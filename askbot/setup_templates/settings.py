@@ -19,12 +19,12 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'postgresql_psycopg2' # only postgres (>8.3) and mysql are supported so far others have not been tested yet
-DATABASE_NAME = 'scopedb'             # Or path to database file if using sqlite3.
-DATABASE_USER = 'scope_user'             # Not used with sqlite3.
-DATABASE_PASSWORD = 'scope_user'         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+#DATABASE_ENGINE = 'postgresql_psycopg2' # only postgres (>8.3) and mysql are supported so far others have not been tested yet
+#DATABASE_NAME = 'scopedb'             # Or path to database file if using sqlite3.
+#DATABASE_USER = 'scope_user'             # Not used with sqlite3.
+#DATABASE_PASSWORD = 'scope_user'         # Not used with sqlite3.
+#DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
+#DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
 #outgoing mail server settings
 SERVER_EMAIL = ''
@@ -42,7 +42,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #go to the site's live settings and enable the feature
 #"Email settings" -> "allow asking by email"
 #
-#   WARNING: command post_emailed_questions DELETES all
+#   WARNING: command post_emailed_questions DELETES all 
 #            emails from the mailbox each time
 #            do not use your personal mail box here!!!
 #
@@ -68,29 +68,28 @@ SITE_ID = 1
 USE_I18N = True
 LANGUAGE_CODE = 'en'
 
-# Absolute path to the directory that holds media.
+# Absolute path to the directory that holds uploaded media
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'askbot', 'upfiles')
-MEDIA_URL = '/upfiles/'#url to uploaded media
-STATIC_URL = '/m/'#url to project static files
+MEDIA_URL = '/upfiles/'
+STATIC_URL = '/m/'#this must be different from MEDIA_URL
 
 PROJECT_ROOT = os.path.dirname(__file__)
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')#path to files collected by collectstatic
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'#must be this value
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 # Make up some unique string, and don't share it with anybody.
-SECRET_KEY = 'sdljdfjkldsflsdjkhsjkldgjlsdgfs s '
+SECRET_KEY = 'sdljdfjkldsflsdjkhsjkldgjlsdgfs s ' 
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
     #below is askbot stuff for this tuple
-    #'askbot.skins.loaders.load_template_source', #changed due to bug 97
     'askbot.skins.loaders.filesystem_load_template_source',
     #'django.template.loaders.eggs.load_template_source',
 )
@@ -122,7 +121,7 @@ ROOT_URLCONF = os.path.basename(os.path.dirname(__file__)) + '.urls'
 
 #UPLOAD SETTINGS
 FILE_UPLOAD_TEMP_DIR = os.path.join(
-                                os.path.dirname(__file__),
+                                os.path.dirname(__file__), 
                                 'tmp'
                             ).replace('\\','/')
 
@@ -162,6 +161,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.sitemaps',
     #'debug_toolbar',
+    #Optional, to enable haystack search
     #'haystack',
     'askbot',
     'askbot.deps.django_authopenid',
@@ -199,9 +199,9 @@ AUTHENTICATION_BACKENDS = (
 #logging settings
 #LOG_FILENAME = 'askbot.log'
 #logging.basicConfig(
-#    filename=os.path.join(os.path.dirname(__file__), 'log', LOG_FILENAME),
-#    level=logging.CRITICAL,
-#    format='%(pathname)s TIME: %(asctime)s MSG: #%(filename)s:%(funcName)s:%(lineno)d %(message)s',
+    #filename=os.path.join(os.path.dirname(__file__), 'log', LOG_FILENAME),
+    #level=logging.CRITICAL,
+   # format='%(pathname)s TIME: %(asctime)s MSG: #%(filename)s:%(funcName)s:%(lineno)d %(message)s',
 #)
 
 ###########################
@@ -214,7 +214,7 @@ ASKBOT_URL = '' #no leading slash, default = '' empty string
 ASKBOT_TRANSLATE_URL = True #translate specific URLs
 _ = lambda v:v #fake translation function for the login url
 LOGIN_URL = '/%s%s%s' % (ASKBOT_URL,_('account/'),_('signin/'))
-LOGIN_REDIRECT_URL = ASKBOT_URL #adjust if needed
+LOGIN_REDIRECT_URL = ASKBOT_URL #adjust, if needed
 #note - it is important that upload dir url is NOT translated!!!
 #also, this url must not have the leading slash
 ALLOW_UNICODE_SLUGS = False
@@ -277,6 +277,6 @@ TINYMCE_DEFAULT_CONFIG = {
 #delayed notifications, time in seconds, 15 mins by default
 NOTIFICATION_DELAY_TIME = 60 * 15 
 
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+import dj_database_url  # add this to requirements.txt
+DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
 

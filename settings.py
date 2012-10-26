@@ -19,12 +19,12 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'postgresql_psycopg2' # only postgres (>8.3) and mysql are supported so far others have not been tested yet
-DATABASE_NAME = 'scopedb'             # Or path to database file if using sqlite3.
-DATABASE_USER = 'scope_user'             # Not used with sqlite3.
-DATABASE_PASSWORD = 'scope_user'         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+#DATABASE_ENGINE = 'postgresql_psycopg2' # only postgres (>8.3) and mysql are supported so far others have not been tested yet
+#DATABASE_NAME = 'scopedb'             # Or path to database file if using sqlite3.
+#DATABASE_USER = 'scope_user'             # Not used with sqlite3.
+#DATABASE_PASSWORD = 'scope_user'         # Not used with sqlite3.
+#DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
+#DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
 #outgoing mail server settings
 SERVER_EMAIL = ''
@@ -277,6 +277,6 @@ TINYMCE_DEFAULT_CONFIG = {
 #delayed notifications, time in seconds, 15 mins by default
 NOTIFICATION_DELAY_TIME = 60 * 15 
 
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+import dj_database_url  # add this to requirements.txt
+DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
 
