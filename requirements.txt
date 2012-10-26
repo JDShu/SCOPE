@@ -2,17 +2,16 @@ Coffin==0.3.7
 Django==1.3.1
 Jinja2==2.6
 Markdown==2.2.0
-MySQL-python==1.2.4b5
 South==0.7.6
 Unidecode==0.04.9
 akismet==0.2.0
 amqplib==1.0.2
 anyjson==0.3.3
--e git://github.com/ASKBOT/askbot-devel.git@3c6a182685ad217129271dfd77280b3710242777#egg=askbot-dev
 beautifulsoup4==4.1.3
 celery==2.2.7
 chardet==2.1.1
-distribute==0.6.28
+distribute==0.6.27
+dj-database-url==0.2.1
 django-celery==2.2.7
 django-countries==1.0.5
 django-followit==0.0.3
@@ -42,4 +41,3 @@ python-openid==2.2.5
 pytz==2012f
 virtualenv==1.8.2
 wsgiref==0.1.2
-dj-database-url==0.2.1
