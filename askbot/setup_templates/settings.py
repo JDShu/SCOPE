@@ -20,9 +20,9 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'postgresql_psycopg2' # only postgres (>8.3) and mysql are supported so far others have not been tested yet
-DATABASE_NAME = ''             # Or path to database file if using sqlite3.
-DATABASE_USER = ''             # Not used with sqlite3.
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
+DATABASE_NAME = 'scopedb'             # Or path to database file if using sqlite3.
+DATABASE_USER = 'scope_user'             # Not used with sqlite3.
+DATABASE_PASSWORD = 'scope_user'         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
@@ -174,6 +174,7 @@ INSTALLED_APPS = (
     'djcelery',
     'djkombu',
     'followit',
+    'tinymce',
     #'avatar',#experimental use git clone git://github.com/ericflo/django-avatar.git$
 )
 
@@ -225,11 +226,13 @@ CELERY_ALWAYS_EAGER = True
 
 import djcelery
 djcelery.setup_loader()
+DOMAIN_NAME = ''
 
-CSRF_COOKIE_NAME = 'askbot_csrf'
-#enter domain name here - e.g. example.com
-#CSRF_COOKIE_DOMAIN = ''
+CSRF_COOKIE_NAME = '_csrf'
+#https://docs.djangoproject.com/en/1.3/ref/contrib/csrf/
+#CSRF_COOKIE_DOMAIN = DOMAIN_NAME
 
+STATIC_ROOT = os.path.join(PROJECT_ROOT, "static")
 STATICFILES_DIRS = (
     ('default/media', os.path.join(ASKBOT_ROOT, 'media')),
 )
@@ -245,9 +248,10 @@ HAYSTACK_SEARCH_ENGINE = 'simple'
 
 TINYMCE_COMPRESSOR = True
 TINYMCE_SPELLCHECKER = False
-TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'common/media/js/tinymce/')
-TINYMCE_URL = STATIC_URL + 'common/media/js/tinymce/'
+TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'default/media/js/tinymce/')
+TINYMCE_URL = STATIC_URL + 'default/media/js/tinymce/'
 TINYMCE_DEFAULT_CONFIG = {
+    'convert_urls': False,
     'plugins': 'askbot_imageuploader,askbot_attachment',
     'theme': 'advanced',
     'content_css': STATIC_URL + 'default/media/style/tinymce/content.css',
@@ -266,8 +270,13 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme_advanced_resizing': True,
     'theme_advanced_resize_horizontal': False,
     'theme_advanced_statusbar_location': 'bottom',
+    'width': '723',
     'height': '250'
 }
 
 #delayed notifications, time in seconds, 15 mins by default
-NOTIFICATION_DELAY_TIME = 60 * 15
+NOTIFICATION_DELAY_TIME = 60 * 15 
+
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
