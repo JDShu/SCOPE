@@ -14,6 +14,7 @@ distribute==0.6.27
 dj-database-url==0.2.1
 django-celery==2.2.7
 django-countries==1.0.5
+django-extensions==1.0.0
 django-followit==0.0.3
 django-keyedcache==1.4-6
 django-kombu==0.9.2
@@ -33,6 +34,8 @@ mock==1.0.0
 nose==1.2.1
 oauth2==1.5.211
 psycopg2==2.4.5
+pygments==1.4
+pygraphviz==1.1
 pyparsing==1.5.6
 pystache==0.3.1
 python-daemon==1.6

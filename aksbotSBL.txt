@@ -1,0 +1,329 @@
+BEGIN;
+CREATE TABLE "vote" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "voted_post_id" integer NOT NULL,
+    "vote" smallint NOT NULL,
+    "voted_at" timestamp with time zone NOT NULL,
+    UNIQUE ("user_id", "voted_post_id")
+)
+;
+CREATE TABLE "askbot_badgedata" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "slug" varchar(50) NOT NULL UNIQUE,
+    "awarded_count" integer CHECK ("awarded_count" >= 0) NOT NULL
+)
+;
+CREATE TABLE "award" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "badge_id" integer NOT NULL REFERENCES "askbot_badgedata" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "object_id" integer CHECK ("object_id" >= 0) NOT NULL,
+    "awarded_at" timestamp with time zone NOT NULL,
+    "notified" boolean NOT NULL
+)
+;
+CREATE TABLE "repute" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "positive" smallint NOT NULL,
+    "negative" smallint NOT NULL,
+    "question_id" integer,
+    "reputed_at" timestamp with time zone NOT NULL,
+    "reputation_type" smallint NOT NULL,
+    "reputation" integer NOT NULL,
+    "comment" varchar(128)
+)
+;
+CREATE TABLE "tag_suggested_by" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "tag_id" integer NOT NULL,
+    "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    UNIQUE ("tag_id", "user_id")
+)
+;
+CREATE TABLE "tag" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "name" varchar(255) NOT NULL UNIQUE,
+    "created_by_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "status" smallint NOT NULL,
+    "used_count" integer CHECK ("used_count" >= 0) NOT NULL,
+    "deleted" boolean NOT NULL,
+    "deleted_at" timestamp with time zone,
+    "deleted_by_id" integer REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "tag_wiki_id" integer UNIQUE
+)
+;
+ALTER TABLE "tag_suggested_by" ADD CONSTRAINT "tag_id_refs_id_a717113a" FOREIGN KEY ("tag_id") REFERENCES "tag" ("id") DEFERRABLE INITIALLY DEFERRED;
+CREATE TABLE "askbot_markedtag" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "tag_id" integer NOT NULL REFERENCES "tag" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "reason" varchar(16) NOT NULL
+)
+;
+CREATE TABLE "askbot_activityauditstatus" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "activity_id" integer NOT NULL,
+    "status" smallint NOT NULL,
+    UNIQUE ("user_id", "activity_id")
+)
+;
+CREATE TABLE "activity_receiving_users" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "activity_id" integer NOT NULL,
+    "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    UNIQUE ("activity_id", "user_id")
+)
+;
+CREATE TABLE "activity" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "activity_type" smallint NOT NULL,
+    "active_at" timestamp with time zone NOT NULL,
+    "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "object_id" integer CHECK ("object_id" >= 0) NOT NULL,
+    "question_id" integer,
+    "is_auditted" boolean NOT NULL,
+    "summary" text NOT NULL
+)
+;
+ALTER TABLE "askbot_activityauditstatus" ADD CONSTRAINT "activity_id_refs_id_5ca7a801" FOREIGN KEY ("activity_id") REFERENCES "activity" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "activity_receiving_users" ADD CONSTRAINT "activity_id_refs_id_6e3bb7cb" FOREIGN KEY ("activity_id") REFERENCES "activity" ("id") DEFERRABLE INITIALLY DEFERRED;
+CREATE TABLE "askbot_emailfeedsetting" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "subscriber_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "feed_type" varchar(16) NOT NULL,
+    "frequency" varchar(8) NOT NULL,
+    "added_at" timestamp with time zone NOT NULL,
+    "reported_at" timestamp with time zone,
+    UNIQUE ("subscriber_id", "feed_type")
+)
+;
+CREATE TABLE "askbot_groupmembership" (
+    "authusergroups_ptr_id" integer NOT NULL PRIMARY KEY REFERENCES "auth_user_groups" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "level" smallint NOT NULL
+)
+;
+CREATE TABLE "askbot_group" (
+    "group_ptr_id" integer NOT NULL PRIMARY KEY REFERENCES "auth_group" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "logo_url" varchar(200),
+    "description_id" integer UNIQUE,
+    "moderate_email" boolean NOT NULL,
+    "moderate_answers_to_enquirers" boolean NOT NULL,
+    "openness" smallint NOT NULL,
+    "preapproved_emails" text,
+    "preapproved_email_domains" text,
+    "is_vip" boolean NOT NULL
+)
+;
+CREATE TABLE "askbot_post_groups" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "post_id" integer NOT NULL,
+    "group_id" integer NOT NULL REFERENCES "askbot_group" ("group_ptr_id") DEFERRABLE INITIALLY DEFERRED,
+    UNIQUE ("post_id", "group_id")
+)
+;
+CREATE TABLE "askbot_post" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "post_type" varchar(255) NOT NULL,
+    "old_question_id" integer CHECK ("old_question_id" >= 0) UNIQUE,
+    "old_answer_id" integer CHECK ("old_answer_id" >= 0) UNIQUE,
+    "old_comment_id" integer CHECK ("old_comment_id" >= 0) UNIQUE,
+    "parent_id" integer,
+    "thread_id" integer,
+    "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "added_at" timestamp with time zone NOT NULL,
+    "approved" boolean NOT NULL,
+    "deleted" boolean NOT NULL,
+    "deleted_at" timestamp with time zone,
+    "deleted_by_id" integer REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "wiki" boolean NOT NULL,
+    "wikified_at" timestamp with time zone,
+    "locked" boolean NOT NULL,
+    "locked_by_id" integer REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "locked_at" timestamp with time zone,
+    "score" integer NOT NULL,
+    "vote_up_count" integer NOT NULL,
+    "vote_down_count" integer NOT NULL,
+    "comment_count" integer CHECK ("comment_count" >= 0) NOT NULL,
+    "offensive_flag_count" smallint NOT NULL,
+    "last_edited_at" timestamp with time zone,
+    "last_edited_by_id" integer REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "html" text,
+    "text" text,
+    "summary" text,
+    "is_anonymous" boolean NOT NULL
+)
+;
+ALTER TABLE "vote" ADD CONSTRAINT "voted_post_id_refs_id_5acd8c43" FOREIGN KEY ("voted_post_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "repute" ADD CONSTRAINT "question_id_refs_id_6cfc78fa" FOREIGN KEY ("question_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "tag" ADD CONSTRAINT "tag_wiki_id_refs_id_38f75ec0" FOREIGN KEY ("tag_wiki_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "activity" ADD CONSTRAINT "question_id_refs_id_a57741ac" FOREIGN KEY ("question_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "askbot_group" ADD CONSTRAINT "description_id_refs_id_9f46af55" FOREIGN KEY ("description_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "askbot_post_groups" ADD CONSTRAINT "post_id_refs_id_839241d7" FOREIGN KEY ("post_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "askbot_post" ADD CONSTRAINT "parent_id_refs_id_8a681b73" FOREIGN KEY ("parent_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
+CREATE TABLE "askbot_postrevision" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "post_id" integer REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "revision" integer CHECK ("revision" >= 0) NOT NULL,
+    "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "revised_at" timestamp with time zone NOT NULL,
+    "summary" varchar(300) NOT NULL,
+    "text" text NOT NULL,
+    "approved" boolean NOT NULL,
+    "approved_by_id" integer REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "approved_at" timestamp with time zone,
+    "by_email" boolean NOT NULL,
+    "email_address" varchar(75),
+    "title" varchar(300) NOT NULL,
+    "tagnames" varchar(125) NOT NULL,
+    "is_anonymous" boolean NOT NULL,
+    UNIQUE ("post_id", "revision")
+)
+;
+CREATE TABLE "askbot_postflagreason" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "added_at" timestamp with time zone NOT NULL,
+    "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "title" varchar(128) NOT NULL,
+    "details_id" integer NOT NULL REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED
+)
+;
+CREATE TABLE "askbot_draftanswer" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "thread_id" integer NOT NULL,
+    "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "text" text
+)
+;
+CREATE TABLE "askbot_anonymousanswer" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "session_key" varchar(40) NOT NULL,
+    "wiki" boolean NOT NULL,
+    "added_at" timestamp with time zone NOT NULL,
+    "ip_addr" inet NOT NULL,
+    "author_id" integer REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "text" text NOT NULL,
+    "summary" varchar(180) NOT NULL,
+    "question_id" integer NOT NULL REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED
+)
+;
+CREATE TABLE "askbot_thread_groups" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "thread_id" integer NOT NULL,
+    "group_id" integer NOT NULL REFERENCES "askbot_group" ("group_ptr_id") DEFERRABLE INITIALLY DEFERRED,
+    "visibility" smallint NOT NULL,
+    UNIQUE ("thread_id", "group_id")
+)
+;
+CREATE TABLE "askbot_thread_tags" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "thread_id" integer NOT NULL,
+    "tag_id" integer NOT NULL REFERENCES "tag" ("id") DEFERRABLE INITIALLY DEFERRED,
+    UNIQUE ("thread_id", "tag_id")
+)
+;
+CREATE TABLE "askbot_thread_followed_by" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "thread_id" integer NOT NULL,
+    "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    UNIQUE ("thread_id", "user_id")
+)
+;
+CREATE TABLE "askbot_thread" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "title" varchar(300) NOT NULL,
+    "tagnames" varchar(125) NOT NULL,
+    "view_count" integer CHECK ("view_count" >= 0) NOT NULL,
+    "favourite_count" integer CHECK ("favourite_count" >= 0) NOT NULL,
+    "answer_count" integer CHECK ("answer_count" >= 0) NOT NULL,
+    "last_activity_at" timestamp with time zone NOT NULL,
+    "last_activity_by_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "closed" boolean NOT NULL,
+    "closed_by_id" integer REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "closed_at" timestamp with time zone,
+    "close_reason" smallint,
+    "approved" boolean NOT NULL,
+    "accepted_answer_id" integer REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "answer_accepted_at" timestamp with time zone,
+    "added_at" timestamp with time zone NOT NULL,
+    "score" integer NOT NULL
+)
+;
+ALTER TABLE "askbot_post" ADD CONSTRAINT "thread_id_refs_id_722ab895" FOREIGN KEY ("thread_id") REFERENCES "askbot_thread" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "askbot_draftanswer" ADD CONSTRAINT "thread_id_refs_id_45b37995" FOREIGN KEY ("thread_id") REFERENCES "askbot_thread" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "askbot_thread_groups" ADD CONSTRAINT "thread_id_refs_id_ddc2b8b9" FOREIGN KEY ("thread_id") REFERENCES "askbot_thread" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "askbot_thread_tags" ADD CONSTRAINT "thread_id_refs_id_33659a1e" FOREIGN KEY ("thread_id") REFERENCES "askbot_thread" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "askbot_thread_followed_by" ADD CONSTRAINT "thread_id_refs_id_6236ff0a" FOREIGN KEY ("thread_id") REFERENCES "askbot_thread" ("id") DEFERRABLE INITIALLY DEFERRED;
+CREATE TABLE "askbot_questionview" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "question_id" integer NOT NULL REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "who_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "when" timestamp with time zone NOT NULL
+)
+;
+CREATE TABLE "favorite_question" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "thread_id" integer NOT NULL REFERENCES "askbot_thread" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "added_at" timestamp with time zone NOT NULL
+)
+;
+CREATE TABLE "askbot_draftquestion" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "title" varchar(300),
+    "text" text,
+    "tagnames" varchar(125)
+)
+;
+CREATE TABLE "askbot_anonymousquestion" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "session_key" varchar(40) NOT NULL,
+    "wiki" boolean NOT NULL,
+    "added_at" timestamp with time zone NOT NULL,
+    "ip_addr" inet NOT NULL,
+    "author_id" integer REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "text" text NOT NULL,
+    "summary" varchar(180) NOT NULL,
+    "title" varchar(300) NOT NULL,
+    "tagnames" varchar(125) NOT NULL,
+    "is_anonymous" boolean NOT NULL
+)
+;
+CREATE TABLE "askbot_replyaddress" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "address" varchar(25) NOT NULL UNIQUE,
+    "post_id" integer REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "reply_action" varchar(32) NOT NULL,
+    "response_post_id" integer REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "allowed_from_email" varchar(150) NOT NULL,
+    "used_at" timestamp with time zone
+)
+;
+CREATE TABLE "askbot_askwidget" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "title" varchar(100) NOT NULL,
+    "group_id" integer REFERENCES "askbot_group" ("group_ptr_id") DEFERRABLE INITIALLY DEFERRED,
+    "tag_id" integer REFERENCES "tag" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "include_text_field" boolean NOT NULL,
+    "inner_style" text NOT NULL,
+    "outer_style" text NOT NULL
+)
+;
+CREATE TABLE "askbot_questionwidget" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "title" varchar(100) NOT NULL,
+    "question_number" integer CHECK ("question_number" >= 0) NOT NULL,
+    "tagnames" varchar(50) NOT NULL,
+    "group_id" integer REFERENCES "askbot_group" ("group_ptr_id") DEFERRABLE INITIALLY DEFERRED,
+    "search_query" varchar(50),
+    "order_by" varchar(18) NOT NULL,
+    "style" text NOT NULL
+)
+;
+COMMIT;
