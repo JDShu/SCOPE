@@ -1414,6 +1414,7 @@ askbot/setup_templates/settings.py.mustache
 askbot/setup_templates/tinymce_sample_config.py
 askbot/setup_templates/urls.py
 askbot/setup_templates/log/README
+askbot/setup_templates/log/askbot.log
 askbot/setup_templates/upfiles/README
 askbot/shims/__init__.py
 askbot/shims/django_shims.py
