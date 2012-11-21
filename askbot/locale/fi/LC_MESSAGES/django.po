@@ -5469,7 +5469,7 @@ msgstr "lisää kommentti"
 
 #: skins/default/templates/exercise.html:135
 #: skins/default/templates/exercise/content.html:40
-msgid "Problem Your Own Exercise"
+msgid "Add a Problem to Your Own Exercise"
 msgstr "Vastaa omaan kysymykseesi"
 
 #: skins/default/templates/exercise.html:140
@@ -5836,7 +5836,7 @@ msgid "Your problem"
 msgstr "Vastauksesi"
 
 #: skins/default/templates/exercise/new_problem_form.html:26
-msgid "Be the first one to problem this exercise!"
+msgid "Be the first one to add a problem to this exercise!"
 msgstr "Ole ensimmäinen vastaaja!"
 
 #: skins/default/templates/exercise/new_problem_form.html:32
@@ -5850,7 +5850,7 @@ msgstr ""
 
 #: skins/default/templates/exercise/new_problem_form.html:36
 msgid ""
-"<span class='big strong'>You are welcome to problem your own exercise</span>, "
+"<span class='big strong'>You are welcome to add a problem to your own exercise</span>, "
 "but please make sure to give an <strong>problem</strong>. Remember that you "
 "can always <strong>revise your original exercise</strong>. Please "
 "<strong>use comments for discussions</strong>  and <strong>please don't "
@@ -6422,11 +6422,11 @@ msgstr ""
 
 #: skins/default/templates/widgets/problem_edit_tips.html:6
 #, fuzzy
-msgid "give an problem interesting to this community"
+msgid "provide a problem interesting to this community"
 msgstr "kysy kysymys, joka kiinnostaa tätä yhteisöä"
 
 #: skins/default/templates/widgets/problem_edit_tips.html:9
-msgid "try to give an problem, rather than engage into a discussion"
+msgid "try to provide a problem, rather than engage into a discussion"
 msgstr "yritä ennemmin vastata kysymykseen kuin uppoutua keskusteluun"
 
 #: skins/default/templates/widgets/problem_edit_tips.html:12
@@ -7435,7 +7435,7 @@ msgstr "anteeksi, meillä näyttää olevan teknisiä vaikeuksia"
 #~ "strong>, jos kyseessä on keskustelu, ja <strong>muista äänestää</strong> "
 #~ "(kirjauduttuasi sisään)!"
 
-#~ msgid "problem your own exercise only to give an problem"
+#~ msgid "problem your own exercise only to provide a problem"
 #~ msgstr ""
 #~ "<span class='big strong'>Voit vastata omaan kysymykseesi</span>, mutta "
 #~ "annathan kunnollisen <strong>vastauksen</strong>. Muista, että voit aina "
@@ -7443,7 +7443,7 @@ msgstr "anteeksi, meillä näyttää olevan teknisiä vaikeuksia"
 #~ "kommentteja, jos kyseessä on keskustelu</strong> ja <strong>muista "
 #~ "äänestää :)</strong> vastauksia, joista pidit (tai et pitänyt)! "
 
-#~ msgid "please only give an problem, no discussions"
+#~ msgid "please only provide a problem, no discussions"
 #~ msgstr ""
 #~ "<span class='big strong'>Yritä antaa kunnollisia vastauksia</span>. Jos "
 #~ "haluat kommentoida kysymystä tai vastausta, <strong>käytä kommentti-"

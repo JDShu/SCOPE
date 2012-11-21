@@ -4819,7 +4819,7 @@ msgstr "envoyer un commentaire"
 
 #: skins/default/templates/exercise.html:135
 #: skins/default/templates/exercise/content.html:40
-msgid "Problem Your Own Exercise"
+msgid "Add a Problem to Your Own Exercise"
 msgstr "Répondre à votre propre exercise"
 
 #: skins/default/templates/exercise.html:140
@@ -5180,7 +5180,7 @@ msgid "Your problem"
 msgstr "Votre réponse"
 
 #: skins/default/templates/exercise/new_problem_form.html:26
-msgid "Be the first one to problem this exercise!"
+msgid "Be the first one to add a problem to this exercise!"
 msgstr "Soyez le premier à répondre à cette quesion !"
 
 #: skins/default/templates/exercise/new_problem_form.html:32
@@ -5188,7 +5188,7 @@ msgid "<span class='strong big'>Please start posting your problem anonymously</s
 msgstr "<span class='strong big'>Merci de commencer à répondre de manière anonyme</span> - votre réponse sera sauvegardée dans la session courante et publiée une fois que vous vous connecterez ou que vous créerez un compte. Merci d'essayer de donner une <strong>réponse complète</strong>, pour les discussions, <strong>merci d'utiliser les commentaires</strong> et <strong>pensez à voter</strong> (après vous être connecté) !"
 
 #: skins/default/templates/exercise/new_problem_form.html:36
-msgid "<span class='big strong'>You are welcome to problem your own exercise</span>, but please make sure to give an <strong>problem</strong>. Remember that you can always <strong>revise your original exercise</strong>. Please <strong>use comments for discussions</strong>  and <strong>please don't forget to vote :)</strong> for the problems that you liked (or perhaps did not like)!"
+msgid "<span class='big strong'>You are welcome to add a problem to your own exercise</span>, but please make sure to give an <strong>problem</strong>. Remember that you can always <strong>revise your original exercise</strong>. Please <strong>use comments for discussions</strong>  and <strong>please don't forget to vote :)</strong> for the problems that you liked (or perhaps did not like)!"
 msgstr "<span class='big strong'>Vous pouvez répondre vous-même à vos exercises</span>, mais assurez-vous de donner une <strong>réponse</strong>. Souvenez-vous que vous pouvez <strong>revoir votre exercise d'origine</strong>. Merci <strong>d'utiliser les commentaires pour les discussions</strong> et <strong>n'oubliez-pas de voter :)</strong> pour les réponses que vous avez apprécié (ou peut-être pas) !"
 
 #: skins/default/templates/exercise/new_problem_form.html:38
@@ -5706,11 +5706,11 @@ msgid "Tips"
 msgstr "Astuces"
 
 #: skins/default/templates/widgets/problem_edit_tips.html:6
-msgid "give an problem interesting to this community"
+msgid "provide a problem interesting to this community"
 msgstr "Rédiger vos réponses afin qu'elles soient pertinentes pour la communauté."
 
 #: skins/default/templates/widgets/problem_edit_tips.html:9
-msgid "try to give an problem, rather than engage into a discussion"
+msgid "try to provide a problem, rather than engage into a discussion"
 msgstr "Contentez-vous de donner une réponse, plutôt que de vous engager dans une discussion."
 
 #: skins/default/templates/widgets/problem_edit_tips.html:12
@@ -6621,12 +6621,12 @@ msgstr "Désolé, nous rencontrons apparemment des difficultés d'ordre techniqu
 #~ "<span class='strong big'>Vous pouvez commencer par répondre anonymement à "
 #~ "cette exercise</span>, puis vous connecter ensuite "
 
-#~ msgid "problem your own exercise only to give an problem"
+#~ msgid "problem your own exercise only to provide a problem"
 #~ msgstr ""
 #~ "vous pouvez répondre à vos propres exercises uniquement pour donner une "
 #~ "réponse"
 
-#~ msgid "please only give an problem, no discussions"
+#~ msgid "please only provide a problem, no discussions"
 #~ msgstr ""
 #~ "Merci de vous contenter de donner une réponse; n'instaurez pas une "
 #~ "discussion"

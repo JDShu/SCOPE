@@ -5351,7 +5351,7 @@ msgstr "aggiungi commento"
 
 #: skins/default/templates/exercise.html:135
 #: skins/default/templates/exercise/content.html:40
-msgid "Problem Your Own Exercise"
+msgid "Add a Problem to Your Own Exercise"
 msgstr "Rispondi alla tua domanda"
 
 #: skins/default/templates/exercise.html:140
@@ -5725,7 +5725,7 @@ msgstr "La tua risposta"
 
 #: skins/default/templates/exercise/new_problem_form.html:26
 #, fuzzy
-msgid "Be the first one to problem this exercise!"
+msgid "Be the first one to add a problem to this exercise!"
 msgstr "Per favore accetta la migliore risposta per questa domanda:"
 
 #: skins/default/templates/exercise/new_problem_form.html:32
@@ -5739,7 +5739,7 @@ msgstr ""
 
 #: skins/default/templates/exercise/new_problem_form.html:36
 msgid ""
-"<span class='big strong'>You are welcome to problem your own exercise</span>, "
+"<span class='big strong'>You are welcome to add a problem to your own exercise</span>, "
 "but please make sure to give an <strong>problem</strong>. Remember that you "
 "can always <strong>revise your original exercise</strong>. Please "
 "<strong>use comments for discussions</strong>  and <strong>please don't "
@@ -6323,11 +6323,11 @@ msgstr ""
 
 #: skins/default/templates/widgets/problem_edit_tips.html:6
 #, fuzzy
-msgid "give an problem interesting to this community"
+msgid "provide a problem interesting to this community"
 msgstr "fai in modo che la tua risposta sia interessante per la comunità"
 
 #: skins/default/templates/widgets/problem_edit_tips.html:9
-msgid "try to give an problem, rather than engage into a discussion"
+msgid "try to provide a problem, rather than engage into a discussion"
 msgstr "cerca di dare una risposta, non di iniziare una discussione"
 
 #: skins/default/templates/widgets/problem_edit_tips.html:12
@@ -7391,7 +7391,7 @@ msgstr "Mi spiace, ci sono dei problemi tecnici"
 #~ "strong>, per eventuali discussioni <strong>utilizza i commenti</strong> e "
 #~ "<strong>ricordati di votare</strong> (non appena hai fatto il login)!"
 
-#~ msgid "problem your own exercise only to give an problem"
+#~ msgid "problem your own exercise only to provide a problem"
 #~ msgstr ""
 #~ "<span class='big strong'>Rispondi pure alla tua domanda</span>, ma cerca "
 #~ "di dare una <strong>vera risposta</strong>. Puoi sempre "
@@ -7399,7 +7399,7 @@ msgstr "Mi spiace, ci sono dei problemi tecnici"
 #~ "discutere</strong> e <strong>ricordati di votare :)</strong> per le "
 #~ "risposte migliori (e per quelle peggiori!)"
 
-#~ msgid "please only give an problem, no discussions"
+#~ msgid "please only provide a problem, no discussions"
 #~ msgstr ""
 #~ "<span class='big strong'>Cerca di dare una vera risposta</span>. Se vuoi "
 #~ "solo aggiungere un commento a una domanda/risposta, <strong>usa i "

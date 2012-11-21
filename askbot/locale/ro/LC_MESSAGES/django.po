@@ -5337,7 +5337,7 @@ msgstr "adaugă comentariu"
 
 #: skins/default/templates/exercise.html:135
 #: skins/default/templates/exercise/content.html:40
-msgid "Problem Your Own Exercise"
+msgid "Add a Problem to Your Own Exercise"
 msgstr "Răspunde propriei întrebări"
 
 #: skins/default/templates/exercise.html:140
@@ -5729,7 +5729,7 @@ msgid "Your problem"
 msgstr "Răspunsul tău"
 
 #: skins/default/templates/exercise/new_problem_form.html:26
-msgid "Be the first one to problem this exercise!"
+msgid "Be the first one to add a problem to this exercise!"
 msgstr "Fi primul care răspunde acestei întrebări!"
 
 #: skins/default/templates/exercise/new_problem_form.html:32
@@ -5743,7 +5743,7 @@ msgstr ""
 
 #: skins/default/templates/exercise/new_problem_form.html:36
 msgid ""
-"<span class='big strong'>You are welcome to problem your own exercise</span>, "
+"<span class='big strong'>You are welcome to add a problem to your own exercise</span>, "
 "but please make sure to give an <strong>problem</strong>. Remember that you "
 "can always <strong>revise your original exercise</strong>. Please "
 "<strong>use comments for discussions</strong>  and <strong>please don't "
@@ -6320,11 +6320,11 @@ msgstr ""
 
 #: skins/default/templates/widgets/problem_edit_tips.html:6
 #, fuzzy
-msgid "give an problem interesting to this community"
+msgid "provide a problem interesting to this community"
 msgstr "dați răspunsuri relevante pentru această comunitate"
 
 #: skins/default/templates/widgets/problem_edit_tips.html:9
-msgid "try to give an problem, rather than engage into a discussion"
+msgid "try to provide a problem, rather than engage into a discussion"
 msgstr "încercați să oferiți un răspuns, nu să vă angajați într-o discuție"
 
 #: skins/default/templates/widgets/problem_edit_tips.html:12
@@ -7244,10 +7244,10 @@ msgstr "ne pare rău dar se pare că avem unele dificultăți tehnice"
 #~ msgid "you can problem anonymously and then login"
 #~ msgstr "puteți răspunde anonim și vă puteți autentifica după aceea"
 
-#~ msgid "problem your own exercise only to give an problem"
+#~ msgid "problem your own exercise only to provide a problem"
 #~ msgstr "răspunde propriei întrebări doar pentru a oferi un răspuns"
 
-#~ msgid "please only give an problem, no discussions"
+#~ msgid "please only provide a problem, no discussions"
 #~ msgstr "vă rugăm să dați doar răspunsul, fără discuții"
 
 #~ msgid "Login/Signup to Post Your Problem"

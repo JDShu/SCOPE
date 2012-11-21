@@ -5397,7 +5397,7 @@ msgstr "已发布10条评论"
 
 #: skins/default/templates/exercise.html:135
 #: skins/default/templates/exercise/content.html:40
-msgid "Problem Your Own Exercise"
+msgid "Add a Problem to Your Own Exercise"
 msgstr "回答你自己的问题"
 
 #: skins/default/templates/exercise.html:140
@@ -5777,7 +5777,7 @@ msgid "Your problem"
 msgstr "您的回答"
 
 #: skins/default/templates/exercise/new_problem_form.html:26
-msgid "Be the first one to problem this exercise!"
+msgid "Be the first one to add a problem to this exercise!"
 msgstr "成为第一个回答此问题的人!"
 
 #: skins/default/templates/exercise/new_problem_form.html:32
@@ -5791,7 +5791,7 @@ msgstr ""
 
 #: skins/default/templates/exercise/new_problem_form.html:36
 msgid ""
-"<span class='big strong'>You are welcome to problem your own exercise</span>, "
+"<span class='big strong'>You are welcome to add a problem to your own exercise</span>, "
 "but please make sure to give an <strong>problem</strong>. Remember that you "
 "can always <strong>revise your original exercise</strong>. Please "
 "<strong>use comments for discussions</strong>  and <strong>please don't "
@@ -6346,7 +6346,7 @@ msgstr ""
 
 #: skins/default/templates/widgets/problem_edit_tips.html:6
 #, fuzzy
-msgid "give an problem interesting to this community"
+msgid "provide a problem interesting to this community"
 msgstr ""
 "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
 "请确认你的答案和这个主题相关\n"
@@ -6354,7 +6354,7 @@ msgstr ""
 "请确保回答与社区有关"
 
 #: skins/default/templates/widgets/problem_edit_tips.html:9
-msgid "try to give an problem, rather than engage into a discussion"
+msgid "try to provide a problem, rather than engage into a discussion"
 msgstr "建议您提的问题是可以被答复的，而不仅仅是可以讨论。"
 
 #: skins/default/templates/widgets/problem_edit_tips.html:12
@@ -7287,10 +7287,10 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "you can problem anonymously and then login"
 #~ msgstr "你可以匿名回答,然后登录"
 
-#~ msgid "problem your own exercise only to give an problem"
+#~ msgid "problem your own exercise only to provide a problem"
 #~ msgstr "仅仅为了回答你自己的问题而给一个答案"
 
-#~ msgid "please only give an problem, no discussions"
+#~ msgid "please only provide a problem, no discussions"
 #~ msgstr "建议您提的问题是可以被答复的，而不仅仅是可以讨论。"
 
 #~ msgid "Login/Signup to Post Your Problem"
