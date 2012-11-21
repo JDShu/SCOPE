@@ -1,0 +1,49 @@
+{% import "macros.html" as macros %}
+
+{# ==== BEGIN: exercise/exercise_card.html ==== #}
+{% include "exercise/exercise_card.html" %}
+{# ==== END: exercise/exercise_card.html ==== #}
+
+{% if problems %}
+    <div class="clean"></div>
+
+    {# ==== START: exercise/problem_tab_bar.html ==== #}
+    {% include "exercise/problem_tab_bar.html" %}
+    {# ==== END: exercise/problem_tab_bar.html ==== #}
+
+    <div class="clean"></div>
+    {{ macros.paginator(paginator_context, anchor='#sort-top') }}
+    <div class="clean"></div>
+
+    {% for problem in problems %}
+        {# ==== START: exercise/problem_card.html ==== #}
+        {% include "exercise/problem_card.html" %}
+        {# ==== END: exercise/problem_card.html ==== #}
+    {% endfor %}
+    {{ macros.paginator(paginator_context, anchor='#sort-top') }}
+    <div class="clean"></div>
+{% else %}
+    {# ==== START: exercise/sharing_prompt_phrase.html ==== #}
+    {% include "exercise/sharing_prompt_phrase.html" %}
+    {# ==== END: exercise/sharing_prompt_phrase.html ==== #}
+{% endif %}
+
+{# ==== START: exercise/new_problem_form.html ==== #}
+{# buttons below cannot be cached yet #}
+{% if user_already_gave_problem %}
+    <a
+        class="submit"
+        href="{% url "edit_problem" previous_problem.id %}"
+    >{% trans %}Edit Your Previous Problem{% endtrans %}</a>
+    <span>{% trans %}(only one problem per exercise is allowed){% endtrans %}</span>
+{% else %}
+    {% include "exercise/new_problem_form.html" %}
+{% endif %}
+{% if exercise.closed == False and request.user == exercise.author %}{# this is outside the form on purpose #}
+<input 
+  type="button"
+  class="submit after-editor problem-own-exercise"
+  id="fmproblem_button"
+  value="{% trans %}Problem Your Own Exercise{% endtrans %}"
+/>
+{% endif %}

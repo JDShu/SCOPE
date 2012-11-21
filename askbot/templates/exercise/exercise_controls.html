@@ -1,0 +1,39 @@
+<a 
+    id="post-{{exercise.id}}-delete"
+    class="exercise-delete"
+>{% if exercise.deleted %}{% trans %}undelete{% endtrans %}{% else %}{% trans %}delete{% endtrans %}{% endif %}</a>
+{% if thread.closed %}
+    <a  class="exercise-close" href="{% url reopen exercise.id %}">{% trans %}reopen{% endtrans %}</a>
+{% else %}
+    <a class="exercise-close" href="{% url close exercise.id %}">{% trans %}close{% endtrans %}</a>
+{% endif %}
+{% if exercise.offensive_flag_count > 0 %}
+    <span 
+        id="exercise-offensive-remove-flag-{{ exercise.id }}"
+        class="offensive-flag"
+        title="{% trans %}report as offensive (i.e containing spam, advertising, malicious text, etc.){% endtrans %}"
+    >
+        <a class="exercise-flag">{% trans %}remove flag{% endtrans %}</a>
+    </span>
+    <span 
+        id="exercise-offensive-flag-{{ exercise.id }}" class="offensive-flag"
+        title="{% trans %}report as offensive (i.e containing spam, advertising, malicious text, etc.){% endtrans %}"
+    >
+        <a class="exercise-flag">{% trans %}flag offensive{% endtrans %} ({{ exercise.offensive_flag_count }})</a>
+    </span>
+{% else %}
+    <span 
+        id="exercise-offensive-flag-{{ exercise.id }}" class="offensive-flag"
+        title="{% trans %}report as offensive (i.e containing spam, advertising, malicious text, etc.){% endtrans %}"
+    >
+        <a class="exercise-flag">{% trans %}flag offensive{% endtrans %}</a>
+    </span>
+{% endif %}
+<script type="text/javascript">
+    var retagUrl = "{% url retag_exercise exercise.id %}";
+</script>
+<a id="retag" class="exercise-retag"href="{% url retag_exercise exercise.id %}">{% trans %}retag{% endtrans %}</a>
+<a id="post-{{exercise.id}}-edit" class="exercise-edit" href="{% url edit_exercise exercise.id %}">{% trans %}edit{% endtrans %}</a>
+<script type="text/javascript">
+    askbot['functions']['renderPostControls']('{{exercise.id}}');
+</script>
