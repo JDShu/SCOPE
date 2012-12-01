@@ -30,24 +30,24 @@ class HaystackSearchTests(AskbotTestCase):
         trail, dreading the arrival at Golconda Camp. For there was the House of
         Judgment, where all of the unfortunate events of that most unhappy day
         would be reviewed sternly, lorem'''
-        self.question1 = self.post_question(
+        self.exercise1 = self.post_exercise(
                                            user=self.user,
                                            body_text=body_1,
                                            title='Test title 1'
                                           )
-        self.question2 = self.post_question(
+        self.exercise2 = self.post_exercise(
                                            user=self.other_user,
                                            body_text=body_2,
                                            title='Test title 2, Baldy of Nome'
                                            )
-        self.answer1 = self.post_answer(
+        self.problem1 = self.post_problem(
                                         user=self.user,
-                                        question = self.question1,
-                                        body_text="This is a answer for question 1"
+                                        exercise = self.exercise1,
+                                        body_text="This is a problem for exercise 1"
                                        )
-        self.answer1 = self.post_answer(
+        self.problem1 = self.post_problem(
                                         user=self.other_user,
-                                        question = self.question2,
+                                        exercise = self.exercise2,
                                         body_text="Just a random text to fill the space"
                                        )
 
@@ -90,7 +90,7 @@ class HaystackSearchTests(AskbotTestCase):
     def test_get_django_queryset(self):
         '''makes a query that can return multiple models and test
         get_django_queryset() method from AskbotSearchQuerySet'''
-        #gepeto is present in profile and in question
+        #gepeto is present in profile and in exercise
         from askbot.search.haystack import AskbotSearchQuerySet
         qs = AskbotSearchQuerySet().filter(content='gepeto').get_django_queryset(User)
         for instance in qs:

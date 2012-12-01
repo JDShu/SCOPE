@@ -2,8 +2,8 @@
 """
 :synopsis: views "read-only" for main textual content
 
-By main textual content is meant - text of Questions, Answers and Comments.
-The "read-only" requirement here is not 100% strict, as for example "question" view does
+By main textual content is meant - text of Exercises, Problems and Comments.
+The "read-only" requirement here is not 100% strict, as for example "exercise" view does
 allow adding new comments via Ajax form post.
 """
 import datetime
@@ -29,7 +29,7 @@ from django.conf import settings
 import askbot
 from askbot import exceptions
 from askbot.utils.diff import textDiff as htmldiff
-from askbot.forms import AnswerForm, ShowQuestionForm
+from askbot.forms import ProblemForm, ShowExerciseForm
 from askbot import conf
 from askbot import models
 from askbot import schedules
@@ -53,23 +53,23 @@ INDEX_AWARD_SIZE = 15
 INDEX_TAGS_SIZE = 25
 # used in tags list
 DEFAULT_PAGE_SIZE = 60
-# used in questions
-# used in answers
+# used in exercises
+# used in problems
 
 #refactor? - we have these
-#views that generate a listing of questions in one way or another:
-#index, unanswered, questions, search, tag
+#views that generate a listing of exercises in one way or another:
+#index, without_problem, exercises, search, tag
 #should we dry them up?
 #related topics - information drill-down, search refinement
 
-def index(request):#generates front page - shows listing of questions sorted in various ways
+def index(request):#generates front page - shows listing of exercises sorted in various ways
     """index view mapped to the root url of the Q&A site
     """
-    return HttpResponseRedirect(reverse('questions'))
+    return HttpResponseRedirect(reverse('exercises'))
 
-def questions(request, **kwargs):
+def exercises(request, **kwargs):
     """
-    List of Questions, Tagged questions, and Unanswered questions.
+    List of Exercises, Tagged exercises, and Exercises without problems.
     matching search query or user selection
     """
     #before = datetime.datetime.now()
@@ -80,7 +80,7 @@ def questions(request, **kwargs):
                     user_logged_in=request.user.is_authenticated(),
                     **kwargs
                 )
-    page_size = int(askbot_settings.DEFAULT_QUESTIONS_PAGE_SIZE)
+    page_size = int(askbot_settings.DEFAULT_EXERCISES_PAGE_SIZE)
 
     qs, meta_data = models.Thread.objects.run_advanced_search(
                         request_user=request.user, search_state=search_state
@@ -94,7 +94,7 @@ def questions(request, **kwargs):
     page = paginator.page(search_state.page)
     page.object_list = list(page.object_list) # evaluate the queryset
 
-    # INFO: Because for the time being we need question posts and thread authors
+    # INFO: Because for the time being we need exercise posts and thread authors
     #       down the pipeline, we have to precache them in thread objects
     models.Thread.objects.precache_view_data_hack(threads=page.object_list)
 
@@ -147,22 +147,22 @@ def questions(request, **kwargs):
     if request.is_ajax():
         q_count = paginator.count
 
-        question_counter = ungettext('%(q_num)s question', '%(q_num)s questions', q_count)
-        question_counter = question_counter % {'q_num': humanize.intcomma(q_count),}
+        exercise_counter = ungettext('%(q_num)s exercise', '%(q_num)s exercises', q_count)
+        exercise_counter = exercise_counter % {'q_num': humanize.intcomma(q_count),}
 
         if q_count > page_size:
             paginator_tpl = get_template('main_page/paginator.html', request)
             paginator_html = paginator_tpl.render(Context({
                 'context': functions.setup_paginator(paginator_context),
-                'questions_count': q_count,
+                'exercises_count': q_count,
                 'page_size' : page_size,
                 'search_state': search_state,
             }))
         else:
             paginator_html = ''
 
-        questions_tpl = get_template('main_page/questions_loop.html', request)
-        questions_html = questions_tpl.render(Context({
+        exercises_tpl = get_template('main_page/exercises_loop.html', request)
+        exercises_html = exercises_tpl.render(Context({
             'threads': page,
             'search_state': search_state,
             'reset_method_count': reset_method_count,
@@ -176,12 +176,12 @@ def questions(request, **kwargs):
                 'ask_query_string': search_state.ask_query_string(),
             },
             'paginator': paginator_html,
-            'question_counter': question_counter,
+            'exercise_counter': exercise_counter,
             'faces': [],#[extra_tags.gravatar(contributor, 48) for contributor in contributors],
             'feed_url': context_feed_url,
             'query_string': search_state.query_string(),
             'page_size' : page_size,
-            'questions': questions_html.replace('\n',''),
+            'exercises': exercises_html.replace('\n',''),
             'non_existing_tags': meta_data['non_existing_tags']
         }
         ajax_data['related_tags'] = [{
@@ -194,11 +194,11 @@ def questions(request, **kwargs):
     else: # non-AJAX branch
 
         template_data = {
-            'active_tab': 'questions',
+            'active_tab': 'exercises',
             'author_name' : meta_data.get('author_name',None),
             'contributors' : contributors,
             'context' : paginator_context,
-            'is_unanswered' : False,#remove this from template
+            'is_without_problem' : False,#remove this from template
             'interesting_tag_names': meta_data.get('interesting_tag_names', None),
             'ignored_tag_names': meta_data.get('ignored_tag_names', None),
             'subscribed_tag_names': meta_data.get('subscribed_tag_names', None),
@@ -208,7 +208,7 @@ def questions(request, **kwargs):
             'page_size': page_size,
             'query': search_state.query,
             'threads' : page,
-            'questions_count' : paginator.count,
+            'exercises_count' : paginator.count,
             'reset_method_count': reset_method_count,
             'scope': search_state.scope,
             'show_sort_by_relevance': conf.should_show_sort_by_relevance(),
@@ -320,43 +320,43 @@ def tags(request):#view showing a listing of available tags - plain list
 
 @csrf.csrf_protect
 #@cache_page(60 * 5)
-def question(request, id):#refactor - long subroutine. display question body, answers and comments
-    """view that displays body of the question and
-    all answers to it
+def exercise(request, id):#refactor - long subroutine. display exercise body, problems and comments
+    """view that displays body of the exercise and
+    all problems to it
     """
     #process url parameters
-    #todo: fix inheritance of sort method from questions
+    #todo: fix inheritance of sort method from exercises
     #before = datetime.datetime.now()
-    default_sort_method = request.session.get('questions_sort_method', 'votes')
-    form = ShowQuestionForm(request.GET, default_sort_method)
+    default_sort_method = request.session.get('exercises_sort_method', 'votes')
+    form = ShowExerciseForm(request.GET, default_sort_method)
     form.full_clean()#always valid
-    show_answer = form.cleaned_data['show_answer']
+    show_problem = form.cleaned_data['show_problem']
     show_comment = form.cleaned_data['show_comment']
     show_page = form.cleaned_data['show_page']
-    answer_sort_method = form.cleaned_data['answer_sort_method']
+    problem_sort_method = form.cleaned_data['problem_sort_method']
 
-    #load question and maybe refuse showing deleted question
-    #if the question does not exist - try mapping to old questions
+    #load exercise and maybe refuse showing deleted exercise
+    #if the exercise does not exist - try mapping to old exercises
     #and and if it is not found again - then give up
     try:
-        question_post = models.Post.objects.filter(
-                                post_type = 'question',
+        exercise_post = models.Post.objects.filter(
+                                post_type = 'exercise',
                                 id = id
                             ).select_related('thread')[0]
     except IndexError:
     # Handle URL mapping - from old Q/A/C/ URLs to the new one
         try:
-            question_post = models.Post.objects.filter(
-                                    post_type='question',
-                                    old_question_id = id
+            exercise_post = models.Post.objects.filter(
+                                    post_type='exercise',
+                                    old_exercise_id = id
                                 ).select_related('thread')[0]
         except IndexError:
             raise Http404
 
-        if show_answer:
+        if show_problem:
             try:
-                old_answer = models.Post.objects.get_answers().get(old_answer_id=show_answer)
-                return HttpResponseRedirect(old_answer.get_absolute_url())
+                old_problem = models.Post.objects.get_problems().get(old_problem_id=show_problem)
+                return HttpResponseRedirect(old_problem.get_absolute_url())
             except models.Post.DoesNotExist:
                 pass
 
@@ -368,37 +368,37 @@ def question(request, id):#refactor - long subroutine. display question body, an
                 pass
 
     try:
-        question_post.assert_is_visible_to(request.user)
-    except exceptions.QuestionHidden, error:
+        exercise_post.assert_is_visible_to(request.user)
+    except exceptions.ExerciseHidden, error:
         request.user.message_set.create(message = unicode(error))
         return HttpResponseRedirect(reverse('index'))
 
     #redirect if slug in the url is wrong
-    if request.path.split('/')[-2] != question_post.slug:
+    if request.path.split('/')[-2] != exercise_post.slug:
         logging.debug('no slug match!')
-        question_url = '?'.join((
-                            question_post.get_absolute_url(),
+        exercise_url = '?'.join((
+                            exercise_post.get_absolute_url(),
                             urllib.urlencode(request.GET)
                         ))
-        return HttpResponseRedirect(question_url)
+        return HttpResponseRedirect(exercise_url)
 
 
-    #resolve comment and answer permalinks
-    #they go first because in theory both can be moved to another question
-    #this block "returns" show_post and assigns actual comment and answer
-    #to show_comment and show_answer variables
+    #resolve comment and problem permalinks
+    #they go first because in theory both can be moved to another exercise
+    #this block "returns" show_post and assigns actual comment and problem
+    #to show_comment and show_problem variables
     #in the case if the permalinked items or their parents are gone - redirect
     #redirect also happens if id of the object's origin post != requested id
     show_post = None #used for permalinks
     if show_comment:
         #if url calls for display of a specific comment,
         #check that comment exists, that it belongs to
-        #the current question
-        #if it is an answer comment and the answer is hidden -
-        #redirect to the default view of the question
-        #if the question is hidden - redirect to the main page
+        #the current exercise
+        #if it is an problem comment and the problem is hidden -
+        #redirect to the default view of the exercise
+        #if the exercise is hidden - redirect to the main page
         #in addition - if url points to a comment and the comment
-        #is for the answer - we need the answer object
+        #is for the problem - we need the problem object
         try:
             show_comment = models.Post.objects.get_comments().get(id=show_comment)
         except models.Post.DoesNotExist:
@@ -407,53 +407,53 @@ def question(request, id):#refactor - long subroutine. display question body, an
                 'deleted and is no longer accessible'
             )
             request.user.message_set.create(message = error_message)
-            return HttpResponseRedirect(question_post.thread.get_absolute_url())
+            return HttpResponseRedirect(exercise_post.thread.get_absolute_url())
 
-        if str(show_comment.thread._question_post().id) != str(id):
+        if str(show_comment.thread._exercise_post().id) != str(id):
             return HttpResponseRedirect(show_comment.get_absolute_url())
         show_post = show_comment.parent
 
         try:
             show_comment.assert_is_visible_to(request.user)
-        except exceptions.AnswerHidden, error:
+        except exceptions.ProblemHidden, error:
             request.user.message_set.create(message = unicode(error))
-            #use reverse function here because question is not yet loaded
-            return HttpResponseRedirect(reverse('question', kwargs = {'id': id}))
-        except exceptions.QuestionHidden, error:
+            #use reverse function here because exercise is not yet loaded
+            return HttpResponseRedirect(reverse('exercise', kwargs = {'id': id}))
+        except exceptions.ExerciseHidden, error:
             request.user.message_set.create(message = unicode(error))
             return HttpResponseRedirect(reverse('index'))
 
-    elif show_answer:
-        #if the url calls to view a particular answer to
-        #question - we must check whether the question exists
-        #whether answer is actually corresponding to the current question
+    elif show_problem:
+        #if the url calls to view a particular problem to
+        #exercise - we must check whether the exercise exists
+        #whether problem is actually corresponding to the current exercise
         #and that the visitor is allowed to see it
-        show_post = get_object_or_404(models.Post, post_type='answer', id=show_answer)
-        if str(show_post.thread._question_post().id) != str(id):
+        show_post = get_object_or_404(models.Post, post_type='problem', id=show_problem)
+        if str(show_post.thread._exercise_post().id) != str(id):
             return HttpResponseRedirect(show_post.get_absolute_url())
 
         try:
             show_post.assert_is_visible_to(request.user)
         except django_exceptions.PermissionDenied, error:
             request.user.message_set.create(message = unicode(error))
-            return HttpResponseRedirect(reverse('question', kwargs = {'id': id}))
+            return HttpResponseRedirect(reverse('exercise', kwargs = {'id': id}))
 
-    thread = question_post.thread
+    thread = exercise_post.thread
 
-    logging.debug('answer_sort_method=' + unicode(answer_sort_method))
+    logging.debug('problem_sort_method=' + unicode(problem_sort_method))
 
-    #load answers and post id's->athor_id mapping
+    #load problems and post id's->athor_id mapping
     #posts are pre-stuffed with the correctly ordered comments
-    updated_question_post, answers, post_to_author, published_answer_ids = thread.get_cached_post_data(
-                                sort_method = answer_sort_method,
+    updated_exercise_post, problems, post_to_author, published_problem_ids = thread.get_cached_post_data(
+                                sort_method = problem_sort_method,
                                 user = request.user
                             )
-    question_post.set_cached_comments(
-        updated_question_post.get_cached_comments()
+    exercise_post.set_cached_comments(
+        updated_exercise_post.get_cached_comments()
     )
 
 
-    #Post.objects.precache_comments(for_posts=[question_post] + answers, visitor=request.user)
+    #Post.objects.precache_comments(for_posts=[exercise_post] + problems, visitor=request.user)
 
     user_votes = {}
     user_post_id_list = list()
@@ -473,14 +473,14 @@ def question(request, id):#refactor - long subroutine. display question body, an
     #resolve page number and comment number for permalinks
     show_comment_position = None
     if show_comment:
-        show_page = show_comment.get_page_number(answer_posts=answers)
+        show_page = show_comment.get_page_number(problem_posts=problems)
         show_comment_position = show_comment.get_order_number()
-    elif show_answer:
-        show_page = show_post.get_page_number(answer_posts=answers)
+    elif show_problem:
+        show_page = show_post.get_page_number(problem_posts=problems)
 
-    objects_list = Paginator(answers, const.ANSWERS_PAGE_SIZE)
+    objects_list = Paginator(problems, const.PROBLEMS_PAGE_SIZE)
     if show_page > objects_list.num_pages:
-        return HttpResponseRedirect(question_post.get_absolute_url())
+        return HttpResponseRedirect(exercise_post.get_absolute_url())
     page_objects = objects_list.page(show_page)
 
     #count visits
@@ -490,10 +490,10 @@ def question(request, id):#refactor - long subroutine. display question body, an
         #todo: merge view counts per user and per session
         #1) view count per session
         update_view_count = False
-        if 'question_view_times' not in request.session:
-            request.session['question_view_times'] = {}
+        if 'exercise_view_times' not in request.session:
+            request.session['exercise_view_times'] = {}
 
-        last_seen = request.session['question_view_times'].get(question_post.id, None)
+        last_seen = request.session['exercise_view_times'].get(exercise_post.id, None)
 
         if thread.last_activity_by_id != request.user.id:
             if last_seen:
@@ -502,26 +502,26 @@ def question(request, id):#refactor - long subroutine. display question body, an
             else:
                 update_view_count = True
 
-        request.session['question_view_times'][question_post.id] = \
+        request.session['exercise_view_times'][exercise_post.id] = \
                                                     datetime.datetime.now()
 
         #2) run the slower jobs in a celery task
         from askbot import tasks
-        tasks.record_question_visit.delay(
-            question_post = question_post,
+        tasks.record_exercise_visit.delay(
+            exercise_post = exercise_post,
             user = request.user,
             update_view_count = update_view_count
         )
 
     paginator_data = {
-        'is_paginated' : (objects_list.count > const.ANSWERS_PAGE_SIZE),
+        'is_paginated' : (objects_list.count > const.PROBLEMS_PAGE_SIZE),
         'pages': objects_list.num_pages,
         'page': show_page,
         'has_previous': page_objects.has_previous(),
         'has_next': page_objects.has_next(),
         'previous': page_objects.previous_page_number(),
         'next': page_objects.next_page_number(),
-        'base_url' : request.path + '?sort=%s&amp;' % answer_sort_method,
+        'base_url' : request.path + '?sort=%s&amp;' % problem_sort_method,
     }
     paginator_context = functions.setup_paginator(paginator_data)
 
@@ -536,55 +536,55 @@ def question(request, id):#refactor - long subroutine. display question body, an
         is_cacheable = False
 
     initial = {
-        'wiki': question_post.wiki and askbot_settings.WIKI_ON,
+        'wiki': exercise_post.wiki and askbot_settings.WIKI_ON,
         'email_notify': thread.is_followed_by(request.user)
     }
     #maybe load draft
     if request.user.is_authenticated():
         #todo: refactor into methor on thread
-        drafts = models.DraftAnswer.objects.filter(
+        drafts = models.DraftProblem.objects.filter(
                                         author=request.user,
                                         thread=thread
                                     )
         if drafts.count() > 0:
             initial['text'] = drafts[0].text
 
-    answer_form = AnswerForm(initial)
+    problem_form = ProblemForm(initial)
 
     user_can_post_comment = (
         request.user.is_authenticated() and request.user.can_post_comment()
     )
 
-    user_already_gave_answer = False
-    previous_answer = None
+    user_already_gave_problem = False
+    previous_problem = None
     if request.user.is_authenticated():
-        if askbot_settings.LIMIT_ONE_ANSWER_PER_USER:
-            for answer in answers:
-                if answer.author == request.user:
-                    user_already_gave_answer = True
-                    previous_answer = answer
+        if askbot_settings.LIMIT_ONE_PROBLEM_PER_USER:
+            for problem in problems:
+                if problem.author == request.user:
+                    user_already_gave_problem = True
+                    previous_problem = problem
                     break
 
     data = {
         'is_cacheable': False,#is_cacheable, #temporary, until invalidation fix
         'long_time': const.LONG_TIME,#"forever" caching
-        'page_class': 'question-page',
-        'active_tab': 'questions',
-        'question' : question_post,
+        'page_class': 'exercise-page',
+        'active_tab': 'exercises',
+        'exercise' : exercise_post,
         'thread': thread,
         'thread_is_moderated': thread.is_moderated(),
         'user_is_thread_moderator': thread.has_moderator(request.user),
-        'published_answer_ids': published_answer_ids,
-        'answer' : answer_form,
-        'answers' : page_objects.object_list,
-        'answer_count': thread.get_answer_count(request.user),
+        'published_problem_ids': published_problem_ids,
+        'problem' : problem_form,
+        'problems' : page_objects.object_list,
+        'problem_count': thread.get_problem_count(request.user),
         'category_tree_data': askbot_settings.CATEGORY_TREE,
         'user_votes': user_votes,
         'user_post_id_list': user_post_id_list,
         'user_can_post_comment': user_can_post_comment,#in general
-        'user_already_gave_answer': user_already_gave_answer,
-        'previous_answer': previous_answer,
-        'tab_id' : answer_sort_method,
+        'user_already_gave_problem': user_already_gave_problem,
+        'previous_problem': previous_problem,
+        'tab_id' : problem_sort_method,
         'favorited' : favorited,
         'similar_threads' : thread.get_similar_threads(),
         'language_code': translation.get_language(),
@@ -599,10 +599,10 @@ def question(request, id):#refactor - long subroutine. display question body, an
 
     data.update(context.get_for_tag_editor())
 
-    return render_into_skin('question.html', data, request)
+    return render_into_skin('exercise.html', data, request)
 
 def revisions(request, id, post_type = None):
-    assert post_type in ('question', 'answer')
+    assert post_type in ('exercise', 'problem')
     post = get_object_or_404(models.Post, post_type=post_type, id=id)
     revisions = list(models.PostRevision.objects.filter(post=post))
     revisions.reverse()
@@ -618,7 +618,7 @@ def revisions(request, id, post_type = None):
 
     data = {
         'page_class':'revisions-page',
-        'active_tab':'questions',
+        'active_tab':'exercises',
         'post': post,
         'revisions': revisions,
     }

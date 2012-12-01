@@ -97,8 +97,8 @@ def manage_inbox(request):
 
                     #elif action_type == 'close':
                     #    for memo in memo_set:
-                    #        if memo.activity.content_object.post_type == "question":
-                    #            request.user.close_question(question = memo.activity.content_object, reason = 7)
+                    #        if memo.activity.content_object.post_type == "exercise":
+                    #            request.user.close_exercise(exercise = memo.activity.content_object, reason = 7)
                     #            memo.delete()
                     elif action_type == 'delete_post':
                         for memo in memo_set:
@@ -206,27 +206,27 @@ def vote(request, id):
     todo: this subroutine needs serious refactoring it's too long and is hard to understand
 
     vote_type:
-        acceptAnswer : 0,
-        questionUpVote : 1,
-        questionDownVote : 2,
+        acceptProblem : 0,
+        exerciseUpVote : 1,
+        exerciseDownVote : 2,
         favorite : 4,
-        answerUpVote: 5,
-        answerDownVote:6,
-        offensiveQuestion : 7,
-        remove offensiveQuestion flag : 7.5,
-        remove all offensiveQuestion flag : 7.6,
-        offensiveAnswer:8,
-        remove offensiveAnswer flag : 8.5,
-        remove all offensiveAnswer flag : 8.6,
-        removeQuestion: 9,
-        removeAnswer:10
-        questionSubscribeUpdates:11
-        questionUnSubscribeUpdates:12
+        problemUpVote: 5,
+        problemDownVote:6,
+        offensiveExercise : 7,
+        remove offensiveExercise flag : 7.5,
+        remove all offensiveExercise flag : 7.6,
+        offensiveProblem:8,
+        remove offensiveProblem flag : 8.5,
+        remove all offensiveProblem flag : 8.6,
+        removeExercise: 9,
+        removeProblem:10
+        exerciseSubscribeUpdates:11
+        exerciseUnSubscribeUpdates:12
 
-    accept answer code:
-        response_data['allowed'] = -1, Accept his own answer   0, no allowed - Anonymous    1, Allowed - by default
+    accept problem code:
+        response_data['allowed'] = -1, Accept his own problem   0, no allowed - Anonymous    1, Allowed - by default
         response_data['success'] =  0, failed                                               1, Success - by default
-        response_data['status']  =  0, By default                       1, Answer has been accepted already(Cancel)
+        response_data['status']  =  0, By default                       1, Problem has been accepted already(Cancel)
 
     vote code:
         allowed = -3, Don't have enough votes left
@@ -262,22 +262,22 @@ def vote(request, id):
 
         if vote_type == '0':
             if request.user.is_authenticated():
-                answer_id = request.POST.get('postId')
-                answer = get_object_or_404(models.Post, post_type='answer', id = answer_id)
-                # make sure question author is current user
-                if answer.accepted():
-                    request.user.unaccept_best_answer(answer)
+                problem_id = request.POST.get('postId')
+                problem = get_object_or_404(models.Post, post_type='problem', id = problem_id)
+                # make sure exercise author is current user
+                if problem.accepted():
+                    request.user.unaccept_best_problem(problem)
                     response_data['status'] = 1 #cancelation
                 else:
-                    request.user.accept_best_answer(answer)
+                    request.user.accept_best_problem(problem)
 
                 ####################################################################
-                answer.thread.update_summary_html() # regenerate question/thread summary html
+                problem.thread.update_summary_html() # regenerate exercise/thread summary html
                 ####################################################################
 
             else:
                 raise exceptions.PermissionDenied(
-                        _('Sorry, but anonymous users cannot accept answers')
+                        _('Sorry, but anonymous users cannot accept problems')
                     )
 
         elif vote_type in ('1', '2', '5', '6'):#Q&A up/down votes
@@ -291,11 +291,11 @@ def vote(request, id):
 
             if vote_type in ('5', '6'):
                 #todo: fix this weirdness - why postId here
-                #and not with question?
+                #and not with exercise?
                 id = request.POST.get('postId')
-                post = get_object_or_404(models.Post, post_type='answer', id=id)
+                post = get_object_or_404(models.Post, post_type='problem', id=id)
             else:
-                post = get_object_or_404(models.Post, post_type='question', id=id)
+                post = get_object_or_404(models.Post, post_type='exercise', id=id)
             #
             ######################
 
@@ -306,17 +306,17 @@ def vote(request, id):
                                     )
 
             ####################################################################
-            if vote_type in ('1', '2'): # up/down-vote question
-                post.thread.update_summary_html() # regenerate question/thread summary html
+            if vote_type in ('1', '2'): # up/down-vote exercise
+                post.thread.update_summary_html() # regenerate exercise/thread summary html
             ####################################################################
 
         elif vote_type in ['7', '8']:
-            #flag question or answer
+            #flag exercise or problem
             if vote_type == '7':
-                post = get_object_or_404(models.Post, post_type='question', id=id)
+                post = get_object_or_404(models.Post, post_type='exercise', id=id)
             if vote_type == '8':
                 id = request.POST.get('postId')
-                post = get_object_or_404(models.Post, post_type='answer', id=id)
+                post = get_object_or_404(models.Post, post_type='problem', id=id)
 
             request.user.flag_post(post)
 
@@ -324,12 +324,12 @@ def vote(request, id):
             response_data['success'] = 1
 
         elif vote_type in ['7.5', '8.5']:
-            #flag question or answer
+            #flag exercise or problem
             if vote_type == '7.5':
-                post = get_object_or_404(models.Post, post_type='question', id=id)
+                post = get_object_or_404(models.Post, post_type='exercise', id=id)
             if vote_type == '8.5':
                 id = request.POST.get('postId')
-                post = get_object_or_404(models.Post, post_type='answer', id=id)
+                post = get_object_or_404(models.Post, post_type='problem', id=id)
 
             request.user.flag_post(post, cancel = True)
 
@@ -337,7 +337,7 @@ def vote(request, id):
             response_data['success'] = 1
 
         elif vote_type in ['7.6', '8.6']:
-            #flag question or answer
+            #flag exercise or problem
             if vote_type == '7.6':
                 post = get_object_or_404(models.Post, id=id)
             if vote_type == '8.6':
@@ -350,11 +350,11 @@ def vote(request, id):
             response_data['success'] = 1
 
         elif vote_type in ['9', '10']:
-            #delete question or answer
-            post = get_object_or_404(models.Post, post_type='question', id=id)
+            #delete exercise or problem
+            post = get_object_or_404(models.Post, post_type='exercise', id=id)
             if vote_type == '10':
                 id = request.POST.get('postId')
-                post = get_object_or_404(models.Post, post_type='answer', id=id)
+                post = get_object_or_404(models.Post, post_type='problem', id=id)
 
             if post.deleted == True:
                 request.user.restore_post(post = post)
@@ -367,21 +367,21 @@ def vote(request, id):
                 response_data['allowed'] = 0
                 response_data['success'] = 0
 
-            question = get_object_or_404(models.Post, post_type='question', id=id)
+            exercise = get_object_or_404(models.Post, post_type='exercise', id=id)
             vote_type = request.POST.get('type')
 
-            #accept answer
+            #accept problem
             if vote_type == '4':
-                fave = request.user.toggle_favorite_question(question)
-                response_data['count'] = models.FavoriteQuestion.objects.filter(thread = question.thread).count()
+                fave = request.user.toggle_favorite_exercise(exercise)
+                response_data['count'] = models.FavoriteExercise.objects.filter(thread = exercise.thread).count()
                 if fave == False:
                     response_data['status'] = 1
 
             elif vote_type == '11':#subscribe q updates
                 user = request.user
                 if user.is_authenticated():
-                    if user not in question.thread.followed_by.all():
-                        user.follow_question(question)
+                    if user not in exercise.thread.followed_by.all():
+                        user.follow_exercise(exercise)
                         if askbot_settings.EMAIL_VALIDATION == True \
                             and user.email_isvalid == False:
 
@@ -392,7 +392,7 @@ def vote(request, id):
                                         '<a href="%(details_url)s">more details here</a>'
                                     ) % {'email':user.email,'details_url':reverse('faq') + '#validate'}
 
-                    subscribed = user.subscribe_for_followed_question_alerts()
+                    subscribed = user.subscribe_for_followed_exercise_alerts()
                     if subscribed:
                         if 'message' in response_data:
                             response_data['message'] += '<br/>'
@@ -406,14 +406,14 @@ def vote(request, id):
             elif vote_type == '12':#unsubscribe q updates
                 user = request.user
                 if user.is_authenticated():
-                    user.unfollow_question(question)
+                    user.unfollow_exercise(exercise)
         else:
             response_data['success'] = 0
             response_data['message'] = u'Request mode is not supported. Please try again.'
 
         if vote_type not in (1, 2, 4, 5, 6, 11, 12):
             #favorite or subscribe/unsubscribe
-            #upvote or downvote question or answer - those
+            #upvote or downvote exercise or problem - those
             #are handled within user.upvote and user.downvote
             post = models.Post.objects.get(id = id)
             post.thread.invalidate_cached_data()
@@ -696,8 +696,8 @@ def subscribe_for_tags(request):
 
 
 @decorators.get_only
-def api_get_questions(request):
-    """json api for retrieving questions"""
+def api_get_exercises(request):
+    """json api for retrieving exercises"""
     query = request.GET.get('query', '').strip()
     if not query:
         return HttpResponseBadRequest('Invalid query')
@@ -719,7 +719,7 @@ def api_get_questions(request):
     thread_list = [{
         'title': escape(thread.title),
         'url': thread.get_absolute_url(),
-        'answer_count': thread.get_answer_count(request.user)
+        'problem_count': thread.get_problem_count(request.user)
     } for thread in threads]
     json_data = simplejson.dumps(thread_list)
     return HttpResponse(json_data, mimetype = "application/json")
@@ -747,55 +747,55 @@ def set_tag_filter_strategy(request):
 
 @login_required
 @csrf.csrf_protect
-def close(request, id):#close question
+def close(request, id):#close exercise
     """view to initiate and process
-    question close
+    exercise close
     """
-    question = get_object_or_404(models.Post, post_type='question', id=id)
+    exercise = get_object_or_404(models.Post, post_type='exercise', id=id)
     try:
         if request.method == 'POST':
             form = forms.CloseForm(request.POST)
             if form.is_valid():
                 reason = form.cleaned_data['reason']
 
-                request.user.close_question(
-                                        question = question,
+                request.user.close_exercise(
+                                        exercise = exercise,
                                         reason = reason
                                     )
-            return HttpResponseRedirect(question.get_absolute_url())
+            return HttpResponseRedirect(exercise.get_absolute_url())
         else:
-            request.user.assert_can_close_question(question)
+            request.user.assert_can_close_exercise(exercise)
             form = forms.CloseForm()
             data = {
-                'question': question,
+                'exercise': exercise,
                 'form': form,
             }
             return render_into_skin('close.html', data, request)
     except exceptions.PermissionDenied, e:
         request.user.message_set.create(message = unicode(e))
-        return HttpResponseRedirect(question.get_absolute_url())
+        return HttpResponseRedirect(exercise.get_absolute_url())
 
 @login_required
 @csrf.csrf_protect
-def reopen(request, id):#re-open question
+def reopen(request, id):#re-open exercise
     """view to initiate and process
-    question close
+    exercise close
 
     this is not an ajax view
     """
 
-    question = get_object_or_404(models.Post, post_type='question', id=id)
-    # open question
+    exercise = get_object_or_404(models.Post, post_type='exercise', id=id)
+    # open exercise
     try:
         if request.method == 'POST' :
-            request.user.reopen_question(question)
-            return HttpResponseRedirect(question.get_absolute_url())
+            request.user.reopen_exercise(exercise)
+            return HttpResponseRedirect(exercise.get_absolute_url())
         else:
-            request.user.assert_can_reopen_question(question)
-            closed_by_profile_url = question.thread.closed_by.get_profile_url()
-            closed_by_username = question.thread.closed_by.username
+            request.user.assert_can_reopen_exercise(exercise)
+            closed_by_profile_url = exercise.thread.closed_by.get_profile_url()
+            closed_by_username = exercise.thread.closed_by.username
             data = {
-                'question' : question,
+                'exercise' : exercise,
                 'closed_by_profile_url': closed_by_profile_url,
                 'closed_by_username': closed_by_username,
             }
@@ -803,24 +803,24 @@ def reopen(request, id):#re-open question
 
     except exceptions.PermissionDenied, e:
         request.user.message_set.create(message = unicode(e))
-        return HttpResponseRedirect(question.get_absolute_url())
+        return HttpResponseRedirect(exercise.get_absolute_url())
 
 
 @csrf.csrf_exempt
 @decorators.ajax_only
-def swap_question_with_answer(request):
-    """receives two json parameters - answer id
-    and new question title
+def swap_exercise_with_problem(request):
+    """receives two json parameters - problem id
+    and new exercise title
     the view is made to be used only by the site administrator
     or moderators
     """
     if request.user.is_authenticated():
         if request.user.is_administrator() or request.user.is_moderator():
-            answer = models.Post.objects.get_answers(request.user).get(id = request.POST['answer_id'])
-            new_question = answer.swap_with_question(new_title = request.POST['new_title'])
+            problem = models.Post.objects.get_problems(request.user).get(id = request.POST['problem_id'])
+            new_exercise = problem.swap_with_exercise(new_title = request.POST['new_title'])
             return {
-                'id': new_question.id,
-                'slug': new_question.slug
+                'id': new_exercise.id,
+                'slug': new_exercise.slug
             }
     raise Http404
 
@@ -856,7 +856,7 @@ def delete_post(request):
         post_id = form.cleaned_data['post_id']
         post = get_object_or_404(
             models.Post,
-            post_type__in = ('question', 'answer'),
+            post_type__in = ('exercise', 'problem'),
             id = post_id
         )
         if form.cleaned_data['cancel_vote']:
@@ -988,7 +988,7 @@ def toggle_group_profile_property(request):
     property_name = CharField().clean(request.POST['property_name'])
     assert property_name in (
                         'moderate_email',
-                        'moderate_answers_to_enquirers',
+                        'moderate_problems_to_enquirers',
                         'is_vip'
                     )
     group = models.Group.objects.get(id = group_id)
@@ -1151,22 +1151,22 @@ def moderate_suggested_tag(request):
 @csrf.csrf_exempt
 @decorators.ajax_only
 @decorators.post_only
-def save_draft_question(request):
-    """saves draft questions"""
+def save_draft_exercise(request):
+    """saves draft exercises"""
     #todo: allow drafts for anonymous users
     if request.user.is_anonymous():
         return
 
-    form = forms.DraftQuestionForm(request.POST)
+    form = forms.DraftExerciseForm(request.POST)
     if form.is_valid():
         title = form.cleaned_data.get('title', '')
         text = form.cleaned_data.get('text', '')
         tagnames = form.cleaned_data.get('tagnames', '')
         if title or text or tagnames:
             try:
-                draft = models.DraftQuestion.objects.get(author=request.user)
-            except models.DraftQuestion.DoesNotExist:
-                draft = models.DraftQuestion()
+                draft = models.DraftExercise.objects.get(author=request.user)
+            except models.DraftExercise.DoesNotExist:
+                draft = models.DraftExercise()
 
             draft.title = title
             draft.text = text
@@ -1178,13 +1178,13 @@ def save_draft_question(request):
 @csrf.csrf_exempt
 @decorators.ajax_only
 @decorators.post_only
-def save_draft_answer(request):
-    """saves draft answers"""
+def save_draft_problem(request):
+    """saves draft problems"""
     #todo: allow drafts for anonymous users
     if request.user.is_anonymous():
         return
 
-    form = forms.DraftAnswerForm(request.POST)
+    form = forms.DraftProblemForm(request.POST)
     if form.is_valid():
         thread_id = form.cleaned_data['thread_id']
         try:
@@ -1192,12 +1192,12 @@ def save_draft_answer(request):
         except models.Thread.DoesNotExist:
             return
         try:
-            draft = models.DraftAnswer.objects.get(
+            draft = models.DraftProblem.objects.get(
                                             thread=thread,
                                             author=request.user
                                     )
-        except models.DraftAnswer.DoesNotExist:
-            draft = models.DraftAnswer()
+        except models.DraftProblem.DoesNotExist:
+            draft = models.DraftProblem()
 
         draft.author = request.user
         draft.thread = thread
@@ -1227,8 +1227,8 @@ def get_users_info(request):
     return HttpResponse('\n'.join(result_list), mimetype = 'text/plain')
 
 @csrf.csrf_protect
-def share_question_with_group(request):
-    form = forms.ShareQuestionForm(request.POST)
+def share_exercise_with_group(request):
+    form = forms.ShareExerciseForm(request.POST)
     try:
         if form.is_valid():
 
@@ -1236,10 +1236,10 @@ def share_question_with_group(request):
             group_name = form.cleaned_data['recipient_name']
 
             thread = models.Thread.objects.get(id=thread_id)
-            question_post = thread._question_post()
+            exercise_post = thread._exercise_post()
 
             #get notif set before
-            sets1 = question_post.get_notify_sets(
+            sets1 = exercise_post.get_notify_sets(
                                     mentioned_users=list(),
                                     exclude_list=[request.user,]
                                 )
@@ -1252,7 +1252,7 @@ def share_question_with_group(request):
                 thread.add_to_groups((group,), recursive=True)
 
             #get notif sets after
-            sets2 = question_post.get_notify_sets(
+            sets2 = exercise_post.get_notify_sets(
                                     mentioned_users=list(),
                                     exclude_list=[request.user,]
                                 )
@@ -1263,7 +1263,7 @@ def share_question_with_group(request):
                 'for_inbox': sets2['for_inbox'] - sets1['for_inbox']
             }
 
-            question_post.issue_update_notifications(
+            exercise_post.issue_update_notifications(
                 updated_by=request.user,
                 notify_sets=notify_sets,
                 activity_type=const.TYPE_ACTIVITY_POST_SHARED,
@@ -1277,8 +1277,8 @@ def share_question_with_group(request):
         return HttpResponseRedirect(thread.get_absolute_url())
 
 @csrf.csrf_protect
-def share_question_with_user(request):
-    form = forms.ShareQuestionForm(request.POST)
+def share_exercise_with_user(request):
+    form = forms.ShareExerciseForm(request.POST)
     try:
         if form.is_valid():
 
@@ -1296,7 +1296,7 @@ def share_question_with_user(request):
                 'for_mentions': set([user]),
                 'for_email': set([user])
             }
-            thread._question_post().issue_update_notifications(
+            thread._exercise_post().issue_update_notifications(
                 updated_by=request.user,
                 notify_sets=notify_sets,
                 activity_type=const.TYPE_ACTIVITY_POST_SHARED,
@@ -1374,8 +1374,8 @@ def get_editor(request):
 @csrf.csrf_exempt
 @decorators.ajax_only
 @decorators.post_only
-def publish_answer(request):
-    """will publish or unpublish answer, if
+def publish_problem(request):
+    """will publish or unpublish problem, if
     current thread is moderated
     """
     denied_msg = _('Sorry, only thread moderators can use this function')
@@ -1383,21 +1383,21 @@ def publish_answer(request):
         if request.user.is_administrator_or_moderator() is False:
             raise exceptions.PermissionDenied(denied_msg)
     #todo: assert permission
-    answer_id = IntegerField().clean(request.POST['answer_id'])
-    answer = models.Post.objects.get(id=answer_id, post_type='answer')
+    problem_id = IntegerField().clean(request.POST['problem_id'])
+    problem = models.Post.objects.get(id=problem_id, post_type='problem')
 
-    if answer.thread.has_moderator(request.user) is False:
+    if problem.thread.has_moderator(request.user) is False:
         raise exceptions.PermissionDenied(denied_msg)
 
-    enquirer = answer.thread._question_post().author
+    enquirer = problem.thread._exercise_post().author
     enquirer_group = enquirer.get_personal_group()
 
-    if answer.has_group(enquirer_group):
-        message = _('The answer is now unpublished')
-        answer.remove_from_groups([enquirer_group])
+    if problem.has_group(enquirer_group):
+        message = _('The problem is now unpublished')
+        problem.remove_from_groups([enquirer_group])
     else:
-        answer.add_to_groups([enquirer_group])
-        message = _('The answer is now published')
+        problem.add_to_groups([enquirer_group])
+        message = _('The problem is now published')
         #todo: notify enquirer by email about the post
     request.user.message_set.create(message=message)
-    return {'redirect_url': answer.get_absolute_url()}
+    return {'redirect_url': problem.get_absolute_url()}

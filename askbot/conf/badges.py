@@ -38,88 +38,88 @@ settings.register(
         BADGES,
         'TEACHER_BADGE_MIN_UPVOTES',
         default=1,
-        description=_('Teacher: minimum upvotes for the answer')
+        description=_('Teacher: minimum upvotes for the problem')
     )
 )
 
 settings.register(
     IntegerValue(
         BADGES,
-        'NICE_ANSWER_BADGE_MIN_UPVOTES',
+        'NICE_PROBLEM_BADGE_MIN_UPVOTES',
         default=2,
-        description=_('Nice Answer: minimum upvotes for the answer')
+        description=_('Nice Problem: minimum upvotes for the problem')
     )
 )
 
 settings.register(
     IntegerValue(
         BADGES,
-        'GOOD_ANSWER_BADGE_MIN_UPVOTES',
+        'GOOD_PROBLEM_BADGE_MIN_UPVOTES',
         default=3,
-        description=_('Good Answer: minimum upvotes for the answer')
+        description=_('Good Problem: minimum upvotes for the problem')
     )
 )
 
 settings.register(
     IntegerValue(
         BADGES,
-        'GREAT_ANSWER_BADGE_MIN_UPVOTES',
+        'GREAT_PROBLEM_BADGE_MIN_UPVOTES',
         default=5,
-        description=_('Great Answer: minimum upvotes for the answer')
+        description=_('Great Problem: minimum upvotes for the problem')
     )
 )
 
 settings.register(
     IntegerValue(
         BADGES,
-        'NICE_QUESTION_BADGE_MIN_UPVOTES',
+        'NICE_EXERCISE_BADGE_MIN_UPVOTES',
         default=2,
-        description=_('Nice Question: minimum upvotes for the question')
+        description=_('Nice Exercise: minimum upvotes for the exercise')
     )
 )
 
 settings.register(
     IntegerValue(
         BADGES,
-        'GOOD_QUESTION_BADGE_MIN_UPVOTES',
+        'GOOD_EXERCISE_BADGE_MIN_UPVOTES',
         default=3,
-        description=_('Good Question: minimum upvotes for the question')
+        description=_('Good Exercise: minimum upvotes for the exercise')
     )
 )
 
 settings.register(
     IntegerValue(
         BADGES,
-        'GREAT_QUESTION_BADGE_MIN_UPVOTES',
+        'GREAT_EXERCISE_BADGE_MIN_UPVOTES',
         default=5,
-        description=_('Great Question: minimum upvotes for the question')
+        description=_('Great Exercise: minimum upvotes for the exercise')
     )
 )
 
 settings.register(
     IntegerValue(
         BADGES,
-        'POPULAR_QUESTION_BADGE_MIN_VIEWS',
+        'POPULAR_EXERCISE_BADGE_MIN_VIEWS',
         default=15,
-        description=_('Popular Question: minimum views')
+        description=_('Popular Exercise: minimum views')
     )
 )
 
 settings.register(
     IntegerValue(
         BADGES,
-        'NOTABLE_QUESTION_BADGE_MIN_VIEWS',
+        'NOTABLE_EXERCISE_BADGE_MIN_VIEWS',
         default=25,
-        description=_('Notable Question: minimum views')
+        description=_('Notable Exercise: minimum views')
     )
 )
 
 settings.register(
     IntegerValue(
         BADGES,
-        'FAMOUS_QUESTION_BADGE_MIN_VIEWS',
+        'FAMOUS_EXERCISE_BADGE_MIN_VIEWS',
         default=50,
-        description=_('Famous Question: minimum views')
+        description=_('Famous Exercise: minimum views')
     )
 )
 
@@ -128,7 +128,7 @@ settings.register(
         BADGES,
         'SELF_LEARNER_BADGE_MIN_UPVOTES',
         default=1,
-        description=_('Self-Learner: minimum answer upvotes')
+        description=_('Self-Learner: minimum problem upvotes')
     )
 )
 
@@ -189,18 +189,18 @@ settings.register(
 settings.register(
     IntegerValue(
         BADGES,
-        'FAVORITE_QUESTION_BADGE_MIN_STARS',
+        'FAVORITE_EXERCISE_BADGE_MIN_STARS',
         default=3,
-        description=_('Favorite Question: minimum stars')
+        description=_('Favorite Exercise: minimum stars')
     )
 )
 
 settings.register(
     IntegerValue(
         BADGES,
-        'STELLAR_QUESTION_BADGE_MIN_STARS',
+        'STELLAR_EXERCISE_BADGE_MIN_STARS',
         default=5,
-        description=_('Stellar Question: minimum stars')
+        description=_('Stellar Exercise: minimum stars')
     )
 )
 

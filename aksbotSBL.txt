@@ -29,7 +29,7 @@ CREATE TABLE "repute" (
     "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
     "positive" smallint NOT NULL,
     "negative" smallint NOT NULL,
-    "question_id" integer,
+    "exercise_id" integer,
     "reputed_at" timestamp with time zone NOT NULL,
     "reputation_type" smallint NOT NULL,
     "reputation" integer NOT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE "activity" (
     "active_at" timestamp with time zone NOT NULL,
     "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED,
     "object_id" integer CHECK ("object_id" >= 0) NOT NULL,
-    "question_id" integer,
+    "exercise_id" integer,
     "is_auditted" boolean NOT NULL,
     "summary" text NOT NULL
 )
@@ -112,7 +112,7 @@ CREATE TABLE "askbot_group" (
     "logo_url" varchar(200),
     "description_id" integer UNIQUE,
     "moderate_email" boolean NOT NULL,
-    "moderate_answers_to_enquirers" boolean NOT NULL,
+    "moderate_problems_to_enquirers" boolean NOT NULL,
     "openness" smallint NOT NULL,
     "preapproved_emails" text,
     "preapproved_email_domains" text,
@@ -129,8 +129,8 @@ CREATE TABLE "askbot_post_groups" (
 CREATE TABLE "askbot_post" (
     "id" serial NOT NULL PRIMARY KEY,
     "post_type" varchar(255) NOT NULL,
-    "old_question_id" integer CHECK ("old_question_id" >= 0) UNIQUE,
-    "old_answer_id" integer CHECK ("old_answer_id" >= 0) UNIQUE,
+    "old_exercise_id" integer CHECK ("old_exercise_id" >= 0) UNIQUE,
+    "old_problem_id" integer CHECK ("old_problem_id" >= 0) UNIQUE,
     "old_comment_id" integer CHECK ("old_comment_id" >= 0) UNIQUE,
     "parent_id" integer,
     "thread_id" integer,
@@ -159,9 +159,9 @@ CREATE TABLE "askbot_post" (
 )
 ;
 ALTER TABLE "vote" ADD CONSTRAINT "voted_post_id_refs_id_5acd8c43" FOREIGN KEY ("voted_post_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
-ALTER TABLE "repute" ADD CONSTRAINT "question_id_refs_id_6cfc78fa" FOREIGN KEY ("question_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "repute" ADD CONSTRAINT "exercise_id_refs_id_6cfc78fa" FOREIGN KEY ("exercise_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
 ALTER TABLE "tag" ADD CONSTRAINT "tag_wiki_id_refs_id_38f75ec0" FOREIGN KEY ("tag_wiki_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
-ALTER TABLE "activity" ADD CONSTRAINT "question_id_refs_id_a57741ac" FOREIGN KEY ("question_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "activity" ADD CONSTRAINT "exercise_id_refs_id_a57741ac" FOREIGN KEY ("exercise_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
 ALTER TABLE "askbot_group" ADD CONSTRAINT "description_id_refs_id_9f46af55" FOREIGN KEY ("description_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
 ALTER TABLE "askbot_post_groups" ADD CONSTRAINT "post_id_refs_id_839241d7" FOREIGN KEY ("post_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
 ALTER TABLE "askbot_post" ADD CONSTRAINT "parent_id_refs_id_8a681b73" FOREIGN KEY ("parent_id") REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED;
@@ -192,14 +192,14 @@ CREATE TABLE "askbot_postflagreason" (
     "details_id" integer NOT NULL REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED
 )
 ;
-CREATE TABLE "askbot_draftanswer" (
+CREATE TABLE "askbot_draftproblem" (
     "id" serial NOT NULL PRIMARY KEY,
     "thread_id" integer NOT NULL,
     "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
     "text" text
 )
 ;
-CREATE TABLE "askbot_anonymousanswer" (
+CREATE TABLE "askbot_anonymousproblem" (
     "id" serial NOT NULL PRIMARY KEY,
     "session_key" varchar(40) NOT NULL,
     "wiki" boolean NOT NULL,
@@ -208,7 +208,7 @@ CREATE TABLE "askbot_anonymousanswer" (
     "author_id" integer REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
     "text" text NOT NULL,
     "summary" varchar(180) NOT NULL,
-    "question_id" integer NOT NULL REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED
+    "exercise_id" integer NOT NULL REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED
 )
 ;
 CREATE TABLE "askbot_thread_groups" (
@@ -239,7 +239,7 @@ CREATE TABLE "askbot_thread" (
     "tagnames" varchar(125) NOT NULL,
     "view_count" integer CHECK ("view_count" >= 0) NOT NULL,
     "favourite_count" integer CHECK ("favourite_count" >= 0) NOT NULL,
-    "answer_count" integer CHECK ("answer_count" >= 0) NOT NULL,
+    "problem_count" integer CHECK ("problem_count" >= 0) NOT NULL,
     "last_activity_at" timestamp with time zone NOT NULL,
     "last_activity_by_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
     "closed" boolean NOT NULL,
@@ -247,32 +247,32 @@ CREATE TABLE "askbot_thread" (
     "closed_at" timestamp with time zone,
     "close_reason" smallint,
     "approved" boolean NOT NULL,
-    "accepted_answer_id" integer REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED,
-    "answer_accepted_at" timestamp with time zone,
+    "accepted_problem_id" integer REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "problem_accepted_at" timestamp with time zone,
     "added_at" timestamp with time zone NOT NULL,
     "score" integer NOT NULL
 )
 ;
 ALTER TABLE "askbot_post" ADD CONSTRAINT "thread_id_refs_id_722ab895" FOREIGN KEY ("thread_id") REFERENCES "askbot_thread" ("id") DEFERRABLE INITIALLY DEFERRED;
-ALTER TABLE "askbot_draftanswer" ADD CONSTRAINT "thread_id_refs_id_45b37995" FOREIGN KEY ("thread_id") REFERENCES "askbot_thread" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "askbot_draftproblem" ADD CONSTRAINT "thread_id_refs_id_45b37995" FOREIGN KEY ("thread_id") REFERENCES "askbot_thread" ("id") DEFERRABLE INITIALLY DEFERRED;
 ALTER TABLE "askbot_thread_groups" ADD CONSTRAINT "thread_id_refs_id_ddc2b8b9" FOREIGN KEY ("thread_id") REFERENCES "askbot_thread" ("id") DEFERRABLE INITIALLY DEFERRED;
 ALTER TABLE "askbot_thread_tags" ADD CONSTRAINT "thread_id_refs_id_33659a1e" FOREIGN KEY ("thread_id") REFERENCES "askbot_thread" ("id") DEFERRABLE INITIALLY DEFERRED;
 ALTER TABLE "askbot_thread_followed_by" ADD CONSTRAINT "thread_id_refs_id_6236ff0a" FOREIGN KEY ("thread_id") REFERENCES "askbot_thread" ("id") DEFERRABLE INITIALLY DEFERRED;
-CREATE TABLE "askbot_questionview" (
+CREATE TABLE "askbot_exerciseview" (
     "id" serial NOT NULL PRIMARY KEY,
-    "question_id" integer NOT NULL REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED,
+    "exercise_id" integer NOT NULL REFERENCES "askbot_post" ("id") DEFERRABLE INITIALLY DEFERRED,
     "who_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
     "when" timestamp with time zone NOT NULL
 )
 ;
-CREATE TABLE "favorite_question" (
+CREATE TABLE "favorite_exercise" (
     "id" serial NOT NULL PRIMARY KEY,
     "thread_id" integer NOT NULL REFERENCES "askbot_thread" ("id") DEFERRABLE INITIALLY DEFERRED,
     "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
     "added_at" timestamp with time zone NOT NULL
 )
 ;
-CREATE TABLE "askbot_draftquestion" (
+CREATE TABLE "askbot_draftexercise" (
     "id" serial NOT NULL PRIMARY KEY,
     "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED,
     "title" varchar(300),
@@ -280,7 +280,7 @@ CREATE TABLE "askbot_draftquestion" (
     "tagnames" varchar(125)
 )
 ;
-CREATE TABLE "askbot_anonymousquestion" (
+CREATE TABLE "askbot_anonymousexercise" (
     "id" serial NOT NULL PRIMARY KEY,
     "session_key" varchar(40) NOT NULL,
     "wiki" boolean NOT NULL,
@@ -315,10 +315,10 @@ CREATE TABLE "askbot_askwidget" (
     "outer_style" text NOT NULL
 )
 ;
-CREATE TABLE "askbot_questionwidget" (
+CREATE TABLE "askbot_exercisewidget" (
     "id" serial NOT NULL PRIMARY KEY,
     "title" varchar(100) NOT NULL,
-    "question_number" integer CHECK ("question_number" >= 0) NOT NULL,
+    "exercise_number" integer CHECK ("exercise_number" >= 0) NOT NULL,
     "tagnames" varchar(50) NOT NULL,
     "group_id" integer REFERENCES "askbot_group" ("group_ptr_id") DEFERRABLE INITIALLY DEFERRED,
     "search_query" varchar(50),

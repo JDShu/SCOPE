@@ -1,3 +1,5 @@
+#TODO: Make work with new post_types
+
 import datetime
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
@@ -191,14 +193,14 @@ class Repute(models.Model):
     #todo: combine positive and negative to one value
     positive = models.SmallIntegerField(default=0)
     negative = models.SmallIntegerField(default=0)
-    question = models.ForeignKey('Post', null=True, blank=True)
+    exercise = models.ForeignKey('Post', null=True, blank=True)
     reputed_at = models.DateTimeField(default=datetime.datetime.now)
     reputation_type = models.SmallIntegerField(choices=const.TYPE_REPUTATION)
     reputation = models.IntegerField(default=1)
 
     #comment that must be used if reputation_type == 10
     #assigned_by_moderator - so that reason can be displayed
-    #in that case Question field will be blank
+    #in that case Exercise field will be blank
     comment = models.CharField(max_length=128, null=True)
 
     objects = ReputeManager()
@@ -211,7 +213,7 @@ class Repute(models.Model):
         db_table = u'repute'
 
     def get_explanation_snippet(self):
-        """returns HTML snippet with a link to related question
+        """returns HTML snippet with a link to related exercise
         or a text description for a the reason of the reputation change
 
         in the implementation description is returned only
@@ -227,23 +229,23 @@ class Repute(models.Model):
             link_title_data = {
                                 'points': abs(delta),
                                 'username': self.user.username,
-                                'question_title': self.question.thread.title
+                                'exercise_title': self.exercise.thread.title
                             }
             if delta > 0:
                 link_title = _(
                                 '%(points)s points were added for %(username)s\'s '
-                                'contribution to question %(question_title)s'
+                                'contribution to exercise %(exercise_title)s'
                             ) % link_title_data
             else:
                 link_title = _(
                                 '%(points)s points were subtracted for %(username)s\'s '
-                                'contribution to question %(question_title)s'
+                                'contribution to exercise %(exercise_title)s'
                             ) % link_title_data
 
-            return '<a href="%(url)s" title="%(link_title)s">%(question_title)s</a>' \
+            return '<a href="%(url)s" title="%(link_title)s">%(exercise_title)s</a>' \
                             % {
-                               'url': self.question.get_absolute_url(),
-                               'question_title': escape(self.question.thread.title),
+                               'url': self.exercise.get_absolute_url(),
+                               'exercise_title': escape(self.exercise.thread.title),
                                'link_title': escape(link_title)
                             }
 

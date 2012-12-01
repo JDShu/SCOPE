@@ -14,7 +14,7 @@ $.fn.authenticator = function() {
     var openid_submit_button = $('input[name=openid_login_with_extra_token]');
     var existing_login_methods = {};
 
-    var account_recovery_question_text = account_recovery_heading.html();
+    var account_recovery_exercise_text = account_recovery_heading.html();
     var account_recovery_prompt_text = account_recovery_text_span.html();
 
     var setup_click_handler = function(elements, handler_function){
@@ -199,7 +199,7 @@ $.fn.authenticator = function() {
             account_recovery_link.show();
             account_recovery_hint.show();
             $('#account-recovery-form>p.hint').css('margin-top','10px');
-            account_recovery_text_span.html(account_recovery_question_text).show();
+            account_recovery_text_span.html(account_recovery_exercise_text).show();
         }
         else {
             if (existing_login_methods !== null){

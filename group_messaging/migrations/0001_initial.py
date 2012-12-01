@@ -124,7 +124,7 @@ class Migration(SchemaMigration):
             'location': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
             'new_response_count': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'questions_per_page': ('django.db.models.fields.SmallIntegerField', [], {'default': '10'}),
+            'exercises_per_page': ('django.db.models.fields.SmallIntegerField', [], {'default': '10'}),
             'real_name': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
             'reputation': ('django.db.models.fields.PositiveIntegerField', [], {'default': '1'}),
             'seen_response_count': ('django.db.models.fields.IntegerField', [], {'default': '0'}),

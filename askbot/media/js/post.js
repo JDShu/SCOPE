@@ -131,7 +131,7 @@ $.validator.addMethod('limit_tag_length', validateTagLength);
 
 var CPValidator = function(){
     return {
-        getQuestionFormRules : function(){
+        getExerciseFormRules : function(){
             return {
                 tags: {
                     required: askbot['settings']['tagsAreRequired'],
@@ -140,14 +140,14 @@ var CPValidator = function(){
                     limit_tag_length: true
                 },
                 text: {
-                    minlength: askbot['settings']['minQuestionBodyLength']
+                    minlength: askbot['settings']['minExerciseBodyLength']
                 },
                 title: {
                     minlength: askbot['settings']['minTitleLength']
                 }
             };
         },
-        getQuestionFormMessages: function(){
+        getExerciseFormMessages: function(){
             return {
                 tags: {
                     required: " " + gettext('tags cannot be empty'),
@@ -159,11 +159,11 @@ var CPValidator = function(){
                     required: " " + gettext('content cannot be empty'),
                     minlength: interpolate(
                                     ngettext(
-                                        'question body must be > %s character',
-                                        'question body must be > %s characters',
-                                        askbot['settings']['minQuestionBodyLength']
+                                        'exercise body must be > %s character',
+                                        'exercise body must be > %s characters',
+                                        askbot['settings']['minExerciseBodyLength']
                                     ),
-                                    [askbot['settings']['minQuestionBodyLength'], ]
+                                    [askbot['settings']['minExerciseBodyLength'], ]
                                 )
                 },
                 title: {
@@ -179,24 +179,24 @@ var CPValidator = function(){
                 }
             };
         },
-        getAnswerFormRules : function(){
+        getProblemFormRules : function(){
             return {
                 text: {
-                    minlength: askbot['settings']['minAnswerBodyLength']
+                    minlength: askbot['settings']['minProblemBodyLength']
                 },
             };
         },
-        getAnswerFormMessages: function(){
+        getProblemFormMessages: function(){
             return {
                 text: {
                     required: " " + gettext('content cannot be empty'),
                     minlength: interpolate(
                                     ngettext(
-                                        'answer must be > %s character',
-                                        'answer must be > %s characters',
-                                        askbot['settings']['minAnswerBodyLength']
+                                        'problem must be > %s character',
+                                        'problem must be > %s characters',
+                                        askbot['settings']['minProblemBodyLength']
                                     ),
-                                    [askbot['settings']['minAnswerBodyLength'], ]
+                                    [askbot['settings']['minProblemBodyLength'], ]
                                 )
                 },
             }
@@ -249,7 +249,7 @@ ThreadUsersDialog.prototype.decorate = function(element) {
     this._url = element.data('url');
     var dialog = new ModalDialog();
     dialog.setRejectButtonText('');
-    dialog.setAcceptButtonText(gettext('Back to the question'));
+    dialog.setAcceptButtonText(gettext('Back to the exercise'));
     dialog.setHeadingText(this._heading_text);
     dialog.setAcceptHandler(function(){ dialog.hide(); });
     var dialog_element = dialog.getElement();
@@ -343,16 +343,16 @@ DraftPost.prototype.decorate = function(element) {
 /**
  * @contstructor
  */
-var DraftQuestion = function() {
+var DraftExercise = function() {
     DraftPost.call(this);
 };
-inherits(DraftQuestion, DraftPost);
+inherits(DraftExercise, DraftPost);
 
-DraftQuestion.prototype.getUrl = function() {
-    return askbot['urls']['saveDraftQuestion'];
+DraftExercise.prototype.getUrl = function() {
+    return askbot['urls']['saveDraftExercise'];
 };
 
-DraftQuestion.prototype.shouldSave = function() {
+DraftExercise.prototype.shouldSave = function() {
     var newd = this.getData();
     var oldd = this._old_data;
     return (
@@ -362,7 +362,7 @@ DraftQuestion.prototype.shouldSave = function() {
     );
 };
 
-DraftQuestion.prototype.getData = function() {
+DraftExercise.prototype.getData = function() {
     return {
         'title': this._title_element.val(),
         'text': this._text_element.val(),
@@ -370,37 +370,37 @@ DraftQuestion.prototype.getData = function() {
     };
 };
 
-DraftQuestion.prototype.assignContentElements = function() {
+DraftExercise.prototype.assignContentElements = function() {
     this._title_element = $('#id_title');
     this._text_element = $('#editor');
     this._tagnames_element = $('#id_tags');
 };
 
-var DraftAnswer = function() {
+var DraftProblem = function() {
     DraftPost.call(this);
 };
-inherits(DraftAnswer, DraftPost);
+inherits(DraftProblem, DraftPost);
 
-DraftAnswer.prototype.setThreadId = function(id) {
+DraftProblem.prototype.setThreadId = function(id) {
     this._threadId = id;
 };
 
-DraftAnswer.prototype.getUrl = function() {
-    return askbot['urls']['saveDraftAnswer'];
+DraftProblem.prototype.getUrl = function() {
+    return askbot['urls']['saveDraftProblem'];
 };
 
-DraftAnswer.prototype.shouldSave = function() {
+DraftProblem.prototype.shouldSave = function() {
     return this.getData()['text'] !== this._old_data['text'];
 };
 
-DraftAnswer.prototype.getData = function() {
+DraftProblem.prototype.getData = function() {
     return {
         'text': this._textElement.val(),
         'thread_id': this._threadId
     };
 };
 
-DraftAnswer.prototype.assignContentElements = function() {
+DraftProblem.prototype.assignContentElements = function() {
     this._textElement = $('#editor');
 };
 
@@ -512,48 +512,48 @@ CommentVoteButton.prototype.createDom = function(){
  * handles all sorts of vote-like operations
  */
 var Vote = function(){
-    // All actions are related to a question
-    var questionId;
-    //question slug to build redirect urls
-    var questionSlug;
-    // The object we operate on actually. It can be a question or an answer.
+    // All actions are related to a exercise
+    var exerciseId;
+    //exercise slug to build redirect urls
+    var exerciseSlug;
+    // The object we operate on actually. It can be a exercise or an problem.
     var postId;
-    var questionAuthorId;
+    var exerciseAuthorId;
     var currentUserId;
-    var answerContainerIdPrefix = 'post-id-';
+    var problemContainerIdPrefix = 'post-id-';
     var voteContainerId = 'vote-buttons';
-    var imgIdPrefixAccept = 'answer-img-accept-';
+    var imgIdPrefixAccept = 'problem-img-accept-';
     var classPrefixFollow= 'button follow';
     var classPrefixFollowed= 'button followed';
-    var imgIdPrefixQuestionVoteup = 'question-img-upvote-';
-    var imgIdPrefixQuestionVotedown = 'question-img-downvote-';
-    var imgIdPrefixAnswerVoteup = 'answer-img-upvote-';
-    var imgIdPrefixAnswerVotedown = 'answer-img-downvote-';
+    var imgIdPrefixExerciseVoteup = 'exercise-img-upvote-';
+    var imgIdPrefixExerciseVotedown = 'exercise-img-downvote-';
+    var imgIdPrefixProblemVoteup = 'problem-img-upvote-';
+    var imgIdPrefixProblemVotedown = 'problem-img-downvote-';
     var divIdFavorite = 'favorite-number';
     var commentLinkIdPrefix = 'comment-';
     var voteNumberClass = "vote-number";
-    var offensiveIdPrefixQuestionFlag = 'question-offensive-flag-';
-    var removeOffensiveIdPrefixQuestionFlag = 'question-offensive-remove-flag-';
-    var removeAllOffensiveIdPrefixQuestionFlag = 'question-offensive-remove-all-flag-';
-    var offensiveIdPrefixAnswerFlag = 'answer-offensive-flag-';
-    var removeOffensiveIdPrefixAnswerFlag = 'answer-offensive-remove-flag-';
-    var removeAllOffensiveIdPrefixAnswerFlag = 'answer-offensive-remove-all-flag-';
+    var offensiveIdPrefixExerciseFlag = 'exercise-offensive-flag-';
+    var removeOffensiveIdPrefixExerciseFlag = 'exercise-offensive-remove-flag-';
+    var removeAllOffensiveIdPrefixExerciseFlag = 'exercise-offensive-remove-all-flag-';
+    var offensiveIdPrefixProblemFlag = 'problem-offensive-flag-';
+    var removeOffensiveIdPrefixProblemFlag = 'problem-offensive-remove-flag-';
+    var removeAllOffensiveIdPrefixProblemFlag = 'problem-offensive-remove-all-flag-';
     var offensiveClassFlag = 'offensive-flag';
-    var questionControlsId = 'question-controls';
-    var removeAnswerLinkIdPrefix = 'answer-delete-link-';
-    var questionSubscribeUpdates = 'question-subscribe-updates';
-    var questionSubscribeSidebar= 'question-subscribe-sidebar';
+    var exerciseControlsId = 'exercise-controls';
+    var removeProblemLinkIdPrefix = 'problem-delete-link-';
+    var exerciseSubscribeUpdates = 'exercise-subscribe-updates';
+    var exerciseSubscribeSidebar= 'exercise-subscribe-sidebar';
 
     var acceptAnonymousMessage = gettext('insufficient privilege');
-    var acceptOwnAnswerMessage = gettext('cannot pick own answer as best');
+    var acceptOwnProblemMessage = gettext('cannot pick own problem as best');
 
     var pleaseLogin = " <a href='" + askbot['urls']['user_signin']
-                    + "?next=" + askbot['urls']['question_url_template']
+                    + "?next=" + askbot['urls']['exercise_url_template']
                     + "'>"
                     + gettext('please login') + "</a>";
 
-    var favoriteAnonymousMessage = gettext('anonymous users cannot follow questions') + pleaseLogin;
-    var subscribeAnonymousMessage = gettext('anonymous users cannot subscribe to questions') + pleaseLogin;
+    var favoriteAnonymousMessage = gettext('anonymous users cannot follow exercises') + pleaseLogin;
+    var subscribeAnonymousMessage = gettext('anonymous users cannot subscribe to exercises') + pleaseLogin;
     var voteAnonymousMessage = gettext('anonymous users cannot vote') + pleaseLogin;
     //there were a couple of more messages...
     var offensiveConfirmation = gettext('please confirm offensive');
@@ -565,22 +565,22 @@ var Vote = function(){
     var deletedMessage = gettext('post deleted');
 
     var VoteType = {
-        acceptAnswer : 0,
-        questionUpVote : 1,
-        questionDownVote : 2,
+        acceptProblem : 0,
+        exerciseUpVote : 1,
+        exerciseDownVote : 2,
         favorite : 4,
-        answerUpVote: 5,
-        answerDownVote:6,
-        offensiveQuestion : 7,
-        removeOffensiveQuestion : 7.5,
-        removeAllOffensiveQuestion : 7.6,
-        offensiveAnswer:8,
-        removeOffensiveAnswer:8.5,
-        removeAllOffensiveAnswer:8.6,
-        removeQuestion: 9,//deprecate
-        removeAnswer:10,//deprecate
-        questionSubscribeUpdates:11,
-        questionUnsubscribeUpdates:12
+        problemUpVote: 5,
+        problemDownVote:6,
+        offensiveExercise : 7,
+        removeOffensiveExercise : 7.5,
+        removeAllOffensiveExercise : 7.6,
+        offensiveProblem:8,
+        removeOffensiveProblem:8.5,
+        removeAllOffensiveProblem:8.6,
+        removeExercise: 9,//deprecate
+        removeProblem:10,//deprecate
+        exerciseSubscribeUpdates:11,
+        exerciseUnsubscribeUpdates:12
     };
 
     var getFavoriteButton = function(){
@@ -592,72 +592,72 @@ var Vote = function(){
         var favoriteNumber = '#'+ divIdFavorite ;
         return $(favoriteNumber);
     };
-    var getQuestionVoteUpButton = function(){
-        var questionVoteUpButton = 'div.'+ voteContainerId +' div[id^="'+ imgIdPrefixQuestionVoteup +'"]';
-        return $(questionVoteUpButton);
+    var getExerciseVoteUpButton = function(){
+        var exerciseVoteUpButton = 'div.'+ voteContainerId +' div[id^="'+ imgIdPrefixExerciseVoteup +'"]';
+        return $(exerciseVoteUpButton);
     };
-    var getQuestionVoteDownButton = function(){
-        var questionVoteDownButton = 'div.'+ voteContainerId +' div[id^="'+ imgIdPrefixQuestionVotedown +'"]';
-        return $(questionVoteDownButton);
+    var getExerciseVoteDownButton = function(){
+        var exerciseVoteDownButton = 'div.'+ voteContainerId +' div[id^="'+ imgIdPrefixExerciseVotedown +'"]';
+        return $(exerciseVoteDownButton);
     };
-    var getAnswerVoteUpButtons = function(){
-        var answerVoteUpButton = 'div.'+ voteContainerId +' div[id^="'+ imgIdPrefixAnswerVoteup +'"]';
-        return $(answerVoteUpButton);
+    var getProblemVoteUpButtons = function(){
+        var problemVoteUpButton = 'div.'+ voteContainerId +' div[id^="'+ imgIdPrefixProblemVoteup +'"]';
+        return $(problemVoteUpButton);
     };
-    var getAnswerVoteDownButtons = function(){
-        var answerVoteDownButton = 'div.'+ voteContainerId +' div[id^="'+ imgIdPrefixAnswerVotedown +'"]';
-        return $(answerVoteDownButton);
+    var getProblemVoteDownButtons = function(){
+        var problemVoteDownButton = 'div.'+ voteContainerId +' div[id^="'+ imgIdPrefixProblemVotedown +'"]';
+        return $(problemVoteDownButton);
     };
-    var getAnswerVoteUpButton = function(id){
-        var answerVoteUpButton = 'div.'+ voteContainerId +' div[id="'+ imgIdPrefixAnswerVoteup + id + '"]';
-        return $(answerVoteUpButton);
+    var getProblemVoteUpButton = function(id){
+        var problemVoteUpButton = 'div.'+ voteContainerId +' div[id="'+ imgIdPrefixProblemVoteup + id + '"]';
+        return $(problemVoteUpButton);
     };
-    var getAnswerVoteDownButton = function(id){
-        var answerVoteDownButton = 'div.'+ voteContainerId +' div[id="'+ imgIdPrefixAnswerVotedown + id + '"]';
-        return $(answerVoteDownButton);
-    };
-
-    var getOffensiveQuestionFlag = function(){
-        var offensiveQuestionFlag = '#question-table span[id^="'+ offensiveIdPrefixQuestionFlag +'"]';
-        return $(offensiveQuestionFlag);
+    var getProblemVoteDownButton = function(id){
+        var problemVoteDownButton = 'div.'+ voteContainerId +' div[id="'+ imgIdPrefixProblemVotedown + id + '"]';
+        return $(problemVoteDownButton);
     };
 
-    var getRemoveOffensiveQuestionFlag = function(){
-        var removeOffensiveQuestionFlag = '#question-table span[id^="'+ removeOffensiveIdPrefixQuestionFlag +'"]';
-        return $(removeOffensiveQuestionFlag);
+    var getOffensiveExerciseFlag = function(){
+        var offensiveExerciseFlag = '#exercise-table span[id^="'+ offensiveIdPrefixExerciseFlag +'"]';
+        return $(offensiveExerciseFlag);
     };
 
-    var getRemoveAllOffensiveQuestionFlag = function(){
-        var removeAllOffensiveQuestionFlag = '#question-table span[id^="'+ removeAllOffensiveIdPrefixQuestionFlag +'"]';
-        return $(removeAllOffensiveQuestionFlag);
+    var getRemoveOffensiveExerciseFlag = function(){
+        var removeOffensiveExerciseFlag = '#exercise-table span[id^="'+ removeOffensiveIdPrefixExerciseFlag +'"]';
+        return $(removeOffensiveExerciseFlag);
     };
 
-    var getOffensiveAnswerFlags = function(){
-        var offensiveQuestionFlag = 'div.answer span[id^="'+ offensiveIdPrefixAnswerFlag +'"]';
-        return $(offensiveQuestionFlag);
+    var getRemoveAllOffensiveExerciseFlag = function(){
+        var removeAllOffensiveExerciseFlag = '#exercise-table span[id^="'+ removeAllOffensiveIdPrefixExerciseFlag +'"]';
+        return $(removeAllOffensiveExerciseFlag);
     };
 
-    var getRemoveOffensiveAnswerFlag = function(){
-        var removeOffensiveAnswerFlag = 'div.answer span[id^="'+ removeOffensiveIdPrefixAnswerFlag +'"]';
-        return $(removeOffensiveAnswerFlag);
+    var getOffensiveProblemFlags = function(){
+        var offensiveExerciseFlag = 'div.problem span[id^="'+ offensiveIdPrefixProblemFlag +'"]';
+        return $(offensiveExerciseFlag);
     };
 
-    var getRemoveAllOffensiveAnswerFlag = function(){
-        var removeAllOffensiveAnswerFlag = 'div.answer span[id^="'+ removeAllOffensiveIdPrefixAnswerFlag +'"]';
-        return $(removeAllOffensiveAnswerFlag);
+    var getRemoveOffensiveProblemFlag = function(){
+        var removeOffensiveProblemFlag = 'div.problem span[id^="'+ removeOffensiveIdPrefixProblemFlag +'"]';
+        return $(removeOffensiveProblemFlag);
     };
 
-    var getquestionSubscribeUpdatesCheckbox = function(){
-        return $('#' + questionSubscribeUpdates);
+    var getRemoveAllOffensiveProblemFlag = function(){
+        var removeAllOffensiveProblemFlag = 'div.problem span[id^="'+ removeAllOffensiveIdPrefixProblemFlag +'"]';
+        return $(removeAllOffensiveProblemFlag);
     };
 
-    var getquestionSubscribeSidebarCheckbox= function(){
-        return $('#' + questionSubscribeSidebar);
+    var getexerciseSubscribeUpdatesCheckbox = function(){
+        return $('#' + exerciseSubscribeUpdates);
     };
 
-    var getremoveAnswersLinks = function(){
-        var removeAnswerLinks = 'div.answer-controls a[id^="'+ removeAnswerLinkIdPrefix +'"]';
-        return $(removeAnswerLinks);
+    var getexerciseSubscribeSidebarCheckbox= function(){
+        return $('#' + exerciseSubscribeSidebar);
+    };
+
+    var getremoveProblemsLinks = function(){
+        var removeProblemLinks = 'div.problem-controls a[id^="'+ removeProblemLinkIdPrefix +'"]';
+        return $(removeProblemLinks);
     };
 
     var setVoteImage = function(voteType, undo, object){
@@ -669,13 +669,13 @@ var Vote = function(){
         }
 
         if(undo){
-            if(voteType == VoteType.questionUpVote || voteType == VoteType.questionDownVote){
-                $(getQuestionVoteUpButton()).removeClass("on");
-                $(getQuestionVoteDownButton()).removeClass("on");
+            if(voteType == VoteType.exerciseUpVote || voteType == VoteType.exerciseDownVote){
+                $(getExerciseVoteUpButton()).removeClass("on");
+                $(getExerciseVoteDownButton()).removeClass("on");
             }
             else{
-                $(getAnswerVoteUpButton(postId)).removeClass("on");
-                $(getAnswerVoteDownButton(postId)).removeClass("on");
+                $(getProblemVoteUpButton(postId)).removeClass("on");
+                $(getProblemVoteDownButton(postId)).removeClass("on");
             }
         }
     };
@@ -686,88 +686,88 @@ var Vote = function(){
     };
 
     var bindEvents = function(){
-        // accept answers
+        // accept problems
         var acceptedButtons = 'div.'+ voteContainerId +' div[id^="'+ imgIdPrefixAccept +'"]';
         $(acceptedButtons).unbind('click').click(function(event){
            Vote.accept($(event.target));
         });
-        // set favorite question
+        // set favorite exercise
         var favoriteButton = getFavoriteButton();
         favoriteButton.unbind('click').click(function(event){
            //Vote.favorite($(event.target));
            Vote.favorite(favoriteButton);
         });
 
-        // question vote up
-        var questionVoteUpButton = getQuestionVoteUpButton();
-        questionVoteUpButton.unbind('click').click(function(event){
-           Vote.vote($(event.target), VoteType.questionUpVote);
+        // exercise vote up
+        var exerciseVoteUpButton = getExerciseVoteUpButton();
+        exerciseVoteUpButton.unbind('click').click(function(event){
+           Vote.vote($(event.target), VoteType.exerciseUpVote);
         });
 
-        var questionVoteDownButton = getQuestionVoteDownButton();
-        questionVoteDownButton.unbind('click').click(function(event){
-           Vote.vote($(event.target), VoteType.questionDownVote);
+        var exerciseVoteDownButton = getExerciseVoteDownButton();
+        exerciseVoteDownButton.unbind('click').click(function(event){
+           Vote.vote($(event.target), VoteType.exerciseDownVote);
         });
 
-        var answerVoteUpButton = getAnswerVoteUpButtons();
-        answerVoteUpButton.unbind('click').click(function(event){
-           Vote.vote($(event.target), VoteType.answerUpVote);
+        var problemVoteUpButton = getProblemVoteUpButtons();
+        problemVoteUpButton.unbind('click').click(function(event){
+           Vote.vote($(event.target), VoteType.problemUpVote);
         });
 
-        var answerVoteDownButton = getAnswerVoteDownButtons();
-        answerVoteDownButton.unbind('click').click(function(event){
-           Vote.vote($(event.target), VoteType.answerDownVote);
+        var problemVoteDownButton = getProblemVoteDownButtons();
+        problemVoteDownButton.unbind('click').click(function(event){
+           Vote.vote($(event.target), VoteType.problemDownVote);
         });
 
-        getOffensiveQuestionFlag().unbind('click').click(function(event){
-           Vote.offensive(this, VoteType.offensiveQuestion);
+        getOffensiveExerciseFlag().unbind('click').click(function(event){
+           Vote.offensive(this, VoteType.offensiveExercise);
         });
 
-        getRemoveOffensiveQuestionFlag().unbind('click').click(function(event){
-           Vote.remove_offensive(this, VoteType.removeOffensiveQuestion);
+        getRemoveOffensiveExerciseFlag().unbind('click').click(function(event){
+           Vote.remove_offensive(this, VoteType.removeOffensiveExercise);
         });
 
-        getRemoveAllOffensiveQuestionFlag().unbind('click').click(function(event){
-           Vote.remove_all_offensive(this, VoteType.removeAllOffensiveQuestion);
+        getRemoveAllOffensiveExerciseFlag().unbind('click').click(function(event){
+           Vote.remove_all_offensive(this, VoteType.removeAllOffensiveExercise);
         });
 
-        getOffensiveAnswerFlags().unbind('click').click(function(event){
-           Vote.offensive(this, VoteType.offensiveAnswer);
+        getOffensiveProblemFlags().unbind('click').click(function(event){
+           Vote.offensive(this, VoteType.offensiveProblem);
         });
 
-        getRemoveOffensiveAnswerFlag().unbind('click').click(function(event){
-           Vote.remove_offensive(this, VoteType.removeOffensiveAnswer);
+        getRemoveOffensiveProblemFlag().unbind('click').click(function(event){
+           Vote.remove_offensive(this, VoteType.removeOffensiveProblem);
         });
 
-        getRemoveAllOffensiveAnswerFlag().unbind('click').click(function(event){
-           Vote.remove_all_offensive(this, VoteType.removeAllOffensiveAnswer);
+        getRemoveAllOffensiveProblemFlag().unbind('click').click(function(event){
+           Vote.remove_all_offensive(this, VoteType.removeAllOffensiveProblem);
         });
 
-        getquestionSubscribeUpdatesCheckbox().unbind('click').click(function(event){
+        getexerciseSubscribeUpdatesCheckbox().unbind('click').click(function(event){
             //despeluchar esto
             if (this.checked){
-                getquestionSubscribeSidebarCheckbox().attr({'checked': true});
-                Vote.vote($(event.target), VoteType.questionSubscribeUpdates);
+                getexerciseSubscribeSidebarCheckbox().attr({'checked': true});
+                Vote.vote($(event.target), VoteType.exerciseSubscribeUpdates);
             }
             else {
-                getquestionSubscribeSidebarCheckbox().attr({'checked': false});
-                Vote.vote($(event.target), VoteType.questionUnsubscribeUpdates);
+                getexerciseSubscribeSidebarCheckbox().attr({'checked': false});
+                Vote.vote($(event.target), VoteType.exerciseUnsubscribeUpdates);
             }
         });
 
-        getquestionSubscribeSidebarCheckbox().unbind('click').click(function(event){
+        getexerciseSubscribeSidebarCheckbox().unbind('click').click(function(event){
             if (this.checked){
-                getquestionSubscribeUpdatesCheckbox().attr({'checked': true});
-                Vote.vote($(event.target), VoteType.questionSubscribeUpdates);
+                getexerciseSubscribeUpdatesCheckbox().attr({'checked': true});
+                Vote.vote($(event.target), VoteType.exerciseSubscribeUpdates);
             }
             else {
-                getquestionSubscribeUpdatesCheckbox().attr({'checked': false});
-                Vote.vote($(event.target), VoteType.questionUnsubscribeUpdates);
+                getexerciseSubscribeUpdatesCheckbox().attr({'checked': false});
+                Vote.vote($(event.target), VoteType.exerciseUnsubscribeUpdates);
             }
         });
 
-        getremoveAnswersLinks().unbind('click').click(function(event){
-            Vote.remove(this, VoteType.removeAnswer);
+        getremoveProblemsLinks().unbind('click').click(function(event){
+            Vote.remove(this, VoteType.removeProblem);
         });
     };
 
@@ -777,7 +777,7 @@ var Vote = function(){
             type: "POST",
             cache: false,
             dataType: "json",
-            url: askbot['urls']['vote_url_template'].replace('{{QuestionID}}', questionId),
+            url: askbot['urls']['vote_url_template'].replace('{{ExerciseID}}', exerciseId),
             data: { "type": voteType, "postId": postId },
             error: handleFail,
             success: function(data) {
@@ -790,25 +790,25 @@ var Vote = function(){
         alert("Callback invoke error: " + msg);
     };
 
-    // callback function for Accept Answer action
+    // callback function for Accept Problem action
     var callback_accept = function(object, voteType, data){
         if(data.allowed == "0" && data.success == "0"){
             showMessage(object, acceptAnonymousMessage);
         }
         else if(data.allowed == "-1"){
-            showMessage(object, acceptOwnAnswerMessage);
+            showMessage(object, acceptOwnProblemMessage);
         }
         else if(data.status == "1"){
-            $("#"+answerContainerIdPrefix+postId).removeClass("accepted-answer");
+            $("#"+problemContainerIdPrefix+postId).removeClass("accepted-problem");
             $("#"+commentLinkIdPrefix+postId).removeClass("comment-link-accepted");
         }
         else if(data.success == "1"){
-            var answers = ('div[id^="'+answerContainerIdPrefix +'"]');
-            $(answers).removeClass('accepted-answer');
-            var commentLinks = ('div[id^="'+answerContainerIdPrefix +'"] div[id^="'+ commentLinkIdPrefix +'"]');
+            var problems = ('div[id^="'+problemContainerIdPrefix +'"]');
+            $(problems).removeClass('accepted-problem');
+            var commentLinks = ('div[id^="'+problemContainerIdPrefix +'"] div[id^="'+ commentLinkIdPrefix +'"]');
             $(commentLinks).removeClass("comment-link-accepted");
 
-            $("#"+answerContainerIdPrefix+postId).addClass("accepted-answer");
+            $("#"+problemContainerIdPrefix+postId).addClass("accepted-problem");
             $("#"+commentLinkIdPrefix+postId).addClass("comment-link-accepted");
         }
         else{
@@ -821,9 +821,9 @@ var Vote = function(){
             showMessage(
                 object,
                 favoriteAnonymousMessage.replace(
-                        '{{QuestionID}}',
-                        questionId).replace(
-                        '{{questionSlug}}',
+                        '{{ExerciseID}}',
+                        exerciseId).replace(
+                        '{{exerciseSlug}}',
                         ''
                     )
             );
@@ -899,16 +899,16 @@ var Vote = function(){
                 $(object).children('span[class="darkred"]').text("");
 
             // Change the link text and rebind events
-            $(object).find("a.question-flag").html(gettext("remove flag"));
+            $(object).find("a.exercise-flag").html(gettext("remove flag"));
             var obj_id = $(object).attr("id");
             $(object).attr("id", obj_id.replace("flag-", "remove-flag-"));
 
-            getRemoveOffensiveQuestionFlag().unbind('click').click(function(event){
-               Vote.remove_offensive(this, VoteType.removeOffensiveQuestion);
+            getRemoveOffensiveExerciseFlag().unbind('click').click(function(event){
+               Vote.remove_offensive(this, VoteType.removeOffensiveExercise);
             });
 
-            getRemoveOffensiveAnswerFlag().unbind('click').click(function(event){
-               Vote.remove_offensive(this, VoteType.removeOffensiveAnswer);
+            getRemoveOffensiveProblemFlag().unbind('click').click(function(event){
+               Vote.remove_offensive(this, VoteType.removeOffensiveProblem);
             });
         }
         else {
@@ -933,16 +933,16 @@ var Vote = function(){
                 $(remove_all).remove();
             }
             // Change the link text and rebind events
-            $(object).find("a.question-flag").html(gettext("flag offensive"));
+            $(object).find("a.exercise-flag").html(gettext("flag offensive"));
             var obj_id = $(object).attr("id");
             $(object).attr("id", obj_id.replace("remove-flag-", "flag-"));
 
-             getOffensiveQuestionFlag().unbind('click').click(function(event){
-               Vote.offensive(this, VoteType.offensiveQuestion);
+             getOffensiveExerciseFlag().unbind('click').click(function(event){
+               Vote.offensive(this, VoteType.offensiveExercise);
             });
 
-            getOffensiveAnswerFlags().unbind('click').click(function(event){
-               Vote.offensive(this, VoteType.offensiveAnswer);
+            getOffensiveProblemFlags().unbind('click').click(function(event){
+               Vote.offensive(this, VoteType.offensiveProblem);
             });
         }
         else {
@@ -962,7 +962,7 @@ var Vote = function(){
                 $(object).children('span[class="darkred"]').text("");
             // remove the link. All flags are gone
             var remove_own = $(object).siblings('span.offensive-flag[id*="-offensive-remove-flag-"]');
-            $(remove_own).find("a.question-flag").html(gettext("flag offensive"));
+            $(remove_own).find("a.exercise-flag").html(gettext("flag offensive"));
             $(remove_own).attr("id", $(remove_own).attr("id").replace("remove-flag-", "flag-"));
             
             $(object).next("span.sep").remove();
@@ -970,12 +970,12 @@ var Vote = function(){
 
 
 
-             getOffensiveQuestionFlag().unbind('click').click(function(event){
-               Vote.offensive(this, VoteType.offensiveQuestion);
+             getOffensiveExerciseFlag().unbind('click').click(function(event){
+               Vote.offensive(this, VoteType.offensiveExercise);
             });
 
-            getOffensiveAnswerFlags().unbind('click').click(function(event){
-               Vote.offensive(this, VoteType.offensiveAnswer);
+            getOffensiveProblemFlags().unbind('click').click(function(event){
+               Vote.offensive(this, VoteType.offensiveProblem);
             });
         }
         else {
@@ -1003,30 +1003,30 @@ var Vote = function(){
     };
 
     return {
-        init : function(qId, qSlug, questionAuthor, userId){
-            questionId = qId;
-            questionSlug = qSlug;
-            questionAuthorId = questionAuthor;
+        init : function(qId, qSlug, exerciseAuthor, userId){
+            exerciseId = qId;
+            exerciseSlug = qSlug;
+            exerciseAuthorId = exerciseAuthor;
             currentUserId = userId;
             bindEvents();
         },
 
-        //accept answer
+        //accept problem
         accept: function(object){
             postId = object.attr("id").substring(imgIdPrefixAccept.length);
-            submit(object, VoteType.acceptAnswer, callback_accept);
+            submit(object, VoteType.acceptProblem, callback_accept);
         },
-        //mark question as favorite
+        //mark exercise as favorite
         favorite: function(object){
             if (!currentUserId || currentUserId.toUpperCase() == "NONE"){
                 showMessage(
                     object,
                     favoriteAnonymousMessage.replace(
-                            "{{QuestionID}}",
-                            questionId
+                            "{{ExerciseID}}",
+                            exerciseId
                         ).replace(
-                            '{{questionSlug}}',
-                            questionSlug
+                            '{{exerciseSlug}}',
+                            exerciseSlug
                         )
                 );
                 return false;
@@ -1036,30 +1036,30 @@ var Vote = function(){
 
         vote: function(object, voteType){
             if (!currentUserId || currentUserId.toUpperCase() == "NONE"){
-                if (voteType == VoteType.questionSubscribeUpdates || voteType == VoteType.questionUnsubscribeUpdates){
-                    getquestionSubscribeSidebarCheckbox().removeAttr('checked');
-                    getquestionSubscribeUpdatesCheckbox().removeAttr('checked');
+                if (voteType == VoteType.exerciseSubscribeUpdates || voteType == VoteType.exerciseUnsubscribeUpdates){
+                    getexerciseSubscribeSidebarCheckbox().removeAttr('checked');
+                    getexerciseSubscribeUpdatesCheckbox().removeAttr('checked');
                     showMessage(object, subscribeAnonymousMessage);
                 }else {
                     showMessage(
                         $(object),
                         voteAnonymousMessage.replace(
-                                "{{QuestionID}}",
-                                questionId
+                                "{{ExerciseID}}",
+                                exerciseId
                             ).replace(
-                                '{{questionSlug}}',
-                                questionSlug
+                                '{{exerciseSlug}}',
+                                exerciseSlug
                             )
                     );
                 }
                 return false;
             }
             // up and downvote processor
-            if (voteType == VoteType.answerUpVote){
-                postId = object.attr("id").substring(imgIdPrefixAnswerVoteup.length);
+            if (voteType == VoteType.problemUpVote){
+                postId = object.attr("id").substring(imgIdPrefixProblemVoteup.length);
             }
-            else if (voteType == VoteType.answerDownVote){
-                postId = object.attr("id").substring(imgIdPrefixAnswerVotedown.length);
+            else if (voteType == VoteType.problemDownVote){
+                postId = object.attr("id").substring(imgIdPrefixProblemVotedown.length);
             }
 
             submit(object, voteType, callback_vote);
@@ -1070,11 +1070,11 @@ var Vote = function(){
                 showMessage(
                     $(object),
                     offensiveAnonymousMessage.replace(
-                            "{{QuestionID}}",
-                            questionId
+                            "{{ExerciseID}}",
+                            exerciseId
                         ).replace(
-                            '{{questionSlug}}',
-                            questionSlug
+                            '{{exerciseSlug}}',
+                            exerciseSlug
                         )
                 );
                 return false;
@@ -1090,11 +1090,11 @@ var Vote = function(){
                 showMessage(
                     $(object),
                     offensiveAnonymousMessage.replace(
-                            "{{QuestionID}}",
-                            questionId
+                            "{{ExerciseID}}",
+                            exerciseId
                         ).replace(
-                            '{{questionSlug}}',
-                            questionSlug
+                            '{{exerciseSlug}}',
+                            exerciseSlug
                         )
                 );
                 return false;
@@ -1109,11 +1109,11 @@ var Vote = function(){
                 showMessage(
                     $(object),
                     offensiveAnonymousMessage.replace(
-                            "{{QuestionID}}",
-                            questionId
+                            "{{ExerciseID}}",
+                            exerciseId
                         ).replace(
-                            '{{questionSlug}}',
-                            questionSlug
+                            '{{exerciseSlug}}',
+                            exerciseSlug
                         )
                 );
                 return false;
@@ -1123,17 +1123,17 @@ var Vote = function(){
                 submit(object, voteType, callback_remove_all_offensive);
             }
         },
-        //delete question or answer (comments are deleted separately)
+        //delete exercise or problem (comments are deleted separately)
         remove: function(object, voteType){
             if (!currentUserId || currentUserId.toUpperCase() == "NONE"){
                 showMessage(
                     $(object),
                     removeAnonymousMessage.replace(
-                            '{{QuestionID}}',
-                            questionId
+                            '{{ExerciseID}}',
+                            exerciseId
                         ).replace(
-                            '{{questionSlug}}',
-                            questionSlug
+                            '{{exerciseSlug}}',
+                            exerciseSlug
                         )
                     );
                 return false;
@@ -1143,11 +1143,11 @@ var Vote = function(){
             postType = bits.shift();
 
             var do_proceed = false;
-            if (postType == 'answer'){
+            if (postType == 'problem'){
                 postNode = $('#post-id-' + postId);
             }
-            else if (postType == 'question'){
-                postNode = $('#question-table');
+            else if (postType == 'exercise'){
+                postNode = $('#exercise-table');
             }
             postRemoveLink = object;
             if (postNode.hasClass('deleted')){
@@ -1165,7 +1165,7 @@ var Vote = function(){
     };
 } ();
 
-var questionRetagger = function(){
+var exerciseRetagger = function(){
 
     var oldTagsHTML = '';
     var tagInput = null;
@@ -1311,7 +1311,7 @@ var questionRetagger = function(){
     };
 
     var startRetag = function(){
-        tagsDiv = $('#question-tags');
+        tagsDiv = $('#exercise-tags');
         oldTagsHTML = tagsDiv.html();//save to restore on cancel
         var old_tags_string = getTagsAsString(tagsDiv);
         var retag_form = createRetagForm(old_tags_string);
@@ -1591,9 +1591,9 @@ EditCommentForm.prototype.reset = function(){
 EditCommentForm.prototype.confirmAbandon = function(){
     this.focus(true);
     this._textarea.addClass('highlight');
-    var answer = confirm(gettext('confirm abandon comment'));
+    var problem = confirm(gettext('confirm abandon comment'));
     this._textarea.removeClass('highlight');
-    return answer;
+    return problem;
 };
 
 EditCommentForm.prototype.focus = function(hard){
@@ -2128,25 +2128,25 @@ QASwapper.prototype.decorate = function(element){
 
 QASwapper.prototype.startSwapping = function(){
     while (true){
-        var title = prompt(gettext('Please enter question title (>10 characters)'));
+        var title = prompt(gettext('Please enter exercise title (>10 characters)'));
         if (title.length >= 10){
-            var data = {new_title: title, answer_id: this._ans_id};
+            var data = {new_title: title, problem_id: this._ans_id};
             $.ajax({
                 type: "POST",
                 cache: false,
                 dataType: "json",
-                url: askbot['urls']['swap_question_with_answer'],
+                url: askbot['urls']['swap_exercise_with_problem'],
                 data: data,
                 success: function(data){
-                    var url_template = askbot['urls']['question_url_template'];
-                    new_question_url = url_template.replace(
-                        '{{QuestionID}}',
+                    var url_template = askbot['urls']['exercise_url_template'];
+                    new_exercise_url = url_template.replace(
+                        '{{ExerciseID}}',
                         data['id']
                     ).replace(
-                        '{{questionSlug}}',
+                        '{{exerciseSlug}}',
                         data['slug']
                     );
-                    window.location.href = new_question_url;
+                    window.location.href = new_exercise_url;
                 }
             });
             break;
@@ -2649,9 +2649,9 @@ UserGroupProfileEditor.prototype.decorate = function(element){
     var moderate_publishing_replies_toggle = new TwoStateToggle();
     moderate_publishing_replies_toggle.setPostData({
         group_id: this.getTagId(),
-        property_name: 'moderate_answers_to_enquirers'
+        property_name: 'moderate_problems_to_enquirers'
     });
-    var btn = element.find('#moderate-answers-to-enquirers');
+    var btn = element.find('#moderate-problems-to-enquirers');
     moderate_publishing_replies_toggle.decorate(btn);
 
     var vip_toggle = new TwoStateToggle();
@@ -3810,16 +3810,16 @@ CategorySelectorLoader.prototype.closeEditor = function() {
     this._editor.hide();
     this._editor_buttons.hide();
     this._display_tags_container.show();
-    this._question_body.show();
-    this._question_controls.show();
+    this._exercise_body.show();
+    this._exercise_controls.show();
 };
 
 CategorySelectorLoader.prototype.openEditor = function() {
     this._editor.show();
     this._editor_buttons.show();
     this._display_tags_container.hide();
-    this._question_body.hide();
-    this._question_controls.hide();
+    this._exercise_body.hide();
+    this._exercise_controls.hide();
     var sel = this._category_selector;
     sel.setState('select');
     sel.getEditorToggle().setState('off-state');
@@ -3837,7 +3837,7 @@ CategorySelectorLoader.prototype.getOnLoadHandler = function() {
         //append loaded html to dom
         var editor = $('<div>' + html + '</div>');
         me.setEditor(editor);
-        $('#question-tags').after(editor);
+        $('#exercise-tags').after(editor);
 
         var selector = askbot['functions']['initCategoryTree']();
         me.setCategorySelector(selector);
@@ -3932,9 +3932,9 @@ CategorySelectorLoader.prototype.getCancelHandler = function() {
 
 CategorySelectorLoader.prototype.decorate = function(element) {
     this._element = element;
-    this._display_tags_container = $('#question-tags');
-    this._question_body = $('.question-body');
-    this._question_controls = $('#question-controls');
+    this._display_tags_container = $('#exercise-tags');
+    this._exercise_body = $('.exercise-body');
+    this._exercise_controls = $('#exercise-controls');
 
     this._editor_buttons = this.makeElement('div');
     this._done_button = this.makeElement('button');
@@ -3970,27 +3970,27 @@ $(document).ready(function() {
         var comments = new PostCommentsWidget();
         comments.decorate(element);
     });
-    $('[id^="swap-question-with-answer-"]').each(function(idx, element){
+    $('[id^="swap-exercise-with-problem-"]').each(function(idx, element){
         var swapper = new QASwapper();
         swapper.decorate($(element));
     });
     $('[id^="post-id-"]').each(function(idx, element){
         var deleter = new DeletePostLink();
-        //confusingly .question-delete matches the answers too need rename
+        //confusingly .exercise-delete matches the problems too need rename
         var post_id = element.id.split('-').pop();
         deleter.setPostId(post_id);
-        deleter.decorate($(element).find('.question-delete'));
+        deleter.decorate($(element).find('.exercise-delete'));
     });
     //todo: convert to "control" class
-    var publishBtns = $('.answer-publish, .answer-unpublish');
+    var publishBtns = $('.problem-publish, .problem-unpublish');
     publishBtns.each(function(idx, btn) {
         setupButtonEventHandlers($(btn), function() {
-            var answerId = $(btn).data('answerId');
+            var problemId = $(btn).data('problemId');
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                data: {'answer_id': answerId},
-                url: askbot['urls']['publishAnswer'],
+                data: {'problem_id': problemId},
+                url: askbot['urls']['publishProblem'],
                 success: function(data) {
                     if (data['success']) {
                         window.location.reload(true);
@@ -4006,7 +4006,7 @@ $(document).ready(function() {
         var catSelectorLoader = new CategorySelectorLoader();
         catSelectorLoader.decorate($('#retag'));
     } else {
-        questionRetagger.init();
+        exerciseRetagger.init();
     }
     socialSharing.init();
 

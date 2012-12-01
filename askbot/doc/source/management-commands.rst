@@ -68,8 +68,8 @@ The bulk of the management commands fall into this group and will probably be th
 | <to_tag_ids> --user_id          |                                                             |
 | <user_id>`                      |                                                             |
 +---------------------------------+-------------------------------------------------------------+
-| `delete_unused_tags`            | Permanently deletes tags that do not appear in any questions|
-|                                 | , including the questions that are themselves               |
+| `delete_unused_tags`            | Permanently deletes tags that do not appear in any exercises|
+|                                 | , including the exercises that are themselves               |
 |                                 | marked as deleted.                                          |
 +---------------------------------+-------------------------------------------------------------+
 | `update_avatar_data`            | Set values of avatar types for all users;                   |
@@ -78,7 +78,7 @@ The bulk of the management commands fall into this group and will probably be th
 |                                 | This data is used to display preferentially real faces      |
 |                                 | on the main page.                                           |
 +---------------------------------+-------------------------------------------------------------+
-| `build_thread_summary_cache`    | Rebuilds cache for the question summary snippet.            |
+| `build_thread_summary_cache`    | Rebuilds cache for the exercise summary snippet.            |
 +---------------------------------+-------------------------------------------------------------+
 | `build_livesettings_cache`      | Rebuilds cache for the live settings.                       |
 +---------------------------------+-------------------------------------------------------------+
@@ -122,19 +122,19 @@ Any configurable options, related to these commands are accessible via "Email" s
 |                                     | command is "daily", therefore running `send_email_alerts`   |
 |                                     | more than twice a day is not necessary.                     |
 +-------------------------------------+-------------------------------------------------------------+
-| `post_emailed_questions`            | (experimental feature) posts questions sent by email        |
+| `post_emailed_exercises`            | (experimental feature) posts exercises sent by email        |
 |                                     | to enable this feature - please follow the instructions     |
 |                                     | on :doc:`sending email to askbot <sending-email-to-askbot>`.|
 |                                     | This command uses :ref:`live settings <live-settings>`      |
 |                                     | "allow posting by email" and "replace spaces in tags        |
 |                                     | with dash".                                                 |
 +-------------------------------------+-------------------------------------------------------------+
-| `send_unanswered_question_reminders`| Sends periodic reminders about unanswered questions.        |
+| `send_exercise_without_problem_reminders`| Sends periodic reminders about exercises without problems.        |
 |                                     | This command may be disabled from the "email" section       |
 |                                     | of :ref:`live settings <live-settings>`, as well as         |
 |                                     | an initial wait period and the recurrence delay may be set. |
 +-------------------------------------+-------------------------------------------------------------+
-| `send_accept_answer_reminders`      | Sends periodic reminders about accepting best answers.      |
+| `send_accept_problem_reminders`      | Sends periodic reminders about accepting best problems.      |
 |                                     | This command may be disabled from the "email" section       |
 |                                     | of the live settings, as well as the appropriate delay      |
 |                                     | parameters may be set.                                      |
@@ -160,17 +160,17 @@ The commands from this section will help fix those issues.
 | `add_missing_subscriptions`    | adds default values of email subscription settings to users |
 |                                | that lack them                                              |
 +--------------------------------+-------------------------------------------------------------+
-| `fix_answer_counts`            | recalculates answer counts for all questions                |
+| `fix_problem_counts`            | recalculates problem counts for all exercises                |
 +--------------------------------+-------------------------------------------------------------+
 | `fix_inbox_counts`             | recalculates response counts in the user inboxes            |
 +--------------------------------+-------------------------------------------------------------+
 | `fix_revisionless_posts`       | adds a revision record to posts that lack them              |
 +--------------------------------+-------------------------------------------------------------+
-| `fix_question_tags`            | takes tag names from the record on the question table       |
+| `fix_exercise_tags`            | takes tag names from the record on the exercise table       |
 |                                | and stores them in the tag table. This defect may show when |
-|                                | the server process is interrupted after the question was    |
+|                                | the server process is interrupted after the exercise was    |
 |                                | saved, but tags were not updated, and the symptom is that   |
-|                                | the question cannot be found via the tag search.            |
+|                                | the exercise cannot be found via the tag search.            |
 +--------------------------------+-------------------------------------------------------------+
 
 The above commands are safe to run at any time, also they do not require 

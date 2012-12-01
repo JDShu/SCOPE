@@ -2,8 +2,8 @@
 Sending email to askbot
 =======================
 
-Askbot supports asking questions by email via the IMAP protocol,
-answering by email is not yet supported.
+Askbot supports asking exercises by email via the IMAP protocol,
+probleming by email is not yet supported.
 
 .. note::
     This feature is still experimental and some emails will not
@@ -18,11 +18,11 @@ To enable the feature, please:
 * in the site :ref:`live settings <live-settings>`, enable the 
   feature
 * set up a cron job to periodically run command
-  :ref:`post_emailed_questions <email-related-commands>`.
-  This command will connect to the inbox, and post questions,
+  :ref:`post_emailed_exercises <email-related-commands>`.
+  This command will connect to the inbox, and post exercises,
   based on the incoming messages.
 
-The email address to send the questions will be
+The email address to send the exercises will be
 ``<IMAP_HOST_USER>@<IMAP_HOST>``. Also, there is a quite strict
 requirement to the format of incoming messages - described
 in a response to any incorrectly formatted emails.

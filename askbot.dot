@@ -474,7 +474,7 @@ digraph name {
         ></TD></TR>
         
         <TR><TD ALIGN="LEFT" BORDER="0"
-        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">moderate_answers_to_enquirers</FONT
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">moderate_problems_to_enquirers</FONT
         ></TD>
         <TD ALIGN="LEFT"
         ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">BooleanField</FONT
@@ -552,14 +552,14 @@ digraph name {
         ></TD></TR>
         
         <TR><TD ALIGN="LEFT" BORDER="0"
-        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">old_question_id</FONT
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">old_exercise_id</FONT
         ></TD>
         <TD ALIGN="LEFT"
         ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">PositiveIntegerField</FONT
         ></TD></TR>
         
         <TR><TD ALIGN="LEFT" BORDER="0"
-        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">old_answer_id</FONT
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">old_problem_id</FONT
         ></TD>
         <TD ALIGN="LEFT"
         ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">PositiveIntegerField</FONT
@@ -829,11 +829,11 @@ digraph name {
     </TABLE>
     >]
 
-    askbot_models_post_DraftAnswer [label=<
+    askbot_models_post_DraftProblem [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
-     >DraftAnswer</FONT></TD></TR>
+     >DraftProblem</FONT></TD></TR>
     
         
         <TR><TD ALIGN="LEFT" BORDER="0"
@@ -854,11 +854,11 @@ digraph name {
     </TABLE>
     >]
 
-    askbot_models_post_AnonymousAnswer [label=<
+    askbot_models_post_AnonymousProblem [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
-     >AnonymousAnswer<BR/>&lt;<FONT FACE="Helvetica Italic">DraftContent</FONT>&gt;</FONT></TD></TR>
+     >AnonymousProblem<BR/>&lt;<FONT FACE="Helvetica Italic">DraftContent</FONT>&gt;</FONT></TD></TR>
     
         
         <TR><TD ALIGN="LEFT" BORDER="0"
@@ -914,7 +914,7 @@ digraph name {
     </TABLE>
     >]
 
-    askbot_models_question_ThreadToGroup [label=<
+    askbot_models_exercise_ThreadToGroup [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -939,7 +939,7 @@ digraph name {
     </TABLE>
     >]
 
-    askbot_models_question_Thread [label=<
+    askbot_models_exercise_Thread [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -982,7 +982,7 @@ digraph name {
         ></TD></TR>
         
         <TR><TD ALIGN="LEFT" BORDER="0"
-        ><FONT FACE="Helvetica Bold">answer_count</FONT
+        ><FONT FACE="Helvetica Bold">problem_count</FONT
         ></TD>
         <TD ALIGN="LEFT"
         ><FONT FACE="Helvetica Bold">PositiveIntegerField</FONT
@@ -1024,7 +1024,7 @@ digraph name {
         ></TD></TR>
         
         <TR><TD ALIGN="LEFT" BORDER="0"
-        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">answer_accepted_at</FONT
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">problem_accepted_at</FONT
         ></TD>
         <TD ALIGN="LEFT"
         ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">DateTimeField</FONT
@@ -1048,11 +1048,11 @@ digraph name {
     </TABLE>
     >]
 
-    askbot_models_question_QuestionView [label=<
+    askbot_models_exercise_ExerciseView [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
-     >QuestionView</FONT></TD></TR>
+     >ExerciseView</FONT></TD></TR>
     
         
         <TR><TD ALIGN="LEFT" BORDER="0"
@@ -1073,11 +1073,11 @@ digraph name {
     </TABLE>
     >]
 
-    askbot_models_question_FavoriteQuestion [label=<
+    askbot_models_exercise_FavoriteExercise [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
-     >FavoriteQuestion</FONT></TD></TR>
+     >FavoriteExercise</FONT></TD></TR>
     
         
         <TR><TD ALIGN="LEFT" BORDER="0"
@@ -1098,11 +1098,11 @@ digraph name {
     </TABLE>
     >]
 
-    askbot_models_question_DraftQuestion [label=<
+    askbot_models_exercise_DraftExercise [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
-     >DraftQuestion</FONT></TD></TR>
+     >DraftExercise</FONT></TD></TR>
     
         
         <TR><TD ALIGN="LEFT" BORDER="0"
@@ -1137,11 +1137,11 @@ digraph name {
     </TABLE>
     >]
 
-    askbot_models_question_AnonymousQuestion [label=<
+    askbot_models_exercise_AnonymousExercise [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
-     >AnonymousQuestion<BR/>&lt;<FONT FACE="Helvetica Italic">DraftContent</FONT>&gt;</FONT></TD></TR>
+     >AnonymousExercise<BR/>&lt;<FONT FACE="Helvetica Italic">DraftContent</FONT>&gt;</FONT></TD></TR>
     
         
         <TR><TD ALIGN="LEFT" BORDER="0"
@@ -1310,11 +1310,11 @@ digraph name {
     </TABLE>
     >]
 
-    askbot_models_widgets_QuestionWidget [label=<
+    askbot_models_widgets_ExerciseWidget [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
-     >QuestionWidget</FONT></TD></TR>
+     >ExerciseWidget</FONT></TD></TR>
     
         
         <TR><TD ALIGN="LEFT" BORDER="0"
@@ -1332,7 +1332,7 @@ digraph name {
         ></TD></TR>
         
         <TR><TD ALIGN="LEFT" BORDER="0"
-        ><FONT FACE="Helvetica Bold">question_number</FONT
+        ><FONT FACE="Helvetica Bold">exercise_number</FONT
         ></TD>
         <TD ALIGN="LEFT"
         ><FONT FACE="Helvetica Bold">PositiveIntegerField</FONT
@@ -1451,7 +1451,7 @@ digraph name {
   
   
   askbot_models_repute_Repute -> askbot_models_post_Post
-  [label="question (repute)"] [arrowhead=none, arrowtail=dot];
+  [label="exercise (repute)"] [arrowhead=none, arrowtail=dot];
   
 
   
@@ -1559,7 +1559,7 @@ digraph name {
   
   
   askbot_models_user_Activity -> askbot_models_post_Post
-  [label="question (activity)"] [arrowhead=none, arrowtail=dot];
+  [label="exercise (activity)"] [arrowhead=none, arrowtail=dot];
   
   
   django_contrib_auth_models_User [label=<
@@ -1612,7 +1612,7 @@ digraph name {
   [label="parent (comments)"] [arrowhead=none, arrowtail=dot];
   
   
-  askbot_models_post_Post -> askbot_models_question_Thread
+  askbot_models_post_Post -> askbot_models_exercise_Thread
   [label="thread (posts)"] [arrowhead=none, arrowtail=dot];
   
   
@@ -1714,8 +1714,8 @@ digraph name {
 
   
   
-  askbot_models_post_DraftAnswer -> askbot_models_question_Thread
-  [label="thread (draft_answers)"] [arrowhead=none, arrowtail=dot];
+  askbot_models_post_DraftProblem -> askbot_models_exercise_Thread
+  [label="thread (draft_problems)"] [arrowhead=none, arrowtail=dot];
   
   
   django_contrib_auth_models_User [label=<
@@ -1726,23 +1726,23 @@ digraph name {
       </TABLE>
       >]
   
-  askbot_models_post_DraftAnswer -> django_contrib_auth_models_User
-  [label="author (draft_answers)"] [arrowhead=none, arrowtail=dot];
+  askbot_models_post_DraftProblem -> django_contrib_auth_models_User
+  [label="author (draft_problems)"] [arrowhead=none, arrowtail=dot];
   
 
   
   
-  askbot_models_post_AnonymousAnswer -> askbot_models_post_Post
-  [label="question (anonymous_answers)"] [arrowhead=none, arrowtail=dot];
+  askbot_models_post_AnonymousProblem -> askbot_models_post_Post
+  [label="exercise (anonymous_problems)"] [arrowhead=none, arrowtail=dot];
   
 
   
   
-  askbot_models_question_ThreadToGroup -> askbot_models_question_Thread
+  askbot_models_exercise_ThreadToGroup -> askbot_models_exercise_Thread
   [label="thread (threadtogroup)"] [arrowhead=none, arrowtail=dot];
   
   
-  askbot_models_question_ThreadToGroup -> askbot_models_user_Group
+  askbot_models_exercise_ThreadToGroup -> askbot_models_user_Group
   [label="group (threadtogroup)"] [arrowhead=none, arrowtail=dot];
   
 
@@ -1756,7 +1756,7 @@ digraph name {
       </TABLE>
       >]
   
-  askbot_models_question_Thread -> django_contrib_auth_models_User
+  askbot_models_exercise_Thread -> django_contrib_auth_models_User
   [label="last_activity_by (unused_last_active_in_threads)"] [arrowhead=none, arrowtail=dot];
   
   
@@ -1768,15 +1768,15 @@ digraph name {
       </TABLE>
       >]
   
-  askbot_models_question_Thread -> django_contrib_auth_models_User
+  askbot_models_exercise_Thread -> django_contrib_auth_models_User
   [label="closed_by (thread)"] [arrowhead=none, arrowtail=dot];
   
   
-  askbot_models_question_Thread -> askbot_models_post_Post
-  [label="accepted_answer (+)"] [arrowhead=none, arrowtail=dot];
+  askbot_models_exercise_Thread -> askbot_models_post_Post
+  [label="accepted_problem (+)"] [arrowhead=none, arrowtail=dot];
   
   
-  askbot_models_question_Thread -> askbot_models_tag_Tag
+  askbot_models_exercise_Thread -> askbot_models_tag_Tag
   [label="tags (threads)"] [arrowhead=dot arrowtail=dot, dir=both];
   
   
@@ -1788,14 +1788,14 @@ digraph name {
       </TABLE>
       >]
   
-  askbot_models_question_Thread -> django_contrib_auth_models_User
+  askbot_models_exercise_Thread -> django_contrib_auth_models_User
   [label="followed_by (followed_threads)"] [arrowhead=dot arrowtail=dot, dir=both];
   
 
   
   
-  askbot_models_question_QuestionView -> askbot_models_post_Post
-  [label="question (viewed)"] [arrowhead=none, arrowtail=dot];
+  askbot_models_exercise_ExerciseView -> askbot_models_post_Post
+  [label="exercise (viewed)"] [arrowhead=none, arrowtail=dot];
   
   
   django_contrib_auth_models_User [label=<
@@ -1806,14 +1806,14 @@ digraph name {
       </TABLE>
       >]
   
-  askbot_models_question_QuestionView -> django_contrib_auth_models_User
-  [label="who (question_views)"] [arrowhead=none, arrowtail=dot];
+  askbot_models_exercise_ExerciseView -> django_contrib_auth_models_User
+  [label="who (exercise_views)"] [arrowhead=none, arrowtail=dot];
   
 
   
   
-  askbot_models_question_FavoriteQuestion -> askbot_models_question_Thread
-  [label="thread (favoritequestion)"] [arrowhead=none, arrowtail=dot];
+  askbot_models_exercise_FavoriteExercise -> askbot_models_exercise_Thread
+  [label="thread (favoriteexercise)"] [arrowhead=none, arrowtail=dot];
   
   
   django_contrib_auth_models_User [label=<
@@ -1824,8 +1824,8 @@ digraph name {
       </TABLE>
       >]
   
-  askbot_models_question_FavoriteQuestion -> django_contrib_auth_models_User
-  [label="user (user_favorite_questions)"] [arrowhead=none, arrowtail=dot];
+  askbot_models_exercise_FavoriteExercise -> django_contrib_auth_models_User
+  [label="user (user_favorite_exercises)"] [arrowhead=none, arrowtail=dot];
   
 
   
@@ -1838,8 +1838,8 @@ digraph name {
       </TABLE>
       >]
   
-  askbot_models_question_DraftQuestion -> django_contrib_auth_models_User
-  [label="author (draftquestion)"] [arrowhead=none, arrowtail=dot];
+  askbot_models_exercise_DraftExercise -> django_contrib_auth_models_User
+  [label="author (draftexercise)"] [arrowhead=none, arrowtail=dot];
   
 
   
@@ -1878,8 +1878,8 @@ digraph name {
 
   
   
-  askbot_models_widgets_QuestionWidget -> askbot_models_user_Group
-  [label="group (questionwidget)"] [arrowhead=none, arrowtail=dot];
+  askbot_models_widgets_ExerciseWidget -> askbot_models_user_Group
+  [label="group (exercisewidget)"] [arrowhead=none, arrowtail=dot];
   
 
 }

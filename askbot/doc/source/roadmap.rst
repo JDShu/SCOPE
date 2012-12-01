@@ -3,7 +3,7 @@ Intro
 ROADMAP aims to streamline activities of the Askbot open source project and
 to minimize ad-hoc approaches of "big-picture" level.
 
-Askbot is a Question and Answer system for the normal people!
+Askbot is a Exercise and Problem system for the normal people!
 
 Basic principles of the project
 ==================================

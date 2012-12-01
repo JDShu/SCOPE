@@ -54,8 +54,8 @@ def clean_login_url(url):
     """pass through, unless user was originally on the logout page"""
     try:
         resolver_match = ResolverMatch(resolve(url))
-        from askbot.views.readers import question
-        if resolver_match.func == question:
+        from askbot.views.readers import exercise
+        if resolver_match.func == exercise:
             return url
     except Http404:
         pass
@@ -220,9 +220,9 @@ can_edit_comment = make_template_filter_from_permission_assertion(
                         filter_name = 'can_edit_comment'
                     )
 
-can_close_question = make_template_filter_from_permission_assertion(
-                        assertion_name = 'assert_can_close_question',
-                        filter_name = 'can_close_question'
+can_close_exercise = make_template_filter_from_permission_assertion(
+                        assertion_name = 'assert_can_close_exercise',
+                        filter_name = 'can_close_exercise'
                     )
 
 can_delete_comment = make_template_filter_from_permission_assertion(
@@ -230,15 +230,15 @@ can_delete_comment = make_template_filter_from_permission_assertion(
                         filter_name = 'can_delete_comment'
                     )
 
-#this works for questions, answers and comments
+#this works for exercises, problems and comments
 can_delete_post = make_template_filter_from_permission_assertion(
                         assertion_name = 'assert_can_delete_post',
                         filter_name = 'can_delete_post'
                     )
 
-can_reopen_question = make_template_filter_from_permission_assertion(
-                        assertion_name = 'assert_can_reopen_question',
-                        filter_name = 'can_reopen_question'
+can_reopen_exercise = make_template_filter_from_permission_assertion(
+                        assertion_name = 'assert_can_reopen_exercise',
+                        filter_name = 'can_reopen_exercise'
                     )
 
 can_edit_post = make_template_filter_from_permission_assertion(
@@ -246,14 +246,14 @@ can_edit_post = make_template_filter_from_permission_assertion(
                         filter_name = 'can_edit_post'
                     )
 
-can_retag_question = make_template_filter_from_permission_assertion(
-                        assertion_name = 'assert_can_retag_question',
-                        filter_name = 'can_retag_question'
+can_retag_exercise = make_template_filter_from_permission_assertion(
+                        assertion_name = 'assert_can_retag_exercise',
+                        filter_name = 'can_retag_exercise'
                     )
 
-can_accept_best_answer = make_template_filter_from_permission_assertion(
-                        assertion_name = 'assert_can_accept_best_answer',
-                        filter_name = 'can_accept_best_answer'
+can_accept_best_problem = make_template_filter_from_permission_assertion(
+                        assertion_name = 'assert_can_accept_best_problem',
+                        filter_name = 'can_accept_best_problem'
                     )
 
 def can_see_offensive_flags(user, post):

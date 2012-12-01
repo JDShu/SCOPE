@@ -41,8 +41,8 @@ Then run the import script::
 
 .. note::
     It is possible that import script will make some mistakes in determining
-    which post in the group is the question, due to some specifics of zendesk
+    which post in the group is the exercise, due to some specifics of zendesk
     data format. If so, please enable feature
-    "Forum data rules"->"allow switching question with answer"
+    "Forum data rules"->"allow switching exercise with problem"
     in :ref:`live settings <live-settings>` and use it in an admin or a moderator
     account.

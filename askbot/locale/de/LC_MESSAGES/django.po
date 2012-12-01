@@ -29,11 +29,11 @@ msgstr "-"
 
 #: feed.py:28
 #, fuzzy
-msgid "Individual question feed"
+msgid "Individual exercise feed"
 msgstr "Individuell ausgewählte Fragen"
 
 #: feed.py:90
-msgid "latest questions"
+msgid "latest exercises"
 msgstr "Neueste Fragen"
 
 #: forms.py:74
@@ -50,15 +50,15 @@ msgstr "País"
 msgid "Country field is required"
 msgstr "Dieses Feld wird benötigt"
 
-#: forms.py:104 skins/default/templates/widgets/answer_edit_tips.html:45
-#: skins/default/templates/widgets/answer_edit_tips.html:49
-#: skins/default/templates/widgets/question_edit_tips.html:40
-#: skins/default/templates/widgets/question_edit_tips.html:45
+#: forms.py:104 skins/default/templates/widgets/problem_edit_tips.html:45
+#: skins/default/templates/widgets/problem_edit_tips.html:49
+#: skins/default/templates/widgets/exercise_edit_tips.html:40
+#: skins/default/templates/widgets/exercise_edit_tips.html:45
 msgid "title"
 msgstr "Titel"
 
 #: forms.py:105
-msgid "please enter a descriptive title for your question"
+msgid "please enter a descriptive title for your exercise"
 msgstr "Bitte geben Sie einen Aussagekräftigen Titel für Ihre Frage ein."
 
 #: forms.py:113
@@ -102,7 +102,7 @@ msgstr[1] ""
 "Tags sind kurze Stichwörter. Sie dürfen keine Leerzeichen enthalten. Bis zu "
 "fünf Tags können vergeben werden."
 
-#: forms.py:222 skins/default/templates/question_retag.html:58
+#: forms.py:222 skins/default/templates/exercise_retag.html:58
 msgid "tags are required"
 msgstr "Mindestens ein Tag muß gesetzt sein."
 
@@ -137,7 +137,7 @@ msgstr ""
 
 #: forms.py:295
 msgid ""
-"if you choose community wiki option, the question and answer do not generate "
+"if you choose community wiki option, the exercise and problem do not generate "
 "points and name of author will not be shown"
 msgstr ""
 "Wenn Sie \"Community Wiki\" auswählen, werden auf die Frage und die "
@@ -260,17 +260,17 @@ msgid "ask anonymously"
 msgstr "Anonym"
 
 #: forms.py:601
-msgid "Check if you do not want to reveal your name when asking this question"
+msgid "Check if you do not want to reveal your name when asking this exercise"
 msgstr "Marcar si no voleu mostrar el vostre nom al fer aquesta pregunta"
 
 #: forms.py:624
 msgid ""
-"Subject line is expected in the format: [tag1, tag2, tag3,...] question title"
+"Subject line is expected in the format: [tag1, tag2, tag3,...] exercise title"
 msgstr ""
 
 #: forms.py:769
 msgid ""
-"You have asked this question anonymously, if you decide to reveal your "
+"You have asked this exercise anonymously, if you decide to reveal your "
 "identity, please check this box."
 msgstr ""
 "Heu fet aquesta pregunta anònimament, si voleu mostrar la vostra identitat "
@@ -282,7 +282,7 @@ msgstr "mostrar identitat"
 
 #: forms.py:831
 msgid ""
-"Sorry, only owner of the anonymous question can reveal his or her identity, "
+"Sorry, only owner of the anonymous exercise can reveal his or her identity, "
 "please uncheck the box"
 msgstr ""
 "Només l'autor de la pregunta anònima pot mostrar la seva identitat. "
@@ -292,7 +292,7 @@ msgstr ""
 msgid ""
 "Sorry, apparently rules have just changed - it is no longer possible to ask "
 "anonymously. Please either check the \"reveal identity\" box or reload this "
-"page and try editing the question again."
+"page and try editing the exercise again."
 msgstr ""
 "Sembla què les regles han canviat; ara no es poden fer preguntes anònimament."
 "Si us plau, marqueu «mostrar identitat» o tornareu a carregar aquesta pàgina "
@@ -347,7 +347,7 @@ msgid "Asked by me"
 msgstr "Von mir gefragt"
 
 #: forms.py:1021
-msgid "Answered by me"
+msgid "Problemed by me"
 msgstr "Von mir beantwortet"
 
 #: forms.py:1024
@@ -410,7 +410,7 @@ msgid "help/"
 msgstr "ajuda"
 
 #: urls.py:46 urls.py:51
-msgid "answers/"
+msgid "problems/"
 msgstr "antworten/"
 
 #: urls.py:46 urls.py:87 urls.py:212
@@ -423,7 +423,7 @@ msgstr "revisionen/"
 
 #: urls.py:61
 #, fuzzy
-msgid "questions"
+msgid "exercises"
 msgstr ""
 "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
 "Fragen\n"
@@ -432,7 +432,7 @@ msgstr ""
 
 #: urls.py:82 urls.py:87 urls.py:92 urls.py:97 urls.py:102 urls.py:107
 #: urls.py:112 urls.py:117 urls.py:123 urls.py:299
-msgid "questions/"
+msgid "exercises/"
 msgstr "fragen/"
 
 #: urls.py:82
@@ -453,7 +453,7 @@ msgid "reopen/"
 msgstr "oeffnen/"
 
 #: urls.py:107
-msgid "answer/"
+msgid "problem/"
 msgstr "antwort/"
 
 #: urls.py:112
@@ -506,7 +506,7 @@ msgid "feedback/"
 msgstr "feedback/"
 
 #: urls.py:305
-msgid "question/"
+msgid "exercise/"
 msgstr "frage/"
 
 #: urls.py:312 setup_templates/settings.py:210
@@ -537,50 +537,50 @@ msgid "Peer Pressure: minimum downvotes for deleted post"
 msgstr "Pressió Companys: mínim vots negatius per a l'entrada eliminada"
 
 #: conf/badges.py:41
-msgid "Teacher: minimum upvotes for the answer"
+msgid "Teacher: minimum upvotes for the problem"
 msgstr "Mestre: mínim vots positius per la resposta"
 
 #: conf/badges.py:50
-msgid "Nice Answer: minimum upvotes for the answer"
+msgid "Nice Problem: minimum upvotes for the problem"
 msgstr ""
 
 #: conf/badges.py:59
-msgid "Good Answer: minimum upvotes for the answer"
+msgid "Good Problem: minimum upvotes for the problem"
 msgstr ""
 
 #: conf/badges.py:68
-msgid "Great Answer: minimum upvotes for the answer"
+msgid "Great Problem: minimum upvotes for the problem"
 msgstr ""
 
 #: conf/badges.py:77
-msgid "Nice Question: minimum upvotes for the question"
+msgid "Nice Exercise: minimum upvotes for the exercise"
 msgstr ""
 
 #: conf/badges.py:86
-msgid "Good Question: minimum upvotes for the question"
+msgid "Good Exercise: minimum upvotes for the exercise"
 msgstr ""
 
 #: conf/badges.py:95
-msgid "Great Question: minimum upvotes for the question"
+msgid "Great Exercise: minimum upvotes for the exercise"
 msgstr ""
 
 #: conf/badges.py:104
 #, fuzzy
-msgid "Popular Question: minimum views"
+msgid "Popular Exercise: minimum views"
 msgstr "populäre Frage"
 
 #: conf/badges.py:113
 #, fuzzy
-msgid "Notable Question: minimum views"
+msgid "Notable Exercise: minimum views"
 msgstr "Bemerkenswerte Frage"
 
 #: conf/badges.py:122
 #, fuzzy
-msgid "Famous Question: minimum views"
+msgid "Famous Exercise: minimum views"
 msgstr "Berühmte Frage"
 
 #: conf/badges.py:131
-msgid "Self-Learner: minimum answer upvotes"
+msgid "Self-Learner: minimum problem upvotes"
 msgstr ""
 
 #: conf/badges.py:140
@@ -609,12 +609,12 @@ msgstr ""
 
 #: conf/badges.py:194
 #, fuzzy
-msgid "Favorite Question: minimum stars"
+msgid "Favorite Exercise: minimum stars"
 msgstr "Favoritenfrage"
 
 #: conf/badges.py:203
 #, fuzzy
-msgid "Stellar Question: minimum stars"
+msgid "Stellar Exercise: minimum stars"
 msgstr "Exzellente Frage"
 
 #: conf/badges.py:212
@@ -654,23 +654,23 @@ msgid "Maximum number of news entries in an email alert"
 msgstr "Màxim nombre de missatges en un avís per correu electrònic"
 
 #: conf/email.py:57
-msgid "Default notification frequency all questions"
+msgid "Default notification frequency all exercises"
 msgstr "Freqüència predeterminada de notificació per a totes les preguntes"
 
 #: conf/email.py:59
-msgid "Option to define frequency of emailed updates for: all questions."
+msgid "Option to define frequency of emailed updates for: all exercises."
 msgstr ""
 "Opció per definir la freqüència de les actualitzacions per correu de: totes "
 "les preguntes."
 
 #: conf/email.py:71
 #, fuzzy
-msgid "Default notification frequency questions asked by the user"
+msgid "Default notification frequency exercises asked by the user"
 msgstr "Fragen mit Tag '%(tag)s' anzeigen"
 
 #: conf/email.py:73
 msgid ""
-"Option to define frequency of emailed updates for: Question asked by the "
+"Option to define frequency of emailed updates for: Exercise asked by the "
 "user."
 msgstr ""
 "Opció per definir la freqüència de les actualitzacions per correu de: "
@@ -678,13 +678,13 @@ msgstr ""
 
 #: conf/email.py:85
 #, fuzzy
-msgid "Default notification frequency questions answered by the user"
+msgid "Default notification frequency exercises problemed by the user"
 msgstr ""
 "Beliebige Fragen und Antworten löschen und weitere Moderationsfunktionen"
 
 #: conf/email.py:87
 msgid ""
-"Option to define frequency of emailed updates for: Question answered by the "
+"Option to define frequency of emailed updates for: Exercise problemed by the "
 "user."
 msgstr ""
 "Opció per definir la freqüència de les actualitzacions per correu de: "
@@ -692,13 +692,13 @@ msgstr ""
 
 #: conf/email.py:99
 msgid ""
-"Default notification frequency questions individually                        "
+"Default notification frequency exercises individually                        "
 "selected by the user"
 msgstr ""
 
 #: conf/email.py:102
 msgid ""
-"Option to define frequency of emailed updates for: Question individually "
+"Option to define frequency of emailed updates for: Exercise individually "
 "selected by the user."
 msgstr ""
 
@@ -715,56 +715,56 @@ msgstr ""
 
 #: conf/email.py:128
 #, fuzzy
-msgid "Send periodic reminders about unanswered questions"
+msgid "Send periodic reminders about exercises without problems"
 msgstr "Es gibt hier keine unbeantworteten Fragen"
 
 #: conf/email.py:130
 msgid ""
 "NOTE: in order to use this feature, it is necessary to run the management "
-"command \"send_unanswered_question_reminders\" (for example, via a cron job "
+"command \"send_exercise_without_problem_reminders\" (for example, via a cron job "
 "- with an appropriate frequency) "
 msgstr ""
 
 #: conf/email.py:143
 #, fuzzy
-msgid "Days before starting to send reminders about unanswered questions"
+msgid "Days before starting to send reminders about exercises without problems"
 msgstr "Es gibt hier keine unbeantworteten Fragen"
 
 #: conf/email.py:154
 msgid ""
-"How often to send unanswered question reminders (in days between the "
+"How often to send exercise without problem reminders (in days between the "
 "reminders sent)."
 msgstr ""
 
 #: conf/email.py:166
-msgid "Max. number of reminders to send about unanswered questions"
+msgid "Max. number of reminders to send about exercises without problems"
 msgstr ""
 
 #: conf/email.py:177
 #, fuzzy
-msgid "Send periodic reminders to accept the best answer"
+msgid "Send periodic reminders to accept the best problem"
 msgstr "Es gibt hier keine unbeantworteten Fragen"
 
 #: conf/email.py:179
 msgid ""
 "NOTE: in order to use this feature, it is necessary to run the management "
-"command \"send_accept_answer_reminders\" (for example, via a cron job - with "
+"command \"send_accept_problem_reminders\" (for example, via a cron job - with "
 "an appropriate frequency) "
 msgstr ""
 
 #: conf/email.py:192
 #, fuzzy
-msgid "Days before starting to send reminders to accept an answer"
+msgid "Days before starting to send reminders to accept an problem"
 msgstr "Es gibt hier keine unbeantworteten Fragen"
 
 #: conf/email.py:203
 msgid ""
-"How often to send accept answer reminders (in days between the reminders "
+"How often to send accept problem reminders (in days between the reminders "
 "sent)."
 msgstr ""
 
 #: conf/email.py:215
-msgid "Max. number of reminders to send to accept the best answer"
+msgid "Max. number of reminders to send to accept the best problem"
 msgstr ""
 
 #: conf/email.py:227
@@ -791,7 +791,7 @@ msgstr ""
 
 #: conf/email.py:256
 #, fuzzy
-msgid "Allow posting questions by email"
+msgid "Allow posting exercises by email"
 msgstr ""
 "<span class=\"strong big\">Sie können Ihre Frage formulieren, ohne sich "
 "vorher anmelden zu müssen</span>. Wenn Sie Ihre Frage speichern, werden Sie "
@@ -811,13 +811,13 @@ msgstr ""
 
 #: conf/email.py:271
 msgid ""
-"This setting applies to tags written in the subject line of questions asked "
+"This setting applies to tags written in the subject line of exercises asked "
 "by email"
 msgstr ""
 
 #: conf/email.py:284
 #, fuzzy
-msgid "Enable posting answers and comments by email"
+msgid "Enable posting problems and comments by email"
 msgstr ""
 "<span class=\"strong big\">Sie können Ihre Frage formulieren, ohne sich "
 "vorher anmelden zu müssen</span>. Wenn Sie Ihre Frage speichern, werden Sie "
@@ -836,7 +836,7 @@ msgstr ""
 #: conf/email.py:311
 msgid ""
 "Email replies having fewer words than this number will be posted as comments "
-"instead of answers"
+"instead of problems"
 msgstr ""
 
 #: conf/external_keys.py:11
@@ -997,12 +997,12 @@ msgid "Check to enable community wiki feature"
 msgstr ""
 
 #: conf/forum_data_rules.py:42
-msgid "Allow asking questions anonymously"
+msgid "Allow asking exercises anonymously"
 msgstr ""
 
 #: conf/forum_data_rules.py:44
 msgid ""
-"Users do not accrue reputation for anonymous questions and their identity is "
+"Users do not accrue reputation for anonymous exercises and their identity is "
 "not revealed until they change their mind"
 msgstr ""
 
@@ -1012,7 +1012,7 @@ msgstr "Permetre publicar abans de registrar-se"
 
 #: conf/forum_data_rules.py:58
 msgid ""
-"Check if you want to allow users start posting questions or answers before "
+"Check if you want to allow users start posting exercises or problems before "
 "logging in. Enabling this may require adjustments in the user login system "
 "to check for pending posts every time the user logs in. The builtin Askbot "
 "login system supports this feature."
@@ -1020,13 +1020,13 @@ msgstr ""
 
 #: conf/forum_data_rules.py:73
 #, fuzzy
-msgid "Allow swapping answer with question"
+msgid "Allow swapping problem with exercise"
 msgstr "Frage beantworten"
 
 #: conf/forum_data_rules.py:75
 msgid ""
 "This setting will help import data from other forums such as zendesk, when "
-"automatic data import fails to detect the original question correctly."
+"automatic data import fails to detect the original exercise correctly."
 msgstr ""
 
 #: conf/forum_data_rules.py:87
@@ -1038,11 +1038,11 @@ msgid "Minimum length of title (number of characters)"
 msgstr ""
 
 #: conf/forum_data_rules.py:106
-msgid "Minimum length of question body (number of characters)"
+msgid "Minimum length of exercise body (number of characters)"
 msgstr ""
 
 #: conf/forum_data_rules.py:117
-msgid "Minimum length of answer body (number of characters)"
+msgid "Minimum length of problem body (number of characters)"
 msgstr ""
 
 #: conf/forum_data_rules.py:126
@@ -1058,7 +1058,7 @@ msgstr "tags aktualisiert"
 #: conf/forum_data_rules.py:138
 msgid ""
 "At least one of these tags will be required for any new or newly edited "
-"question. A mandatory tag may be wildcard, if the wildcard tags are active."
+"exercise. A mandatory tag may be wildcard, if the wildcard tags are active."
 msgstr ""
 
 #: conf/forum_data_rules.py:150
@@ -1068,7 +1068,7 @@ msgstr ""
 #: conf/forum_data_rules.py:152
 msgid ""
 "Attention: after checking this, please back up the database, and run a "
-"management command: <code>python manage.py fix_question_tags</code> to "
+"management command: <code>python manage.py fix_exercise_tags</code> to "
 "globally rename the tags"
 msgstr ""
 
@@ -1141,17 +1141,17 @@ msgid ""
 msgstr ""
 
 #: conf/forum_data_rules.py:273
-msgid "Maximum number of tags per question"
+msgid "Maximum number of tags per exercise"
 msgstr ""
 
 #: conf/forum_data_rules.py:285
-msgid "Number of questions to list by default"
+msgid "Number of exercises to list by default"
 msgstr ""
 
 #: conf/forum_data_rules.py:295
 #, fuzzy
-msgid "What should \"unanswered question\" mean?"
-msgstr "unanswered questions"
+msgid "What should \"exercise without problem\" mean?"
+msgstr "exercises without problems"
 
 #: conf/ldap.py:9
 msgid "LDAP login configuration"
@@ -1388,12 +1388,12 @@ msgstr "Negativ bewerten"
 
 #: conf/minimum_reputation.py:40
 #, fuzzy
-msgid "Answer own question immediately"
+msgid "Problem own exercise immediately"
 msgstr "Eigene Frage beantworten"
 
 #: conf/minimum_reputation.py:49
 #, fuzzy
-msgid "Accept own answer"
+msgid "Accept own problem"
 msgstr "Beliebige Antworten bearbeiten"
 
 #: conf/minimum_reputation.py:58
@@ -1412,7 +1412,7 @@ msgstr ""
 
 #: conf/minimum_reputation.py:85
 #, fuzzy
-msgid "Delete questions and answers posted by others"
+msgid "Delete exercises and problems posted by others"
 msgstr ""
 "Beliebige Fragen und Antworten löschen und weitere Moderationsfunktionen"
 
@@ -1423,16 +1423,16 @@ msgstr "dateien/"
 
 #: conf/minimum_reputation.py:103
 #, fuzzy
-msgid "Close own questions"
+msgid "Close own exercises"
 msgstr "Frage schließen"
 
 #: conf/minimum_reputation.py:112
-msgid "Retag questions posted by other people"
+msgid "Retag exercises posted by other people"
 msgstr ""
 
 #: conf/minimum_reputation.py:121
 #, fuzzy
-msgid "Reopen own questions"
+msgid "Reopen own exercises"
 msgstr "Frage wieder eröffnen"
 
 #: conf/minimum_reputation.py:130
@@ -1451,7 +1451,7 @@ msgstr "als beleidigend/illegal gemeldet"
 
 #: conf/minimum_reputation.py:157
 #, fuzzy
-msgid "Close questions asked by others"
+msgid "Close exercises asked by others"
 msgstr "Fragen mit Tag '%(tag)s' anzeigen"
 
 #: conf/minimum_reputation.py:166
@@ -1469,7 +1469,7 @@ msgid ""
 msgstr ""
 
 #: conf/minimum_reputation.py:190
-msgid "Post answers and comments by email"
+msgid "Post problems and comments by email"
 msgstr ""
 
 #: conf/reputation_changes.py:13
@@ -1485,12 +1485,12 @@ msgid "Gain for receiving an upvote"
 msgstr ""
 
 #: conf/reputation_changes.py:41
-msgid "Gain for the author of accepted answer"
+msgid "Gain for the author of accepted problem"
 msgstr ""
 
 #: conf/reputation_changes.py:50
 #, fuzzy
-msgid "Gain for accepting best answer"
+msgid "Gain for accepting best problem"
 msgstr "als beste Antwort markiert"
 
 #: conf/reputation_changes.py:59
@@ -1502,11 +1502,11 @@ msgid "Gain for voter on canceling downvote"
 msgstr ""
 
 #: conf/reputation_changes.py:78
-msgid "Loss for voter for canceling of answer acceptance"
+msgid "Loss for voter for canceling of problem acceptance"
 msgstr ""
 
 #: conf/reputation_changes.py:88
-msgid "Loss for author whose answer was \"un-accepted\""
+msgid "Loss for author whose problem was \"un-accepted\""
 msgstr ""
 
 #: conf/reputation_changes.py:98
@@ -1538,12 +1538,12 @@ msgid "Main page sidebar"
 msgstr ""
 
 #: conf/sidebar_main.py:20 conf/sidebar_profile.py:20
-#: conf/sidebar_question.py:19
+#: conf/sidebar_exercise.py:19
 msgid "Custom sidebar header"
 msgstr ""
 
 #: conf/sidebar_main.py:23 conf/sidebar_profile.py:23
-#: conf/sidebar_question.py:22
+#: conf/sidebar_exercise.py:22
 msgid ""
 "Use this area to enter content at the TOP of the sidebarin HTML format.   "
 "When using this option (as well as the sidebar footer), please use the HTML "
@@ -1583,12 +1583,12 @@ msgid ""
 msgstr ""
 
 #: conf/sidebar_main.py:85 conf/sidebar_profile.py:36
-#: conf/sidebar_question.py:75
+#: conf/sidebar_exercise.py:75
 msgid "Custom sidebar footer"
 msgstr ""
 
 #: conf/sidebar_main.py:88 conf/sidebar_profile.py:39
-#: conf/sidebar_question.py:78
+#: conf/sidebar_exercise.py:78
 msgid ""
 "Use this area to enter content at the BOTTOM of the sidebarin HTML format.   "
 "When using this option (as well as the sidebar header), please use the HTML "
@@ -1601,37 +1601,37 @@ msgstr ""
 msgid "User profile sidebar"
 msgstr "Benutzerprofil"
 
-#: conf/sidebar_question.py:11
+#: conf/sidebar_exercise.py:11
 #, fuzzy
-msgid "Question page sidebar"
+msgid "Exercise page sidebar"
 msgstr "Tags"
 
-#: conf/sidebar_question.py:35
+#: conf/sidebar_exercise.py:35
 msgid "Show tag list in sidebar"
 msgstr ""
 
-#: conf/sidebar_question.py:37
+#: conf/sidebar_exercise.py:37
 msgid "Uncheck this if you want to hide the tag list from the sidebar "
 msgstr ""
 
-#: conf/sidebar_question.py:48
+#: conf/sidebar_exercise.py:48
 msgid "Show meta information in sidebar"
 msgstr ""
 
-#: conf/sidebar_question.py:50
+#: conf/sidebar_exercise.py:50
 msgid ""
-"Uncheck this if you want to hide the meta information about the question "
+"Uncheck this if you want to hide the meta information about the exercise "
 "(post date, views, last updated). "
 msgstr ""
 
-#: conf/sidebar_question.py:62
+#: conf/sidebar_exercise.py:62
 #, fuzzy
-msgid "Show related questions in sidebar"
+msgid "Show related exercises in sidebar"
 msgstr "Verwandte / ähnliche Fragen"
 
-#: conf/sidebar_question.py:64
+#: conf/sidebar_exercise.py:64
 #, fuzzy
-msgid "Uncheck this if you want to hide the list of related questions. "
+msgid "Uncheck this if you want to hide the list of related exercises. "
 msgstr "Klicken Sie, um die ältesten bearbeiteten Fragen zu sehen"
 
 #: conf/site_modes.py:64
@@ -1701,7 +1701,7 @@ msgid "If left empty, a simple internal feedback form will be used instead"
 msgstr ""
 
 #: conf/skin_counter_settings.py:11
-msgid "Skin: view, vote and answer counters"
+msgid "Skin: view, vote and problem counters"
 msgstr ""
 
 #: conf/skin_counter_settings.py:19
@@ -1774,31 +1774,31 @@ msgid "Foreground color for views = MAX"
 msgstr ""
 
 #: conf/skin_counter_settings.py:173
-msgid "Answer counter value to give \"full color\""
+msgid "Problem counter value to give \"full color\""
 msgstr ""
 
 #: conf/skin_counter_settings.py:185
-msgid "Background color for answers = 0"
+msgid "Background color for problems = 0"
 msgstr ""
 
 #: conf/skin_counter_settings.py:195
-msgid "Foreground color for answers = 0"
+msgid "Foreground color for problems = 0"
 msgstr ""
 
 #: conf/skin_counter_settings.py:205
-msgid "Background color for answers"
+msgid "Background color for problems"
 msgstr ""
 
 #: conf/skin_counter_settings.py:215
-msgid "Foreground color for answers"
+msgid "Foreground color for problems"
 msgstr ""
 
 #: conf/skin_counter_settings.py:227
-msgid "Background color for answers = MAX"
+msgid "Background color for problems = MAX"
 msgstr ""
 
 #: conf/skin_counter_settings.py:238
-msgid "Foreground color for answers = MAX"
+msgid "Foreground color for problems = MAX"
 msgstr ""
 
 #: conf/skin_counter_settings.py:251
@@ -1806,7 +1806,7 @@ msgid "Background color for accepted"
 msgstr ""
 
 #: conf/skin_counter_settings.py:261
-msgid "Foreground color for accepted answer"
+msgid "Foreground color for accepted problem"
 msgstr ""
 
 #: conf/skin_general_settings.py:15
@@ -1993,23 +1993,23 @@ msgstr ""
 
 #: conf/social_sharing.py:20
 #, fuzzy
-msgid "Check to enable sharing of questions on Twitter"
+msgid "Check to enable sharing of exercises on Twitter"
 msgstr "Diese Frage wieder eröffnen"
 
 #: conf/social_sharing.py:29
-msgid "Check to enable sharing of questions on Facebook"
+msgid "Check to enable sharing of exercises on Facebook"
 msgstr ""
 
 #: conf/social_sharing.py:38
-msgid "Check to enable sharing of questions on LinkedIn"
+msgid "Check to enable sharing of exercises on LinkedIn"
 msgstr ""
 
 #: conf/social_sharing.py:47
-msgid "Check to enable sharing of questions on Identi.ca"
+msgid "Check to enable sharing of exercises on Identi.ca"
 msgstr ""
 
 #: conf/social_sharing.py:56
-msgid "Check to enable sharing of questions on Google+"
+msgid "Check to enable sharing of exercises on Google+"
 msgstr ""
 
 #: conf/spam_and_moderation.py:10
@@ -2135,7 +2135,7 @@ msgid "Number of days to allow canceling votes"
 msgstr ""
 
 #: conf/vote_rules.py:60
-msgid "Number of days required before answering own question"
+msgid "Number of days required before probleming own exercise"
 msgstr ""
 
 #: conf/vote_rules.py:69
@@ -2148,8 +2148,8 @@ msgstr ""
 
 #: conf/vote_rules.py:87
 msgid ""
-"Minimum days to accept an answer, if it has not been accepted by the "
-"question poster"
+"Minimum days to accept an problem, if it has not been accepted by the "
+"exercise poster"
 msgstr ""
 
 #: conf/widgets.py:13
@@ -2158,39 +2158,39 @@ msgstr ""
 
 #: conf/widgets.py:25
 #, fuzzy
-msgid "Number of questions to show"
+msgid "Number of exercises to show"
 msgstr "Keine Favoriten-Fragen."
 
 #: conf/widgets.py:28
 msgid ""
 "To embed the widget, add the following code to your site (and fill in "
 "correct base url, preferred tags, width and height):<iframe src="
-"\"{{base_url}}/widgets/questions?tags={{comma-separated-tags}}\" width=\"100%"
+"\"{{base_url}}/widgets/exercises?tags={{comma-separated-tags}}\" width=\"100%"
 "\" height=\"300\"scrolling=\"no\"><p>Your browser does not support iframes.</"
 "p></iframe>"
 msgstr ""
 
 #: conf/widgets.py:73
 #, fuzzy
-msgid "CSS for the questions widget"
+msgid "CSS for the exercises widget"
 msgstr "Die Frage schließen"
 
 #: conf/widgets.py:81
 #, fuzzy
-msgid "Header for the questions widget"
+msgid "Header for the exercises widget"
 msgstr "Fragen aus ignorierten Tags ausblenden"
 
 #: conf/widgets.py:90
 #, fuzzy
-msgid "Footer for the questions widget"
+msgid "Footer for the exercises widget"
 msgstr "Fragen in der Favoritenliste des Benutzers"
 
 #: const/__init__.py:10
-msgid "duplicate question"
+msgid "duplicate exercise"
 msgstr "Duplikat"
 
 #: const/__init__.py:11
-msgid "question is off-topic or not relevant"
+msgid "exercise is off-topic or not relevant"
 msgstr "Die Frage geht am Thema vorbei oder ist nicht relevant "
 
 #: const/__init__.py:12
@@ -2198,21 +2198,21 @@ msgid "too subjective and argumentative"
 msgstr "Zu subjektiv und zu diskussionen verleitend"
 
 #: const/__init__.py:13
-msgid "not a real question"
+msgid "not a real exercise"
 msgstr "Keine echte Frage"
 
 #: const/__init__.py:14
-msgid "the question is answered, right answer was accepted"
+msgid "the exercise is problemed, right problem was accepted"
 msgstr ""
 "The Frage wurde beantwortet, die korrekte Antwort als \"Akzeptiert\" "
 "markiert."
 
 #: const/__init__.py:15
-msgid "question is not relevant or outdated"
+msgid "exercise is not relevant or outdated"
 msgstr "Die Frage ist nicht relevant oder inzwischen veraltet."
 
 #: const/__init__.py:16
-msgid "question contains offensive or malicious remarks"
+msgid "exercise contains offensive or malicious remarks"
 msgstr "Die Frage enthält beleidigende oder illegale Formulierungen"
 
 #: const/__init__.py:17
@@ -2224,12 +2224,12 @@ msgid "too localized"
 msgstr "Zu eng gefaßt"
 
 #: const/__init__.py:43
-#: skins/default/templates/question/answer_tab_bar.html:18
+#: skins/default/templates/exercise/problem_tab_bar.html:18
 msgid "newest"
 msgstr "neueste"
 
 #: const/__init__.py:44 skins/default/templates/users.html:27
-#: skins/default/templates/question/answer_tab_bar.html:15
+#: skins/default/templates/exercise/problem_tab_bar.html:15
 msgid "oldest"
 msgstr "älteste"
 
@@ -2250,7 +2250,7 @@ msgid "coldest"
 msgstr "kälteste"
 
 #: const/__init__.py:49
-#: skins/default/templates/question/answer_tab_bar.html:21
+#: skins/default/templates/exercise/problem_tab_bar.html:21
 msgid "most voted"
 msgstr "am häufigsten positiv bewertet"
 
@@ -2269,7 +2269,7 @@ msgid "all"
 msgstr "alle"
 
 #: const/__init__.py:64
-msgid "unanswered"
+msgid "without_problem"
 msgstr "unbeantwortet"
 
 #: const/__init__.py:65
@@ -2287,38 +2287,38 @@ msgstr "núvol"
 
 #: const/__init__.py:79
 #, fuzzy
-msgid "Question has no answers"
+msgid "Exercise has no problems"
 msgstr "Fragen, die ich beantwortet habe"
 
 #: const/__init__.py:80
 #, fuzzy
-msgid "Question has no accepted answers"
+msgid "Exercise has no accepted problems"
 msgstr "Fragen, die ich beantwortet habe"
 
 #: const/__init__.py:125
 #, fuzzy
-msgid "asked a question"
+msgid "asked a exercise"
 msgstr "Frage stellen"
 
 #: const/__init__.py:126
 #, fuzzy
-msgid "answered a question"
+msgid "problemed a exercise"
 msgstr "Unbeantwortete"
 
 #: const/__init__.py:127 const/__init__.py:203
-msgid "commented question"
+msgid "commented exercise"
 msgstr "kommentierte Frage"
 
 #: const/__init__.py:128 const/__init__.py:204
-msgid "commented answer"
+msgid "commented problem"
 msgstr "kommentierte Antwort"
 
 #: const/__init__.py:129
-msgid "edited question"
+msgid "edited exercise"
 msgstr "überarbeitete Frage"
 
 #: const/__init__.py:130
-msgid "edited answer"
+msgid "edited problem"
 msgstr "überarbeitete Antwort"
 
 #: const/__init__.py:131
@@ -2327,7 +2327,7 @@ msgid "received badge"
 msgstr "Auszeichnung erhalten"
 
 #: const/__init__.py:132
-msgid "marked best answer"
+msgid "marked best problem"
 msgstr "als beste Antwort markiert"
 
 #: const/__init__.py:133
@@ -2343,11 +2343,11 @@ msgid "canceled vote"
 msgstr "Bewertung zurückgezogen"
 
 #: const/__init__.py:136
-msgid "deleted question"
+msgid "deleted exercise"
 msgstr "Frage gelöscht"
 
 #: const/__init__.py:137
-msgid "deleted answer"
+msgid "deleted problem"
 msgstr "Antwort gelöscht"
 
 #: const/__init__.py:138
@@ -2372,12 +2372,12 @@ msgstr "E-Mail-Update an Benutzer versandt"
 
 #: const/__init__.py:145
 #, fuzzy
-msgid "reminder about unanswered questions sent"
+msgid "reminder about exercises without problems sent"
 msgstr "Unbeantwortete Fragen anzeigen"
 
 #: const/__init__.py:149
 #, fuzzy
-msgid "reminder about accepting the best answer sent"
+msgid "reminder about accepting the best problem sent"
 msgstr "als beste Antwort markiert"
 
 #: const/__init__.py:151
@@ -2386,12 +2386,12 @@ msgstr "citat en l'entrada"
 
 #: const/__init__.py:202
 #, fuzzy
-msgid "answered question"
+msgid "problemed exercise"
 msgstr "Unbeantwortete"
 
 #: const/__init__.py:205
 #, fuzzy
-msgid "accepted answer"
+msgid "accepted problem"
 msgstr "überarbeitete Antwort"
 
 #: const/__init__.py:209
@@ -2488,12 +2488,12 @@ msgstr "Avatar penjat"
 
 #: const/message_keys.py:21
 #, fuzzy
-msgid "most relevant questions"
+msgid "most relevant exercises"
 msgstr "Stellen Sie nur Fragen, die für dieses Forum relevant sind."
 
 #: const/message_keys.py:22
 #, fuzzy
-msgid "click to see most relevant questions"
+msgid "click to see most relevant exercises"
 msgstr "Klicken Sie, um die höchstbewerteten Fragen anzuzeigen"
 
 #: const/message_keys.py:23
@@ -2502,7 +2502,7 @@ msgid "by relevance"
 msgstr "Relevanz"
 
 #: const/message_keys.py:24
-msgid "click to see the oldest questions"
+msgid "click to see the oldest exercises"
 msgstr "Klicken Sie, um die ältesten Fragen zu sehen"
 
 #: const/message_keys.py:25
@@ -2511,11 +2511,11 @@ msgid "by date"
 msgstr "Update"
 
 #: const/message_keys.py:26
-msgid "click to see the newest questions"
+msgid "click to see the newest exercises"
 msgstr "Klicken Sie, um die neuesten Fragen zu sehen"
 
 #: const/message_keys.py:27
-msgid "click to see the least recently updated questions"
+msgid "click to see the least recently updated exercises"
 msgstr "Klicken Sie, um die ältesten bearbeiteten Fragen zu sehen"
 
 #: const/message_keys.py:28
@@ -2524,26 +2524,26 @@ msgid "by activity"
 msgstr "aktiv"
 
 #: const/message_keys.py:29
-msgid "click to see the most recently updated questions"
+msgid "click to see the most recently updated exercises"
 msgstr "Klicken Sie, um die jüngst bearbeiteten Fragen zu sehen"
 
 #: const/message_keys.py:30
 #, fuzzy
-msgid "click to see the least answered questions"
+msgid "click to see the least problemed exercises"
 msgstr "Klicken Sie, um die ältesten Fragen zu sehen"
 
 #: const/message_keys.py:31
 #, fuzzy
-msgid "by answers"
+msgid "by problems"
 msgstr "Antworten"
 
 #: const/message_keys.py:32
 #, fuzzy
-msgid "click to see the most answered questions"
+msgid "click to see the most problemed exercises"
 msgstr "Klicken Sie, um die höchstbewerteten Fragen anzuzeigen"
 
 #: const/message_keys.py:33
-msgid "click to see least voted questions"
+msgid "click to see least voted exercises"
 msgstr "am wenigsten positiv bewertete Fragen"
 
 #: const/message_keys.py:34
@@ -2552,7 +2552,7 @@ msgid "by votes"
 msgstr "Stimmen"
 
 #: const/message_keys.py:35
-msgid "click to see most voted questions"
+msgid "click to see most voted exercises"
 msgstr "Klicken Sie, um die höchstbewerteten Fragen anzuzeigen"
 
 #: const/message_keys.py:40
@@ -2960,41 +2960,41 @@ msgstr "Desplegar tot"
 msgid "Congratulations, you are now an Administrator"
 msgstr "Gratulation, Sie sind jetzt Administrator"
 
-#: management/commands/send_accept_answer_reminders.py:58
+#: management/commands/send_accept_problem_reminders.py:58
 #, python-format
-msgid "Accept the best answer for %(question_count)d of your questions"
+msgid "Accept the best problem for %(exercise_count)d of your exercises"
 msgstr ""
 
-#: management/commands/send_accept_answer_reminders.py:63
+#: management/commands/send_accept_problem_reminders.py:63
 #, fuzzy
-msgid "Please accept the best answer for this question:"
+msgid "Please accept the best problem for this exercise:"
 msgstr "Verfassen Sie die erste Antwort auf diese Frage!"
 
-#: management/commands/send_accept_answer_reminders.py:65
+#: management/commands/send_accept_problem_reminders.py:65
 #, fuzzy
-msgid "Please accept the best answer for these questions:"
+msgid "Please accept the best problem for these exercises:"
 msgstr "Klicken Sie, um die ältesten Fragen zu sehen"
 
 #: management/commands/send_email_alerts.py:414
 #, python-format
-msgid "%(question_count)d updated question about %(topics)s"
-msgid_plural "%(question_count)d updated questions about %(topics)s"
-msgstr[0] "%(question_count)d pregunta actualitzada de %(topics)s"
-msgstr[1] "%(question_count)d preguntes actualitzades de %(topics)s"
+msgid "%(exercise_count)d updated exercise about %(topics)s"
+msgid_plural "%(exercise_count)d updated exercises about %(topics)s"
+msgstr[0] "%(exercise_count)d pregunta actualitzada de %(topics)s"
+msgstr[1] "%(exercise_count)d preguntes actualitzades de %(topics)s"
 
 #: management/commands/send_email_alerts.py:425
 #, python-format
 msgid ""
-"<p>Dear %(name)s,</p><p>The following question has been updated "
+"<p>Dear %(name)s,</p><p>The following exercise has been updated "
 "%(sitename)s</p>"
 msgid_plural ""
-"<p>Dear %(name)s,</p><p>The following %(num)d questions have been updated on "
+"<p>Dear %(name)s,</p><p>The following %(num)d exercises have been updated on "
 "%(sitename)s:</p>"
 msgstr[0] ""
 msgstr[1] ""
 
 #: management/commands/send_email_alerts.py:449
-msgid "new question"
+msgid "new exercise"
 msgstr "Neue Frage"
 
 #: management/commands/send_email_alerts.py:474
@@ -3007,12 +3007,12 @@ msgid ""
 "friendly %(sitename)s server.</p>"
 msgstr ""
 
-#: management/commands/send_unanswered_question_reminders.py:60
+#: management/commands/send_exercise_without_problem_reminders.py:60
 #, python-format
-msgid "%(question_count)d unanswered question about %(topics)s"
-msgid_plural "%(question_count)d unanswered questions about %(topics)s"
-msgstr[0] "%(question_count)d pregunta sense contestar de %(topics)s"
-msgstr[1] "%(question_count)d preguntes sense contestar de %(topics)s"
+msgid "%(exercise_count)d exercise without problem about %(topics)s"
+msgid_plural "%(exercise_count)d exercises without problems about %(topics)s"
+msgstr[0] "%(exercise_count)d pregunta sense contestar de %(topics)s"
+msgstr[1] "%(exercise_count)d preguntes sense contestar de %(topics)s"
 
 #: middleware/forum_mode.py:53
 #, fuzzy, python-format
@@ -3021,7 +3021,7 @@ msgstr "Bitte einloggen"
 
 #: models/__init__.py:320
 msgid ""
-"Sorry, you cannot accept or unaccept best answers because your account is "
+"Sorry, you cannot accept or unaccept best problems because your account is "
 "blocked"
 msgstr ""
 "No pot acceptar o rebutjar les millors respostes ja que el seu compte està "
@@ -3029,7 +3029,7 @@ msgstr ""
 
 #: models/__init__.py:324
 msgid ""
-"Sorry, you cannot accept or unaccept best answers because your account is "
+"Sorry, you cannot accept or unaccept best problems because your account is "
 "suspended"
 msgstr ""
 "No pot acceptar o rebutjar les millors respostes ja que el seu compte està "
@@ -3038,21 +3038,21 @@ msgstr ""
 #: models/__init__.py:337
 #, fuzzy, python-format
 msgid ""
-">%(points)s points required to accept or unaccept  your own answer to your "
-"own question"
+">%(points)s points required to accept or unaccept  your own problem to your "
+"own exercise"
 msgstr "Erste Antwort auf eine eigene Frage akzeptiert"
 
 #: models/__init__.py:359
 #, python-format
 msgid ""
-"Sorry, you will be able to accept this answer only after %(will_be_able_at)s"
+"Sorry, you will be able to accept this problem only after %(will_be_able_at)s"
 msgstr "Podrà acceptar aquesta resposta a partir de %(will_be_able_at)s"
 
 #: models/__init__.py:367
 #, python-format
 msgid ""
-"Sorry, only moderators or original author of the question  - %(username)s - "
-"can accept or unaccept the best answer"
+"Sorry, only moderators or original author of the exercise  - %(username)s - "
+"can accept or unaccept the best problem"
 msgstr ""
 "Només els moderadors o l'autor original de la pregunta -%(username)s- poden "
 "acceptar i rebutjar la millor resposta"
@@ -3131,7 +3131,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Sorry, to comment any post a minimum reputation of %(min_rep)s points is "
-"required. You can still comment your own posts and answers to your questions"
+"required. You can still comment your own posts and problems to your exercises"
 msgstr ""
 "Per comentar una entrada es cal tenir una reputació de %(min_rep)s puntsSí "
 "podeu comentar les entrades i les respostes a les vostres preguntes"
@@ -3178,10 +3178,10 @@ msgstr ""
 
 #: models/__init__.py:664
 msgid ""
-"Sorry, cannot delete your question since it has an upvoted answer posted by "
+"Sorry, cannot delete your exercise since it has an upvoted problem posted by "
 "someone else"
 msgid_plural ""
-"Sorry, cannot delete your question since it has some upvoted answers posted "
+"Sorry, cannot delete your exercise since it has some upvoted problems posted "
 "by other users"
 msgstr[0] ""
 "No es pot eliminar la pregunta ja que hi ha una resposta amb vots positius "
@@ -3209,11 +3209,11 @@ msgstr ""
 "%(min_rep)s"
 
 #: models/__init__.py:707
-msgid "Sorry, since your account is blocked you cannot close questions"
+msgid "Sorry, since your account is blocked you cannot close exercises"
 msgstr "El seu compte està bloquejat, no pot tancar preguntes"
 
 #: models/__init__.py:711
-msgid "Sorry, since your account is suspended you cannot close questions"
+msgid "Sorry, since your account is suspended you cannot close exercises"
 msgstr "Des de que el seu compte està deshabilitat no pot tancar preguntes"
 
 #: models/__init__.py:715
@@ -3228,7 +3228,7 @@ msgstr ""
 #: models/__init__.py:724
 #, python-format
 msgid ""
-"Sorry, to close own question a minimum reputation of %(min_rep)s is required"
+"Sorry, to close own exercise a minimum reputation of %(min_rep)s is required"
 msgstr ""
 "Per tancar una pregunta pròpia cal tenir una reputació mínima de %(min_rep)s"
 
@@ -3236,7 +3236,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Sorry, only administrators, moderators or post owners with reputation > "
-"%(min_rep)s can reopen questions."
+"%(min_rep)s can reopen exercises."
 msgstr ""
 "Només els moderadors, els administradors del lloc o els propietaris de les "
 "entrades amb reputació mínim de %(min_rep)s poden reobrir preguntes."
@@ -3244,12 +3244,12 @@ msgstr ""
 #: models/__init__.py:754
 #, python-format
 msgid ""
-"Sorry, to reopen own question a minimum reputation of %(min_rep)s is required"
+"Sorry, to reopen own exercise a minimum reputation of %(min_rep)s is required"
 msgstr ""
 "Per reobrir una pregunta pròpia cal tenir una reputació mínima de %(min_rep)s"
 
 #: models/__init__.py:775
-msgid "You have flagged this question before and cannot do it more than once"
+msgid "You have flagged this exercise before and cannot do it more than once"
 msgstr ""
 
 #: models/__init__.py:783
@@ -3307,26 +3307,26 @@ msgstr ""
 
 #: models/__init__.py:887
 msgid ""
-"Sorry, only question owners, site administrators and moderators can retag "
-"deleted questions"
+"Sorry, only exercise owners, site administrators and moderators can retag "
+"deleted exercises"
 msgstr ""
 "Només els propietaris de de la pregunta, els moderadors i els administradors "
 "podenreetiquetar una pregunta esborrada"
 
 #: models/__init__.py:894
-msgid "Sorry, since your account is blocked you cannot retag questions"
+msgid "Sorry, since your account is blocked you cannot retag exercises"
 msgstr "El seu compte està bloquejat, no pot reetiquetar preguntes"
 
 #: models/__init__.py:898
 msgid ""
-"Sorry, since your account is suspended you can retag only your own questions"
+"Sorry, since your account is suspended you can retag only your own exercises"
 msgstr ""
 "El seu compte està deshabilitat, només pot reetiquetar les preguntes pròpies"
 
 #: models/__init__.py:902
 #, python-format
 msgid ""
-"Sorry, to retag questions a minimum reputation of %(min_rep)s is required"
+"Sorry, to retag exercises a minimum reputation of %(min_rep)s is required"
 msgstr ""
 "Per reetiquetar una pregunta ha de tenir una reputació mínima de %(min_rep)s "
 
@@ -3387,8 +3387,8 @@ msgstr[1] "%(days)d dies"
 #: models/__init__.py:1480
 #, python-format
 msgid ""
-"New users must wait %(days)s before answering their own question.  You can "
-"post an answer %(left)s"
+"New users must wait %(days)s before probleming their own exercise.  You can "
+"post an problem %(left)s"
 msgstr ""
 "Els usuaris nous han d'esperar %(days)s per respondre la seva pròpia "
 "pregunta. Podeu publicar una resposta %(left)s"
@@ -3507,7 +3507,7 @@ msgstr "Gruppenzwang"
 
 #: models/badges.py:174
 #, python-format
-msgid "Received at least %(votes)s upvote for an answer for the first time"
+msgid "Received at least %(votes)s upvote for an problem for the first time"
 msgstr ""
 "Reb un mínim de %(votes)s vots positius per una resposta per primera vegada"
 
@@ -3545,7 +3545,7 @@ msgstr "300 Mal abgestimmt"
 
 #: models/badges.py:252
 #, fuzzy, python-format
-msgid "Answered own question with at least %(num)s up votes"
+msgid "Problemed own exercise with at least %(num)s up votes"
 msgstr ""
 "Eigene Frage beantwortet und mindestens 3 positive Bewertungen dafür erhalten"
 
@@ -3555,37 +3555,37 @@ msgstr "Eigenständig lernender"
 
 #: models/badges.py:304
 #, fuzzy
-msgid "Nice Answer"
+msgid "Nice Problem"
 msgstr "Nette Antwort"
 
 #: models/badges.py:309 models/badges.py:321 models/badges.py:333
 #, fuzzy, python-format
-msgid "Answer voted up %(num)s times"
+msgid "Problem voted up %(num)s times"
 msgstr "Benutzer hat positive Bewertungen abgegeben"
 
 #: models/badges.py:316
-msgid "Good Answer"
+msgid "Good Problem"
 msgstr "Gute Antwort"
 
 #: models/badges.py:328
-msgid "Great Answer"
+msgid "Great Problem"
 msgstr "Sehr gute Antwort"
 
 #: models/badges.py:340
-msgid "Nice Question"
+msgid "Nice Exercise"
 msgstr "Fragen"
 
 #: models/badges.py:345 models/badges.py:357 models/badges.py:369
 #, fuzzy, python-format
-msgid "Question voted up %(num)s times"
+msgid "Exercise voted up %(num)s times"
 msgstr "Benutzer hat positive Bewertungen abgegeben"
 
 #: models/badges.py:352
-msgid "Good Question"
+msgid "Good Exercise"
 msgstr "Gute Frage"
 
 #: models/badges.py:364
-msgid "Great Question"
+msgid "Great Exercise"
 msgstr "Sehr gute Frage"
 
 #: models/badges.py:376
@@ -3593,30 +3593,30 @@ msgid "Student"
 msgstr "Schüler"
 
 #: models/badges.py:381
-msgid "Asked first question with at least one up vote"
+msgid "Asked first exercise with at least one up vote"
 msgstr "Hat erste Frage mit mindestens einer positiven Bewertung gestellt"
 
 #: models/badges.py:414
-msgid "Popular Question"
+msgid "Popular Exercise"
 msgstr "populäre Frage"
 
 #: models/badges.py:418 models/badges.py:429 models/badges.py:441
 #, fuzzy, python-format
-msgid "Asked a question with %(views)s views"
+msgid "Asked a exercise with %(views)s views"
 msgstr "Hat Frage mit mindestens 1.000 Einblendungen gestellt"
 
 #: models/badges.py:425
-msgid "Notable Question"
+msgid "Notable Exercise"
 msgstr "Bemerkenswerte Frage"
 
 #: models/badges.py:436
 #, fuzzy
-msgid "Famous Question"
+msgid "Famous Exercise"
 msgstr "Berühmte Frage"
 
 #: models/badges.py:450
 #, fuzzy
-msgid "Asked a question and accepted an answer"
+msgid "Asked a exercise and accepted an problem"
 msgstr "Fragen, die ich beantwortet habe"
 
 #: models/badges.py:453
@@ -3629,7 +3629,7 @@ msgstr "Hat Ahnung"
 
 #: models/badges.py:499
 #, fuzzy, python-format
-msgid "First answer was accepted with %(num)s or more votes"
+msgid "First problem was accepted with %(num)s or more votes"
 msgstr ""
 "Erste Antwort verfaßt, diese wurde akzeptiert und mindestens 10 Mal positiv "
 "bewertet"
@@ -3640,7 +3640,7 @@ msgstr "Guru"
 
 #: models/badges.py:510
 #, fuzzy, python-format
-msgid "Answer accepted with %(num)s or more votes"
+msgid "Problem accepted with %(num)s or more votes"
 msgstr ""
 "Erste Antwort verfaßt, diese wurde akzeptiert und mindestens 10 Mal positiv "
 "bewertet"
@@ -3648,7 +3648,7 @@ msgstr ""
 #: models/badges.py:518
 #, fuzzy, python-format
 msgid ""
-"Answered a question more than %(days)s days later with at least %(votes)s "
+"Problemed a exercise more than %(days)s days later with at least %(votes)s "
 "votes"
 msgstr ""
 "Hat eine Frage mehr als 2 Monate später beantwortet und mindestens 5 "
@@ -3718,15 +3718,15 @@ msgstr "Benutzerprofil komplettiert"
 
 #: models/badges.py:663
 #, fuzzy, python-format
-msgid "Question favorited by %(num)s users"
+msgid "Exercise favorited by %(num)s users"
 msgstr "Frage von 25 Benutzern in Favoritenliste aufgenommen"
 
 #: models/badges.py:689
-msgid "Stellar Question"
+msgid "Stellar Exercise"
 msgstr "Exzellente Frage"
 
 #: models/badges.py:698
-msgid "Favorite Question"
+msgid "Favorite Exercise"
 msgstr "Favoritenfrage"
 
 #: models/badges.py:710
@@ -3754,7 +3754,7 @@ msgstr "Tag-Schöpfer"
 
 #: models/badges.py:756
 #, fuzzy, python-format
-msgid "Created a tag used by %(num)s questions"
+msgid "Created a tag used by %(num)s exercises"
 msgstr "Tag formuliert, das in 50 Fragen verwendet wurde"
 
 #: models/badges.py:774
@@ -3767,25 +3767,25 @@ msgstr "Sehr aktiv in einem bestimmten Tag"
 
 #: models/post.py:1071
 #, fuzzy
-msgid "Sorry, this question has been deleted and is no longer accessible"
+msgid "Sorry, this exercise has been deleted and is no longer accessible"
 msgstr "Die Frage wurde als Favorit ausgewählt"
 
 #: models/post.py:1087
 msgid ""
-"Sorry, the answer you are looking for is no longer available, because the "
-"parent question has been removed"
+"Sorry, the problem you are looking for is no longer available, because the "
+"parent exercise has been removed"
 msgstr ""
 "La resposat que cerca ja no es vàlida, ja què s'ha tret la pregunta original "
 
 #: models/post.py:1094
 #, fuzzy
-msgid "Sorry, this answer has been removed and is no longer accessible"
+msgid "Sorry, this problem has been removed and is no longer accessible"
 msgstr "Die Frage wurde als Favorit ausgewählt"
 
 #: models/post.py:1110
 msgid ""
 "Sorry, the comment you are looking for is no longer accessible, because the "
-"parent question has been removed"
+"parent exercise has been removed"
 msgstr ""
 "El comentari que cerca ja no es pot accedir ja què s'ha tret la pregunta "
 "original"
@@ -3793,17 +3793,17 @@ msgstr ""
 #: models/post.py:1117
 msgid ""
 "Sorry, the comment you are looking for is no longer accessible, because the "
-"parent answer has been removed"
+"parent problem has been removed"
 msgstr ""
 "El comentari que cerca ja no es pot accedir ja què s'ha tret la resposta "
 "original"
 
-#: models/question.py:54
+#: models/exercise.py:54
 #, python-format
 msgid "\" and \"%s\""
 msgstr "\" i \"%s\""
 
-#: models/question.py:57
+#: models/exercise.py:57
 #, fuzzy
 msgid "\" and more"
 msgstr "Mehr Informationen"
@@ -3821,20 +3821,20 @@ msgstr "<em>Canviar pel moderador. Raó:</em> %(reason)s"
 #: models/repute.py:154
 #, python-format
 msgid ""
-"%(points)s points were added for %(username)s's contribution to question "
-"%(question_title)s"
+"%(points)s points were added for %(username)s's contribution to exercise "
+"%(exercise_title)s"
 msgstr ""
 "S'han afegit %(points)s punts a %(username)s per la seva contribució a la "
-"pregunta %(question_title)s"
+"pregunta %(exercise_title)s"
 
 #: models/repute.py:159
 #, python-format
 msgid ""
 "%(points)s points were subtracted for %(username)s's contribution to "
-"question %(question_title)s"
+"exercise %(exercise_title)s"
 msgstr ""
 "S'han tret %(points)s punts a %(username)s per la seva contribució a la "
-"pregunta %(question_title)s"
+"pregunta %(exercise_title)s"
 
 #: models/tag.py:106
 msgid "interesting"
@@ -3849,15 +3849,15 @@ msgid "Entire forum"
 msgstr "Gesamtes Forum"
 
 #: models/user.py:267
-msgid "Questions that I asked"
+msgid "Exercises that I asked"
 msgstr "Fragen, die ich gestellt habe"
 
 #: models/user.py:268
-msgid "Questions that I answered"
+msgid "Exercises that I problemed"
 msgstr "Fragen, die ich beantwortet habe"
 
 #: models/user.py:269
-msgid "Individually selected questions"
+msgid "Individually selected exercises"
 msgstr "Individuell ausgewählte Fragen"
 
 #: models/user.py:270
@@ -3925,7 +3925,7 @@ msgid ""
 "<span class='strong big'>Please enter your email address in the box below.</"
 "span>\n"
 "Valid email address is required on this Q&amp;A forum. If you like, \n"
-"you can <strong>receive updates</strong> on interesting questions or entire\n"
+"you can <strong>receive updates</strong> on interesting exercises or entire\n"
 "forum via email. Also, your email is used to create a unique \n"
 "<a href='%%(gravatar_faq_url)s'><strong>gravatar</strong></a> image for "
 "your\n"
@@ -3944,11 +3944,11 @@ msgid "Save Email"
 msgstr "E-Mail-Adresse speichern"
 
 #: skins/common/templates/authopenid/changeemail.html:51
-#: skins/default/templates/answer_edit.html:25
+#: skins/default/templates/problem_edit.html:25
 #: skins/default/templates/close.html:16
 #: skins/default/templates/feedback.html:64
-#: skins/default/templates/question_edit.html:36
-#: skins/default/templates/question_retag.html:22
+#: skins/default/templates/exercise_edit.html:36
+#: skins/default/templates/exercise_retag.html:22
 #: skins/default/templates/reopen.html:27
 #: skins/default/templates/subscribe_for_tags.html:16
 #: skins/default/templates/user_profile/user_edit.html:102
@@ -3998,7 +3998,7 @@ msgid ""
 "\n"
 "<span class='big strong'>Your email address is now set to %%(email)s.</"
 "span> \n"
-"Updates on the questions that you like most will be sent to this address. \n"
+"Updates on the exercises that you like most will be sent to this address. \n"
 "Email notifications are sent once a day or less frequently - only when "
 "there \n"
 "are any news."
@@ -4012,9 +4012,9 @@ msgstr "E-Mail-Adresse bestätigt"
 msgid ""
 "<span class=\\\"big strong\\\">Thank you for verifying your email!</span> "
 "Now \n"
-"you can <strong>ask</strong> and <strong>answer</strong> questions. Also "
+"you can <strong>ask</strong> and <strong>problem</strong> exercises. Also "
 "if \n"
-"you find a very interesting question you can <strong>subscribe for the \n"
+"you find a very interesting exercise you can <strong>subscribe for the \n"
 "updates</strong> - then will be notified about changes <strong>once a day</"
 "strong>\n"
 "or less frequently."
@@ -4136,7 +4136,7 @@ msgstr "Benutzerlogin"
 #, fuzzy, python-format
 msgid ""
 "\n"
-"        Your answer to %(title)s %(summary)s will be posted once you log in\n"
+"        Your problem to %(title)s %(summary)s will be posted once you log in\n"
 "        "
 msgstr ""
 "\n"
@@ -4147,7 +4147,7 @@ msgstr ""
 #: skins/common/templates/authopenid/signin.html:21
 #, fuzzy, python-format
 msgid ""
-"Your question \n"
+"Your exercise \n"
 "        %(title)s %(summary)s will be posted once you log in\n"
 "        "
 msgstr ""
@@ -4262,8 +4262,8 @@ msgid "delete, if you like"
 msgstr "esborra, si voleu"
 
 #: skins/common/templates/authopenid/signin.html:177
-#: skins/common/templates/question/answer_controls.html:13
-#: skins/common/templates/question/question_controls.html:4
+#: skins/common/templates/exercise/problem_controls.html:13
+#: skins/common/templates/exercise/exercise_controls.html:4
 msgid "delete"
 msgstr "löschen"
 
@@ -4404,97 +4404,97 @@ msgstr ""
 msgid "Delete These"
 msgstr "Antwort gelöscht"
 
-#: skins/common/templates/question/answer_controls.html:2
+#: skins/common/templates/exercise/problem_controls.html:2
 #, fuzzy
-msgid "swap with question"
+msgid "swap with exercise"
 msgstr "Frage beantworten"
 
-#: skins/common/templates/question/answer_controls.html:7
+#: skins/common/templates/exercise/problem_controls.html:7
 msgid "permanent link"
 msgstr "Link"
 
-#: skins/common/templates/question/answer_controls.html:8
-#: skins/default/templates/widgets/answer_edit_tips.html:45
-#: skins/default/templates/widgets/question_edit_tips.html:40
+#: skins/common/templates/exercise/problem_controls.html:8
+#: skins/default/templates/widgets/problem_edit_tips.html:45
+#: skins/default/templates/widgets/exercise_edit_tips.html:40
 msgid "link"
 msgstr "Link"
 
-#: skins/common/templates/question/answer_controls.html:13
-#: skins/common/templates/question/question_controls.html:4
+#: skins/common/templates/exercise/problem_controls.html:13
+#: skins/common/templates/exercise/exercise_controls.html:4
 msgid "undelete"
 msgstr "Wiederherstellen"
 
-#: skins/common/templates/question/answer_controls.html:19
+#: skins/common/templates/exercise/problem_controls.html:19
 #, fuzzy
 msgid "remove offensive flag"
 msgstr "als beleidigend/illegal gemeldet"
 
-#: skins/common/templates/question/answer_controls.html:21
-#: skins/common/templates/question/question_controls.html:16
+#: skins/common/templates/exercise/problem_controls.html:21
+#: skins/common/templates/exercise/exercise_controls.html:16
 #, fuzzy
 msgid "remove flag"
 msgstr "Alle Tags zeigen"
 
-#: skins/common/templates/question/answer_controls.html:26
-#: skins/common/templates/question/answer_controls.html:35
-#: skins/common/templates/question/question_controls.html:14
-#: skins/common/templates/question/question_controls.html:20
-#: skins/common/templates/question/question_controls.html:27
+#: skins/common/templates/exercise/problem_controls.html:26
+#: skins/common/templates/exercise/problem_controls.html:35
+#: skins/common/templates/exercise/exercise_controls.html:14
+#: skins/common/templates/exercise/exercise_controls.html:20
+#: skins/common/templates/exercise/exercise_controls.html:27
 msgid ""
 "report as offensive (i.e containing spam, advertising, malicious text, etc.)"
 msgstr ""
 "Beitrag melden (z.B. Spam, unerwünschte Werbung, Beleidigungen, illegale "
 "Inhalte usw.)"
 
-#: skins/common/templates/question/answer_controls.html:28
-#: skins/common/templates/question/answer_controls.html:37
-#: skins/common/templates/question/question_controls.html:22
-#: skins/common/templates/question/question_controls.html:29
+#: skins/common/templates/exercise/problem_controls.html:28
+#: skins/common/templates/exercise/problem_controls.html:37
+#: skins/common/templates/exercise/exercise_controls.html:22
+#: skins/common/templates/exercise/exercise_controls.html:29
 msgid "flag offensive"
 msgstr "Als beleidigend melden"
 
-#: skins/common/templates/question/answer_controls.html:41
-#: skins/common/templates/question/question_controls.html:36
+#: skins/common/templates/exercise/problem_controls.html:41
+#: skins/common/templates/exercise/exercise_controls.html:36
 #: skins/default/templates/macros.html:311
 #: skins/default/templates/revisions.html:38
 #: skins/default/templates/revisions.html:41
 msgid "edit"
 msgstr "bearbeiten"
 
-#: skins/common/templates/question/answer_vote_buttons.html:6
+#: skins/common/templates/exercise/problem_vote_buttons.html:6
 #: skins/default/templates/user_profile/user_stats.html:24
-msgid "this answer has been selected as correct"
+msgid "this problem has been selected as correct"
 msgstr "Diese Antwort ist als korrekt ausgewählt worden"
 
-#: skins/common/templates/question/answer_vote_buttons.html:8
+#: skins/common/templates/exercise/problem_vote_buttons.html:8
 #, fuzzy
-msgid "mark this answer as correct (click again to undo)"
+msgid "mark this problem as correct (click again to undo)"
 msgstr "Zur Favoritenliste hinzufügen (zum Abbrechen erneut klicken)"
 
-#: skins/common/templates/question/closed_question_info.html:2
+#: skins/common/templates/exercise/closed_exercise_info.html:2
 #, fuzzy, python-format
 msgid ""
-"The question has been closed for the following reason <b>\"%(close_reason)s"
+"The exercise has been closed for the following reason <b>\"%(close_reason)s"
 "\"</b> <i>by"
 msgstr ""
 "Die Frage wurde aus den folgenden Gründen: \"%(close_reason)s\" geschlossen "
 "von"
 
-#: skins/common/templates/question/closed_question_info.html:4
+#: skins/common/templates/exercise/closed_exercise_info.html:4
 #, python-format
 msgid "close date %(closed_at)s"
 msgstr "Schließungszeitpunkt close date %(closed_at)s"
 
-#: skins/common/templates/question/question_controls.html:6
+#: skins/common/templates/exercise/exercise_controls.html:6
 msgid "reopen"
 msgstr "wieder öffnen"
 
-#: skins/common/templates/question/question_controls.html:8
+#: skins/common/templates/exercise/exercise_controls.html:8
 #: skins/default/templates/user_profile/user_inbox.html:67
 msgid "close"
 msgstr "schließen"
 
-#: skins/common/templates/question/question_controls.html:35
+#: skins/common/templates/exercise/exercise_controls.html:35
 #, fuzzy
 msgid "retag"
 msgstr "Tags verändert"
@@ -4519,13 +4519,13 @@ msgid "Toggle the real time Markdown editor preview"
 msgstr "Die Markdown-Echtzeit-Vorschau ein- oder ausblenden"
 
 #: skins/common/templates/widgets/edit_post.html:60
-#: skins/default/templates/answer_edit.html:61
-#: skins/default/templates/answer_edit.html:64
+#: skins/default/templates/problem_edit.html:61
+#: skins/default/templates/problem_edit.html:64
 #: skins/default/templates/ask.html:49 skins/default/templates/ask.html:52
-#: skins/default/templates/question_edit.html:73
-#: skins/default/templates/question_edit.html:76
-#: skins/default/templates/question/javascript.html:85
-#: skins/default/templates/question/javascript.html:88
+#: skins/default/templates/exercise_edit.html:73
+#: skins/default/templates/exercise_edit.html:76
+#: skins/default/templates/exercise/javascript.html:85
+#: skins/default/templates/exercise/javascript.html:88
 msgid "hide preview"
 msgstr "Vorschau ausblenden"
 
@@ -4569,7 +4569,7 @@ msgid "This might have happened for the following reasons:"
 msgstr "Dies könnte einen der folgenden Gründe haben:"
 
 #: skins/default/templates/404.jinja.html:17
-msgid "this question or answer has been deleted;"
+msgid "this exercise or problem has been deleted;"
 msgstr "Diese Frage oder Antwort wurde gelöscht;"
 
 #: skins/default/templates/404.jinja.html:18
@@ -4604,7 +4604,7 @@ msgstr "Zurück zur vorigen Seite"
 
 #: skins/default/templates/404.jinja.html:31
 #: skins/default/templates/widgets/scope_nav.html:6
-msgid "see all questions"
+msgid "see all exercises"
 msgstr "Alle Fragen zeigen"
 
 #: skins/default/templates/404.jinja.html:32
@@ -4627,43 +4627,43 @@ msgid "please report the error to the site administrators if you wish"
 msgstr "Bitte melden Sie uns den Fehler, falls Sie möchten."
 
 #: skins/default/templates/500.jinja.html:12
-msgid "see latest questions"
+msgid "see latest exercises"
 msgstr "Zeige neueste Fragen"
 
 #: skins/default/templates/500.jinja.html:13
 msgid "see tags"
 msgstr "Zeige Tags"
 
-#: skins/default/templates/answer_edit.html:4
-#: skins/default/templates/answer_edit.html:10
-msgid "Edit answer"
+#: skins/default/templates/problem_edit.html:4
+#: skins/default/templates/problem_edit.html:10
+msgid "Edit problem"
 msgstr "Antwort bearbeiten"
 
-#: skins/default/templates/answer_edit.html:10
-#: skins/default/templates/question_edit.html:9
-#: skins/default/templates/question_retag.html:5
+#: skins/default/templates/problem_edit.html:10
+#: skins/default/templates/exercise_edit.html:9
+#: skins/default/templates/exercise_retag.html:5
 #: skins/default/templates/revisions.html:7
 msgid "back"
 msgstr "Zurück"
 
-#: skins/default/templates/answer_edit.html:14
+#: skins/default/templates/problem_edit.html:14
 msgid "revision"
 msgstr "Version"
 
-#: skins/default/templates/answer_edit.html:17
-#: skins/default/templates/question_edit.html:16
+#: skins/default/templates/problem_edit.html:17
+#: skins/default/templates/exercise_edit.html:16
 msgid "select revision"
 msgstr "Version auswählen"
 
-#: skins/default/templates/answer_edit.html:24
-#: skins/default/templates/question_edit.html:35
+#: skins/default/templates/problem_edit.html:24
+#: skins/default/templates/exercise_edit.html:35
 msgid "Save edit"
 msgstr "Überarbeitung speichern"
 
-#: skins/default/templates/answer_edit.html:64
+#: skins/default/templates/problem_edit.html:64
 #: skins/default/templates/ask.html:52
-#: skins/default/templates/question_edit.html:76
-#: skins/default/templates/question/javascript.html:88
+#: skins/default/templates/exercise_edit.html:76
+#: skins/default/templates/exercise/javascript.html:88
 msgid "show preview"
 msgstr "Vorschau einblenden"
 
@@ -4671,7 +4671,7 @@ msgstr "Vorschau einblenden"
 #: skins/default/templates/widgets/ask_button.html:5
 #: skins/default/templates/widgets/ask_form.html:43
 #, fuzzy
-msgid "Ask Your Question"
+msgid "Add Your Exercise"
 msgstr "Stellen Sie Ihre Frage"
 
 #: skins/default/templates/badge.html:5 skins/default/templates/badge.html:9
@@ -4708,7 +4708,7 @@ msgid "Badges"
 msgstr "Auszeichnungen"
 
 #: skins/default/templates/badges.html:7
-msgid "Community gives you awards for your questions, answers and votes."
+msgid "Community gives you awards for your exercises, problems and votes."
 msgstr ""
 "Rege Teilnahme mit qualitativ hochwertigen Fragen und Antworten führt zum "
 "Erhalt von Auszeichnungen."
@@ -4766,11 +4766,11 @@ msgstr ""
 "Ehrenauszeichnung verliehen."
 
 #: skins/default/templates/close.html:3 skins/default/templates/close.html:5
-msgid "Close question"
+msgid "Close exercise"
 msgstr "Frage schließen"
 
 #: skins/default/templates/close.html:6
-msgid "Close the question"
+msgid "Close the exercise"
 msgstr "Die Frage schließen"
 
 #: skins/default/templates/close.html:11
@@ -4783,22 +4783,22 @@ msgstr "OK zu schließen"
 
 #: skins/default/templates/faq_static.html:3
 #: skins/default/templates/faq_static.html:5
-#: skins/default/templates/widgets/answer_edit_tips.html:20
-#: skins/default/templates/widgets/question_edit_tips.html:16 views/meta.py:61
+#: skins/default/templates/widgets/problem_edit_tips.html:20
+#: skins/default/templates/widgets/exercise_edit_tips.html:16 views/meta.py:61
 msgid "FAQ"
 msgstr ""
 
 #: skins/default/templates/faq_static.html:5
-msgid "Frequently Asked Questions "
+msgid "Frequently Asked Exercises "
 msgstr "Häufig gestellte Fragen"
 
 #: skins/default/templates/faq_static.html:6
-msgid "What kinds of questions can I ask here?"
+msgid "What kinds of exercises can I ask here?"
 msgstr "Was für Fragen kann ich hier stellen?"
 
 #: skins/default/templates/faq_static.html:7
 msgid ""
-"Most importanly - questions should be <strong>relevant</strong> to this "
+"Most importanly - exercises should be <strong>relevant</strong> to this "
 "community."
 msgstr ""
 "Das allerwichtigste - Fragen sollten für dieses Forum <strong>relevant</"
@@ -4807,34 +4807,34 @@ msgstr ""
 #: skins/default/templates/faq_static.html:8
 #, fuzzy
 msgid ""
-"Before you ask - please make sure to search for a similar question. You can "
-"search questions by their title or tags."
+"Before you ask - please make sure to search for a similar exercise. You can "
+"search exercises by their title or tags."
 msgstr ""
 "Bevor Sie fragen: Bitte benutzen Sie die Suchfunktion, um sicherzustellen, "
 "daß die Frage nicht bereits gestellt wurde."
 
 #: skins/default/templates/faq_static.html:10
 #, fuzzy
-msgid "What kinds of questions should be avoided?"
+msgid "What kinds of exercises should be avoided?"
 msgstr "Was für Fragen sollten nicht gestellt werden?"
 
 #: skins/default/templates/faq_static.html:11
 msgid ""
-"Please avoid asking questions that are not relevant to this community, too "
+"Please avoid asking exercises that are not relevant to this community, too "
 "subjective and argumentative."
 msgstr ""
 "Bitte verzichten Sie auf Fragen, die für dieses Forum nicht relevant sind, "
 "oder die zu subjektiv sind und zu Diskussionen verleiten."
 
 #: skins/default/templates/faq_static.html:13
-msgid "What should I avoid in my answers?"
+msgid "What should I avoid in my problems?"
 msgstr "Was sollte ich in meinen Antworten vermeiden?"
 
 #: skins/default/templates/faq_static.html:14
 msgid ""
-"is a <strong>question and answer</strong> site - <strong>it is not a "
-"discussion group</strong>. Please avoid holding debates in your answers as "
-"they tend to dilute the essense of questions and answers. For the brief "
+"is a <strong>exercise and problem</strong> site - <strong>it is not a "
+"discussion group</strong>. Please avoid holding debates in your problems as "
+"they tend to dilute the essense of exercises and problems. For the brief "
 "discussions please use commenting facility."
 msgstr ""
 
@@ -4843,7 +4843,7 @@ msgid "Who moderates this community?"
 msgstr "Wer moderiert diese Forum?"
 
 #: skins/default/templates/faq_static.html:16
-msgid "The short answer is: <strong>you</strong>."
+msgid "The short problem is: <strong>you</strong>."
 msgstr "Die Antwort ist: <strong>Sie!</strong>"
 
 #: skins/default/templates/faq_static.html:17
@@ -4866,7 +4866,7 @@ msgstr "Wie funktioniert das Punktesystem?"
 
 #: skins/default/templates/faq_static.html:21
 msgid ""
-"When a question or answer is upvoted, the user who posted them will gain "
+"When a exercise or problem is upvoted, the user who posted them will gain "
 "some points, which are called \\\"karma points\\\". These points serve as a "
 "rough measure of the community trust to him/her. Various moderation tasks "
 "are gradually assigned to the users based on those points."
@@ -4875,13 +4875,13 @@ msgstr ""
 #: skins/default/templates/faq_static.html:22
 #, fuzzy, python-format
 msgid ""
-"For example, if you ask an interesting question or give a helpful answer, "
-"your input will be upvoted. On the other hand if the answer is misleading - "
+"For example, if you ask an interesting exercise or give a helpful problem, "
+"your input will be upvoted. On the other hand if the problem is misleading - "
 "it will be downvoted. Each vote in favor will generate <strong>"
 "%(REP_GAIN_FOR_RECEIVING_UPVOTE)s</strong> points, each vote against will "
 "subtract <strong>%(REP_LOSS_FOR_RECEIVING_DOWNVOTE)s</strong> points. There "
 "is a limit of <strong>%(MAX_REP_GAIN_PER_USER_PER_DAY)s</strong> points that "
-"can be accumulated for a question or answer per day. The table below "
+"can be accumulated for a exercise or problem per day. The table below "
 "explains reputation point requirements for each type of moderation task."
 msgstr ""
 "Wenn Sie zum Beispiel eine interessante Frage stellen oder eine hilfreiche "
@@ -4909,25 +4909,25 @@ msgstr "Negativ bewerten"
 
 #: skins/default/templates/faq_static.html:43
 #, fuzzy
-msgid " accept own answer to own questions"
+msgid " accept own problem to own exercises"
 msgstr "Erste Antwort auf eine eigene Frage akzeptiert"
 
 #: skins/default/templates/faq_static.html:47
-msgid "open and close own questions"
+msgid "open and close own exercises"
 msgstr "Eigene Fragen öffnen und schließen"
 
 #: skins/default/templates/faq_static.html:51
 #, fuzzy
-msgid "retag other's questions"
+msgid "retag other's exercises"
 msgstr "Vergebene Tags bearbeiten"
 
 #: skins/default/templates/faq_static.html:56
-msgid "edit community wiki questions"
+msgid "edit community wiki exercises"
 msgstr "Als \"Community Wiki\" markierte Fragen beantworten"
 
 #: skins/default/templates/faq_static.html:61
 #, fuzzy
-msgid "edit any answer"
+msgid "edit any problem"
 msgstr "Beliebige Antworten bearbeiten"
 
 #: skins/default/templates/faq_static.html:65
@@ -4975,7 +4975,7 @@ msgid "\"Login now!\""
 msgstr "Jetzt einloggen"
 
 #: skins/default/templates/faq_static.html:75
-msgid "Why other people can edit my questions/answers?"
+msgid "Why other people can edit my exercises/problems?"
 msgstr "Warum können andere Benutzer meine Fragen und Antworten bearbeiten?"
 
 #: skins/default/templates/faq_static.html:76
@@ -4984,7 +4984,7 @@ msgstr "Das Ziel dieser Seite ist:"
 
 #: skins/default/templates/faq_static.html:76
 msgid ""
-"So questions and answers can be edited like wiki pages by experienced users "
+"So exercises and problems can be edited like wiki pages by experienced users "
 "of this site and this improves the overall quality of the knowledge base "
 "content."
 msgstr ""
@@ -4998,16 +4998,16 @@ msgstr ""
 "richtige für Sie."
 
 #: skins/default/templates/faq_static.html:79
-msgid "Still have questions?"
+msgid "Still have exercises?"
 msgstr "Sie haben noch Fragen?"
 
 #: skins/default/templates/faq_static.html:80
 #, fuzzy, python-format
 msgid ""
-"Please <a href='%%(ask_question_url)s'>ask</a> your question, help make our "
+"Please <a href='%%(ask_exercise_url)s'>ask</a> your exercise, help make our "
 "community better!"
 msgstr ""
-"Bitte <a href='%(ask_question_url)s'>stellen</a> Sie Ihre Frage und helfen "
+"Bitte <a href='%(ask_exercise_url)s'>stellen</a> Sie Ihre Frage und helfen "
 "Sie uns, das Forum stetig zu verbessern!"
 
 #: skins/default/templates/feedback.html:3
@@ -5094,26 +5094,26 @@ msgstr ""
 
 #: skins/default/templates/help.html:16
 msgid ""
-"This site is for asking and answering questions, not for open-ended "
+"This site is for asking and probleming exercises, not for open-ended "
 "discussions."
 msgstr ""
 
 #: skins/default/templates/help.html:17
 msgid ""
-"We encourage everyone to use “question” space for asking and “answer” for "
-"answering."
+"We encourage everyone to use “exercise” space for asking and “problem” for "
+"probleming."
 msgstr ""
 
 #: skins/default/templates/help.html:20
 msgid ""
-"Despite that, each question and answer can be commented – \n"
+"Despite that, each exercise and problem can be commented – \n"
 "    the comments are good for the limited discussions."
 msgstr ""
 
 #: skins/default/templates/help.html:24
 #, python-format
 msgid ""
-"Voting in %(app_name)s helps to select best answers and thank most helpful "
+"Voting in %(app_name)s helps to select best problems and thank most helpful "
 "users."
 msgstr ""
 
@@ -5197,7 +5197,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s answered a question \n"
+"<p>%(update_author_name)s problemed a exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -5208,7 +5208,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s posted a new question \n"
+"<p>%(update_author_name)s posted a new exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -5219,7 +5219,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s updated an answer to the question\n"
+"<p>%(update_author_name)s updated an problem to the exercise\n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -5230,7 +5230,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s updated a question \n"
+"<p>%(update_author_name)s updated a exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -5272,7 +5272,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"You can post an answer or a comment by replying to email notifications. To "
+"You can post an problem or a comment by replying to email notifications. To "
 "do that\n"
 "you need %(reply_by_email_karma_threshold)s karma, you have "
 "%(receiving_user_karma)s karma. \n"
@@ -5280,7 +5280,7 @@ msgstr ""
 
 #: skins/default/templates/macros.html:5
 #, fuzzy, python-format
-msgid "Share this question on %(site)s"
+msgid "Share this exercise on %(site)s"
 msgstr "Diese Frage wieder eröffnen"
 
 #: skins/default/templates/macros.html:16
@@ -5328,7 +5328,7 @@ msgid "asked"
 msgstr "gefragt"
 
 #: skins/default/templates/macros.html:90
-msgid "answered"
+msgid "problemed"
 msgstr "geantwortet"
 
 #: skins/default/templates/macros.html:92
@@ -5341,7 +5341,7 @@ msgstr "aktualisiert"
 
 #: skins/default/templates/macros.html:202
 #, python-format
-msgid "see questions tagged '%(tag)s'"
+msgid "see exercises tagged '%(tag)s'"
 msgstr "Fragen mit Tag '%(tag)s' anzeigen"
 
 #: skins/default/templates/macros.html:304
@@ -5419,36 +5419,36 @@ msgid "%(seen)s flagged posts"
 msgstr "Erster gemeldeter Beitrag"
 
 #: skins/default/templates/main_page.html:11
-msgid "Questions"
+msgid "Exercises"
 msgstr "Fragen"
 
-#: skins/default/templates/question.html:110
+#: skins/default/templates/exercise.html:110
 #, fuzzy
 msgid "post a comment / <strong>some</strong> more"
 msgstr "<strong>1</strong> mehr"
 
-#: skins/default/templates/question.html:113
+#: skins/default/templates/exercise.html:113
 #, fuzzy
 msgid "see <strong>some</strong> more"
 msgstr "<strong>1</strong> mehr"
 
-#: skins/default/templates/question.html:117
-#: skins/default/templates/question/javascript.html:20
+#: skins/default/templates/exercise.html:117
+#: skins/default/templates/exercise/javascript.html:20
 #, fuzzy
 msgid "post a comment"
 msgstr "Kommentar hinzufügen"
 
-#: skins/default/templates/question.html:135
-#: skins/default/templates/question/content.html:40
-msgid "Answer Your Own Question"
+#: skins/default/templates/exercise.html:135
+#: skins/default/templates/exercise/content.html:40
+msgid "Add a Problem to Your Own Exercise"
 msgstr "Eigene Frage beantworten"
 
-#: skins/default/templates/question.html:140
+#: skins/default/templates/exercise.html:140
 #, fuzzy
-msgid "Post Your Answer"
+msgid "Post Your Problem"
 msgstr "Ihre Antwort"
 
-#: skins/default/templates/question.html:146
+#: skins/default/templates/exercise.html:146
 #: skins/default/templates/widgets/ask_form.html:41
 #, fuzzy
 msgid "Login/Signup to Post"
@@ -5456,43 +5456,43 @@ msgstr ""
 "Bitte loggen Sie sich ein oder registrieren Sie sich, um die Antwort "
 "endgültig zu speichern."
 
-#: skins/default/templates/question_edit.html:4
-#: skins/default/templates/question_edit.html:9
-msgid "Edit question"
+#: skins/default/templates/exercise_edit.html:4
+#: skins/default/templates/exercise_edit.html:9
+msgid "Edit exercise"
 msgstr "Frage bearbeiten"
 
-#: skins/default/templates/question_retag.html:3
-#: skins/default/templates/question_retag.html:5
+#: skins/default/templates/exercise_retag.html:3
+#: skins/default/templates/exercise_retag.html:5
 #, fuzzy
-msgid "Retag question"
+msgid "Retag exercise"
 msgstr "Verwandte / ähnliche Fragen"
 
-#: skins/default/templates/question_retag.html:21
+#: skins/default/templates/exercise_retag.html:21
 #, fuzzy
 msgid "Retag"
 msgstr "Tags"
 
-#: skins/default/templates/question_retag.html:28
+#: skins/default/templates/exercise_retag.html:28
 msgid "Why use and modify tags?"
 msgstr "Warum Tags verwenden und bearbeiten?"
 
-#: skins/default/templates/question_retag.html:30
+#: skins/default/templates/exercise_retag.html:30
 msgid "Tags help to keep the content better organized and searchable"
 msgstr ""
 "Les etiquetes ajuden a mantenir el contingut més organitzat i faciliten la "
 "cerca"
 
-#: skins/default/templates/question_retag.html:32
+#: skins/default/templates/exercise_retag.html:32
 msgid "tag editors receive special awards from the community"
 msgstr ""
 "Benutzer, die Tags bearbeiten, bekommen spezielle Auszeichnungen verliehen."
 
-#: skins/default/templates/question_retag.html:59
+#: skins/default/templates/exercise_retag.html:59
 msgid "up to 5 tags, less than 20 characters each"
 msgstr "Bis zu 5 Tags mit jeweils weniger als 20 Buchstaben"
 
 #: skins/default/templates/reopen.html:3 skins/default/templates/reopen.html:5
-msgid "Reopen question"
+msgid "Reopen exercise"
 msgstr "Frage wieder eröffnen"
 
 #: skins/default/templates/reopen.html:6
@@ -5503,7 +5503,7 @@ msgstr "Titel"
 #: skins/default/templates/reopen.html:11
 #, python-format
 msgid ""
-"This question has been closed by \n"
+"This exercise has been closed by \n"
 "    <a href=\"%(closed_by_profile_url)s\">%(closed_by_username)s</a>\n"
 msgstr ""
 "Aquesta pregunta l'ha tancat \n"
@@ -5520,11 +5520,11 @@ msgstr "Quan:"
 
 #: skins/default/templates/reopen.html:22
 #, fuzzy
-msgid "Reopen this question?"
+msgid "Reopen this exercise?"
 msgstr "Diese Frage wieder eröffnen"
 
 #: skins/default/templates/reopen.html:26
-msgid "Reopen this question"
+msgid "Reopen this exercise"
 msgstr "Diese Frage wieder eröffnen"
 
 #: skins/default/templates/reply_by_email_error.html:1
@@ -5645,8 +5645,8 @@ msgstr "Nichts gefunden."
 
 #: skins/default/templates/main_page/headline.html:4 views/readers.py:135
 #, fuzzy, python-format
-msgid "%(q_num)s question"
-msgid_plural "%(q_num)s questions"
+msgid "%(q_num)s exercise"
+msgid_plural "%(q_num)s exercises"
 msgstr[0] "%(q_num)s Frage"
 msgstr[1] "%(q_num)s Fragen"
 
@@ -5701,17 +5701,17 @@ msgstr ""
 "Tags und eine Suchabfrage hinzufügen, um genauere Suchergebnisse zu erzielen"
 
 #: skins/default/templates/main_page/nothing_found.html:4
-msgid "There are no unanswered questions here"
+msgid "There are no exercises without problems here"
 msgstr "Es gibt hier keine unbeantworteten Fragen"
 
 #: skins/default/templates/main_page/nothing_found.html:7
 #, fuzzy
-msgid "No questions here. "
+msgid "No exercises here. "
 msgstr "Keine Favoriten-Fragen."
 
 #: skins/default/templates/main_page/nothing_found.html:8
 #, fuzzy
-msgid "Please follow some questions or follow some users."
+msgid "Please follow some exercises or follow some users."
 msgstr ""
 "Bitte fügen Sie Fragen, die Ihnen besonders gut gefallen, zu Ihrer "
 "Favoritenliste hinzu."
@@ -5734,19 +5734,19 @@ msgid "starting over"
 msgstr "ganz von Vorne beginnen"
 
 #: skins/default/templates/main_page/nothing_found.html:30
-msgid "Please always feel free to ask your question!"
+msgid "Please always feel free to add your exercise!"
 msgstr "Sie können jederzeit gern Ihre eigene Frage stellen!"
 
-#: skins/default/templates/main_page/questions_loop.html:11
+#: skins/default/templates/main_page/exercises_loop.html:11
 msgid "Did not find what you were looking for?"
 msgstr "Sie haben nicht gefunden, wonach Sie gesucht haben?"
 
-#: skins/default/templates/main_page/questions_loop.html:12
-msgid "Please, post your question!"
+#: skins/default/templates/main_page/exercises_loop.html:12
+msgid "Please, post your exercise!"
 msgstr "Bitte stellen Sie Ihre Frage!"
 
 #: skins/default/templates/main_page/tab_bar.html:10
-msgid "subscribe to the questions feed"
+msgid "subscribe to the exercises feed"
 msgstr "Fragen-RSS-Feed abonnieren"
 
 #: skins/default/templates/main_page/tab_bar.html:11
@@ -5784,15 +5784,15 @@ msgid ""
 "please use up to %(tag_count)s tags, less than %(max_chars)s characters each"
 msgstr "Bis zu 5 Tags mit jeweils weniger als 20 Buchstaben"
 
-#: skins/default/templates/question/answer_tab_bar.html:3
+#: skins/default/templates/exercise/problem_tab_bar.html:3
 #, python-format
 msgid ""
 "\n"
-"            %(counter)s Answer\n"
+"            %(counter)s Problem\n"
 "            "
 msgid_plural ""
 "\n"
-"            %(counter)s Answers\n"
+"            %(counter)s Problems\n"
 "        "
 msgstr[0] ""
 "\n"
@@ -5803,188 +5803,188 @@ msgstr[1] ""
 "        %(counter)s Respostes:\n"
 "        "
 
-#: skins/default/templates/question/answer_tab_bar.html:11
+#: skins/default/templates/exercise/problem_tab_bar.html:11
 msgid "Sort by »"
 msgstr "Ordenar per »"
 
-#: skins/default/templates/question/answer_tab_bar.html:14
-msgid "oldest answers will be shown first"
+#: skins/default/templates/exercise/problem_tab_bar.html:14
+msgid "oldest problems will be shown first"
 msgstr "Älteste Antworten werden als Erstes angezeigt"
 
-#: skins/default/templates/question/answer_tab_bar.html:17
-msgid "newest answers will be shown first"
+#: skins/default/templates/exercise/problem_tab_bar.html:17
+msgid "newest problems will be shown first"
 msgstr "Neueste werden zuerst angezeigt"
 
-#: skins/default/templates/question/answer_tab_bar.html:20
-msgid "most voted answers will be shown first"
+#: skins/default/templates/exercise/problem_tab_bar.html:20
+msgid "most voted problems will be shown first"
 msgstr "Höchstbewertete werden zuerst angezeigt"
 
-#: skins/default/templates/question/new_answer_form.html:16
+#: skins/default/templates/exercise/new_problem_form.html:16
 #, fuzzy
-msgid "Login/Signup to Answer"
+msgid "Login/Signup to Problem"
 msgstr ""
 "Bitte loggen Sie sich ein oder registrieren Sie sich, um die Antwort "
 "endgültig zu speichern."
 
-#: skins/default/templates/question/new_answer_form.html:24
-msgid "Your answer"
+#: skins/default/templates/exercise/new_problem_form.html:24
+msgid "Your problem"
 msgstr "Ihre Antwort"
 
-#: skins/default/templates/question/new_answer_form.html:26
-msgid "Be the first one to answer this question!"
+#: skins/default/templates/exercise/new_problem_form.html:26
+msgid "Be the first one to add a problem to this exercise!"
 msgstr "Verfassen Sie die erste Antwort auf diese Frage!"
 
-#: skins/default/templates/question/new_answer_form.html:32
+#: skins/default/templates/exercise/new_problem_form.html:32
 msgid ""
-"<span class='strong big'>Please start posting your answer anonymously</span> "
-"- your answer will be saved within the current session and published after "
+"<span class='strong big'>Please start posting your problem anonymously</span> "
+"- your problem will be saved within the current session and published after "
 "you log in or create a new account. Please try to give a <strong>substantial "
-"answer</strong>, for discussions, <strong>please use comments</strong> and "
+"problem</strong>, for discussions, <strong>please use comments</strong> and "
 "<strong>please do remember to vote</strong> (after you log in)!"
 msgstr ""
 
-#: skins/default/templates/question/new_answer_form.html:36
+#: skins/default/templates/exercise/new_problem_form.html:36
 msgid ""
-"<span class='big strong'>You are welcome to answer your own question</span>, "
-"but please make sure to give an <strong>answer</strong>. Remember that you "
-"can always <strong>revise your original question</strong>. Please "
+"<span class='big strong'>You are welcome to add a problem to your own exercise</span>, "
+"but please make sure to give an <strong>problem</strong>. Remember that you "
+"can always <strong>revise your original exercise</strong>. Please "
 "<strong>use comments for discussions</strong>  and <strong>please don't "
-"forget to vote :)</strong> for the answers that you liked (or perhaps did "
+"forget to vote :)</strong> for the problems that you liked (or perhaps did "
 "not like)!"
 msgstr ""
 
-#: skins/default/templates/question/new_answer_form.html:38
+#: skins/default/templates/exercise/new_problem_form.html:38
 msgid ""
-"<span class='big strong'>Please try to give a substantial answer</span>. If "
-"you wanted to comment on the question or answer, just <strong>use the "
+"<span class='big strong'>Please try to give a substantial problem</span>. If "
+"you wanted to comment on the exercise or problem, just <strong>use the "
 "commenting tool</strong>. Please remember that you can always <strong>revise "
-"your answers</strong> - no need to answer the same question twice. Also, "
+"your problems</strong> - no need to problem the same exercise twice. Also, "
 "please <strong>don't forget to vote</strong> - it really helps to select the "
-"best questions and answers!"
+"best exercises and problems!"
 msgstr ""
 
-#: skins/default/templates/question/sharing_prompt_phrase.html:2
+#: skins/default/templates/exercise/sharing_prompt_phrase.html:2
 #, python-format
 msgid ""
-"Know someone who can answer?  Share a <a href=\"%(question_url)s\">link</a> "
-"to this question via"
+"Know someone who can problem?  Share a <a href=\"%(exercise_url)s\">link</a> "
+"to this exercise via"
 msgstr ""
-"Coneix algun que sap la resposta? Compareix l'<a href=\"%(question_url)s"
+"Coneix algun que sap la resposta? Compareix l'<a href=\"%(exercise_url)s"
 "\">enllaç</a> a aquesta pregunta via"
 
-#: skins/default/templates/question/sharing_prompt_phrase.html:8
+#: skins/default/templates/exercise/sharing_prompt_phrase.html:8
 #, fuzzy
 msgid " or"
 msgstr "oder"
 
-#: skins/default/templates/question/sharing_prompt_phrase.html:10
+#: skins/default/templates/exercise/sharing_prompt_phrase.html:10
 msgid "email"
 msgstr "E-Mail"
 
-#: skins/default/templates/question/sidebar.html:6
+#: skins/default/templates/exercise/sidebar.html:6
 #, fuzzy
-msgid "Question tools"
+msgid "Exercise tools"
 msgstr "Tags"
 
-#: skins/default/templates/question/sidebar.html:9
+#: skins/default/templates/exercise/sidebar.html:9
 #, fuzzy
-msgid "click to unfollow this question"
+msgid "click to unfollow this exercise"
 msgstr "Fragen mit den meisten Antworten"
 
-#: skins/default/templates/question/sidebar.html:10
+#: skins/default/templates/exercise/sidebar.html:10
 #, fuzzy
 msgid "Following"
 msgstr "Alle Fragen"
 
-#: skins/default/templates/question/sidebar.html:11
+#: skins/default/templates/exercise/sidebar.html:11
 #, fuzzy
 msgid "Unfollow"
 msgstr "Alle Fragen"
 
-#: skins/default/templates/question/sidebar.html:15
+#: skins/default/templates/exercise/sidebar.html:15
 #, fuzzy
-msgid "click to follow this question"
+msgid "click to follow this exercise"
 msgstr "Fragen mit den meisten Antworten"
 
-#: skins/default/templates/question/sidebar.html:16
+#: skins/default/templates/exercise/sidebar.html:16
 #, fuzzy
 msgid "Follow"
 msgstr "Alle Fragen"
 
-#: skins/default/templates/question/sidebar.html:23
+#: skins/default/templates/exercise/sidebar.html:23
 #, python-format
 msgid "%(count)s follower"
 msgid_plural "%(count)s followers"
 msgstr[0] "%(count)s seguidor"
 msgstr[1] "%(count)s seguidors"
 
-#: skins/default/templates/question/sidebar.html:29
+#: skins/default/templates/exercise/sidebar.html:29
 #, fuzzy
 msgid "email the updates"
 msgstr "E-Mail-Benachrichtigungen abgestellt"
 
-#: skins/default/templates/question/sidebar.html:32
+#: skins/default/templates/exercise/sidebar.html:32
 msgid ""
 "<strong>Here</strong> (once you log in) you will be able to sign up for the "
-"periodic email updates about this question."
+"periodic email updates about this exercise."
 msgstr ""
 "<strong>Aquí</strong> (un cop connectat) es pot inscriure per rebre "
 "actualitzacions periòdiques sobre aquesta pregunta"
 
-#: skins/default/templates/question/sidebar.html:37
+#: skins/default/templates/exercise/sidebar.html:37
 #, fuzzy
-msgid "subscribe to this question rss feed"
+msgid "subscribe to this exercise rss feed"
 msgstr "Fragen-RSS-Feed abonnieren"
 
-#: skins/default/templates/question/sidebar.html:38
+#: skins/default/templates/exercise/sidebar.html:38
 #, fuzzy
 msgid "subscribe to rss feed"
 msgstr "Fragen-RSS-Feed abonnieren"
 
-#: skins/default/templates/question/sidebar.html:46
+#: skins/default/templates/exercise/sidebar.html:46
 msgid "Stats"
 msgstr "Estadístiques"
 
-#: skins/default/templates/question/sidebar.html:48
+#: skins/default/templates/exercise/sidebar.html:48
 #, fuzzy
 msgid "Asked"
 msgstr "gefragt"
 
-#: skins/default/templates/question/sidebar.html:51
+#: skins/default/templates/exercise/sidebar.html:51
 msgid "Seen"
 msgstr ""
 
-#: skins/default/templates/question/sidebar.html:51
+#: skins/default/templates/exercise/sidebar.html:51
 msgid "times"
 msgstr "mal"
 
-#: skins/default/templates/question/sidebar.html:54
+#: skins/default/templates/exercise/sidebar.html:54
 #, fuzzy
 msgid "Last updated"
 msgstr "Zuletzt aktualisiert"
 
-#: skins/default/templates/question/sidebar.html:62
-msgid "Related questions"
+#: skins/default/templates/exercise/sidebar.html:62
+msgid "Related exercises"
 msgstr "Verwandte / ähnliche Fragen"
 
-#: skins/default/templates/question/subscribe_by_email_prompt.html:5
+#: skins/default/templates/exercise/subscribe_by_email_prompt.html:5
 #, fuzzy
-msgid "Email me when there are any new answers"
+msgid "Email me when there are any new problems"
 msgstr ""
 "<strong>Benachrichtigung bei neuen Antworten</strong> einmal wöchentlich per "
 "E-Mail"
 
-#: skins/default/templates/question/subscribe_by_email_prompt.html:11
+#: skins/default/templates/exercise/subscribe_by_email_prompt.html:11
 msgid "once you sign in you will be able to subscribe for any updates here"
 msgstr ""
 "<span class='strong'>Hier</span> können Sie regelmäßige Benachrichtigungen "
 "für diese Frage abonnieren, sobald Sie sich eingeloggt haben."
 
-#: skins/default/templates/question/subscribe_by_email_prompt.html:12
+#: skins/default/templates/exercise/subscribe_by_email_prompt.html:12
 #, fuzzy
 msgid ""
 "<span class='strong'>Here</span> (once you log in) you will be able to sign "
-"up for the periodic email updates about this question."
+"up for the periodic email updates about this exercise."
 msgstr ""
 "<strong>Aquí</strong> (un cop connectat) es pot inscriure per rebre "
 "actualitzacions periòdiques sobre aquesta pregunta"
@@ -6042,8 +6042,8 @@ msgstr "E-Mail-Abonnementeinstellungen"
 #: skins/default/templates/user_profile/user_email_subscriptions.html:9
 msgid ""
 "<span class='big strong'>Adjust frequency of email updates.</span> Receive "
-"updates on interesting questions by email, <strong><br/>help the community</"
-"strong> by answering questions of your colleagues. If you do not wish to "
+"updates on interesting exercises by email, <strong><br/>help the community</"
+"strong> by probleming exercises of your colleagues. If you do not wish to "
 "receive emails - select 'no email' on all items below.<br/>Updates are only "
 "sent when there is any new activity on selected items."
 msgstr ""
@@ -6058,7 +6058,7 @@ msgstr ""
 #: skins/default/templates/user_profile/user_favorites.html:4
 #: skins/default/templates/user_profile/user_tabs.html:27
 #, fuzzy
-msgid "followed questions"
+msgid "followed exercises"
 msgstr "Alle Fragen"
 
 #: skins/default/templates/user_profile/user_inbox.html:18
@@ -6333,26 +6333,26 @@ msgstr "Übersicht"
 
 #: skins/default/templates/user_profile/user_stats.html:11
 #, fuzzy, python-format
-msgid "<span class=\"count\">%(counter)s</span> Question"
-msgid_plural "<span class=\"count\">%(counter)s</span> Questions"
+msgid "<span class=\"count\">%(counter)s</span> Exercise"
+msgid_plural "<span class=\"count\">%(counter)s</span> Exercises"
 msgstr[0] "<span class=\"count\">1</span> Frage"
 msgstr[1] "<span class=\"count\">%(counter)s</span>  Fragen"
 
 #: skins/default/templates/user_profile/user_stats.html:16
-msgid "Answer"
-msgid_plural "Answers"
+msgid "Problem"
+msgid_plural "Problems"
 msgstr[0] "Resposta"
 msgstr[1] "Respostes"
 
 #: skins/default/templates/user_profile/user_stats.html:24
 #, python-format
-msgid "the answer has been voted for %(answer_score)s times"
-msgstr "Diese Antwort ist %(answer_score)s mal positiv bewertet worden"
+msgid "the problem has been voted for %(problem_score)s times"
+msgstr "Diese Antwort ist %(problem_score)s mal positiv bewertet worden"
 
 #: skins/default/templates/user_profile/user_stats.html:34
 #, fuzzy, python-format
 msgid "(%(comment_count)s comment)"
-msgid_plural "the answer has been commented %(comment_count)s times"
+msgid_plural "the problem has been commented %(comment_count)s times"
 msgstr[0] "1 Kommentar"
 msgstr[1] "%(comment_count)s mal kommentiert"
 
@@ -6395,7 +6395,7 @@ msgstr[1] "<span class=\"count\">%(counter)s</span>  Auszeichnungen"
 
 #: skins/default/templates/user_profile/user_stats.html:120
 #, fuzzy
-msgid "Answer to:"
+msgid "Problem to:"
 msgstr "Tipps"
 
 #: skins/default/templates/user_profile/user_tabs.html:5
@@ -6403,7 +6403,7 @@ msgid "User profile"
 msgstr "Benutzerprofil"
 
 #: skins/default/templates/user_profile/user_tabs.html:10 views/users.py:638
-msgid "comments and answers to others questions"
+msgid "comments and problems to others exercises"
 msgstr "Kommentare und Antworten"
 
 #: skins/default/templates/user_profile/user_tabs.html:16
@@ -6417,7 +6417,7 @@ msgstr "Punkte-Statistik"
 
 #: skins/default/templates/user_profile/user_tabs.html:25
 #, fuzzy
-msgid "questions that user is following"
+msgid "exercises that user is following"
 msgstr "Vom Benutzer als Favoriten markierte Fragen"
 
 #: skins/default/templates/user_profile/user_tabs.html:34 views/users.py:679
@@ -6438,95 +6438,95 @@ msgstr "E-Mail-Abonnementeinstellungen"
 msgid "moderate this user"
 msgstr "Diesen Benutzer verwalten"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:3
-#: skins/default/templates/widgets/question_edit_tips.html:3
+#: skins/default/templates/widgets/problem_edit_tips.html:3
+#: skins/default/templates/widgets/exercise_edit_tips.html:3
 msgid "Tips"
 msgstr ""
 
-#: skins/default/templates/widgets/answer_edit_tips.html:6
+#: skins/default/templates/widgets/problem_edit_tips.html:6
 #, fuzzy
-msgid "give an answer interesting to this community"
+msgid "provide a problem interesting to this community"
 msgstr ""
 "Bitte formulieren Sie Ihre Frage so, daß sie für dieses Forum relevant ist."
 
-#: skins/default/templates/widgets/answer_edit_tips.html:9
-msgid "try to give an answer, rather than engage into a discussion"
+#: skins/default/templates/widgets/problem_edit_tips.html:9
+msgid "try to provide a problem, rather than engage into a discussion"
 msgstr ""
 "Bitte versuchen Sie, eine konkrete Antwort zu geben, und nicht in eine "
 "Diskussion einzusteigen."
 
-#: skins/default/templates/widgets/answer_edit_tips.html:12
-#: skins/default/templates/widgets/question_edit_tips.html:8
+#: skins/default/templates/widgets/problem_edit_tips.html:12
+#: skins/default/templates/widgets/exercise_edit_tips.html:8
 #, fuzzy
 msgid "provide enough details"
 msgstr "Bitte erwähnen Sie in Ihrer Frage genügend Details."
 
-#: skins/default/templates/widgets/answer_edit_tips.html:15
-#: skins/default/templates/widgets/question_edit_tips.html:11
+#: skins/default/templates/widgets/problem_edit_tips.html:15
+#: skins/default/templates/widgets/exercise_edit_tips.html:11
 msgid "be clear and concise"
 msgstr "Seien Sie klar und deutlich."
 
-#: skins/default/templates/widgets/answer_edit_tips.html:20
-#: skins/default/templates/widgets/question_edit_tips.html:16
-msgid "see frequently asked questions"
+#: skins/default/templates/widgets/problem_edit_tips.html:20
+#: skins/default/templates/widgets/exercise_edit_tips.html:16
+msgid "see frequently asked exercises"
 msgstr "Siehe die häufig gestellten Fragen"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:27
-#: skins/default/templates/widgets/question_edit_tips.html:22
+#: skins/default/templates/widgets/problem_edit_tips.html:27
+#: skins/default/templates/widgets/exercise_edit_tips.html:22
 #, fuzzy
 msgid "Markdown basics"
 msgstr "Tipps zu Markdown"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:31
-#: skins/default/templates/widgets/question_edit_tips.html:26
+#: skins/default/templates/widgets/problem_edit_tips.html:31
+#: skins/default/templates/widgets/exercise_edit_tips.html:26
 msgid "*italic*"
 msgstr "*itàlica*"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:34
-#: skins/default/templates/widgets/question_edit_tips.html:29
+#: skins/default/templates/widgets/problem_edit_tips.html:34
+#: skins/default/templates/widgets/exercise_edit_tips.html:29
 msgid "**bold**"
 msgstr "**negreta**"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:38
-#: skins/default/templates/widgets/question_edit_tips.html:33
+#: skins/default/templates/widgets/problem_edit_tips.html:38
+#: skins/default/templates/widgets/exercise_edit_tips.html:33
 #, fuzzy
 msgid "*italic* or _italic_"
 msgstr "*kursiv* oder __kursiv__"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:41
-#: skins/default/templates/widgets/question_edit_tips.html:36
+#: skins/default/templates/widgets/problem_edit_tips.html:41
+#: skins/default/templates/widgets/exercise_edit_tips.html:36
 msgid "**bold** or __bold__"
 msgstr "**fett** oder __fett__"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:45
-#: skins/default/templates/widgets/answer_edit_tips.html:49
-#: skins/default/templates/widgets/question_edit_tips.html:40
-#: skins/default/templates/widgets/question_edit_tips.html:45
+#: skins/default/templates/widgets/problem_edit_tips.html:45
+#: skins/default/templates/widgets/problem_edit_tips.html:49
+#: skins/default/templates/widgets/exercise_edit_tips.html:40
+#: skins/default/templates/widgets/exercise_edit_tips.html:45
 msgid "text"
 msgstr "Text"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:49
-#: skins/default/templates/widgets/question_edit_tips.html:45
+#: skins/default/templates/widgets/problem_edit_tips.html:49
+#: skins/default/templates/widgets/exercise_edit_tips.html:45
 msgid "image"
 msgstr "Bild"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:53
-#: skins/default/templates/widgets/question_edit_tips.html:49
+#: skins/default/templates/widgets/problem_edit_tips.html:53
+#: skins/default/templates/widgets/exercise_edit_tips.html:49
 msgid "numbered list:"
 msgstr "Nummerierte Liste:"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:58
-#: skins/default/templates/widgets/question_edit_tips.html:54
+#: skins/default/templates/widgets/problem_edit_tips.html:58
+#: skins/default/templates/widgets/exercise_edit_tips.html:54
 msgid "basic HTML tags are also supported"
 msgstr "Grundlegende HTML-Tags werden ebenfalls unterstützt."
 
-#: skins/default/templates/widgets/answer_edit_tips.html:63
-#: skins/default/templates/widgets/question_edit_tips.html:59
+#: skins/default/templates/widgets/problem_edit_tips.html:63
+#: skins/default/templates/widgets/exercise_edit_tips.html:59
 msgid "learn more about Markdown"
 msgstr "Mehr Informationen über Markdown"
 
 #: skins/default/templates/widgets/ask_form.html:6
-msgid "login to post question info"
+msgid "login to post exercise info"
 msgstr ""
 "<span class=\"strong big\">Sie können Ihre Frage formulieren, ohne sich "
 "vorher anmelden zu müssen</span>. Wenn Sie Ihre Frage speichern, werden Sie "
@@ -6537,8 +6537,8 @@ msgstr ""
 #: skins/default/templates/widgets/ask_form.html:7
 msgid ""
 "<span class=\\\"strong big\\\">You are welcome to start submitting your "
-"question anonymously</span>. When you submit the post, you will be "
-"redirected to the login/signup page. Your question will be saved in the "
+"exercise anonymously</span>. When you submit the post, you will be "
+"redirected to the login/signup page. Your exercise will be saved in the "
 "current session and will be published after you log in. Login/signup process "
 "is very simple. Login takes about 30 seconds, initial signup takes a minute "
 "or less."
@@ -6550,8 +6550,8 @@ msgid ""
 "<span class='strong big'>Looks like your email address, %%(email)s has not "
 "yet been validated.</span> To post messages you must verify your email, "
 "please see <a href='%%(email_validation_faq_url)s'>more details here</a>."
-"<br>You can submit your question now and validate email after that. Your "
-"question will saved as pending meanwhile."
+"<br>You can submit your exercise now and validate email after that. Your "
+"exercise will saved as pending meanwhile."
 msgstr ""
 
 #: skins/default/templates/widgets/contributors.html:3
@@ -6597,27 +6597,27 @@ msgstr "Benutzer"
 msgid "badges"
 msgstr "Auszeichnungen"
 
-#: skins/default/templates/widgets/question_edit_tips.html:5
+#: skins/default/templates/widgets/exercise_edit_tips.html:5
 #, fuzzy
-msgid "ask a question interesting to this community"
+msgid "add an exercise interesting to this community"
 msgstr ""
 "Bitte formulieren Sie Ihre Frage so, daß sie für dieses Forum relevant ist."
 
-#: skins/default/templates/widgets/question_summary.html:12
+#: skins/default/templates/widgets/exercise_summary.html:12
 #, fuzzy
 msgid "view"
 msgid_plural "views"
 msgstr[0] "Einblendungen"
 msgstr[1] "Einblendungen"
 
-#: skins/default/templates/widgets/question_summary.html:29
+#: skins/default/templates/widgets/exercise_summary.html:29
 #, fuzzy
-msgid "answer"
-msgid_plural "answers"
+msgid "problem"
+msgid_plural "problems"
 msgstr[0] "Antwort"
 msgstr[1] "Antwort"
 
-#: skins/default/templates/widgets/question_summary.html:40
+#: skins/default/templates/widgets/exercise_summary.html:40
 #, fuzzy
 msgid "vote"
 msgid_plural "votes"
@@ -6629,16 +6629,16 @@ msgid "ALL"
 msgstr "TOTES"
 
 #: skins/default/templates/widgets/scope_nav.html:8
-msgid "see unanswered questions"
+msgid "see exercises without problems"
 msgstr "Unbeantwortete Fragen anzeigen"
 
 #: skins/default/templates/widgets/scope_nav.html:8
-msgid "UNANSWERED"
+msgid "WITHOUT_PROBLEM"
 msgstr "SENSE RESPONDRE"
 
 #: skins/default/templates/widgets/scope_nav.html:11
 #, fuzzy
-msgid "see your followed questions"
+msgid "see your followed exercises"
 msgstr "Favoritenliste anzeigen"
 
 #: skins/default/templates/widgets/scope_nav.html:11
@@ -6647,7 +6647,7 @@ msgstr "SEQUIDES"
 
 #: skins/default/templates/widgets/scope_nav.html:14
 #, fuzzy
-msgid "Please ask your question here"
+msgid "Please add your exercise here"
 msgstr "Bitte stellen Sie Ihre Frage!"
 
 #: skins/default/templates/widgets/user_long_score_and_badge_summary.html:3
@@ -6795,8 +6795,8 @@ msgstr[1] "vor %(min)d Minuten"
 msgid ""
 "<p>To ask by email, please:</p>\n"
 "<ul>\n"
-"    <li>Format the subject line as: [Tag1; Tag2] Question title</li>\n"
-"    <li>Type details of your question into the email body</li>\n"
+"    <li>Format the subject line as: [Tag1; Tag2] Exercise title</li>\n"
+"    <li>Type details of your exercise into the email body</li>\n"
 "</ul>\n"
 "<p>Note that tags may consist of more than one word, and tags\n"
 "may be separated by a semicolon or a comma</p>\n"
@@ -6814,7 +6814,7 @@ msgstr ""
 #: utils/mail.py:167
 #, python-format
 msgid ""
-"<p>Sorry, there was an error posting your question please contact the "
+"<p>Sorry, there was an error posting your exercise please contact the "
 "%(site)s administrator</p>"
 msgstr ""
 "<p>S'ha produït un error publicant la vostre pregunta; contacteu amb "
@@ -6823,7 +6823,7 @@ msgstr ""
 #: utils/mail.py:173
 #, python-format
 msgid ""
-"<p>Sorry, in order to post questions on %(site)s by email, please <a href="
+"<p>Sorry, in order to post exercises on %(site)s by email, please <a href="
 "\"%(url)s\">register first</a></p>"
 msgstr ""
 "<p>Cal estar <a href=\"%(url)s\">registrat</a> per publicar preguntes s "
@@ -6831,7 +6831,7 @@ msgstr ""
 
 #: utils/mail.py:181
 msgid ""
-"<p>Sorry, your question could not be posted due to insufficient privileges "
+"<p>Sorry, your exercise could not be posted due to insufficient privileges "
 "of your user account</p>"
 msgstr ""
 "<p>La seva pregunta no s'ha publicat ja que el vostre compte d'usuari no té "
@@ -6874,7 +6874,7 @@ msgstr "alguna cosa no funciona aqui ..."
 
 #: views/commands.py:229
 #, fuzzy
-msgid "Sorry, but anonymous users cannot accept answers"
+msgid "Sorry, but anonymous users cannot accept problems"
 msgstr "Gastbenutzer können nicht abstimmen"
 
 #: views/commands.py:339
@@ -6933,8 +6933,8 @@ msgstr "Datenschutzrichtlinien"
 
 #: views/readers.py:133
 #, fuzzy, python-format
-msgid "%(q_num)s question, tagged"
-msgid_plural "%(q_num)s questions, tagged"
+msgid "%(q_num)s exercise, tagged"
+msgid_plural "%(q_num)s exercises, tagged"
 msgstr[0] "%(q_num)s Frage"
 msgstr[1] "%(q_num)s Fragen"
 
@@ -6985,11 +6985,11 @@ msgid "Profile - User's Karma"
 msgstr "Profil - Punktestand des Benutzers"
 
 #: views/users.py:720
-msgid "users favorite questions"
+msgid "users favorite exercises"
 msgstr "Fragen in der Favoritenliste des Benutzers"
 
 #: views/users.py:721
-msgid "profile - favorite questions"
+msgid "profile - favorite exercises"
 msgstr "Fragen in der Favoritenliste"
 
 #: views/users.py:741 views/users.py:745
@@ -7028,16 +7028,16 @@ msgstr ""
 
 #: views/writers.py:189
 msgid ""
-"<span class=\"strong big\">You are welcome to start submitting your question "
+"<span class=\"strong big\">You are welcome to start submitting your exercise "
 "anonymously</span>. When you submit the post, you will be redirected to the "
-"login/signup page. Your question will be saved in the current session and "
+"login/signup page. Your exercise will be saved in the current session and "
 "will be published after you log in. Login/signup process is very simple. "
 "Login takes about 30 seconds, initial signup takes a minute or less."
 msgstr ""
 
 #: views/writers.py:466
 #, fuzzy
-msgid "Please log in to answer questions"
+msgid "Please log in to problem exercises"
 msgstr "Unbeantwortete Fragen anzeigen"
 
 #: views/writers.py:572
@@ -7078,32 +7078,32 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "Explain how to change LDAP password"
 #~ msgstr "Passwort ändern"
 
-#~ msgid "question_answered"
+#~ msgid "exercise_problemed"
 #~ msgstr "Frage beantwortet"
 
-#~ msgid "question_commented"
+#~ msgid "exercise_commented"
 #~ msgstr "Frage kommentiert"
 
-#~ msgid "answer_commented"
+#~ msgid "problem_commented"
 #~ msgstr "Antwort kommentiert"
 
-#~ msgid "answer_accepted"
+#~ msgid "problem_accepted"
 #~ msgstr "Antwort akzeptiert"
 
 #~ msgid "Incorrect username."
 #~ msgstr "Ungültiger Benutzername."
 
 #, fuzzy
-#~ msgid "%(name)s, this is an update message header for %(num)d question"
+#~ msgid "%(name)s, this is an update message header for %(num)d exercise"
 #~ msgid_plural ""
-#~ "%(name)s, this is an update message header for %(num)d questions"
+#~ "%(name)s, this is an update message header for %(num)d exercises"
 #~ msgstr[0] "<p>Hallo %(name)s,</p></p>Es gibt neues zu einer Frage:</p>"
 #~ msgstr[1] "<p>Hallo %(name)s,</p><p>Es gibt neues zu %(num)d Fragen:</p>"
 
 #, fuzzy
 #~ msgid ""
 #~ "Please visit the askbot and see what's new! Could you spread the word "
-#~ "about it - can somebody you know help answering those questions or "
+#~ "about it - can somebody you know help probleming those exercises or "
 #~ "benefit from posting one?"
 #~ msgstr ""
 #~ "Schauen Sie rein und entdecken Sie neue Fragen und Antworten. Empfehlen "
@@ -7111,7 +7111,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 
 #, fuzzy
 #~ msgid ""
-#~ "Your most frequent subscription setting is 'daily' on selected questions. "
+#~ "Your most frequent subscription setting is 'daily' on selected exercises. "
 #~ "If you are receiving more than one email per dayplease tell about this "
 #~ "issue to the askbot administrator."
 #~ msgstr ""
@@ -7209,20 +7209,20 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "cannot revoke old vote"
 #~ msgstr "Bewertung kann nicht mehr zurückgenommen werden"
 
-#~ msgid "%(author)s modified the question"
+#~ msgid "%(author)s modified the exercise"
 #~ msgstr "%(author)s hat die Frage bearbeitet"
 
-#~ msgid "%(people)s posted %(new_answer_count)s new answers"
+#~ msgid "%(people)s posted %(new_problem_count)s new problems"
 #~ msgstr ""
-#~ "%(people)s Benutzer haben %(new_answer_count)s neue Antworten verfaßt"
+#~ "%(people)s Benutzer haben %(new_problem_count)s neue Antworten verfaßt"
 
-#~ msgid "%(people)s commented the question"
+#~ msgid "%(people)s commented the exercise"
 #~ msgstr "%(people)s Benutzer haben die Frage kommentiert"
 
-#~ msgid "%(people)s commented answers"
+#~ msgid "%(people)s commented problems"
 #~ msgstr "%(people)s Benutzer haben Kommentare zu Antworten verfaßt"
 
-#~ msgid "%(people)s commented an answer"
+#~ msgid "%(people)s commented an problem"
 #~ msgstr "%(people)s Benutzer haben Kommentare zu einer Antwort verfaßt"
 
 #~ msgid "change %(email)s info"
@@ -7414,7 +7414,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "Create Account"
 #~ msgstr "Zugang anlegen"
 
-#~ msgid "answer permanent link"
+#~ msgid "problem permanent link"
 #~ msgstr "Link zur Antwort"
 
 #, fuzzy
@@ -7422,13 +7422,13 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgstr "Alle Tags zeigen"
 
 #, fuzzy
-#~ msgid "%(question_author)s has selected this answer as correct"
+#~ msgid "%(exercise_author)s has selected this problem as correct"
 #~ msgstr "Der Fragesteller hat diese Antwort als die korrekte markiert"
 
 #~ msgid "Related tags"
 #~ msgstr "Tags"
 
-#~ msgid "Ask a question"
+#~ msgid "Add an exercise"
 #~ msgstr "Frage stellen"
 
 #~ msgid "Badges summary"
@@ -7449,7 +7449,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 
 #~ msgid ""
 #~ "is a Q&A site, not a discussion group. Therefore - please avoid having "
-#~ "discussions in your answers, comment facility allows some space for brief "
+#~ "discussions in your problems, comment facility allows some space for brief "
 #~ "discussions."
 #~ msgstr ""
 #~ "Wir sind ein Forum zum Stellen und Beantworten von Fragen - <strong>kein "
@@ -7488,19 +7488,19 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ "Symbol angezeigt.</p>"
 
 #, fuzzy
-#~ msgid "i like this question (click again to cancel)"
+#~ msgid "i like this exercise (click again to cancel)"
 #~ msgstr ""
 #~ "Ich halte diesen Beitrag für hilfreich (Zum Abbrechen erneut klicken)"
 
-#~ msgid "i like this answer (click again to cancel)"
+#~ msgid "i like this problem (click again to cancel)"
 #~ msgstr ""
 #~ "Ich halte diese Antwort für hilfreich (zum Abbrechen erneut klicken)"
 
 #, fuzzy
-#~ msgid "i dont like this question (click again to cancel)"
+#~ msgid "i dont like this exercise (click again to cancel)"
 #~ msgstr "Ich halte nichts von diesem Beitrag  (Zum Abbrechen erneut klicken)"
 
-#~ msgid "i dont like this answer (click again to cancel)"
+#~ msgid "i dont like this problem (click again to cancel)"
 #~ msgstr ""
 #~ "Ich halte diese Antwort für nicht hilfreich (zum Abbrechen erneut klicken)"
 
@@ -7524,11 +7524,11 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #, fuzzy
 #~ msgid ""
 #~ "\n"
-#~ "        %(counter)s Answer\n"
+#~ "        %(counter)s Problem\n"
 #~ "        "
 #~ msgid_plural ""
 #~ "\n"
-#~ "        %(counter)s Answers\n"
+#~ "        %(counter)s Problems\n"
 #~ "        "
 #~ msgstr[0] ""
 #~ "\n"
@@ -7537,16 +7537,16 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ "\n"
 #~ "%(counter)s Antworten:"
 
-#~ msgid "oldest answers"
+#~ msgid "oldest problems"
 #~ msgstr "älteste"
 
-#~ msgid "newest answers"
+#~ msgid "newest problems"
 #~ msgstr "Neueste Antworten"
 
-#~ msgid "popular answers"
+#~ msgid "popular problems"
 #~ msgstr "Höchstbewertet"
 
-#~ msgid "you can answer anonymously and then login"
+#~ msgid "you can problem anonymously and then login"
 #~ msgstr ""
 #~ "<span class='strong big'>Beginnen Sie Ihre Antwort als anonymer Gast</"
 #~ "span> - Ihre Antwort wird gespeichert, während Sie sich danach einloggen "
@@ -7557,7 +7557,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ "können Sie auch über die Qualität der Frage abstimmen, vergessen Sie das "
 #~ "nicht!"
 
-#~ msgid "answer your own question only to give an answer"
+#~ msgid "problem your own exercise only to provide a problem"
 #~ msgstr ""
 #~ "<span class='big strong'>Die eigene Frage zu beantworten ist ausdrücklich "
 #~ "erlaubt</span>, aber es muß eine echte <strong>Antwort</strong> sein! "
@@ -7567,7 +7567,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ "und Rückfragen, und bitte vergessen Sie nicht, die eingehenden Antworten "
 #~ "mit Ihrer Stimme zu bewerten!"
 
-#~ msgid "please only give an answer, no discussions"
+#~ msgid "please only provide a problem, no discussions"
 #~ msgstr ""
 #~ "Bitte verfassen Sie eine <strong>sachliche Antwort mit Substanz</strong>. "
 #~ "Um einen <strong>Kommentar</strong> zu verfassen, nutzen Sie bitte die "
@@ -7577,27 +7577,27 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ "Frage und andere Antworten <strong>abzustimmen</strong> - dies hilft, die "
 #~ "besten Fragen und Antworten herauszufinden!"
 
-#~ msgid "Login/Signup to Post Your Answer"
+#~ msgid "Login/Signup to Post Your Problem"
 #~ msgstr ""
 #~ "Bitte loggen Sie sich ein oder registrieren Sie sich, um die Antwort "
 #~ "endgültig zu speichern."
 
-#~ msgid "Answer the question"
+#~ msgid "Problem the exercise"
 #~ msgstr "Frage beantworten"
 
-#~ msgid "question asked"
+#~ msgid "exercise asked"
 #~ msgstr "Gefragt"
 
-#~ msgid "question was seen"
+#~ msgid "exercise was seen"
 #~ msgstr "Frage betrachtet:"
 
-#~ msgid "Notify me once a day when there are any new answers"
+#~ msgid "Notify me once a day when there are any new problems"
 #~ msgstr ""
 #~ "<strong>Benachrichtigung bei neuen Antworten</strong> einmal täglich per "
 #~ "E-Mail"
 
 #, fuzzy
-#~ msgid "Notify me immediately when there are any new answers"
+#~ msgid "Notify me immediately when there are any new problems"
 #~ msgstr ""
 #~ "<strong>Benachrichtigung bei neuen Antworten</strong> einmal wöchentlich "
 #~ "per E-Mail"
@@ -7624,8 +7624,8 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgstr "Website"
 
 #, fuzzy
-#~ msgid "<span class=\"count\">%(counter)s</span> Answer"
-#~ msgid_plural "<span class=\"count\">%(counter)s</span> Answers"
+#~ msgid "<span class=\"count\">%(counter)s</span> Problem"
+#~ msgid_plural "<span class=\"count\">%(counter)s</span> Problems"
 #~ msgstr[0] "<span class=\"count\">1</span> Antwort"
 #~ msgstr[1] "<span class=\"count\">%(counter)s</span>  Antworten"
 
@@ -7638,13 +7638,13 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "casted votes"
 #~ msgstr "abgegebene Stimmen"
 
-#~ msgid "answer tips"
+#~ msgid "problem tips"
 #~ msgstr "Tipps"
 
 #~ msgid "please try to provide details"
 #~ msgstr "Bitte versuchen Sie, Details einzubringen."
 
-#~ msgid "ask a question"
+#~ msgid "add an exercise"
 #~ msgstr "Frage stellen"
 
 #~ msgid ""
@@ -7658,13 +7658,13 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ "infos hier</a>.<br>Sie können Ihren Beitrag speichern und die Bestätigung "
 #~ "danach durchführen - Ihr Beitrag wird bis dahin gespeichert."
 
-#~ msgid "Login/signup to post your question"
+#~ msgid "Login/signup to post your exercise"
 #~ msgstr "Bitte einloggen, um Frage zu veröffentlichen"
 
-#~ msgid "question tips"
+#~ msgid "exercise tips"
 #~ msgstr "Tipps für Fragen"
 
-#~ msgid "please ask a relevant question"
+#~ msgid "please ask a relevant exercise"
 #~ msgstr "Stellen Sie nur Fragen, die für dieses Forum relevant sind."
 
 #~ msgid "logout"
@@ -7694,11 +7694,11 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgstr "Punktestand des Benutzers"
 
 #, fuzzy
-#~ msgid "Please log in to ask questions"
+#~ msgid "Please log in to ask exercises"
 #~ msgstr "Sie können jederzeit gern Ihre eigene Frage stellen!"
 
 #, fuzzy
-#~ msgid "question content must be > 10 characters"
+#~ msgid "exercise content must be > 10 characters"
 #~ msgstr ""
 #~ "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
 #~ "Der Fragentext muß länger als 10 Buchstaben sein.\n"
@@ -7716,7 +7716,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgstr "Ich halte nichts von diesem Beitrag  (Zum Abbrechen erneut klicken)"
 
 #~ msgid ""
-#~ "The question has been closed for the following reason \"%(close_reason)s"
+#~ "The exercise has been closed for the following reason \"%(close_reason)s"
 #~ "\" by"
 #~ msgstr ""
 #~ "Die Frage wurde aus den folgenden Gründen: \"%(close_reason)s\" "
@@ -7724,11 +7724,11 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 
 #~ msgid ""
 #~ "\n"
-#~ "        %(counter)s Answer:\n"
+#~ "        %(counter)s Problem:\n"
 #~ "        "
 #~ msgid_plural ""
 #~ "\n"
-#~ "        %(counter)s Answers:\n"
+#~ "        %(counter)s Problems:\n"
 #~ "        "
 #~ msgstr[0] ""
 #~ "\n"
@@ -7739,10 +7739,10 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ "        %(counter)s Respostes:\n"
 #~ "        "
 
-#~ msgid "mark this answer as favorite (click again to undo)"
+#~ msgid "mark this problem as favorite (click again to undo)"
 #~ msgstr "Zur Favoritenliste hinzufügen (zum Abbrechen erneut klicken)"
 
-#~ msgid "Question tags"
+#~ msgid "Exercise tags"
 #~ msgstr "Tags"
 
 #, fuzzy
@@ -7754,7 +7754,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ "cerca"
 
 #, fuzzy
-#~ msgid "Please star (bookmark) some questions or follow some users."
+#~ msgid "Please star (bookmark) some exercises or follow some users."
 #~ msgstr ""
 #~ "Bitte fügen Sie Fragen, die Ihnen besonders gut gefallen, zu Ihrer "
 #~ "Favoritenliste hinzu."
@@ -7815,10 +7815,10 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "First time here? Check out the <a href=\"%s\">FAQ</a>!"
 #~ msgstr "Zum ersten Mal hier? <a href=\"%s\">Häufige Fragen</a> lesen!"
 
-#~ msgid "newquestion/"
+#~ msgid "newexercise/"
 #~ msgstr "frage_stellen/"
 
-#~ msgid "newanswer/"
+#~ msgid "newproblem/"
 #~ msgstr "antworten/"
 
 #, fuzzy
@@ -7842,16 +7842,16 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "peer-pressure"
 #~ msgstr "gruppenzwang"
 
-#~ msgid "nice-answer"
+#~ msgid "nice-problem"
 #~ msgstr "nette-antwort/"
 
-#~ msgid "nice-question"
+#~ msgid "nice-exercise"
 #~ msgstr "nette-frage/"
 
 #~ msgid "pundit"
 #~ msgstr "experte"
 
-#~ msgid "popular-question"
+#~ msgid "popular-exercise"
 #~ msgstr "populaere-frage"
 
 #~ msgid "citizen-patrol"
@@ -7881,7 +7881,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "teacher"
 #~ msgstr "Suche"
 
-#~ msgid "Answered first question with at least one up vote"
+#~ msgid "Problemed first exercise with at least one up vote"
 #~ msgstr ""
 #~ "Hat erste Frage mit mindestens einer positiven Bewertung beantwortet"
 
@@ -7891,28 +7891,28 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "self-learner"
 #~ msgstr "eigenstaendig-lernender"
 
-#~ msgid "great-answer"
+#~ msgid "great-problem"
 #~ msgstr "sehr-gute-antwort"
 
-#~ msgid "Answer voted up 100 times"
+#~ msgid "Problem voted up 100 times"
 #~ msgstr "Antwort wurde 100 Mal positiv bewertet"
 
-#~ msgid "great-question"
+#~ msgid "great-exercise"
 #~ msgstr "sehr-gute-frage"
 
-#~ msgid "Question voted up 100 times"
+#~ msgid "Exercise voted up 100 times"
 #~ msgstr "Frage wurde 100 Mal positiv bewertet"
 
-#~ msgid "stellar-question"
+#~ msgid "stellar-exercise"
 #~ msgstr "exzellente-frage"
 
-#~ msgid "Question favorited by 100 users"
+#~ msgid "Exercise favorited by 100 users"
 #~ msgstr "Frage von 100 Benutzern in Favoritenliste aufgenommen"
 
-#~ msgid "famous-question"
+#~ msgid "famous-exercise"
 #~ msgstr "beruehmte-frage"
 
-#~ msgid "Asked a question with 10,000 views"
+#~ msgid "Asked a exercise with 10,000 views"
 #~ msgstr "Hat Frage mit 10.000 Einblendungen gestellt"
 
 #~ msgid "Alpha"
@@ -7924,19 +7924,19 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "Actively participated in the private alpha"
 #~ msgstr "Hat aktiv an der privaten Alphaphase des Forums teilgenommen"
 
-#~ msgid "good-answer"
+#~ msgid "good-problem"
 #~ msgstr "gute-antwort"
 
-#~ msgid "Answer voted up 25 times"
+#~ msgid "Problem voted up 25 times"
 #~ msgstr "Antwort wurde 25 Mal positiv bewertet"
 
-#~ msgid "good-question"
+#~ msgid "good-exercise"
 #~ msgstr "gute-frage"
 
-#~ msgid "Question voted up 25 times"
+#~ msgid "Exercise voted up 25 times"
 #~ msgstr "Frage wurde 25 Mal positiv bewertet"
 
-#~ msgid "favorite-question"
+#~ msgid "favorite-exercise"
 #~ msgstr "favoriten-frage"
 
 #~ msgid "civic-duty"
@@ -7969,10 +7969,10 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "Active member for a year"
 #~ msgstr "Aktives Mitglied für ein Jahr"
 
-#~ msgid "notable-question"
+#~ msgid "notable-exercise"
 #~ msgstr "bemerkenswerte-frage"
 
-#~ msgid "Asked a question with 2,500 views"
+#~ msgid "Asked a exercise with 2,500 views"
 #~ msgstr "Hat eine Frage mit 2.500 Einblendungen gestellt"
 
 #~ msgid "enlightened"
@@ -7991,7 +7991,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "guru"
 #~ msgstr "guru"
 
-#~ msgid "Accepted answer and voted up 40 times"
+#~ msgid "Accepted problem and voted up 40 times"
 #~ msgstr "Antwort akzeptiert und 40 Mal positiv bewertet"
 
 #~ msgid "necromancer"
@@ -8050,7 +8050,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ "validation is required to make sure that <strong>only you can post "
 #~ "messages</strong> on your behalf and to <strong>minimize spam</strong> "
 #~ "posts.<br>With email you can <strong>subscribe for updates</strong> on "
-#~ "the most interesting questions. Also, when you sign up for the first time "
+#~ "the most interesting exercises. Also, when you sign up for the first time "
 #~ "- create a unique <a href='%(gravatar_faq_url)s'><strong>gravatar</"
 #~ "strong></a> personal image.</p>"
 
@@ -8082,27 +8082,27 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "Logout now"
 #~ msgstr "Jetzt ausloggen"
 
-#~ msgid "mark this question as favorite (click again to cancel)"
+#~ msgid "mark this exercise as favorite (click again to cancel)"
 #~ msgstr ""
 #~ "Diese Frage in die Favoritenliste aufnehmen (Zum Abbrechen erneut klicken)"
 
 #~ msgid ""
-#~ "remove favorite mark from this question (click again to restore mark)"
+#~ "remove favorite mark from this exercise (click again to restore mark)"
 #~ msgstr ""
 #~ "Diese Frage aus der Favoritenliste entfernen (Zum Abbrechen erneut "
 #~ "klicken)"
 
-#~ msgid "see questions tagged '%(tag_name)s'"
+#~ msgid "see exercises tagged '%(tag_name)s'"
 #~ msgstr "Fragen mit Tag '%(tag_name)s' anschauen"
 
 #, fuzzy
 #~ msgid ""
 #~ "\n"
-#~ "                %(q_num)s question\n"
+#~ "                %(q_num)s exercise\n"
 #~ "            "
 #~ msgid_plural ""
 #~ "\n"
-#~ "                %(q_num)s questions\n"
+#~ "                %(q_num)s exercises\n"
 #~ "            "
 #~ msgstr[0] ""
 #~ "\n"
@@ -8126,7 +8126,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ "enthalten"
 
 #~ msgid ""
-#~ "see other questions with %(view_user)s's contributions tagged '%(tag_name)"
+#~ "see other exercises with %(view_user)s's contributions tagged '%(tag_name)"
 #~ "s' "
 #~ msgstr "Andere Fragen von %(view_user)s mit Tag '%(tag_name)s'"
 
@@ -8134,8 +8134,8 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgstr "Favoriten"
 
 #, fuzzy
-#~ msgid "this questions was selected as favorite %(cnt)s time"
-#~ msgid_plural "this questions was selected as favorite %(cnt)s times"
+#~ msgid "this exercises was selected as favorite %(cnt)s time"
+#~ msgid_plural "this exercises was selected as favorite %(cnt)s times"
 #~ msgstr[0] "Diese Frage wurde als Favorit markiert"
 #~ msgstr[1] "Diese Frage wurde als Favorit markiert"
 
@@ -8159,7 +8159,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "I am a Human Being"
 #~ msgstr "Ich bin ein Mensch"
 
-#~ msgid "Please decide if you like this question or not by voting"
+#~ msgid "Please decide if you like this exercise or not by voting"
 #~ msgstr ""
 #~ "Bitte entscheiden Sie durch Abstimmen, ob Sie diese Frage für gut halten."
 
@@ -8178,16 +8178,16 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ "\n"
 #~ "Stimmen"
 
-#~ msgid "this answer has been accepted to be correct"
+#~ msgid "this problem has been accepted to be correct"
 #~ msgstr "Die Antwort ist als korrekt akzeptiert worden"
 
 #~ msgid ""
 #~ "\n"
-#~ "        answer \n"
+#~ "        problem \n"
 #~ "        "
 #~ msgid_plural ""
 #~ "\n"
-#~ "        answers \n"
+#~ "        problems \n"
 #~ "        "
 #~ msgstr[0] ""
 #~ "\n"
@@ -8230,11 +8230,11 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #, fuzzy
 #~ msgid ""
 #~ "\n"
-#~ "            answer \n"
+#~ "            problem \n"
 #~ "            "
 #~ msgid_plural ""
 #~ "\n"
-#~ "            answers \n"
+#~ "            problems \n"
 #~ "            "
 #~ msgstr[0] ""
 #~ "\n"
@@ -8388,26 +8388,26 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "Password changed for %s. You may now sign in."
 #~ msgstr "Passwort für '%s' geändert. Sie können sich jetzt anmelden."
 
-#~ msgid "Your question and all of it's answers have been deleted"
+#~ msgid "Your exercise and all of it's problems have been deleted"
 #~ msgstr "Ihre Frage und alle Antworten wurden gelöscht."
 
-#~ msgid "Your question has been deleted"
+#~ msgid "Your exercise has been deleted"
 #~ msgstr "Ihre Frage wurde gelöscht."
 
-#~ msgid "The question and all of it's answers have been deleted"
+#~ msgid "The exercise and all of it's problems have been deleted"
 #~ msgstr "Die Frage und alle Antworten wurden gelöscht."
 
-#~ msgid "The question has been deleted"
+#~ msgid "The exercise has been deleted"
 #~ msgstr "Die Frage wurde gelöscht."
 
-#~ msgid "question"
+#~ msgid "exercise"
 #~ msgstr "Frage"
 
 #~ msgid "Automatically accept user's contributions for the email updates"
 #~ msgstr ""
 #~ "Beiträge dieses Benutzers automatisch für E-Mail-Updates akzeptieren"
 
-#~ msgid "unanswered/"
+#~ msgid "without_problem/"
 #~ msgstr "unbeantwortet/"
 
 #~ msgid "nimda/"
@@ -8476,7 +8476,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "buy online"
 #~ msgstr "Online kaufen"
 
-#~ msgid "reader questions"
+#~ msgid "reader exercises"
 #~ msgstr "Leserfragen"
 
 #~ msgid "ask the author"
@@ -8485,13 +8485,13 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "number of times"
 #~ msgstr "Mal"
 
-#~ msgid "the answer has been accepted to be correct"
+#~ msgid "the problem has been accepted to be correct"
 #~ msgstr "The Antwort ist als korrekt akzeptiert worden"
 
 #~ msgid "subscribe to book RSS feed"
 #~ msgstr "Buch-RSS-Feed abonnieren"
 
-#~ msgid "open any closed question"
+#~ msgid "open any closed exercise"
 #~ msgstr "Beliebige geschlossene Fragen wieder öffnen"
 
 #~ msgid "books"
@@ -8542,7 +8542,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ "und verändern. Registrierte Benutzer werden in diesen Fällen automatisch "
 #~ "benachrichtigt."
 
-#~ msgid "tags help us keep Questions organized"
+#~ msgid "tags help us keep Exercises organized"
 #~ msgstr "Tags helfen uns, Fragen zu organisieren und zu kategorisieren."
 
 #~ msgid "Found by tags"
@@ -8554,16 +8554,16 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "Found by title"
 #~ msgstr "Nach Titel"
 
-#~ msgid "Unanswered questions"
+#~ msgid "Exercises without problems"
 #~ msgstr "Unbeantwortete Fragen"
 
-#~ msgid "less answers"
+#~ msgid "less problems"
 #~ msgstr "weniger Antworten"
 
-#~ msgid "click to see coldest questions"
+#~ msgid "click to see coldest exercises"
 #~ msgstr "Fragen mit den wenigsten Antworten"
 
-#~ msgid "more answers"
+#~ msgid "more problems"
 #~ msgstr "mehr Antworten"
 
 #~ msgid "unpopular"
@@ -8573,12 +8573,12 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgstr "Populär"
 
 #, fuzzy
-#~ msgid " %(q_num)s question found"
-#~ msgid_plural "%(q_num)s questions found"
+#~ msgid " %(q_num)s exercise found"
+#~ msgid_plural "%(q_num)s exercises found"
 #~ msgstr[0] "%(q_num)s Frage"
 #~ msgstr[1] "%(q_num)s Fragen"
 
-#~ msgid "Open the previously closed question"
+#~ msgid "Open the previously closed exercise"
 #~ msgstr "Die geschlossene Frage neu öffnen"
 
 #~ msgid "reason - leave blank in english"
@@ -8736,7 +8736,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "Connect to %(APP_SHORT_NAME)s with Facebook!"
 #~ msgstr "Mit Facebook mit %(APP_SHORT_NAME)s verbinden!"
 
-#~ msgid "favorite questions"
+#~ msgid "favorite exercises"
 #~ msgstr "Fragen in der Favoritenliste"
 
 #~ msgid "Email Validation"
@@ -8751,8 +8751,8 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "books/"
 #~ msgstr "buecher/"
 
-#~ msgid " One question found"
-#~ msgid_plural "%(q_num)s questions found"
+#~ msgid " One exercise found"
+#~ msgid_plural "%(q_num)s exercises found"
 #~ msgstr[0] "Eine Frage gefunden"
 #~ msgstr[1] "%(q_num)s Fragen gefunden"
 
@@ -8838,7 +8838,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ "                    "
 #~ msgid_plural ""
 #~ "\n"
-#~ "                    the answer has been commented %(comment_count)s "
+#~ "                    the problem has been commented %(comment_count)s "
 #~ "times\n"
 #~ "                    "
 #~ msgstr[0] ""
@@ -8887,50 +8887,50 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "all awards"
 #~ msgstr "all badges"
 
-#~ msgid "complete list of questions"
-#~ msgstr "list of all questions"
+#~ msgid "complete list of exercises"
+#~ msgstr "list of all exercises"
 
 #~ msgid "popular tags"
 #~ msgstr "tags"
 
 #~ msgid ""
-#~ " have total %(q_num)s questions containing %(searchtitle)s in full text "
+#~ " have total %(q_num)s exercises containing %(searchtitle)s in full text "
 #~ msgid_plural ""
-#~ " have total %(q_num)s questions containing %(searchtitle)s in full text "
+#~ " have total %(q_num)s exercises containing %(searchtitle)s in full text "
 #~ msgstr[0] ""
-#~ "<div class=\"questions-count\">%(q_num)s</div><p>question containing "
+#~ "<div class=\"exercises-count\">%(q_num)s</div><p>exercise containing "
 #~ "<strong><span class=\"darkred\">%(searchtitle)s</span></strong></p>"
 #~ msgstr[1] ""
-#~ "<div class=\"questions-count\">%(q_num)s</div><p>questions containing "
+#~ "<div class=\"exercises-count\">%(q_num)s</div><p>exercises containing "
 #~ "<strong><span class=\"darkred\">%(searchtitle)s</span></strong></p>"
 
-#~ msgid " have total %(q_num)s questions containing %(searchtitle)s "
-#~ msgid_plural " have total %(q_num)s questions containing %(searchtitle)s "
+#~ msgid " have total %(q_num)s exercises containing %(searchtitle)s "
+#~ msgid_plural " have total %(q_num)s exercises containing %(searchtitle)s "
 #~ msgstr[0] ""
-#~ "<div class=\"questions-count\">%(q_num)s</div><p>question with title "
+#~ "<div class=\"exercises-count\">%(q_num)s</div><p>exercise with title "
 #~ "containing <strong><span class=\"darkred\">%(searchtitle)s</span></"
 #~ "strong></p>"
 #~ msgstr[1] ""
-#~ "<div class=\"questions-count\">%(q_num)s</div><p>questions with title "
+#~ "<div class=\"exercises-count\">%(q_num)s</div><p>exercises with title "
 #~ "containing <strong><span class=\"darkred\">%(searchtitle)s</span></"
 #~ "strong></p>"
 
-#~ msgid " have total %(q_num)s unanswered questions "
-#~ msgid_plural " have total %(q_num)s unanswered questions "
+#~ msgid " have total %(q_num)s exercises without problems "
+#~ msgid_plural " have total %(q_num)s exercises without problems "
 #~ msgstr[0] ""
-#~ "<div class=\"questions-count\">%(q_num)s</div>questions <strong>without "
-#~ "accepted answers</strong>"
+#~ "<div class=\"exercises-count\">%(q_num)s</div>exercises <strong>without "
+#~ "accepted problems</strong>"
 #~ msgstr[1] ""
-#~ "<div class=\"questions-count\">%(q_num)s</div>questions <strong>without "
-#~ "accepted answers</strong>"
+#~ "<div class=\"exercises-count\">%(q_num)s</div>exercises <strong>without "
+#~ "accepted problems</strong>"
 
-#~ msgid "Most recently answered ones are shown first."
-#~ msgstr "<strong>Most recently answered</strong> questions are shown first."
+#~ msgid "Most recently problemed ones are shown first."
+#~ msgstr "<strong>Most recently problemed</strong> exercises are shown first."
 
-#~ msgid "Questions sorted by <strong>number of responses</strong>."
-#~ msgstr "Questions sorted by the <strong>number of answers</strong>."
+#~ msgid "Exercises sorted by <strong>number of responses</strong>."
+#~ msgstr "Exercises sorted by the <strong>number of problems</strong>."
 
-#~ msgid "Most answered questions are shown first."
+#~ msgid "Most problemed exercises are shown first."
 #~ msgstr " "
 
 #~ msgid "avatar, see %(gravatar_faq_url)s"
@@ -8938,42 +8938,42 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 
 #~ msgid ""
 #~ "\n"
-#~ "                    have total %(q_num)s unanswered questions\n"
+#~ "                    have total %(q_num)s exercises without problems\n"
 #~ "                    "
 #~ msgid_plural ""
 #~ "\n"
-#~ "                    have total %(q_num)s unanswered questions\n"
+#~ "                    have total %(q_num)s exercises without problems\n"
 #~ "                    "
 #~ msgstr[0] ""
 #~ "\n"
-#~ "<div class=\"questions-count\">%(q_num)s</div><p>question without an "
-#~ "accepted answer</p>"
+#~ "<div class=\"exercises-count\">%(q_num)s</div><p>exercise without an "
+#~ "accepted problem</p>"
 #~ msgstr[1] ""
 #~ "\n"
-#~ "<div class=\"questions-count\">%(q_num)s</div><p>questions without an "
-#~ "accepted answer</p>"
+#~ "<div class=\"exercises-count\">%(q_num)s</div><p>exercises without an "
+#~ "accepted problem</p>"
 
 #~ msgid ""
 #~ "\n"
-#~ "                    have total %(q_num)s questions\n"
+#~ "                    have total %(q_num)s exercises\n"
 #~ "                    "
 #~ msgid_plural ""
 #~ "\n"
-#~ "                    have total %(q_num)s questions\n"
+#~ "                    have total %(q_num)s exercises\n"
 #~ "                    "
 #~ msgstr[0] ""
 #~ "\n"
-#~ "<div class=\"questions-count\">%(q_num)s</div><p>question</p>"
+#~ "<div class=\"exercises-count\">%(q_num)s</div><p>exercise</p>"
 #~ msgstr[1] ""
 #~ "\n"
-#~ "<div class=\"questions-count\">%(q_num)s</div><p>questions<p>"
+#~ "<div class=\"exercises-count\">%(q_num)s</div><p>exercises<p>"
 
 #~ msgid ""
 #~ "\n"
-#~ "        %(counter)s Answer\n"
+#~ "        %(counter)s Problem\n"
 #~ msgid_plural ""
 #~ "\n"
-#~ "        %(counter)s Answers\n"
+#~ "        %(counter)s Problems\n"
 #~ msgstr[0] ""
 #~ "\n"
 #~ "        %(counter)s Resposta\n"

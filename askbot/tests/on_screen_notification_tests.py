@@ -69,21 +69,21 @@ class OnScreenUpdateNotificationTests(TestCase):
         ]
 
     def setUp(self):
-        #users for the question
+        #users for the exercise
         self.u11 = create_user('user11', 'user11@example.com', status='m')
         self.u12 = create_user('user12', 'user12@example.com', status='m')
         self.u13 = create_user('user13', 'user13@example.com', status='m')
         self.u14 = create_user('user14', 'user14@example.com', status='m')
 
-        #users for first answer
-        self.u21 = create_user('user21', 'user21@example.com', status='m')#post answer
-        self.u22 = create_user('user22', 'user22@example.com', status='m')#edit answer
+        #users for first problem
+        self.u21 = create_user('user21', 'user21@example.com', status='m')#post problem
+        self.u22 = create_user('user22', 'user22@example.com', status='m')#edit problem
         self.u23 = create_user('user23', 'user23@example.com', status='m')
         self.u24 = create_user('user24', 'user24@example.com', status='m')
 
-        #users for second answer
-        self.u31 = create_user('user31', 'user31@example.com', status='m')#post answer
-        self.u32 = create_user('user32', 'user32@example.com', status='m')#edit answer
+        #users for second problem
+        self.u31 = create_user('user31', 'user31@example.com', status='m')#post problem
+        self.u32 = create_user('user32', 'user32@example.com', status='m')#edit problem
         self.u33 = create_user('user33', 'user33@example.com', status='m')
         self.u34 = create_user('user34', 'user34@example.com', status='m')
 
@@ -91,55 +91,55 @@ class OnScreenUpdateNotificationTests(TestCase):
         self.reload_users()
 
         #pre-populate askbot with some content
-        #create a question and two answers, each post gets two comments
+        #create a exercise and two problems, each post gets two comments
         #users have two digit codes. What users do in the setup code
         #is explained below (x is a variable that takes integer values of [1-3])
         #user x1 makes a post, users x2 and x3 add comments to that post
-        #users 1x work on question, 2x and 3x on the answers
+        #users 1x work on exercise, 2x and 3x on the problems
         #users x4 do not do anyting in the setup code
 
         self.thread = models.Thread.objects.create_new(
-                            title = 'test question',
+                            title = 'test exercise',
                             author = self.u11,
                             added_at = datetime.datetime.now(),
                             wiki = False,
                             tagnames = 'test', 
                             text = 'hey listen up',
                         )
-        self.question = self.thread._question_post()
-        self.comment12 = self.question.add_comment(
+        self.exercise = self.thread._exercise_post()
+        self.comment12 = self.exercise.add_comment(
                             user = self.u12,
                             comment = 'comment12'
                         )
-        self.comment13 = self.question.add_comment(
+        self.comment13 = self.exercise.add_comment(
                             user = self.u13,
                             comment = 'comment13'
                         )
-        self.answer1 = models.Post.objects.create_new_answer(
+        self.problem1 = models.Post.objects.create_new_problem(
                             thread = self.thread,
                             author = self.u21,
                             added_at = datetime.datetime.now(),
-                            text = 'answer1'
+                            text = 'problem1'
                         )
-        self.comment22 = self.answer1.add_comment(
+        self.comment22 = self.problem1.add_comment(
                             user = self.u22,
                             comment = 'comment22'
                         )
-        self.comment23 = self.answer1.add_comment(
+        self.comment23 = self.problem1.add_comment(
                             user = self.u23,
                             comment = 'comment23'
                         )
-        self.answer2 = models.Post.objects.create_new_answer(
+        self.problem2 = models.Post.objects.create_new_problem(
                             thread = self.thread,
                             author = self.u31,
                             added_at = datetime.datetime.now(),
-                            text = 'answer2'
+                            text = 'problem2'
                         )
-        self.comment32 = self.answer2.add_comment(
+        self.comment32 = self.problem2.add_comment(
                             user = self.u32,
                             comment = 'comment32'
                         )
-        self.comment33 = self.answer2.add_comment(
+        self.comment33 = self.problem2.add_comment(
                             user = self.u33,
                             comment = 'comment33'
                         )
@@ -185,32 +185,32 @@ class OnScreenUpdateNotificationTests(TestCase):
         )
 
 
-    def post_then_delete_answer_comment(self):
+    def post_then_delete_problem_comment(self):
         pass
 
-    def post_then_delete_answer(self):
+    def post_then_delete_problem(self):
         pass
 
-    def post_then_delete_question_comment(self):
+    def post_then_delete_exercise_comment(self):
         pass
 
-    def post_mention_in_question_then_delete(self):
+    def post_mention_in_exercise_then_delete(self):
         pass
 
-    def post_mention_in_answer_then_delete(self):
+    def post_mention_in_problem_then_delete(self):
         pass
 
-    def post_mention_in_question_then_edit_out(self):
+    def post_mention_in_exercise_then_edit_out(self):
         pass
 
-    def post_mention_in_answer_then_edit_out(self):
+    def post_mention_in_problem_then_edit_out(self):
         pass
 
     def test_post_mention_in_comments_then_delete(self):
         self.reset_response_counts()
         time.sleep(1)
         timestamp = datetime.datetime.now()
-        comment = self.question.add_comment(
+        comment = self.exercise.add_comment(
                             user = self.u11,
                             comment = '@user12 howyou doin?',
                             added_at = timestamp
@@ -228,7 +228,7 @@ class OnScreenUpdateNotificationTests(TestCase):
         self.reset_response_counts()
         time.sleep(1)
         timestamp = datetime.datetime.now()
-        comment = self.answer1.add_comment(
+        comment = self.problem1.add_comment(
                             user = self.u21,
                             comment = 'hey @user22 blah',
                             added_at = timestamp
@@ -245,12 +245,12 @@ class OnScreenUpdateNotificationTests(TestCase):
         )
 
     def test_self_comments(self):
-        """poster of the question or answer adds a comment
-        under the corresponding question or answer"""
+        """poster of the exercise or problem adds a comment
+        under the corresponding exercise or problem"""
         self.reset_response_counts()
         time.sleep(1)
         timestamp = datetime.datetime.now()
-        self.question.add_comment(
+        self.exercise.add_comment(
                             user = self.u11,
                             comment = 'self-comment',
                             added_at = timestamp
@@ -271,7 +271,7 @@ class OnScreenUpdateNotificationTests(TestCase):
         self.reset_response_counts()
         time.sleep(1)
         timestamp = datetime.datetime.now()
-        self.answer1.add_comment(
+        self.problem1.add_comment(
                             user = self.u21,
                             comment = 'self-comment 2',
                             added_at = timestamp
@@ -290,11 +290,11 @@ class OnScreenUpdateNotificationTests(TestCase):
             ]
         )
 
-    def test_self_mention_not_posting_in_comment_to_question1(self):
+    def test_self_mention_not_posting_in_comment_to_exercise1(self):
         self.reset_response_counts()
         time.sleep(1)
         timestamp = datetime.datetime.now()
-        self.question.add_comment(
+        self.exercise.add_comment(
                             user = self.u11,
                             comment = 'self-comment @user11',
                             added_at = timestamp
@@ -313,11 +313,11 @@ class OnScreenUpdateNotificationTests(TestCase):
             ]
         )
 
-    def test_self_mention_not_posting_in_comment_to_question2(self):
+    def test_self_mention_not_posting_in_comment_to_exercise2(self):
         self.reset_response_counts()
         time.sleep(1)
         timestamp = datetime.datetime.now()
-        self.question.add_comment(
+        self.exercise.add_comment(
                             user = self.u11,
                             comment = 'self-comment @user11 blah',
                             added_at = timestamp
@@ -336,11 +336,11 @@ class OnScreenUpdateNotificationTests(TestCase):
             ]
         )
 
-    def test_self_mention_not_posting_in_comment_to_answer(self):
+    def test_self_mention_not_posting_in_comment_to_problem(self):
         self.reset_response_counts()
         time.sleep(1)
         timestamp = datetime.datetime.now()
-        self.answer1.add_comment(
+        self.problem1.add_comment(
                             user = self.u21,
                             comment = 'self-comment 1 @user21',
                             added_at = timestamp
@@ -360,8 +360,8 @@ class OnScreenUpdateNotificationTests(TestCase):
         )
 
     def test_responses_clear_after_visit(self):
-        """user 14 posts comment under question
-        user 11, 12, 21, and 22 visit the question
+        """user 14 posts comment under exercise
+        user 11, 12, 21, and 22 visit the exercise
         user 13 does not
         the expected outcome is that 11 and 12 have
         0 responses and 13 still has one
@@ -370,7 +370,7 @@ class OnScreenUpdateNotificationTests(TestCase):
         self.reset_response_counts()
         time.sleep(1)
         timestamp = datetime.datetime.now()
-        self.question.add_comment(
+        self.exercise.add_comment(
             user = self.u14,
             comment = 'dudududududu',
             added_at = timestamp
@@ -395,8 +395,8 @@ class OnScreenUpdateNotificationTests(TestCase):
                 0, 0, 0, 0,
             ]
         )
-        self.u11.visit_question(self.question)
-        self.u12.visit_question(self.question)
+        self.u11.visit_exercise(self.exercise)
+        self.u12.visit_exercise(self.exercise)
         notifications = get_re_notif_after(timestamp)
         self.assertEqual(len(notifications), 1)
         self.assertEqual(#visitors are not notified
@@ -432,7 +432,7 @@ class OnScreenUpdateNotificationTests(TestCase):
 
 
     def test_comments_to_post_authors(self):
-        self.question.apply_edit(
+        self.exercise.apply_edit(
                         edited_by = self.u14,
                         text = 'now much better',
                         comment = 'improved text'
@@ -440,7 +440,7 @@ class OnScreenUpdateNotificationTests(TestCase):
         self.reset_response_counts()
         time.sleep(1)
         timestamp = datetime.datetime.now()
-        self.question.add_comment(
+        self.exercise.add_comment(
                             user = self.u12,
                             comment = 'self-comment 1',
                             added_at = timestamp
@@ -458,7 +458,7 @@ class OnScreenUpdateNotificationTests(TestCase):
                  0, 0, 0, 0,
             ]
         )
-        self.answer1.apply_edit(
+        self.problem1.apply_edit(
                         edited_by = self.u24,
                         text = 'now much better',
                         comment = 'improved text'
@@ -466,7 +466,7 @@ class OnScreenUpdateNotificationTests(TestCase):
         self.reset_response_counts()
         time.sleep(1)
         timestamp = datetime.datetime.now()
-        self.answer1.add_comment(
+        self.problem1.add_comment(
                             user = self.u22,
                             comment = 'self-comment 1',
                             added_at = timestamp
@@ -485,18 +485,18 @@ class OnScreenUpdateNotificationTests(TestCase):
             ]
         )
 
-    def test_question_edit(self):
-        """when question is edited
-        response receivers are question authors, commenters
-        and answer authors, but not answer commenters
+    def test_exercise_edit(self):
+        """when exercise is edited
+        response receivers are exercise authors, commenters
+        and problem authors, but not problem commenters
         """
         self.reset_response_counts()
         time.sleep(1)
         timestamp = datetime.datetime.now()
-        self.question.apply_edit(
+        self.exercise.apply_edit(
                         edited_by = self.u14,
-                        text = 'waaay better question!',
-                        comment = 'improved question',
+                        text = 'waaay better exercise!',
+                        comment = 'improved exercise',
                     )
         notifications = get_re_notif_after(timestamp)
         self.assertEqual(len(notifications), 1)
@@ -514,10 +514,10 @@ class OnScreenUpdateNotificationTests(TestCase):
         self.reset_response_counts()
         time.sleep(1)
         timestamp = datetime.datetime.now()
-        self.question.apply_edit(
+        self.exercise.apply_edit(
                         edited_by = self.u31,
-                        text = 'waaay even better question!',
-                        comment = 'improved question',
+                        text = 'waaay even better exercise!',
+                        comment = 'improved exercise',
                     )
         notifications = get_re_notif_after(timestamp)
         self.assertEqual(len(notifications), 1)
@@ -533,16 +533,16 @@ class OnScreenUpdateNotificationTests(TestCase):
             ]
         )
 
-    def test_answer_edit(self):
+    def test_problem_edit(self):
         """
         """
         self.reset_response_counts()
         time.sleep(1)
         timestamp = datetime.datetime.now()
-        self.answer1.apply_edit(
+        self.problem1.apply_edit(
                         edited_by = self.u24,
-                        text = 'waaay better answer!',
-                        comment = 'improved answer1',
+                        text = 'waaay better problem!',
+                        comment = 'improved problem1',
                     )
         notifications = get_re_notif_after(timestamp)
         self.assertEqual(len(notifications), 1)
@@ -564,15 +564,15 @@ class OnScreenUpdateNotificationTests(TestCase):
             ]
         )
 
-    def test_new_answer(self):
+    def test_new_problem(self):
         self.reset_response_counts()
         time.sleep(1)
         timestamp = datetime.datetime.now()
-        self.answer3 = models.Post.objects.create_new_answer(
+        self.problem3 = models.Post.objects.create_new_problem(
                             thread = self.thread,
                             author = self.u11,
                             added_at = timestamp,
-                            text = 'answer3'
+                            text = 'problem3'
                         )
         time_end = datetime.datetime.now()
         notifications = get_re_notif_after(timestamp)
@@ -596,11 +596,11 @@ class OnScreenUpdateNotificationTests(TestCase):
         self.reset_response_counts()
         time.sleep(1)
         timestamp = datetime.datetime.now()
-        self.answer3 = models.Post.objects.create_new_answer(
+        self.problem3 = models.Post.objects.create_new_problem(
                             thread = self.thread,
                             author = self.u31,
                             added_at = timestamp,
-                            text = 'answer4'
+                            text = 'problem4'
                         )
         notifications = get_re_notif_after(timestamp)
         self.assertEqual(len(notifications), 1)

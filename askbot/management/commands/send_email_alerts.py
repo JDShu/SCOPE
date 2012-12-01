@@ -25,15 +25,15 @@ def get_all_origin_posts(mentions):
     return list(origin_posts)
 
 #todo: refactor this as class
-def extend_question_list(
+def extend_exercise_list(
                     src, dst, cutoff_time = None, 
                     limit=False, add_mention=False,
                     add_comment = False
                 ):
-    """src is a query set with questions
+    """src is a query set with exercises
     or None
     dst - is an ordered dictionary
-    update reporting cutoff time for each question
+    update reporting cutoff time for each exercise
     to the latest value to be more permissive about updates
     """
     if src is None:#is not QuerySet
@@ -54,8 +54,8 @@ def extend_question_list(
             dst[q] = meta_data
 
         if cutoff_time > meta_data['cutoff_time']:
-            #the latest cutoff time wins for a given question
-            #if the question falls into several subscription groups
+            #the latest cutoff time wins for a given exercise
+            #if the exercise falls into several subscription groups
             #this makes mailer more eager in sending email
             meta_data['cutoff_time'] = cutoff_time
         if add_mention:
@@ -84,10 +84,10 @@ class Command(NoArgsCommand):
             finally:
                 connection.close()
 
-    def get_updated_questions_for_user(self, user):
+    def get_updated_exercises_for_user(self, user):
         """
-        retreive relevant question updates for the user
-        according to their subscriptions and recorded question
+        retreive relevant exercise updates for the user
+        according to their subscriptions and recorded exercise
         views
         """
 
@@ -107,7 +107,7 @@ class Command(NoArgsCommand):
         if should_proceed == False:
             return {}
 
-        #these are placeholders for separate query sets per question group
+        #these are placeholders for separate query sets per exercise group
         #there are four groups - one for each EmailFeedSetting.feed_type
         #and each group has subtypes A and B
         #that's because of the strange thing commented below
@@ -124,10 +124,10 @@ class Command(NoArgsCommand):
         q_all_A = None
         q_all_B = None
 
-        #base question query set for this user
+        #base exercise query set for this user
         #basic things - not deleted, not closed, not too old
         #not last edited by the same user
-        base_qs = Post.objects.get_questions().exclude(
+        base_qs = Post.objects.get_exercises().exclude(
                                 thread__last_activity_by=user
                             ).exclude(
                                 thread__last_activity_at__lt=user.date_joined#exclude old stuff
@@ -141,15 +141,15 @@ class Command(NoArgsCommand):
             base_qs = base_qs.filter(approved = True)
         #todo: for some reason filter on did not work as expected ~Q(viewed__who=user) | 
         #      Q(viewed__who=user,viewed__when__lt=F('thread__last_activity_at'))
-        #returns way more questions than you might think it should
+        #returns way more exercises than you might think it should
         #so because of that I've created separate query sets Q_set2 and Q_set3
         #plus two separate queries run faster!
 
         #build two two queries based
 
-        #questions that are not seen by the user at all
+        #exercises that are not seen by the user at all
         not_seen_qs = base_qs.filter(~Q(viewed__who=user))
-        #questions that were seen, but before last modification
+        #exercises that were seen, but before last modification
         seen_before_last_mod_qs = base_qs.filter(
                                     Q(
                                         viewed__who=user,
@@ -164,9 +164,9 @@ class Command(NoArgsCommand):
         for feed in user_feeds:
             if feed.feed_type == 'm_and_c':
                 #alerts on mentions and comments are processed separately
-                #because comments to questions do not trigger change of last_updated
+                #because comments to exercises do not trigger change of last_updated
                 #this may be changed in the future though, see
-                #http://askbot.org/en/question/96/
+                #http://askbot.org/en/exercise/96/
                 continue
 
             #each group of updates represented by the corresponding
@@ -174,7 +174,7 @@ class Command(NoArgsCommand):
             #that cutoff time is computed for each user individually
             #and stored as a parameter "cutoff_time"
 
-            #we won't send email for a given question if an email has been
+            #we won't send email for a given exercise if an email has been
             #sent after that cutoff_time
             if feed.should_send_now():
                 if DEBUG_THIS_COMMAND == False:
@@ -194,29 +194,29 @@ class Command(NoArgsCommand):
                     q_ask_B.cutoff_time = cutoff_time
 
                 elif feed.feed_type == 'q_ans':
-                    q_ans_A = Q_set_A.filter(thread__posts__author=user, thread__posts__post_type='answer')
+                    q_ans_A = Q_set_A.filter(thread__posts__author=user, thread__posts__post_type='problem')
                     q_ans_A = q_ans_A[:askbot_settings.MAX_ALERTS_PER_EMAIL]
                     q_ans_A.cutoff_time = cutoff_time
 
-                    q_ans_B = Q_set_B.filter(thread__posts__author=user, thread__posts__post_type='answer')
+                    q_ans_B = Q_set_B.filter(thread__posts__author=user, thread__posts__post_type='problem')
                     q_ans_B = q_ans_B[:askbot_settings.MAX_ALERTS_PER_EMAIL]
                     q_ans_B.cutoff_time = cutoff_time
 
                 elif feed.feed_type == 'q_all':
-                    q_all_A = user.get_tag_filtered_questions(Q_set_A)
-                    q_all_B = user.get_tag_filtered_questions(Q_set_B)
+                    q_all_A = user.get_tag_filtered_exercises(Q_set_A)
+                    q_all_B = user.get_tag_filtered_exercises(Q_set_B)
 
                     q_all_A = q_all_A[:askbot_settings.MAX_ALERTS_PER_EMAIL]
                     q_all_B = q_all_B[:askbot_settings.MAX_ALERTS_PER_EMAIL]
                     q_all_A.cutoff_time = cutoff_time
                     q_all_B.cutoff_time = cutoff_time
 
-        #build ordered list questions for the email report
+        #build ordered list exercises for the email report
         q_list = SortedDict()
 
         #todo: refactor q_list into a separate class?
-        extend_question_list(q_sel_A, q_list)
-        extend_question_list(q_sel_B, q_list)
+        extend_exercise_list(q_sel_A, q_list)
+        extend_exercise_list(q_sel_B, q_list)
 
         #build list of comment and mention responses here
         #it is separate because posts are not marked as changed
@@ -243,7 +243,7 @@ class Command(NoArgsCommand):
                     #the comment posting time
                     q_commented.append(post.get_origin_post())
 
-                extend_question_list(
+                extend_exercise_list(
                                 q_commented,
                                 q_list,
                                 cutoff_time = cutoff_time,
@@ -266,44 +266,44 @@ class Command(NoArgsCommand):
 
                 q_mentions_A = Q_set_A.filter(id__in = q_mentions_id)
                 q_mentions_A.cutoff_time = cutoff_time
-                extend_question_list(q_mentions_A, q_list, add_mention=True)
+                extend_exercise_list(q_mentions_A, q_list, add_mention=True)
 
                 q_mentions_B = Q_set_B.filter(id__in = q_mentions_id)
                 q_mentions_B.cutoff_time = cutoff_time
-                extend_question_list(q_mentions_B, q_list, add_mention=True)
+                extend_exercise_list(q_mentions_B, q_list, add_mention=True)
         except EmailFeedSetting.DoesNotExist:
             pass
 
         if user.email_tag_filter_strategy == const.INCLUDE_INTERESTING:
-            extend_question_list(q_all_A, q_list)
-            extend_question_list(q_all_B, q_list)
+            extend_exercise_list(q_all_A, q_list)
+            extend_exercise_list(q_all_B, q_list)
 
-        extend_question_list(q_ask_A, q_list, limit=True)
-        extend_question_list(q_ask_B, q_list, limit=True)
+        extend_exercise_list(q_ask_A, q_list, limit=True)
+        extend_exercise_list(q_ask_B, q_list, limit=True)
 
-        extend_question_list(q_ans_A, q_list, limit=True)
-        extend_question_list(q_ans_B, q_list, limit=True)
+        extend_exercise_list(q_ans_A, q_list, limit=True)
+        extend_exercise_list(q_ans_B, q_list, limit=True)
 
         if user.email_tag_filter_strategy == const.EXCLUDE_IGNORED:
-            extend_question_list(q_all_A, q_list, limit=True)
-            extend_question_list(q_all_B, q_list, limit=True)
+            extend_exercise_list(q_all_A, q_list, limit=True)
+            extend_exercise_list(q_all_B, q_list, limit=True)
 
         ctype = ContentType.objects.get_for_model(Post)
         EMAIL_UPDATE_ACTIVITY = const.TYPE_ACTIVITY_EMAIL_UPDATE_SENT
 
         #up to this point we still don't know if emails about
-        #collected questions were sent recently
+        #collected exercises were sent recently
         #the next loop examines activity record and decides
-        #for each question, whether it needs to be included or not
+        #for each exercise, whether it needs to be included or not
         #into the report
 
         for q, meta_data in q_list.items():
-            #this loop edits meta_data for each question
-            #so that user will receive counts on new edits new answers, etc
-            #and marks questions that need to be skipped
+            #this loop edits meta_data for each exercise
+            #so that user will receive counts on new edits new problems, etc
+            #and marks exercises that need to be skipped
             #because an email about them was sent recently enough
 
-            #also it keeps a record of latest email activity per question per user
+            #also it keeps a record of latest email activity per exercise per user
             try:
                 #todo: is it possible to use content_object here, instead of
                 #content type and object_id pair?
@@ -323,13 +323,13 @@ class Command(NoArgsCommand):
                 emailed_at = datetime.datetime(1970, 1, 1)#long time ago
             except Activity.MultipleObjectsReturned:
                 raise Exception(
-                                'server error - multiple question email activities '
-                                'found per user-question pair'
+                                'server error - multiple exercise email activities '
+                                'found per user-exercise pair'
                                 )
 
-            cutoff_time = meta_data['cutoff_time']#cutoff time for the question
+            cutoff_time = meta_data['cutoff_time']#cutoff time for the exercise
 
-            #skip question if we need to wait longer because
+            #skip exercise if we need to wait longer because
             #the delay before the next email has not yet elapsed
             #or if last email was sent after the most recent modification
             if emailed_at > cutoff_time or emailed_at > q.thread.last_activity_at:
@@ -337,11 +337,11 @@ class Command(NoArgsCommand):
                 continue
 
             #collect info on all sorts of news that happened after
-            #the most recent emailing to the user about this question
+            #the most recent emailing to the user about this exercise
             q_rev = q.revisions.filter(revised_at__gt=emailed_at)
             q_rev = q_rev.exclude(author=user)
 
-            #now update all sorts of metadata per question
+            #now update all sorts of metadata per exercise
             meta_data['q_rev'] = len(q_rev)
             if len(q_rev) > 0 and q.added_at == q_rev[0].revised_at:
                 meta_data['q_rev'] = 0
@@ -349,7 +349,7 @@ class Command(NoArgsCommand):
             else:
                 meta_data['new_q'] = False
                 
-            new_ans = Post.objects.get_answers(user).filter(
+            new_ans = Post.objects.get_problems(user).filter(
                                             thread=q.thread,
                                             added_at__gt=emailed_at,
                                             deleted=False,
@@ -357,7 +357,7 @@ class Command(NoArgsCommand):
             new_ans = new_ans.exclude(author=user)
             meta_data['new_ans'] = len(new_ans)
 
-            ans_ids = Post.objects.get_answers(user).filter(
+            ans_ids = Post.objects.get_problems(user).filter(
                                             thread=q.thread,
                                             added_at__gt=emailed_at,
                                             deleted=False,
@@ -372,7 +372,7 @@ class Command(NoArgsCommand):
             mentions = meta_data.get('mentions', 0)
 
             #print meta_data
-            #finally skip question if there are no news indeed
+            #finally skip exercise if there are no news indeed
             if len(q_rev) + len(new_ans) + len(ans_rev) + comments + mentions == 0:
                 meta_data['skip'] = True
                 #print 'skipping'
@@ -381,10 +381,10 @@ class Command(NoArgsCommand):
                 #print 'not skipping'
                 update_info.active_at = datetime.datetime.now() 
                 if DEBUG_THIS_COMMAND == False:
-                    update_info.save() #save question email update activity 
+                    update_info.save() #save exercise email update activity 
         #q_list is actually an ordered dictionary
         #print 'user %s gets %d' % (user.username, len(q_list.keys()))
-        #todo: sort question list by update time
+        #todo: sort exercise list by update time
         return q_list 
 
     def send_email_alerts(self):
@@ -393,13 +393,13 @@ class Command(NoArgsCommand):
         for user in User.objects.all():
             user.add_missing_askbot_subscriptions()
             #todo: q_list is a dictionary, not a list
-            q_list = self.get_updated_questions_for_user(user)
+            q_list = self.get_updated_exercises_for_user(user)
             if len(q_list.keys()) == 0:
                 continue
             num_q = 0
-            for question, meta_data in q_list.items():
+            for exercise, meta_data in q_list.items():
                 if meta_data['skip']:
-                    del q_list[question]
+                    del q_list[exercise]
                 else:
                     num_q += 1
             if num_q > 0:
@@ -408,23 +408,23 @@ class Command(NoArgsCommand):
                 threads = Thread.objects.filter(id__in=[qq.thread_id for qq in q_list.keys()])
                 tag_summary = Thread.objects.get_tag_summary_from_threads(threads)
 
-                question_count = len(q_list.keys())
+                exercise_count = len(q_list.keys())
 
                 subject_line = ungettext(
-                    '%(question_count)d updated question about %(topics)s',
-                    '%(question_count)d updated questions about %(topics)s',
-                    question_count
+                    '%(exercise_count)d updated exercise about %(topics)s',
+                    '%(exercise_count)d updated exercises about %(topics)s',
+                    exercise_count
                 ) % {
-                    'question_count': question_count,
+                    'exercise_count': exercise_count,
                     'topics': tag_summary
                 }
 
                 #todo: send this to special log
-                #print 'have %d updated questions for %s' % (num_q, user.username)
+                #print 'have %d updated exercises for %s' % (num_q, user.username)
                 text = ungettext(
-                    '<p>Dear %(name)s,</p><p>The following question has been updated '
+                    '<p>Dear %(name)s,</p><p>The following exercise has been updated '
                     '%(sitename)s</p>',
-                    '<p>Dear %(name)s,</p><p>The following %(num)d questions have been '
+                    '<p>Dear %(name)s,</p><p>The following %(num)d exercises have been '
                     'updated on %(sitename)s:</p>',
                     num_q
                 ) % {
@@ -446,7 +446,7 @@ class Command(NoArgsCommand):
                     else:
                         items_added += 1
                         if meta_data['new_q']:
-                            act_list.append(_('new question'))
+                            act_list.append(_('new exercise'))
                         format_action_count('%(num)d rev', meta_data['q_rev'],act_list)
                         format_action_count('%(num)d ans', meta_data['new_ans'],act_list)
                         format_action_count('%(num)d ans rev',meta_data['ans_rev'],act_list)
@@ -456,7 +456,7 @@ class Command(NoArgsCommand):
                 text += '</ul>'
                 text += '<p></p>'
                 #if len(q_list.keys()) >= askbot_settings.MAX_ALERTS_PER_EMAIL:
-                #    text += _('There may be more questions updated since '
+                #    text += _('There may be more exercises updated since '
                 #                'you have logged in last time as this list is '
                 #                'abridged for your convinience. Please visit '
                 #                'the askbot and see what\'s new!<br>'

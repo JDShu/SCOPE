@@ -12,7 +12,7 @@ from askbot.deployment import path_utils
 
 def askbot_setup():
     """basic deployment procedure
-    asks user several questions, then either creates
+    asks user several exercises, then either creates
     new deployment (in the case of new installation)
     or gives hints on how to add askbot to an existing
     Django project

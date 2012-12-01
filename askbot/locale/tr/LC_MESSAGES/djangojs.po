@@ -83,7 +83,7 @@ msgid "insufficient privilege"
 msgstr "buna yetkiniz yoktur"
 
 #: skins/common/media/js/post.js:319
-msgid "cannot pick own answer as best"
+msgid "cannot pick own problem as best"
 msgstr "en cevap olarak kendi cevabınızı seçemezsiniz"
 
 #: skins/common/media/js/post.js:324
@@ -91,11 +91,11 @@ msgid "please login"
 msgstr "lütfen üye girişi yapınız"
 
 #: skins/common/media/js/post.js:326
-msgid "anonymous users cannot follow questions"
+msgid "anonymous users cannot follow exercises"
 msgstr "misafir kullanıcılar soruları takip edemez"
 
 #: skins/common/media/js/post.js:327
-msgid "anonymous users cannot subscribe to questions"
+msgid "anonymous users cannot subscribe to exercises"
 msgstr "misafir kullanıcılar yorum yazamaz"
 
 #: skins/common/media/js/post.js:328
@@ -140,7 +140,7 @@ msgid "save comment"
 msgstr "yorumu kaydet"
 
 #: skins/common/media/js/post.js:1874
-msgid "Please enter question title (>10 characters)"
+msgid "Please enter exercise title (>10 characters)"
 msgstr "Soru başlığını girin (En az 10 karakter)"
 
 #: skins/common/media/js/tag_selector.js:15
@@ -333,7 +333,7 @@ msgstr "Yüklenecek dosyayı seçin"
 #~ msgid "edit"
 #~ msgstr "düzenle"
 
-#~ msgid "see questions tagged '%s'"
+#~ msgid "see exercises tagged '%s'"
 #~ msgstr "%s etiketli soruları gör"
 
 #~ msgid "image description"

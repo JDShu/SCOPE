@@ -611,23 +611,23 @@ def show_signin_view(
 
     #todo: this sthuff must be executed on some signal
     #because askbot should have nothing to do with the login app
-    from askbot.models import AnonymousQuestion as AQ
+    from askbot.models import AnonymousExercise as AQ
     session_key = request.session.session_key
-    logging.debug('retrieving anonymously posted question associated with session %s' % session_key)
+    logging.debug('retrieving anonymously posted exercise associated with session %s' % session_key)
     qlist = AQ.objects.filter(session_key=session_key).order_by('-added_at')
     if len(qlist) > 0:
-        question = qlist[0]
+        exercise = qlist[0]
     else:
-        question = None
+        exercise = None
 
-    from askbot.models import AnonymousAnswer as AA
+    from askbot.models import AnonymousProblem as AA
     session_key = request.session.session_key
-    logging.debug('retrieving posted answer associated with session %s' % session_key)
+    logging.debug('retrieving posted problem associated with session %s' % session_key)
     alist = AA.objects.filter(session_key=session_key).order_by('-added_at')
     if len(alist) > 0:
-        answer = alist[0]
+        problem = alist[0]
     else:
-        answer = None
+        problem = None
 
     if request.user.is_authenticated():
         existing_login_methods = UserAssociation.objects.filter(user = request.user)
@@ -672,8 +672,8 @@ def show_signin_view(
         'page_class': 'openid-signin',
         'view_subtype': view_subtype, #add_openid|default
         'page_title': page_title,
-        'question':question,
-        'answer':answer,
+        'exercise':exercise,
+        'problem':problem,
         'login_form': login_form,
         'use_password_login': util.use_password_login(),
         'account_recovery_form': account_recovery_form,

@@ -24,13 +24,13 @@ def fix_revisionless_posts(post_class):
             post.save()
 
 class Command(NoArgsCommand):
-    """Command class for "fix_answer_counts" 
+    """Command class for "fix_problem_counts" 
     """
 
     def remove_save_signals(self):
         """removes signals on model pre-save and
         post-save, so that there are no side-effects
-        besides actually updating the answer counts
+        besides actually updating the problem counts
         """
         signals.pre_save.receivers = []
         signals.post_save.receivers = []

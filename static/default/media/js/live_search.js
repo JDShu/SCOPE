@@ -56,8 +56,8 @@ var liveSearch = function(query_string) {
     var query_val = function () {return $.trim(query.val());};
     var prev_text = query_val();
     var running = false;
-    var q_list_sel = 'question-list';//id of question listing div
-    var search_url = askbot['urls']['questions'];
+    var q_list_sel = 'exercise-list';//id of exercise listing div
+    var search_url = askbot['urls']['exercises'];
     var x_button = $('input[name=reset_query]');
     var tag_warning_box = new TagWarningBox();
 
@@ -71,8 +71,8 @@ var liveSearch = function(query_string) {
         if (search_tags.length === 0) {
             return;
         }
-        /** @todo: the questions/ might need translation... */
-        query_string = '/questions/scope:all/sort:activity-desc/page:1/'
+        /** @todo: the exercises/ might need translation... */
+        query_string = '/exercises/scope:all/sort:activity-desc/page:1/'
         $.each(search_tags, function(idx, tag) {
             query_string = QSutils.add_search_tag(query_string, search_tags);
         });
@@ -190,13 +190,13 @@ var liveSearch = function(query_string) {
 
     var updateHistory = function(url) {
         var context = { state:1, rand:Math.random() };
-        History.pushState( context, "Questions", url );
+        History.pushState( context, "Exercises", url );
         setTimeout(function (){
             /* HACK: For some weird reson, sometimes something overrides the above pushState so we re-aplly it
                      This might be caused by some other JS plugin.
                      The delay of 10msec allows the other plugin to override the URL.
             */
-            History.replaceState( context, "Questions", url );
+            History.replaceState( context, "Exercises", url );
         }, 10);
     };
 
@@ -310,9 +310,9 @@ var liveSearch = function(query_string) {
     };
 
     var render_result = function(data, text_status, xhr){
-        if (data['questions'].length > 0){
+        if (data['exercises'].length > 0){
             $('#pager').toggle(data['paginator'] !== '').html(data['paginator']);
-            $('#questionCount').html(data['question_counter']);
+            $('#exerciseCount').html(data['exercise_counter']);
             render_search_tags(data['query_data']['tags'], data['query_string']);
             if(data['faces'].length > 0) {
                 $('#contrib-users > a').remove();
@@ -335,7 +335,7 @@ var liveSearch = function(query_string) {
                 $(this).attr('href', search_url + qs);
             });
 
-            // Patch "Ask your question"
+            // Patch "Add your exercise"
             var askButton = $('#askButton');
             var askHrefBase = askButton.attr('href').split('?')[0];
             askButton.attr('href', askHrefBase + data['query_data']['ask_query_string']); /* INFO: ask_query_string should already be URL-encoded! */
@@ -343,7 +343,7 @@ var liveSearch = function(query_string) {
             query.focus();
 
             var old_list = $('#' + q_list_sel);
-            var new_list = $('<div></div>').hide().html(data['questions']);
+            var new_list = $('<div></div>').hide().html(data['exercises']);
             new_list.find('.timeago').timeago();
             old_list.stop(true).after(new_list).fadeOut(200, function() {
                 //show new div with a fadeIn effect

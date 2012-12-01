@@ -170,19 +170,19 @@ These are not set in stone yet.
 +----------------------------+------------------------+
 | page url                   | class name             |
 +============================+========================+
-| /questions/                | main-page              |
+| /exercises/                | main-page              |
 +----------------------------+------------------------+
-| /questions/ask/            | ask-page               |
+| /exercises/ask/            | ask-page               |
 +----------------------------+------------------------+
 | /tags                      | tags-page              |
 +----------------------------+------------------------+
-| /question/<id>/<slug>      | question-page          |
+| /exercise/<id>/<slug>      | exercise-page          |
 +----------------------------+------------------------+
-| /questions/<id>/revisions  | revisions-page         |
+| /exercises/<id>/revisions  | revisions-page         |
 +----------------------------+------------------------+
-| /questions/<id>/edit       | question-edit-page     |
+| /exercises/<id>/edit       | exercise-edit-page     |
 +----------------------------+------------------------+
-| /answers/<id>/revisions    | revisions-page         |
+| /problems/<id>/revisions    | revisions-page         |
 +----------------------------+------------------------+
 | /users/                    | users-page             |
 +----------------------------+------------------------+
@@ -220,10 +220,10 @@ The general template layout is controlled by a few files described below:
 +------------------------------------+------------------------------------------------------+
 | two_column_body.html               | This is a base layout for two column style pages.    |
 +------------------------------------+------------------------------------------------------+
-| widgets/answer_edit_tips.html      | Contains text displayed as "Answer Edit Tips" in the |
-|                                    | answer edit page.                                    |
+| widgets/problem_edit_tips.html      | Contains text displayed as "Problem Edit Tips" in the |
+|                                    | problem edit page.                                    |
 +------------------------------------+------------------------------------------------------+
-| widgets/ask_form.html              | Contains the form to ask a question.                 |
+| widgets/ask_form.html              | Contains the form to add an exercise.                 |
 +------------------------------------+------------------------------------------------------+
 | widgets/bottom_scripts.html        | Contains javascript calls and some javascript        |
 |                                    | functions needed for askbot this is included at the  |
@@ -241,8 +241,8 @@ The general template layout is controlled by a few files described below:
 +------------------------------------+------------------------------------------------------+
 | widgets/paginator.html             | Renders the paginator in the main page.              |
 +------------------------------------+------------------------------------------------------+
-| widgets/question_edit_tips.html    | Contains text displayed as "Question Edit Tips" in   |
-|                                    | the question edit page.                              |
+| widgets/exercise_edit_tips.html    | Contains text displayed as "Exercise Edit Tips" in   |
+|                                    | the exercise edit page.                              |
 +------------------------------------+------------------------------------------------------+
 | widgets/secondary_header.html      | Containter for the search bar section.               |
 +------------------------------------+------------------------------------------------------+
@@ -261,10 +261,10 @@ widgets folder and are called from several places in the templates.
 +----------------------------+------------------------------+--------------------------------+
 | Widget name                | Used in                      | Description                    |
 +============================+==============================+================================+
-| ask_button.html            | widgets/secondary_header.html | Just the "ask a question"      | 
+| ask_button.html            | widgets/secondary_header.html | Just the "add an exercise"      | 
 |                            |                              | button                         |
 +----------------------------+------------------------------+--------------------------------+
-| answer_controls.html       | question.html                | Answer operation links, edit   | 
+| problem_controls.html       | exercise.html                | Problem operation links, edit   | 
 |                            |                              | report as spam and more.       |
 +----------------------------+------------------------------+--------------------------------+
 | contributors.html          | main_page/sidebar.html       | Widget to display contributors | 
@@ -276,17 +276,17 @@ widgets folder and are called from several places in the templates.
 +----------------------------+------------------------------+--------------------------------+
 | meta_nav.html              | widgets/header.html          | Widget for the me logo.        | 
 +----------------------------+------------------------------+--------------------------------+
-| question_controls.html     | question.html                | Question operation links, edit | 
+| exercise_controls.html     | exercise.html                | Exercise operation links, edit | 
 |                            |                              | report as spam and more.       |
 +----------------------------+------------------------------+--------------------------------+
-| question_vote_buttons.html | question.html                | Vote buttons used in question  | 
+| exercise_vote_buttons.html | exercise.html                | Vote buttons used in exercise  | 
 +----------------------------+------------------------------+--------------------------------+
-| related_tags.html          | main_page/sidebar.html       | Question operation links, edit | 
+| related_tags.html          | main_page/sidebar.html       | Exercise operation links, edit | 
 |                            |                              | report as spam and more.       |
 +----------------------------+------------------------------+--------------------------------+
 | search_bar.html            | widgets/secondary_header.html| Contains the search bar.       | 
 +----------------------------+------------------------------+--------------------------------+
-| share_buttons.html         | question.html                | Widget to show the social      | 
+| share_buttons.html         | exercise.html                | Widget to show the social      | 
 |                            |                              | sharing buttons.               |
 +----------------------------+------------------------------+--------------------------------+
 | tag_selector.html          | main_page/sidebar.html       | Contains the tag selector for  | 
@@ -305,23 +305,23 @@ which file is called is in the following table.
 +----------------------------+-----------------------------+--------------------------------+
 | Page url                   | Template file               | Macros used                    |
 +============================+=============================+================================+
-| /questions/                | main_page.html              |                                |
+| /exercises/                | main_page.html              |                                |
 +----------------------------+-----------------------------+--------------------------------+
-| /questions/ask/            | ask.html                    |                                |
+| /exercises/ask/            | ask.html                    |                                |
 +----------------------------+-----------------------------+--------------------------------+
 | /tags                      | tags.html                   | tag_widget, paginator,         | 
 |                            |                             | tag_cloud                      |
 +----------------------------+-----------------------------+--------------------------------+
-| /question/<id>/<slug>      | question.html               | tag_widget, edit_post          |
+| /exercise/<id>/<slug>      | exercise.html               | tag_widget, edit_post          |
 |                            |                             | checkbox_in_div, share         |
 +----------------------------+-----------------------------+--------------------------------+
-| /questions/<id>/revisions  | revisions.html              | post_contributor_info          |
+| /exercises/<id>/revisions  | revisions.html              | post_contributor_info          |
 +----------------------------+-----------------------------+--------------------------------+
-| /questions/<id>/edit       | question-edit.html          | tag_autocomplete_js,           |
+| /exercises/<id>/edit       | exercise-edit.html          | tag_autocomplete_js,           |
 |                            |                             | checkbox_in_div,               |
 |                            |                             | edit_post                      |
 +----------------------------+-----------------------------+--------------------------------+
-| /answers/<id>/revisions    | revisions.html              | post_contributor_info          |
+| /problems/<id>/revisions    | revisions.html              | post_contributor_info          |
 +----------------------------+-----------------------------+--------------------------------+
 | /users/                    | users.html                  | users_list, paginator          |
 +----------------------------+-----------------------------+--------------------------------+

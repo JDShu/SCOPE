@@ -31,8 +31,8 @@ class ManagementCommandTests(AskbotTestCase):
         """Verify a users account can be transfered to another user"""
         # Create a new user and add some random related objects
         user_one = self.create_user()
-        question = self.post_question(user=user_one)
-        comment = self.post_comment(user=user_one, parent_post=question)
+        exercise = self.post_exercise(user=user_one)
+        comment = self.post_comment(user=user_one, parent_post=exercise)
         number_of_gold = 50
         user_one.gold = number_of_gold 
         reputation = 20
@@ -44,7 +44,7 @@ class ManagementCommandTests(AskbotTestCase):
         # Check that the first user was deleted
         self.assertEqual(models.User.objects.filter(pk=user_one.id).count(), 0)
         # Explicitly check that the values assigned to user_one are now user_two's
-        self.assertEqual(user_two.posts.get_questions().filter(pk=question.id).count(), 1)
+        self.assertEqual(user_two.posts.get_exercises().filter(pk=exercise.id).count(), 1)
         self.assertEqual(user_two.posts.get_comments().filter(pk=comment.id).count(), 1)
         #todo: change groups to django groups
         #then replace to 3 back to 2 in the line below

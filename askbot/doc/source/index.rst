@@ -4,11 +4,11 @@
 Documentation Home
 ==================
 
-Askbot is an open source Question and Answer (Q&A) forum project inspired by StackOverflow 
-and YahooAnswers.
+Askbot is an open source Exercise and Problem (Q&A) forum project inspired by StackOverflow 
+and YahooProblems.
 
 It is quick and easy to install and deploy askbot on your site.
-Have questions? - please ask
+Have exercises? - please ask
 at the forum_ or by email at admin@askbot.org
 
 .. toctree::
@@ -36,7 +36,7 @@ Code of Askbot grew out of CNPROG project originally written by
 Mike Chen and Sailing Cai.
 
 .. _Python: http://www.python.org/download/
-.. _YahooAnswers: http://answers.yahoo.com/
+.. _YahooProblems: http://problems.yahoo.com/
 .. _StackOverflow: http://stackoverflow.com/
 .. _Django: http://djangoproject.com
 .. _CNPROG: http://cnprog.com

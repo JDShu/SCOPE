@@ -1,7 +1,7 @@
 {% import "macros.html" as macros %}
-{% if questions_count > 0 %}
-        <h1 id="questionCount" class="search-result-summary">
-            {% trans cnt=questions_count, q_num=questions_count|intcomma %}{{q_num}} question{% pluralize %}{{q_num}} questions{% endtrans %}
+{% if exercises_count > 0 %}
+        <h1 id="exerciseCount" class="search-result-summary">
+            {% trans cnt=exercises_count, q_num=exercises_count|intcomma %}{{q_num}} exercise{% pluralize %}{{q_num}} exercises{% endtrans %}
         {% if author_name %}
             {% trans %}with {{author_name}}'s contributions{% endtrans %}
         {% endif %}
@@ -28,10 +28,10 @@
                     <a href="{{ search_state.remove_tags().full_url() }}">{% trans %}reset tags{% endtrans %}</a>
                 {% endif %}
                 {% if query %}{% trans %} or {% endtrans %}
-                    <a href="{% url questions %}">{% trans %}start over{% endtrans %}</a>
+                    <a href="{% url exercises %}">{% trans %}start over{% endtrans %}</a>
                 {% endif %}
             {% else %}
-                <a href="{% url questions %}">{% trans %}start over{% endtrans %}</a>
+                <a href="{% url exercises %}">{% trans %}start over{% endtrans %}</a>
             {% endif %}
             {% trans %} - to expand, or dig in by adding more tags and revising the query.{% endtrans %}
             </p>

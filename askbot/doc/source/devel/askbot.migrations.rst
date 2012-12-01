@@ -15,7 +15,7 @@
 
 
 * :ref:`askbot.migrations.0001_initial`
-* :ref:`askbot.migrations.0002_auto__add_field_answer_text__chg_field_answer_html__add_field_question`
+* :ref:`askbot.migrations.0002_auto__add_field_problem_text__chg_field_problem_html__add_field_exercise`
 * :ref:`askbot.migrations.0003_copy_denorm_text_record_to_posts_for_fulltext_search`
 * :ref:`askbot.migrations.0004_install_full_text_indexes_for_mysql`
 * :ref:`askbot.migrations.0005_install_badges`

@@ -87,7 +87,7 @@ msgid "insufficient privilege"
 msgstr "privilège insuffisant"
 
 #: skins/common/media/js/post.js:319
-msgid "cannot pick own answer as best"
+msgid "cannot pick own problem as best"
 msgstr "désolé, vous ne pouvez pas accepter votre propre réponse"
 
 #: skins/common/media/js/post.js:324
@@ -95,12 +95,12 @@ msgid "please login"
 msgstr "merci de vous identifier"
 
 #: skins/common/media/js/post.js:326
-msgid "anonymous users cannot follow questions"
-msgstr "les utilisateurs anonymes ne peuvent pas suivre une question"
+msgid "anonymous users cannot follow exercises"
+msgstr "les utilisateurs anonymes ne peuvent pas suivre une exercise"
 
 #: skins/common/media/js/post.js:327
-msgid "anonymous users cannot subscribe to questions"
-msgstr "les utilisateurs anonymes ne peuvent pas souscrire à une question"
+msgid "anonymous users cannot subscribe to exercises"
+msgstr "les utilisateurs anonymes ne peuvent pas souscrire à une exercise"
 
 #: skins/common/media/js/post.js:328
 msgid "anonymous users cannot vote"
@@ -150,8 +150,8 @@ msgid "save comment"
 msgstr "sauvegarder un commentaire"
 
 #: skins/common/media/js/post.js:1874
-msgid "Please enter question title (>10 characters)"
-msgstr "Veuillez entrer le titre de la question (>10 caractères)"
+msgid "Please enter exercise title (>10 characters)"
+msgstr "Veuillez entrer le titre de la exercise (>10 caractères)"
 
 #: skins/common/media/js/tag_selector.js:15
 msgid "Tag \"<span></span>\" matches:"
@@ -336,8 +336,8 @@ msgstr "Merci de choisir un fichier et de le télécharger vers le serveur:"
 #~ msgid "edit"
 #~ msgstr "modifier"
 
-#~ msgid "see questions tagged '%s'"
-#~ msgstr "voir les questions marquées '%s'"
+#~ msgid "see exercises tagged '%s'"
+#~ msgstr "voir les exercises marquées '%s'"
 
 #~ msgid "image description"
 #~ msgstr "description de l'image"

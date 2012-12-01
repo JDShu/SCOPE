@@ -10,8 +10,8 @@ exactly match name of the model used in the project
 from django.contrib import admin
 from askbot import models
 
-class AnonymousQuestionAdmin(admin.ModelAdmin):
-    """AnonymousQuestion admin class"""
+class AnonymousExerciseAdmin(admin.ModelAdmin):
+    """AnonymousExercise admin class"""
 
 class TagAdmin(admin.ModelAdmin):
     """Tag admin class"""
@@ -19,7 +19,7 @@ class TagAdmin(admin.ModelAdmin):
 class VoteAdmin(admin.ModelAdmin):
     """  admin class"""
 
-class FavoriteQuestionAdmin(admin.ModelAdmin):
+class FavoriteExerciseAdmin(admin.ModelAdmin):
     """  admin class"""
 
 class PostRevisionAdmin(admin.ModelAdmin):
@@ -37,7 +37,7 @@ class ActivityAdmin(admin.ModelAdmin):
 admin.site.register(models.Post)
 admin.site.register(models.Tag, TagAdmin)
 admin.site.register(models.Vote, VoteAdmin)
-admin.site.register(models.FavoriteQuestion, FavoriteQuestionAdmin)
+admin.site.register(models.FavoriteExercise, FavoriteExerciseAdmin)
 admin.site.register(models.PostRevision, PostRevisionAdmin)
 admin.site.register(models.Award, AwardAdmin)
 admin.site.register(models.Repute, ReputeAdmin)

@@ -16,7 +16,7 @@ from askbot import models
 from askbot import mail
 from askbot.conf import settings as askbot_settings
 from askbot import const
-from askbot.models.question import Thread
+from askbot.models.exercise import Thread
 
 TO_JSON = functools.partial(serializers.serialize, 'json')
 
@@ -25,7 +25,7 @@ def email_alert_test(test_func):
     :class:`~askbot.tests.email_alert_tests.EmailAlertTests`
     wraps tests with a generic sequence of testing
     email alerts on updates to anything relating to
-    given question
+    given exercise
     """
     @functools.wraps(test_func)
     def wrapped_test(test_object, *args, **kwargs):
@@ -35,8 +35,8 @@ def email_alert_test(test_func):
             #run the main codo of the test function
             test_func(test_object)
             #if visit_timestamp is set,
-            #target user will visit the question at that time
-            test_object.maybe_visit_question()
+            #target user will visit the exercise at that time
+            test_object.maybe_visit_exercise()
             test_object.send_alerts()
             test_object.check_results(test_name)
         else:
@@ -54,10 +54,10 @@ def setup_email_alert_tests(setup_func):
         #functions
         test_object.setup_timestamp = datetime.datetime.now()
 
-        #timestamp to use for the question visit
+        #timestamp to use for the exercise visit
         #by the target user
         #if this timestamp is None then there will be no visit
-        #otherwise question will be visited by the target user
+        #otherwise exercise will be visited by the target user
         #at that time
         test_object.visit_timestamp = None
 
@@ -67,22 +67,22 @@ def setup_email_alert_tests(setup_func):
         test_object.expected_results = dict()
 
         #do not follow by default (do not use q_sel type subscription)
-        test_object.follow_question = False
+        test_object.follow_exercise = False
 
         #fill out expected result for each test
         test_object.expected_results['q_ask'] = {'message_count': 0, }
-        test_object.expected_results['q_ask_delete_answer'] = {'message_count': 0, }
-        test_object.expected_results['question_comment'] = {'message_count': 0, }
-        test_object.expected_results['question_comment_delete'] = {'message_count': 0, }
-        test_object.expected_results['answer_comment'] = {'message_count': 0, }
-        test_object.expected_results['answer_delete_comment'] = {'message_count': 0, }
-        test_object.expected_results['mention_in_question'] = {'message_count': 0, }
-        test_object.expected_results['mention_in_answer'] = {'message_count': 0, }
-        test_object.expected_results['question_edit'] = {'message_count': 0, }
-        test_object.expected_results['answer_edit'] = {'message_count': 0, }
-        test_object.expected_results['question_and_answer_by_target'] = {'message_count': 0, }
+        test_object.expected_results['q_ask_delete_problem'] = {'message_count': 0, }
+        test_object.expected_results['exercise_comment'] = {'message_count': 0, }
+        test_object.expected_results['exercise_comment_delete'] = {'message_count': 0, }
+        test_object.expected_results['problem_comment'] = {'message_count': 0, }
+        test_object.expected_results['problem_delete_comment'] = {'message_count': 0, }
+        test_object.expected_results['mention_in_exercise'] = {'message_count': 0, }
+        test_object.expected_results['mention_in_problem'] = {'message_count': 0, }
+        test_object.expected_results['exercise_edit'] = {'message_count': 0, }
+        test_object.expected_results['problem_edit'] = {'message_count': 0, }
+        test_object.expected_results['exercise_and_problem_by_target'] = {'message_count': 0, }
         test_object.expected_results['q_ans'] = {'message_count': 0, }
-        test_object.expected_results['q_ans_new_answer'] = {'message_count': 0, }
+        test_object.expected_results['q_ans_new_problem'] = {'message_count': 0, }
 
         #this function is expected to contain a difference between this
         #one and the desired setup within the concrete test
@@ -201,7 +201,7 @@ class EmailAlertTests(TestCase):
             ):
         """todo: this method may also edit other stuff
         like post title and tags - in the case when post is
-        of type question
+        of type exercise
         """
         if timestamp is None:
             timestamp = self.setup_timestamp
@@ -212,31 +212,31 @@ class EmailAlertTests(TestCase):
                     comment = 'nothing serious'
                 )
 
-    def post_question(
+    def post_exercise(
                 self,
                 author = None,
                 timestamp = None,
-                title = 'test question title',
-                body_text = 'test question body',
+                title = 'test exercise title',
+                body_text = 'test exercise body',
                 tags = 'test',
             ):
-        """post a question with dummy content
+        """post a exercise with dummy content
         and return it
         """
         if timestamp is None:
             timestamp = self.setup_timestamp
-        self.question = author.post_question(
+        self.exercise = author.post_exercise(
                             title = title,
                             body_text = body_text,
                             tags = tags,
                             timestamp = timestamp
                         )
-        if self.follow_question:
-            self.target_user.follow_question(self.question)
-        return self.question
+        if self.follow_exercise:
+            self.target_user.follow_exercise(self.exercise)
+        return self.exercise
 
-    def maybe_visit_question(self, user = None):
-        """visits question on behalf of a given user and applies
+    def maybe_visit_exercise(self, user = None):
+        """visits exercise on behalf of a given user and applies
         a timestamp set in the class attribute ``visit_timestamp``
 
         if ``visit_timestamp`` is None, then visit is skipped
@@ -248,33 +248,33 @@ class EmailAlertTests(TestCase):
             if user is None:
                 user = self.target_user
             user.visit_post(
-                        question = self.question,
+                        exercise = self.exercise,
                         timestamp = self.visit_timestamp
                     )
 
-    def post_answer(
+    def post_problem(
                 self,
-                question = None,
+                exercise = None,
                 author = None,
-                body_text = 'test answer body',
+                body_text = 'test problem body',
                 timestamp = None,
                 follow = None,#None - do nothing, True/False - follow/unfollow
             ):
-        """post answer with dummy content and return it
+        """post problem with dummy content and return it
         """
         if timestamp is None:
             timestamp = self.setup_timestamp
 
         if follow is None:
-            if author.is_following_question(question):
+            if author.is_following_exercise(exercise):
                 follow = True
             else:
                 follow = False
         elif follow not in (True, False):
             raise ValueError('"follow" may be only None, True or False')
 
-        return author.post_answer(
-                    question = question,
+        return author.post_problem(
+                    exercise = exercise,
                     body_text = body_text,
                     timestamp = timestamp,
                     follow = follow,
@@ -305,180 +305,180 @@ class EmailAlertTests(TestCase):
                             error_message
                         )
 
-    def proto_post_answer_comment(self):
+    def proto_post_problem_comment(self):
         """base method for use in some tests
         """
-        question = self.post_question(
+        exercise = self.post_exercise(
                             author = self.other_user
                         )
-        answer = self.post_answer(
-                            question = question,
+        problem = self.post_problem(
+                            exercise = exercise,
                             author = self.target_user
                         )
         comment = self.post_comment(
-                    parent_post = answer,
+                    parent_post = problem,
                     author = self.other_user,
                 )
         return comment
 
     @email_alert_test
-    def test_answer_comment(self):
-        """target user posts answer and other user posts a comment
-        to the answer
+    def test_problem_comment(self):
+        """target user posts problem and other user posts a comment
+        to the problem
         """
-        self.proto_post_answer_comment()
+        self.proto_post_problem_comment()
 
     @email_alert_test
-    def test_answer_delete_comment(self):
-        comment = self.proto_post_answer_comment()
+    def test_problem_delete_comment(self):
+        comment = self.proto_post_problem_comment()
         comment.get_owner().delete_comment(comment = comment)
 
     @email_alert_test
-    def test_question_edit(self):
-        question = self.post_question(
+    def test_exercise_edit(self):
+        exercise = self.post_exercise(
                                 author = self.target_user
                             )
         self.edit_post(
-                    post = question,
+                    post = exercise,
                     author = self.other_user
                 )
-        self.question = question
+        self.exercise = exercise
 
     @email_alert_test
-    def test_answer_edit(self):
-        question = self.post_question(
+    def test_problem_edit(self):
+        exercise = self.post_exercise(
                                 author = self.target_user
                             )
-        answer = self.post_answer(
-                                question = question,
+        problem = self.post_problem(
+                                exercise = exercise,
                                 author = self.target_user
                             )
         self.edit_post(
-                    post = answer,
+                    post = problem,
                     author = self.other_user
                 )
-        self.question = question
+        self.exercise = exercise
 
     @email_alert_test
-    def test_question_and_answer_by_target(self):
-        question = self.post_question(
+    def test_exercise_and_problem_by_target(self):
+        exercise = self.post_exercise(
                                 author = self.target_user
                             )
-        answer = self.post_answer(
-                                question = question,
+        problem = self.post_problem(
+                                exercise = exercise,
                                 author = self.target_user
                             )
-        self.question = question
+        self.exercise = exercise
 
-    def proto_question_comment(self):
-        question = self.post_question(
+    def proto_exercise_comment(self):
+        exercise = self.post_exercise(
                     author = self.target_user,
                 )
         comment = self.post_comment(
                     author = self.other_user,
-                    parent_post = question,
+                    parent_post = exercise,
                 )
         return comment
 
     @email_alert_test
-    def test_question_comment(self):
-        """target user posts question other user posts a comment
+    def test_exercise_comment(self):
+        """target user posts exercise other user posts a comment
         target user does or does not receive email notification
         depending on the setup parameters
 
         in the base class user does not receive a notification
         """
-        self.proto_question_comment()
+        self.proto_exercise_comment()
 
     @email_alert_test
-    def test_question_comment_delete(self):
-        """target user posts question other user posts a comment
+    def test_exercise_comment_delete(self):
+        """target user posts exercise other user posts a comment
         target user does or does not receive email notification
         depending on the setup parameters
 
         in the base class user does not receive a notification
         """
-        comment = self.proto_question_comment()
+        comment = self.proto_exercise_comment()
         comment.get_owner().delete_comment(comment)
 
     def proto_test_q_ask(self):
         """base method for tests that
-        have name containing q_ask - i.e. target asks other answers
-        answer is returned
+        have name containing q_ask - i.e. target asks other problems
+        problem is returned
         """
-        question = self.post_question(
+        exercise = self.post_exercise(
                     author = self.target_user,
                 )
-        answer = self.post_answer(
-                    question = question,
+        problem = self.post_problem(
+                    exercise = exercise,
                     author = self.other_user,
                 )
-        return answer
+        return problem
 
     @email_alert_test
     def test_q_ask(self):
-        """target user posts question
-        other user answer the question
+        """target user posts exercise
+        other user problem the exercise
         """
         self.proto_test_q_ask()
 
     @email_alert_test
-    def test_q_ask_delete_answer(self):
-        answer = self.proto_test_q_ask()
-        self.other_user.delete_post(answer)
+    def test_q_ask_delete_problem(self):
+        problem = self.proto_test_q_ask()
+        self.other_user.delete_post(problem)
 
     @email_alert_test
     def test_q_ans(self):
-        """other user posts question
-        target user post answer
+        """other user posts exercise
+        target user post problem
         """
-        question = self.post_question(
+        exercise = self.post_exercise(
                                 author = self.other_user,
                             )
-        self.post_answer(
-                    question = question,
+        self.post_problem(
+                    exercise = exercise,
                     author = self.target_user
                 )
-        self.question = question
+        self.exercise = exercise
 
     @email_alert_test
-    def test_q_ans_new_answer(self):
-        """other user posts question
-        target user post answer and other user
-        posts another answer
+    def test_q_ans_new_problem(self):
+        """other user posts exercise
+        target user post problem and other user
+        posts another problem
         """
-        question = self.post_question(
+        exercise = self.post_exercise(
                                 author = self.other_user,
                             )
-        self.post_answer(
-                    question = question,
+        self.post_problem(
+                    exercise = exercise,
                     author = self.target_user
                 )
-        self.post_answer(
-                    question = question,
+        self.post_problem(
+                    exercise = exercise,
                     author = self.other_user
                 )
-        self.question = question
+        self.exercise = exercise
 
     @email_alert_test
-    def test_mention_in_question(self):
-        question = self.post_question(
+    def test_mention_in_exercise(self):
+        exercise = self.post_exercise(
                                 author = self.other_user,
                                 body_text = 'hey @target get this'
                             )
-        self.question = question
+        self.exercise = exercise
 
     @email_alert_test
-    def test_mention_in_answer(self):
-        question = self.post_question(
+    def test_mention_in_problem(self):
+        exercise = self.post_exercise(
                                 author = self.other_user,
                             )
-        self.post_answer(
-                    question = question,
+        self.post_problem(
+                    exercise = exercise,
                     author = self.other_user,
                     body_text = 'hey @target check this out'
                 )
-        self.question = question
+        self.exercise = exercise
 
 class WeeklyQAskEmailAlertTests(EmailAlertTests):
     @setup_email_alert_tests
@@ -486,42 +486,42 @@ class WeeklyQAskEmailAlertTests(EmailAlertTests):
         self.notification_schedule['q_ask'] = 'w'
         self.setup_timestamp = datetime.datetime.now() - datetime.timedelta(14)
         self.expected_results['q_ask'] = {'message_count': 1}
-        self.expected_results['q_ask_delete_answer'] = {'message_count': 0}
-        self.expected_results['question_edit'] = {'message_count': 1, }
-        self.expected_results['answer_edit'] = {'message_count': 1, }
+        self.expected_results['q_ask_delete_problem'] = {'message_count': 0}
+        self.expected_results['exercise_edit'] = {'message_count': 1, }
+        self.expected_results['problem_edit'] = {'message_count': 1, }
 
         #local tests
-        self.expected_results['question_edit_reedited_recently'] = \
+        self.expected_results['exercise_edit_reedited_recently'] = \
                                                     {'message_count': 1}
-        self.expected_results['answer_edit_reedited_recently'] = \
+        self.expected_results['problem_edit_reedited_recently'] = \
                                                     {'message_count': 1}
 
     @email_alert_test
-    def test_question_edit_reedited_recently(self):
-        question = self.post_question(
+    def test_exercise_edit_reedited_recently(self):
+        exercise = self.post_exercise(
                         author = self.target_user
                     )
         self.edit_post(
-                    post = question,
+                    post = exercise,
                     author = self.other_user,
                 )
         self.edit_post(
-                    post = question,
+                    post = exercise,
                     author = self.other_user,
                     timestamp = datetime.datetime.now() - datetime.timedelta(1)
                 )
 
     @email_alert_test
-    def test_answer_edit_reedited_recently(self):
-        question = self.post_question(
+    def test_problem_edit_reedited_recently(self):
+        exercise = self.post_exercise(
                         author = self.target_user
                     )
-        answer = self.post_answer(
-                    question = question,
+        problem = self.post_problem(
+                    exercise = exercise,
                     author = self.other_user,
                 )
         self.edit_post(
-                    post = answer,
+                    post = problem,
                     author = self.other_user,
                     timestamp = datetime.datetime.now() - datetime.timedelta(1)
                 )
@@ -531,20 +531,20 @@ class WeeklyMentionsAndCommentsEmailAlertTests(EmailAlertTests):
     def setUp(self):
         self.notification_schedule['m_and_c'] = 'w'
         self.setup_timestamp = datetime.datetime.now() - datetime.timedelta(14)
-        self.expected_results['question_comment'] = {'message_count': 1, }
-        self.expected_results['question_comment_delete'] = {'message_count': 0, }
-        self.expected_results['answer_comment'] = {'message_count': 1, }
-        self.expected_results['answer_delete_comment'] = {'message_count': 0, }
-        self.expected_results['mention_in_question'] = {'message_count': 1, }
-        self.expected_results['mention_in_answer'] = {'message_count': 1, }
+        self.expected_results['exercise_comment'] = {'message_count': 1, }
+        self.expected_results['exercise_comment_delete'] = {'message_count': 0, }
+        self.expected_results['problem_comment'] = {'message_count': 1, }
+        self.expected_results['problem_delete_comment'] = {'message_count': 0, }
+        self.expected_results['mention_in_exercise'] = {'message_count': 1, }
+        self.expected_results['mention_in_problem'] = {'message_count': 1, }
 
 class WeeklyQAnsEmailAlertTests(EmailAlertTests):
     @setup_email_alert_tests
     def setUp(self):
         self.notification_schedule['q_ans'] = 'w'
         self.setup_timestamp = datetime.datetime.now() - datetime.timedelta(14)
-        self.expected_results['answer_edit'] = {'message_count': 1, }
-        self.expected_results['q_ans_new_answer'] = {'message_count': 1, }
+        self.expected_results['problem_edit'] = {'message_count': 1, }
+        self.expected_results['q_ans_new_problem'] = {'message_count': 1, }
 
 class InstantQAskEmailAlertTests(EmailAlertTests):
     @setup_email_alert_tests
@@ -552,9 +552,9 @@ class InstantQAskEmailAlertTests(EmailAlertTests):
         self.notification_schedule['q_ask'] = 'i'
         self.setup_timestamp = datetime.datetime.now() - datetime.timedelta(1)
         self.expected_results['q_ask'] = {'message_count': 1}
-        self.expected_results['q_ask_delete_answer'] = {'message_count': 1}
-        self.expected_results['question_edit'] = {'message_count': 1, }
-        self.expected_results['answer_edit'] = {'message_count': 1, }
+        self.expected_results['q_ask_delete_problem'] = {'message_count': 1}
+        self.expected_results['exercise_edit'] = {'message_count': 1, }
+        self.expected_results['problem_edit'] = {'message_count': 1, }
 
 class InstantWholeForumEmailAlertTests(EmailAlertTests):
     @setup_email_alert_tests
@@ -563,22 +563,22 @@ class InstantWholeForumEmailAlertTests(EmailAlertTests):
         self.setup_timestamp = datetime.datetime.now() - datetime.timedelta(1)
 
         self.expected_results['q_ask'] = {'message_count': 1, }
-        self.expected_results['q_ask_delete_answer'] = {'message_count': 1}
-        self.expected_results['question_comment'] = {'message_count': 1, }
-        self.expected_results['question_comment_delete'] = {'message_count': 1, }
-        self.expected_results['answer_comment'] = {'message_count': 2, }
-        self.expected_results['answer_delete_comment'] = {'message_count': 2, }
-        self.expected_results['mention_in_question'] = {'message_count': 1, }
-        self.expected_results['mention_in_answer'] = {'message_count': 2, }
-        self.expected_results['question_edit'] = {'message_count': 1, }
-        self.expected_results['answer_edit'] = {'message_count': 1, }
-        self.expected_results['question_and_answer_by_target'] = {'message_count': 0, }
+        self.expected_results['q_ask_delete_problem'] = {'message_count': 1}
+        self.expected_results['exercise_comment'] = {'message_count': 1, }
+        self.expected_results['exercise_comment_delete'] = {'message_count': 1, }
+        self.expected_results['problem_comment'] = {'message_count': 2, }
+        self.expected_results['problem_delete_comment'] = {'message_count': 2, }
+        self.expected_results['mention_in_exercise'] = {'message_count': 1, }
+        self.expected_results['mention_in_problem'] = {'message_count': 2, }
+        self.expected_results['exercise_edit'] = {'message_count': 1, }
+        self.expected_results['problem_edit'] = {'message_count': 1, }
+        self.expected_results['exercise_and_problem_by_target'] = {'message_count': 0, }
         self.expected_results['q_ans'] = {'message_count': 1, }
-        self.expected_results['q_ans_new_answer'] = {'message_count': 2, }
+        self.expected_results['q_ans_new_problem'] = {'message_count': 2, }
 
-class BlankWeeklySelectedQuestionsEmailAlertTests(EmailAlertTests):
+class BlankWeeklySelectedExercisesEmailAlertTests(EmailAlertTests):
     """blank means that this is testing for the absence of email
-    because questions are not followed as set by default in the
+    because exercises are not followed as set by default in the
     parent class
     """
     @setup_email_alert_tests
@@ -586,9 +586,9 @@ class BlankWeeklySelectedQuestionsEmailAlertTests(EmailAlertTests):
         self.notification_schedule['q_sel'] = 'w'
         self.setup_timestamp = datetime.datetime.now() - datetime.timedelta(14)
 
-class BlankInstantSelectedQuestionsEmailAlertTests(EmailAlertTests):
+class BlankInstantSelectedExercisesEmailAlertTests(EmailAlertTests):
     """blank means that this is testing for the absence of email
-    because questions are not followed as set by default in the
+    because exercises are not followed as set by default in the
     parent class
     """
     @setup_email_alert_tests
@@ -596,78 +596,78 @@ class BlankInstantSelectedQuestionsEmailAlertTests(EmailAlertTests):
         self.notification_schedule['q_sel'] = 'i'
         self.setup_timestamp = datetime.datetime.now() - datetime.timedelta(1)
 
-class LiveWeeklySelectedQuestionsEmailAlertTests(EmailAlertTests):
+class LiveWeeklySelectedExercisesEmailAlertTests(EmailAlertTests):
     """live means that this is testing for the presence of email
-    as all questions are automatically followed by user here
+    as all exercises are automatically followed by user here
     """
     @setup_email_alert_tests
     def setUp(self):
         self.notification_schedule['q_sel'] = 'w'
         self.setup_timestamp = datetime.datetime.now() - datetime.timedelta(14)
-        self.follow_question = True
+        self.follow_exercise = True
 
         self.expected_results['q_ask'] = {'message_count': 1, }
-        self.expected_results['q_ask_delete_answer'] = {'message_count': 0}
-        self.expected_results['question_comment'] = {'message_count': 0, }
-        self.expected_results['question_comment_delete'] = {'message_count': 0, }
-        self.expected_results['answer_comment'] = {'message_count': 0, }
-        self.expected_results['answer_delete_comment'] = {'message_count': 0, }
-        self.expected_results['mention_in_question'] = {'message_count': 1, }
-        self.expected_results['mention_in_answer'] = {'message_count': 1, }
-        self.expected_results['question_edit'] = {'message_count': 1, }
-        self.expected_results['answer_edit'] = {'message_count': 1, }
-        self.expected_results['question_and_answer_by_target'] = {'message_count': 0, }
+        self.expected_results['q_ask_delete_problem'] = {'message_count': 0}
+        self.expected_results['exercise_comment'] = {'message_count': 0, }
+        self.expected_results['exercise_comment_delete'] = {'message_count': 0, }
+        self.expected_results['problem_comment'] = {'message_count': 0, }
+        self.expected_results['problem_delete_comment'] = {'message_count': 0, }
+        self.expected_results['mention_in_exercise'] = {'message_count': 1, }
+        self.expected_results['mention_in_problem'] = {'message_count': 1, }
+        self.expected_results['exercise_edit'] = {'message_count': 1, }
+        self.expected_results['problem_edit'] = {'message_count': 1, }
+        self.expected_results['exercise_and_problem_by_target'] = {'message_count': 0, }
         self.expected_results['q_ans'] = {'message_count': 0, }
-        self.expected_results['q_ans_new_answer'] = {'message_count': 1, }
+        self.expected_results['q_ans_new_problem'] = {'message_count': 1, }
 
-class LiveInstantSelectedQuestionsEmailAlertTests(EmailAlertTests):
+class LiveInstantSelectedExercisesEmailAlertTests(EmailAlertTests):
     """live means that this is testing for the presence of email
-    as all questions are automatically followed by user here
+    as all exercises are automatically followed by user here
     """
     @setup_email_alert_tests
     def setUp(self):
         self.notification_schedule['q_sel'] = 'i'
         #first posts yesterday
         self.setup_timestamp = datetime.datetime.now() - datetime.timedelta(1)
-        self.follow_question = True
+        self.follow_exercise = True
 
         self.expected_results['q_ask'] = {'message_count': 1, }
-        self.expected_results['q_ask_delete_answer'] = {'message_count': 1}
-        self.expected_results['question_comment'] = {'message_count': 1, }
-        self.expected_results['question_comment_delete'] = {'message_count': 1, }
-        self.expected_results['answer_comment'] = {'message_count': 1, }
-        self.expected_results['answer_delete_comment'] = {'message_count': 1, }
-        self.expected_results['mention_in_question'] = {'message_count': 0, }
-        self.expected_results['mention_in_answer'] = {'message_count': 1, }
-        self.expected_results['question_edit'] = {'message_count': 1, }
-        self.expected_results['answer_edit'] = {'message_count': 1, }
-        self.expected_results['question_and_answer_by_target'] = {'message_count': 0, }
+        self.expected_results['q_ask_delete_problem'] = {'message_count': 1}
+        self.expected_results['exercise_comment'] = {'message_count': 1, }
+        self.expected_results['exercise_comment_delete'] = {'message_count': 1, }
+        self.expected_results['problem_comment'] = {'message_count': 1, }
+        self.expected_results['problem_delete_comment'] = {'message_count': 1, }
+        self.expected_results['mention_in_exercise'] = {'message_count': 0, }
+        self.expected_results['mention_in_problem'] = {'message_count': 1, }
+        self.expected_results['exercise_edit'] = {'message_count': 1, }
+        self.expected_results['problem_edit'] = {'message_count': 1, }
+        self.expected_results['exercise_and_problem_by_target'] = {'message_count': 0, }
         self.expected_results['q_ans'] = {'message_count': 0, }
-        self.expected_results['q_ans_new_answer'] = {'message_count': 1, }
+        self.expected_results['q_ans_new_problem'] = {'message_count': 1, }
 
 class InstantMentionsAndCommentsEmailAlertTests(EmailAlertTests):
     @setup_email_alert_tests
     def setUp(self):
         self.notification_schedule['m_and_c'] = 'i'
         self.setup_timestamp = datetime.datetime.now() - datetime.timedelta(1)
-        self.expected_results['question_comment'] = {'message_count': 1, }
-        self.expected_results['question_comment_delete'] = {'message_count': 1, }
-        self.expected_results['answer_comment'] = {'message_count': 1, }
-        self.expected_results['answer_delete_comment'] = {'message_count': 1, }
-        self.expected_results['mention_in_question'] = {'message_count': 1, }
-        self.expected_results['mention_in_answer'] = {'message_count': 1, }
+        self.expected_results['exercise_comment'] = {'message_count': 1, }
+        self.expected_results['exercise_comment_delete'] = {'message_count': 1, }
+        self.expected_results['problem_comment'] = {'message_count': 1, }
+        self.expected_results['problem_delete_comment'] = {'message_count': 1, }
+        self.expected_results['mention_in_exercise'] = {'message_count': 1, }
+        self.expected_results['mention_in_problem'] = {'message_count': 1, }
 
         #specialized local test case
-        self.expected_results['question_edited_mention_stays'] = {'message_count': 1}
+        self.expected_results['exercise_edited_mention_stays'] = {'message_count': 1}
 
     @email_alert_test
-    def test_question_edited_mention_stays(self):
-        question = self.post_question(
+    def test_exercise_edited_mention_stays(self):
+        exercise = self.post_exercise(
                         author = self.other_user,
                         body_text = 'hey @target check this one',
                     )
         self.edit_post(
-                    post = question,
+                    post = exercise,
                     author = self.other_user,
                     body_text = 'yoyo @target do look here'
                 )
@@ -678,8 +678,8 @@ class InstantQAnsEmailAlertTests(EmailAlertTests):
     def setUp(self):
         self.notification_schedule['q_ans'] = 'i'
         self.setup_timestamp = datetime.datetime.now() - datetime.timedelta(1)
-        self.expected_results['answer_edit'] = {'message_count': 1, }
-        self.expected_results['q_ans_new_answer'] = {'message_count': 1, }
+        self.expected_results['problem_edit'] = {'message_count': 1, }
+        self.expected_results['q_ans_new_problem'] = {'message_count': 1, }
 
 class DelayedAlertSubjectLineTests(TestCase):
     def test_topics_in_subject_line(self):
@@ -750,7 +750,7 @@ class TagFollowedInstantWholeForumEmailAlertTests(utils.AskbotTestCase):
         )
 
     def test_wildcard_catches_new_tag(self):
-        """users asks a question with a brand new tag
+        """users asks a exercise with a brand new tag
         and other user subscribes to it by wildcard
         """
         askbot_settings.update('USE_WILDCARD_TAGS', True)
@@ -761,9 +761,9 @@ class TagFollowedInstantWholeForumEmailAlertTests(utils.AskbotTestCase):
             reason = 'good',
             action = 'add'
         )
-        self.user2.post_question(
+        self.user2.post_exercise(
             title = 'some title',
-            body_text = 'some text for the question',
+            body_text = 'some text for the exercise',
             tags = 'something'
         )
         outbox = django.core.mail.outbox
@@ -773,9 +773,9 @@ class TagFollowedInstantWholeForumEmailAlertTests(utils.AskbotTestCase):
             self.user1.email in outbox[0].recipients()
         )
 
-    def test_tag_based_subscription_on_new_question_works(self):
+    def test_tag_based_subscription_on_new_exercise_works(self):
         """someone subscribes for an pre-existing tag
-        then another user asks a question with that tag
+        then another user asks a exercise with that tag
         and the subcriber receives an alert
         """
         models.Tag(
@@ -790,9 +790,9 @@ class TagFollowedInstantWholeForumEmailAlertTests(utils.AskbotTestCase):
             reason = 'good',
             action = 'add'
         )
-        self.user2.post_question(
+        self.user2.post_exercise(
             title = 'some title',
-            body_text = 'some text for the question',
+            body_text = 'some text for the exercise',
             tags = 'something'
         )
         outbox = django.core.mail.outbox
@@ -804,10 +804,10 @@ class TagFollowedInstantWholeForumEmailAlertTests(utils.AskbotTestCase):
 
 class EmailReminderTestCase(utils.AskbotTestCase):
     #subclass must define these (example below)
-    #enable_setting_name = 'ENABLE_UNANSWERED_REMINDERS'
-    #frequency_setting_name = 'UNANSWERED_REMINDER_FREQUENCY'
-    #days_before_setting_name = 'DAYS_BEFORE_SENDING_UNANSWERED_REMINDER'
-    #max_reminder_setting_name = 'MAX_UNANSWERED_REMINDERS'
+    #enable_setting_name = 'ENABLE_EXERCISE_WITHOUT_PROBLEM_REMINDERS'
+    #frequency_setting_name = 'EXERCISE_WITHOUT_PROBLEM_REMINDER_FREQUENCY'
+    #days_before_setting_name = 'DAYS_BEFORE_SENDING_EXERCISE_WITHOUT_PROBLEM_REMINDER'
+    #max_reminder_setting_name = 'MAX_EXERCISE_WITHOUT_PROBLEM_REMINDERS'
 
     def setUp(self):
         self.u1 = self.create_user(username = 'user1')
@@ -827,28 +827,28 @@ class EmailReminderTestCase(utils.AskbotTestCase):
         self.assertEqual(len(outbox), email_count)
 
     def do_post(self, timestamp):
-        self.question = self.post_question(
+        self.exercise = self.post_exercise(
             user = self.u1,
             timestamp = timestamp
         )
 
 
-class AcceptAnswerReminderTests(EmailReminderTestCase):
+class AcceptProblemReminderTests(EmailReminderTestCase):
     """only two test cases here, because the algorithm here
-    is the same as for unanswered questons,
-    except here we are dealing with the questions that have
-    or do not have an accepted answer
+    is the same as for exercises without problems,
+    except here we are dealing with the exercises that have
+    or do not have an accepted problem
     """
-    enable_setting_name = 'ENABLE_ACCEPT_ANSWER_REMINDERS'
-    frequency_setting_name = 'ACCEPT_ANSWER_REMINDER_FREQUENCY'
-    days_before_setting_name = 'DAYS_BEFORE_SENDING_ACCEPT_ANSWER_REMINDER'
-    max_reminder_setting_name = 'MAX_ACCEPT_ANSWER_REMINDERS'
-    command_name = 'send_accept_answer_reminders'
+    enable_setting_name = 'ENABLE_ACCEPT_PROBLEM_REMINDERS'
+    frequency_setting_name = 'ACCEPT_PROBLEM_REMINDER_FREQUENCY'
+    days_before_setting_name = 'DAYS_BEFORE_SENDING_ACCEPT_PROBLEM_REMINDER'
+    max_reminder_setting_name = 'MAX_ACCEPT_PROBLEM_REMINDERS'
+    command_name = 'send_accept_problem_reminders'
 
     def do_post(self, timestamp):
-        super(AcceptAnswerReminderTests, self).do_post(timestamp)
-        self.answer = self.post_answer(
-            question = self.question,
+        super(AcceptProblemReminderTests, self).do_post(timestamp)
+        self.problem = self.post_problem(
+            exercise = self.exercise,
             user = self.u2,
             timestamp = timestamp
         )
@@ -862,23 +862,23 @@ class AcceptAnswerReminderTests(EmailReminderTestCase):
         self.assert_have_emails(1)
 
     def test_reminder_negative_wait(self):
-        """negative test - the answer is accepted already"""
+        """negative test - the problem is accepted already"""
         days_ago = self.wait_days
         timestamp = datetime.datetime.now() - datetime.timedelta(days_ago, 3600)
         self.do_post(timestamp)
-        self.u1.accept_best_answer(
-            answer = self.answer,
+        self.u1.accept_best_problem(
+            problem = self.problem,
         )
         self.assert_have_emails(0)
 
 
-class UnansweredReminderTests(EmailReminderTestCase):
+class without_problemReminderTests(EmailReminderTestCase):
 
-    enable_setting_name = 'ENABLE_UNANSWERED_REMINDERS'
-    frequency_setting_name = 'UNANSWERED_REMINDER_FREQUENCY'
-    days_before_setting_name = 'DAYS_BEFORE_SENDING_UNANSWERED_REMINDER'
-    max_reminder_setting_name = 'MAX_UNANSWERED_REMINDERS'
-    command_name = 'send_unanswered_question_reminders'
+    enable_setting_name = 'ENABLE_EXERCISE_WITHOUT_PROBLEM_REMINDERS'
+    frequency_setting_name = 'EXERCISE_WITHOUT_PROBLEM_REMINDER_FREQUENCY'
+    days_before_setting_name = 'DAYS_BEFORE_SENDING_EXERCISE_WITHOUT_PROBLEM_REMINDER'
+    max_reminder_setting_name = 'MAX_EXERCISE_WITHOUT_PROBLEM_REMINDERS'
+    command_name = 'send_exercise_without_problem_reminders'
 
     def test_reminder_positive_wait(self):
         """a positive test - user must receive a reminder
@@ -973,7 +973,7 @@ class EmailAlertTestsWithGroupsEnabled(utils.AskbotTestCase):
             'recipient',
             notification_schedule=models.EmailFeedSetting.MAX_EMAIL_SCHEDULE
         )
-        self.post_question(user=sender)
+        self.post_exercise(user=sender)
         outbox = django.core.mail.outbox
         self.assertEqual(len(outbox), 1)
         self.assertEqual(outbox[0].recipients(), [recipient.email])
@@ -1009,25 +1009,25 @@ class PostApprovalTests(utils.AskbotTestCase):
             self.self_notify_when
         )
 
-    def test_emailed_question_answerable_approval_notification(self):
+    def test_emailed_exercise_problemable_approval_notification(self):
         self.u1 = self.create_user('user1', status = 'a')#regular user
-        question = self.post_question(user = self.u1, by_email = True)
+        exercise = self.post_exercise(user = self.u1, by_email = True)
         outbox = django.core.mail.outbox
         #here we should get just the notification of the post
         #being placed on the moderation queue
         self.assertEquals(len(outbox), 1)
         self.assertEquals(outbox[0].recipients(), [self.u1.email])
 
-    def test_moderated_question_answerable_approval_notification(self):
+    def test_moderated_exercise_problemable_approval_notification(self):
         u1 = self.create_user('user1', status = 'a')
-        question = self.post_question(user = u1, by_email = True)
+        exercise = self.post_exercise(user = u1, by_email = True)
 
-        self.assertEquals(question.approved, False)
+        self.assertEquals(exercise.approved, False)
 
         u2 = self.create_user('admin', status = 'd')
 
-        self.assertEquals(question.revisions.count(), 1)
-        u2.approve_post_revision(question.get_latest_revision())
+        self.assertEquals(exercise.revisions.count(), 1)
+        u2.approve_post_revision(exercise.get_latest_revision())
 
         outbox = django.core.mail.outbox
         self.assertEquals(len(outbox), 1)
@@ -1044,7 +1044,7 @@ class AbsolutizeUrlsInEmailsTests(utils.AskbotTestCase):
         u2 = self.create_user('u2', notification_schedule=max_email)
         text = '<a href="/index.html">home</a>' + \
         '<img alt="an image" src=\'/img.png\'><a href="https://example.com"><img src="/img.png"/></a>'
-        question = self.post_question(user=u1, body_text=text)
+        exercise = self.post_exercise(user=u1, body_text=text)
         outbox = django.core.mail.outbox
         html_message = outbox[0].alternatives[0][0]
         content_type = outbox[0].alternatives[0][1]

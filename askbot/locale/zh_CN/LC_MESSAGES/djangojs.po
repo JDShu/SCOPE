@@ -91,7 +91,7 @@ msgid "insufficient privilege"
 msgstr "用户权限不在操作范围"
 
 #: skins/common/media/js/post.js:319
-msgid "cannot pick own answer as best"
+msgid "cannot pick own problem as best"
 msgstr "不能设置自己的回答为最佳答案"
 
 #: skins/common/media/js/post.js:324
@@ -100,12 +100,12 @@ msgstr "注册或者登录"
 
 # 100%
 #: skins/common/media/js/post.js:326
-msgid "anonymous users cannot follow questions"
+msgid "anonymous users cannot follow exercises"
 msgstr "匿名用户可跟踪提问"
 
 # 100%
 #: skins/common/media/js/post.js:327
-msgid "anonymous users cannot subscribe to questions"
+msgid "anonymous users cannot subscribe to exercises"
 msgstr "匿名用户不能订阅提问"
 
 # 100%
@@ -153,7 +153,7 @@ msgstr "保存评论"
 
 # 100%
 #: skins/common/media/js/post.js:1874
-msgid "Please enter question title (>10 characters)"
+msgid "Please enter exercise title (>10 characters)"
 msgstr "请输入提问标题 (>10 字符)"
 
 # 100%
@@ -352,7 +352,7 @@ msgstr "上传文件附件"
 #~ msgstr "编辑"
 
 # 100%
-#~ msgid "see questions tagged '%s'"
+#~ msgid "see exercises tagged '%s'"
 #~ msgstr "查看含标签“%s”的提问"
 
 # 100%

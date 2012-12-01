@@ -56,7 +56,7 @@ var charmap = [
 	['&brvbar;',  '&#166;',  true, 'broken bar'],
 	['&uml;',     '&#168;',  true, 'diaeresis'],
 	['&iexcl;',   '&#161;',  true, 'inverted exclamation mark'],
-	['&iquest;',  '&#191;',  true, 'turned question mark'],
+	['&iquest;',  '&#191;',  true, 'turned exercise mark'],
 	['&circ;',    '&#710;',  true, 'circumflex accent'],
 	['&tilde;',   '&#732;',  true, 'small tilde'],
 	['&deg;',     '&#176;',  true, 'degree sign'],

@@ -71,7 +71,7 @@ function output()
    
    document.write("<h1>Template for new translation</h1>");
    document.write("<textarea style='width: 100%; height: 600px'>");
-   document.write("// Note that the words ending with '/' (e.g. 'questions/') are directory names\n");
+   document.write("// Note that the words ending with '/' (e.g. 'exercises/') are directory names\n");
    document.write("// And need to be identical with the directory names\n");
    document.write("// in the basic server-side translation\n\n");
    

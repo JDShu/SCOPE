@@ -7,8 +7,8 @@ from askbot.conf import settings as askbot_settings
 
 NUM_USERS = 40
 # KEEP NEXT 3 SETTINGS LESS THAN OR EQUAL TO NUM_USERS!
-NUM_QUESTIONS = 40
-NUM_ANSWERS = 20
+NUM_EXERCISES = 40
+NUM_PROBLEMS = 20
 NUM_COMMENTS = 20
 
 # To ensure that all the actions can be made, repute each user high positive
@@ -21,15 +21,15 @@ BAD_STUFF = "<script>alert('hohoho')</script>"
 USERNAME_TEMPLATE = BAD_STUFF + "test_user_%s"
 PASSWORD_TEMPLATE = "test_password_%s"
 EMAIL_TEMPLATE = "test_user_%s@askbot.org"
-TITLE_TEMPLATE = "Question No.%s" + BAD_STUFF
+TITLE_TEMPLATE = "Exercise No.%s" + BAD_STUFF
 LONG_TITLE_TEMPLATE = TITLE_TEMPLATE + 'a lot more text a lot more text a lot more text '*5
-TAGS_TEMPLATE = [BAD_STUFF + "tag-%s-0", BAD_STUFF + "tag-%s-1"] # len(TAGS_TEMPLATE) tags per question
+TAGS_TEMPLATE = [BAD_STUFF + "tag-%s-0", BAD_STUFF + "tag-%s-1"] # len(TAGS_TEMPLATE) tags per exercise
 
 CONTENT_TEMPLATE = BAD_STUFF + """Lorem lean startup ipsum product market fit customer
                     development acquihire technical cofounder. User engagement
                     **A/B** testing *shrink* a market venture capital pitch."""
 
-ANSWER_TEMPLATE = BAD_STUFF + """Accelerator photo sharing business school drop out ramen
+PROBLEM_TEMPLATE = BAD_STUFF + """Accelerator photo sharing business school drop out ramen
                     hustle crush it revenue traction platforms."""
 
 COMMENT_TEMPLATE = BAD_STUFF + """Main differentiators business model micro economics
@@ -100,130 +100,130 @@ class Command(NoArgsCommand):
         return users
 
 
-    def create_questions(self, users):
-        "Create the questions and return the last one as active question"
+    def create_exercises(self, users):
+        "Create the exercises and return the last one as active exercise"
 
-        # Keeping the last active question entry for later use. Questions API
+        # Keeping the last active exercise entry for later use. Exercises API
         # might change, so we rely solely on User data entry API.
-        active_question = None
+        active_exercise = None
         last_vote = False
-        # Each user posts a question
-        for i in range(NUM_QUESTIONS):
+        # Each user posts a exercise
+        for i in range(NUM_EXERCISES):
             user = users[i]
-            # Downvote/upvote the questions - It's reproducible, yet
+            # Downvote/upvote the exercises - It's reproducible, yet
             # gives good randomized data
-            if not active_question is None:
+            if not active_exercise is None:
                 if last_vote:
-                    user.downvote(active_question)
-                    self.print_if_verbose("%s downvoted a question"%(
+                    user.downvote(active_exercise)
+                    self.print_if_verbose("%s downvoted a exercise"%(
                                         user.username
                                     ))
                 else:
-                    user.upvote(active_question)
-                    self.print_if_verbose("%s upvoted a question"%(
+                    user.upvote(active_exercise)
+                    self.print_if_verbose("%s upvoted a exercise"%(
                                         user.username
                                     ))
                 last_vote = ~last_vote
 
-            # len(TAGS_TEMPLATE) tags per question - each tag is different
+            # len(TAGS_TEMPLATE) tags per exercise - each tag is different
             tags = " ".join([t%user.id for t in TAGS_TEMPLATE])
-            if i < NUM_QUESTIONS/2:
+            if i < NUM_EXERCISES/2:
                 tags += ' one-tag'
 
             if i % 2 == 0:
-                question_template = TITLE_TEMPLATE
+                exercise_template = TITLE_TEMPLATE
             else:
-                question_template = LONG_TITLE_TEMPLATE
+                exercise_template = LONG_TITLE_TEMPLATE
 
-            active_question = user.post_question(
-                        title = question_template % user.id,
+            active_exercise = user.post_exercise(
+                        title = exercise_template % user.id,
                         body_text = CONTENT_TEMPLATE,
                         tags = tags,
                     )
 
-            self.print_if_verbose("Created Question '%s' with tags: '%s'" % (
-                                                active_question.thread.title, tags,)
+            self.print_if_verbose("Created Exercise '%s' with tags: '%s'" % (
+                                                active_exercise.thread.title, tags,)
                                             )
-        return active_question
+        return active_exercise
 
 
-    def create_answers(self, users, active_question):
-        "Create the answers for the active question, return the active answer"
-        active_answer = None
+    def create_problems(self, users, active_exercise):
+        "Create the problems for the active exercise, return the active problem"
+        active_problem = None
         last_vote = False
-        # Now, fill the last added question with answers
-        for user in users[:NUM_ANSWERS]:
+        # Now, fill the last added exercise with problems
+        for user in users[:NUM_PROBLEMS]:
             # We don't need to test for data validation, so ONLY users
-            # that aren't authors can post answer to the question
-            if not active_question.author is user:
-                # Downvote/upvote the answers - It's reproducible, yet
+            # that aren't authors can post problem to the exercise
+            if not active_exercise.author is user:
+                # Downvote/upvote the problems - It's reproducible, yet
                 # gives good randomized data
-                if not active_answer is None:
+                if not active_problem is None:
                     if last_vote:
-                        user.downvote(active_answer)
-                        self.print_if_verbose("%s downvoted an answer"%(
+                        user.downvote(active_problem)
+                        self.print_if_verbose("%s downvoted an problem"%(
                                             user.username
                                         ))
                     else:
-                        user.upvote(active_answer)
-                        self.print_if_verbose("%s upvoted an answer"%(
+                        user.upvote(active_problem)
+                        self.print_if_verbose("%s upvoted an problem"%(
                                             user.username
                                         ))
                     last_vote = ~last_vote
 
-                active_answer = user.post_answer(
-                        question = active_question,
-                        body_text = ANSWER_TEMPLATE,
+                active_problem = user.post_problem(
+                        exercise = active_exercise,
+                        body_text = PROBLEM_TEMPLATE,
                         follow = True
                     )
-                self.print_if_verbose("%s posted an answer to the active question"%(
+                self.print_if_verbose("%s posted an problem to the active exercise"%(
                                             user.username
                                         ))
-                # Upvote the active question
-                user.upvote(active_question)
-                # Follow the active question
-                user.follow_question(active_question)
-                self.print_if_verbose("%s followed the active question"%(
+                # Upvote the active exercise
+                user.upvote(active_exercise)
+                # Follow the active exercise
+                user.follow_exercise(active_exercise)
+                self.print_if_verbose("%s followed the active exercise"%(
                                                 user.username)
                                             )
-                # Subscribe to the active question
-                user.subscribe_for_followed_question_alerts()
-                self.print_if_verbose("%s subscribed to followed questions"%(
+                # Subscribe to the active exercise
+                user.subscribe_for_followed_exercise_alerts()
+                self.print_if_verbose("%s subscribed to followed exercises"%(
                                                 user.username)
                                             )
-        return active_answer
+        return active_problem
 
 
-    def create_comments(self, users, active_question, active_answer):
-        """Create the comments for the active question and the active answer,
-        return 2 active comments - 1 question comment and 1 answer comment"""
+    def create_comments(self, users, active_exercise, active_problem):
+        """Create the comments for the active exercise and the active problem,
+        return 2 active comments - 1 exercise comment and 1 problem comment"""
 
-        active_question_comment = None
-        active_answer_comment = None
+        active_exercise_comment = None
+        active_problem_comment = None
 
         for user in users[:NUM_COMMENTS]:
-            active_question_comment = user.post_comment(
-                                    parent_post = active_question,
+            active_exercise_comment = user.post_comment(
+                                    parent_post = active_exercise,
                                     body_text = COMMENT_TEMPLATE
                                 )
-            self.print_if_verbose("%s posted a question comment"%user.username)
-            active_answer_comment = user.post_comment(
-                                    parent_post = active_answer,
+            self.print_if_verbose("%s posted a exercise comment"%user.username)
+            active_problem_comment = user.post_comment(
+                                    parent_post = active_problem,
                                     body_text = COMMENT_TEMPLATE
                                 )
-            self.print_if_verbose("%s posted an answer comment"%user.username)
+            self.print_if_verbose("%s posted an problem comment"%user.username)
 
-            # Upvote the active answer
-            user.upvote(active_answer)
+            # Upvote the active problem
+            user.upvote(active_problem)
 
         # Upvote active comments
-        if active_question_comment and active_answer_comment:
+        if active_exercise_comment and active_problem_comment:
             num_upvotees = NUM_COMMENTS - 1
             for user in users[:num_upvotees]:
-                user.upvote(active_question_comment)
-                user.upvote(active_answer_comment)
+                user.upvote(active_exercise_comment)
+                user.upvote(active_problem_comment)
 
-        return active_question_comment, active_answer_comment
+        return active_exercise_comment, active_problem_comment
 
 
     def handle_noargs(self, **options):
@@ -231,9 +231,9 @@ class Command(NoArgsCommand):
         self.interactive = options.get("interactive")
 
         if self.interactive:
-            answer = choice_dialog("This command will DELETE ALL DATA in the current database, and will fill the database with test data. Are you absolutely sure you want to proceed?",
+            problem = choice_dialog("This command will DELETE ALL DATA in the current database, and will fill the database with test data. Are you absolutely sure you want to proceed?",
                             choices = ("yes", "no", ))
-            if answer != "yes":
+            if problem != "yes":
                 return
 
         self.save_alert_settings()
@@ -242,52 +242,52 @@ class Command(NoArgsCommand):
         # Create Users
         users = self.create_users()
 
-        # Create Questions, vote for questions
-        active_question = self.create_questions(users)
+        # Create Exercises, vote for exercises
+        active_exercise = self.create_exercises(users)
 
-        # Create Answers, vote for the answers, vote for the active question
-        # vote for the active answer
-        active_answer = self.create_answers(users, active_question)
+        # Create Problems, vote for the problems, vote for the active exercise
+        # vote for the active problem
+        active_problem = self.create_problems(users, active_exercise)
 
-        # Create Comments, vote for the active answer
-        active_question_comment, active_answer_comment = self.create_comments(
-                                users, active_question, active_answer)
+        # Create Comments, vote for the active problem
+        active_exercise_comment, active_problem_comment = self.create_comments(
+                                users, active_exercise, active_problem)
 
-        # Edit the active question, answer and comments
-        active_question.author.edit_question(
-                            question = active_question,
+        # Edit the active exercise, problem and comments
+        active_exercise.author.edit_exercise(
+                            exercise = active_exercise,
                             title = TITLE_TEMPLATE % "EDITED",
                             body_text = CONTENT_TEMPLATE,
                             revision_comment = "EDITED",
                             force = True
                         )
-        self.print_if_verbose("User has edited the active question")
+        self.print_if_verbose("User has edited the active exercise")
 
-        active_answer.author.edit_answer(
-                            answer = active_answer,
+        active_problem.author.edit_problem(
+                            problem = active_problem,
                             body_text = COMMENT_TEMPLATE,
                             force = True
                         )
-        self.print_if_verbose("User has edited the active answer")
+        self.print_if_verbose("User has edited the active problem")
 
-        active_answer_comment.author.edit_comment(
-                            comment_post = active_answer_comment,
-                            body_text = ANSWER_TEMPLATE
+        active_problem_comment.author.edit_comment(
+                            comment_post = active_problem_comment,
+                            body_text = PROBLEM_TEMPLATE
                         )
-        self.print_if_verbose("User has edited the active answer comment")
+        self.print_if_verbose("User has edited the active problem comment")
 
-        active_question_comment.author.edit_comment(
-                            comment_post = active_question_comment,
-                            body_text = ANSWER_TEMPLATE
+        active_exercise_comment.author.edit_comment(
+                            comment_post = active_exercise_comment,
+                            body_text = PROBLEM_TEMPLATE
                         )
-        self.print_if_verbose("User has edited the active question comment")
+        self.print_if_verbose("User has edited the active exercise comment")
 
-        # Accept best answer
-        active_question.author.accept_best_answer(
-                            answer = active_answer,
+        # Accept best problem
+        active_exercise.author.accept_best_problem(
+                            problem = active_problem,
                             force = True,
                         )
-        self.print_if_verbose("User has accepted a best answer")
+        self.print_if_verbose("User has accepted a best problem")
 
         self.restore_saved_alert_settings()
 

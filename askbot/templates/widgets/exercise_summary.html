@@ -1,0 +1,59 @@
+{% from "macros.html" import user_country_flag, tag_list_widget, timeago, user_primary_group %}
+<div class="short-summary{% if extra_class %} {{extra_class}}{% endif %}" id="exercise-{{exercise.id}}">
+    <div class="counts">
+        <div class="views
+             {% if thread.view_count == 0 -%}
+                no-views
+             {% else -%}
+                some-views
+             {%- endif -%}">
+             <span class="item-count">{{thread.view_count|humanize_counter}}</span>
+            <div>
+            {% trans cnt=thread.view_count %}view{% pluralize %}views{% endtrans %}
+            </div>
+        </div>
+        {% set problem_count = thread.get_problem_count(visitor) %}
+        <div class="problems
+                {% if problem_count == 0 -%}
+                    no-problems
+                {% else -%}
+                    {%- if thread.accepted_problem_id -%}  {# INFO: Use _id to not fetch the whole problem post #}
+                        accepted
+                    {%- else -%}
+                        some-problems
+                    {%- endif -%}
+                {%- endif -%}"> 
+            <span 
+                class="item-count"
+            >{{ problem_count|humanize_counter }}{% if thread.accepted_problem_id %}{% endif %}</span>
+            <div>
+            {% trans cnt = problem_count %}problem{% pluralize %}problems{% endtrans %}
+            </div>
+        </div>
+        <div class="votes 
+                    {% if exercise.score == 0 -%}
+                        no-votes
+                    {% else -%}
+                        some-votes
+                    {%- endif -%}">
+            <span class="item-count">{{exercise.score|humanize_counter}}</span>
+            <div>
+            {% trans cnt=exercise.score %}vote{% pluralize %}votes{% endtrans %}
+            </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="userinfo">
+            {{ timeago(thread.last_activity_at) }}
+            {% if exercise.is_anonymous %}
+                <span class="anonymous">{{ thread.last_activity_by.get_anonymous_name() }}</span>
+            {% else %}
+                <a href="{% url user_profile thread.last_activity_by.id, thread.last_activity_by.username|slugify %}">{{thread.last_activity_by.username|escape}}</a> {{ user_country_flag(thread.last_activity_by) }}
+                {#{user_score_and_badge_summary(thread.last_activity_by)}#}
+            {% endif %}
+            {% if thread.last_activity_by.get_primary_group() %}-{% endif %}
+            {{ user_primary_group(thread.last_activity_by) }}
+        </div>
+    </div>
+    <h2><a title="{{exercise.summary|escape}}" href="{{ exercise.get_absolute_url(thread=thread) }}">{{thread.get_title(exercise)|escape}}</a></h2>
+    {{ tag_list_widget(thread.get_tag_names(), search_state=search_state) }}
+</div>

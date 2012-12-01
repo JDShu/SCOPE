@@ -313,10 +313,10 @@ util.prompt = function(text, defaultInputText, makeLinkMarkdown, dialogType){
         dialog.style.zIndex = "1001";
         
         // The dialog text.
-        var question = doc.createElement("div");
-        question.innerHTML = text;
-        question.style.padding = "5px";
-        dialog.appendChild(question);
+        var exercise = doc.createElement("div");
+        exercise.innerHTML = text;
+        exercise.style.padding = "5px";
+        dialog.appendChild(exercise);
         
         // The web form container for the text box and buttons.
         var form = doc.createElement("form");

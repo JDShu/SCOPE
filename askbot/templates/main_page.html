@@ -7,14 +7,14 @@
 
     there is no html markup in this file
 #}
-<!-- questions.html -->
-{% block title %}{% spaceless %}{% trans %}Questions{% endtrans %}{% endspaceless %}{% endblock %}
+<!-- exercises.html -->
+{% block title %}{% spaceless %}{% trans %}Exercises{% endtrans %}{% endspaceless %}{% endblock %}
 {% block content %}
     {% include "main_page/tab_bar.html" %}
     {% include "main_page/headline.html" %}
     {# ==== BEGIN: main_page/content.html === #}
-    <div id="question-list">
-        {% include "main_page/questions_loop.html" %}
+    <div id="exercise-list">
+        {% include "main_page/exercises_loop.html" %}
     </div>
     {# ==== END: main_page/content.html === #}
     {% include "main_page/paginator.html" %}
@@ -25,4 +25,4 @@
 {% block endjs %}
     {% include "main_page/javascript.html" %}
 {% endblock %}
-<!-- end questions.html -->
+<!-- end exercises.html -->

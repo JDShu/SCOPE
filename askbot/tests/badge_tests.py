@@ -22,57 +22,57 @@ class BadgeTests(AskbotTestCase):
         count = models.Award.objects.filter(**filters).count()
         self.assertEquals(count, expected_count)
 
-    def assert_accepted_answer_badge_works(self,
+    def assert_accepted_problem_badge_works(self,
                                     badge_key = None,
                                     min_points = None,
                                     expected_count = 1,
                                     previous_count = 0,
                                     trigger = None
                                 ):
-        assert(trigger in ('accept_best_answer', 'upvote_answer'))
-        question = self.post_question(user = self.u1)
-        answer = self.post_answer(user = self.u2, question = question)
-        answer.points = min_points - 1
-        answer.save()
+        assert(trigger in ('accept_best_problem', 'upvote_problem'))
+        exercise = self.post_exercise(user = self.u1)
+        problem = self.post_problem(user = self.u2, exercise = exercise)
+        problem.points = min_points - 1
+        problem.save()
 
-        recipient = answer.author
+        recipient = problem.author
 
-        if trigger == 'accept_best_answer':
-            self.u1.upvote(answer)
+        if trigger == 'accept_best_problem':
+            self.u1.upvote(problem)
             self.assert_have_badge(badge_key, recipient, previous_count)
-            self.u1.accept_best_answer(answer)
+            self.u1.accept_best_problem(problem)
         else:
-            self.u1.accept_best_answer(answer)
+            self.u1.accept_best_problem(problem)
             self.assert_have_badge(badge_key, recipient, previous_count)
-            self.u1.upvote(answer)
+            self.u1.upvote(problem)
         self.assert_have_badge(badge_key, recipient, expected_count)
 
-    def assert_upvoted_answer_badge_works(self,
+    def assert_upvoted_problem_badge_works(self,
                                     badge_key = None,
                                     min_points = None,
                                     multiple = False
                                 ):
-        """test answer badge where answer author is the recipient
+        """test problem badge where problem author is the recipient
         where badge award is triggered by upvotes
         * min_points - minimum # of upvotes required
         * multiple - multiple award or not
         * badge_key - key on askbot.models.badges.Badge object
         """
-        question = self.post_question(user = self.u1)
-        answer = self.post_answer(user = self.u2, question = question)
-        answer.points = min_points - 1
-        answer.save()
-        self.u1.upvote(answer)
+        exercise = self.post_exercise(user = self.u1)
+        problem = self.post_problem(user = self.u2, exercise = exercise)
+        problem.points = min_points - 1
+        problem.save()
+        self.u1.upvote(problem)
         self.assert_have_badge(badge_key, recipient = self.u2)
-        self.u3.upvote(answer)
+        self.u3.upvote(problem)
         self.assert_have_badge(badge_key, recipient = self.u2, expected_count = 1)
 
-        #post another question and check that there are no new badges
-        question2 = self.post_question(user = self.u1)
-        answer2 = self.post_answer(user = self.u2, question = question2)
-        answer2.score = min_points - 1
-        answer2.save()
-        self.u1.upvote(answer2)
+        #post another exercise and check that there are no new badges
+        exercise2 = self.post_exercise(user = self.u1)
+        problem2 = self.post_problem(user = self.u2, exercise = exercise2)
+        problem2.score = min_points - 1
+        problem2.save()
+        self.u1.upvote(problem2)
 
         if multiple == True:
             expected_count = 2
@@ -85,30 +85,30 @@ class BadgeTests(AskbotTestCase):
                 expected_count = expected_count
             )
 
-    def assert_upvoted_question_badge_works(self,
+    def assert_upvoted_exercise_badge_works(self,
                                     badge_key = None,
                                     min_points = None,
                                     multiple = False
                                 ):
-        """test question badge where question author is the recipient
+        """test exercise badge where exercise author is the recipient
         where badge award is triggered by upvotes
         * min_points - minimum # of upvotes required
         * multiple - multiple award or not
         * badge_key - key on askbot.models.badges.Badge object
         """
-        question = self.post_question(user = self.u1)
-        question.points = min_points - 1
-        question.save()
-        self.u2.upvote(question)
+        exercise = self.post_exercise(user = self.u1)
+        exercise.points = min_points - 1
+        exercise.save()
+        self.u2.upvote(exercise)
         self.assert_have_badge(badge_key, recipient = self.u1)
-        self.u3.upvote(question)
+        self.u3.upvote(exercise)
         self.assert_have_badge(badge_key, recipient = self.u1, expected_count = 1)
 
-        #post another question and check that there are no new badges
-        question2 = self.post_question(user = self.u1)
-        question2.points = min_points - 1
-        question2.save()
-        self.u2.upvote(question2)
+        #post another exercise and check that there are no new badges
+        exercise2 = self.post_exercise(user = self.u1)
+        exercise2.points = min_points - 1
+        exercise2.save()
+        self.u2.upvote(exercise2)
 
         if multiple == True:
             expected_count = 2
@@ -122,130 +122,130 @@ class BadgeTests(AskbotTestCase):
                     )
 
     def test_disciplined_badge(self):
-        question = self.post_question(user = self.u1)
-        question.points = settings.DISCIPLINED_BADGE_MIN_UPVOTES
-        question.save()
-        self.u1.delete_question(question)
+        exercise = self.post_exercise(user = self.u1)
+        exercise.points = settings.DISCIPLINED_BADGE_MIN_UPVOTES
+        exercise.save()
+        self.u1.delete_exercise(exercise)
         self.assert_have_badge('disciplined', recipient = self.u1)
 
-        question2 = self.post_question(user = self.u1)
-        question2.points = settings.DISCIPLINED_BADGE_MIN_UPVOTES
-        question2.save()
-        self.u1.delete_question(question2)
+        exercise2 = self.post_exercise(user = self.u1)
+        exercise2.points = settings.DISCIPLINED_BADGE_MIN_UPVOTES
+        exercise2.save()
+        self.u1.delete_exercise(exercise2)
         self.assert_have_badge('disciplined', recipient = self.u1, expected_count = 2)
 
     def test_peer_pressure_badge(self):
-        question = self.post_question(user = self.u1)
-        answer = self.post_answer(user = self.u1, question = question)
-        answer.points = -1*settings.PEER_PRESSURE_BADGE_MIN_DOWNVOTES
-        answer.save()
-        self.u1.delete_answer(answer)
+        exercise = self.post_exercise(user = self.u1)
+        problem = self.post_problem(user = self.u1, exercise = exercise)
+        problem.points = -1*settings.PEER_PRESSURE_BADGE_MIN_DOWNVOTES
+        problem.save()
+        self.u1.delete_problem(problem)
         self.assert_have_badge('peer-pressure', recipient = self.u1)
 
     def test_teacher_badge(self):
-        self.assert_upvoted_answer_badge_works(
+        self.assert_upvoted_problem_badge_works(
             badge_key = 'teacher',
             min_points = settings.TEACHER_BADGE_MIN_UPVOTES,
             multiple = False
         )
 
-    def test_nice_answer_badge(self):
-        self.assert_upvoted_answer_badge_works(
-            badge_key = 'nice-answer',
-            min_points = settings.NICE_ANSWER_BADGE_MIN_UPVOTES,
+    def test_nice_problem_badge(self):
+        self.assert_upvoted_problem_badge_works(
+            badge_key = 'nice-problem',
+            min_points = settings.NICE_PROBLEM_BADGE_MIN_UPVOTES,
             multiple = True
         )
 
-    def test_nice_question_badge(self):
-        self.assert_upvoted_question_badge_works(
-            badge_key = 'nice-question',
-            min_points = settings.NICE_QUESTION_BADGE_MIN_UPVOTES,
+    def test_nice_exercise_badge(self):
+        self.assert_upvoted_exercise_badge_works(
+            badge_key = 'nice-exercise',
+            min_points = settings.NICE_EXERCISE_BADGE_MIN_UPVOTES,
             multiple = True
         )
 
-    def test_popular_question_badge(self):
-        question = self.post_question(user = self.u1)
-        min_views = settings.POPULAR_QUESTION_BADGE_MIN_VIEWS
-        question.thread.view_count = min_views - 1
-        question.thread.save()
+    def test_popular_exercise_badge(self):
+        exercise = self.post_exercise(user = self.u1)
+        min_views = settings.POPULAR_EXERCISE_BADGE_MIN_VIEWS
+        exercise.thread.view_count = min_views - 1
+        exercise.thread.save()
 
         #patch not_a_robot_request to return True
         from askbot.utils import functions
         functions.not_a_robot_request = lambda v: True
 
-        url = question.get_absolute_url()
+        url = exercise.get_absolute_url()
 
         self.client.login(method='force', user_id = self.u2.id)
         self.client.get(url)
-        self.assert_have_badge('popular-question', recipient = self.u1)
+        self.assert_have_badge('popular-exercise', recipient = self.u1)
 
         self.client.login(method='force', user_id = self.u3.id)
         self.client.get(url)
-        self.assert_have_badge('popular-question', recipient = self.u1, expected_count = 1)
+        self.assert_have_badge('popular-exercise', recipient = self.u1, expected_count = 1)
 
-        question2 = self.post_question(user = self.u1)
-        question2.thread.view_count = min_views - 1
-        question2.thread.save()
+        exercise2 = self.post_exercise(user = self.u1)
+        exercise2.thread.view_count = min_views - 1
+        exercise2.thread.save()
         self.client.login(method='force', user_id = self.u2.id)
-        self.client.get(question2.get_absolute_url())
-        self.assert_have_badge('popular-question', recipient = self.u1, expected_count = 2)
+        self.client.get(exercise2.get_absolute_url())
+        self.assert_have_badge('popular-exercise', recipient = self.u1, expected_count = 2)
 
     def test_student_badge(self):
-        question = self.post_question(user = self.u1)
-        self.u2.upvote(question)
+        exercise = self.post_exercise(user = self.u1)
+        self.u2.upvote(exercise)
         self.assert_have_badge('student', recipient = self.u1)
-        self.u3.upvote(question)
+        self.u3.upvote(exercise)
         self.assert_have_badge('student', recipient = self.u1, expected_count = 1)
 
-        question2 = self.post_question(user = self.u1)
-        self.u2.upvote(question)
+        exercise2 = self.post_exercise(user = self.u1)
+        self.u2.upvote(exercise)
         self.assert_have_badge('student', recipient = self.u1, expected_count = 1)
 
     def test_supporter_badge(self):
-        question = self.post_question(user = self.u1)
-        self.u2.upvote(question)
+        exercise = self.post_exercise(user = self.u1)
+        self.u2.upvote(exercise)
         self.assert_have_badge('supporter', recipient = self.u2)
 
-        answer = self.post_answer(user = self.u1, question = question)
-        self.u3.upvote(answer)
+        problem = self.post_problem(user = self.u1, exercise = exercise)
+        self.u3.upvote(problem)
         self.assert_have_badge('supporter', recipient = self.u3)
-        self.u2.upvote(answer)
+        self.u2.upvote(problem)
         self.assert_have_badge('supporter', recipient = self.u2, expected_count = 1)
 
     def test_critic_badge(self):
-        question = self.post_question(user = self.u1)
-        self.u2.downvote(question)
+        exercise = self.post_exercise(user = self.u1)
+        self.u2.downvote(exercise)
         self.assert_have_badge('critic', recipient = self.u2)
 
-        answer = self.post_answer(user = self.u1, question = question)
-        self.u3.downvote(answer)
+        problem = self.post_problem(user = self.u1, exercise = exercise)
+        self.u3.downvote(problem)
         self.assert_have_badge('critic', recipient = self.u3)
-        self.u2.downvote(answer)
+        self.u2.downvote(problem)
         self.assert_have_badge('critic', recipient = self.u2, expected_count = 1)
 
     def test_self_learner_badge(self):
-        question = self.post_question(user = self.u1)
-        answer = self.post_answer(user = self.u1, question = question)
+        exercise = self.post_exercise(user = self.u1)
+        problem = self.post_problem(user = self.u1, exercise = exercise)
         min_votes = settings.SELF_LEARNER_BADGE_MIN_UPVOTES
-        answer.points = min_votes - 1
-        answer.save()
-        self.u2.upvote(answer)
+        problem.points = min_votes - 1
+        problem.save()
+        self.u2.upvote(problem)
         self.assert_have_badge('self-learner', recipient = self.u1)
 
-        #copy-paste of the first question, except expect second badge
-        question = self.post_question(user = self.u1)
-        answer = self.post_answer(user = self.u1, question = question)
-        answer.points = min_votes - 1
-        answer.save()
-        self.u2.upvote(answer)
+        #copy-paste of the first exercise, except expect second badge
+        exercise = self.post_exercise(user = self.u1)
+        problem = self.post_problem(user = self.u1, exercise = exercise)
+        problem.points = min_votes - 1
+        problem.save()
+        self.u2.upvote(problem)
         self.assert_have_badge('self-learner', recipient = self.u1, expected_count = 2)
 
-        question = self.post_question(user = self.u2)
-        answer = self.post_answer(user = self.u1, question = question)
-        answer.points = min_votes - 1
-        answer.save()
-        self.u2.upvote(answer)
-        #no badge when asker != answerer
+        exercise = self.post_exercise(user = self.u2)
+        problem = self.post_problem(user = self.u1, exercise = exercise)
+        problem.points = min_votes - 1
+        problem.save()
+        self.u2.upvote(problem)
+        #no badge when asker != problemer
         self.assert_have_badge(
             'self-learner',
             recipient = self.u1,
@@ -254,25 +254,25 @@ class BadgeTests(AskbotTestCase):
 
     def test_civic_duty_badge(self):
         settings.update('CIVIC_DUTY_BADGE_MIN_VOTES', 2)
-        question = self.post_question(user = self.u1)
-        answer = self.post_answer(user = self.u2, question = question)
-        answer2 = self.post_answer(user = self.u1, question = question)
-        self.u3.upvote(question)
-        self.u3.downvote(answer)
+        exercise = self.post_exercise(user = self.u1)
+        problem = self.post_problem(user = self.u2, exercise = exercise)
+        problem2 = self.post_problem(user = self.u1, exercise = exercise)
+        self.u3.upvote(exercise)
+        self.u3.downvote(problem)
         self.assert_have_badge('civic-duty', recipient = self.u3)
-        self.u3.upvote(answer2)
+        self.u3.upvote(problem2)
         self.assert_have_badge('civic-duty', recipient = self.u3, expected_count = 1)
-        self.u3.downvote(answer)
+        self.u3.downvote(problem)
         self.assert_have_badge('civic-duty', recipient = self.u3, expected_count = 1)
 
     def test_scholar_badge(self):
-        question = self.post_question(user = self.u1)
-        answer = self.post_answer(user = self.u2, question = question)
-        self.u1.accept_best_answer(answer)
+        exercise = self.post_exercise(user = self.u1)
+        problem = self.post_problem(user = self.u2, exercise = exercise)
+        self.u1.accept_best_problem(problem)
         self.assert_have_badge('scholar', recipient = self.u1)
-        question2 = self.post_question(user = self.u1)
-        answer2 = self.post_answer(user = self.u2, question = question2)
-        self.u1.accept_best_answer(answer2)
+        exercise2 = self.post_exercise(user = self.u1)
+        problem2 = self.post_problem(user = self.u2, exercise = exercise2)
+        self.u1.accept_best_problem(problem2)
         self.assert_have_badge(
             'scholar',
             recipient = self.u1,
@@ -280,13 +280,13 @@ class BadgeTests(AskbotTestCase):
         )
 
     def assert_enlightened_badge_works(self, trigger):
-        self.assert_accepted_answer_badge_works(
+        self.assert_accepted_problem_badge_works(
             'enlightened',
             min_points = settings.ENLIGHTENED_BADGE_MIN_UPVOTES,
             expected_count = 1,
             trigger = trigger
         )
-        self.assert_accepted_answer_badge_works(
+        self.assert_accepted_problem_badge_works(
             'enlightened',
             min_points = settings.ENLIGHTENED_BADGE_MIN_UPVOTES,
             expected_count = 1,
@@ -295,13 +295,13 @@ class BadgeTests(AskbotTestCase):
         )
 
     def assert_guru_badge_works(self, trigger):
-        self.assert_accepted_answer_badge_works(
+        self.assert_accepted_problem_badge_works(
             'guru',
             min_points = settings.GURU_BADGE_MIN_UPVOTES,
             expected_count = 1,
             trigger = trigger
         )
-        self.assert_accepted_answer_badge_works(
+        self.assert_accepted_problem_badge_works(
             'guru',
             min_points = settings.GURU_BADGE_MIN_UPVOTES,
             previous_count = 1,
@@ -310,105 +310,105 @@ class BadgeTests(AskbotTestCase):
         )
 
     def test_enlightened_badge1(self):
-        self.assert_enlightened_badge_works('upvote_answer')
+        self.assert_enlightened_badge_works('upvote_problem')
 
     def test_enlightened_badge2(self):
-        self.assert_enlightened_badge_works('accept_best_answer')
+        self.assert_enlightened_badge_works('accept_best_problem')
 
     def test_guru_badge1(self):
-        self.assert_guru_badge_works('upvote_answer')
+        self.assert_guru_badge_works('upvote_problem')
 
     def test_guru_badge2(self):
-        self.assert_guru_badge_works('accept_best_answer')
+        self.assert_guru_badge_works('accept_best_problem')
 
     def test_necromancer_badge(self):
-        question = self.post_question(user = self.u1)
+        exercise = self.post_exercise(user = self.u1)
         now = datetime.datetime.now()
         delta = datetime.timedelta(settings.NECROMANCER_BADGE_MIN_DELAY + 1)
         future = now + delta
-        answer = self.post_answer(
+        problem = self.post_problem(
                         user = self.u2,
-                        question = question,
+                        exercise = exercise,
                         timestamp = future
                     )
-        answer.points = settings.NECROMANCER_BADGE_MIN_UPVOTES - 1
-        answer.save()
+        problem.points = settings.NECROMANCER_BADGE_MIN_UPVOTES - 1
+        problem.save()
         self.assert_have_badge('necromancer', self.u2, expected_count = 0)
-        self.u1.upvote(answer)
+        self.u1.upvote(problem)
         self.assert_have_badge('necromancer', self.u2, expected_count = 1)
 
-    def test_citizen_patrol_question(self):
+    def test_citizen_patrol_exercise(self):
         self.u2.set_status('m')
-        question = self.post_question(user = self.u1)
-        self.u2.flag_post(question)
+        exercise = self.post_exercise(user = self.u1)
+        self.u2.flag_post(exercise)
         self.assert_have_badge('citizen-patrol', self.u2)
-        question = self.post_question(user = self.u1)
-        self.u2.flag_post(question)
+        exercise = self.post_exercise(user = self.u1)
+        self.u2.flag_post(exercise)
         self.assert_have_badge('citizen-patrol', self.u2, 1)
 
-    def test_citizen_patrol_answer(self):
+    def test_citizen_patrol_problem(self):
         self.u2.set_status('m')
-        question = self.post_question(user = self.u1)
-        answer = self.post_answer(user = self.u1, question = question)
-        self.u2.flag_post(answer)
+        exercise = self.post_exercise(user = self.u1)
+        problem = self.post_problem(user = self.u1, exercise = exercise)
+        self.u2.flag_post(problem)
         self.assert_have_badge('citizen-patrol', self.u2)
-        question = self.post_question(user = self.u1)
-        answer = self.post_answer(user = self.u1, question = question)
-        self.u2.flag_post(answer)
+        exercise = self.post_exercise(user = self.u1)
+        problem = self.post_problem(user = self.u1, exercise = exercise)
+        self.u2.flag_post(problem)
         self.assert_have_badge('citizen-patrol', self.u2, 1)
 
-    def test_editor_badge_question(self):
+    def test_editor_badge_exercise(self):
         self.u2.set_status('m')
-        question = self.post_question(user = self.u1)
-        self.u2.edit_question(
-            question = question,
+        exercise = self.post_exercise(user = self.u1)
+        self.u2.edit_exercise(
+            exercise = exercise,
             title = 'hahaha',
             body_text = 'heheeh',
             revision_comment = 'ihihih'
         )
         self.assert_have_badge('editor', self.u2, 1)
         #double check that its not multiple
-        question = self.post_question(user = self.u1)
-        self.u2.edit_question(
-            question = question,
+        exercise = self.post_exercise(user = self.u1)
+        self.u2.edit_exercise(
+            exercise = exercise,
             title = 'hahaha',
             body_text = 'heheeh',
             revision_comment = 'ihihih'
         )
         self.assert_have_badge('editor', self.u2, 1)
 
-    def test_editor_badge_answer(self):
+    def test_editor_badge_problem(self):
         self.u2.set_status('m')
-        question = self.post_question(user = self.u1)
-        answer = self.post_answer(user = self.u1, question = question)
-        self.u2.edit_answer(answer = answer, body_text = 'hahaha')
+        exercise = self.post_exercise(user = self.u1)
+        problem = self.post_problem(user = self.u1, exercise = exercise)
+        self.u2.edit_problem(problem = problem, body_text = 'hahaha')
         self.assert_have_badge('editor', self.u2, 1)
         #double check that its not multiple
-        question = self.post_question(user = self.u1)
-        answer = self.post_answer(user = self.u1, question = question)
-        self.u2.edit_answer(answer = answer, body_text = 'hahaha')
+        exercise = self.post_exercise(user = self.u1)
+        problem = self.post_problem(user = self.u1, exercise = exercise)
+        self.u2.edit_problem(problem = problem, body_text = 'hahaha')
         self.assert_have_badge('editor', self.u2, 1)
 
     def test_associate_editor_badge(self):
         self.u2.set_status('m')
-        question = self.post_question(user = self.u1)
+        exercise = self.post_exercise(user = self.u1)
         settings.update('ASSOCIATE_EDITOR_BADGE_MIN_EDITS', 2)
-        self.u2.edit_question(
-            question = question,
+        self.u2.edit_exercise(
+            exercise = exercise,
             title = 'hahaha',
             body_text = 'sdgsdjghsldkfshd',
             revision_comment = 'sdgdfgsgfs'
         )
         self.assert_have_badge('strunk-and-white', self.u2, 0)
-        self.u2.edit_question(
-            question = question,
+        self.u2.edit_exercise(
+            exercise = exercise,
             title = 'hahaha',
             body_text = 'sdgsdjghsldkfshd',
             revision_comment = 'sdgdfgsgfs'
         )
         self.assert_have_badge('strunk-and-white', self.u2, 1)
-        self.u2.edit_question(
-            question = question,
+        self.u2.edit_exercise(
+            exercise = exercise,
             title = 'hahaha',
             body_text = 'sdgsdjghsldkfshd',
             revision_comment = 'sdgdfgsgfs'
@@ -416,10 +416,10 @@ class BadgeTests(AskbotTestCase):
         self.assert_have_badge('strunk-and-white', self.u2, 1)
 
     def test_organizer_badge(self):
-        question = self.post_question(user = self.u1)
-        self.u1.retag_question(question = question, tags = 'blah boom')
+        exercise = self.post_exercise(user = self.u1)
+        self.u1.retag_exercise(exercise = exercise, tags = 'blah boom')
         self.assert_have_badge('organizer', self.u1, 1)
-        self.u1.retag_question(question = question, tags = 'blah pooh')
+        self.u1.retag_exercise(exercise = exercise, tags = 'blah pooh')
         self.assert_have_badge('organizer', self.u1, 1)
 
     def test_autobiographer_badge(self):
@@ -442,56 +442,56 @@ class BadgeTests(AskbotTestCase):
         self.assert_have_badge('autobiographer', self.u1, 1)
 
     def test_stellar_badge1(self):
-        question = self.post_question(user = self.u1)
-        settings.update('STELLAR_QUESTION_BADGE_MIN_STARS', 2)
-        self.u2.toggle_favorite_question(question)
-        self.assert_have_badge('stellar-question', self.u1, 0)
-        self.u3.toggle_favorite_question(question)
-        self.assert_have_badge('stellar-question', self.u1, 1)
+        exercise = self.post_exercise(user = self.u1)
+        settings.update('STELLAR_EXERCISE_BADGE_MIN_STARS', 2)
+        self.u2.toggle_favorite_exercise(exercise)
+        self.assert_have_badge('stellar-exercise', self.u1, 0)
+        self.u3.toggle_favorite_exercise(exercise)
+        self.assert_have_badge('stellar-exercise', self.u1, 1)
 
     def test_stellar_badge2(self):
-        question = self.post_question(user = self.u1)
-        settings.update('STELLAR_QUESTION_BADGE_MIN_STARS', 2)
-        self.u2.toggle_favorite_question(question)
-        self.assert_have_badge('stellar-question', self.u1, 0)
-        self.u1.toggle_favorite_question(question)
+        exercise = self.post_exercise(user = self.u1)
+        settings.update('STELLAR_EXERCISE_BADGE_MIN_STARS', 2)
+        self.u2.toggle_favorite_exercise(exercise)
+        self.assert_have_badge('stellar-exercise', self.u1, 0)
+        self.u1.toggle_favorite_exercise(exercise)
         """no gaming"""
-        self.assert_have_badge('stellar-question', self.u1, 0)
+        self.assert_have_badge('stellar-exercise', self.u1, 0)
 
     def test_stellar_badge3(self):
-        question = self.post_question(user = self.u1)
-        settings.update('STELLAR_QUESTION_BADGE_MIN_STARS', 2)
-        self.u2.toggle_favorite_question(question)
-        self.assert_have_badge('stellar-question', self.u1, 0)
-        self.u3.toggle_favorite_question(question)
+        exercise = self.post_exercise(user = self.u1)
+        settings.update('STELLAR_EXERCISE_BADGE_MIN_STARS', 2)
+        self.u2.toggle_favorite_exercise(exercise)
+        self.assert_have_badge('stellar-exercise', self.u1, 0)
+        self.u3.toggle_favorite_exercise(exercise)
         #award now
-        self.assert_have_badge('stellar-question', self.u1, 1)
-        self.u3.toggle_favorite_question(question)
+        self.assert_have_badge('stellar-exercise', self.u1, 1)
+        self.u3.toggle_favorite_exercise(exercise)
         #dont take back
-        self.assert_have_badge('stellar-question', self.u1, 1)
-        self.u3.toggle_favorite_question(question)
+        self.assert_have_badge('stellar-exercise', self.u1, 1)
+        self.u3.toggle_favorite_exercise(exercise)
         #dont reaward
-        self.assert_have_badge('stellar-question', self.u1, 1)
+        self.assert_have_badge('stellar-exercise', self.u1, 1)
 
     def test_commentator_badge(self):
-        question = self.post_question(user = self.u1)
+        exercise = self.post_exercise(user = self.u1)
         min_comments = settings.COMMENTATOR_BADGE_MIN_COMMENTS
         for i in xrange(min_comments - 1):
-            self.post_comment(user = self.u1, parent_post = question)
+            self.post_comment(user = self.u1, parent_post = exercise)
 
         self.assert_have_badge('commentator', self.u1, 0)
-        self.post_comment(user = self.u1, parent_post = question)
+        self.post_comment(user = self.u1, parent_post = exercise)
         self.assert_have_badge('commentator', self.u1, 1)
-        self.post_comment(user = self.u1, parent_post = question)
+        self.post_comment(user = self.u1, parent_post = exercise)
         self.assert_have_badge('commentator', self.u1, 1)
 
     def test_taxonomist_badge(self):
-        self.post_question(user = self.u1, tags = 'test')
+        self.post_exercise(user = self.u1, tags = 'test')
         min_use = settings.TAXONOMIST_BADGE_MIN_USE_COUNT
         for i in xrange(min_use - 2):
-            self.post_question(user = self.u2, tags = 'test')
+            self.post_exercise(user = self.u2, tags = 'test')
         self.assert_have_badge('taxonomist', self.u1, 0)
-        self.post_question(user = self.u2, tags = 'test')
+        self.post_exercise(user = self.u2, tags = 'test')
         self.assert_have_badge('taxonomist', self.u1, 1)
 
     def test_enthusiast_badge(self):

@@ -1,11 +1,11 @@
 {# todo: add tips to widen selection #}
 <p class="evenMore" style="padding-top:30px;text-align:center;">
-{% if search_state.scope == "unanswered" %}
-    {% trans %}There are no unanswered questions here{% endtrans %}
+{% if search_state.scope == "without_problem" %}
+    {% trans %}There are no exercises without problems here{% endtrans %}
 {% endif %}
 {% if search_state.scope == "favorite" %}
-    {% trans %}No questions here. {% endtrans %}
-    {% trans %}Please follow some questions or follow some users.{% endtrans %}
+    {% trans %}No exercises here. {% endtrans %}
+    {% trans %}Please follow some exercises or follow some users.{% endtrans %}
 {% endif %}
 </p>
 {% if search_state.query or search_state.tags or search_state.author %}
@@ -19,13 +19,13 @@
             <a href="{{ search_state.remove_tags().full_url() }}">{% trans %}resetting tags{% endtrans %}</a>
         {% endif %}
         {% if search_state.query %}{% trans %} or {% endtrans %}
-            <a href="{% url questions %}">{% trans %}starting over{% endtrans %}</a>
+            <a href="{% url exercises %}">{% trans %}starting over{% endtrans %}</a>
         {% endif %}
     {% else %}
-        <a href="{% url questions %}">{% trans %}starting over{% endtrans %}</a>
+        <a href="{% url exercises %}">{% trans %}starting over{% endtrans %}</a>
     {% endif %}
 </p>
 {% endif %}
 <p class="evenMore" style="text-align:center">
-<a href="{% url ask %}">{% trans %}Please always feel free to ask your question!{% endtrans %}</a>
+<a href="{% url ask %}">{% trans %}Please always feel free to add your exercise!{% endtrans %}</a>
 </p>

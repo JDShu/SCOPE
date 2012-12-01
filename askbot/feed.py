@@ -22,13 +22,13 @@ from django.core.exceptions import ObjectDoesNotExist
 from askbot.models import Post
 from askbot.conf import settings as askbot_settings
 
-class RssIndividualQuestionFeed(Feed):
-    """rss feed class for particular questions
+class RssIndividualExerciseFeed(Feed):
+    """rss feed class for particular exercises
     """
 
     def title(self):
         return askbot_settings.APP_TITLE + _(' - ') + \
-                _('Individual question feed')
+                _('Individual exercise feed')
 
     def feed_copyright(self):
         return askbot_settings.APP_COPYRIGHT
@@ -39,7 +39,7 @@ class RssIndividualQuestionFeed(Feed):
     def get_object(self, bits):
         if len(bits) != 1:
             raise ObjectDoesNotExist
-        return Post.objects.get_questions().get(id__exact = bits[0])
+        return Post.objects.get_exercises().get(id__exact = bits[0])
 
     def item_link(self, item):
         """get full url to the item
@@ -56,9 +56,9 @@ class RssIndividualQuestionFeed(Feed):
 
     def items(self, item):
         """get content items for the feed
-        ordered as: question, question comments,
-        then for each answer - the answer itself, then
-        answer comments
+        ordered as: exercise, exercise comments,
+        then for each problem - the problem itself, then
+        problem comments
         """
         chain_elements = list()
         chain_elements.append([item,])
@@ -66,11 +66,11 @@ class RssIndividualQuestionFeed(Feed):
             Post.objects.get_comments().filter(parent=item)
         )
 
-        answers = Post.objects.get_answers().filter(thread = item.thread)
-        for answer in answers:
-            chain_elements.append([answer,])
+        problems = Post.objects.get_problems().filter(thread = item.thread)
+        for problem in problems:
+            chain_elements.append([problem,])
             chain_elements.append(
-                Post.objects.get_comments().filter(parent=answer)
+                Post.objects.get_comments().filter(parent=problem)
             )
 
         return itertools.chain(*chain_elements)
@@ -79,10 +79,10 @@ class RssIndividualQuestionFeed(Feed):
         """returns the title for the item
         """
         title = item
-        if item.post_type == "question":
+        if item.post_type == "exercise":
             self.title = item
-        elif item.post_type == "answer":
-            title = "Answer by %s for %s " % (item.author, self.title)
+        elif item.post_type == "problem":
+            title = "Problem by %s for %s " % (item.author, self.title)
         elif item.post_type == "comment":
             title = "Comment by %s for %s" % (item.author, self.title)
         return title
@@ -93,13 +93,13 @@ class RssIndividualQuestionFeed(Feed):
         return item.text
 
 
-class RssLastestQuestionsFeed(Feed):
-    """rss feed class for the latest questions
+class RssLastestExercisesFeed(Feed):
+    """rss feed class for the latest exercises
     """
 
     def title(self):
         return askbot_settings.APP_TITLE + _(' - ') + \
-                _('Individual question feed')
+                _('Individual exercise feed')
 
     def feed_copyright(self):
         return askbot_settings.APP_COPYRIGHT
@@ -142,10 +142,10 @@ class RssLastestQuestionsFeed(Feed):
         return item.text
 
     def items(self, item):
-        """get questions for the feed
+        """get exercises for the feed
         """
         #initial filtering
-        qs = Post.objects.get_questions().filter(deleted=False)
+        qs = Post.objects.get_exercises().filter(deleted=False)
 
         #get search string and tags from GET
         query = self.request.GET.get("q", None)
@@ -153,12 +153,12 @@ class RssLastestQuestionsFeed(Feed):
 
         if query:
             #if there's a search string, use the
-            #question search method
+            #exercise search method
             qs = qs.get_by_text_query(query)
 
         if tags:
             #if there are tags in GET, filter the
-            #questions additionally
+            #exercises additionally
             for tag in tags:
                 qs = qs.filter(thread__tags__name = tag)
 

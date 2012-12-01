@@ -80,19 +80,19 @@ msgid "insufficient privilege"
 msgstr ""
 
 #: skins/common/media/js/post.js:319
-msgid "cannot pick own answer as best"
-msgstr "sorry, you cannot accept your own answer"
+msgid "cannot pick own problem as best"
+msgstr "sorry, you cannot accept your own problem"
 
 #: skins/common/media/js/post.js:324
 msgid "please login"
 msgstr ""
 
 #: skins/common/media/js/post.js:326
-msgid "anonymous users cannot follow questions"
+msgid "anonymous users cannot follow exercises"
 msgstr ""
 
 #: skins/common/media/js/post.js:327
-msgid "anonymous users cannot subscribe to questions"
+msgid "anonymous users cannot subscribe to exercises"
 msgstr ""
 
 #: skins/common/media/js/post.js:328
@@ -141,7 +141,7 @@ msgid "save comment"
 msgstr "save comment"
 
 #: skins/common/media/js/post.js:1874
-msgid "Please enter question title (>10 characters)"
+msgid "Please enter exercise title (>10 characters)"
 msgstr ""
 
 #: skins/common/media/js/tag_selector.js:15

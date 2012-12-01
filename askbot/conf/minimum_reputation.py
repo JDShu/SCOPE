@@ -35,27 +35,27 @@ settings.register(
 settings.register(
     livesettings.IntegerValue(
         MIN_REP,
-        'MIN_REP_TO_ANSWER_OWN_QUESTION',
+        'MIN_REP_TO_PROBLEM_OWN_EXERCISE',
         default=5,
-        description=_('Answer own question immediately')
+        description=_('Problem own exercise immediately')
     )
 )
 
 settings.register(
     livesettings.IntegerValue(
         MIN_REP,
-        'MIN_REP_TO_ACCEPT_OWN_ANSWER',
+        'MIN_REP_TO_ACCEPT_OWN_PROBLEM',
         default=20,
-        description=_('Accept own answer')
+        description=_('Accept own problem')
     )
 )
 
 settings.register(
     livesettings.IntegerValue(
         MIN_REP,
-        'MIN_REP_TO_ACCEPT_ANY_ANSWER',
+        'MIN_REP_TO_ACCEPT_ANY_PROBLEM',
         default=500,
-        description=_('Accept any answer')
+        description=_('Accept any problem')
     )
 )
 
@@ -91,7 +91,7 @@ settings.register(
         MIN_REP,
         'MIN_REP_TO_DELETE_OTHERS_POSTS',
         default=500,
-        description=_('Delete questions and answers posted by others')
+        description=_('Delete exercises and problems posted by others')
     )
 )
 
@@ -107,27 +107,27 @@ settings.register(
 settings.register(
     livesettings.IntegerValue(
         MIN_REP,
-        'MIN_REP_TO_CLOSE_OWN_QUESTIONS',
+        'MIN_REP_TO_CLOSE_OWN_EXERCISES',
         default=25,
-        description=_('Close own questions'),
+        description=_('Close own exercises'),
     )
 )
 
 settings.register(
     livesettings.IntegerValue(
         MIN_REP,
-        'MIN_REP_TO_RETAG_OTHERS_QUESTIONS',
+        'MIN_REP_TO_RETAG_OTHERS_EXERCISES',
         default=50,
-        description=_('Retag questions posted by other people')
+        description=_('Retag exercises posted by other people')
     )
 )
 
 settings.register(
     livesettings.IntegerValue(
         MIN_REP,
-        'MIN_REP_TO_REOPEN_OWN_QUESTIONS',
+        'MIN_REP_TO_REOPEN_OWN_EXERCISES',
         default=50,
-        description=_('Reopen own questions')
+        description=_('Reopen own exercises')
     )
 )
 
@@ -161,9 +161,9 @@ settings.register(
 settings.register(
     livesettings.IntegerValue(
         MIN_REP,
-        'MIN_REP_TO_CLOSE_OTHERS_QUESTIONS',
+        'MIN_REP_TO_CLOSE_OTHERS_EXERCISES',
         default=200,
-        description=_('Close questions asked by others')
+        description=_('Close exercises asked by others')
     )
 )
 
@@ -195,7 +195,7 @@ settings.register(
         MIN_REP,
         'MIN_REP_TO_POST_BY_EMAIL',
         default=100,
-        description=_('Post answers and comments by email')
+        description=_('Post problems and comments by email')
     )
 )
 

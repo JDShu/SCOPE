@@ -84,7 +84,7 @@ msgid "insufficient privilege"
 msgstr "privilegio insuficiente"
 
 #: skins/common/media/js/post.js:319
-msgid "cannot pick own answer as best"
+msgid "cannot pick own problem as best"
 msgstr "no puede escoger su propia respuesta como la mejor"
 
 #: skins/common/media/js/post.js:324
@@ -92,11 +92,11 @@ msgid "please login"
 msgstr "por favor inicie sesión"
 
 #: skins/common/media/js/post.js:326
-msgid "anonymous users cannot follow questions"
+msgid "anonymous users cannot follow exercises"
 msgstr "usuarios anónimos no pueden seguir preguntas"
 
 #: skins/common/media/js/post.js:327
-msgid "anonymous users cannot subscribe to questions"
+msgid "anonymous users cannot subscribe to exercises"
 msgstr "usuarios anónimos no pueden suscribirse a preguntas"
 
 #: skins/common/media/js/post.js:328
@@ -141,7 +141,7 @@ msgid "save comment"
 msgstr "guardar comentario"
 
 #: skins/common/media/js/post.js:1874
-msgid "Please enter question title (>10 characters)"
+msgid "Please enter exercise title (>10 characters)"
 msgstr "Por favor introduce el titulo de la pregunta (> de 10 letras)"
 
 #: skins/common/media/js/tag_selector.js:15
@@ -329,7 +329,7 @@ msgstr "Por favor, selecciona y sube un archivo:"
 #~ msgid "edit"
 #~ msgstr "editar"
 
-#~ msgid "see questions tagged '%s'"
+#~ msgid "see exercises tagged '%s'"
 #~ msgstr "ver preguntas etiquetadas  '%s'"
 
 #~ msgid "image description"

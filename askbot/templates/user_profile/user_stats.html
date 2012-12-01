@@ -7,32 +7,32 @@
 {% endblock %}
 {% block usercontent %}
     {% include "user_profile/user_info.html" %}
-    <a name="questions"></a>
+    <a name="exercises"></a>
     {% spaceless %}
-        <h2>{% trans counter=question_count %}<span class="count">{{counter}}</span> Question{% pluralize %}<span class="count">{{counter}}</span> Questions{% endtrans %}</h2>
+        <h2>{% trans counter=exercise_count %}<span class="count">{{counter}}</span> Exercise{% pluralize %}<span class="count">{{counter}}</span> Exercises{% endtrans %}</h2>
     {% endspaceless %}
-    {% include "user_profile/users_questions.html" %}
-    <a name="answers"></a>
+    {% include "user_profile/users_exercises.html" %}
+    <a name="problems"></a>
     {% spaceless %}
-        <h2 style="clear:both;"><span class="count">{{ top_answer_count }}</span> {% trans counter=top_answer_count %}Answer{% pluralize %}Answers{% endtrans %}</h2>
+        <h2 style="clear:both;"><span class="count">{{ top_problem_count }}</span> {% trans counter=top_problem_count %}Problem{% pluralize %}Problems{% endtrans %}</h2>
     {% endspaceless %}
     <div class="user-stats-table">
-        {% for top_answer in top_answers %}
-        <div class="answer-summary">
-            <a title="{{ top_answer.summary|collapse|escape }}"
-                href="{% url question top_answer.thread._question_post().id %}{{ top_answer.thread.title|slugify }}#{{ top_answer.id }}">
-                <span class="answer-votes {% if top_answer.accepted() %}answered-accepted{% endif %}"
-                      title="{% trans answer_score=top_answer.score %}the answer has been voted for {{ answer_score }} times{% endtrans %} {% if top_answer.accepted() %}{% trans %}this answer has been selected as correct{% endtrans %}{%endif%}">
-                    {{ top_answer.score }}
+        {% for top_problem in top_problems %}
+        <div class="problem-summary">
+            <a title="{{ top_problem.summary|collapse|escape }}"
+                href="{% url exercise top_problem.thread._exercise_post().id %}{{ top_problem.thread.title|slugify }}#{{ top_problem.id }}">
+                <span class="problem-votes {% if top_problem.accepted() %}problemed-accepted{% endif %}"
+                      title="{% trans problem_score=top_problem.score %}the problem has been voted for {{ problem_score }} times{% endtrans %} {% if top_problem.accepted() %}{% trans %}this problem has been selected as correct{% endtrans %}{%endif%}">
+                    {{ top_problem.score }}
                 </span>
             </a>
-            <div class="answer-link">
+            <div class="problem-link">
                 {% spaceless %}
-                <a href="{% url question top_answer.thread._question_post().id %}{{ top_answer.thread.title|slugify }}#{{top_answer.id}}">{{ top_answer.thread.title|escape }}</a>
+                <a href="{% url exercise top_problem.thread._exercise_post().id %}{{ top_problem.thread.title|slugify }}#{{top_problem.id}}">{{ top_problem.thread.title|escape }}</a>
                 {% endspaceless %}
-                {% if top_answer.comment_count > 0 %}
+                {% if top_problem.comment_count > 0 %}
                 <span>
-                    {% trans comment_count=top_answer.comment_count %}({{ comment_count }} comment){% pluralize %}the answer has been commented {{ comment_count }} times{% endtrans %}
+                    {% trans comment_count=top_problem.comment_count %}({{ comment_count }} comment){% pluralize %}the problem has been commented {{ comment_count }} times{% endtrans %}
                 </span>
                 {% endif %}
             </div>
@@ -129,7 +129,7 @@
                                     <a
                                         title="{{ award.content_object.get_snippet()|collapse }}"
                                         href="{{ award.content_object.get_absolute_url() }}"
-                                    >{% if award.content_type.post_type == 'answer' %}{% trans %}Answer to:{% endtrans %}{% endif %} {{ award.content_object.thread.title|escape }}</a>
+                                    >{% if award.content_type.post_type == 'problem' %}{% trans %}Problem to:{% endtrans %}{% endif %} {{ award.content_object.thread.title|escape }}</a>
                                 </li>
                                 {% endif %}
                             {% endfor %}
@@ -159,7 +159,7 @@
     </script>
     <script type='text/javascript' src='{{"/js/tag_selector.js"|media}}'></script>
 	<script type="text/javascript">
-	askbot['urls']['questions'] = '{% url "questions" %}';
+	askbot['urls']['exercises'] = '{% url "exercises" %}';
 	</script>
 {% endblock %}
 <!-- end user_stats.html -->

@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 from askbot.models import Tag, Group
-from askbot.const import DEFAULT_QUESTION_WIDGET_STYLE, SEARCH_ORDER_BY
+from askbot.const import DEFAULT_EXERCISE_WIDGET_STYLE, SEARCH_ORDER_BY
 
 class AskWidget(models.Model):
     '''stores widgets styles and options'''
@@ -21,9 +21,9 @@ class AskWidget(models.Model):
         return "Widget: %s" % self.title
 
 
-class QuestionWidget(models.Model):
+class ExerciseWidget(models.Model):
     title = models.CharField(max_length=100)
-    question_number = models.PositiveIntegerField(default=7)
+    exercise_number = models.PositiveIntegerField(default=7)
     tagnames = models.CharField(_('tags'), max_length=50)
     group = models.ForeignKey(Group, null=True, blank=True)
     search_query = models.CharField(
@@ -32,7 +32,7 @@ class QuestionWidget(models.Model):
     order_by = models.CharField(max_length=18,
             choices=SEARCH_ORDER_BY, default='-added_at')
     style = models.TextField(_('css for the widget'),
-            default=DEFAULT_QUESTION_WIDGET_STYLE, blank=True)
+            default=DEFAULT_EXERCISE_WIDGET_STYLE, blank=True)
 
     class Meta:
         app_label = 'askbot'

@@ -1,0 +1,38 @@
+<div class="vote-buttons">
+    {% include "exercise/exercise_vote_buttons.html" %}
+    {% include "exercise/share_buttons.html" %}
+</div>
+<div id="post-id-{{exercise.id}}" class="exercise-content{% if exercise.deleted %} deleted{% endif %}">
+
+    <h1><a href="{{ exercise.get_absolute_url() }}">{{ thread.get_title(exercise)|escape }}</a></h1>
+    {% include "exercise/exercise_tags.html" %}
+
+    <div id="exercise-table">
+        <div class="exercise-body">
+            <div class="post-update-info-container">
+                {% include "exercise/exercise_author_info.html" %}
+            </div>
+            {{ exercise.html }}
+        </div>
+        <div id="exercise-controls" class="post-controls">
+            {% include "exercise/exercise_controls.html" %}
+        </div>
+        <script type="text/javascript">
+            (function(){
+                if (askbot['data']['userIsAuthenticated'] === false){
+                    var ctrl = document.getElementById('exercise-controls')
+                    ctrl.parentNode.removeChild(ctrl);
+                }
+            })();
+        </script>
+        {% if thread.closed %}
+            <div class="clearfix"></div>
+            {# ==== START: exercise/closed_exercise_info.html ==== #}
+            {% include "exercise/closed_exercise_info.html" %}
+            {# ==== END: exercise/closed_exercise_info.html ==== #}
+        {% endif %}
+        {% include "exercise/exercise_comments.html" %}
+    </div>
+
+</div>
+

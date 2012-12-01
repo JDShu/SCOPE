@@ -11,7 +11,7 @@ import askbot
 setup(
     name = "askbot",
     version = askbot.get_version(),#remember to manually set this correctly
-    description = 'Question and Answer forum, like StackOverflow, written in python and Django',
+    description = 'Exercise and Problem forum, like StackOverflow, written in python and Django',
     packages = find_packages(),
     author = 'Evgeny.Fadeev',
     author_email = 'evgeny.fadeev@gmail.com',
@@ -49,7 +49,7 @@ setup(
     ],
     long_description = """Askbot will work alone or with other django apps (with some limitations, please see below), Django 1.1.1 - 1.2.3(*), MySQL(**) and PostgresQL(recommended) (>=8.3).
 
-Questions? Suggestions? Found a bug? -> please post at http://askbot.org/
+Exercises? Suggestions? Found a bug? -> please post at http://askbot.org/
 
 Features
 ========
@@ -110,7 +110,7 @@ If there are any other collisions, askbot will simply fail to install, it will n
 
 Background Information
 ======================
-Askbot is based on CNPROG project by Mike Chen and Sailing Cai, project which was originally inspired by StackOverflow and Yahoo Answers.
+Askbot is based on CNPROG project by Mike Chen and Sailing Cai, project which was originally inspired by StackOverflow and Yahoo Problems.
 
 Footnotes
 =========

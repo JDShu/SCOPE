@@ -51,10 +51,10 @@ def create_user(
     the same as in keys in
     :attr:`~askbot.models.EmailFeedSetting.FEED_TYPES`:
 
-    * 'q_ask' - questions that user asks
+    * 'q_ask' - exercises that user asks
     * 'q_all' - enture forum, tag filtered
-    * 'q_ans' - questions that user answers
-    * 'q_sel' - questions that user decides to follow
+    * 'q_ans' - exercises that user problems
+    * 'q_sel' - exercises that user decides to follow
     * 'm_and_c' - comments and mentions of user anywhere
 
     and values as keys in
@@ -147,11 +147,11 @@ class AskbotTestCase(TestCase):
             return self.assertEqual(set(items), set(values))
         return self.assertEqual(list(items), list(values))
 
-    def post_question(
+    def post_exercise(
                     self,
                     user = None,
-                    title = 'test question title',
-                    body_text = 'test question body text',
+                    title = 'test exercise title',
+                    body_text = 'test exercise body text',
                     tags = 'test',
                     by_email = False,
                     wiki = False,
@@ -161,18 +161,18 @@ class AskbotTestCase(TestCase):
                     follow = False,
                     timestamp = None,
                 ):
-        """posts and returns question on behalf
+        """posts and returns exercise on behalf
         of user. If user is not given, it will be self.user
 
         ``tags`` is a string with tagnames
 
-        if follow is True, question is followed by the poster
+        if follow is True, exercise is followed by the poster
         """
 
         if user is None:
             user = self.user
 
-        question = user.post_question(
+        exercise = user.post_exercise(
                             title=title,
                             body_text=body_text,
                             tags=tags,
@@ -185,16 +185,16 @@ class AskbotTestCase(TestCase):
                         )
 
         if follow:
-            user.follow_question(question)
+            user.follow_exercise(exercise)
 
-        return question
+        return exercise
 
-    def edit_question(self,
+    def edit_exercise(self,
                 user=None,
-                question=None,
+                exercise=None,
                 title='edited title',
                 body_text='edited body text',
-                revision_comment='edited the question',
+                revision_comment='edited the exercise',
                 tags='one two three four',
                 wiki=False,
                 edit_anonymously=False,
@@ -203,11 +203,11 @@ class AskbotTestCase(TestCase):
                 force=False,#if True - bypass the assert
                 by_email=False
             ):
-        """helper editing the question,
+        """helper editing the exercise,
         a bunch of fields are pre-filled for the ease of use
         """
-        user.edit_question(
-            question=question,
+        user.edit_exercise(
+            exercise=exercise,
             title=title,
             body_text=body_text,
             revision_comment=revision_comment,
@@ -220,19 +220,19 @@ class AskbotTestCase(TestCase):
             by_email=False
         )
 
-    def edit_answer(self,
+    def edit_problem(self,
             user=None,
-            answer=None,
-            body_text='edited answer body',
-            revision_comment='editing answer',
+            problem=None,
+            body_text='edited problem body',
+            revision_comment='editing problem',
             wiki=False,
             is_private=False,
             timestamp=None,
             force=False,#if True - bypass the assert
             by_email=False
         ):
-        user.edit_answer(
-            answer=answer,
+        user.edit_problem(
+            problem=problem,
             body_text=body_text,
             revision_comment=revision_comment,
             wiki=wiki,
@@ -247,11 +247,11 @@ class AskbotTestCase(TestCase):
         """
         return obj.__class__.objects.get(id = obj.id)
 
-    def post_answer(
+    def post_problem(
                     self,
                     user = None,
-                    question = None,
-                    body_text = 'test answer text',
+                    exercise = None,
+                    body_text = 'test problem text',
                     by_email = False,
                     follow = False,
                     wiki = False,
@@ -261,8 +261,8 @@ class AskbotTestCase(TestCase):
 
         if user is None:
             user = self.user
-        return user.post_answer(
-                        question = question,
+        return user.post_problem(
+                        exercise = exercise,
                         body_text = body_text,
                         by_email = by_email,
                         follow = follow,

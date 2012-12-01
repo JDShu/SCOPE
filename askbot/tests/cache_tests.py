@@ -7,20 +7,20 @@ from askbot.tests.utils import AskbotTestCase
 class CacheTests(AskbotTestCase):
     def setUp(self):
         user = self.create_user('other_user')
-        self.question = self.post_question(user=user)
-        self.post_answer(user=user, question=self.question)
+        self.exercise = self.post_exercise(user=user)
+        self.post_problem(user=user, exercise=self.exercise)
         settings.DEBUG = True  # because it's forsed to False
 
-    def visit_question(self):
-        self.client.get(self.question.get_absolute_url(), follow=True)
+    def visit_exercise(self):
+        self.client.get(self.exercise.get_absolute_url(), follow=True)
         
-    def test_anonymous_question_cache(self):
+    def test_anonymous_exercise_cache(self):
 
-        self.visit_question()
+        self.visit_exercise()
         counter = len(connection.queries)
         print 'we have %d queries' % counter
-        self.visit_question()
+        self.visit_exercise()
 
-        #second hit to the same question should give fewer queries
+        #second hit to the same exercise should give fewer queries
         self.assertTrue(counter > len(connection.queries))
         settings.DEBUG = False

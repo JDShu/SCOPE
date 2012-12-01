@@ -55,9 +55,9 @@ settings.register(
 settings.register(
     IntegerValue(
         VOTE_RULES,
-        'MIN_DAYS_TO_ANSWER_OWN_QUESTION',
+        'MIN_DAYS_TO_PROBLEM_OWN_EXERCISE',
         default=0,
-        description=_('Number of days required before answering own question')
+        description=_('Number of days required before probleming own exercise')
     )
 )
 
@@ -82,9 +82,9 @@ settings.register(
 settings.register(
     IntegerValue(
         VOTE_RULES,
-        'MIN_DAYS_FOR_STAFF_TO_ACCEPT_ANSWER',
+        'MIN_DAYS_FOR_STAFF_TO_ACCEPT_PROBLEM',
         default=7,
-        description=_('Minimum days to accept an answer, '
-            'if it has not been accepted by the question poster')
+        description=_('Minimum days to accept an problem, '
+            'if it has not been accepted by the exercise poster')
     )
 )

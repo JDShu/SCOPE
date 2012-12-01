@@ -34,7 +34,7 @@ class Migration(DataMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_auditted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'question': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['askbot.Post']", 'null': 'True'}),
+            'exercise': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['askbot.Post']", 'null': 'True'}),
             'receiving_users': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'received_activity'", 'symmetrical': 'False', 'to': "orm['auth.User']"}),
             'recipients': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'incoming_activity'", 'symmetrical': 'False', 'through': "orm['askbot.ActivityAuditStatus']", 'to': "orm['auth.User']"}),
             'summary': ('django.db.models.fields.TextField', [], {'default': "''"}),
@@ -47,20 +47,20 @@ class Migration(DataMigration):
             'status': ('django.db.models.fields.SmallIntegerField', [], {'default': '0'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
-        'askbot.anonymousanswer': {
-            'Meta': {'object_name': 'AnonymousAnswer'},
+        'askbot.anonymousproblem': {
+            'Meta': {'object_name': 'AnonymousProblem'},
             'added_at': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'ip_addr': ('django.db.models.fields.IPAddressField', [], {'max_length': '15'}),
-            'question': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'anonymous_answers'", 'to': "orm['askbot.Post']"}),
+            'exercise': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'anonymous_problems'", 'to': "orm['askbot.Post']"}),
             'session_key': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
             'summary': ('django.db.models.fields.CharField', [], {'max_length': '180'}),
             'text': ('django.db.models.fields.TextField', [], {}),
             'wiki': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
         },
-        'askbot.anonymousquestion': {
-            'Meta': {'object_name': 'AnonymousQuestion'},
+        'askbot.anonymousexercise': {
+            'Meta': {'object_name': 'AnonymousExercise'},
             'added_at': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -99,15 +99,15 @@ class Migration(DataMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50'})
         },
-        'askbot.draftanswer': {
-            'Meta': {'object_name': 'DraftAnswer'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'draft_answers'", 'to': "orm['auth.User']"}),
+        'askbot.draftproblem': {
+            'Meta': {'object_name': 'DraftProblem'},
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'draft_problems'", 'to': "orm['auth.User']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'text': ('django.db.models.fields.TextField', [], {'null': 'True'}),
-            'thread': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'draft_answers'", 'to': "orm['askbot.Thread']"})
+            'thread': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'draft_problems'", 'to': "orm['askbot.Thread']"})
         },
-        'askbot.draftquestion': {
-            'Meta': {'object_name': 'DraftQuestion'},
+        'askbot.draftexercise': {
+            'Meta': {'object_name': 'DraftExercise'},
             'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'tagnames': ('django.db.models.fields.CharField', [], {'max_length': '125', 'null': 'True'}),
@@ -123,12 +123,12 @@ class Migration(DataMigration):
             'reported_at': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
             'subscriber': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'notification_subscriptions'", 'to': "orm['auth.User']"})
         },
-        'askbot.favoritequestion': {
-            'Meta': {'object_name': 'FavoriteQuestion', 'db_table': "u'favorite_question'"},
+        'askbot.favoriteexercise': {
+            'Meta': {'object_name': 'FavoriteExercise', 'db_table': "u'favorite_exercise'"},
             'added_at': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'thread': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['askbot.Thread']"}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'user_favorite_questions'", 'to': "orm['auth.User']"})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'user_favorite_exercises'", 'to': "orm['auth.User']"})
         },
         'askbot.group': {
             'Meta': {'object_name': 'Group', '_ormbases': ['auth.Group']},
@@ -170,9 +170,9 @@ class Migration(DataMigration):
             'locked_at': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'locked_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'locked_posts'", 'null': 'True', 'to': "orm['auth.User']"}),
             'offensive_flag_count': ('django.db.models.fields.SmallIntegerField', [], {'default': '0'}),
-            'old_answer_id': ('django.db.models.fields.PositiveIntegerField', [], {'default': 'None', 'unique': 'True', 'null': 'True', 'blank': 'True'}),
+            'old_problem_id': ('django.db.models.fields.PositiveIntegerField', [], {'default': 'None', 'unique': 'True', 'null': 'True', 'blank': 'True'}),
             'old_comment_id': ('django.db.models.fields.PositiveIntegerField', [], {'default': 'None', 'unique': 'True', 'null': 'True', 'blank': 'True'}),
-            'old_question_id': ('django.db.models.fields.PositiveIntegerField', [], {'default': 'None', 'unique': 'True', 'null': 'True', 'blank': 'True'}),
+            'old_exercise_id': ('django.db.models.fields.PositiveIntegerField', [], {'default': 'None', 'unique': 'True', 'null': 'True', 'blank': 'True'}),
             'parent': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'comments'", 'null': 'True', 'to': "orm['askbot.Post']"}),
             'post_type': ('django.db.models.fields.CharField', [], {'max_length': '255', 'db_index': 'True'}),
             'score': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
@@ -216,18 +216,18 @@ class Migration(DataMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'post': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['askbot.Post']"})
         },
-        'askbot.questionview': {
-            'Meta': {'object_name': 'QuestionView'},
+        'askbot.exerciseview': {
+            'Meta': {'object_name': 'ExerciseView'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'question': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'viewed'", 'to': "orm['askbot.Post']"}),
+            'exercise': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'viewed'", 'to': "orm['askbot.Post']"}),
             'when': ('django.db.models.fields.DateTimeField', [], {}),
-            'who': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'question_views'", 'to': "orm['auth.User']"})
+            'who': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'exercise_views'", 'to': "orm['auth.User']"})
         },
-        'askbot.questionwidget': {
-            'Meta': {'object_name': 'QuestionWidget'},
+        'askbot.exercisewidget': {
+            'Meta': {'object_name': 'ExerciseWidget'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'order_by': ('django.db.models.fields.CharField', [], {'default': "'-added_at'", 'max_length': '18'}),
-            'question_number': ('django.db.models.fields.PositiveIntegerField', [], {'default': '7'}),
+            'exercise_number': ('django.db.models.fields.PositiveIntegerField', [], {'default': '7'}),
             'search_query': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'style': ('django.db.models.fields.TextField', [], {'default': '"\\n@import url(\'http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,400,700\');\\nbody {\\n    overflow: hidden;\\n}\\n\\n#container {\\n    width: 200px;\\n    height: 350px;\\n}\\nul {\\n    list-style: none;\\n    padding: 5px;\\n    margin: 5px;\\n}\\nli {\\n    border-bottom: #CCC 1px solid;\\n    padding-bottom: 5px;\\n    padding-top: 5px;\\n}\\nli:last-child {\\n    border: none;\\n}\\na {\\n    text-decoration: none;\\n    color: #464646;\\n    font-family: \'Yanone Kaffeesatz\', sans-serif;\\n    font-size: 15px;\\n}\\n"', 'blank': 'True'}),
             'tagnames': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
@@ -239,7 +239,7 @@ class Migration(DataMigration):
             'allowed_from_email': ('django.db.models.fields.EmailField', [], {'max_length': '150'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'post': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'reply_addresses'", 'null': 'True', 'to': "orm['askbot.Post']"}),
-            'reply_action': ('django.db.models.fields.CharField', [], {'default': "'auto_answer_or_comment'", 'max_length': '32'}),
+            'reply_action': ('django.db.models.fields.CharField', [], {'default': "'auto_problem_or_comment'", 'max_length': '32'}),
             'response_post': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'edit_addresses'", 'null': 'True', 'to': "orm['askbot.Post']"}),
             'used_at': ('django.db.models.fields.DateTimeField', [], {'default': 'None', 'null': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
@@ -250,7 +250,7 @@ class Migration(DataMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'negative': ('django.db.models.fields.SmallIntegerField', [], {'default': '0'}),
             'positive': ('django.db.models.fields.SmallIntegerField', [], {'default': '0'}),
-            'question': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['askbot.Post']", 'null': 'True', 'blank': 'True'}),
+            'exercise': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['askbot.Post']", 'null': 'True', 'blank': 'True'}),
             'reputation': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
             'reputation_type': ('django.db.models.fields.SmallIntegerField', [], {}),
             'reputed_at': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
@@ -271,16 +271,16 @@ class Migration(DataMigration):
         },
         'askbot.thread': {
             'Meta': {'object_name': 'Thread'},
-            'accepted_answer': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': "orm['askbot.Post']"}),
+            'accepted_problem': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': "orm['askbot.Post']"}),
             'added_at': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'answer_accepted_at': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'answer_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
+            'problem_accepted_at': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'problem_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
             'approved': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'db_index': 'True'}),
             'close_reason': ('django.db.models.fields.SmallIntegerField', [], {'null': 'True', 'blank': 'True'}),
             'closed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'closed_at': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'closed_by': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'}),
-            'favorited_by': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'unused_favorite_threads'", 'symmetrical': 'False', 'through': "orm['askbot.FavoriteQuestion']", 'to': "orm['auth.User']"}),
+            'favorited_by': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'unused_favorite_threads'", 'symmetrical': 'False', 'through': "orm['askbot.FavoriteExercise']", 'to': "orm['auth.User']"}),
             'favourite_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
             'followed_by': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'followed_threads'", 'symmetrical': 'False', 'to': "orm['auth.User']"}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'group_threads'", 'symmetrical': 'False', 'db_table': "'askbot_thread_groups'", 'to': "orm['askbot.Group']"}),
@@ -352,7 +352,7 @@ class Migration(DataMigration):
             'location': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
             'new_response_count': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'questions_per_page': ('django.db.models.fields.SmallIntegerField', [], {'default': '10'}),
+            'exercises_per_page': ('django.db.models.fields.SmallIntegerField', [], {'default': '10'}),
             'real_name': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
             'reputation': ('django.db.models.fields.PositiveIntegerField', [], {'default': '1'}),
             'seen_response_count': ('django.db.models.fields.IntegerField', [], {'default': '0'}),

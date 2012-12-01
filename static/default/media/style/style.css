@@ -570,12 +570,12 @@ body.anon #searchBar .searchInputCancelable {
   float: left;
   width: 960px;
 }
-/* ----- Sidebar Widgets Box, check main_page/sidebar.html or question/sidebar.html ----- */
+/* ----- Sidebar Widgets Box, check main_page/sidebar.html or exercise/sidebar.html ----- */
 .box {
   background: #fff;
   padding: 4px 0px 10px 0px;
   width: 200px;
-  /* widgets for question template */
+  /* widgets for exercise template */
 
   /* notify by email box */
 
@@ -802,7 +802,7 @@ body.anon #searchBar .searchInputCancelable {
   color: #777;
   text-align: center;
 }
-.box .notify-sidebar #question-subscribe-sidebar {
+.box .notify-sidebar #exercise-subscribe-sidebar {
   margin: 0 0 0 3px;
 }
 .users-page .box label {
@@ -819,23 +819,23 @@ body.anon #searchBar .searchInputCancelable {
   float: right;
   padding-right: 10px;
 }
-.questions-related {
+.exercises-related {
   word-wrap: break-word;
 }
-.questions-related p {
+.exercises-related p {
   line-height: 20px;
   padding: 4px 0px 9px 0px;
   font-size: 16px;
   font-weight: normal;
   border-bottom: #cccccc 1px solid;
 }
-.questions-related p:first-child {
+.exercises-related p:first-child {
   margin-top: -4px;
 }
-.questions-related p:last-child {
+.exercises-related p:last-child {
   border: none;
 }
-.questions-related a {
+.exercises-related a {
   font-size: 13px;
   line-height: 1.3;
 }
@@ -944,8 +944,8 @@ body.anon #searchBar .searchInputCancelable {
 .rss:hover {
   color: #F4A731 !important;
 }
-/* ----- Headline, containing number of questions and tags selected, check main_page/headline.html ----- */
-#questionCount {
+/* ----- Headline, containing number of exercises and tags selected, check main_page/headline.html ----- */
+#exerciseCount {
   font-weight: bold;
   font-size: 20px;
   color: #7ea9b3;
@@ -980,8 +980,8 @@ ul#searchTags {
   text-decoration: underline;
   color: #1b79bd;
 }
-/* ----- Question list , check main_page/content.html and macros/macros.html----- */
-#question-list {
+/* ----- Exercise list , check main_page/content.html and macros/macros.html----- */
+#exercise-list {
   float: left;
   position: relative;
   background-color: #FFF;
@@ -1041,7 +1041,7 @@ ul#searchTags {
 }
 .short-summary .counts .votes div,
 .short-summary .counts .views div,
-.short-summary .counts .answers div,
+.short-summary .counts .problems div,
 .short-summary .counts .favorites div {
   margin-top: 3px;
   font-size: 14px;
@@ -1052,7 +1052,7 @@ ul#searchTags {
   margin: 0 0 0 1px;
 }
 .short-summary .votes,
-.short-summary .answers,
+.short-summary .problems,
 .short-summary .favorites,
 .short-summary .views {
   text-align: center;
@@ -1066,8 +1066,8 @@ ul#searchTags {
 .short-summary .votes {
   background: url(../images/vote-background.png) repeat-x;
 }
-.short-summary .answers {
-  background: url(../images/answers-background.png) repeat-x;
+.short-summary .problems {
+  background: url(../images/problems-background.png) repeat-x;
 }
 .short-summary .views {
   background: url(../images/view-background.png) repeat-x;
@@ -1078,10 +1078,10 @@ ul#searchTags {
 .short-summary .some-votes .item-count {
   color: #4a757f;
 }
-.short-summary .no-answers .item-count {
+.short-summary .no-problems .item-count {
   color: #b1b5b6;
 }
-.short-summary .some-answers .item-count {
+.short-summary .some-problems .item-count {
   color: #eab243;
 }
 .short-summary .no-views .item-count {
@@ -1105,7 +1105,7 @@ ul#searchTags {
   background: #eab243;
   color: yellow;
 }
-/* ----- Question list Paginator , check main_content/pager.html and macros/utils_macros.html----- */
+/* ----- Exercise list Paginator , check main_content/pager.html and macros/utils_macros.html----- */
 .evenMore {
   font-size: 13px;
   color: #707070;
@@ -1410,7 +1410,7 @@ ul#related-tags li {
   display: inline;
   padding-right: 15px;
 }
-/* ----- Ask and Edit Question Form template----- */
+/* ----- Ask and Edit Exercise Form template----- */
 .section-title {
   color: #7ea9b3;
   font-family: 'Open Sans Condensed', Arial, sans-serif;
@@ -1432,7 +1432,7 @@ ul#related-tags li {
   color: #525252;
   line-height: 1.4;
 }
-#askFormBar .questionTitleInput {
+#askFormBar .exerciseTitleInput {
   font-size: 24px;
   line-height: 24px;
   height: 36px;
@@ -1441,17 +1441,17 @@ ul#related-tags li {
   border: #cce6ec 3px solid;
   width: 719px;
 }
-.ask-page div#question-list,
-.edit-question-page div#question-list {
+.ask-page div#exercise-list,
+.edit-exercise-page div#exercise-list {
   border-bottom: #f0f0ec 1px solid;
   float: none;
 }
-.ask-page div#question-list a,
-.edit-question-page div#question-list a {
+.ask-page div#exercise-list a,
+.edit-exercise-page div#exercise-list a {
   line-height: 30px;
 }
-.ask-page div#question-list h2,
-.edit-question-page div#question-list h2 {
+.ask-page div#exercise-list h2,
+.edit-exercise-page div#exercise-list h2 {
   font-size: 13px;
   padding-bottom: 0;
   color: #1b79bd;
@@ -1461,8 +1461,8 @@ ul#related-tags li {
   line-height: 30px;
   font-weight: normal;
 }
-.ask-page div#question-list span,
-.edit-question-page div#question-list span {
+.ask-page div#exercise-list span,
+.edit-exercise-page div#exercise-list span {
   width: 28px;
   height: 26px;
   line-height: 26px;
@@ -1479,12 +1479,12 @@ ul#related-tags li {
   -khtml-border-radius: 3px;
 }
 .ask-page label,
-.edit-question-page label {
+.edit-exercise-page label {
   color: #525252;
   font-size: 13px;
 }
 .ask-page #id_tags,
-.edit-question-page #id_tags {
+.edit-exercise-page #id_tags {
   border: #cce6ec 3px solid;
   height: 25px;
   padding-left: 5px;
@@ -1492,13 +1492,13 @@ ul#related-tags li {
   width: 395px;
 }
 .ask-page #id_post_author_username,
-.question-page #id_post_author_username,
-.edit-question-page #id_post_author_username,
-.edit-answer-page #id_post_author_username,
+.exercise-page #id_post_author_username,
+.edit-exercise-page #id_post_author_username,
+.edit-problem-page #id_post_author_username,
 .ask-page #id_post_author_email,
-.question-page #id_post_author_email,
-.edit-question-page #id_post_author_email,
-.edit-answer-page #id_post_author_email {
+.exercise-page #id_post_author_email,
+.edit-exercise-page #id_post_author_email,
+.edit-problem-page #id_post_author_email {
   border: #cce6ec 3px solid;
   height: 25px;
   padding-left: 5px;
@@ -1506,22 +1506,22 @@ ul#related-tags li {
   width: 186px;
 }
 .ask-page #id_post_author_email,
-.question-page #id_post_author_email,
-.edit-question-page #id_post_author_email,
-.edit-answer-page #id_post_author_email {
+.exercise-page #id_post_author_email,
+.edit-exercise-page #id_post_author_email,
+.edit-problem-page #id_post_author_email {
   margin-left: 10px;
 }
 .ask-page table.proxy-user-info,
-.question-page table.proxy-user-info,
-.edit-question-page table.proxy-user-info,
-.edit-answer-page table.proxy-user-info {
+.exercise-page table.proxy-user-info,
+.edit-exercise-page table.proxy-user-info,
+.edit-problem-page table.proxy-user-info {
   border-spacing: 0px;
   width: 100%;
 }
 .ask-page table.proxy-user-info .form-item,
-.question-page table.proxy-user-info .form-item,
-.edit-question-page table.proxy-user-info .form-item,
-.edit-answer-page table.proxy-user-info .form-item {
+.exercise-page table.proxy-user-info .form-item,
+.edit-exercise-page table.proxy-user-info .form-item,
+.edit-problem-page table.proxy-user-info .form-item {
   float: left;
 }
 .groups-input,
@@ -1683,16 +1683,16 @@ ul#related-tags li {
   margin-bottom: 5px;
 }
 .ask-page .title-desc,
-.question-page .title-desc,
+.exercise-page .title-desc,
 .ask-page .tags-desc,
-.question-page .tags-desc {
+.exercise-page .tags-desc {
   color: #707070;
   font-style: italic;
   font-size: 16px;
 }
-#fmanswer input.submit,
+#fmproblem input.submit,
 .ask-page input.submit,
-.edit-question-page input.submit {
+.edit-exercise-page input.submit {
   float: left;
   font-weight: normal;
   margin-top: 3px;
@@ -1725,9 +1725,9 @@ ul#related-tags li {
   box-shadow: 1px 1px 2px #636363;
   margin-right: 7px;
 }
-#fmanswer input.submit:hover,
+#fmproblem input.submit:hover,
 .ask-page input.submit:hover,
-.edit-question-page input.submit:hover {
+.edit-exercise-page input.submit:hover {
   background-color: #cde5e9;
   background-repeat: no-repeat;
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#cde5e9), color-stop(25%, #cde5e9), to(#94b3ba));
@@ -1755,22 +1755,22 @@ ul#related-tags li {
   width: 200px;
 }
 .ask-page .wmd-container,
-.question-page .wmd-container,
-.edit-question-page .wmd-container,
-.edit-answer-page .wmd-container {
+.exercise-page .wmd-container,
+.edit-exercise-page .wmd-container,
+.edit-problem-page .wmd-container {
   width: 723px;
 }
 .ask-page #editor,
-.question-page #editor,
-.edit-question-page #editor,
-.edit-answer-page #editor {
+.exercise-page #editor,
+.edit-exercise-page #editor,
+.edit-problem-page #editor {
   width: 710px;
   padding: 6px;
 }
 .ask-page .retagger-buttons button,
-.question-page .retagger-buttons button,
-.edit-question-page .retagger-buttons button,
-.edit-answer-page .retagger-buttons button {
+.exercise-page .retagger-buttons button,
+.edit-exercise-page .retagger-buttons button,
+.edit-problem-page .retagger-buttons button {
   margin: 8px 10px 5px 0;
 }
 #editor {
@@ -1837,13 +1837,13 @@ ul#related-tags li {
   font-weight: normal;
   cursor: help;
 }
-.question-options {
+.exercise-options {
   margin-top: 1px;
   color: #666;
   line-height: 13px;
   margin-bottom: 5px;
 }
-.question-options label {
+.exercise-options label {
   vertical-align: text-bottom;
 }
 .edit-content-html {
@@ -1851,19 +1851,19 @@ ul#related-tags li {
   border-bottom: 1px dotted #D8D2A9;
   margin: 5px 0 5px 0;
 }
-.edit-question-page,
+.edit-exercise-page,
 #fmedit,
 .wmd-preview {
   color: #525252;
 }
-.edit-question-page #id_revision,
+.edit-exercise-page #id_revision,
 #fmedit #id_revision,
 .wmd-preview #id_revision {
   font-size: 14px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
-.edit-question-page #id_title,
+.edit-exercise-page #id_title,
 #fmedit #id_title,
 .wmd-preview #id_title {
   font-size: 24px;
@@ -1875,7 +1875,7 @@ ul#related-tags li {
   width: 719px;
   margin-bottom: 10px;
 }
-.edit-question-page #id_summary,
+.edit-exercise-page #id_summary,
 #fmedit #id_summary,
 .wmd-preview #id_summary {
   border: #cce6ec 3px solid;
@@ -1884,23 +1884,23 @@ ul#related-tags li {
   width: 395px;
   font-size: 14px;
 }
-.edit-question-page .title-desc,
+.edit-exercise-page .title-desc,
 #fmedit .title-desc,
 .wmd-preview .title-desc {
   margin-bottom: 10px;
 }
-/* ----- Question template ----- */
-.question-page h1 {
+/* ----- Exercise template ----- */
+.exercise-page h1 {
   padding-top: 0px;
   font-family: 'Open Sans Condensed', Arial, sans-serif;
 }
-.question-page h1 a {
+.exercise-page h1 a {
   color: #464646;
   font-size: 26px;
   font-weight: normal;
   line-height: 1;
 }
-.question-page p.rss {
+.exercise-page p.rss {
   float: none;
   clear: both;
   padding: 3px 0 0 23px;
@@ -1909,73 +1909,73 @@ ul#related-tags li {
   background-position: center left;
   margin-left: 0px !important;
 }
-.question-page p.rss a {
+.exercise-page p.rss a {
   font-family: 'Open Sans Condensed', Arial, sans-serif;
   vertical-align: top;
 }
-.question-page .question-content {
+.exercise-page .exercise-content {
   float: right;
   width: 682px;
   margin-bottom: 10px;
 }
-.question-page .question-content pre,
-.question-page .answer pre,
-.question-page .question-content code,
-.question-page .answer code {
+.exercise-page .exercise-content pre,
+.exercise-page .problem pre,
+.exercise-page .exercise-content code,
+.exercise-page .problem code {
   clear: both;
 }
-.question-page #question-table {
+.exercise-page #exercise-table {
   float: left;
   border-top: #f0f0f0 1px solid;
 }
-.question-page #question-table,
-.question-page .answer-table {
+.exercise-page #exercise-table,
+.exercise-page .problem-table {
   margin: 8px 0 6px 0;
   border-spacing: 0px;
   width: 670px;
   padding-right: 10px;
 }
-.question-page .answer-table {
+.exercise-page .problem-table {
   margin-top: 0px;
   border-bottom: 1px solid #D4D4D4;
   float: right;
 }
-.question-page .answer-table td,
-.question-page #question-table td {
+.exercise-page .problem-table td,
+.exercise-page #exercise-table td {
   width: 20px;
   vertical-align: top;
 }
-.question-page .question-body,
-.question-page .answer-body {
+.exercise-page .exercise-body,
+.exercise-page .problem-body {
   overflow: auto;
   margin-top: 10px;
   font-family: Arial;
   color: #4b4b4b;
 }
-.question-page .question-body p,
-.question-page .answer-body p {
+.exercise-page .exercise-body p,
+.exercise-page .problem-body p {
   margin-bottom: 14px;
   line-height: 1.4;
   font-size: 14px;
   padding: 0px 5px 5px 0px;
 }
-.question-page .question-body a,
-.question-page .answer-body a {
+.exercise-page .exercise-body a,
+.exercise-page .problem-body a {
   color: #1b79bd;
 }
-.question-page .question-body li,
-.question-page .answer-body li {
+.exercise-page .exercise-body li,
+.exercise-page .problem-body li {
   margin-bottom: 7px;
 }
-.question-page .question-body IMG,
-.question-page .answer-body IMG {
+.exercise-page .exercise-body IMG,
+.exercise-page .problem-body IMG {
   max-width: 600px;
 }
-.question-page .post-update-info-container {
+.exercise-page .post-update-info-container {
   float: right;
   width: 175px;
 }
-.question-page .post-update-info {
+.exercise-page .post-update-info {
   background: #ffffff url(../images/background-user-info.png) repeat-x bottom;
   float: right;
   font-size: 9px;
@@ -1993,25 +1993,25 @@ ul#related-tags li {
   -moz-box-shadow: 0px 2px 1px #bfbfbf;
   box-shadow: 0px 2px 1px #bfbfbf;
 }
-.question-page .post-update-info p {
+.exercise-page .post-update-info p {
   line-height: 13px;
   font-size: 11px;
   margin: 0 0 2px 1px;
   padding: 0;
 }
-.question-page .post-update-info a {
+.exercise-page .post-update-info a {
   color: #444;
 }
-.question-page .post-update-info .gravatar {
+.exercise-page .post-update-info .gravatar {
   float: left;
   margin-right: 4px;
 }
-.question-page .post-update-info p.tip {
+.exercise-page .post-update-info p.tip {
   color: #444;
   line-height: 13px;
   font-size: 10px;
 }
-.question-page .post-controls {
+.exercise-page .post-controls {
   font-size: 11px;
   line-height: 12px;
   min-width: 200px;
@@ -2022,7 +2022,7 @@ ul#related-tags li {
   margin-top: 10px;
   margin-bottom: 8px;
 }
-.question-page .post-controls a {
+.exercise-page .post-controls a {
   color: #777;
   padding: 0px 7px 3px 18px;
   cursor: pointer;
@@ -2037,7 +2037,7 @@ ul#related-tags li {
   margin-top: -2px;
   margin-left: 4px;
 }
-.question-page .post-controls a:hover {
+.exercise-page .post-controls a:hover {
   background-color: #f5f0c9;
   border-radius: 3px;
   -ms-border-radius: 3px;
@@ -2045,46 +2045,46 @@ ul#related-tags li {
   -webkit-border-radius: 3px;
   -khtml-border-radius: 3px;
 }
-.question-page .post-controls .sep {
+.exercise-page .post-controls .sep {
   color: #ccc;
   float: right;
   height: 18px;
   font-size: 18px;
 }
-.question-page .post-controls .question-delete,
-.question-page .answer-controls .question-delete {
+.exercise-page .post-controls .exercise-delete,
+.exercise-page .problem-controls .exercise-delete {
   background: url(../images/delete.png) no-repeat center left;
   padding-left: 11px;
 }
-.question-page .post-controls .question-flag,
-.question-page .answer-controls .question-flag {
+.exercise-page .post-controls .exercise-flag,
+.exercise-page .problem-controls .exercise-flag {
   background: url(../images/flag.png) no-repeat center left;
 }
-.question-page .post-controls .question-edit,
-.question-page .answer-controls .question-edit {
+.exercise-page .post-controls .exercise-edit,
+.exercise-page .problem-controls .exercise-edit {
   background: url(../images/edit2.png) no-repeat center left;
 }
-.question-page .post-controls .question-retag,
-.question-page .answer-controls .question-retag {
+.exercise-page .post-controls .exercise-retag,
+.exercise-page .problem-controls .exercise-retag {
   background: url(../images/retag.png) no-repeat center left;
 }
-.question-page .post-controls .question-close,
-.question-page .answer-controls .question-close {
+.exercise-page .post-controls .exercise-close,
+.exercise-page .problem-controls .exercise-close {
   background: url(../images/close.png) no-repeat center left;
 }
-.question-page .post-controls .permant-link,
-.question-page .answer-controls .permant-link {
+.exercise-page .post-controls .permant-link,
+.exercise-page .problem-controls .permant-link {
   background: url(../images/link.png) no-repeat center left;
 }
-.question-page .post-controls .answer-convert,
-.question-page .answer-controls .answer-convert {
+.exercise-page .post-controls .problem-convert,
+.exercise-page .problem-controls .problem-convert {
   float: right;
   clear: left;
   /*background: url(../images/link.png) no-repeat center left;*/
 
 }
-.question-page .post-controls .answer-convert input,
-.question-page .answer-controls .answer-convert input {
+.exercise-page .post-controls .problem-convert input,
+.exercise-page .problem-controls .problem-convert input {
   font-size: 12px;
   color: #777;
   font-family: Arial;
@@ -2102,8 +2102,8 @@ ul#related-tags li {
   margin-left: 4px;
   box-shadow: none;
 }
-.question-page .post-controls .answer-convert input:hover,
-.question-page .answer-controls .answer-convert input:hover {
+.exercise-page .post-controls .problem-convert input:hover,
+.exercise-page .problem-controls .problem-convert input:hover {
   background-color: #f5f0c9;
   border-radius: 3px;
   -ms-border-radius: 3px;
@@ -2111,52 +2111,52 @@ ul#related-tags li {
   -webkit-border-radius: 3px;
   -khtml-border-radius: 3px;
 }
-.question-page .tabBar {
+.exercise-page .tabBar {
   width: 100%;
 }
-.question-page #questionCount {
+.exercise-page #exerciseCount {
   float: left;
   font-family: 'Open Sans Condensed', Arial, sans-serif;
   line-height: 15px;
 }
-.question-page .question-img-upvote,
-.question-page .question-img-downvote,
-.question-page .answer-img-upvote,
-.question-page .answer-img-downvote {
+.exercise-page .exercise-img-upvote,
+.exercise-page .exercise-img-downvote,
+.exercise-page .problem-img-upvote,
+.exercise-page .problem-img-downvote {
   width: 25px;
   height: 20px;
   cursor: pointer;
 }
-.question-page .question-img-upvote,
-.question-page .answer-img-upvote {
+.exercise-page .exercise-img-upvote,
+.exercise-page .problem-img-upvote {
   background: url(../images/vote-arrow-up-new.png) no-repeat;
 }
-.question-page .question-img-downvote,
-.question-page .answer-img-downvote {
+.exercise-page .exercise-img-downvote,
+.exercise-page .problem-img-downvote {
   background: url(../images/vote-arrow-down-new.png) no-repeat;
 }
-.question-page .question-img-upvote:hover,
-.question-page .question-img-upvote.on,
-.question-page .answer-img-upvote:hover,
-.question-page .answer-img-upvote.on {
+.exercise-page .exercise-img-upvote:hover,
+.exercise-page .exercise-img-upvote.on,
+.exercise-page .problem-img-upvote:hover,
+.exercise-page .problem-img-upvote.on {
   background: url(../images/vote-arrow-up-on-new.png) no-repeat;
 }
-.question-page .question-img-downvote:hover,
-.question-page .question-img-downvote.on,
-.question-page .answer-img-downvote:hover,
-.question-page .answer-img-downvote.on {
+.exercise-page .exercise-img-downvote:hover,
+.exercise-page .exercise-img-downvote.on,
+.exercise-page .problem-img-downvote:hover,
+.exercise-page .problem-img-downvote.on {
   background: url(../images/vote-arrow-down-on-new.png) no-repeat;
 }
-.question-page #fmanswer_button {
+.exercise-page #fmproblem_button {
   margin: 8px 0px;
 }
-.question-page .question-img-favorite:hover {
+.exercise-page .exercise-img-favorite:hover {
   background: url(../images/vote-favorite-on.png);
 }
-.question-page div.comments {
+.exercise-page div.comments {
   padding: 0;
 }
-.question-page #comment-title {
+.exercise-page #comment-title {
   font-weight: bold;
   font-size: 23px;
   color: #7ea9b3;
@@ -2164,46 +2164,46 @@ ul#related-tags li {
   float: left;
   font-family: 'Open Sans Condensed', Arial, sans-serif;
 }
-.question-page .comments {
+.exercise-page .comments {
   font-size: 12px;
   clear: both;
 }
-.question-page .comments div.controls {
+.exercise-page .comments div.controls {
   clear: both;
   float: left;
   width: 100%;
   margin: 3px 0 20px 5px;
 }
-.question-page .comments .controls a {
+.exercise-page .comments .controls a {
   color: #988e4c;
   padding: 0 3px 2px 22px;
   font-family: Arial;
   font-size: 13px;
   background: url(../images/comment.png) no-repeat center left;
 }
-.question-page .comments .controls a:hover {
+.exercise-page .comments .controls a:hover {
   background-color: #f5f0c9;
   text-decoration: none;
 }
-.question-page .comments .button {
+.exercise-page .comments .button {
   color: #988e4c;
   font-size: 11px;
   padding: 3px;
   cursor: pointer;
 }
-.question-page .comments a {
+.exercise-page .comments a {
   background-color: inherit;
   color: #1b79bd;
   padding: 0;
 }
-.question-page .comments form.post-comments {
+.exercise-page .comments form.post-comments {
   margin: 3px 26px 0 42px;
 }
-.question-page .comments form.post-comments textarea {
+.exercise-page .comments form.post-comments textarea {
   font-size: 13px;
   line-height: 1.3;
 }
-.question-page .comments textarea {
+.exercise-page .comments textarea {
   height: 42px;
   width: 100%;
   margin: 7px 0 5px 1px;
@@ -2216,13 +2216,13 @@ ul#related-tags li {
   padding-top: 3px;
   border: #cce6ec 3px solid;
 }
-.question-page .comments input {
+.exercise-page .comments input {
   margin-left: 10px;
   margin-top: 1px;
   vertical-align: top;
   width: 100px;
 }
-.question-page .comments button {
+.exercise-page .comments button {
   line-height: 25px;
   margin-bottom: 5px;
   height: 27px;
@@ -2255,7 +2255,7 @@ ul#related-tags li {
   font-family: Arial;
   font-weight: bold;
 }
-.question-page .comments button:hover {
+.exercise-page .comments button:hover {
   background-color: #cde5e9;
   background-repeat: no-repeat;
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#cde5e9), color-stop(25%, #cde5e9), to(#94b3ba));
@@ -2269,7 +2269,7 @@ ul#related-tags li {
   -moz-text-shadow: 0px 1px 0px #c6d9dd;
   -webkit-text-shadow: 0px 1px 0px #c6d9dd;
 }
-.question-page .comments .counter {
+.exercise-page .comments .counter {
   display: inline-block;
   width: 245px;
   float: right;
@@ -2279,7 +2279,7 @@ ul#related-tags li {
   float: right;
   text-align: right;
 }
-.question-page .comments .comment {
+.exercise-page .comments .comment {
   border-bottom: 1px solid #edeeeb;
   clear: both;
   margin: 0;
@@ -2296,24 +2296,24 @@ ul#related-tags li {
   -webkit-border-radius: 5px;
   -khtml-border-radius: 5px;
 }
-.question-page .comments div.comment:hover {
+.exercise-page .comments div.comment:hover {
   background-color: #efefef;
 }
-.question-page .comments a.author {
+.exercise-page .comments a.author {
   background-color: inherit;
   color: #1b79bd;
   padding: 0;
 }
-.question-page .comments a.author:hover {
+.exercise-page .comments a.author:hover {
   text-decoration: underline;
 }
-.question-page .comments span.delete-icon {
+.exercise-page .comments span.delete-icon {
   background: url(../images/close-small.png) no-repeat;
   border: 0;
   width: 14px;
   height: 14px;
 }
-.question-page .comments span.delete-icon:hover {
+.exercise-page .comments span.delete-icon:hover {
   border: #BC564B 2px solid;
   border-radius: 10px;
   -ms-border-radius: 10px;
@@ -2322,31 +2322,31 @@ ul#related-tags li {
   -khtml-border-radius: 10px;
   margin: -3px 0px 0px -2px;
 }
-.question-page .comments .content {
+.exercise-page .comments .content {
   margin-bottom: 7px;
 }
-.question-page .comments .comment-votes {
+.exercise-page .comments .comment-votes {
   float: left;
   width: 37px;
   line-height: 130%;
   padding: 6px 5px 6px 3px;
 }
-.question-page .comments .comment-body {
+.exercise-page .comments .comment-body {
   line-height: 1.3;
   margin: 3px 26px 0 46px;
   padding: 5px 3px;
   color: #666;
   font-size: 13px;
 }
-.question-page .comments .comment-body .edit {
+.exercise-page .comments .comment-body .edit {
   padding-left: 6px;
 }
-.question-page .comments .comment-body .convert-comment {
+.exercise-page .comments .comment-body .convert-comment {
   display: inline;
   white-space: nowrap;
   padding-left: 0px;
 }
-.question-page .comments .comment-body .convert-comment input {
+.exercise-page .comments .comment-body .convert-comment input {
   background: none;
   padding: 0px;
   color: #1B79BD;
@@ -2358,23 +2358,23 @@ ul#related-tags li {
   font-size: 13px;
   box-shadow: none;
 }
-.question-page .comments .comment-body .convert-comment input:hover {
+.exercise-page .comments .comment-body .convert-comment input:hover {
   text-decoration: underline;
   cursor: pointer;
 }
-.question-page .comments .comment-body p {
+.exercise-page .comments .comment-body p {
   font-size: 13px;
   line-height: 1.3;
   margin-bottom: 3px;
   padding: 0;
 }
-.question-page .comments .comment-delete {
+.exercise-page .comments .comment-delete {
   float: right;
   width: 14px;
   line-height: 130%;
   padding: 8px 6px;
 }
-.question-page .comments .upvote {
+.exercise-page .comments .upvote {
   margin: 0px;
   padding-right: 17px;
   padding-top: 2px;
@@ -2384,18 +2384,18 @@ ul#related-tags li {
   font-weight: bold;
   color: #777;
 }
-.question-page .comments .upvote.upvoted {
+.exercise-page .comments .upvote.upvoted {
   color: #d64000;
 }
-.question-page .comments .upvote.hover {
+.exercise-page .comments .upvote.hover {
   background: url(../images/go-up-grey.png) no-repeat;
   background-position: right 1px;
 }
-.question-page .comments .upvote:hover {
+.exercise-page .comments .upvote:hover {
   background: url(../images/go-up-orange.png) no-repeat;
   background-position: right 1px;
 }
-.question-page .comments .help-text {
+.exercise-page .comments .help-text {
   float: right;
   text-align: right;
   color: gray;
@@ -2403,12 +2403,12 @@ ul#related-tags li {
   margin-top: 0px;
   line-height: 50%;
 }
-.question-page #questionTools {
+.exercise-page #exerciseTools {
   font-size: 22px;
   margin-top: 11px;
   text-align: left;
 }
-.question-page .question-status {
+.exercise-page .exercise-status {
   margin-top: 10px;
   margin-bottom: 15px;
   padding: 20px;
@@ -2416,12 +2416,12 @@ ul#related-tags li {
   text-align: center;
   border: #e1c04a 1px solid;
 }
-.question-page .question-status h3 {
+.exercise-page .exercise-status h3 {
   font-size: 20px;
   color: #707070;
   font-weight: normal;
 }
-.question-page .vote-buttons {
+.exercise-page .vote-buttons {
   float: left;
   text-align: center;
   padding-top: 2px;
@@ -2432,98 +2432,98 @@ ul#related-tags li {
   *height: 210px;
   *width: 30px;
 }
-.question-page .vote-buttons IMG {
+.exercise-page .vote-buttons IMG {
   cursor: pointer;
 }
-.question-page .vote-number {
+.exercise-page .vote-number {
   font-family: 'Open Sans Condensed', Arial, sans-serif;
   padding: 2px 0 5px 0;
   font-size: 25px;
   font-weight: bold;
   color: #777;
 }
-.question-page .vote-buttons .notify-sidebar {
+.exercise-page .vote-buttons .notify-sidebar {
   text-align: left;
   width: 130px;
   margin-top: 7px;
 }
-.question-page .vote-buttons .notify-sidebar label {
+.exercise-page .vote-buttons .notify-sidebar label {
   vertical-align: top;
 }
-.question-page .tabBar-answer {
+.exercise-page .tabBar-problem {
   margin-bottom: 15px;
   padding-left: 7px;
   width: 723px;
   margin-top: 10px;
 }
-.question-page .answer .vote-buttons {
+.exercise-page .problem .vote-buttons {
   float: left;
   margin-top: 10px;
 }
-.question-page .accepted-answer {
+.exercise-page .accepted-problem {
   background-color: #f7fecc;
   border-bottom-color: #9BD59B;
 }
-.question-page .accepted-answer .vote-buttons {
+.exercise-page .accepted-problem .vote-buttons {
   width: 27px;
   margin-right: 10px;
   margin-top: 10px;
 }
-.question-page .answer .post-update-info a {
+.exercise-page .problem .post-update-info a {
   color: #444444;
 }
-.question-page .answered {
+.exercise-page .problemed {
   background: #CCC;
   color: #999;
 }
-.question-page .answered-accepted {
+.exercise-page .problemed-accepted {
   background: #DCDCDC;
   color: #763333;
 }
-.question-page .answered-accepted strong {
+.exercise-page .problemed-accepted strong {
   color: #E1E818;
 }
-.question-page .answered-by-owner {
+.exercise-page .problemed-by-owner {
   background: #F1F1FF;
 }
-.question-page .answered-by-owner .comments .button {
+.exercise-page .problemed-by-owner .comments .button {
   background-color: #E6ECFF;
 }
-.question-page .answered-by-owner .comments {
+.exercise-page .problemed-by-owner .comments {
   background-color: #E6ECFF;
 }
-.question-page .answered-by-owner .vote-buttons {
+.exercise-page .problemed-by-owner .vote-buttons {
   margin-right: 10px;
 }
-.question-page .answer-img-accept {
+.exercise-page .problem-img-accept {
   background: url(../images/vote-accepted.png);
   width: 23px;
   height: 23px;
 }
-.question-page .accepted-answer .answer-img-accept,
-.question-page .answer-img-accept:hover {
+.exercise-page .accepted-problem .problem-img-accept,
+.exercise-page .problem-img-accept:hover {
   background: url(../images/vote-accepted-on.png);
 }
-.question-page .answer-body a {
+.exercise-page .problem-body a {
   color: #1b79bd;
 }
-.question-page .answer-body li {
+.exercise-page .problem-body li {
   margin-bottom: 0.7em;
 }
-.question-page #fmanswer {
+.exercise-page #fmproblem {
   color: #707070;
   line-height: 1.2;
   margin-top: 10px;
 }
-.question-page #fmanswer h2 {
+.exercise-page #fmproblem h2 {
   font-family: 'Open Sans Condensed', Arial, sans-serif;
   color: #7ea9b3;
   font-size: 24px;
 }
-.question-page #fmanswer label {
+.exercise-page #fmproblem label {
   font-size: 13px;
 }
-.question-page .message {
+.exercise-page .message {
   padding: 5px;
   margin: 0px 0 10px 0;
 }
@@ -3011,12 +3011,12 @@ a:hover.medal {
   font-weight: 700;
   color: #777;
 }
-.answer-summary {
+.problem-summary {
   display: block;
   clear: both;
   padding: 3px;
 }
-.answer-votes {
+.problem-votes {
   background-color: #EEEEEE;
   color: #555555;
   float: left;
@@ -3135,7 +3135,7 @@ a:hover.medal {
   -moz-box-shadow: 1px 1px 4px #cfb852;
   box-shadow: 1px 1px 4px #cfb852;
 }
-.revision .answerbody {
+.revision .problembody {
   padding: 10px 0 5px 10px;
 }
 .revision .revision-mark {
@@ -3402,11 +3402,11 @@ span.form-error {
   background-color: #FFFE9B;
   padding: 2px;
 }
-.question-title-link a {
+.exercise-title-link a {
   font-weight: bold;
   color: #0077CC;
 }
-.answer-title-link a {
+.problem-title-link a {
   color: #333;
 }
 /* todo: make these more semantic */
@@ -3509,7 +3509,7 @@ button::-moz-focus-inner {
 .submit.small:hover {
   text-decoration: none;
 }
-.question-page a.submit {
+.exercise-page a.submit {
   display: -moz-inline-stack;
   display: inline-block;
   line-height: 30px;
@@ -3679,7 +3679,7 @@ ul.post-retag input {
   height: 1.5em;
   margin: 3px 0 0 -3px;
 }
-#question-controls .tags {
+#exercise-controls .tags {
   margin: 0 0 3px 0;
 }
 #tagSelector {
@@ -3930,7 +3930,7 @@ body.anon.lang-es #searchBar .searchInputCancelable {
   color: white;
   background: #b32f2f;
 }
-.question-page .post-update-info a.primary-group-name,
+.exercise-page .post-update-info a.primary-group-name,
 a.primary-group-name {
   color: #990E08;
   font-weight: bold;
@@ -4048,13 +4048,13 @@ textarea.tipped-input {
   padding-top: 5px;
   text-align: left;
 }
-.question-page .category-selector ul.select-box {
+.exercise-page .category-selector ul.select-box {
   width: 217px;
 }
-.question-page .category-selector ul.select-box input {
+.exercise-page .category-selector ul.select-box input {
   width: 95px;
 }
-.question-page .tag-editor {
+.exercise-page .tag-editor {
   width: 660px;
   margin-left: 0;
 }

@@ -42,7 +42,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #go to the site's live settings and enable the feature
 #"Email settings" -> "allow asking by email"
 #
-#   WARNING: command post_emailed_questions DELETES all 
+#   WARNING: command post_emailed_exercises DELETES all 
 #            emails from the mailbox each time
 #            do not use your personal mail box here!!!
 #
@@ -136,7 +136,7 @@ DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 #TEMPLATE_DIRS = (,) #template have no effect in askbot, use the variable below
 #ASKBOT_EXTRA_SKINS_DIR = #path to your private skin collection
-#take a look here http://askbot.org/en/question/207/
+#take a look here http://askbot.org/en/exercise/207/
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',

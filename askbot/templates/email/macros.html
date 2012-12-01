@@ -8,18 +8,18 @@
     {% spaceless %}
         {{ start_quote(quote_level) }}
             {% set author = post.author.username|escape %}
-            {% if post.post_type == 'question' %}
+            {% if post.post_type == 'exercise' %}
             <p style="font-size:10px; font-weight: bold;">
                     {% if format == 'parent_subthread' %}
                         {% if is_leaf_post %}
-                            {% trans %}Question by {{ author }}:{% endtrans %}
+                            {% trans %}Exercise by {{ author }}:{% endtrans %}
                         {% else %}
                             {% trans -%}
-                                In reply to {{ author }}'s question:
+                                In reply to {{ author }}'s exercise:
                             {%- endtrans %}
                         {% endif %}
                     {% else %}
-                        {% trans %}Question :{% endtrans %}
+                        {% trans %}Exercise :{% endtrans %}
                     {% endif %}
                     {{ post.thread.title }}
             </p>
@@ -35,20 +35,20 @@
                     {{ tag_names|join(', ') }}.
                 </p>
                 {% endif %}
-            {% elif post.post_type == 'answer' %}
+            {% elif post.post_type == 'problem' %}
                 <p style="font-size:10px; font-weight: bold;">
                     {% if format == 'parent_subthread' %}
                         {% if is_leaf_post %}
                             {% trans -%}
-                                {{ author }}'s answer:
+                                {{ author }}'s problem:
                             {%- endtrans %}
                         {% else %}
                             {% trans -%}
-                                In reply to {{ author }}'s answer:
+                                In reply to {{ author }}'s problem:
                             {%- endtrans %}
                         {% endif %}
                     {% else %}
-                        {% trans %}Answered by {{ author }}:{% endtrans %}
+                        {% trans %}Problemed by {{ author }}:{% endtrans %}
                     {% endif %}
                 </p>
             {% else %}

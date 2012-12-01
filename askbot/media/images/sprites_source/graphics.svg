@@ -391,7 +391,7 @@
        width="200.58887"
        id="rect4912"
        style="fill:#c9dbdf;fill-opacity:1;stroke:none"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <path
@@ -399,7 +399,7 @@
        id="path4914"
        d="m 65.5187,85.57437 c -2.3021,0 -4.1543,2.0202 -4.1543,4.5312 l 0,17.9688 200.5856,0 0,-17.9688 c 0,-2.511 -1.8521,-4.5312 -4.1543,-4.5312 l -192.277,0 z"
        style="fill:#d6e5e8;fill-opacity:1;stroke:none"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
@@ -411,7 +411,7 @@
        x="-2560"
        y="1248.6122"
        ry="4.1932693"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
@@ -422,7 +422,7 @@
        width="200.58887"
        id="rect4919"
        style="fill:#c9dbdf;fill-opacity:1;stroke:none"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <path
@@ -430,13 +430,13 @@
        id="path4921"
        d="m 66.6543,35.03887 c -2.3021,0 -4.1543,2.0202 -4.1543,4.5312 l 0,17.9688 200.5856,0 0,-17.9688 c 0,-2.511 -1.8521,-4.5312 -4.1543,-4.5312 l -192.277,0 z"
        style="fill:#d6e5e8;fill-opacity:1;stroke:none"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        style="fill:url(#linearGradient5710);fill-opacity:1;stroke:none"
        id="rect5702"
        width="200.58887"
@@ -447,7 +447,7 @@
     <text
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        xml:space="preserve"
        style="font-size:18.32528687px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#c6d9dd;fill-opacity:1;stroke:none;font-family:Arial Rounded MT Bold;-inkscape-font-specification:Arial Rounded MT Bold"
        x="105.31578"
@@ -458,7 +458,7 @@
          id="tspan5784"
          x="105.31578"
          y="63.835571"
-         style="font-size:23px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#c6d9dd;fill-opacity:1;font-family:Yanone Kaffeesatz;-inkscape-font-specification:Yanone Kaffeesatz">ASK A QUESTION</tspan></text>
+         style="font-size:23px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#c6d9dd;fill-opacity:1;font-family:Yanone Kaffeesatz;-inkscape-font-specification:Yanone Kaffeesatz">ADD AN EXERCISE</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4923"
@@ -466,14 +466,14 @@
        x="105.31578"
        style="font-size:18.32528687px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#314e55;fill-opacity:1;stroke:none;font-family:Arial Rounded MT Bold;-inkscape-font-specification:Arial Rounded MT Bold"
        xml:space="preserve"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"><tspan
          style="font-size:23px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#314e55;fill-opacity:1;font-family:Yanone Kaffeesatz;-inkscape-font-specification:Yanone Kaffeesatz"
          y="62.951782"
          x="105.31578"
          id="tspan4926"
-         sodipodi:role="line">ASK A QUESTION</tspan></text>
+         sodipodi:role="line">ADD AN EXERCISE</tspan></text>
     <g
        id="g5771"
        clip-path="url(#clipPath5776)"
@@ -489,7 +489,7 @@
          width="200.58887"
          id="rect5712"
          style="fill:#c9dbdf;fill-opacity:1;stroke:none"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <path
@@ -497,7 +497,7 @@
          id="path5714"
          d="m -1342.2529,4000.4898 c -2.3021,0 -4.1543,2.0202 -4.1543,4.5312 l 0,17.9688 200.5856,0 0,-17.9688 c 0,-2.511 -1.8521,-4.5312 -4.1543,-4.5312 l -192.277,0 z"
          style="fill:#d6e5e8;fill-opacity:1;stroke:none"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
     </g>
@@ -516,7 +516,7 @@
          width="200.58887"
          id="rect5718"
          style="fill:#c9dbdf;fill-opacity:1;stroke:none"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <path
@@ -524,13 +524,13 @@
          id="path5720"
          d="m -1341.1173,3952.4543 c -2.3021,0 -4.1543,2.0202 -4.1543,4.5312 l 0,17.9688 200.5856,0 0,-17.9688 c 0,-2.511 -1.8521,-4.5312 -4.1543,-4.5312 l -192.277,0 z"
          style="fill:#d6e5e8;fill-opacity:1;stroke:none"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <rect
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          style="fill:url(#linearGradient5765);fill-opacity:1;stroke:none"
          id="rect5722"
          width="200.58887"
@@ -542,7 +542,7 @@
     <rect
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        style="fill:#eceeeb;fill-opacity:1;stroke:none"
        id="rect8138"
        width="200"
@@ -566,7 +566,7 @@
        id="rect9929"
        style="fill:#555753;fill-opacity:0.68306011;stroke:none;filter:url(#filter4997-0-8)"
        transform="matrix(0.2721041,0,0,0.50764927,1221.6765,-580.43915)"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
@@ -577,7 +577,7 @@
        x="524.88599"
        y="52.783974"
        ry="2.12871"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <path
@@ -585,7 +585,7 @@
        d="m 526.05089,52.66314 c -0.6832,0 -1.2329,1.025 -1.2329,2.3 l 0,9.122 59.5311,0 0,-9.122 c 0,-1.275 -0.5496,-2.3 -1.2328,-2.3 l -57.0654,0 z"
        id="path9933"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <text
@@ -595,7 +595,7 @@
        y="68.574982"
        id="text9935"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
@@ -620,13 +620,13 @@
            width="182.7612"
            id="rect9941"
            style="fill:#f5f3ec;fill-opacity:1;stroke:none"
-           inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+           inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
            inkscape:export-xdpi="90"
            inkscape:export-ydpi="90" />
         <rect
            inkscape:export-ydpi="90"
            inkscape:export-xdpi="90"
-           inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+           inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
            style="fill:#e2dbc8;fill-opacity:1;stroke:none"
            id="rect9943"
            width="182.7612"
@@ -639,13 +639,13 @@
            id="path9945"
            d="m -2863.6754,6698.8032 c -2.0974,0 -3.7849,1.584 -3.7849,3.553 l 0,14.09 182.7576,0 0,-14.09 c 0,-1.969 -1.6874,-3.553 -3.7847,-3.553 l -175.188,0 z"
            style="fill:#f1e8d0;fill-opacity:1;stroke:none"
-           inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+           inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
            inkscape:export-xdpi="90"
            inkscape:export-ydpi="90" />
         <rect
            inkscape:export-ydpi="90"
            inkscape:export-xdpi="90"
-           inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+           inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
            style="fill:#c9dbdf;fill-opacity:1;stroke:none"
            id="rect9947"
            width="182.7612"
@@ -656,7 +656,7 @@
         <path
            inkscape:export-ydpi="90"
            inkscape:export-xdpi="90"
-           inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+           inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
            style="fill:#d6e5e8;fill-opacity:1;stroke:none"
            d="m -2864.5062,6664.7148 c -2.0974,0 -3.7849,1.584 -3.7849,3.553 l 0,14.09 182.7576,0 0,-14.09 c 0,-1.969 -1.6874,-3.553 -3.7847,-3.553 l -175.188,0 z"
            id="path9949"
@@ -666,7 +666,7 @@
     <rect
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        style="fill:#c9dbdf;fill-opacity:1;stroke:none"
        id="rect6733"
        width="182.7612"
@@ -682,13 +682,13 @@
        width="182.7612"
        id="rect6763"
        style="fill:#a4bbc1;fill-opacity:1;stroke:none"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <path
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        style="fill:#bfd2d6;fill-opacity:1;stroke:none"
        d="m 528.71502,211.90415 c -2.0974,0 -3.7849,1.584 -3.7849,3.553 l 0,14.09 182.7576,0 0,-14.09 c 0,-1.969 -1.6874,-3.553 -3.7847,-3.553 l -175.188,0 z"
        id="path6735"
@@ -701,7 +701,7 @@
        width="182.7612"
        id="rect6759"
        style="fill:#c9dbdf;fill-opacity:1;stroke:none"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <path
@@ -709,7 +709,7 @@
        id="path6761"
        d="m 527.88422,177.81575 c -2.0974,0 -3.7849,1.584 -3.7849,3.553 l 0,14.09 182.7576,0 0,-14.09 c 0,-1.969 -1.6874,-3.553 -3.7847,-3.553 l -175.188,0 z"
        style="fill:#d6e5e8;fill-opacity:1;stroke:none"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <g
@@ -722,7 +722,7 @@
       <rect
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          style="fill:#c9dbdf;fill-opacity:1;stroke:none"
          id="rect6774"
          width="182.7612"
@@ -738,13 +738,13 @@
          width="182.7612"
          id="rect6777"
          style="fill:#a4bbc1;fill-opacity:1;stroke:none"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <path
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          style="fill:#bfd2d6;fill-opacity:1;stroke:none"
          d="m -2863.6754,6698.8032 c -2.0974,0 -3.7849,1.584 -3.7849,3.553 l 0,14.09 182.7576,0 0,-14.09 c 0,-1.969 -1.6874,-3.553 -3.7847,-3.553 l -175.188,0 z"
          id="path6779"
@@ -757,7 +757,7 @@
          width="182.7612"
          id="rect6781"
          style="fill:#c9dbdf;fill-opacity:1;stroke:none"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <path
@@ -765,7 +765,7 @@
          id="path6783"
          d="m -2864.5062,6664.7148 c -2.0974,0 -3.7849,1.584 -3.7849,3.553 l 0,14.09 182.7576,0 0,-14.09 c 0,-1.969 -1.6874,-3.553 -3.7847,-3.553 l -175.188,0 z"
          style="fill:#d6e5e8;fill-opacity:1;stroke:none"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
     </g>
@@ -777,7 +777,7 @@
        x="355.97711"
        y="39.400673"
        ry="2.12871"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <path
@@ -785,7 +785,7 @@
        d="m 357.62409,39.2807 c -0.9661,0 -1.7433,1.025 -1.7433,2.3 l 0,9.122 84.1764,0 0,-9.122 c 0,-1.275 -0.7772,-2.3 -1.7432,-2.3 l -80.6899,0 z"
        id="path6801"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
@@ -796,7 +796,7 @@
        x="443.17215"
        y="38.692047"
        ry="2.12871"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <path
@@ -804,13 +804,13 @@
        d="m 444.33704,38.57123 c -0.6832,0 -1.2329,1.025 -1.2329,2.3 l 0,9.122 59.5311,0 0,-9.122 c 0,-1.275 -0.5496,-2.3 -1.2328,-2.3 l -57.0654,0 z"
        id="path6811"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        ry="2.12871"
        y="61.465118"
        x="356.40265"
@@ -821,7 +821,7 @@
     <path
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:connector-curvature="0"
        id="path6830"
        d="m 358.04959,61.3453 c -0.9661,0 -1.7433,1.025 -1.7433,2.3 l 0,9.122 84.1764,0 0,-9.122 c 0,-1.275 -0.7772,-2.3 -1.7432,-2.3 l -80.6899,0 z"
@@ -829,7 +829,7 @@
     <rect
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        ry="2.12871"
        y="60.785797"
        x="442.92215"
@@ -840,7 +840,7 @@
     <path
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:connector-curvature="0"
        id="path6834"
        d="m 444.08704,60.66493 c -0.6832,0 -1.2329,1.025 -1.2329,2.3 l 0,9.122 59.5311,0 0,-9.122 c 0,-1.275 -0.5496,-2.3 -1.2328,-2.3 l -57.0654,0 z"
@@ -860,7 +860,7 @@
          x="-2853.5227"
          y="5098.1392"
          ry="2.12871"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <path
@@ -868,13 +868,13 @@
          d="m -2851.8758,5098.0191 c -0.9661,0 -1.7433,1.025 -1.7433,2.3 l 0,9.122 84.1764,0 0,-9.122 c 0,-1.275 -0.7772,-2.3 -1.7432,-2.3 l -80.6899,0 z"
          id="path6840"
          inkscape:connector-curvature="0"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <rect
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          ry="2.12871"
          y="5120.2036"
          x="-2853.0972"
@@ -885,7 +885,7 @@
       <path
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          inkscape:connector-curvature="0"
          id="path6848"
          d="m -2851.4503,5120.0837 c -0.9661,0 -1.7433,1.025 -1.7433,2.3 l 0,9.122 84.1764,0 0,-9.122 c 0,-1.275 -0.7772,-2.3 -1.7432,-2.3 l -80.6899,0 z"
@@ -906,7 +906,7 @@
          x="-2761.3779"
          y="5093.895"
          ry="2.12871"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <path
@@ -914,13 +914,13 @@
          d="m -2760.2131,5093.7741 c -0.6832,0 -1.2329,1.025 -1.2329,2.3 l 0,9.122 59.5311,0 0,-9.122 c 0,-1.275 -0.5496,-2.3 -1.2328,-2.3 l -57.0654,0 z"
          id="path6844"
          inkscape:connector-curvature="0"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <rect
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          ry="2.12871"
          y="5115.9888"
          x="-2761.6279"
@@ -931,7 +931,7 @@
       <path
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          inkscape:connector-curvature="0"
          id="path6852"
          d="m -2760.4631,5115.8678 c -0.6832,0 -1.2329,1.025 -1.2329,2.3 l 0,9.122 59.5311,0 0,-9.122 c 0,-1.275 -0.5496,-2.3 -1.2328,-2.3 l -57.0654,0 z"
@@ -997,7 +997,7 @@
        sodipodi:start="0"
        sodipodi:end="6.2520846"
        transform="matrix(1.2987029,0,0,1,3497.2427,-6935.2056)"
-       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+       inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <path
@@ -1045,7 +1045,7 @@
       <rect
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          ry="2.6516504"
          y="4233.0288"
          x="-2930.5173"
@@ -1056,7 +1056,7 @@
       <g
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/question_page_20_oct.png"
+         inkscape:export-filename="/home/bcorrales/personal/askbot/templates/exercise_page_20_oct.png"
          transform="matrix(0.06751632,0,0,0.06751632,-2752.3707,3732.1503)"
          id="g6072">
         <path

@@ -77,7 +77,7 @@ def faq(request):
     else:
         data = {
             'gravatar_faq_url': reverse('faq') + '#gravatar',
-            'ask_question_url': reverse('ask'),
+            'ask_exercise_url': reverse('ask'),
             'page_class': 'meta',
         }
         return render_into_skin('faq_static.html', data, request)
@@ -174,7 +174,7 @@ def badge(request, id):
 @admins_only
 def list_suggested_tags(request):
     """moderators and administrators can list tags that are
-    in the moderation queue, apply suggested tag to questions
+    in the moderation queue, apply suggested tag to exercises
     or cancel the moderation reuest."""
     if askbot_settings.ENABLE_TAG_MODERATION == False:
         raise Http404

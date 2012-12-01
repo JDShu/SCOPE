@@ -1,3 +1,5 @@
+# FIXME: Make work with new post_types
+
 from datetime import datetime
 import random
 import string
@@ -34,11 +36,11 @@ class ReplyAddressManager(BaseQuerySetManager):
 			
 
 REPLY_ACTION_CHOICES = (
-    ('post_answer', _('Post an answer')),
+    ('post_problem', _('Post an problem')),
     ('post_comment', _('Post a comment')),
     ('replace_content', _('Edit post')),
     ('append_content', _('Append to post')),
-    ('auto_answer_or_comment', _('Answer or comment, depending on the size of post')),
+    ('auto_problem_or_comment', _('Problem or comment, depending on the size of post')),
     ('validate_email', _('Validate email and record signature')),
 )
 class ReplyAddress(models.Model):
@@ -53,7 +55,7 @@ class ReplyAddress(models.Model):
     reply_action = models.CharField(
                         max_length = 32,
                         choices = REPLY_ACTION_CHOICES,
-                        default = 'auto_answer_or_comment'
+                        default = 'auto_problem_or_comment'
                     )
     response_post = models.ForeignKey(
                             Post,
@@ -107,10 +109,10 @@ class ReplyAddress(models.Model):
             assert(reply_action == 'replace_content')
             revision_comment = _('edited by email')
 
-        if post.post_type == 'question':
+        if post.post_type == 'exercise':
             assert(post is self.post)
-            self.user.edit_question(
-                question = post,
+            self.user.edit_exercise(
+                exercise = post,
                 body_text = body_text,
                 title = title,
                 revision_comment = revision_comment,
@@ -130,24 +132,24 @@ class ReplyAddress(models.Model):
         to the user
         """
         result = None
-        if self.post.post_type == 'answer':
+        if self.post.post_type == 'problem':
             result = self.user.post_comment(
                                         self.post,
                                         body_text,
                                         by_email = True
                                     )
-        elif self.post.post_type == 'question':
-            if self.reply_action == 'auto_answer_or_comment':
+        elif self.post.post_type == 'exercise':
+            if self.reply_action == 'auto_problem_or_comment':
                 wordcount = len(body_text)/6#todo: this is a simplistic hack
-                if wordcount > askbot_settings.MIN_WORDS_FOR_ANSWER_BY_EMAIL:
-                    reply_action = 'post_answer'
+                if wordcount > askbot_settings.MIN_WORDS_FOR_PROBLEM_BY_EMAIL:
+                    reply_action = 'post_problem'
                 else:
                     reply_action = 'post_comment'
             else:
                 reply_action = self.reply_action
 
-            if reply_action == 'post_answer':
-                result = self.user.post_answer(
+            if reply_action == 'post_problem':
+                result = self.user.post_problem(
                                             self.post,
                                             body_text,
                                             by_email = True

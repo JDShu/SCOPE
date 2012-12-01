@@ -1,0 +1,14 @@
+{% extends "email/base_mail.html"%}
+{%block title%}{{reminder_phrase}}{% endblock %}
+{%block headline%}{{reminder_phrase}}{% endblock %}
+
+{%block content %}
+<ul>
+  {% for exercise in exercises %}
+  <li><a href="{{site_url}}{{exercise.get_absolute_url()}}?sort=latest">{{exercise.thread.title}}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}
+{%block footer %}
+{% include "email/footer.html" %}
+{% endblock %}

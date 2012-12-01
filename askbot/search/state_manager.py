@@ -47,7 +47,7 @@ def parse_query(query):
     * stripped_query (query with the items below stripped)
     * query_tags (list of tag names)
     * query_users (list of user names, not validated)
-    * query_title (question title)
+    * query_title (exercise title)
     Note: the stripped_query is the actual string
     against which global search will be performed
     the original query will still all be shown in the search
@@ -133,16 +133,16 @@ class SearchState(object):
         if self.page == 0:  # in case someone likes jokes :)
             self.page = 1
 
-        self._questions_url = urlresolvers.reverse('questions')
+        self._exercises_url = urlresolvers.reverse('exercises')
 
     def __str__(self):
         return self.query_string()
 
     def full_url(self):
-        return self._questions_url + self.query_string()
+        return self._exercises_url + self.query_string()
 
     def ask_query_string(self): # TODO: test me
-        """returns string to prepopulate title field on the "Ask your question" page"""
+        """returns string to prepopulate title field on the "Add your exercise" page"""
         ask_title = self.stripped_query or self.query or ''
         if not ask_title:
             return ''
@@ -203,7 +203,7 @@ class SearchState(object):
             ss.query_users = ss.query_users[:]
         #ss.query_title = self.query_title
 
-        #ss._questions_url = self._questions_url
+        #ss._exercises_url = self._exercises_url
 
         return ss
 
@@ -249,7 +249,7 @@ class SearchState(object):
         return ss
 
 
-class DummySearchState(object): # Used for caching question/thread summaries
+class DummySearchState(object): # Used for caching exercise/thread summaries
 
     def add_tag(self, tag):
         self.tag = tag

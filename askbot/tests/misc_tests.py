@@ -13,8 +13,8 @@ class MiscTests(AskbotTestCase):
 
     def test_proper_PostRevision_manager_is_used(self):
         "Makes sure that both normal and related managers for PostRevision don't implement .create() method"
-        question = self.post_question(user=self.u1)
-        self.assertRaises(NotImplementedError, question.revisions.create)
+        exercise = self.post_exercise(user=self.u1)
+        self.assertRaises(NotImplementedError, exercise.revisions.create)
         self.assertRaises(NotImplementedError, PostRevision.objects.create)
 
 class ContentConvertionTests(AskbotTestCase):
@@ -28,59 +28,59 @@ class ContentConvertionTests(AskbotTestCase):
         self.client = Client()
 
         #content
-        self.question = self.post_question(user=self.u1)
-        self.answer_to_convert = self.post_answer(user=self.u2,
-                                                  question=self.question)
-        self.comment_on_answer = self.post_comment(user=self.u1,
-                                                   parent_post=self.answer_to_convert)
-        self.another_answer = self.post_answer(user=self.u1,
-                                               question=self.question)
+        self.exercise = self.post_exercise(user=self.u1)
+        self.problem_to_convert = self.post_problem(user=self.u2,
+                                                  exercise=self.exercise)
+        self.comment_on_problem = self.post_comment(user=self.u1,
+                                                   parent_post=self.problem_to_convert)
+        self.another_problem = self.post_problem(user=self.u1,
+                                               exercise=self.exercise)
         self.comment_to_convert = self.post_comment(user=self.u1,
-                                                    parent_post=self.another_answer)
+                                                    parent_post=self.another_problem)
 
-    def test_convert_comment_to_answer(self):
+    def test_convert_comment_to_problem(self):
         self.client.login(username='user1', password='password')
-        old_parent_comment_count = self.another_answer.comment_count
-        answer_count = self.question.thread.answer_count
-        self.client.post(reverse('comment_to_answer'),
+        old_parent_comment_count = self.another_problem.comment_count
+        problem_count = self.exercise.thread.problem_count
+        self.client.post(reverse('comment_to_problem'),
                          {'comment_id': self.comment_to_convert.id})
-        converted_answer = self.reload_object(self.comment_to_convert)
-        #old_parent = self.another_answer
-        old_parent = self.reload_object(self.another_answer)
+        converted_problem = self.reload_object(self.comment_to_convert)
+        #old_parent = self.another_problem
+        old_parent = self.reload_object(self.another_problem)
 
         #test for convertion
-        self.assertEquals(converted_answer.post_type, 'answer')
+        self.assertEquals(converted_problem.post_type, 'problem')
         #test for parent change
-        self.assertNotEquals(old_parent.id, converted_answer.parent.id)
-        #test for answer count update
-        self.assertEquals(converted_answer.thread.answer_count, answer_count + 1)
+        self.assertNotEquals(old_parent.id, converted_problem.parent.id)
+        #test for problem count update
+        self.assertEquals(converted_problem.thread.problem_count, problem_count + 1)
         #test for comment count update
         self.assertEquals(old_parent.comment_count, old_parent_comment_count - 1)
 
         #test the delete post view for errors
         response = self.client.post(reverse('delete_post'),
-                                    {'post_id': converted_answer.id,
+                                    {'post_id': converted_problem.id,
                                      'cancel_vote': 'false'},
                                     HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEquals(response.status_code, 200)
         self.assertTrue('is_deleted' in response.content)
 
-    def test_convert_answer_to_comment(self):
-        comment_count = self.question.comment_count
-        #because the answer itself has a comment too!
-        comment_count += self.answer_to_convert.comment_count
+    def test_convert_problem_to_comment(self):
+        comment_count = self.exercise.comment_count
+        #because the problem itself has a comment too!
+        comment_count += self.problem_to_convert.comment_count
 
-        answer_count = self.question.thread.answer_count
+        problem_count = self.exercise.thread.problem_count
         self.client.login(username='user1', password='password')
-        self.client.post(reverse('answer_to_comment'),
-                         {'answer_id': self.answer_to_convert.id})
-        converted_comment = self.reload_object(self.answer_to_convert)
-        old_parent = self.reload_object(self.question)
+        self.client.post(reverse('problem_to_comment'),
+                         {'problem_id': self.problem_to_convert.id})
+        converted_comment = self.reload_object(self.problem_to_convert)
+        old_parent = self.reload_object(self.exercise)
 
         #test for convertion
         self.assertEquals(converted_comment.post_type, 'comment')
-        #test for answer count update
-        self.assertEquals(converted_comment.thread.answer_count, answer_count - 1)
+        #test for problem count update
+        self.assertEquals(converted_comment.thread.problem_count, problem_count - 1)
         #test for comment count update
         self.assertEquals(old_parent.comment_count, comment_count + 1)
 

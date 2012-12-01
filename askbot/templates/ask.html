@@ -1,13 +1,13 @@
 {% extends "two_column_body.html" %}
 {% import "macros.html" as macros %}
 <!-- template ask.html -->
-{% block title %}{% spaceless %}{% trans %}Ask Your Question{% endtrans %}{% endspaceless %}{% endblock %}
+{% block title %}{% spaceless %}{% trans %}Add Your Exercise{% endtrans %}{% endspaceless %}{% endblock %}
 {% block forestyle %}
     <link rel="stylesheet" type="text/css" href="{{"/js/wmd/wmd.css"|media}}" />
 {% endblock %}
 {# main contents of ask form is in the template input_bar #}
 {% block sidebar %}
-{% include "widgets/question_edit_tips.html" %}
+{% include "widgets/exercise_edit_tips.html" %}
 {% endblock %}
 {% block content %}
         {% include "widgets/ask_form.html" %}
@@ -33,8 +33,8 @@
         {% include "meta/category_tree_js.html" %}
     {% endif %}
     <script type='text/javascript'>
-        askbot['urls']['api_get_questions'] = '{% url api_get_questions %}';
-        askbot['urls']['saveDraftQuestion'] = '{% url save_draft_question %}';
+        askbot['urls']['api_get_exercises'] = '{% url api_get_exercises %}';
+        askbot['urls']['saveDraftExercise'] = '{% url save_draft_exercise %}';
         {% if settings.ENABLE_MATHJAX or settings.MARKUP_CODE_FRIENDLY %}
             var codeFriendlyMarkdown = true;
         {% else %}
@@ -63,11 +63,11 @@
 
             {{ macros.tag_autocomplete_js(id = '#id_tags') }}
 
-            setupFormValidation($("#fmask"), CPValidator.getQuestionFormRules(), CPValidator.getQuestionFormMessages());
+            setupFormValidation($("#fmask"), CPValidator.getExerciseFormRules(), CPValidator.getExerciseFormMessages());
             lanai.highlightSyntax();
 
             if (askbot['data']['userIsAuthenticated']) {
-                var draftHandler = new DraftQuestion();
+                var draftHandler = new DraftExercise();
                 draftHandler.decorate($(document));
                 window.onbeforeunload = function() {
                     var saveHandler = draftHandler.getSaveHandler();

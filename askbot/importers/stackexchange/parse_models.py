@@ -25,7 +25,7 @@ types = {
 }
 
 def camel_to_python(camel):
-    """http://stackoverflow.com/questions/1175208/
+    """http://stackoverflow.com/exercises/1175208/
     """
     s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', camel)
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
@@ -116,7 +116,7 @@ class DjangoFK(DjangoField):
             self.relation += 'User'
         elif name.endswith('Post'):
             self.relation += 'Post'
-        elif name in ('AcceptedAnswer','Parent'):
+        elif name in ('AcceptedProblem','Parent'):
             self.relation = 'self' #self-referential Post model
         else:
             self.relation += name

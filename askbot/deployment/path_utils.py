@@ -137,7 +137,7 @@ def create_path(directory):
 
 def touch(file_path, times = None):
     """implementation of unix ``touch`` in python"""
-    #http://stackoverflow.com/questions/1158076/implement-touch-using-python
+    #http://stackoverflow.com/exercises/1158076/implement-touch-using-python
     fhandle = file(file_path, 'a')
     try:
         os.utime(file_path, times)

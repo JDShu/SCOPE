@@ -44,7 +44,7 @@ class SearchStateTests(AskbotTestCase):
 
     def test_all_valid_selectors(self):
         ss = SearchState(
-            scope='unanswered',
+            scope='without_problem',
             sort='age-desc',
             query=' alfa',
             tags='miki, mini',
@@ -54,11 +54,11 @@ class SearchStateTests(AskbotTestCase):
             user_logged_in=False
         )
         self.assertEqual(
-            'scope:unanswered/sort:age-desc/query:alfa/tags:miki,mini/author:12/page:2/',
+            'scope:without_problem/sort:age-desc/query:alfa/tags:miki,mini/author:12/page:2/',
             ss.query_string()
         )
         self.assertEqual(
-            'scope:unanswered/sort:age-desc/query:alfa/tags:miki,mini/author:12/page:2/',
+            'scope:without_problem/sort:age-desc/query:alfa/tags:miki,mini/author:12/page:2/',
             ss.deepcopy().query_string()
         )
 
@@ -216,7 +216,7 @@ class SearchStateTests(AskbotTestCase):
         # 2. lists are cloned so that change in the copy doesn't affect the original
 
         ss = SearchState(
-            scope='unanswered',
+            scope='without_problem',
             sort='votes-desc',
             query='hejho #tag1 [tag: tag2] @user @user2 title:"what is this?"',
             tags='miki, mini',
@@ -227,7 +227,7 @@ class SearchStateTests(AskbotTestCase):
         )
         ss2 = ss.deepcopy()
 
-        self.assertEqual(ss.scope, 'unanswered')
+        self.assertEqual(ss.scope, 'without_problem')
         self.assertTrue(ss.scope is ss2.scope)
 
         self.assertEqual(ss.sort, 'votes-desc')
@@ -257,8 +257,8 @@ class SearchStateTests(AskbotTestCase):
         self.assertEqual(ss.query_title, 'what is this?')
         self.assertTrue(ss.query_title is ss2.query_title)
 
-        self.assertEqual(ss._questions_url, urlresolvers.reverse('questions'))
-        self.assertTrue(ss._questions_url is ss2._questions_url)
+        self.assertEqual(ss._exercises_url, urlresolvers.reverse('exercises'))
+        self.assertTrue(ss._exercises_url is ss2._exercises_url)
 
     def test_deep_copy_2(self):
         # Regression test: a special case of deepcopy() when `tags` list is empty,

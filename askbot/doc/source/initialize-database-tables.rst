@@ -9,10 +9,10 @@ When you install Askbot the first time and any time you upgrade the software, ru
     python manage.py syncdb
 
 .. versionchanged:: 0.7.21
-    When the script asks you if you want to create a superuser, answer yes if you want to create one. By default Askbot sets admin status(superuser) for the first user created automatically but also supports this form.
+    When the script asks you if you want to create a superuser, problem yes if you want to create one. By default Askbot sets admin status(superuser) for the first user created automatically but also supports this form.
 
 .. deprecated:: 0.7.21
-    When the script asks you if you want to create a superuser, answer **no**.
+    When the script asks you if you want to create a superuser, problem **no**.
 
 Then run::
 

@@ -8,26 +8,26 @@ from django.db import models
 class API(BaseAPI):
     def get_origin_post_from_content_object(self, parent):
         """follows relations from the parent object
-        until origin post (question) is found
+        until origin post (exercise) is found
         starting point is always ``parent.content_object``
         """
         model = parent.content_type.model
         id = parent.object_id
         #print 'model is ' + model
-        if model == 'question':
-            return self.orm.Question.objects.get(id=id)
-        elif model == 'answer':
-            return self.orm.Answer.objects.get(id=id).question
-        elif model == 'favoritequestion':
+        if model == 'exercise':
+            return self.orm.Exercise.objects.get(id=id)
+        elif model == 'problem':
+            return self.orm.Problem.objects.get(id=id).exercise
+        elif model == 'favoriteexercise':
             try:
-                return self.orm.FavoriteQuestion.objects.get(id=id).question
-            except self.orm.FavoriteQuestion.DoesNotExist:
+                return self.orm.FavoriteExercise.objects.get(id=id).exercise
+            except self.orm.FavoriteExercise.DoesNotExist:
                 #ignore this issue for now
                 return None
-        elif model == 'answerrevision':
-            return self.orm.AnswerRevision.objects.get(id=id).answer.question
-        elif model == 'questionrevision':
-            return self.orm.QuestionRevision.objects.get(id=id).question
+        elif model == 'problemrevision':
+            return self.orm.ProblemRevision.objects.get(id=id).problem.exercise
+        elif model == 'exerciserevision':
+            return self.orm.ExerciseRevision.objects.get(id=id).exercise
         elif model == 'comment':
             comment = self.orm.Comment.objects.get(id=id)
             return self.get_origin_post_from_content_object(comment)

@@ -34,12 +34,12 @@ from askbot import exceptions as askbot_exceptions
 from askbot import const
 from askbot.const.message_keys import get_i18n_message
 from askbot.conf import settings as askbot_settings
-from askbot.models.question import Thread
+from askbot.models.exercise import Thread
 from askbot.skins import utils as skin_utils
 from askbot.mail import messages
-from askbot.models.question import QuestionView, AnonymousQuestion
-from askbot.models.question import DraftQuestion
-from askbot.models.question import FavoriteQuestion
+from askbot.models.exercise import ExerciseView, AnonymousExercise
+from askbot.models.exercise import DraftExercise
+from askbot.models.exercise import FavoriteExercise
 from askbot.models.tag import Tag, MarkedTag
 from askbot.models.tag import get_global_group
 from askbot.models.tag import get_group_names
@@ -49,14 +49,15 @@ from askbot.models.user import EmailFeedSetting, ActivityAuditStatus, Activity
 from askbot.models.user import GroupMembership
 from askbot.models.user import Group
 from askbot.models.post import Post, PostRevision
-from askbot.models.post import PostFlagReason, AnonymousAnswer
+from askbot.models.post import PostFlagReason, AnonymousProblem, AnonymousSolution
 from askbot.models.post import PostToGroup
-from askbot.models.post import DraftAnswer
+from askbot.models.post import DraftProblem
+from askbot.models.post import DraftSolution
 from askbot.models.reply_by_email import ReplyAddress
 from askbot.models import signals
 from askbot.models.badges import award_badges_signal, get_badge, BadgeData
 from askbot.models.repute import Award, Repute, Vote
-from askbot.models.widgets import AskWidget, QuestionWidget
+from askbot.models.widgets import AskWidget, ExerciseWidget
 from askbot import auth
 from askbot.utils.decorators import auto_now_timestamp
 from askbot.utils.slug import slugify
@@ -116,6 +117,8 @@ def get_users_by_text_query(search_query, users_query_set = None):
         #        models.Q(about__search = search_query)
         #    )
 
+
+
 User.add_to_class(
             'status',
             models.CharField(
@@ -144,9 +147,9 @@ User.add_to_class('gold', models.SmallIntegerField(default=0))
 User.add_to_class('silver', models.SmallIntegerField(default=0))
 User.add_to_class('bronze', models.SmallIntegerField(default=0))
 User.add_to_class(
-    'questions_per_page',  # TODO: remove me and const.QUESTIONS_PER_PAGE_USER_CHOICES, we're no longer used!
+    'exercises_per_page',  # TODO: remove me and const.EXERCISES_PER_PAGE_USER_CHOICES, we're no longer used!
     models.SmallIntegerField(
-        choices=const.QUESTIONS_PER_PAGE_USER_CHOICES,
+        choices=const.EXERCISES_PER_PAGE_USER_CHOICES,
         default=10
     )
 )
@@ -319,9 +322,9 @@ def user_get_marked_tag_names(self, reason):
 
     return tag_names
 
-def user_has_affinity_to_question(self, question = None, affinity_type = None):
+def user_has_affinity_to_exercise(self, exercise = None, affinity_type = None):
     """returns True if number of tag overlap of the user tag
-    selection with the question is 0 and False otherwise
+    selection with the exercise is 0 and False otherwise
     affinity_type can be either "like" or "dislike"
     """
     if affinity_type == 'like':
@@ -337,9 +340,9 @@ def user_has_affinity_to_question(self, question = None, affinity_type = None):
     else:
         raise ValueError('unexpected affinity type %s' % str(affinity_type))
 
-    question_tags = question.thread.tags.all()
+    exercise_tags = exercise.thread.tags.all()
     intersecting_tag_selections = self.tag_selections.filter(
-                                                tag__in = question_tags,
+                                                tag__in = exercise_tags,
                                                 reason = tag_selection_type
                                             )
     #count number of overlapping tags
@@ -348,8 +351,8 @@ def user_has_affinity_to_question(self, question = None, affinity_type = None):
     elif askbot_settings.USE_WILDCARD_TAGS == False:
         return False
 
-    #match question tags against wildcards
-    for tag in question_tags:
+    #match exercise tags against wildcards
+    for tag in exercise_tags:
         for wildcard in wildcards:
             if tag.name.startswith(wildcard[:-1]):
                 return True
@@ -506,14 +509,14 @@ def user_assert_can_approve_post_revision(self, post_revision = None):
         admin_or_moderator_required = True
     )
 
-def user_assert_can_unaccept_best_answer(self, answer = None):
-    assert getattr(answer, 'post_type', '') == 'answer'
+def user_assert_can_unaccept_best_problem(self, problem = None):
+    assert getattr(problem, 'post_type', '') == 'problem'
     blocked_error_message = _(
-            'Sorry, you cannot accept or unaccept best answers '
+            'Sorry, you cannot accept or unaccept best problems '
             'because your account is blocked'
         )
     suspended_error_message = _(
-            'Sorry, you cannot accept or unaccept best answers '
+            'Sorry, you cannot accept or unaccept best problems '
             'because your account is suspended'
         )
 
@@ -521,14 +524,14 @@ def user_assert_can_unaccept_best_answer(self, answer = None):
         error_message = blocked_error_message
     elif self.is_suspended():
         error_message = suspended_error_message
-    elif self == answer.thread._question_post().get_owner():
-        if self == answer.get_owner():
+    elif self == problem.thread._exercise_post().get_owner():
+        if self == problem.get_owner():
             if not self.is_administrator():
                 #check rep
-                min_rep_setting = askbot_settings.MIN_REP_TO_ACCEPT_OWN_ANSWER
+                min_rep_setting = askbot_settings.MIN_REP_TO_ACCEPT_OWN_PROBLEM
                 low_rep_error_message = _(
                             ">%(points)s points required to accept or unaccept "
-                            " your own answer to your own question"
+                            " your own problem to your own exercise"
                         ) % {'points': min_rep_setting}
 
                 _assert_user_can(
@@ -540,18 +543,18 @@ def user_assert_can_unaccept_best_answer(self, answer = None):
                 )
         return # success
 
-    elif self.reputation >= askbot_settings.MIN_REP_TO_ACCEPT_ANY_ANSWER or \
-        self.is_administrator() or self.is_moderator() or self.is_post_moderator(answer):
+    elif self.reputation >= askbot_settings.MIN_REP_TO_ACCEPT_ANY_PROBLEM or \
+        self.is_administrator() or self.is_moderator() or self.is_post_moderator(problem):
 
         will_be_able_at = (
-            answer.added_at +
+            problem.added_at +
             datetime.timedelta(
-                days=askbot_settings.MIN_DAYS_FOR_STAFF_TO_ACCEPT_ANSWER)
+                days=askbot_settings.MIN_DAYS_FOR_STAFF_TO_ACCEPT_PROBLEM)
         )
 
         if datetime.datetime.now() < will_be_able_at:
             error_message = _(
-                'Sorry, you will be able to accept this answer '
+                'Sorry, you will be able to accept this problem '
                 'only after %(will_be_able_at)s'
                 ) % {'will_be_able_at': will_be_able_at.strftime('%d/%m/%Y')}
         else:
@@ -559,15 +562,15 @@ def user_assert_can_unaccept_best_answer(self, answer = None):
 
     else:
         error_message = _(
-            'Sorry, only moderators or original author of the question '
-            ' - %(username)s - can accept or unaccept the best answer'
-            ) % {'username': answer.get_owner().username}
+            'Sorry, only moderators or original author of the exercise '
+            ' - %(username)s - can accept or unaccept the best problem'
+            ) % {'username': problem.get_owner().username}
 
     raise django_exceptions.PermissionDenied(error_message)
 
-def user_assert_can_accept_best_answer(self, answer = None):
-    assert getattr(answer, 'post_type', '') == 'answer'
-    self.assert_can_unaccept_best_answer(answer)
+def user_assert_can_accept_best_problem(self, problem = None):
+    assert getattr(problem, 'post_type', '') == 'problem'
+    self.assert_can_unaccept_best_problem(problem)
 
 def user_assert_can_vote_for_post(
                                 self,
@@ -578,7 +581,7 @@ def user_assert_can_vote_for_post(
     if user can't in fact upvote
 
     :param:direction can be 'up' or 'down'
-    :param:post can be instance of question or answer
+    :param:post can be instance of exercise or problem
     """
     if self == post.author:
         raise django_exceptions.PermissionDenied(
@@ -636,7 +639,7 @@ def user_assert_can_upload_file(request_user):
     )
 
 
-def user_assert_can_post_question(self):
+def user_assert_can_post_exercise(self):
     """raises exceptions.PermissionDenied with
     text that has the reason for the denial
     """
@@ -651,17 +654,29 @@ def user_assert_can_post_question(self):
     )
 
 
-def user_assert_can_post_answer(self, thread = None):
-    """same as user_can_post_question
+def user_assert_can_post_problem(self, thread = None):
+    """same as user_can_post_exercise
     """
-    limit_answers = askbot_settings.LIMIT_ONE_ANSWER_PER_USER
-    if limit_answers and thread.has_answer_by_user(self):
+    limit_problems = askbot_settings.LIMIT_ONE_PROBLEM_PER_USER
+    if limit_problems and thread.has_problem_by_user(self):
         message = _(
-            'Sorry, you already gave an answer, please edit it instead.'
+            'Sorry, you already gave an problem, please edit it instead.'
         )
-        raise askbot_exceptions.AnswerAlreadyGiven(message)
+        raise askbot_exceptions.ProblemAlreadyGiven(message)
 
-    self.assert_can_post_question()
+    self.assert_can_post_exercise()
+    
+#MAX:  This only tests to see that a user can post an exercise at this time.
+def user_assert_can_post_solution(self, thread = None):
+    """same as user_can_post_exercise
+    
+    limit_solutions = askbot_settings.LIMIT_ONE_SOLUTION_PER_USER
+    if limit_solutions and thread.has_solution_by_user(self):
+        message = _(
+            'Sorry, you already gave an solution, please edit it instead.'
+        )
+        raise askbot_exceptions.SolutionAlreadyGiven(message)"""
+    self.assert_can_post_exercise()
 
 
 def user_assert_can_edit_comment(self, comment = None):
@@ -724,7 +739,7 @@ def user_assert_can_post_comment(self, parent_post = None):
     low_rep_error_message = _(
                 'Sorry, to comment any post a minimum reputation of '
                 '%(min_rep)s points is required. You can still comment '
-                'your own posts and answers to your questions'
+                'your own posts and problems to your exercises'
             ) % {'min_rep': askbot_settings.MIN_REP_TO_LEAVE_COMMENTS}
 
     blocked_message = get_i18n_message('BLOCKED_USERS_CANNOT_POST')
@@ -740,15 +755,16 @@ def user_assert_can_post_comment(self, parent_post = None):
             low_rep_error_message = low_rep_error_message,
         )
     except askbot_exceptions.InsufficientReputation, e:
-        if parent_post.post_type == 'answer':
-            if self == parent_post.thread._question_post().author:
+    #MAX:
+        if parent_post.post_type in ('problem', 'solution'):
+            if self == parent_post.thread._exercise_post().author:
                 return
         raise e
 
 def user_assert_can_see_deleted_post(self, post = None):
 
     """attn: this assertion is independently coded in
-    Question.get_answers call
+    Exercise.get_problems call
     """
 
     error_message = _(
@@ -817,22 +833,29 @@ def user_assert_can_edit_post(self, post = None):
     )
 
 
-def user_assert_can_edit_question(self, question = None):
-    assert getattr(question, 'post_type', '') == 'question'
-    self.assert_can_edit_post(question)
+def user_assert_can_edit_exercise(self, exercise = None):
+    assert getattr(exercise, 'post_type', '') == 'exercise'
+    self.assert_can_edit_post(exercise)
 
 
-def user_assert_can_edit_answer(self, answer = None):
-    assert getattr(answer, 'post_type', '') == 'answer'
-    self.assert_can_edit_post(answer)
+def user_assert_can_edit_problem(self, problem = None):
+    assert getattr(problem, 'post_type', '') == 'problem'
+    self.assert_can_edit_post(problem)
 
+#MAX:
+def user_assert_can_edit_solution(self, solution = None):
+    assert getattr(solution, 'post_type', '') == 'solution'
+    self.assert_can_edit_post(solution)
 
 def user_assert_can_delete_post(self, post = None):
     post_type = getattr(post, 'post_type', '')
-    if post_type == 'question':
-        self.assert_can_delete_question(question = post)
-    elif post_type == 'answer':
-        self.assert_can_delete_answer(answer = post)
+    if post_type == 'exercise':
+        self.assert_can_delete_exercise(exercise = post)
+    elif post_type == 'problem':
+        self.assert_can_delete_problem(problem = post)
+    #MAX:
+    elif post_type == 'solution':
+        self.assert_can_delete_solution(solution = post)
     elif post_type == 'comment':
         self.assert_can_delete_comment(comment = post)
     else:
@@ -843,39 +866,39 @@ def user_assert_can_restore_post(self, post = None):
     """
     self.assert_can_delete_post(post = post)
 
-def user_assert_can_delete_question(self, question = None):
-    """rules are the same as to delete answer,
-    except if question has answers already, when owner
+def user_assert_can_delete_exercise(self, exercise = None):
+    """rules are the same as to delete problem,
+    except if exercise has problems already, when owner
     cannot delete unless s/he is and adinistrator or moderator
     """
 
-    #cheating here. can_delete_answer wants argument named
-    #"question", so the argument name is skipped
-    self.assert_can_delete_answer(question)
-    if self == question.get_owner():
-        #if there are answers by other people,
+    #cheating here. can_delete_problem wants argument named
+    #"exercise", so the argument name is skipped
+    self.assert_can_delete_problem(exercise)
+    if self == exercise.get_owner():
+        #if there are problems by other people,
         #then deny, unless user in admin or moderator
-        answer_count = question.thread.all_answers()\
+        problem_count = exercise.thread.all_problems()\
                         .exclude(author=self).exclude(points__lte=0).count()
 
-        if answer_count > 0:
+        if problem_count > 0:
             if self.is_administrator() or self.is_moderator():
                 return
             else:
                 msg = ungettext(
-                    'Sorry, cannot delete your question since it '
-                    'has an upvoted answer posted by someone else',
-                    'Sorry, cannot delete your question since it '
-                    'has some upvoted answers posted by other users',
-                    answer_count
+                    'Sorry, cannot delete your exercise since it '
+                    'has an upvoted problem posted by someone else',
+                    'Sorry, cannot delete your exercise since it '
+                    'has some upvoted problems posted by other users',
+                    problem_count
                 )
                 raise django_exceptions.PermissionDenied(msg)
 
 
-def user_assert_can_delete_answer(self, answer = None):
+def user_assert_can_delete_problem(self, problem = None):
     """intentionally use "post" word in the messages
-    instead of "answer", because this logic also applies to
-    assert on deleting question (in addition to some special rules)
+    instead of "problem", because this logic also applies to
+    assert on deleting exercise (in addition to some special rules)
     """
     blocked_error_message = _(
                 'Sorry, since your account is blocked '
@@ -894,7 +917,7 @@ def user_assert_can_delete_answer(self, answer = None):
 
     _assert_user_can(
         user = self,
-        post = answer,
+        post = problem,
         owner_can = True,
         blocked_error_message = blocked_error_message,
         suspended_error_message = suspended_error_message,
@@ -902,34 +925,64 @@ def user_assert_can_delete_answer(self, answer = None):
         min_rep_setting = min_rep_setting
     )
 
-
-def user_assert_can_close_question(self, question = None):
-    assert(getattr(question, 'post_type', '') == 'question')
+#MAX:
+def user_assert_can_delete_solution(self, solution = None):
+    """intentionally use "post" word in the messages
+    instead of "solution", because this logic also applies to
+    assert on deleting exercise (in addition to some special rules)
+    """
     blocked_error_message = _(
                 'Sorry, since your account is blocked '
-                'you cannot close questions'
+                'you cannot delete posts'
             )
     suspended_error_message = _(
                 'Sorry, since your account is suspended '
-                'you cannot close questions'
+                'you can delete only your own posts'
+            )
+    low_rep_error_message = _(
+                'Sorry, to delete other people\'s posts, a minimum '
+                'reputation of %(min_rep)s is required'
+            ) % \
+            {'min_rep': askbot_settings.MIN_REP_TO_DELETE_OTHERS_POSTS}
+    min_rep_setting = askbot_settings.MIN_REP_TO_DELETE_OTHERS_POSTS
+
+    _assert_user_can(
+        user = self,
+        post = solution,
+        owner_can = True,
+        blocked_error_message = blocked_error_message,
+        suspended_error_message = suspended_error_message,
+        low_rep_error_message = low_rep_error_message,
+        min_rep_setting = min_rep_setting
+    )
+
+def user_assert_can_close_exercise(self, exercise = None):
+    assert(getattr(exercise, 'post_type', '') == 'exercise')
+    blocked_error_message = _(
+                'Sorry, since your account is blocked '
+                'you cannot close exercises'
+            )
+    suspended_error_message = _(
+                'Sorry, since your account is suspended '
+                'you cannot close exercises'
             )
     low_rep_error_message = _(
                 'Sorry, to close other people\' posts, a minimum '
                 'reputation of %(min_rep)s is required'
             ) % \
-            {'min_rep': askbot_settings.MIN_REP_TO_CLOSE_OTHERS_QUESTIONS}
-    min_rep_setting = askbot_settings.MIN_REP_TO_CLOSE_OTHERS_QUESTIONS
+            {'min_rep': askbot_settings.MIN_REP_TO_CLOSE_OTHERS_EXERCISES}
+    min_rep_setting = askbot_settings.MIN_REP_TO_CLOSE_OTHERS_EXERCISES
 
-    owner_min_rep_setting =  askbot_settings.MIN_REP_TO_CLOSE_OWN_QUESTIONS
+    owner_min_rep_setting =  askbot_settings.MIN_REP_TO_CLOSE_OWN_EXERCISES
 
     owner_low_rep_error_message = _(
-                        'Sorry, to close own question '
+                        'Sorry, to close own exercise '
                         'a minimum reputation of %(min_rep)s is required'
                     ) % {'min_rep': owner_min_rep_setting}
 
     _assert_user_can(
         user = self,
-        post = question,
+        post = exercise,
         owner_can = True,
         suspended_owner_cannot = True,
         owner_min_rep_setting = owner_min_rep_setting,
@@ -941,37 +994,37 @@ def user_assert_can_close_question(self, question = None):
     )
 
 
-def user_assert_can_reopen_question(self, question = None):
-    assert(question.post_type == 'question')
+def user_assert_can_reopen_exercise(self, exercise = None):
+    assert(exercise.post_type == 'exercise')
 
-    #for some reason rep to reopen own questions != rep to close own q's
-    owner_min_rep_setting =  askbot_settings.MIN_REP_TO_REOPEN_OWN_QUESTIONS
-    min_rep_setting = askbot_settings.MIN_REP_TO_CLOSE_OTHERS_QUESTIONS
+    #for some reason rep to reopen own exercises != rep to close own q's
+    owner_min_rep_setting =  askbot_settings.MIN_REP_TO_REOPEN_OWN_EXERCISES
+    min_rep_setting = askbot_settings.MIN_REP_TO_CLOSE_OTHERS_EXERCISES
 
     general_error_message = _(
                         'Sorry, only administrators, moderators '
                         'or post owners with reputation > %(min_rep)s '
-                        'can reopen questions.'
+                        'can reopen exercises.'
                     ) % {'min_rep': owner_min_rep_setting }
 
     owner_low_rep_error_message = _(
-                        'Sorry, to reopen own question '
+                        'Sorry, to reopen own exercise '
                         'a minimum reputation of %(min_rep)s is required'
                     ) % {'min_rep': owner_min_rep_setting}
 
     blocked_error_message = _(
-            'Sorry, you cannot reopen questions '
+            'Sorry, you cannot reopen exercises '
             'because your account is blocked'
         )
 
     suspended_error_message = _(
-            'Sorry, you cannot reopen questions '
+            'Sorry, you cannot reopen exercises '
             'because your account is suspended'
         )
 
     _assert_user_can(
         user = self,
-        post = question,
+        post = exercise,
         owner_can = True,
         suspended_owner_cannot = True,
         owner_min_rep_setting = owner_min_rep_setting,
@@ -988,7 +1041,7 @@ def user_assert_can_flag_offensive(self, post = None):
     assert(post is not None)
 
     double_flagging_error_message = _(
-        'You have flagged this question before and '
+        'You have flagged this exercise before and '
         'cannot do it more than once'
     )
 
@@ -1093,37 +1146,37 @@ def user_assert_can_remove_all_flags_offensive(self, post = None):
         raise django_exceptions.PermissionDenied(permission_denied_message)
 
 
-def user_assert_can_retag_question(self, question = None):
+def user_assert_can_retag_exercise(self, exercise = None):
 
-    if question.deleted == True:
+    if exercise.deleted == True:
         try:
-            self.assert_can_edit_deleted_post(question)
+            self.assert_can_edit_deleted_post(exercise)
         except django_exceptions.PermissionDenied:
             error_message = _(
-                            'Sorry, only question owners, '
+                            'Sorry, only exercise owners, '
                             'site administrators and moderators '
-                            'can retag deleted questions'
+                            'can retag deleted exercises'
                         )
             raise django_exceptions.PermissionDenied(error_message)
 
     blocked_error_message = _(
                 'Sorry, since your account is blocked '
-                'you cannot retag questions'
+                'you cannot retag exercises'
             )
     suspended_error_message = _(
                 'Sorry, since your account is suspended '
-                'you can retag only your own questions'
+                'you can retag only your own exercises'
             )
     low_rep_error_message = _(
-                'Sorry, to retag questions a minimum '
+                'Sorry, to retag exercises a minimum '
                 'reputation of %(min_rep)s is required'
             ) % \
-            {'min_rep': askbot_settings.MIN_REP_TO_RETAG_OTHERS_QUESTIONS}
-    min_rep_setting = askbot_settings.MIN_REP_TO_RETAG_OTHERS_QUESTIONS
+            {'min_rep': askbot_settings.MIN_REP_TO_RETAG_OTHERS_EXERCISES}
+    min_rep_setting = askbot_settings.MIN_REP_TO_RETAG_OTHERS_EXERCISES
 
     _assert_user_can(
         user = self,
-        post = question,
+        post = exercise,
         owner_can = True,
         blocked_error_message = blocked_error_message,
         suspended_error_message = suspended_error_message,
@@ -1245,8 +1298,9 @@ def user_post_anonymous_askbot_content(user, session_key):
 
     this function is used by the signal handler with a similar name
     """
-    aq_list = AnonymousQuestion.objects.filter(session_key = session_key)
-    aa_list = AnonymousAnswer.objects.filter(session_key = session_key)
+    aq_list = AnonymousExercise.objects.filter(session_key = session_key)
+    aa_list = AnonymousProblem.objects.filter(session_key = session_key)
+    anon_s_list = AnonymousSolution.objects.filter(session_key = session_key)
     #from askbot.conf import settings as askbot_settings
     if askbot_settings.EMAIL_VALIDATION == True:#add user to the record
         for aq in aq_list:
@@ -1255,6 +1309,10 @@ def user_post_anonymous_askbot_content(user, session_key):
         for aa in aa_list:
             aa.author = user
             aa.save()
+        #MAX:
+        for anon_s in anon_s_list:
+            anon_s.author = user
+            anon_s.save()
         #maybe add pending posts message?
     else:
         if user.is_blocked():
@@ -1268,6 +1326,9 @@ def user_post_anonymous_askbot_content(user, session_key):
                 aq.publish(user)
             for aa in aa_list:
                 aa.publish(user)
+            #MAX:
+            for anon_s in anon_s_list:
+                anon_s.publish(user)
 
 
 def user_mark_tags(
@@ -1344,69 +1405,69 @@ def user_mark_tags(
     return cleaned_tagnames, cleaned_wildcards
 
 @auto_now_timestamp
-def user_retag_question(
+def user_retag_exercise(
                     self,
-                    question = None,
+                    exercise = None,
                     tags = None,
                     timestamp = None,
                     silent = False
                 ):
-    self.assert_can_retag_question(question)
-    question.thread.retag(
+    self.assert_can_retag_exercise(exercise)
+    exercise.thread.retag(
         retagged_by = self,
         retagged_at = timestamp,
         tagnames = tags,
         silent = silent
     )
-    question.thread.invalidate_cached_data()
+    exercise.thread.invalidate_cached_data()
     award_badges_signal.send(None,
-        event = 'retag_question',
+        event = 'retag_exercise',
         actor = self,
-        context_object = question,
+        context_object = exercise,
         timestamp = timestamp
     )
 
 @auto_now_timestamp
-def user_accept_best_answer(
-                self, answer = None,
+def user_accept_best_problem(
+                self, problem = None,
                 timestamp = None,
                 cancel = False,
                 force = False
             ):
     if cancel:
-        return self.unaccept_best_answer(
-                                answer = answer,
+        return self.unaccept_best_problem(
+                                problem = problem,
                                 timestamp = timestamp,
                                 force = force
                             )
     if force == False:
-        self.assert_can_accept_best_answer(answer)
-    if answer.accepted() == True:
+        self.assert_can_accept_best_problem(problem)
+    if problem.accepted() == True:
         return
 
-    prev_accepted_answer = answer.thread.accepted_answer
-    if prev_accepted_answer:
-        auth.onAnswerAcceptCanceled(prev_accepted_answer, self)
+    prev_accepted_problem = problem.thread.accepted_problem
+    if prev_accepted_problem:
+        auth.onProblemAcceptCanceled(prev_accepted_problem, self)
 
-    auth.onAnswerAccept(answer, self, timestamp = timestamp)
+    auth.onProblemAccept(problem, self, timestamp = timestamp)
     award_badges_signal.send(None,
-        event = 'accept_best_answer',
+        event = 'accept_best_problem',
         actor = self,
-        context_object = answer,
+        context_object = problem,
         timestamp = timestamp
     )
 
 @auto_now_timestamp
-def user_unaccept_best_answer(
-                self, answer = None,
+def user_unaccept_best_problem(
+                self, problem = None,
                 timestamp = None,
                 force = False
             ):
     if force == False:
-        self.assert_can_unaccept_best_answer(answer)
-    if not answer.accepted():
+        self.assert_can_unaccept_best_problem(problem)
+    if not problem.accepted():
         return
-    auth.onAnswerAcceptCanceled(answer, self)
+    auth.onProblemAcceptCanceled(problem, self)
 
 @auto_now_timestamp
 def user_delete_comment(
@@ -1424,48 +1485,77 @@ def user_delete_comment(
     comment.thread.invalidate_cached_data()
 
 @auto_now_timestamp
-def user_delete_answer(
+def user_delete_problem(
                     self,
-                    answer = None,
+                    problem = None,
                     timestamp = None
                 ):
-    self.assert_can_delete_answer(answer = answer)
-    answer.deleted = True
-    answer.deleted_by = self
-    answer.deleted_at = timestamp
-    answer.save()
+    self.assert_can_delete_problem(problem = problem)
+    problem.deleted = True
+    problem.deleted_by = self
+    problem.deleted_at = timestamp
+    problem.save()
 
-    answer.thread.update_answer_count()
-    answer.thread.invalidate_cached_data()
-    logging.debug('updated answer count to %d' % answer.thread.answer_count)
+    problem.thread.update_problem_count()
+    problem.thread.invalidate_cached_data()
+    logging.debug('updated problem count to %d' % problem.thread.problem_count)
 
-    signals.delete_question_or_answer.send(
-        sender = answer.__class__,
-        instance = answer,
+    signals.delete_exercise_or_problem.send(
+        sender = problem.__class__,
+        instance = problem,
         delete_by = self
     )
     award_badges_signal.send(None,
                 event = 'delete_post',
                 actor = self,
-                context_object = answer,
+                context_object = problem,
                 timestamp = timestamp
             )
 
-
-@auto_now_timestamp
-def user_delete_question(
+#MAX:
+def user_delete_solution(
                     self,
-                    question = None,
+                    solution = None,
                     timestamp = None
                 ):
-    self.assert_can_delete_question(question = question)
+    self.assert_can_delete_solution(solution = solution)
+    solution.deleted = True
+    solution.deleted_by = self
+    solution.deleted_at = timestamp
+    solution.save()
 
-    question.deleted = True
-    question.deleted_by = self
-    question.deleted_at = timestamp
-    question.save()
+    solution.thread.update_solution_count()
+    solution.thread.invalidate_cached_data()
+    logging.debug('updated solution count to %d' % solution.thread.solution_count)
 
-    for tag in list(question.thread.tags.all()):
+    #MAX: This portion is not active at this time because signals.py hasn't been touched
+    """signals.delete_exercise_or_solution.send(
+        sender = solution.__class__,
+        instance = solution,
+        delete_by = self
+    )
+    award_badges_signal.send(None,
+                event = 'delete_post',
+                actor = self,
+                context_object = solution,
+                timestamp = timestamp
+            )"""
+
+
+@auto_now_timestamp
+def user_delete_exercise(
+                    self,
+                    exercise = None,
+                    timestamp = None
+                ):
+    self.assert_can_delete_exercise(exercise = exercise)
+
+    exercise.deleted = True
+    exercise.deleted_by = self
+    exercise.deleted_at = timestamp
+    exercise.save()
+
+    for tag in list(exercise.thread.tags.all()):
         if tag.used_count == 1:
             tag.deleted = True
             tag.deleted_by = self
@@ -1474,37 +1564,37 @@ def user_delete_question(
             tag.used_count = tag.used_count - 1
         tag.save()
 
-    signals.delete_question_or_answer.send(
-        sender = question.__class__,
-        instance = question,
+    signals.delete_exercise_or_problem.send(
+        sender = exercise.__class__,
+        instance = exercise,
         delete_by = self
     )
     award_badges_signal.send(None,
                 event = 'delete_post',
                 actor = self,
-                context_object = question,
+                context_object = exercise,
                 timestamp = timestamp
             )
 
 
 @auto_now_timestamp
-def user_close_question(
+def user_close_exercise(
                     self,
-                    question = None,
+                    exercise = None,
                     reason = None,
                     timestamp = None
                 ):
-    self.assert_can_close_question(question)
-    question.thread.set_closed_status(closed=True, closed_by=self, closed_at=timestamp, close_reason=reason)
+    self.assert_can_close_exercise(exercise)
+    exercise.thread.set_closed_status(closed=True, closed_by=self, closed_at=timestamp, close_reason=reason)
 
 @auto_now_timestamp
-def user_reopen_question(
+def user_reopen_exercise(
                     self,
-                    question = None,
+                    exercise = None,
                     timestamp = None
                 ):
-    self.assert_can_reopen_question(question)
-    question.thread.set_closed_status(closed=False, closed_by=self, closed_at=timestamp, close_reason=None)
+    self.assert_can_reopen_exercise(exercise)
+    exercise.thread.set_closed_status(closed=False, closed_by=self, closed_at=timestamp, close_reason=None)
 
 @auto_now_timestamp
 def user_delete_post(
@@ -1518,12 +1608,15 @@ def user_delete_post(
     """
     if post.post_type == 'comment':
         self.delete_comment(comment = post, timestamp = timestamp)
-    elif post.post_type == 'answer':
-        self.delete_answer(answer = post, timestamp = timestamp)
-    elif post.post_type == 'question':
-        self.delete_question(question = post, timestamp = timestamp)
+    elif post.post_type == 'problem':
+        self.delete_problem(problem = post, timestamp = timestamp)
+    #MAX:
+    elif post.post_type == 'solution':
+        self.delete_solution(solution = post, timestamp = timestamp)
+    elif post.post_type == 'exercise':
+        self.delete_exercise(exercise = post, timestamp = timestamp)
     else:
-        raise TypeError('either Comment, Question or Answer expected')
+        raise TypeError('either Comment, Exercise, Problem or Solution expected')
     post.thread.invalidate_cached_data()
 
 def user_restore_post(
@@ -1533,14 +1626,16 @@ def user_restore_post(
                 ):
     #here timestamp is not used, I guess added for consistency
     self.assert_can_restore_post(post)
-    if post.post_type in ('question', 'answer'):
+    if post.post_type in ('exercise', 'problem', 'solution'):
         post.deleted = False
         post.deleted_by = None
         post.deleted_at = None
         post.save()
         post.thread.invalidate_cached_data()
-        if post.post_type == 'answer':
-            post.thread.update_answer_count()
+        if post.post_type == 'problem':
+            post.thread.update_problem_count()
+        elif post.post_type == 'solution':
+            post.thread.update_solution_count()
         else:
             #todo: make sure that these tags actually exist
             #some may have since been deleted for good
@@ -1554,7 +1649,7 @@ def user_restore_post(
     else:
         raise NotImplementedError()
 
-def user_post_question(
+def user_post_exercise(
                     self,
                     title = None,
                     body_text = '',
@@ -1567,23 +1662,23 @@ def user_post_question(
                     by_email = False,
                     email_address = None
                 ):
-    """makes an assertion whether user can post the question
-    then posts it and returns the question object"""
+    """makes an assertion whether user can post the exercise
+    then posts it and returns the exercise object"""
 
-    self.assert_can_post_question()
+    self.assert_can_post_exercise()
 
-    if body_text == '':#a hack to allow bodyless question
+    if body_text == '':#a hack to allow bodyless exercise
         body_text = ' '
 
     if title is None:
-        raise ValueError('Title is required to post question')
+        raise ValueError('Title is required to post exercise')
     if tags is None:
-        raise ValueError('Tags are required to post question')
+        raise ValueError('Tags are required to post exercise')
     if timestamp is None:
         timestamp = datetime.datetime.now()
 
     #todo: split this into "create thread" + "add queston", if text exists
-    #or maybe just add a blank question post anyway
+    #or maybe just add a blank exercise post anyway
     thread = Thread.objects.create_new(
                                     author = self,
                                     title = title,
@@ -1597,12 +1692,12 @@ def user_post_question(
                                     by_email = by_email,
                                     email_address = email_address
                                 )
-    question = thread._question_post()
-    if question.author != self:
-        raise ValueError('question.author != self')
-    question.author = self # HACK: Some tests require that question.author IS exactly the same object as self-user (kind of identity map which Django doesn't provide),
-                           #       because they set some attributes for that instance and expect them to be changed also for question.author
-    return question
+    exercise = thread._exercise_post()
+    if exercise.author != self:
+        raise ValueError('exercise.author != self')
+    exercise.author = self # HACK: Some tests require that exercise.author IS exactly the same object as self-user (kind of identity map which Django doesn't provide),
+    #       because they set some attributes for that instance and expect them to be changed also for exercise.author
+    return exercise
 
 @auto_now_timestamp
 def user_edit_comment(
@@ -1645,17 +1740,26 @@ def user_edit_post(self,
                 body_text = body_text,
                 by_email = by_email
             )
-    elif post.post_type == 'answer':
-        self.edit_answer(
-            answer = post,
+    elif post.post_type == 'problem':
+        self.edit_problem(
+            problem = post,
             body_text = body_text,
             timestamp = timestamp,
             revision_comment = revision_comment,
             by_email = by_email
         )
-    elif post.post_type == 'question':
-        self.edit_question(
-            question = post,
+    #MAX:
+    elif post.post_type == 'solution':
+        self.edit_solution(
+            solution = post,
+            body_text = body_text,
+            timestamp = timestamp,
+            revision_comment = revision_comment,
+            by_email = by_email
+        )
+    elif post.post_type == 'exercise':
+        self.edit_exercise(
+            exercise = post,
             body_text = body_text,
             timestamp = timestamp,
             revision_comment = revision_comment,
@@ -1667,7 +1771,7 @@ def user_edit_post(self,
             edited_at = timestamp,
             edited_by = self,
             text = body_text,
-            #todo: summary name clash in question and question revision
+            #todo: summary name clash in exercise and exercise revision
             comment = revision_comment,
             wiki = True,
             by_email = False
@@ -1676,9 +1780,9 @@ def user_edit_post(self,
         raise NotImplementedError()
 
 @auto_now_timestamp
-def user_edit_question(
+def user_edit_exercise(
                 self,
-                question = None,
+                exercise = None,
                 title = None,
                 body_text = None,
                 revision_comment = None,
@@ -1691,14 +1795,14 @@ def user_edit_question(
                 by_email = False
             ):
     if force == False:
-        self.assert_can_edit_question(question)
+        self.assert_can_edit_exercise(exercise)
 
-    question.apply_edit(
+    exercise.apply_edit(
         edited_at = timestamp,
         edited_by = self,
         title = title,
         text = body_text,
-        #todo: summary name clash in question and question revision
+        #todo: summary name clash in exercise and exercise revision
         comment = revision_comment,
         tags = tags,
         wiki = wiki,
@@ -1707,19 +1811,19 @@ def user_edit_question(
         by_email = by_email
     )
 
-    question.thread.invalidate_cached_data()
+    exercise.thread.invalidate_cached_data()
 
     award_badges_signal.send(None,
-        event = 'edit_question',
+        event = 'edit_exercise',
         actor = self,
-        context_object = question,
+        context_object = exercise,
         timestamp = timestamp
     )
 
 @auto_now_timestamp
-def user_edit_answer(
+def user_edit_problem(
                     self,
-                    answer = None,
+                    problem = None,
                     body_text = None,
                     revision_comment = None,
                     wiki = False,
@@ -1729,8 +1833,8 @@ def user_edit_answer(
                     by_email = False
                 ):
     if force == False:
-        self.assert_can_edit_answer(answer)
-    answer.apply_edit(
+        self.assert_can_edit_problem(problem)
+    problem.apply_edit(
         edited_at = timestamp,
         edited_by = self,
         text = body_text,
@@ -1740,13 +1844,47 @@ def user_edit_answer(
         by_email = by_email
     )
 
-    answer.thread.invalidate_cached_data()
+    problem.thread.invalidate_cached_data()
     award_badges_signal.send(None,
-        event = 'edit_answer',
+        event = 'edit_problem',
         actor = self,
-        context_object = answer,
+        context_object = problem,
         timestamp = timestamp
     )
+
+#MAX:
+@auto_now_timestamp
+def user_edit_solution(
+                    self,
+                    solution = None,
+                    body_text = None,
+                    revision_comment = None,
+                    wiki = False,
+                    is_private = False,
+                    timestamp = None,
+                    force = False,#if True - bypass the assert
+                    by_email = False
+                ):
+    if force == False:
+        self.assert_can_edit_solution(solution)
+    solution.apply_edit(
+        edited_at = timestamp,
+        edited_by = self,
+        text = body_text,
+        comment = revision_comment,
+        wiki = wiki,
+        is_private = is_private,
+        by_email = by_email
+    )
+
+    solution.thread.invalidate_cached_data()
+    #MAX:  This part disabled for now
+    """award_badges_signal.send(None,
+        event = 'edit_solution',
+        actor = self,
+        context_object = solution,
+        timestamp = timestamp
+    )"""
 
 @auto_now_timestamp
 def user_create_post_reject_reason(
@@ -1790,9 +1928,9 @@ def user_edit_post_reject_reason(
         text = details
     )
 
-def user_post_answer(
+def user_post_problem(
                     self,
-                    question = None,
+                    exercise = None,
                     body_text = None,
                     follow = False,
                     wiki = False,
@@ -1801,17 +1939,17 @@ def user_post_answer(
                     by_email = False
                 ):
 
-    #todo: move this to assertion - user_assert_can_post_answer
-    if self == question.author and not self.is_administrator():
+    #todo: move this to assertion - user_assert_can_post_problem
+    if self == exercise.author and not self.is_administrator():
 
-        # check date and rep required to post answer to own question
+        # check date and rep required to post problem to own exercise
 
-        delta = datetime.timedelta(askbot_settings.MIN_DAYS_TO_ANSWER_OWN_QUESTION)
+        delta = datetime.timedelta(askbot_settings.MIN_DAYS_TO_PROBLEM_OWN_EXERCISE)
 
         now = datetime.datetime.now()
-        asked = question.added_at
+        asked = exercise.added_at
         #todo: this is an assertion, must be moved out
-        if (now - asked  < delta and self.reputation < askbot_settings.MIN_REP_TO_ANSWER_OWN_QUESTION):
+        if (now - asked  < delta and self.reputation < askbot_settings.MIN_REP_TO_PROBLEM_OWN_EXERCISE):
             diff = asked + delta - now
             days = diff.days
             hours = int(diff.seconds/3600)
@@ -1831,32 +1969,32 @@ def user_post_answer(
                 left = ungettext('in %(hr)d hour','in %(hr)d hours',hours) % {'hr':hours}
             else:
                 left = ungettext('in %(min)d min','in %(min)d mins',minutes) % {'min':minutes}
-            day = ungettext('%(days)d day','%(days)d days',askbot_settings.MIN_DAYS_TO_ANSWER_OWN_QUESTION) % {'days':askbot_settings.MIN_DAYS_TO_ANSWER_OWN_QUESTION}
+            day = ungettext('%(days)d day','%(days)d days',askbot_settings.MIN_DAYS_TO_PROBLEM_OWN_EXERCISE) % {'days':askbot_settings.MIN_DAYS_TO_PROBLEM_OWN_EXERCISE}
             error_message = _(
-                'New users must wait %(days)s before answering their own question. '
-                ' You can post an answer %(left)s'
+                'New users must wait %(days)s before probleming their own exercise. '
+                ' You can post an problem %(left)s'
                 ) % {'days': day,'left': left}
             assert(error_message is not None)
             raise django_exceptions.PermissionDenied(error_message)
 
-    self.assert_can_post_answer(thread = question.thread)
+    self.assert_can_post_problem(thread = exercise.thread)
 
-    if getattr(question, 'post_type', '') != 'question':
-        raise TypeError('question argument must be provided')
+    if getattr(exercise, 'post_type', '') != 'exercise':
+        raise TypeError('exercise argument must be provided')
     if body_text is None:
-        raise ValueError('Body text is required to post answer')
+        raise ValueError('Body text is required to post problem')
     if timestamp is None:
         timestamp = datetime.datetime.now()
-#    answer = Answer.objects.create_new(
-#        thread = question.thread,
+#    problem = Problem.objects.create_new(
+#        thread = exercise.thread,
 #        author = self,
 #        text = body_text,
 #        added_at = timestamp,
 #        email_notify = follow,
 #        wiki = wiki
 #    )
-    answer_post = Post.objects.create_new_answer(
-        thread = question.thread,
+    problem_post = Post.objects.create_new_problem(
+        thread = exercise.thread,
         author = self,
         text = body_text,
         added_at = timestamp,
@@ -1865,51 +2003,143 @@ def user_post_answer(
         is_private = is_private,
         by_email = by_email
     )
-    #add to the answerer's group
-    answer_post.add_to_groups([self.get_personal_group()])
+    #add to the problem contributor's group
+    problem_post.add_to_groups([self.get_personal_group()])
 
-    answer_post.thread.invalidate_cached_data()
+    problem_post.thread.invalidate_cached_data()
     award_badges_signal.send(None,
-        event = 'post_answer',
+        event = 'post_problem',
         actor = self,
-        context_object = answer_post
+        context_object = problem_post
     )
-    return answer_post
+    return problem_post
 
-def user_visit_question(self, question = None, timestamp = None):
-    """create a QuestionView record
+#MAX:
+def user_post_solution(
+                    self,
+                    exercise = None,
+                    body_text = None,
+                    parent = None,
+                    follow = False,
+                    wiki = False,
+                    is_private = False,
+                    timestamp = None,
+                    by_email = False
+                ):
+    #MAX: Disabled for now
+    #todo: move this to assertion - user_assert_can_post_solution
+    """if self == exercise.author and not self.is_administrator():
+
+        # check date and rep required to post solution to own exercise
+
+        delta = datetime.timedelta(askbot_settings.MIN_DAYS_TO_SOLUTION_OWN_EXERCISE)
+
+        now = datetime.datetime.now()
+        asked = exercise.added_at
+        #todo: this is an assertion, must be moved out
+        if (now - asked  < delta and self.reputation < askbot_settings.MIN_REP_TO_SOLUTION_OWN_EXERCISE):
+            diff = asked + delta - now
+            days = diff.days
+            hours = int(diff.seconds/3600)
+            minutes = int(diff.seconds/60)
+
+            if days > 2:
+                if asked.year == now.year:
+                    date_token = asked.strftime("%b %d")
+                else:
+                    date_token = asked.strftime("%b %d '%y")
+                left = _('on %(date)s') % { 'date': date_token }
+            elif days == 2:
+                left = _('in two days')
+            elif days == 1:
+                left = _('tomorrow')
+            elif minutes >= 60:
+                left = ungettext('in %(hr)d hour','in %(hr)d hours',hours) % {'hr':hours}
+            else:
+                left = ungettext('in %(min)d min','in %(min)d mins',minutes) % {'min':minutes}
+            day = ungettext('%(days)d day','%(days)d days',askbot_settings.MIN_DAYS_TO_SOLUTION_OWN_EXERCISE) % {'days':askbot_settings.MIN_DAYS_TO_SOLUTION_OWN_EXERCISE}
+            error_message = _(
+                'New users must wait %(days)s before solutioning their own exercise. '
+                ' You can post an solution %(left)s'
+                ) % {'days': day,'left': left}
+            assert(error_message is not None)
+            raise django_exceptions.PermissionDenied(error_message)"""
+
+    self.assert_can_post_solution(thread = exercise.thread)
+
+    if getattr(exercise, 'post_type', '') != 'exercise':
+        raise TypeError('exercise argument must be provided')
+    if getattr(parent, 'post_type', '') != 'problem':
+        raise TypeError('parent argument must be provided')
+    if body_text is None:
+        raise ValueError('Body text is required to post solution')
+    if timestamp is None:
+        timestamp = datetime.datetime.now()
+#    solution = Solution.objects.create_new(
+#        thread = exercise.thread,
+#        author = self,
+#        text = body_text,
+#        added_at = timestamp,
+#        email_notify = follow,
+#        wiki = wiki
+#    )
+    solution_post = Post.objects.create_new_solution(
+        thread = exercise.thread,
+        author = self,
+        text = body_text,
+        parent = parent,
+        added_at = timestamp,
+        email_notify = follow,
+        wiki = wiki,
+        is_private = is_private,
+        by_email = by_email
+    )
+    #add to the solutioner's group
+    solution_post.add_to_groups([self.get_personal_group()])
+
+    solution_post.thread.invalidate_cached_data()
+    #MAX: Disabled for now
+    """award_badges_signal.send(None,
+        event = 'post_solution',
+        actor = self,
+        context_object = solution_post
+    )"""
+    return solution_post
+
+def user_visit_exercise(self, exercise = None, timestamp = None):
+    """create a ExerciseView record
     on behalf of the user represented by the self object
     and mark it as taking place at timestamp time
 
     and remove pending on-screen notifications about anything in
-    the post - question, answer or comments
+    the post - exercise, problem or comments
     """
     if timestamp is None:
         timestamp = datetime.datetime.now()
 
     try:
-        QuestionView.objects.filter(
-            who=self, question=question
+        ExerciseView.objects.filter(
+            who=self, exercise=exercise
         ).update(
             when = timestamp
         )
-    except QuestionView.DoesNotExist:
-        QuestionView(
+    except ExerciseView.DoesNotExist:
+        ExerciseView(
             who=self,
-            question=question,
+            exercise=exercise,
             when = timestamp
         ).save()
 
     #filter memo objects on response activities directed to the qurrent user
     #that refer to the children of the currently
-    #viewed question and clear them for the current user
+    #viewed exercise and clear them for the current user
     ACTIVITY_TYPES = const.RESPONSE_ACTIVITY_TYPES_FOR_DISPLAY
     ACTIVITY_TYPES += (const.TYPE_ACTIVITY_MENTION,)
 
     audit_records = ActivityAuditStatus.objects.filter(
                         user = self,
                         status = ActivityAuditStatus.STATUS_NEW,
-                        activity__question = question
+                        activity__exercise = exercise
                     )
 
     cleared_record_count = audit_records.filter(
@@ -2006,7 +2236,7 @@ def user_is_owner_of(self, obj):
     """True if user owns object
     False otherwise
     """
-    if isinstance(obj, Post) and obj.post_type == 'question':
+    if isinstance(obj, Post) and obj.post_type == 'exercise':
         return self == obj.author
     else:
         raise NotImplementedError()
@@ -2068,7 +2298,7 @@ def user_set_status(self, new_status):
             self.remove_admin_status()
 
     #when toggling between blocked and non-blocked status
-    #we need to invalidate question page caches, b/c they contain
+    #we need to invalidate exercise page caches, b/c they contain
     #user's url, which must be hidden in the blocked state
     if 'b' in (new_status, self.status) and new_status != self.status:
         threads = Thread.objects.get_for_user(self)
@@ -2101,18 +2331,18 @@ def user_moderate_user_reputation(
     user.reputation = new_rep
     user.save()
 
-    #any question. This is necessary because reputes are read in the
-    #user_reputation view with select_related('question__title') and it fails if
+    #any exercise. This is necessary because reputes are read in the
+    #user_reputation view with select_related('exercise__title') and it fails if
     #ForeignKey is nullable even though it should work (according to the manual)
     #probably a bug in the Django ORM
-    #fake_question = Question.objects.all()[:1][0]
+    #fake_exercise = Exercise.objects.all()[:1][0]
     #so in cases where reputation_type == 10
-    #question record is fake and is ignored
+    #exercise record is fake and is ignored
     #this bug is hidden in call Repute.get_explanation_snippet()
     repute = Repute(
                         user = user,
                         comment = comment,
-                        #question = fake_question,
+                        #exercise = fake_exercise,
                         reputed_at = timestamp,
                         reputation_type = 10, #todo: fix magic number
                         reputation = user.reputation
@@ -2154,15 +2384,15 @@ def user_can_moderate_user(self, other):
         return False
 
 
-def user_get_followed_question_alert_frequency(self):
+def user_get_followed_exercise_alert_frequency(self):
     feed_setting, created = EmailFeedSetting.objects.get_or_create(
                                     subscriber=self,
                                     feed_type='q_sel'
                                 )
     return feed_setting.frequency
 
-def user_subscribe_for_followed_question_alerts(self):
-    """turns on daily subscription for selected questions
+def user_subscribe_for_followed_exercise_alerts(self):
+    """turns on daily subscription for selected exercises
     otherwise does nothing
 
     Returns ``True`` if the subscription was turned on and
@@ -2178,13 +2408,13 @@ def user_subscribe_for_followed_question_alerts(self):
         return True
     return False
 
-def user_get_tag_filtered_questions(self, questions = None):
-    """Returns a query set of questions, tag filtered according
-    to the user choices. Parameter ``questions`` can be either ``None``
+def user_get_tag_filtered_exercises(self, exercises = None):
+    """Returns a query set of exercises, tag filtered according
+    to the user choices. Parameter ``exercises`` can be either ``None``
     or a starting query set.
     """
-    if questions is None:
-        questions = Post.objects.get_questions()
+    if exercises is None:
+        exercises = Post.objects.get_exercises()
 
     if self.email_tag_filter_strategy == const.EXCLUDE_IGNORED:
 
@@ -2196,7 +2426,7 @@ def user_get_tag_filtered_questions(self, questions = None):
         wk = self.ignored_tags.strip().split()
         ignored_by_wildcards = Tag.objects.get_by_wildcards(wk)
 
-        return questions.exclude(
+        return exercises.exclude(
                         thread__tags__in = ignored_tags
                     ).exclude(
                         thread__tags__in = ignored_by_wildcards
@@ -2219,9 +2449,9 @@ def user_get_tag_filtered_questions(self, questions = None):
         tag_filter = models.Q(thread__tags__in = list(selected_tags)) \
                     | models.Q(thread__tags__in = list(selected_by_wildcards))
 
-        return questions.filter( tag_filter ).distinct()
+        return exercises.filter( tag_filter ).distinct()
     else:
-        return questions
+        return exercises
 
 def get_messages(self):
     messages = []
@@ -2368,8 +2598,8 @@ def user_get_badge_summary(self):
 #may be different
 #maybe if we do use business rule checks here - we should add
 #some flag allowing to bypass them for things like the data importers
-def toggle_favorite_question(
-                        self, question,
+def toggle_favorite_exercise(
+                        self, exercise,
                         timestamp = None,
                         cancel = False,
                         force = False#this parameter is not used yet
@@ -2382,34 +2612,35 @@ def toggle_favorite_question(
     returns a value
     """
     try:
-        fave = FavoriteQuestion.objects.get(thread=question.thread, user=self)
+        fave = FavoriteExercise.objects.get(thread=exercise.thread, user=self)
         fave.delete()
         result = False
-        question.thread.update_favorite_count()
-    except FavoriteQuestion.DoesNotExist:
+        exercise.thread.update_favorite_count()
+    except FavoriteExercise.DoesNotExist:
         if timestamp is None:
             timestamp = datetime.datetime.now()
-        fave = FavoriteQuestion(
-            thread = question.thread,
+        fave = FavoriteExercise(
+            thread = exercise.thread,
             user = self,
             added_at = timestamp,
         )
         fave.save()
         result = True
-        question.thread.update_favorite_count()
+        exercise.thread.update_favorite_count()
         award_badges_signal.send(None,
-            event = 'select_favorite_question',
+            event = 'select_favorite_exercise',
             actor = self,
-            context_object = question,
+            context_object = exercise,
             timestamp = timestamp
         )
     return result
 
+#MAX: Voting doesn't currently apply to solutions
 VOTES_TO_EVENTS = {
-    (Vote.VOTE_UP, 'answer'): 'upvote_answer',
-    (Vote.VOTE_UP, 'question'): 'upvote_question',
-    (Vote.VOTE_DOWN, 'question'): 'downvote',
-    (Vote.VOTE_DOWN, 'answer'): 'downvote',
+    (Vote.VOTE_UP, 'problem'): 'upvote_problem',
+    (Vote.VOTE_UP, 'exercise'): 'upvote_exercise',
+    (Vote.VOTE_DOWN, 'exercise'): 'downvote',
+    (Vote.VOTE_DOWN, 'problem'): 'downvote',
     (Vote.VOTE_UP, 'comment'): 'upvote_comment',
 }
 @auto_now_timestamp
@@ -2461,8 +2692,8 @@ def _process_vote(user, post, timestamp=None, cancel=False, vote_type=None):
 
     post.thread.invalidate_cached_data()
 
-    if post.post_type == 'question':
-        #denormalize the question post score on the thread
+    if post.post_type == 'exercise':
+        #denormalize the exercise post score on the thread
         post.thread.points = post.points
         post.thread.save()
         post.thread.update_summary_html()
@@ -2480,15 +2711,15 @@ def _process_vote(user, post, timestamp=None, cancel=False, vote_type=None):
                 )
     return vote
 
-def user_unfollow_question(self, question = None):
-    self.followed_threads.remove(question.thread)
+def user_unfollow_exercise(self, exercise = None):
+    self.followed_threads.remove(exercise.thread)
 
-def user_follow_question(self, question = None):
-    self.followed_threads.add(question.thread)
+def user_follow_exercise(self, exercise = None):
+    self.followed_threads.add(exercise.thread)
 
-def user_is_following_question(user, question):
-    """True if user is following a question"""
-    return question.thread.followed_by.filter(id=user.id).exists()
+def user_is_following_exercise(user, exercise):
+    """True if user is following a exercise"""
+    return exercise.thread.followed_by.filter(id=user.id).exists()
 
 
 def upvote(self, post, timestamp=None, cancel=False, force = False):
@@ -2527,7 +2758,7 @@ def user_approve_post_revision(user, post_revision, timestamp = None):
     post.approved = True
     post.save()
 
-    if post_revision.post.post_type == 'question':
+    if post_revision.post.post_type == 'exercise':
         thread = post.thread
         thread.approved = True
         thread.save()
@@ -2735,12 +2966,12 @@ User.add_to_class(
     classmethod(user_is_username_taken)
 )
 User.add_to_class(
-    'get_followed_question_alert_frequency',
-    user_get_followed_question_alert_frequency
+    'get_followed_exercise_alert_frequency',
+    user_get_followed_exercise_alert_frequency
 )
 User.add_to_class(
-    'subscribe_for_followed_question_alerts',
-    user_subscribe_for_followed_question_alerts
+    'subscribe_for_followed_exercise_alerts',
+    user_subscribe_for_followed_exercise_alerts
 )
 User.add_to_class('get_absolute_url', user_get_absolute_url)
 User.add_to_class('get_avatar_url', user_get_avatar_url)
@@ -2759,11 +2990,13 @@ User.add_to_class('strip_email_signature', user_strip_email_signature)
 User.add_to_class('get_groups_membership_info', user_get_groups_membership_info)
 User.add_to_class('get_anonymous_name', user_get_anonymous_name)
 User.add_to_class('update_avatar_type', user_update_avatar_type)
-User.add_to_class('post_question', user_post_question)
-User.add_to_class('edit_question', user_edit_question)
-User.add_to_class('retag_question', user_retag_question)
-User.add_to_class('post_answer', user_post_answer)
-User.add_to_class('edit_answer', user_edit_answer)
+User.add_to_class('post_exercise', user_post_exercise)
+User.add_to_class('edit_exercise', user_edit_exercise)
+User.add_to_class('retag_exercise', user_retag_exercise)
+User.add_to_class('post_problem', user_post_problem)
+User.add_to_class('edit_problem', user_edit_problem)
+User.add_to_class('post_solution', user_post_solution)
+User.add_to_class('edit_solution', user_edit_solution)
 User.add_to_class('edit_post', user_edit_post)
 User.add_to_class(
     'post_anonymous_askbot_content',
@@ -2775,7 +3008,7 @@ User.add_to_class('create_post_reject_reason', user_create_post_reject_reason)
 User.add_to_class('edit_post_reject_reason', user_edit_post_reject_reason)
 User.add_to_class('delete_post', user_delete_post)
 User.add_to_class('post_object_description', user_post_object_description)
-User.add_to_class('visit_question', user_visit_question)
+User.add_to_class('visit_exercise', user_visit_exercise)
 User.add_to_class('upvote', upvote)
 User.add_to_class('downvote', downvote)
 User.add_to_class('flag_post', flag_post)
@@ -2788,13 +3021,13 @@ User.add_to_class(
 User.add_to_class('get_flags_for_post', user_get_flags_for_post)
 User.add_to_class('get_profile_url', get_profile_url)
 User.add_to_class('get_profile_link', get_profile_link)
-User.add_to_class('get_tag_filtered_questions', user_get_tag_filtered_questions)
+User.add_to_class('get_tag_filtered_exercises', user_get_tag_filtered_exercises)
 User.add_to_class('get_messages', get_messages)
 User.add_to_class('delete_messages', delete_messages)
-User.add_to_class('toggle_favorite_question', toggle_favorite_question)
-User.add_to_class('follow_question', user_follow_question)
-User.add_to_class('unfollow_question', user_unfollow_question)
-User.add_to_class('is_following_question', user_is_following_question)
+User.add_to_class('toggle_favorite_exercise', toggle_favorite_exercise)
+User.add_to_class('follow_exercise', user_follow_exercise)
+User.add_to_class('unfollow_exercise', user_unfollow_exercise)
+User.add_to_class('is_following_exercise', user_is_following_exercise)
 User.add_to_class('mark_tags', user_mark_tags)
 User.add_to_class('update_response_counts', user_update_response_counts)
 User.add_to_class('can_create_tags', user_can_create_tags)
@@ -2820,20 +3053,23 @@ User.add_to_class('is_owner_of', user_is_owner_of)
 User.add_to_class('has_interesting_wildcard_tags', user_has_interesting_wildcard_tags)
 User.add_to_class('has_ignored_wildcard_tags', user_has_ignored_wildcard_tags)
 User.add_to_class('can_moderate_user', user_can_moderate_user)
-User.add_to_class('has_affinity_to_question', user_has_affinity_to_question)
+User.add_to_class('has_affinity_to_exercise', user_has_affinity_to_exercise)
 User.add_to_class('moderate_user_reputation', user_moderate_user_reputation)
 User.add_to_class('set_status', user_set_status)
 User.add_to_class('get_status_display', user_get_status_display)
 User.add_to_class('get_old_vote_for_post', user_get_old_vote_for_post)
 User.add_to_class('get_unused_votes_today', user_get_unused_votes_today)
 User.add_to_class('delete_comment', user_delete_comment)
-User.add_to_class('delete_question', user_delete_question)
-User.add_to_class('delete_answer', user_delete_answer)
+User.add_to_class('delete_exercise', user_delete_exercise)
+User.add_to_class('delete_problem', user_delete_problem)
+User.add_to_class('delete_solution', user_delete_solution)
 User.add_to_class('restore_post', user_restore_post)
-User.add_to_class('close_question', user_close_question)
-User.add_to_class('reopen_question', user_reopen_question)
-User.add_to_class('accept_best_answer', user_accept_best_answer)
-User.add_to_class('unaccept_best_answer', user_unaccept_best_answer)
+User.add_to_class('close_exercise', user_close_exercise)
+User.add_to_class('reopen_exercise', user_reopen_exercise)
+User.add_to_class('accept_best_problem', user_accept_best_problem)
+User.add_to_class('unaccept_best_problem', user_unaccept_best_problem)
+#MAX: We're not doing this yet - User.add_to_class('accept_best_solution', user_accept_best_solution)
+#MAX: We're not doing this yet - User.add_to_class('unaccept_best_solution', user_unaccept_best_solution)
 User.add_to_class(
     'update_wildcard_tag_selections',
     user_update_wildcard_tag_selections
@@ -2845,32 +3081,42 @@ User.add_to_class('notify_users', user_notify_users)
 User.add_to_class('assert_can_vote_for_post', user_assert_can_vote_for_post)
 User.add_to_class('assert_can_revoke_old_vote', user_assert_can_revoke_old_vote)
 User.add_to_class('assert_can_upload_file', user_assert_can_upload_file)
-User.add_to_class('assert_can_post_question', user_assert_can_post_question)
-User.add_to_class('assert_can_post_answer', user_assert_can_post_answer)
+User.add_to_class('assert_can_post_exercise', user_assert_can_post_exercise)
+User.add_to_class('assert_can_post_problem', user_assert_can_post_problem)
+User.add_to_class('assert_can_post_solution', user_assert_can_post_solution)
 User.add_to_class('assert_can_post_comment', user_assert_can_post_comment)
 User.add_to_class('assert_can_edit_post', user_assert_can_edit_post)
 User.add_to_class('assert_can_edit_deleted_post', user_assert_can_edit_deleted_post)
 User.add_to_class('assert_can_see_deleted_post', user_assert_can_see_deleted_post)
-User.add_to_class('assert_can_edit_question', user_assert_can_edit_question)
-User.add_to_class('assert_can_edit_answer', user_assert_can_edit_answer)
-User.add_to_class('assert_can_close_question', user_assert_can_close_question)
-User.add_to_class('assert_can_reopen_question', user_assert_can_reopen_question)
+User.add_to_class('assert_can_edit_exercise', user_assert_can_edit_exercise)
+User.add_to_class('assert_can_edit_problem', user_assert_can_edit_problem)
+User.add_to_class('assert_can_edit_solution', user_assert_can_edit_solution)
+User.add_to_class('assert_can_close_exercise', user_assert_can_close_exercise)
+User.add_to_class('assert_can_reopen_exercise', user_assert_can_reopen_exercise)
 User.add_to_class('assert_can_flag_offensive', user_assert_can_flag_offensive)
 User.add_to_class('assert_can_remove_flag_offensive', user_assert_can_remove_flag_offensive)
 User.add_to_class('assert_can_remove_all_flags_offensive', user_assert_can_remove_all_flags_offensive)
-User.add_to_class('assert_can_retag_question', user_assert_can_retag_question)
+User.add_to_class('assert_can_retag_exercise', user_assert_can_retag_exercise)
 #todo: do we need assert_can_delete_post
 User.add_to_class('assert_can_delete_post', user_assert_can_delete_post)
 User.add_to_class('assert_can_restore_post', user_assert_can_restore_post)
 User.add_to_class('assert_can_delete_comment', user_assert_can_delete_comment)
 User.add_to_class('assert_can_edit_comment', user_assert_can_edit_comment)
-User.add_to_class('assert_can_delete_answer', user_assert_can_delete_answer)
-User.add_to_class('assert_can_delete_question', user_assert_can_delete_question)
-User.add_to_class('assert_can_accept_best_answer', user_assert_can_accept_best_answer)
+User.add_to_class('assert_can_delete_problem', user_assert_can_delete_problem)
+User.add_to_class('assert_can_delete_solution', user_assert_can_delete_solution)
+User.add_to_class('assert_can_delete_exercise', user_assert_can_delete_exercise)
+User.add_to_class('assert_can_accept_best_problem', user_assert_can_accept_best_problem)
+#MAX: We're not doing this yet - User.add_to_class('assert_can_accept_best_solution', user_assert_can_accept_best_solution)
+
 User.add_to_class(
-    'assert_can_unaccept_best_answer',
-    user_assert_can_unaccept_best_answer
+    'assert_can_unaccept_best_problem',
+    user_assert_can_unaccept_best_problem
 )
+#MAX:  We're not doing this yet.
+"""User.add_to_class(
+    'assert_can_unaccept_best_solution',
+    user_assert_can_unaccept_best_solution
+)"""
 User.add_to_class(
     'assert_can_approve_post_revision',
     user_assert_can_approve_post_revision
@@ -2906,20 +3152,29 @@ def format_instant_notification_email(
                                     }
                                 )
 
-    if update_type == 'question_comment':
+    if update_type == 'exercise_comment':
         assert(isinstance(post, Post) and post.is_comment())
-        assert(post.parent and post.parent.is_question())
-    elif update_type == 'answer_comment':
+        assert(post.parent and post.parent.is_exercise())
+    elif update_type == 'problem_comment':
         assert(isinstance(post, Post) and post.is_comment())
-        assert(post.parent and post.parent.is_answer())
-    elif update_type == 'answer_update':
-        assert(isinstance(post, Post) and post.is_answer())
-    elif update_type == 'new_answer':
-        assert(isinstance(post, Post) and post.is_answer())
-    elif update_type == 'question_update':
-        assert(isinstance(post, Post) and post.is_question())
-    elif update_type == 'new_question':
-        assert(isinstance(post, Post) and post.is_question())
+        assert(post.parent and post.parent.is_problem())
+    #MAX:
+    elif update_type == 'solution_comment':
+        assert(isinstance(post, Post) and post.is_comment())
+        assert(post.parent and post.parent.is_solution())
+    elif update_type == 'problem_update':
+        assert(isinstance(post, Post) and post.is_problem())
+    elif update_type == 'new_problem':
+        assert(isinstance(post, Post) and post.is_problem())
+    #MAX:
+    elif update_type == 'solution_update':
+        assert(isinstance(post, Post) and post.is_solution())
+    elif update_type == 'new_solution':
+        assert(isinstance(post, Post) and post.is_solution())
+    elif update_type == 'exercise_update':
+        assert(isinstance(post, Post) and post.is_exercise())
+    elif update_type == 'new_exercise':
+        assert(isinstance(post, Post) and post.is_exercise())
     elif update_type == 'post_shared':
         pass
     else:
@@ -2955,12 +3210,18 @@ def format_instant_notification_email(
             user_action = _('%(user)s edited a %(post_link)s.')
         else:
             user_action = _('%(user)s posted a %(post_link)s')
-    elif post.is_answer():
+    elif post.is_problem():
         if update_type.endswith('update'):
             user_action = _('%(user)s edited an %(post_link)s.')
         else:
             user_action = _('%(user)s posted an %(post_link)s.')
-    elif post.is_question():
+    #MAX:
+    elif post.is_solution():
+        if update_type.endswith('update'):
+            user_action = _('%(user)s edited an %(post_link)s.')
+        else:
+            user_action = _('%(user)s posted an %(post_link)s.')
+    elif post.is_exercise():
         if update_type.endswith('update'):
             user_action = _('%(user)s edited a %(post_link)s.')
         else:
@@ -2981,7 +3242,7 @@ def format_instant_notification_email(
     if can_reply:
         reply_separator = const.SIMPLE_REPLY_SEPARATOR_TEMPLATE % \
                     _('To reply, PLEASE WRITE ABOVE THIS LINE.')
-        if post.post_type == 'question' and alt_reply_address:
+        if post.post_type == 'exercise' and alt_reply_address:
             data = {
                 'addr': alt_reply_address,
                 'subject': urllib.quote(
@@ -3018,20 +3279,21 @@ def format_instant_notification_email(
 
     return subject_line, content
 
+#MAX: This doesn't really accomodate solution types.  Just stubs them
 def get_reply_to_addresses(user, post):
     """Returns one or two email addresses that can be
     used by a given `user` to reply to the `post`
     the first address - always a real email address,
-    the second address is not ``None`` only for "question" posts.
+    the second address is not ``None`` only for "exercise" posts.
 
-    When the user is notified of a new question -
+    When the user is notified of a new exercise -
     i.e. `post` is a "quesiton", he/she
-    will need to choose - whether to give a question or a comment,
+    will need to choose - whether to give a exercise or a comment,
     thus we return the second address - for the comment reply.
 
-    When the post is a "question", the first email address
-    is for posting an "answer", and when post is either
-    "comment" or "answer", the address will be for posting
+    When the post is a "exercise", the first email address
+    is for posting an "problem", and when post is either
+    "comment" or "problem", the address will be for posting
     a "comment".
     """
     #these variables will contain return values
@@ -3045,16 +3307,17 @@ def get_reply_to_addresses(user, post):
                 'user': user,
                 'reply_action': 'post_comment'
             }
-            if post.post_type in ('answer', 'comment'):
+            #MAX: solutions and problems probably need to be handle differently now
+            if post.post_type in ('problem', 'solution', 'comment'):
                 reply_args['reply_action'] = 'post_comment'
-            elif post.post_type == 'question':
-                reply_args['reply_action'] = 'post_answer'
+            elif post.post_type == 'exercise':
+                reply_args['reply_action'] = 'post_problem'
 
             primary_addr = ReplyAddress.objects.create_new(
                                                     **reply_args
                                                 ).as_email_address()
 
-            if post.post_type == 'question':
+            if post.post_type == 'exercise':
                 reply_args['reply_action'] = 'post_comment'
                 secondary_addr = ReplyAddress.objects.create_new(
                                                     **reply_args
@@ -3245,27 +3508,27 @@ def notify_award_message(instance, created, **kwargs):
 
         user.message_set.create(message=msg)
 
-def record_answer_accepted(instance, created, **kwargs):
+def record_problem_accepted(instance, created, **kwargs):
     """
-    when answer is accepted, we record this for question author
+    when problem is accepted, we record this for exercise author
     - who accepted it.
     """
-    if instance.post_type != 'answer':
+    if instance.post_type != 'problem':
         return
 
-    question = instance.thread._question_post()
+    exercise = instance.thread._exercise_post()
 
     if not created and instance.accepted():
         activity = Activity(
-                        user=question.author,
+                        user=exercise.author,
                         active_at=datetime.datetime.now(),
-                        content_object=question,
-                        activity_type=const.TYPE_ACTIVITY_MARK_ANSWER,
-                        question=question
+                        content_object=exercise,
+                        activity_type=const.TYPE_ACTIVITY_MARK_PROBLEM,
+                        exercise=exercise
                     )
         activity.save()
         recipients = instance.get_author_list(
-                                    exclude_list = [question.author]
+                                    exclude_list = [exercise.author]
                                 )
         activity.add_recipients(recipients)
 
@@ -3322,16 +3585,16 @@ def record_cancel_vote(instance, **kwargs):
     activity.save()
 
 
-#todo: weird that there is no record delete answer or comment
+#todo: weird that there is no record delete problem or comment
 #is this even necessary to keep track of?
-def record_delete_question(instance, delete_by, **kwargs):
+def record_delete_exercise(instance, delete_by, **kwargs):
     """
-    when user deleted the question
+    when user deleted the exercise
     """
-    if instance.post_type == 'question':
-        activity_type = const.TYPE_ACTIVITY_DELETE_QUESTION
-    elif instance.post_type == 'answer':
-        activity_type = const.TYPE_ACTIVITY_DELETE_ANSWER
+    if instance.post_type == 'exercise':
+        activity_type = const.TYPE_ACTIVITY_DELETE_EXERCISE
+    elif instance.post_type == 'problem':
+        activity_type = const.TYPE_ACTIVITY_DELETE_PROBLEM
     else:
         return
 
@@ -3340,7 +3603,7 @@ def record_delete_question(instance, delete_by, **kwargs):
                     active_at=datetime.datetime.now(),
                     content_object=instance,
                     activity_type=activity_type,
-                    question = instance.get_origin_post()
+                    exercise = instance.get_origin_post()
                 )
     #no need to set receiving user here
     activity.save()
@@ -3351,7 +3614,7 @@ def record_flag_offensive(instance, mark_by, **kwargs):
                     active_at=datetime.datetime.now(),
                     content_object=instance,
                     activity_type=const.TYPE_ACTIVITY_MARK_OFFENSIVE,
-                    question=instance.get_origin_post()
+                    exercise=instance.get_origin_post()
                 )
     activity.save()
 #   todo: report authors that their post is flagged offensive
@@ -3369,7 +3632,7 @@ def remove_flag_offensive(instance, mark_by, **kwargs):
                     content_type = content_type,
                     object_id = instance.id,
                     activity_type=const.TYPE_ACTIVITY_MARK_OFFENSIVE,
-                    question=instance.get_origin_post()
+                    exercise=instance.get_origin_post()
                 )
     activity.delete()
 
@@ -3387,20 +3650,20 @@ def record_update_tags(thread, tags, user, timestamp, **kwargs):
             timestamp = timestamp
         )
 
-    question = thread._question_post()
+    exercise = thread._exercise_post()
 
     activity = Activity(
                     user=user,
                     active_at=datetime.datetime.now(),
-                    content_object=question,
+                    content_object=exercise,
                     activity_type=const.TYPE_ACTIVITY_UPDATE_TAGS,
-                    question = question
+                    exercise = exercise
                 )
     activity.save()
 
-def record_favorite_question(instance, created, **kwargs):
+def record_favorite_exercise(instance, created, **kwargs):
     """
-    when user add the question in him favorite questions list.
+    when user add the exercise in him favorite exercises list.
     """
     if created:
         activity = Activity(
@@ -3408,10 +3671,10 @@ def record_favorite_question(instance, created, **kwargs):
                         active_at=datetime.datetime.now(),
                         content_object=instance,
                         activity_type=const.TYPE_ACTIVITY_FAVORITE,
-                        question=instance.thread._question_post()
+                        exercise=instance.thread._exercise_post()
                     )
         activity.save()
-        recipients = instance.thread._question_post().get_author_list(
+        recipients = instance.thread._exercise_post().get_author_list(
                                             exclude_list = [instance.user]
                                         )
         activity.add_recipients(recipients)
@@ -3594,9 +3857,9 @@ django_signals.post_save.connect(add_user_to_global_group, sender=User)
 django_signals.post_save.connect(add_user_to_personal_group, sender=User)
 django_signals.post_save.connect(record_award_event, sender=Award)
 django_signals.post_save.connect(notify_award_message, sender=Award)
-django_signals.post_save.connect(record_answer_accepted, sender=Post)
+django_signals.post_save.connect(record_problem_accepted, sender=Post)
 django_signals.post_save.connect(record_vote, sender=Vote)
-django_signals.post_save.connect(record_favorite_question, sender=FavoriteQuestion)
+django_signals.post_save.connect(record_favorite_exercise, sender=FavoriteExercise)
 django_signals.post_save.connect(moderate_group_joining, sender=GroupMembership)
 
 if 'avatar' in django_settings.INSTALLED_APPS:
@@ -3607,7 +3870,7 @@ if 'avatar' in django_settings.INSTALLED_APPS:
 django_signals.post_delete.connect(record_cancel_vote, sender=Vote)
 
 #change this to real m2m_changed with Django1.2
-signals.delete_question_or_answer.connect(record_delete_question, sender=Post)
+signals.delete_exercise_or_problem.connect(record_delete_exercise, sender=Post)
 signals.flag_offensive.connect(record_flag_offensive, sender=Post)
 signals.remove_flag_offensive.connect(remove_flag_offensive, sender=Post)
 signals.tags_updated.connect(record_update_tags)
@@ -3627,13 +3890,16 @@ __all__ = [
 
         'Thread',
 
-        'QuestionView',
-        'FavoriteQuestion',
-        'AnonymousQuestion',
-        'DraftQuestion',
+        'ExerciseView',
+        'FavoriteExercise',
+        'AnonymousExercise',
+        'DraftExercise',
 
-        'AnonymousAnswer',
-        'DraftAnswer',
+        'AnonymousProblem',
+        'DraftProblem',
+        
+        'AnonymousSolution',
+        'DraftSolution',
 
         'Post',
         'PostRevision',

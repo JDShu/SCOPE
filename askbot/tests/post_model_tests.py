@@ -55,31 +55,31 @@ class PostModelTests(AskbotTestCase):
             post_revision.save
         )
 
-        question = self.post_question(user=self.u1)
+        exercise = self.post_exercise(user=self.u1)
 
         rev2 = PostRevision(
-            post=question, text='blah', author=self.u1,
+            post=exercise, text='blah', author=self.u1,
             revised_at=datetime.datetime.now(), revision=2
         )
         rev2.save()
         self.assertFalse(rev2.id is None)
 
     def test_post_revision_autoincrease(self):
-        question = self.post_question(user=self.u1)
-        self.assertEqual(1, question.revisions.all()[0].revision)
-        self.assertEqual(1, question.revisions.count())
+        exercise = self.post_exercise(user=self.u1)
+        self.assertEqual(1, exercise.revisions.all()[0].revision)
+        self.assertEqual(1, exercise.revisions.count())
 
-        question.apply_edit(edited_by=self.u1, text="blah2", comment="blahc2")
-        self.assertEqual(2, question.revisions.all()[0].revision)
-        self.assertEqual(2, question.revisions.count())
+        exercise.apply_edit(edited_by=self.u1, text="blah2", comment="blahc2")
+        self.assertEqual(2, exercise.revisions.all()[0].revision)
+        self.assertEqual(2, exercise.revisions.count())
 
-        question.apply_edit(edited_by=self.u1, text="blah3", comment="blahc3")
-        self.assertEqual(3, question.revisions.all()[0].revision)
-        self.assertEqual(3, question.revisions.count())
+        exercise.apply_edit(edited_by=self.u1, text="blah3", comment="blahc3")
+        self.assertEqual(3, exercise.revisions.all()[0].revision)
+        self.assertEqual(3, exercise.revisions.count())
 
     def test_comment_ordering_by_date(self):
         self.user = self.u1
-        q = self.post_question()
+        q = self.post_exercise()
 
         c1 = self.post_comment(parent_post=q, timestamp=datetime.datetime(2010, 10, 2, 14, 33, 20))
         c2 = q.add_comment(user=self.user, comment='blah blah', added_at=datetime.datetime(2010, 10, 2, 14, 33, 21))
@@ -103,7 +103,7 @@ class PostModelTests(AskbotTestCase):
 
     def test_comment_precaching(self):
         self.user = self.u1
-        q = self.post_question()
+        q = self.post_exercise()
 
         c1 = self.post_comment(parent_post=q, timestamp=datetime.datetime(2010, 10, 2, 14, 33, 20))
         c2 = q.add_comment(user=self.user, comment='blah blah', added_at=datetime.datetime(2010, 10, 2, 14, 33, 21))
@@ -124,19 +124,19 @@ class PostModelTests(AskbotTestCase):
     def test_cached_get_absolute_url_1(self):
         th = lambda:1
         th.title = 'lala-x-lala'
-        p = Post(id=3, post_type='question')
+        p = Post(id=3, post_type='exercise')
         p._thread_cache = th  # cannot assign non-Thread instance directly
-        self.assertEqual('/question/3/lala-x-lala/', p.get_absolute_url(thread=th))
+        self.assertEqual('/exercise/3/lala-x-lala/', p.get_absolute_url(thread=th))
         self.assertTrue(p._thread_cache is th)
-        self.assertEqual('/question/3/lala-x-lala/', p.get_absolute_url(thread=th))
+        self.assertEqual('/exercise/3/lala-x-lala/', p.get_absolute_url(thread=th))
 
     def test_cached_get_absolute_url_2(self):
-        p = Post(id=3, post_type='question')
+        p = Post(id=3, post_type='exercise')
         th = lambda:1
         th.title = 'lala-x-lala'
-        self.assertEqual('/question/3/lala-x-lala/', p.get_absolute_url(thread=th))
+        self.assertEqual('/exercise/3/lala-x-lala/', p.get_absolute_url(thread=th))
         self.assertTrue(p._thread_cache is th)
-        self.assertEqual('/question/3/lala-x-lala/', p.get_absolute_url(thread=th))
+        self.assertEqual('/exercise/3/lala-x-lala/', p.get_absolute_url(thread=th))
 
     def test_get_moderators_with_groups(self):
         groups_enabled_backup = askbot_settings.GROUPS_ENABLED
@@ -158,9 +158,9 @@ class PostModelTests(AskbotTestCase):
         adm2 = self.create_user('adm2', status='d')
         reg2 = self.create_user('reg2')
         #make a post
-        question = self.post_question(user=reg1, group_id=group.id)
+        exercise = self.post_exercise(user=reg1, group_id=group.id)
         #run get_moderators and see that only one admin and one
-        mods = question.get_moderators()
+        mods = exercise.get_moderators()
         self.assertEqual(
             set([mod1, adm1]),
             set(mods)
@@ -177,10 +177,10 @@ class ThreadTagModelsTests(AskbotTestCase):
         self.create_user()
         user2 = self.create_user(username='user2')
         user3 = self.create_user(username='user3')
-        self.q1 = self.post_question(tags='tag1 tag2 tag3')
-        self.q2 = self.post_question(tags='tag3 tag4 tag5')
-        self.q3 = self.post_question(tags='tag6', user=user2)
-        self.q4 = self.post_question(tags='tag1 tag2 tag3 tag4 tag5 tag6', user=user3)
+        self.q1 = self.post_exercise(tags='tag1 tag2 tag3')
+        self.q2 = self.post_exercise(tags='tag3 tag4 tag5')
+        self.q3 = self.post_exercise(tags='tag6', user=user2)
+        self.q4 = self.post_exercise(tags='tag1 tag2 tag3 tag4 tag5 tag6', user=user3)
 
     def test_related_tags(self):
         tags = Tag.objects.get_related_to_search(threads=[self.q1.thread, self.q2.thread], ignored_tag_names=[])
@@ -271,13 +271,13 @@ class ThreadTagModelsTests(AskbotTestCase):
         qs = list(qs)
 
         for thread in qs:
-            self.assertIsNone(getattr(thread, '_question_cache', None))
+            self.assertIsNone(getattr(thread, '_exercise_cache', None))
             self.assertIsNone(getattr(thread, '_last_activity_by_cache', None))
 
-            post = Post.objects.get(post_type='question', thread=thread.id)
-            self.assertEqual(post, thread._question_post())
-            self.assertEqual(post, thread._question_cache)
-            self.assertTrue(thread._question_post() is thread._question_cache)
+            post = Post.objects.get(post_type='exercise', thread=thread.id)
+            self.assertEqual(post, thread._exercise_post())
+            self.assertEqual(post, thread._exercise_cache)
+            self.assertTrue(thread._exercise_post() is thread._exercise_cache)
 
     def test_thread_caching_2_precache_view_data_hack(self):
         ss = SearchState.get_empty()
@@ -287,10 +287,10 @@ class ThreadTagModelsTests(AskbotTestCase):
         Thread.objects.precache_view_data_hack(threads=qs)
 
         for thread in qs:
-            post = Post.objects.get(post_type='question', thread=thread.id)
-            self.assertEqual(post.id, thread._question_cache.id) # Cannot compare models instances with deferred model instances
-            self.assertEqual(post.id, thread._question_post().id)
-            self.assertTrue(thread._question_post() is thread._question_cache)
+            post = Post.objects.get(post_type='exercise', thread=thread.id)
+            self.assertEqual(post.id, thread._exercise_cache.id) # Cannot compare models instances with deferred model instances
+            self.assertEqual(post.id, thread._exercise_post().id)
+            self.assertTrue(thread._exercise_post() is thread._exercise_cache)
 
             user = User.objects.get(id=thread.last_activity_by_id)
             self.assertEqual(user.id, thread._last_activity_by_cache.id)
@@ -302,7 +302,7 @@ class ThreadRenderLowLevelCachingTests(AskbotTestCase):
         self.create_user()
         # INFO: title and body_text should contain tag placeholders so that we can check if they stay untouched
         #       - only real tag placeholders in tag widget should be replaced with search URLs
-        self.q = self.post_question(title="<<<tag1>>> fake title", body_text="<<<tag2>>> <<<tag3>>> cheating", tags='tag1 tag2 tag3')
+        self.q = self.post_exercise(title="<<<tag1>>> fake title", body_text="<<<tag2>>> <<<tag3>>> cheating", tags='tag1 tag2 tag3')
 
         self.old_cache = cache.cache
 
@@ -318,11 +318,11 @@ class ThreadRenderLowLevelCachingTests(AskbotTestCase):
 
         context = {
             'thread': thread,
-            'question': thread._question_post(),
+            'exercise': thread._exercise_post(),
             'search_state': ss,
             'visitor': None
         }
-        proper_html = get_template('widgets/question_summary.html').render(context)
+        proper_html = get_template('widgets/exercise_summary.html').render(context)
         self.assertEqual(test_html, proper_html)
 
         # Make double-check that all tags are included
@@ -335,7 +335,7 @@ class ThreadRenderLowLevelCachingTests(AskbotTestCase):
         # This should be obvious at this point, if the above test passes, but why not be explicit
         # UPDATE: And voila, these tests catched double-escaping bug in template, where `&lt;` was `&amp;lt;`
         #         And indeed, post.summary is escaped before saving, in parse_and_save()
-        # UPDATE 2:Weird things happen with question summary (it's double escaped etc., really weird) so
+        # UPDATE 2:Weird things happen with exercise summary (it's double escaped etc., really weird) so
         # let's just make sure that there are no tag placeholders left
         self.assertTrue('&lt;&lt;&lt;tag1&gt;&gt;&gt; fake title' in proper_html)
         #self.assertTrue('&lt;&lt;&lt;tag2&gt;&gt;&gt; &lt;&lt;&lt;tag3&gt;&gt;&gt; cheating' in proper_html)
@@ -348,7 +348,7 @@ class ThreadRenderLowLevelCachingTests(AskbotTestCase):
         ss = ss.add_tag('mini-mini')
         context['search_state'] = ss
         test_html = thread.get_summary_html(search_state=ss)
-        proper_html = get_template('widgets/question_summary.html').render(context)
+        proper_html = get_template('widgets/exercise_summary.html').render(context)
 
         self.assertEqual(test_html, proper_html)
 
@@ -374,10 +374,10 @@ class ThreadRenderLowLevelCachingTests(AskbotTestCase):
 
         context = {
             'thread': thread,
-            'question': self.q,
+            'exercise': self.q,
             'search_state': DummySearchState(),
         }
-        html = get_template('widgets/question_summary.html').render(context)
+        html = get_template('widgets/exercise_summary.html').render(context)
         filled_html = html.replace('<<<tag1>>>', SearchState.get_empty().add_tag('tag1').full_url())\
                           .replace('<<<tag2>>>', SearchState.get_empty().add_tag('tag2').full_url())\
                           .replace('<<<tag3>>>', SearchState.get_empty().add_tag('tag3').full_url())
@@ -437,17 +437,17 @@ class ThreadRenderCacheUpdateTests(AskbotTestCase):
     def tearDown(self):
         cache.cache = self.old_cache  # Restore caching
 
-    def _html_for_question(self, q):
+    def _html_for_exercise(self, q):
         context = {
             'thread': q.thread,
-            'question': q,
+            'exercise': q,
             'search_state': DummySearchState(),
             'visitor': None
         }
-        html = get_template('widgets/question_summary.html').render(context)
+        html = get_template('widgets/exercise_summary.html').render(context)
         return html
 
-    def test_post_question(self):
+    def test_post_exercise(self):
         self.assertEqual(0, Post.objects.count())
         response = self.client.post(urlresolvers.reverse('ask'), data={
             'title': 'test title',
@@ -455,31 +455,31 @@ class ThreadRenderCacheUpdateTests(AskbotTestCase):
             'tags': 'tag1 tag2',
         })
         self.assertEqual(1, Post.objects.count())
-        question = Post.objects.all()[0]
-        self.assertRedirects(response=response, expected_url=question.get_absolute_url())
+        exercise = Post.objects.all()[0]
+        self.assertRedirects(response=response, expected_url=exercise.get_absolute_url())
 
-        self.assertEqual('test title', question.thread.title)
-        self.assertEqual('test body text', question.text)
-        self.assertItemsEqual(['tag1', 'tag2'], list(question.thread.tags.values_list('name', flat=True)))
-        self.assertEqual(0, question.thread.answer_count)
+        self.assertEqual('test title', exercise.thread.title)
+        self.assertEqual('test body text', exercise.text)
+        self.assertItemsEqual(['tag1', 'tag2'], list(exercise.thread.tags.values_list('name', flat=True)))
+        self.assertEqual(0, exercise.thread.problem_count)
 
-        self.assertTrue(question.thread.summary_html_cached())  # <<< make sure that caching backend is set up properly (i.e. it's not dummy)
-        html = self._html_for_question(question)
-        self.assertEqual(html, question.thread.get_cached_summary_html())
+        self.assertTrue(exercise.thread.summary_html_cached())  # <<< make sure that caching backend is set up properly (i.e. it's not dummy)
+        html = self._html_for_exercise(exercise)
+        self.assertEqual(html, exercise.thread.get_cached_summary_html())
 
-    def test_edit_question(self):
+    def test_edit_exercise(self):
         self.assertEqual(0, Post.objects.count())
-        question = self.post_question()
+        exercise = self.post_exercise()
 
         thread = Thread.objects.all()[0]
-        self.assertEqual(0, thread.answer_count)
-        self.assertEqual(thread.last_activity_at, question.added_at)
-        self.assertEqual(thread.last_activity_by, question.author)
+        self.assertEqual(0, thread.problem_count)
+        self.assertEqual(thread.last_activity_at, exercise.added_at)
+        self.assertEqual(thread.last_activity_by, exercise.author)
 
         time.sleep(1.5) # compensate for 1-sec time resolution in some databases
 
         response = self.client.post(
-            urlresolvers.reverse('edit_question', kwargs={'id': question.id}),
+            urlresolvers.reverse('edit_exercise', kwargs={'id': exercise.id}),
             data={
                 'title': 'edited title',
                 'text': 'edited body text',
@@ -489,84 +489,84 @@ class ThreadRenderCacheUpdateTests(AskbotTestCase):
             }
         )
         self.assertEqual(1, Post.objects.count())
-        question = Post.objects.all()[0]
+        exercise = Post.objects.all()[0]
         self.assertRedirects(
             response=response,
-            expected_url=question.get_absolute_url()
+            expected_url=exercise.get_absolute_url()
         )
 
-        thread = question.thread
-        self.assertEqual(0, thread.answer_count)
-        self.assertTrue(thread.last_activity_at > question.added_at)
-        self.assertEqual(thread.last_activity_at, question.last_edited_at)
-        self.assertEqual(thread.last_activity_by, question.author)
+        thread = exercise.thread
+        self.assertEqual(0, thread.problem_count)
+        self.assertTrue(thread.last_activity_at > exercise.added_at)
+        self.assertEqual(thread.last_activity_at, exercise.last_edited_at)
+        self.assertEqual(thread.last_activity_by, exercise.author)
 
-        self.assertTrue(question.thread.summary_html_cached())  # <<< make sure that caching backend is set up properly (i.e. it's not dummy)
-        html = self._html_for_question(question)
-        self.assertEqual(html, question.thread.get_cached_summary_html())
+        self.assertTrue(exercise.thread.summary_html_cached())  # <<< make sure that caching backend is set up properly (i.e. it's not dummy)
+        html = self._html_for_exercise(exercise)
+        self.assertEqual(html, exercise.thread.get_cached_summary_html())
 
-    def test_retag_question(self):
+    def test_retag_exercise(self):
         self.assertEqual(0, Post.objects.count())
-        question = self.post_question()
-        response = self.client.post(urlresolvers.reverse('retag_question', kwargs={'id': question.id}), data={
+        exercise = self.post_exercise()
+        response = self.client.post(urlresolvers.reverse('retag_exercise', kwargs={'id': exercise.id}), data={
             'tags': 'tag1 tag2',
         })
         self.assertEqual(1, Post.objects.count())
-        question = Post.objects.all()[0]
-        self.assertRedirects(response=response, expected_url=question.get_absolute_url())
+        exercise = Post.objects.all()[0]
+        self.assertRedirects(response=response, expected_url=exercise.get_absolute_url())
 
-        self.assertItemsEqual(['tag1', 'tag2'], list(question.thread.tags.values_list('name', flat=True)))
+        self.assertItemsEqual(['tag1', 'tag2'], list(exercise.thread.tags.values_list('name', flat=True)))
 
-        self.assertTrue(question.thread.summary_html_cached())  # <<< make sure that caching backend is set up properly (i.e. it's not dummy)
-        html = self._html_for_question(question)
-        self.assertEqual(html, question.thread.get_cached_summary_html())
+        self.assertTrue(exercise.thread.summary_html_cached())  # <<< make sure that caching backend is set up properly (i.e. it's not dummy)
+        html = self._html_for_exercise(exercise)
+        self.assertEqual(html, exercise.thread.get_cached_summary_html())
 
-    def test_answer_question(self):
+    def test_problem_exercise(self):
         self.assertEqual(0, Post.objects.count())
-        question = self.post_question()
+        exercise = self.post_exercise()
         self.assertEqual(1, Post.objects.count())
 
-        #thread = question.thread
+        #thread = exercise.thread
         # get fresh Thread instance so that on MySQL it has timestamps without microseconds
-        thread = Thread.objects.get(id=question.thread.id)
+        thread = Thread.objects.get(id=exercise.thread.id)
 
-        self.assertEqual(0, thread.answer_count)
-        self.assertEqual(thread.last_activity_at, question.added_at)
-        self.assertEqual(thread.last_activity_by, question.author)
+        self.assertEqual(0, thread.problem_count)
+        self.assertEqual(thread.last_activity_at, exercise.added_at)
+        self.assertEqual(thread.last_activity_by, exercise.author)
 
         self.client.logout()
         self.client.login(username='user2', password='pswd')
         time.sleep(1.5) # compensate for 1-sec time resolution in some databases
-        response = self.client.post(urlresolvers.reverse('answer', kwargs={'id': question.id}), data={
-            'text': 'answer longer than 10 chars',
+        response = self.client.post(urlresolvers.reverse('problem', kwargs={'id': exercise.id}), data={
+            'text': 'problem longer than 10 chars',
         })
         self.assertEqual(2, Post.objects.count())
-        answer = Post.objects.get_answers()[0]
-        self.assertRedirects(response=response, expected_url=answer.get_absolute_url())
+        problem = Post.objects.get_problems()[0]
+        self.assertRedirects(response=response, expected_url=problem.get_absolute_url())
 
-        thread = answer.thread
-        self.assertEqual(1, thread.answer_count)
-        self.assertEqual(thread.last_activity_at, answer.added_at)
-        self.assertEqual(thread.last_activity_by, answer.author)
+        thread = problem.thread
+        self.assertEqual(1, thread.problem_count)
+        self.assertEqual(thread.last_activity_at, problem.added_at)
+        self.assertEqual(thread.last_activity_by, problem.author)
 
-        self.assertTrue(question.added_at < answer.added_at)
-        self.assertNotEqual(question.author, answer.author)
+        self.assertTrue(exercise.added_at < problem.added_at)
+        self.assertNotEqual(exercise.author, problem.author)
 
         self.assertTrue(thread.summary_html_cached())  # <<< make sure that caching backend is set up properly (i.e. it's not dummy)
-        html = self._html_for_question(thread._question_post())
+        html = self._html_for_exercise(thread._exercise_post())
         self.assertEqual(html, thread.get_cached_summary_html())
 
-    def test_edit_answer(self):
+    def test_edit_problem(self):
         self.assertEqual(0, Post.objects.count())
-        question = self.post_question()
-        # get fresh question Post instance so that on MySQL it has timestamps without microseconds
-        question = Post.objects.get(id=question.id)
-        self.assertEqual(question.thread.last_activity_at, question.added_at)
-        self.assertEqual(question.thread.last_activity_by, question.author)
+        exercise = self.post_exercise()
+        # get fresh exercise Post instance so that on MySQL it has timestamps without microseconds
+        exercise = Post.objects.get(id=exercise.id)
+        self.assertEqual(exercise.thread.last_activity_at, exercise.added_at)
+        self.assertEqual(exercise.thread.last_activity_by, exercise.author)
 
         time.sleep(1.5)  # compensate for 1-sec time resolution in some databases
-        question_thread = copy.deepcopy(question.thread) # INFO: in the line below question.thread is touched and it reloads its `last_activity_by` field so we preserve it here
-        answer = self.post_answer(user=self.user2, question=question)
+        exercise_thread = copy.deepcopy(exercise.thread) # INFO: in the line below exercise.thread is touched and it reloads its `last_activity_by` field so we preserve it here
+        problem = self.post_problem(user=self.user2, exercise=exercise)
         self.assertEqual(2, Post.objects.count())
 
         time.sleep(1.5)  # compensate for 1-sec time resolution in some databases
@@ -574,8 +574,8 @@ class ThreadRenderCacheUpdateTests(AskbotTestCase):
         self.client.login(username='user2', password='pswd')
         response = self.client.post(
             urlresolvers.reverse(
-                'edit_answer',
-                kwargs={'id': answer.id}
+                'edit_problem',
+                kwargs={'id': problem.id}
             ),
             data={
                 'text': 'edited body text',
@@ -583,29 +583,29 @@ class ThreadRenderCacheUpdateTests(AskbotTestCase):
                 'select_revision': 'false'
             }
         )
-        self.assertRedirects(response=response, expected_url=answer.get_absolute_url())
+        self.assertRedirects(response=response, expected_url=problem.get_absolute_url())
 
-        answer = Post.objects.get(id=answer.id)
-        thread = answer.thread
-        self.assertEqual(thread.last_activity_at, answer.last_edited_at)
-        self.assertEqual(thread.last_activity_by, answer.last_edited_by)
-        self.assertTrue(thread.last_activity_at > question_thread.last_activity_at)
-        self.assertNotEqual(thread.last_activity_by, question_thread.last_activity_by)
+        problem = Post.objects.get(id=problem.id)
+        thread = problem.thread
+        self.assertEqual(thread.last_activity_at, problem.last_edited_at)
+        self.assertEqual(thread.last_activity_by, problem.last_edited_by)
+        self.assertTrue(thread.last_activity_at > exercise_thread.last_activity_at)
+        self.assertNotEqual(thread.last_activity_by, exercise_thread.last_activity_by)
 
         self.assertTrue(thread.summary_html_cached())  # <<< make sure that caching backend is set up properly (i.e. it's not dummy)
-        html = self._html_for_question(thread._question_post())
+        html = self._html_for_exercise(thread._exercise_post())
         self.assertEqual(html, thread.get_cached_summary_html())
 
     def test_view_count(self):
-        question = self.post_question()
-        self.assertEqual(0, question.thread.view_count)
+        exercise = self.post_exercise()
+        self.assertEqual(0, exercise.thread.view_count)
         self.assertEqual(0, Thread.objects.all()[0].view_count)
         self.client.logout()
-        # INFO: We need to pass some headers to make question() view believe we're not a robot
+        # INFO: We need to pass some headers to make exercise() view believe we're not a robot
         self.client.get(
-            urlresolvers.reverse('question', kwargs={'id': question.id}),
+            urlresolvers.reverse('exercise', kwargs={'id': exercise.id}),
             {},
-            follow=True, # the first view redirects to the full question url (with slug in it), so we have to follow that redirect
+            follow=True, # the first view redirects to the full exercise url (with slug in it), so we have to follow that redirect
             HTTP_ACCEPT_LANGUAGE='en',
             HTTP_USER_AGENT='Mozilla Gecko'
         )
@@ -613,69 +613,69 @@ class ThreadRenderCacheUpdateTests(AskbotTestCase):
         self.assertEqual(1, thread.view_count)
 
         self.assertTrue(thread.summary_html_cached())  # <<< make sure that caching backend is set up properly (i.e. it's not dummy)
-        html = self._html_for_question(thread._question_post())
+        html = self._html_for_exercise(thread._exercise_post())
         self.assertEqual(html, thread.get_cached_summary_html())
 
-    def test_question_upvote_downvote(self):
-        question = self.post_question()
-        question.points = 5
-        question.vote_up_count = 7
-        question.vote_down_count = 2
-        question.save()
+    def test_exercise_upvote_downvote(self):
+        exercise = self.post_exercise()
+        exercise.points = 5
+        exercise.vote_up_count = 7
+        exercise.vote_down_count = 2
+        exercise.save()
 
         self.client.logout()
         self.client.login(username='user2', password='pswd')
-        response = self.client.post(urlresolvers.reverse('vote', kwargs={'id': question.id}), data={'type': '1'},
+        response = self.client.post(urlresolvers.reverse('vote', kwargs={'id': exercise.id}), data={'type': '1'},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest') # use AJAX request
         self.assertEqual(200, response.status_code)
         data = simplejson.loads(response.content)
 
         self.assertEqual(1, data['success'])
-        self.assertEqual(6, data['count'])  # 6 == question.points(5) + 1
+        self.assertEqual(6, data['count'])  # 6 == exercise.points(5) + 1
 
-        thread = Thread.objects.get(id=question.thread.id)
+        thread = Thread.objects.get(id=exercise.thread.id)
 
         self.assertTrue(thread.summary_html_cached())  # <<< make sure that caching backend is set up properly (i.e. it's not dummy)
-        html = self._html_for_question(thread._question_post())
+        html = self._html_for_exercise(thread._exercise_post())
         self.assertEqual(html, thread.get_cached_summary_html())
 
         ###
 
-        response = self.client.post(urlresolvers.reverse('vote', kwargs={'id': question.id}), data={'type': '2'},
+        response = self.client.post(urlresolvers.reverse('vote', kwargs={'id': exercise.id}), data={'type': '2'},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest') # use AJAX request
         self.assertEqual(200, response.status_code)
         data = simplejson.loads(response.content)
 
         self.assertEqual(1, data['success'])
-        self.assertEqual(5, data['count'])  # 6 == question.points(6) - 1
+        self.assertEqual(5, data['count'])  # 6 == exercise.points(6) - 1
 
-        thread = Thread.objects.get(id=question.thread.id)
+        thread = Thread.objects.get(id=exercise.thread.id)
 
         self.assertTrue(thread.summary_html_cached())  # <<< make sure that caching backend is set up properly (i.e. it's not dummy)
-        html = self._html_for_question(thread._question_post())
+        html = self._html_for_exercise(thread._exercise_post())
         self.assertEqual(html, thread.get_cached_summary_html())
 
-    def test_question_accept_answer(self):
-        question = self.post_question(user=self.user2)
-        answer = self.post_answer(question=question)
+    def test_exercise_accept_problem(self):
+        exercise = self.post_exercise(user=self.user2)
+        problem = self.post_problem(exercise=exercise)
 
         self.client.logout()
         self.client.login(username='user2', password='pswd')
-        response = self.client.post(urlresolvers.reverse('vote', kwargs={'id': question.id}), data={'type': '0', 'postId': answer.id},
+        response = self.client.post(urlresolvers.reverse('vote', kwargs={'id': exercise.id}), data={'type': '0', 'postId': problem.id},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest') # use AJAX request
         self.assertEqual(200, response.status_code)
         data = simplejson.loads(response.content)
 
         self.assertEqual(1, data['success'])
 
-        thread = Thread.objects.get(id=question.thread.id)
+        thread = Thread.objects.get(id=exercise.thread.id)
 
         self.assertTrue(thread.summary_html_cached())  # <<< make sure that caching backend is set up properly (i.e. it's not dummy)
-        html = self._html_for_question(thread._question_post())
+        html = self._html_for_exercise(thread._exercise_post())
         self.assertEqual(html, thread.get_cached_summary_html())
 
 
 # TODO: (in spare time - those cases should pass without changing anything in code but we should have them eventually for completness)
-# - Publishing anonymous questions / answers
-# - Re-posting question as answer and vice versa
-# - Management commands (like post_emailed_questions)
+# - Publishing anonymous exercises / problems
+# - Re-posting exercise as problem and vice versa
+# - Management commands (like post_emailed_exercises)

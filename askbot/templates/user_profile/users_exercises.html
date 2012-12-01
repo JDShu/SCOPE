@@ -1,0 +1,14 @@
+<!-- users_exercises.html -->
+{% import "macros.html" as macros %}
+<div class="user-stats-table">
+    {% for exercise in exercises %}
+    {{
+        macros.exercise_summary(
+            exercise.thread, exercise,
+            extra_class='narrow', search_state=search_state,
+            visitor = request.user
+        )
+    }}
+    {% endfor %}
+</div>
+<!-- end users_exercises.html -->

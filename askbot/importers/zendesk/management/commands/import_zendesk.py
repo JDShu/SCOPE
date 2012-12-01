@@ -78,10 +78,10 @@ def create_askbot_user(zd_user):
     ab_user.save()
     return ab_user
 
-def post_question(zendesk_post):
-    """posts question to askbot, using zendesk post item"""
+def post_exercise(zendesk_post):
+    """posts exercise to askbot, using zendesk post item"""
     try:
-        return zendesk_post.get_author().post_question(
+        return zendesk_post.get_author().post_exercise(
             title = zendesk_post.get_fake_title(),
             body_text = zendesk_post.get_body_text(),
             tags = zendesk_post.get_tag_name(),
@@ -91,10 +91,10 @@ def post_question(zendesk_post):
         msg = unicode(e)
         print "Warning: post %d dropped: %s" % (zendesk_post.post_id, msg)
 
-def post_answer(zendesk_post, question = None):
+def post_problem(zendesk_post, exercise = None):
     try:
-        zendesk_post.get_author().post_answer(
-            question = question,
+        zendesk_post.get_author().post_problem(
+            exercise = exercise,
             body_text = zendesk_post.get_body_text(),
             timestamp = zendesk_post.created_at
         )
@@ -312,18 +312,18 @@ class Command(BaseCommand):
             thread_entries = zendesk_models.Post.objects.filter(
                 entry_id = thread_id
             ).order_by('created_at')
-            question_post = thread_entries[0]
-            question = post_question(question_post)
-            question_post.is_processed = True
-            question_post.save()
+            exercise_post = thread_entries[0]
+            exercise = post_exercise(exercise_post)
+            exercise_post.is_processed = True
+            exercise_post.save()
             transaction.commit()
             entry_count = thread_entries.count()
             threads_posted += 1
             console.print_action(str(threads_posted))
             if entry_count > 1:
-                for answer_post in thread_entries[1:]:
-                    post_answer(answer_post, question = question)
-                    answer_post.is_processed = True
-                    answer_post.save()
+                for problem_post in thread_entries[1:]:
+                    post_problem(problem_post, exercise = exercise)
+                    problem_post.is_processed = True
+                    problem_post.save()
                     transaction.commit()
         console.print_action(str(threads_posted), nowipe = True)

@@ -10,7 +10,7 @@ User.assert_can...
 import datetime
 from django.db import transaction
 from askbot.models import Repute
-#from askbot.models import Answer
+#from askbot.models import Problem
 from askbot.models import signals
 from askbot.conf import settings as askbot_settings
 
@@ -32,12 +32,12 @@ def onFlaggedItem(post, user, timestamp=None):
     )
     flagged_user.save()
 
-    question = post.thread._question_post()
+    exercise = post.thread._exercise_post()
 
     reputation = Repute(
                     user=flagged_user,
                     negative=askbot_settings.REP_LOSS_FOR_RECEIVING_FLAG,
-                    question=question,
+                    exercise=exercise,
                     reputed_at=timestamp,
                     reputation_type=-4,#todo: clean up magic number
                     reputation=flagged_user.reputation
@@ -69,7 +69,7 @@ def onFlaggedItem(post, user, timestamp=None):
             user=flagged_user,
             negative=\
                 askbot_settings.REP_LOSS_FOR_RECEIVING_THREE_FLAGS_PER_REVISION,
-            question=question,
+            exercise=exercise,
             reputed_at=timestamp,
             reputation_type=-6,
             reputation=flagged_user.reputation
@@ -87,7 +87,7 @@ def onFlaggedItem(post, user, timestamp=None):
             user=flagged_user,
             negative=\
                 askbot_settings.REP_LOSS_FOR_RECEIVING_FIVE_FLAGS_PER_REVISION,
-            question=question,
+            exercise=exercise,
             reputed_at=timestamp,
             reputation_type=-7,
             reputation=flagged_user.reputation
@@ -115,12 +115,12 @@ def onUnFlaggedItem(post, user, timestamp=None):
     )
     flagged_user.save()
 
-    question = post.thread._question_post()
+    exercise = post.thread._exercise_post()
 
     reputation = Repute(
                     user=flagged_user,
                     positive=askbot_settings.REP_LOSS_FOR_RECEIVING_FLAG,
-                    question=question,
+                    exercise=exercise,
                     reputed_at=timestamp,
                     reputation_type=-4,#todo: clean up magic number
                     reputation=flagged_user.reputation
@@ -153,7 +153,7 @@ def onUnFlaggedItem(post, user, timestamp=None):
             user=flagged_user,
             positive=\
                 askbot_settings.REP_LOSS_FOR_RECEIVING_THREE_FLAGS_PER_REVISION,
-            question=question,
+            exercise=exercise,
             reputed_at=timestamp,
             reputation_type=-6,
             reputation=flagged_user.reputation
@@ -171,7 +171,7 @@ def onUnFlaggedItem(post, user, timestamp=None):
             user=flagged_user,
             positive =\
                 askbot_settings.REP_LOSS_FOR_RECEIVING_FIVE_FLAGS_PER_REVISION,
-            question=question,
+            exercise=exercise,
             reputed_at=timestamp,
             reputation_type=-7,
             reputation=flagged_user.reputation
@@ -182,74 +182,74 @@ def onUnFlaggedItem(post, user, timestamp=None):
         post.save()
 
 @transaction.commit_on_success
-def onAnswerAccept(answer, user, timestamp=None):
-    answer.thread.set_accepted_answer(answer=answer, timestamp=timestamp)
-    question = answer.thread._question_post()
+def onProblemAccept(problem, user, timestamp=None):
+    problem.thread.set_accepted_problem(problem=problem, timestamp=timestamp)
+    exercise = problem.thread._exercise_post()
 
-    if answer.author != user:
-        answer.author.receive_reputation(
-            askbot_settings.REP_GAIN_FOR_RECEIVING_ANSWER_ACCEPTANCE
+    if problem.author != user:
+        problem.author.receive_reputation(
+            askbot_settings.REP_GAIN_FOR_RECEIVING_PROBLEM_ACCEPTANCE
         )
-        answer.author.save()
-        reputation = Repute(user=answer.author,
-                   positive=askbot_settings.REP_GAIN_FOR_RECEIVING_ANSWER_ACCEPTANCE,
-                   question=question,
+        problem.author.save()
+        reputation = Repute(user=problem.author,
+                   positive=askbot_settings.REP_GAIN_FOR_RECEIVING_PROBLEM_ACCEPTANCE,
+                   exercise=exercise,
                    reputed_at=timestamp,
                    reputation_type=2,
-                   reputation=answer.author.reputation)
+                   reputation=problem.author.reputation)
         reputation.save()
 
-    if answer.author == question.author and user == question.author:
-        #a plug to prevent reputation gaming by posting a question
-        #then answering and accepting as best all by the same person
+    if problem.author == exercise.author and user == exercise.author:
+        #a plug to prevent reputation gaming by posting a exercise
+        #then probleming and accepting as best all by the same person
         return
 
-    user.receive_reputation(askbot_settings.REP_GAIN_FOR_ACCEPTING_ANSWER)
+    user.receive_reputation(askbot_settings.REP_GAIN_FOR_ACCEPTING_PROBLEM)
     user.save()
     reputation = Repute(user=user,
-               positive=askbot_settings.REP_GAIN_FOR_ACCEPTING_ANSWER,
-               question=question,
+               positive=askbot_settings.REP_GAIN_FOR_ACCEPTING_PROBLEM,
+               exercise=exercise,
                reputed_at=timestamp,
                reputation_type=3,
                reputation=user.reputation)
     reputation.save()
 
 @transaction.commit_on_success
-def onAnswerAcceptCanceled(answer, user, timestamp=None):
+def onProblemAcceptCanceled(problem, user, timestamp=None):
     if timestamp is None:
         timestamp = datetime.datetime.now()
-    answer.thread.set_accepted_answer(answer=None, timestamp=None)
-    question = answer.thread._question_post()
+    problem.thread.set_accepted_problem(problem=None, timestamp=None)
+    exercise = problem.thread._exercise_post()
 
-    if user != answer.author:
-        answer.author.receive_reputation(
-            askbot_settings.REP_LOSS_FOR_RECEIVING_CANCELATION_OF_ANSWER_ACCEPTANCE
+    if user != problem.author:
+        problem.author.receive_reputation(
+            askbot_settings.REP_LOSS_FOR_RECEIVING_CANCELATION_OF_PROBLEM_ACCEPTANCE
         )
-        answer.author.save()
+        problem.author.save()
         reputation = Repute(
-            user=answer.author,
+            user=problem.author,
             negative=\
-             askbot_settings.REP_LOSS_FOR_RECEIVING_CANCELATION_OF_ANSWER_ACCEPTANCE,
-            question=question,
+             askbot_settings.REP_LOSS_FOR_RECEIVING_CANCELATION_OF_PROBLEM_ACCEPTANCE,
+            exercise=exercise,
             reputed_at=timestamp,
             reputation_type=-2,
-            reputation=answer.author.reputation
+            reputation=problem.author.reputation
         )
         reputation.save()
 
-    if answer.author == question.author and user == question.author:
+    if problem.author == exercise.author and user == exercise.author:
         #a symmettric measure for the reputation gaming plug
-        #as in the onAnswerAccept function
+        #as in the onProblemAccept function
         #here it protects the user from uwanted reputation loss
         return
 
     user.receive_reputation(
-        askbot_settings.REP_LOSS_FOR_CANCELING_ANSWER_ACCEPTANCE
+        askbot_settings.REP_LOSS_FOR_CANCELING_PROBLEM_ACCEPTANCE
     )
     user.save()
     reputation = Repute(user=user,
-               negative=askbot_settings.REP_LOSS_FOR_CANCELING_ANSWER_ACCEPTANCE,
-               question=question,
+               negative=askbot_settings.REP_LOSS_FOR_CANCELING_PROBLEM_ACCEPTANCE,
+               exercise=exercise,
                reputed_at=timestamp,
                reputation_type=-1,
                reputation=user.reputation)
@@ -279,11 +279,11 @@ def onUpVoted(vote, post, user, timestamp=None):
             )
             author.save()
 
-            question = post.thread._question_post() # TODO: this is suboptimal if post is already a question
+            exercise = post.thread._exercise_post() # TODO: this is suboptimal if post is already a exercise
 
             reputation = Repute(user=author,
                        positive=askbot_settings.REP_GAIN_FOR_RECEIVING_UPVOTE,
-                       question=question,
+                       exercise=exercise,
                        reputed_at=timestamp,
                        reputation_type=1,
                        reputation=author.reputation)
@@ -314,12 +314,12 @@ def onUpVotedCanceled(vote, post, user, timestamp=None):
         )
         author.save()
 
-        question = post.thread._question_post() # TODO: this is suboptimal if post is already a question
+        exercise = post.thread._exercise_post() # TODO: this is suboptimal if post is already a exercise
 
         reputation = Repute(
             user=author,
             negative=askbot_settings.REP_LOSS_FOR_RECEIVING_UPVOTE_CANCELATION,
-            question=question,
+            exercise=exercise,
             reputed_at=timestamp,
             reputation_type=-8,
             reputation=author.reputation
@@ -343,11 +343,11 @@ def onDownVoted(vote, post, user, timestamp=None):
         )
         author.save()
 
-        question = post.thread._question_post() # TODO: this is suboptimal if post is already a question
+        exercise = post.thread._exercise_post() # TODO: this is suboptimal if post is already a exercise
 
         reputation = Repute(user=author,
                    negative=askbot_settings.REP_LOSS_FOR_RECEIVING_DOWNVOTE,
-                   question=question,
+                   exercise=exercise,
                    reputed_at=timestamp,
                    reputation_type=-3,
                    reputation=author.reputation)
@@ -360,7 +360,7 @@ def onDownVoted(vote, post, user, timestamp=None):
 
         reputation = Repute(user=user,
                    negative=askbot_settings.REP_LOSS_FOR_DOWNVOTING,
-                   question=question,
+                   exercise=exercise,
                    reputed_at=timestamp,
                    reputation_type=-5,
                    reputation=user.reputation)
@@ -385,12 +385,12 @@ def onDownVotedCanceled(vote, post, user, timestamp=None):
         )
         author.save()
 
-        question = post.thread._question_post() # TODO: this is suboptimal if post is already a question
+        exercise = post.thread._exercise_post() # TODO: this is suboptimal if post is already a exercise
 
         reputation = Repute(user=author,
                 positive=\
                     askbot_settings.REP_GAIN_FOR_RECEIVING_DOWNVOTE_CANCELATION,
-                question=question,
+                exercise=exercise,
                 reputed_at=timestamp,
                 reputation_type=4,
                 reputation=author.reputation
@@ -402,7 +402,7 @@ def onDownVotedCanceled(vote, post, user, timestamp=None):
 
         reputation = Repute(user=user,
                    positive=askbot_settings.REP_GAIN_FOR_CANCELING_DOWNVOTE,
-                   question=question,
+                   exercise=exercise,
                    reputed_at=timestamp,
                    reputation_type=5,
                    reputation=user.reputation)

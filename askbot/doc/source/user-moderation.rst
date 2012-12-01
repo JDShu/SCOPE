@@ -23,7 +23,7 @@ These status levels are mutually exclusive.
 **Admin panel**. Each user has a sub/view of his/her account giving tools.
 
 Admin panel exposes moderation and administration tools. Note that there are some
-moderation tools located in other places (e.g. question views).
+moderation tools located in other places (e.g. exercise views).
 
 If a user can see own admin panel, the panel will always be restricted in function, because
 it never makes to communicate by email with him/herself, etc.
@@ -34,7 +34,7 @@ it never makes to communicate by email with him/herself, etc.
 * arbitrarily add/subtract reputation and leave a message
 * send PM to user
 * merge tags (tags view, )
-* merge questions (need special tool - sticky selection in search?)
+* merge exercises (need special tool - sticky selection in search?)
 
 **Restrictions on moderators**
 

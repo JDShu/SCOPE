@@ -47,30 +47,30 @@ def thread_headers(post, orig_post, update):
     """modify headers for email messages, so
     that emails appear as threaded conversations in gmail"""
     suffix_id = django_settings.SERVER_EMAIL
-    if update == const.TYPE_ACTIVITY_ASK_QUESTION:
+    if update == const.TYPE_ACTIVITY_ASK_EXERCISE:
         msg_id = "NQ-%s-%s" % (post.id, suffix_id)
         headers = {'Message-ID': msg_id}
-    elif update == const.TYPE_ACTIVITY_ANSWER:
+    elif update == const.TYPE_ACTIVITY_PROBLEM:
         msg_id = "NA-%s-%s" % (post.id, suffix_id)
         orig_id = "NQ-%s-%s" % (orig_post.id, suffix_id)
         headers = {'Message-ID': msg_id,
                   'In-Reply-To': orig_id}
-    elif update == const.TYPE_ACTIVITY_UPDATE_QUESTION:
+    elif update == const.TYPE_ACTIVITY_UPDATE_EXERCISE:
         msg_id = "UQ-%s-%s-%s" % (post.id, post.last_edited_at, suffix_id)
         orig_id = "NQ-%s-%s" % (orig_post.id, suffix_id)
         headers = {'Message-ID': msg_id,
                   'In-Reply-To': orig_id}
-    elif update == const.TYPE_ACTIVITY_COMMENT_QUESTION:
+    elif update == const.TYPE_ACTIVITY_COMMENT_EXERCISE:
         msg_id = "CQ-%s-%s" % (post.id, suffix_id)
         orig_id = "NQ-%s-%s" % (orig_post.id, suffix_id)
         headers = {'Message-ID': msg_id,
                   'In-Reply-To': orig_id}
-    elif update == const.TYPE_ACTIVITY_UPDATE_ANSWER:
+    elif update == const.TYPE_ACTIVITY_UPDATE_PROBLEM:
         msg_id = "UA-%s-%s-%s" % (post.id, post.last_edited_at, suffix_id)
         orig_id = "NQ-%s-%s" % (orig_post.id, suffix_id)
         headers = {'Message-ID': msg_id,
                   'In-Reply-To': orig_id}
-    elif update == const.TYPE_ACTIVITY_COMMENT_ANSWER:
+    elif update == const.TYPE_ACTIVITY_COMMENT_PROBLEM:
         msg_id = "CA-%s-%s" % (post.id, suffix_id)
         orig_id = "NQ-%s-%s" % (orig_post.id, suffix_id)
         headers = {'Message-ID': msg_id,
@@ -175,11 +175,11 @@ def mail_moderators(
             raise exceptions.EmailNotSent(unicode(error))
 
 INSTRUCTIONS_PREAMBLE = _('<p>To ask by email, please:</p>')
-QUESTION_TITLE_INSTRUCTION = _(
+EXERCISE_TITLE_INSTRUCTION = _(
     '<li>Type title in the subject line</li>'
 )
-QUESTION_DETAILS_INSTRUCTION = _(
-    '<li>Type details of your question into the email body</li>'
+EXERCISE_DETAILS_INSTRUCTION = _(
+    '<li>Type details of your exercise into the email body</li>'
 )
 OPTIONAL_TAGS_INSTRUCTION = _(
 """<li>The beginning of the subject line can contain tags,
@@ -205,7 +205,7 @@ def bounce_email(
     """
     if reason == 'problem_posting':
         error_message = _(
-            '<p>Sorry, there was an error posting your question '
+            '<p>Sorry, there was an error posting your exercise '
             'please contact the %(site)s administrator</p>'
         ) % {'site': askbot_settings.APP_SHORT_NAME}
 
@@ -213,9 +213,9 @@ def bounce_email(
             error_message = string_concat(
                                     INSTRUCTIONS_PREAMBLE,
                                     '<ul>',
-                                    QUESTION_TITLE_INSTRUCTION,
+                                    EXERCISE_TITLE_INSTRUCTION,
                                     REQUIRED_TAGS_INSTRUCTION,
-                                    QUESTION_DETAILS_INSTRUCTION,
+                                    EXERCISE_DETAILS_INSTRUCTION,
                                     '</ul>',
                                     TAGS_INSTRUCTION_FOOTNOTE
                                 )
@@ -223,8 +223,8 @@ def bounce_email(
             error_message = string_concat(
                                     INSTRUCTIONS_PREAMBLE,
                                     '<ul>',
-                                        QUESTION_TITLE_INSTRUCTION,
-                                        QUESTION_DETAILS_INSTRUCTION,
+                                        EXERCISE_TITLE_INSTRUCTION,
+                                        EXERCISE_DETAILS_INSTRUCTION,
                                         OPTIONAL_TAGS_INSTRUCTION,
                                     '</ul>',
                                     TAGS_INSTRUCTION_FOOTNOTE
@@ -232,7 +232,7 @@ def bounce_email(
 
     elif reason == 'unknown_user':
         error_message = _(
-            '<p>Sorry, in order to post questions on %(site)s '
+            '<p>Sorry, in order to post exercises on %(site)s '
             'by email, please <a href="%(url)s">register first</a></p>'
         ) % {
             'site': askbot_settings.APP_SHORT_NAME,
@@ -240,7 +240,7 @@ def bounce_email(
         }
     elif reason == 'permission_denied' and body_text is None:
         error_message = _(
-            '<p>Sorry, your question could not be posted '
+            '<p>Sorry, your exercise could not be posted '
             'due to insufficient privileges of your user account</p>'
         )
     elif body_text:
@@ -313,7 +313,7 @@ def extract_user_signature(text, reply_code):
 def process_parts(parts, reply_code = None):
     """Process parts will upload the attachments and parse out the
     body, if body is multipart. Secondly - links to attachments
-    will be added to the body of the question.
+    will be added to the body of the exercise.
     Returns ready to post body of the message and the list
     of uploaded files.
     """
@@ -344,11 +344,11 @@ def process_parts(parts, reply_code = None):
     return body_markdown.strip(), stored_files, signature
 
 
-def process_emailed_question(
+def process_emailed_exercise(
     from_address, subject, body_text, stored_files,
     tags=None, group_id=None
 ):
-    """posts question received by email or bounces the message"""
+    """posts exercise received by email or bounces the message"""
     #a bunch of imports here, to avoid potential circular import issues
     from askbot.forms import AskByEmailForm
     from askbot.models import ReplyAddress, User
@@ -395,7 +395,7 @@ def process_emailed_question(
                 tagnames += ' ' + ' '.join(tags)
 
 
-            user.post_question(
+            user.post_exercise(
                 title=title,
                 tags=tagnames.strip(),
                 body_text=stripped_body_text,

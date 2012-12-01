@@ -23,8 +23,8 @@ When installing Askbot for the first time, you will need to initialize the proje
 
     askbot-setup
 
-and answering the questions. The `askbot-setup` script will ask you where to deploy Askbot. If you are in
-the directory where the Askbot project resides, you can answer `.` (`.` refers to the current directory).
+and probleming the exercises. The `askbot-setup` script will ask you where to deploy Askbot. If you are in
+the directory where the Askbot project resides, you can problem `.` (`.` refers to the current directory).
 There may be an error message; ignore it.
 
 .. note::

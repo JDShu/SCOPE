@@ -18,7 +18,7 @@
 %}If you would like to edit by email, please
 <a href="mailto:{{ replace_content_address }}?body={{ post_text }}{{ author_email_signature}}&subject={{ subject }}">click here</a>{% endtrans %}</p>
 <p>{% trans %}Below is a copy of your post:{% endtrans %}</p>
-{% if post.post_type == 'question' %}
+{% if post.post_type == 'exercise' %}
     <p style="font-size:16px">{{ post.thread.title }}</p>
 {% endif %}
 {{ post.html }}

@@ -11,7 +11,7 @@ Any of this can be done later via url `/settings` at your site - log in as a sup
     and (if you want Google search engine crawl your site timely) the Google Analytics Key (if you wish to monitor
     the site traffic)
 
-Google will be pinged each time question, answer or comment is saved or a question deleted and the
+Google will be pinged each time exercise, problem or comment is saved or a exercise deleted and the
 site verification key is required for this to work. Please obtain the Site Verification Key at the
 `Google Webmasters Tools`_ site.
 

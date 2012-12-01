@@ -43,7 +43,7 @@ msgstr ""
 "<div>Есть закладка!</div><div class=\"unfollow\">Убрать закладку</div>"
 
 #: skins/default/media/js/post.js:1684 skins/common/media/js/post.js:1874
-msgid "Please enter question title (>10 characters)"
+msgid "Please enter exercise title (>10 characters)"
 msgstr ""
 "Пожалуйста, введите заголовок вопроса (>10 символов)"
 
@@ -146,7 +146,7 @@ msgid "insufficient privilege"
 msgstr "недостаточно прав доступа"
 
 #: skins/common/media/js/post.js:319
-msgid "cannot pick own answer as best"
+msgid "cannot pick own problem as best"
 msgstr "простите, вы не можете принять ваш собственный ответ"
 
 #: skins/common/media/js/post.js:324
@@ -154,11 +154,11 @@ msgid "please login"
 msgstr "пожалуйста, войдите на сайт"
 
 #: skins/common/media/js/post.js:326
-msgid "anonymous users cannot follow questions"
+msgid "anonymous users cannot follow exercises"
 msgstr "анонимные пользователи не могут отслеживать вопросы"
 
 #: skins/common/media/js/post.js:327
-msgid "anonymous users cannot subscribe to questions"
+msgid "anonymous users cannot subscribe to exercises"
 msgstr "анонимные пользователи не могут подписываться на вопросы"
 
 #: skins/common/media/js/post.js:328
@@ -310,8 +310,8 @@ msgstr ""
 msgid "upload file attachment"
 msgstr "Пожалуйста, выберите и загрузите файл:"
 
-#~ msgid "%(q_num)s question"
-#~ msgid_plural "%(q_num)s questions"
+#~ msgid "%(q_num)s exercise"
+#~ msgid_plural "%(q_num)s exercises"
 #~ msgstr[0] "%(q_num)s вопрос"
 #~ msgstr[1] "%(q_num)s вопроса"
 #~ msgstr[2] "%(q_num)s вопросов"
@@ -358,7 +358,7 @@ msgstr "Пожалуйста, выберите и загрузите файл:"
 #~ msgid "edit"
 #~ msgstr "редактировать"
 
-#~ msgid "see questions tagged '%s'"
+#~ msgid "see exercises tagged '%s'"
 #~ msgstr "просмотреть вопросы, которым присвоен тэг '%s'"
 
 #~ msgid "image description"

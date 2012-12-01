@@ -1,5 +1,5 @@
 """management command that renames a tag or merges
-it to another, all corresponding questions are automatically
+it to another, all corresponding exercises are automatically
 retagged
 """
 import sys
@@ -42,7 +42,7 @@ def format_tag_ids(tag_list):
 class Command(BaseCommand):
     "The command object itself"
 
-    help = """Retags questions tagged with <from_names> to <to_names>.
+    help = """Retags exercises tagged with <from_names> to <to_names>.
 
 If in the end some tags end up being unused, they are automatically removed.
 Tag names are case sensitive, non-ascii characters are also accepted.
@@ -54,7 +54,7 @@ Tag names are case sensitive, non-ascii characters are also accepted.
 Both --to and --from arguments accept multiple tags, but the argument must be quoted
 in that case (e.g. --from="raw material" --to="raw-material"), thus tags
 can be renamed, merged or split. It is highly recommended to first inspect the
-list of questions that are to be affected before running this operation.
+list of exercises that are to be affected before running this operation.
 
 The tag rename operation cannot be undone, but the command will
 ask you to confirm your action before making changes.

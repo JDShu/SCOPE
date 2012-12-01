@@ -54,9 +54,9 @@ settings.register(
         FORUM_DATA_RULES,
         'ALLOW_ASK_ANONYMOUSLY',
         default=True,
-        description=_('Allow asking questions anonymously'),
+        description=_('Allow asking exercises anonymously'),
         help_text=_(
-            'Users do not accrue reputation for anonymous questions '
+            'Users do not accrue reputation for anonymous exercises '
             'and their identity is not revealed until they change their '
             'mind'
         )
@@ -70,8 +70,8 @@ settings.register(
         default = True,
         description = _('Allow posting before logging in'),
         help_text = _(
-            'Check if you want to allow users start posting questions '
-            'or answers before logging in. '
+            'Check if you want to allow users start posting exercises '
+            'or problems before logging in. '
             'Enabling this may require adjustments in the '
             'user login system to check for pending posts '
             'every time the user logs in. The builtin Askbot login system '
@@ -83,13 +83,13 @@ settings.register(
 settings.register(
     livesettings.BooleanValue(
         FORUM_DATA_RULES,
-        'ALLOW_SWAPPING_QUESTION_WITH_ANSWER',
+        'ALLOW_SWAPPING_EXERCISE_WITH_PROBLEM',
         default = False,
-        description = _('Allow swapping answer with question'),
+        description = _('Allow swapping problem with exercise'),
         help_text = _(
             'This setting will help import data from other forums '
             'such as zendesk, when automatic '
-            'data import fails to detect the original question correctly.'
+            'data import fails to detect the original exercise correctly.'
         )
     )
 )
@@ -115,10 +115,10 @@ settings.register(
 settings.register(
     livesettings.IntegerValue(
         FORUM_DATA_RULES,
-        'MIN_QUESTION_BODY_LENGTH',
+        'MIN_EXERCISE_BODY_LENGTH',
         default=10,
         description=_(
-            'Minimum length of question body (number of characters)'
+            'Minimum length of exercise body (number of characters)'
         )
     )
 )
@@ -126,10 +126,10 @@ settings.register(
 settings.register(
     livesettings.IntegerValue(
         FORUM_DATA_RULES,
-        'MIN_ANSWER_BODY_LENGTH',
+        'MIN_PROBLEM_BODY_LENGTH',
         default=10,
         description=_(
-            'Minimum length of answer body (number of characters)'
+            'Minimum length of problem body (number of characters)'
         )
     )
 )
@@ -137,10 +137,10 @@ settings.register(
 settings.register(
     livesettings.BooleanValue(
         FORUM_DATA_RULES,
-        'LIMIT_ONE_ANSWER_PER_USER',
+        'LIMIT_ONE_PROBLEM_PER_USER',
         default = True,
         description = _(
-            'Limit one answer per question per user'
+            'Limit one problem per exercise per user'
         )
     )
 )
@@ -162,7 +162,7 @@ settings.register(
         description = _('Enable tag moderation'),
         help_text = _(
             'If enabled, any new tags will not be applied '
-            'to the questions, but emailed to the moderators. '
+            'to the exercises, but emailed to the moderators. '
             'To use this feature, tags must be optional.'
         )
     )
@@ -192,7 +192,7 @@ settings.register(
         default = '',
         help_text = _(
             'At least one of these tags will be required for any new '
-            'or newly edited question. A mandatory tag may be wildcard, '
+            'or newly edited exercise. A mandatory tag may be wildcard, '
             'if the wildcard tags are active.'
         )
     )
@@ -207,7 +207,7 @@ settings.register(
         help_text = _(
             'Attention: after checking this, please back up the database, '
             'and run a management command: '
-            '<code>python manage.py fix_question_tags</code> to globally '
+            '<code>python manage.py fix_exercise_tags</code> to globally '
             'rename the tags'
          )
     )
@@ -364,7 +364,7 @@ settings.register(
         FORUM_DATA_RULES,
         'MAX_TAGS_PER_POST',
         default=5,
-        description=_('Maximum number of tags per question')
+        description=_('Maximum number of tags per exercise')
     )
 )
 
@@ -373,19 +373,19 @@ settings.register(
 settings.register(
     livesettings.StringValue(
         FORUM_DATA_RULES,
-        'DEFAULT_QUESTIONS_PAGE_SIZE',
+        'DEFAULT_EXERCISES_PAGE_SIZE',
         choices=const.PAGE_SIZE_CHOICES,
         default='30',
-        description=_('Number of questions to list by default')
+        description=_('Number of exercises to list by default')
     )
 )
 
 settings.register(
     livesettings.StringValue(
         FORUM_DATA_RULES,
-        'UNANSWERED_QUESTION_MEANING',
-        choices=const.UNANSWERED_QUESTION_MEANING_CHOICES,
-        default='NO_ACCEPTED_ANSWERS',
-        description=_('What should "unanswered question" mean?')
+        'EXERCISE_WITHOUT_PROBLEM_MEANING',
+        choices=const.EXERCISE_WITHOUT_PROBLEM_MEANING_CHOICES,
+        default='NO_ACCEPTED_PROBLEMS',
+        description=_('What should "exercise without problem" mean?')
     )
 )

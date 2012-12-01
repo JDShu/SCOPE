@@ -1,3 +1,5 @@
+#FIXME: Make work with new post_types
+
 import datetime
 import logging
 import re
@@ -83,7 +85,7 @@ class ActivityManager(models.Manager):
             kwargs['is_auditted'] = False
 
         mention_activity = Activity(**kwargs)
-        mention_activity.question = mentioned_in.get_origin_post()
+        mention_activity.exercise = mentioned_in.get_origin_post()
         mention_activity.save()
 
         if mentioned_whom:
@@ -176,8 +178,8 @@ class Activity(models.Model):
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    #todo: remove this denorm question field when Post model is set up
-    question = models.ForeignKey('Post', null=True)
+    #todo: remove this denorm exercise field when Post model is set up
+    exercise = models.ForeignKey('Post', null=True)
 
     is_auditted = models.BooleanField(default=False)
     #add summary field.
@@ -257,10 +259,10 @@ class EmailFeedSetting(models.Model):
     }
     #definitions of feed schedule types
     FEED_TYPES = (
-            'q_ask', #questions that user asks
+            'q_ask', #exercises that user asks
             'q_all', #enture forum, tag filtered
-            'q_ans', #questions that user answers
-            'q_sel', #questions that user decides to follow
+            'q_ans', #exercises that user problems
+            'q_sel', #exercises that user decides to follow
             'm_and_c' #comments and mentions of user anywhere
     )
     #email delivery schedule when no email is sent at all
@@ -280,9 +282,9 @@ class EmailFeedSetting(models.Model):
     }
     FEED_TYPE_CHOICES = (
                     ('q_all',_('Entire forum')),
-                    ('q_ask',_('Questions that I asked')),
-                    ('q_ans',_('Questions that I answered')),
-                    ('q_sel',_('Individually selected questions')),
+                    ('q_ask',_('Exercises that I asked')),
+                    ('q_ans',_('Exercises that I problemed')),
+                    ('q_sel',_('Individually selected exercises')),
                     ('m_and_c',_('Mentions and comment responses')),
                     )
     UPDATE_FREQUENCY = (
@@ -468,9 +470,9 @@ class Group(AuthGroup):
                     null=True, blank=True
                 )
     moderate_email = models.BooleanField(default=True)
-    moderate_answers_to_enquirers = models.BooleanField(
+    moderate_problems_to_enquirers = models.BooleanField(
                         default=False,
-                        help_text='If true, answers to outsiders questions '
+                        help_text='If true, problems to outsiders exercises '
                                 'will be shown to the enquirers only when '
                                 'selected by the group moderators.'
                     )
@@ -505,7 +507,7 @@ class Group(AuthGroup):
         return user.id in mod_ids
 
     def get_openness_choices(self):
-        """gives answers to question
+        """gives problems to exercise
         "How can users join this group?"
         """
         return (

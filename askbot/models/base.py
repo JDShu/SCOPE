@@ -1,3 +1,5 @@
+"""This module should be fine for QURRENT"""
+
 import datetime
 from django.db import models
 from django.contrib.auth.models import User
@@ -42,8 +44,8 @@ class BaseQuerySetManager(models.Manager):
 
 
 class DraftContent(models.Model):
-    """Base class for AnonymousQuestion and AnonymousAnswer"""
-    session_key = models.CharField(max_length=40)  #session id for anonymous questions
+    """Base class for AnonymousExercise and AnonymousProblem"""
+    session_key = models.CharField(max_length=40)  #session id for anonymous exercises
     wiki = models.BooleanField(default=False)
     added_at = models.DateTimeField(default=datetime.datetime.now)
     ip_addr = models.IPAddressField(max_length=21) #allow high port numbers

@@ -63,20 +63,20 @@ class ReplyAddressModelTests(AskbotTestCase):
         self.u3 = self.create_user(username='user3')
         self.u1.moderate_user_reputation(self.u3, reputation_change = 100, comment=  "no comment")
 
-        self.question = self.post_question(
+        self.exercise = self.post_exercise(
             user = self.u1,
             follow = True,
         )
-        self.answer = self.post_answer(
+        self.problem = self.post_problem(
             user = self.u2,
-            question = self.question
+            exercise = self.exercise
         )
 
-        self.comment = self.post_comment(user = self.u2, parent_post = self.answer)
+        self.comment = self.post_comment(user = self.u2, parent_post = self.problem)
 
-    def test_process_correct_answer_comment(self):
+    def test_process_correct_problem_comment(self):
         addr = ReplyAddress.objects.create_new(
-                                    post = self.answer,
+                                    post = self.problem,
                                     user = self.u1
                                 ).address
         reply_separator = const.REPLY_SEPARATOR_TEMPLATE % {
@@ -90,28 +90,28 @@ class ReplyAddressModelTests(AskbotTestCase):
         )
         msg['Subject'] = 'test subject'
         PROCESS(msg, address = addr)
-        self.assertEquals(self.answer.comments.count(), 2)
-        self.assertEquals(self.answer.comments.all().order_by('-pk')[0].text.strip(), "This is a test reply")
+        self.assertEquals(self.problem.comments.count(), 2)
+        self.assertEquals(self.problem.comments.all().order_by('-pk')[0].text.strip(), "This is a test reply")
 
     def test_address_creation(self):
         self.assertEquals(ReplyAddress.objects.all().count(), 0)
         result = ReplyAddress.objects.create_new(
-                                        post = self.answer,
+                                        post = self.problem,
                                         user = self.u1
                                     )
         self.assertTrue(len(result.address) >= 12 and len(result.address) <= 25)
         self.assertEquals(ReplyAddress.objects.all().count(), 1)
 
 
-    def test_create_answer_reply(self):
+    def test_create_problem_reply(self):
         result = ReplyAddress.objects.create_new(
-                                        post = self.answer,
+                                        post = self.problem,
                                         user = self.u1
                                     )
         post = result.create_reply(TEST_CONTENT)
         self.assertEquals(post.post_type, "comment")
         self.assertEquals(post.text, TEST_CONTENT)
-        self.assertEquals(self.answer.comments.count(), 2)
+        self.assertEquals(self.problem.comments.count(), 2)
 
     def test_create_comment_reply(self):
         result = ReplyAddress.objects.create_new(
@@ -121,25 +121,25 @@ class ReplyAddressModelTests(AskbotTestCase):
         post = result.create_reply(TEST_CONTENT)
         self.assertEquals(post.post_type, "comment")
         self.assertEquals(post.text, TEST_CONTENT)
-        self.assertEquals(self.answer.comments.count(), 2)
+        self.assertEquals(self.problem.comments.count(), 2)
 
 
-    def test_create_question_comment_reply(self):
+    def test_create_exercise_comment_reply(self):
         result = ReplyAddress.objects.create_new(
-                                        post = self.question,
+                                        post = self.exercise,
                                         user = self.u3
                                     )
         post = result.create_reply(TEST_CONTENT)
         self.assertEquals(post.post_type, "comment")
         self.assertEquals(post.text, TEST_CONTENT)
 
-    def test_create_question_answer_reply(self):
+    def test_create_exercise_problem_reply(self):
         result = ReplyAddress.objects.create_new(
-                                        post = self.question,
+                                        post = self.exercise,
                                         user = self.u3
                                     )
         post = result.create_reply(TEST_LONG_CONTENT)
-        self.assertEquals(post.post_type, "answer")
+        self.assertEquals(post.post_type, "problem")
         self.assertEquals(post.text, TEST_LONG_CONTENT)
 
 class EmailSignatureDetectionTests(AskbotTestCase):
@@ -149,13 +149,13 @@ class EmailSignatureDetectionTests(AskbotTestCase):
         self.u2 = self.create_user('user2', status = 'a')
 
     def test_detect_signature_in_response(self):
-        question = self.post_question(user = self.u1)
+        exercise = self.post_exercise(user = self.u1)
 
         #create a response address record
         reply_token = ReplyAddress.objects.create_new(
-                                        post = question,
+                                        post = exercise,
                                         user = self.u2,
-                                        reply_action = 'post_answer'
+                                        reply_action = 'post_problem'
                                     )
 
         self.u2.email_signature = ''

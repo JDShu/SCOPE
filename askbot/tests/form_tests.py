@@ -28,13 +28,13 @@ EMAIL_CASES = (#test should fail if the second item is None
 )
 SUBJECT_LINE_CASES = (#test fails if second item is None
     (
-        ' [ tag1;long  tag, another] question title',
-        ('tag1 long-tag another', 'question title')
+        ' [ tag1;long  tag, another] exercise title',
+        ('tag1 long-tag another', 'exercise title')
     ),
-    ('[] question title', None),
-    ('question title', None),
-    ('   [question title', None),
-    ('] question title', None),
+    ('[] exercise title', None),
+    ('exercise title', None),
+    ('   [exercise title', None),
+    ('] exercise title', None),
 )
 
 class AskByEmailFormTests(AskbotTestCase):
@@ -139,7 +139,7 @@ class TagNamesFieldTests(AskbotTestCase):
         self.assert_tags_equal(cleaned_tags, ['oneness',])
 
 
-class EditQuestionAnonymouslyFormTests(AskbotTestCase):
+class EditExerciseAnonymouslyFormTests(AskbotTestCase):
     """setup the following truth table
     on reveal_identity field:
     is_anon  can  owner  checked  result
@@ -163,9 +163,9 @@ class EditQuestionAnonymouslyFormTests(AskbotTestCase):
         (1, 1, 1, 0, False),
         (1, 1, 1, 1, True),
     )
-    #legend: is_anon - question is anonymous
+    #legend: is_anon - exercise is anonymous
     #        can - askbot_settings.ALLOW_ASK_ANONYMOUSLY
-    #        owner - editor is question owner
+    #        owner - editor is exercise owner
     #        checked - the checkbox "reveal_identity" is marked
     def setUp(self):
         self.create_user()
@@ -173,7 +173,7 @@ class EditQuestionAnonymouslyFormTests(AskbotTestCase):
             username = 'other_user',
             status = 'm'#must be able to edit
         )
-        super(EditQuestionAnonymouslyFormTests, self).setUp()
+        super(EditExerciseAnonymouslyFormTests, self).setUp()
 
     def setup_data(self, is_anon, can_be_anon, is_owner, box_checked):
         """sets up data in the same order as shown in the
@@ -182,7 +182,7 @@ class EditQuestionAnonymouslyFormTests(AskbotTestCase):
         the four positional arguments are in the same order
         """
         askbot_settings.update('ALLOW_ASK_ANONYMOUSLY', can_be_anon)
-        question = self.post_question(is_anonymous = is_anon)
+        exercise = self.post_exercise(is_anonymous = is_anon)
         if is_owner:
             editor = self.user
         else:
@@ -194,11 +194,11 @@ class EditQuestionAnonymouslyFormTests(AskbotTestCase):
         }
         if box_checked:
             data['reveal_identity'] = 'on'
-        self.form = forms.EditQuestionForm(
+        self.form = forms.EditExerciseForm(
                         data,
-                        question = question,
+                        exercise = exercise,
                         user = editor,
-                        revision = question.get_latest_revision(),
+                        revision = exercise.get_latest_revision(),
                     )
 
     def test_reveal_identity_field(self):
@@ -311,16 +311,16 @@ class UserNameFieldTest(AskbotTestCase):
 
         #TODO: test more things
 
-class AnswerEditorFieldTests(AskbotTestCase):
-    """don't need to test the QuestionEditorFieldTests, b/c the
+class ProblemEditorFieldTests(AskbotTestCase):
+    """don't need to test the ExerciseEditorFieldTests, b/c the
     class is identical"""
     def setUp(self):
-        self.old_min_length = askbot_settings.MIN_ANSWER_BODY_LENGTH
-        askbot_settings.update('MIN_ANSWER_BODY_LENGTH', 10)
-        self.field = forms.AnswerEditorField()
+        self.old_min_length = askbot_settings.MIN_PROBLEM_BODY_LENGTH
+        askbot_settings.update('MIN_PROBLEM_BODY_LENGTH', 10)
+        self.field = forms.ProblemEditorField()
 
     def tearDown(self):
-        askbot_settings.update('MIN_ANSWER_BODY_LENGTH', self.old_min_length)
+        askbot_settings.update('MIN_PROBLEM_BODY_LENGTH', self.old_min_length)
 
     def test_fail_short_body(self):
         self.assertRaises(

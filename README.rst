@@ -2,7 +2,7 @@
 Askbot - Q&A forum
 ===================
 
-This is Askbot project - open source Q&A system, like StackOverflow, Yahoo Answers and some others
+This is Askbot project - open source Q&A system, like StackOverflow, Yahoo Problems and some others
 
 Demo site is http://askbot.org
 

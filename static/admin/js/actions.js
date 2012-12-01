@@ -5,7 +5,7 @@
 		var list_editable_changed = false;
 		checker = function(checked) {
 			if (checked) {
-				showQuestion();
+				showExercise();
 			} else {
 				reset();
 			}
@@ -22,7 +22,7 @@
 			$(options.allToggle).attr("checked", function() {
 				if (sel == actionCheckboxes.length) {
 					value = true;
-					showQuestion();
+					showExercise();
 				} else {
 					value = false;
 					clearAcross();
@@ -30,21 +30,21 @@
 				return value;
 			});
 		}
-		showQuestion = function() {
+		showExercise = function() {
 			$(options.acrossClears).hide();
-			$(options.acrossQuestions).show();
+			$(options.acrossExercises).show();
 			$(options.allContainer).hide();
 		}
 		showClear = function() {
 			$(options.acrossClears).show();
-			$(options.acrossQuestions).hide();
+			$(options.acrossExercises).hide();
 			$(options.actionContainer).toggleClass(options.selectedClass);
 			$(options.allContainer).show();
 			$(options.counterContainer).hide();
 		}
 		reset = function() {
 			$(options.acrossClears).hide();
-			$(options.acrossQuestions).hide();
+			$(options.acrossExercises).hide();
 			$(options.allContainer).hide();
 			$(options.counterContainer).show();
 		}
@@ -67,7 +67,7 @@
 			checker($(this).attr("checked"));
 			updateCounter();
 		});
-		$("div.actions span.question a").click(function(event) {
+		$("div.actions span.exercise a").click(function(event) {
 			event.preventDefault();
 			$(options.acrossInput).val(1);
 			showClear();
@@ -131,7 +131,7 @@
 		counterContainer: "span.action-counter",
 		allContainer: "div.actions span.all",
 		acrossInput: "div.actions input.select-across",
-		acrossQuestions: "div.actions span.question",
+		acrossExercises: "div.actions span.exercise",
 		acrossClears: "div.actions span.clear",
 		allToggle: "#action-toggle",
 		selectedClass: "selected"

@@ -219,7 +219,7 @@ class DomainNameField(forms.CharField):
 
 
 class TitleField(forms.CharField):
-    """Fild receiving question title"""
+    """Fild receiving exercise title"""
     def __init__(self, *args, **kwargs):
         super(TitleField, self).__init__(*args, **kwargs)
         self.required = kwargs.get('required', True)
@@ -229,7 +229,7 @@ class TitleField(forms.CharField):
         self.max_length = 255
         self.label = _('title')
         self.help_text = _(
-            'please enter a descriptive title for your question'
+            'please enter a descriptive title for your exercise'
         )
         self.initial = ''
 
@@ -267,7 +267,7 @@ class TitleField(forms.CharField):
 
 class EditorField(forms.CharField):
     """EditorField is subclassed by the
-    :class:`QuestionEditorField` and :class:`AnswerEditorField`
+    :class:`ExerciseEditorField` and :class:`ProblemEditorField`
     """
     length_error_template_singular = 'post content must be > %d character',
     length_error_template_plural = 'post content must be > %d characters',
@@ -299,26 +299,26 @@ class EditorField(forms.CharField):
         return value
 
 
-class QuestionEditorField(EditorField):
-    """Editor field for the questions"""
+class ExerciseEditorField(EditorField):
+    """Editor field for the exercises"""
 
     def __init__(self, *args, **kwargs):
-        super(QuestionEditorField, self).__init__(*args, **kwargs)
+        super(ExerciseEditorField, self).__init__(*args, **kwargs)
         self.length_error_template_singular = \
-            'question body must be > %d character'
+            'exercise body must be > %d character'
         self.length_error_template_plural = \
-            'question body must be > %d characters'
-        self.min_length = askbot_settings.MIN_QUESTION_BODY_LENGTH
+            'exercise body must be > %d characters'
+        self.min_length = askbot_settings.MIN_EXERCISE_BODY_LENGTH
 
 
-class AnswerEditorField(EditorField):
-    """Editor field for answers"""
+class ProblemEditorField(EditorField):
+    """Editor field for problems"""
 
     def __init__(self, *args, **kwargs):
-        super(AnswerEditorField, self).__init__(*args, **kwargs)
-        self.length_error_template_singular = 'answer must be > %d character'
-        self.length_error_template_plural = 'answer must be > %d characters'
-        self.min_length = askbot_settings.MIN_ANSWER_BODY_LENGTH
+        super(ProblemEditorField, self).__init__(*args, **kwargs)
+        self.length_error_template_singular = 'problem must be > %d character'
+        self.length_error_template_plural = 'problem must be > %d characters'
+        self.min_length = askbot_settings.MIN_PROBLEM_BODY_LENGTH
 
 
 def clean_tag(tag_name):
@@ -438,8 +438,8 @@ class WikiField(forms.BooleanField):
             'many others can edit wiki post)'
         )
         self.help_text = _(
-            'if you choose community wiki option, the question '
-            'and answer do not generate points and name of '
+            'if you choose community wiki option, the exercise '
+            'and problem do not generate points and name of '
             'author will not be shown'
         )
 
@@ -492,24 +492,24 @@ class DumpUploadForm(forms.Form):
     dump_file = forms.FileField()
 
 
-class ShowQuestionForm(forms.Form):
-    """Cleans data necessary to access answers and comments
-    by the respective comment or answer id - necessary
+class ShowExerciseForm(forms.Form):
+    """Cleans data necessary to access problems and comments
+    by the respective comment or problem id - necessary
     when comments would be normally wrapped and/or displayed
-    on the page other than the first page of answers to a question.
-    Same for the answers that are shown on the later pages.
+    on the page other than the first page of problems to a exercise.
+    Same for the problems that are shown on the later pages.
     """
-    answer = forms.IntegerField(required=False)
+    problem = forms.IntegerField(required=False)
     comment = forms.IntegerField(required=False)
     page = forms.IntegerField(required=False)
     sort = forms.CharField(required=False)
 
     def __init__(self, data, default_sort_method):
-        super(ShowQuestionForm, self).__init__(data)
+        super(ShowExerciseForm, self).__init__(data)
         self.default_sort_method = default_sort_method
 
     def get_pruned_data(self):
-        nones = ('answer', 'comment', 'page')
+        nones = ('problem', 'comment', 'page')
         for key in nones:
             if key in self.cleaned_data:
                 if self.cleaned_data[key] is None:
@@ -530,19 +530,19 @@ class ShowQuestionForm(forms.Form):
 
         in_data = self.get_pruned_data()
         out_data = dict()
-        if ('answer' in in_data) ^ ('comment' in in_data):
+        if ('problem' in in_data) ^ ('comment' in in_data):
             out_data['show_page'] = None
-            out_data['answer_sort_method'] = 'votes'
+            out_data['problem_sort_method'] = 'votes'
             out_data['show_comment'] = in_data.get('comment', None)
-            out_data['show_answer'] = in_data.get('answer', None)
+            out_data['show_problem'] = in_data.get('problem', None)
         else:
             out_data['show_page'] = in_data.get('page', 1)
-            out_data['answer_sort_method'] = in_data.get(
+            out_data['problem_sort_method'] = in_data.get(
                                                     'sort',
                                                     self.default_sort_method
                                                 )
             out_data['show_comment'] = None
-            out_data['show_answer'] = None
+            out_data['show_problem'] = None
         self.cleaned_data = out_data
         return out_data
 
@@ -786,14 +786,14 @@ class PostPrivatelyForm(forms.Form, FormWithHideableFields):
         return self.cleaned_data['post_privately']
 
 
-class DraftQuestionForm(forms.Form):
+class DraftExerciseForm(forms.Form):
     """No real validation required for this form"""
     title = forms.CharField(required=False)
     text = forms.CharField(required=False)
     tagnames = forms.CharField(required=False)
 
 
-class DraftAnswerForm(forms.Form):
+class DraftProblemForm(forms.Form):
     """Only thread_id is required"""
     thread_id = forms.IntegerField()
     text = forms.CharField(required=False)
@@ -873,7 +873,7 @@ class PostAsSomeoneForm(forms.Form):
 
 
 class AskForm(PostAsSomeoneForm, PostPrivatelyForm):
-    """the form used to askbot questions
+    """the form used to askbot exercises
     field ask_anonymously is shown to the user if the
     if ALLOW_ASK_ANONYMOUSLY live setting is True
     however, for simplicity, the value will always be present
@@ -888,7 +888,7 @@ class AskForm(PostAsSomeoneForm, PostPrivatelyForm):
         label=_('ask anonymously'),
         help_text=_(
             'Check if you do not want to reveal your name '
-            'when asking this question'
+            'when asking this exercise'
         ),
         required=False,
     )
@@ -900,7 +900,7 @@ class AskForm(PostAsSomeoneForm, PostPrivatelyForm):
     def __init__(self, *args, **kwargs):
         super(AskForm, self).__init__(*args, **kwargs)
         #it's important that this field is set up dynamically
-        self.fields['text'] = QuestionEditorField()
+        self.fields['text'] = ExerciseEditorField()
         #hide ask_anonymously field
         if askbot_settings.ALLOW_ASK_ANONYMOUSLY is False:
             self.hide_field('ask_anonymously')
@@ -915,19 +915,19 @@ class AskForm(PostAsSomeoneForm, PostPrivatelyForm):
 
 ASK_BY_EMAIL_SUBJECT_HELP = _(
     'Subject line is expected in the format: '
-    '[tag1, tag2, tag3,...] question title'
+    '[tag1, tag2, tag3,...] exercise title'
 )
 
 #widgetforms
 class AskWidgetForm(forms.Form, FormWithHideableFields):
-    '''Simple form with just the title to ask a question'''
+    '''Simple form with just the title to add an exercise'''
 
     title = TitleField()
     ask_anonymously = forms.BooleanField(
         label=_('ask anonymously'),
         help_text=_(
             'Check if you do not want to reveal your name '
-            'when asking this question'
+            'when asking this exercise'
         ),
         required=False,
     )
@@ -937,7 +937,7 @@ class AskWidgetForm(forms.Form, FormWithHideableFields):
         #hide ask_anonymously field
         if not askbot_settings.ALLOW_ASK_ANONYMOUSLY:
             self.hide_field('ask_anonymously')
-        self.fields['text'] = QuestionEditorField()
+        self.fields['text'] = ExerciseEditorField()
         if not include_text:
             self.hide_field('text')
             #hack to make it validate
@@ -969,9 +969,9 @@ class CreateAskWidgetForm(forms.Form, FormWithHideableFields):
         if not askbot_settings.GROUPS_ENABLED:
             self.hide_field('group')
 
-class CreateQuestionWidgetForm(forms.Form, FormWithHideableFields):
+class CreateExerciseWidgetForm(forms.Form, FormWithHideableFields):
     title =  forms.CharField(max_length=100)
-    question_number =  forms.CharField(initial='7')
+    exercise_number =  forms.CharField(initial='7')
     tagnames  =  forms.CharField(label=_('tags'), max_length=50)
     search_query =  forms.CharField(max_length=50, required=False)
     order_by = forms.ChoiceField(
@@ -980,12 +980,12 @@ class CreateQuestionWidgetForm(forms.Form, FormWithHideableFields):
     )
     style = forms.CharField(
         widget=forms.Textarea,
-        initial=const.DEFAULT_QUESTION_WIDGET_STYLE,
+        initial=const.DEFAULT_EXERCISE_WIDGET_STYLE,
         required=False
     )
 
     def __init__(self, *args, **kwargs):
-        super(CreateQuestionWidgetForm, self).__init__(*args, **kwargs)
+        super(CreateExerciseWidgetForm, self).__init__(*args, **kwargs)
         self.fields['tagnames'] = TagNamesField()
         self.fields['group'] = forms.ModelChoiceField(
             queryset=get_groups().exclude(name__startswith='_internal'),
@@ -994,11 +994,11 @@ class CreateQuestionWidgetForm(forms.Form, FormWithHideableFields):
 
 class AskByEmailForm(forms.Form):
     """:class:`~askbot.forms.AskByEmailForm`
-    validates question data, where question was posted
+    validates exercise data, where exercise was posted
     by email.
 
     It is ivoked by the management command
-    :mod:`~askbot.management.commands.post_emailed_questions`
+    :mod:`~askbot.management.commands.post_emailed_exercises`
 
     Input is text data with attributes:
 
@@ -1008,9 +1008,9 @@ class AskByEmailForm(forms.Form):
 
     Cleaned values are:
     * ``email`` - email address
-    * ``title`` - question title
+    * ``title`` - exercise title
     * ``tagnames`` - tag names all in one string
-    * ``body_text`` - body of question text -
+    * ``body_text`` - body of exercise text -
       a pass-through, no extra validation
     """
     sender = forms.CharField(max_length=255)
@@ -1020,7 +1020,7 @@ class AskByEmailForm(forms.Form):
             'required': ASK_BY_EMAIL_SUBJECT_HELP
         }
     )
-    body_text = QuestionEditorField()
+    body_text = ExerciseEditorField()
 
     def clean_sender(self):
         """Cleans the :attr:`~askbot.forms.AskByEmail.sender` attribute
@@ -1073,8 +1073,8 @@ class AskByEmailForm(forms.Form):
         return self.cleaned_data['subject']
 
 
-class AnswerForm(PostAsSomeoneForm, PostPrivatelyForm):
-    text = AnswerEditorField()
+class ProblemForm(PostAsSomeoneForm, PostPrivatelyForm):
+    text = ProblemEditorField()
     wiki = WikiField()
     openid = forms.CharField(
         required=False, max_length=255,
@@ -1083,10 +1083,10 @@ class AnswerForm(PostAsSomeoneForm, PostPrivatelyForm):
     email_notify = EmailNotifyField(initial=False)
 
     def __init__(self, *args, **kwargs):
-        super(AnswerForm, self).__init__(*args, **kwargs)
-        self.fields['text'] = AnswerEditorField()
+        super(ProblemForm, self).__init__(*args, **kwargs)
+        self.fields['text'] = ProblemEditorField()
         self.fields['email_notify'].widget.attrs['id'] = \
-                                    'question-subscribe-updates'
+                                    'exercise-subscribe-updates'
 
 
 class VoteForm(forms.Form):
@@ -1115,18 +1115,18 @@ class CloseForm(forms.Form):
     reason = forms.ChoiceField(choices=const.CLOSE_REASONS)
 
 
-class RetagQuestionForm(forms.Form):
+class RetagExerciseForm(forms.Form):
     tags = TagNamesField()
 
-    def __init__(self, question, *args, **kwargs):
+    def __init__(self, exercise, *args, **kwargs):
         """initialize the default values"""
-        super(RetagQuestionForm, self).__init__(*args, **kwargs)
-        self.fields['tags'].initial = question.thread.tagnames
+        super(RetagExerciseForm, self).__init__(*args, **kwargs)
+        self.fields['tags'].initial = exercise.thread.tagnames
 
 
 class RevisionForm(forms.Form):
     """
-    Lists revisions of a Question or Answer
+    Lists revisions of a Exercise or Problem
     """
     revision = forms.ChoiceField(
                     widget=forms.Select(
@@ -1150,14 +1150,14 @@ class RevisionForm(forms.Form):
         self.fields['revision'].choices = rev_choices
         self.fields['revision'].initial = latest_revision.revision
 
-class EditQuestionForm(PostAsSomeoneForm, PostPrivatelyForm):
+class EditExerciseForm(PostAsSomeoneForm, PostPrivatelyForm):
     title = TitleField()
     tags = TagNamesField()
     summary = SummaryField()
     wiki = WikiField()
     reveal_identity = forms.BooleanField(
         help_text=_(
-            'You have asked this question anonymously, '
+            'You have asked this exercise anonymously, '
             'if you decide to reveal your identity, please check '
             'this box.'
         ),
@@ -1165,38 +1165,38 @@ class EditQuestionForm(PostAsSomeoneForm, PostPrivatelyForm):
         required=False,
     )
 
-    #todo: this is odd that this form takes question as an argument
+    #todo: this is odd that this form takes exercise as an argument
     def __init__(self, *args, **kwargs):
-        """populate EditQuestionForm with initial data"""
-        self.question = kwargs.pop('question')
+        """populate EditExerciseForm with initial data"""
+        self.exercise = kwargs.pop('exercise')
         self.user = kwargs['user']#preserve for superclass
         revision = kwargs.pop('revision')
-        super(EditQuestionForm, self).__init__(*args, **kwargs)
+        super(EditExerciseForm, self).__init__(*args, **kwargs)
         #it is important to add this field dynamically
-        self.fields['text'] = QuestionEditorField()
+        self.fields['text'] = ExerciseEditorField()
         self.fields['title'].initial = revision.title
         self.fields['text'].initial = revision.text
         self.fields['tags'].initial = revision.tagnames
-        self.fields['wiki'].initial = self.question.wiki
+        self.fields['wiki'].initial = self.exercise.wiki
         #hide the reveal identity field
         if not self.can_stay_anonymous():
             self.hide_field('reveal_identity')
 
     def has_changed(self):
-        if super(EditQuestionForm, self).has_changed():
+        if super(EditExerciseForm, self).has_changed():
             return True
         if askbot_settings.GROUPS_ENABLED:
-            return self.question.is_private() \
+            return self.exercise.is_private() \
                 != self.cleaned_data['post_privately']
         else:
             return False
 
     def can_stay_anonymous(self):
-        """determines if the user cat keep editing the question
+        """determines if the user cat keep editing the exercise
         anonymously"""
         return (askbot_settings.ALLOW_ASK_ANONYMOUSLY
-            and self.question.is_anonymous
-            and self.user.is_owner_of(self.question)
+            and self.exercise.is_anonymous
+            and self.user.is_owner_of(self.exercise)
         )
 
     def clean_reveal_identity(self):
@@ -1205,7 +1205,7 @@ class EditQuestionForm(PostAsSomeoneForm, PostPrivatelyForm):
         edits must be rewritten as not anonymous
         this does not necessarily mean that the edit will be anonymous
 
-        only does real work when question is anonymous
+        only does real work when exercise is anonymous
         based on the following truth table:
 
         is_anon  can  owner  checked  cleaned data
@@ -1220,9 +1220,9 @@ class EditQuestionForm(PostAsSomeoneForm, PostPrivatelyForm):
         +        -     -        -        False
         """
         value = self.cleaned_data['reveal_identity']
-        if self.question.is_anonymous:
+        if self.exercise.is_anonymous:
             if value is True:
-                if self.user.is_owner_of(self.question):
+                if self.user.is_owner_of(self.exercise):
                     #regardless of the ALLOW_ASK_ANONYMOUSLY
                     return True
                 else:
@@ -1231,14 +1231,14 @@ class EditQuestionForm(PostAsSomeoneForm, PostPrivatelyForm):
                     raise forms.ValidationError(
                                 _(
                                     'Sorry, only owner of the anonymous '
-                                    'question can reveal his or her '
+                                    'exercise can reveal his or her '
                                     'identity, please uncheck the '
                                     'box'
                                  )
                              )
             else:
                 can_ask_anon = askbot_settings.ALLOW_ASK_ANONYMOUSLY
-                is_owner = self.user.is_owner_of(self.question)
+                is_owner = self.user.is_owner_of(self.exercise)
                 if can_ask_anon is False and is_owner:
                     self.show_field('reveal_identity')
                     raise forms.ValidationError(
@@ -1246,7 +1246,7 @@ class EditQuestionForm(PostAsSomeoneForm, PostPrivatelyForm):
                             'Sorry, apparently rules have just changed - '
                             'it is no longer possible to ask anonymously. '
                             'Please either check the "reveal identity" box '
-                            'or reload this page and try editing the question '
+                            'or reload this page and try editing the exercise '
                             'again.'
                         )
                     )
@@ -1261,7 +1261,7 @@ class EditQuestionForm(PostAsSomeoneForm, PostPrivatelyForm):
         field edit_anonymously. It relies on correct cleaning
         if the "reveal_identity" field
         """
-        super(EditQuestionForm, self).clean()
+        super(EditExerciseForm, self).clean()
         reveal_identity = self.cleaned_data.get('reveal_identity', False)
         stay_anonymous = False
         if reveal_identity is False and self.can_stay_anonymous():
@@ -1269,24 +1269,24 @@ class EditQuestionForm(PostAsSomeoneForm, PostPrivatelyForm):
         self.cleaned_data['stay_anonymous'] = stay_anonymous
         return self.cleaned_data
 
-class EditAnswerForm(PostAsSomeoneForm, PostPrivatelyForm):
+class EditProblemForm(PostAsSomeoneForm, PostPrivatelyForm):
     summary = SummaryField()
     wiki = WikiField()
 
-    def __init__(self, answer, revision, *args, **kwargs):
-        self.answer = answer
-        super(EditAnswerForm, self).__init__(*args, **kwargs)
+    def __init__(self, problem, revision, *args, **kwargs):
+        self.problem = problem
+        super(EditProblemForm, self).__init__(*args, **kwargs)
         #it is important to add this field dynamically
-        self.fields['text'] = AnswerEditorField()
+        self.fields['text'] = ProblemEditorField()
         self.fields['text'].initial = revision.text
-        self.fields['wiki'].initial = answer.wiki
+        self.fields['wiki'].initial = problem.wiki
 
     def has_changed(self):
-        #todo: this function is almost copy/paste of EditQuestionForm.has_changed()
-        if super(EditAnswerForm, self).has_changed():
+        #todo: this function is almost copy/paste of EditExerciseForm.has_changed()
+        if super(EditProblemForm, self).has_changed():
             return True
         if askbot_settings.GROUPS_ENABLED:
-            return self.answer.is_private() \
+            return self.problem.is_private() \
                 != self.cleaned_data['post_privately']
         else:
             return False
@@ -1434,23 +1434,23 @@ class EmailFeedSettingField(forms.ChoiceField):
 
 class EditUserEmailFeedsForm(forms.Form):
     FORM_TO_MODEL_MAP = {
-        'all_questions': 'q_all',
+        'all_exercises': 'q_all',
         'asked_by_me': 'q_ask',
-        'answered_by_me': 'q_ans',
+        'problemed_by_me': 'q_ans',
         'individually_selected': 'q_sel',
         'mentions_and_comments': 'm_and_c',
     }
     NO_EMAIL_INITIAL = {
-        'all_questions': 'n',
+        'all_exercises': 'n',
         'asked_by_me': 'n',
-        'answered_by_me': 'n',
+        'problemed_by_me': 'n',
         'individually_selected': 'n',
         'mentions_and_comments': 'n',
     }
     INSTANT_EMAIL_INITIAL = {
-        'all_questions': 'i',
+        'all_exercises': 'i',
         'asked_by_me': 'i',
-        'answered_by_me': 'i',
+        'problemed_by_me': 'i',
         'individually_selected': 'i',
         'mentions_and_comments': 'i',
     }
@@ -1458,13 +1458,13 @@ class EditUserEmailFeedsForm(forms.Form):
     asked_by_me = EmailFeedSettingField(
                             label=_('Asked by me')
                         )
-    answered_by_me = EmailFeedSettingField(
-                            label=_('Answered by me')
+    problemed_by_me = EmailFeedSettingField(
+                            label=_('Problemed by me')
                         )
     individually_selected = EmailFeedSettingField(
                             label=_('Individually selected')
                         )
-    all_questions = EmailFeedSettingField(
+    all_exercises = EmailFeedSettingField(
                             label=_('Entire forum (tag filtered)'),
                         )
 
@@ -1507,9 +1507,9 @@ class EditUserEmailFeedsForm(forms.Form):
 
     def set_frequency(self, frequency='n'):
         data = {
-            'all_questions': frequency,
+            'all_exercises': frequency,
             'asked_by_me': frequency,
-            'answered_by_me': frequency,
+            'problemed_by_me': frequency,
             'individually_selected': frequency,
             'mentions_and_comments': frequency
         }
@@ -1623,6 +1623,6 @@ class ModerateTagForm(forms.Form):
         assert(action in ('accept', 'reject'))
         return action
 
-class ShareQuestionForm(forms.Form):
+class ShareExerciseForm(forms.Form):
     thread_id = forms.IntegerField()
     recipient_name = forms.CharField()

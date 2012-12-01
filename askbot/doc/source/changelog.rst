@@ -4,15 +4,15 @@ Changes in Askbot
 Development version
 -------------------
 * Added support of Haystack for search (Adolfo)
-* Added minimum reputation setting to accept any answer as correct (Evgeny)
+* Added minimum reputation setting to accept any problem as correct (Evgeny)
 * Added "VIP" option to groups - if checked, all posts belong to the group and users of that group in the future will be able to moderate those posts. Moderation features for VIP group are in progress (Evgeny)
 * Added setting `NOTIFICATION_DELAY_TIME` to use with enabled celery daemon (Adolfo)
 * Added setting `ASKBOT_INTERNAL_IPS` - to allow anonymous access to 
   closed sites from dedicated IP addresses (Evgeny)
 * Moved default skin from `askbot/skins/default` to simply `askbot` (Evgeny)
-* Repost comment as answer (Adolfo)
-* Question list widget (Adolfo)
-* Ask a question widget (Adolfo)
+* Repost comment as problem (Adolfo)
+* Exercise list widget (Adolfo)
+* Add an exercise widget (Adolfo)
 * Embeddable widget generator (Adolfo)
 * Groups are shown in the dropdown menu in the header (Adolfo)
 * Added group moderation requests to the moderators inboxes (Evgeny)
@@ -22,13 +22,13 @@ Development version
 * Editable optional three level category selector for the tags (Evgeny)
 * Tag editor adding tags as they are typed (Evgeny)
 * Added optional support for unicode slugs (Evgeny)
-* Allow switching comment with answer and answer with question comment (Adolfo)
+* Allow switching comment with problem and problem with exercise comment (Adolfo)
 * Allow user names longer than 30 characters (Evgeny)
 * Option to disable feedback form for the anonymos users (Evgeny)
 * Optional restriction to have confirmed email address to join forum (Evgeny)
 * Optional list of allowed email addresses and email domain name for the new users (Evgeny)
 * Optional support for unicode slugs (Evgeny)
-* Optionally allow limiting one answer per question per person (Evgeny)
+* Optionally allow limiting one problem per exercise per person (Evgeny)
 * Added management command `build_livesettings_cache` (Adolfo)
 * Administrators can post under fictional user accounts without logging out (jtrain, Evgeny)
 * Welcome email for the case when replying by email is enabled (Evgeny)
@@ -37,7 +37,7 @@ Development version
   to help prevent user profile spam (Evgeny)
 * Added a function to create a custom user profile tab,
   the feature requires access to the server (Evgeny)
-* Added optional top banner to the question page (Evgeny)
+* Added optional top banner to the exercise page (Evgeny)
 * Made "bootstrap mode" default and created instead "large site mode" (Evgeny)
 * Added interesting/ignored/subscribed tags to the user profile page (Paul Backhouse, Evgeny)
 
@@ -72,7 +72,7 @@ Development version
 * Added a management delete_contextless_badge_award_activities (Evgeny)
 * Fixed a file upload issue in FF and IE found by jerry_gzy (Evgeny)
 * Added test on maximum length of title working for utf-8 text (Evgeny)
-* Added caching and invalidation to the question page (Evgeny)
+* Added caching and invalidation to the exercise page (Evgeny)
 * Added a management command delete_contextless_activities (Evgeny)
 * LDAP login configuration (github user `monkut <https://github.com/monkut>`_)
 * Check order of middleware classes (Daniel Mican)
@@ -92,7 +92,7 @@ Development version
 
 0.7.37 (Jan 8, 2012)
 --------------------
-* added basic slugification treatment to question titles with 
+* added basic slugification treatment to exercise titles with 
   ``ALLOW_UNICODE_SLUGS = True`` (Evgeny)
 * added verification of the project directory name to
   make sure it does not contain a `.` (dot) symbol (Evgeny)
@@ -100,8 +100,8 @@ Development version
   that may be used for other projects (Evgeny)
 * added more rigorous test for the user name to make it slug safe (Evgeny)
 * made setting `ASKBOT_FILE_UPLOAD_DIR` work (Radim Řehůřek)
-* added minimal length of question title ond body
-  text to live settings and allowed body-less questions (Radim Řehůřek, Evgeny)
+* added minimal length of exercise title ond body
+  text to live settings and allowed body-less exercises (Radim Řehůřek, Evgeny)
 * allowed disabling use of gravatar site-wide (Rosandra Cuello Suñol)
 * when internal login app is disabled - links to login/logout/add-remove-login-methods are gone (Evgeny)
 * replaced setting `ASKBOT_FILE_UPLOAD_DIR` with django's `MEDIA_ROOT` (Evgeny)
@@ -126,7 +126,7 @@ Development version
 0.7.33 (Dec 6, 2011)
 --------------------
 * Made on log in redirect to the forum index page by default
-  and to the question page, if user was reading the question
+  and to the exercise page, if user was reading the exercise
   it is still possible to override the ``next`` url parameter
   or just rely on django's ``LOGIN_REDIRECT_URL`` (Evgeny)
 * Implemented retraction of offensive flags (Dejan Noveski)
@@ -140,7 +140,7 @@ Development version
 ---------------------
 * Added ``askbot_create_test_fixture`` management command (Dejan Noveski)
 * Integrated new test fixture into the page load test cases (Dejan Noveski)
-* Added an embeddable widget for the questions list matching tags (Daniel Mican, Evgeny Fadeev, Dejan Noveski)
+* Added an embeddable widget for the exercises list matching tags (Daniel Mican, Evgeny Fadeev, Dejan Noveski)
 
 0.7.30 (Nov 28, 2011)
 ---------------------
@@ -151,10 +151,10 @@ Note: some of these features were added in one of the three previous versions.
 * Show unused vote count (Tomasz Zielinski)
 * Categorized live settings (Evgeny)
 * Merge users management command (Daniel Mican)
-* Added management command ``send_accept_answer_reminders`` (Evgeny)
+* Added management command ``send_accept_problem_reminders`` (Evgeny)
 * Improved the ``askbot-setup`` script (Adolfo, Evgeny)
 * Merge users management command (Daniel Mican)
-* Anonymous caching of the question page (Vlad Bokov)
+* Anonymous caching of the exercise page (Vlad Bokov)
 * Fixed sharing button bug, css fixes for new template (Alexander Werner)
 * Added ASKBOT_TRANSLATE_URL setting for url localization(Alexander Werner)
 * Changed javascript translation model, moved from jqueryi18n to django (Rosandra Cuello Suñol)
@@ -176,13 +176,13 @@ For these versions we did not keep consistent record of features.
 * Added settings for email subscription defaults (Adolfo)
 * Resolved `bug #102<http://bugs.askbot.org/issues/102>`_ - duplicate notifications on posts with mentions (Evegeny)
 * Added color-animated transitions when urls with hash tags are visited (Adolfo)
-* Repository tags will be `automatically added <http://askbot.org/en/question/345/can-git-tags-be-created-for-each-of-the-releases>`_ to new releases (Evgeny, suggsted by ajmirsky)
+* Repository tags will be `automatically added <http://askbot.org/en/exercise/345/can-git-tags-be-created-for-each-of-the-releases>`_ to new releases (Evgeny, suggsted by ajmirsky)
 
 0.7.25 (Oct 5 2011)
 -------------------
-* RSS feed for individual question (Sayan Chowdhury)
-* Allow pre-population of tags via ask a questions link (Adolfo)
-* Make answering own question one click harder (Adolfo)
+* RSS feed for individual exercise (Sayan Chowdhury)
+* Allow pre-population of tags via add an exercises link (Adolfo)
+* Make probleming own exercise one click harder (Adolfo)
 * Bootstrap mode (Adolfo, Evgeny)
 * Color-animated urls with the hash fragments (Adolfo)
 
@@ -226,17 +226,17 @@ This version was skipped
 
 0.7.19
 ------
-* Changed the Favorite question function for Follow question.
+* Changed the Favorite exercise function for Follow exercise.
 * Fixed issues with page load time.
 * Added notify me checkbox to the sidebar.
 * Removed MySql dependency from setup.py
 * Fixed Facebook login.
-* `Fixed "Moderation tab is misaligned" issue reported by methner. <http://askbot.org/en/question/587/moderation-tab-is-misaligned-fixed>`_
+* `Fixed "Moderation tab is misaligned" issue reported by methner. <http://askbot.org/en/exercise/587/moderation-tab-is-misaligned-fixed>`_
 * Fixed bug in follow users and changed the follow button design.
 
 0.7.18
 ------
-* `Added multiple capitalization to username mentions(reported by niles) <http://askbot.org/en/question/580/allow-alternate-capitalizations-in-user-links>`_
+* `Added multiple capitalization to username mentions(reported by niles) <http://askbot.org/en/exercise/580/allow-alternate-capitalizations-in-user-links>`_
 
 0.7.17
 ------
@@ -247,7 +247,7 @@ This version was skipped
 ------
 * Admins can add aministrators too.
 * Added a postgres driver version check in the start procedures due to a bug in psycopg2 2.4.2.
-* New inbox system style (`bug reported by Tomasz P. Szynalski <http://askbot.org/en/question/470/answerscomments-are-listed-twice-in-the-inbox>`_).
+* New inbox system style (`bug reported by Tomasz P. Szynalski <http://askbot.org/en/exercise/470/problemscomments-are-listed-twice-in-the-inbox>`_).
 
 0.7.15
 ------

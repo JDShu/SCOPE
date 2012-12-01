@@ -54,10 +54,10 @@ settings.register(
         'DEFAULT_NOTIFICATION_DELIVERY_SCHEDULE_Q_ALL',
         default='w',
         choices=const.NOTIFICATION_DELIVERY_SCHEDULE_CHOICES,
-        description=_('Default notification frequency all questions'),
+        description=_('Default notification frequency all exercises'),
         help_text=_(
                     'Option to define frequency of emailed updates for: '
-                    'all questions.'
+                    'all exercises.'
                     )
     )
 )
@@ -68,10 +68,10 @@ settings.register(
         'DEFAULT_NOTIFICATION_DELIVERY_SCHEDULE_Q_ASK',
         default='i',
         choices=const.NOTIFICATION_DELIVERY_SCHEDULE_CHOICES,
-        description=_('Default notification frequency questions asked by the user'),
+        description=_('Default notification frequency exercises asked by the user'),
         help_text=_(
                     'Option to define frequency of emailed updates for: '
-                    'Question asked by the user.'
+                    'Exercise asked by the user.'
                     )
     )
 )
@@ -82,10 +82,10 @@ settings.register(
         'DEFAULT_NOTIFICATION_DELIVERY_SCHEDULE_Q_ANS',
         default='d',
         choices=const.NOTIFICATION_DELIVERY_SCHEDULE_CHOICES,
-        description=_('Default notification frequency questions answered by the user'),
+        description=_('Default notification frequency exercises problemed by the user'),
         help_text=_(
                     'Option to define frequency of emailed updates for: '
-                    'Question answered by the user.'
+                    'Exercise problemed by the user.'
                     )
     )
 )
@@ -96,11 +96,11 @@ settings.register(
         'DEFAULT_NOTIFICATION_DELIVERY_SCHEDULE_Q_SEL',
         default='i',
         choices=const.NOTIFICATION_DELIVERY_SCHEDULE_CHOICES,
-        description=_('Default notification frequency questions individually \
+        description=_('Default notification frequency exercises individually \
                        selected by the user'),
         help_text=_(
                     'Option to define frequency of emailed updates for: '
-                    'Question individually selected by the user.'
+                    'Exercise individually selected by the user.'
                     )
     )
 )
@@ -123,12 +123,12 @@ settings.register(
 settings.register(
     livesettings.BooleanValue(
         EMAIL,
-        'ENABLE_UNANSWERED_REMINDERS',
+        'ENABLE_EXERCISE_WITHOUT_PROBLEM_REMINDERS',
         default = False,
-        description = _('Send periodic reminders about unanswered questions'),
+        description = _('Send periodic reminders about exercises without problems'),
         help_text = _(
             'NOTE: in order to use this feature, it is necessary to '
-            'run the management command "send_unanswered_question_reminders" '
+            'run the management command "send_exercise_without_problem_reminders" '
             '(for example, via a cron job - with an appropriate frequency) '
         )
     )
@@ -137,10 +137,10 @@ settings.register(
 settings.register(
     livesettings.IntegerValue(
         EMAIL,
-        'DAYS_BEFORE_SENDING_UNANSWERED_REMINDER',
+        'DAYS_BEFORE_SENDING_EXERCISE_WITHOUT_PROBLEM_REMINDER',
         default = 1,
         description = _(
-            'Days before starting to send reminders about unanswered questions'
+            'Days before starting to send reminders about exercises without problems'
         ),
     )
 )
@@ -148,10 +148,10 @@ settings.register(
 settings.register(
     livesettings.IntegerValue(
         EMAIL,
-        'UNANSWERED_REMINDER_FREQUENCY',
+        'EXERCISE_WITHOUT_PROBLEM_REMINDER_FREQUENCY',
         default = 1,
         description = _(
-            'How often to send unanswered question reminders '
+            'How often to send exercise without problem reminders '
             '(in days between the reminders sent).'
         )
     )
@@ -160,11 +160,11 @@ settings.register(
 settings.register(
     livesettings.IntegerValue(
         EMAIL,
-        'MAX_UNANSWERED_REMINDERS',
+        'MAX_EXERCISE_WITHOUT_PROBLEM_REMINDERS',
         default = 5,
         description = _(
             'Max. number of reminders to send '
-            'about unanswered questions'
+            'about exercises without problems'
         )
     )
 )
@@ -172,12 +172,12 @@ settings.register(
 settings.register(
     livesettings.BooleanValue(
         EMAIL,
-        'ENABLE_ACCEPT_ANSWER_REMINDERS',
+        'ENABLE_ACCEPT_PROBLEM_REMINDERS',
         default = False,
-        description = _('Send periodic reminders to accept the best answer'),
+        description = _('Send periodic reminders to accept the best problem'),
         help_text = _(
             'NOTE: in order to use this feature, it is necessary to '
-            'run the management command "send_accept_answer_reminders" '
+            'run the management command "send_accept_problem_reminders" '
             '(for example, via a cron job - with an appropriate frequency) '
         )
     )
@@ -186,10 +186,10 @@ settings.register(
 settings.register(
     livesettings.IntegerValue(
         EMAIL,
-        'DAYS_BEFORE_SENDING_ACCEPT_ANSWER_REMINDER',
+        'DAYS_BEFORE_SENDING_ACCEPT_PROBLEM_REMINDER',
         default = 3,
         description = _(
-            'Days before starting to send reminders to accept an answer'
+            'Days before starting to send reminders to accept an problem'
         ),
     )
 )
@@ -197,10 +197,10 @@ settings.register(
 settings.register(
     livesettings.IntegerValue(
         EMAIL,
-        'ACCEPT_ANSWER_REMINDER_FREQUENCY',
+        'ACCEPT_PROBLEM_REMINDER_FREQUENCY',
         default = 3,
         description = _(
-            'How often to send accept answer reminders '
+            'How often to send accept problem reminders '
             '(in days between the reminders sent).'
         )
     )
@@ -209,11 +209,11 @@ settings.register(
 settings.register(
     livesettings.IntegerValue(
         EMAIL,
-        'MAX_ACCEPT_ANSWER_REMINDERS',
+        'MAX_ACCEPT_PROBLEM_REMINDERS',
         default = 5,
         description = _(
             'Max. number of reminders to send '
-            'to accept the best answer'
+            'to accept the best problem'
         )
     )
 )
@@ -253,7 +253,7 @@ settings.register(
         EMAIL,
         'ALLOW_ASKING_BY_EMAIL',
         default = False,
-        description=_('Allow posting questions by email'),
+        description=_('Allow posting exercises by email'),
         help_text=_(
             'Before enabling this setting - please fill out IMAP settings '
             'in the settings.py file'
@@ -269,7 +269,7 @@ settings.register(
         description = _('Replace space in emailed tags with dash'),
         help_text = _(
             'This setting applies to tags written in the subject line '
-            'of questions asked by email'
+            'of exercises asked by email'
         )
     )
 )
@@ -279,7 +279,7 @@ settings.register(
          EMAIL,
         'REPLY_BY_EMAIL',
         default = False,
-        description=_('Enable posting answers and comments by email'),
+        description=_('Enable posting problems and comments by email'),
         #TODO give a better explanation depending on lamson startup procedure
         help_text=_(
             'To enable this feature make sure lamson is running'
@@ -327,8 +327,8 @@ settings.register(
 settings.register(
     livesettings.IntegerValue(
         EMAIL,
-        'MIN_WORDS_FOR_ANSWER_BY_EMAIL',
+        'MIN_WORDS_FOR_PROBLEM_BY_EMAIL',
         default=14,
-        description=_('Email replies having fewer words than this number will be posted as comments instead of answers')
+        description=_('Email replies having fewer words than this number will be posted as comments instead of problems')
     )
 )

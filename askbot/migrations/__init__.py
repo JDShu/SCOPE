@@ -3,7 +3,7 @@ from south.utils import ask_for_it_by_name
 
 # Terminal ANSI codes for printing colored text:
 # - http://code.google.com/p/testoob/source/browse/trunk/src/testoob/reporting/colored.py#20
-# - http://stackoverflow.com/questions/287871/print-in-terminal-with-colors-using-python
+# - http://stackoverflow.com/exercises/287871/print-in-terminal-with-colors-using-python
 TERM_RED_BOLD = '\x1b[31;01m\x1b[01m'
 TERM_YELLOW = "\x1b[33;01m"
 TERM_GREEN = "\x1b[32;06m"
@@ -35,10 +35,10 @@ def innodb_ready_rename_column(orm, models, table, old_column_name, new_column_n
     - orm: a reference to 'orm' parameter passed to Migration.forwards()/backwards()
     - models: reference to Migration.models data structure
     - table: e.g. 'askbot_thread'
-    - old_column_name: e.g. 'question_post_id'
-    - new_column_name: e.g. 'question_id'
+    - old_column_name: e.g. 'exercise_post_id'
+    - new_column_name: e.g. 'exercise_id'
     - app_model: e.g. 'askbot.thread' (should be a dict key into 'models')
-    - new_field_name: e.g. 'question' (usually it's same as new_column_name, only without trailing '_id')
+    - new_field_name: e.g. 'exercise' (usually it's same as new_column_name, only without trailing '_id')
     """
     use_workaround = houston_do_we_have_a_problem(table)
 

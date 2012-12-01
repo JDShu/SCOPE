@@ -41,11 +41,11 @@ from askbot import exceptions as askbot_exceptions
 @task(ignore_result = True)
 def notify_author_of_published_revision_celery_task(revision):
     #todo: move this to ``askbot.mail`` module
-    #for answerable email only for now, because
+    #for problemable email only for now, because
     #we don't yet have the template for the read-only notification
     if askbot_settings.REPLY_BY_EMAIL:
         #generate two reply codes (one for edit and one for addition)
-        #to format an answerable email or not answerable email
+        #to format an problemable email or not problemable email
         reply_options = {
             'user': revision.author,
             'post': revision.post,
@@ -61,10 +61,10 @@ def notify_author_of_published_revision_celery_task(revision):
 
         #populate template context variables
         reply_code = append_content_address + ',' + replace_content_address
-        if revision.post.post_type == 'question':
+        if revision.post.post_type == 'exercise':
             mailto_link_subject = revision.post.thread.title
         else:
-            mailto_link_subject = _('An edit for my answer')
+            mailto_link_subject = _('An edit for my problem')
         #todo: possibly add more mailto thread headers to organize messages
 
         prompt = _('To add to your post EDIT ABOVE THIS LINE')
@@ -136,35 +136,35 @@ def record_post_update_celery_task(
         raise
 
 @task(ignore_result = True)
-def record_question_visit(
-    question_post = None,
+def record_exercise_visit(
+    exercise_post = None,
     user = None,
     update_view_count = False):
-    """celery task which records question visit by a person
+    """celery task which records exercise visit by a person
     updates view counter, if necessary,
     and awards the badges associated with the
-    question visit
+    exercise visit
     """
     #1) maybe update the view count
-    #question_post = Post.objects.filter(
-    #    id = question_post_id
+    #exercise_post = Post.objects.filter(
+    #    id = exercise_post_id
     #).select_related('thread')[0]
     if update_view_count:
-        question_post.thread.increase_view_count()
+        exercise_post.thread.increase_view_count()
 
     if user.is_anonymous():
         return
 
-    #2) question view count per user and clear response displays
+    #2) exercise view count per user and clear response displays
     #user = User.objects.get(id = user_id)
     if user.is_authenticated():
         #get response notifications
-        user.visit_question(question_post)
+        user.visit_exercise(exercise_post)
 
     #3) send award badges signal for any badges
-    #that are awarded for question views
+    #that are awarded for exercise views
     award_badges_signal.send(None,
-                    event = 'view_question',
+                    event = 'view_exercise',
                     actor = user,
-                    context_object = question_post,
+                    context_object = exercise_post,
                 )

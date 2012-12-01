@@ -52,7 +52,7 @@
     /*<![CDATA[*/
     $(document).ready(function(){
         // focus input on the search bar endcomment
-        {% if active_tab in ('users', 'questions', 'tags') %}
+        {% if active_tab in ('users', 'exercises', 'tags') %}
             $('#keywords').focus();
         {% elif active_tab == 'ask' %}
             $('#id_title').focus();

@@ -17,7 +17,7 @@ settings.register(
         SOCIAL_SHARING,
         'ENABLE_SHARING_TWITTER',
         default=True,
-        description=_('Check to enable sharing of questions on Twitter')
+        description=_('Check to enable sharing of exercises on Twitter')
     )
 )
 
@@ -26,7 +26,7 @@ settings.register(
         SOCIAL_SHARING,
         'ENABLE_SHARING_FACEBOOK',
         default=True,
-        description=_('Check to enable sharing of questions on Facebook')
+        description=_('Check to enable sharing of exercises on Facebook')
     )
 )
 
@@ -35,7 +35,7 @@ settings.register(
         SOCIAL_SHARING,
         'ENABLE_SHARING_LINKEDIN',
         default=True,
-        description=_('Check to enable sharing of questions on LinkedIn')
+        description=_('Check to enable sharing of exercises on LinkedIn')
     )
 )
 
@@ -44,7 +44,7 @@ settings.register(
         SOCIAL_SHARING,
         'ENABLE_SHARING_IDENTICA',
         default=True,
-        description=_('Check to enable sharing of questions on Identi.ca')
+        description=_('Check to enable sharing of exercises on Identi.ca')
     )
 )
 
@@ -53,6 +53,6 @@ settings.register(
         SOCIAL_SHARING,
         'ENABLE_SHARING_GOOGLE',
         default=True,
-        description=_('Check to enable sharing of questions on Google+')
+        description=_('Check to enable sharing of exercises on Google+')
     )
 )

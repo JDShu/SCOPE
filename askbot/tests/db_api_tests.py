@@ -26,20 +26,20 @@ class DBApiTests(AskbotTestCase):
     def setUp(self):
         self.create_user()
         self.create_user(username = 'other_user')
-        self.question = self.post_question()
+        self.exercise = self.post_exercise()
         self.now = datetime.datetime.now()
 
-    def post_answer(self, user = None, question = None):
+    def post_problem(self, user = None, exercise = None):
         if user is None:
             user = self.user
-        if question is None:
-            question = self.question
+        if exercise is None:
+            exercise = self.exercise
 
-        self.answer = super(DBApiTests, self).post_answer(
+        self.problem = super(DBApiTests, self).post_problem(
                                                 user = user,
-                                                question = question,
+                                                exercise = exercise,
                                             )
-        return self.answer
+        return self.problem
 
     def assert_post_is_deleted(self, post):
         self.assertTrue(post.deleted == True)
@@ -52,31 +52,31 @@ class DBApiTests(AskbotTestCase):
         self.assertTrue(post.deleted_at == None)
 
     def test_blank_tags_impossible(self):
-        self.post_question(tags='')
+        self.post_exercise(tags='')
         self.assertEqual(
             models.Tag.objects.filter(name='').count(),
             0
         )
 
-    def test_flag_question(self):
+    def test_flag_exercise(self):
         self.user.set_status('m')
-        self.user.flag_post(self.question)
+        self.user.flag_post(self.exercise)
         self.assertEquals(
             self.user.get_flags().count(),
             1
         )
 
-    def test_flag_answer(self):
-        self.post_answer()
+    def test_flag_problem(self):
+        self.post_problem()
         self.user.set_status('m')
-        self.user.flag_post(self.answer)
+        self.user.flag_post(self.problem)
         self.assertEquals(
             self.user.get_flags().count(),
             1
         )
 
-    def ask_anonymous_question(self):
-        q = self.user.post_question(
+    def ask_anonymous_exercise(self):
+        q = self.user.post_exercise(
                         is_anonymous = True,
                         body_text = 'hahahah',
                         title = 'aouaouaosuoa',
@@ -84,41 +84,41 @@ class DBApiTests(AskbotTestCase):
                     )
         return self.reload_object(q)
 
-    def test_user_cannot_post_two_answers(self):
-        question = self.post_question(user=self.user)
-        answer = self.post_answer(question=question, user=self.user)
+    def test_user_cannot_post_two_problems(self):
+        exercise = self.post_exercise(user=self.user)
+        problem = self.post_problem(exercise=exercise, user=self.user)
         self.assertRaises(
-            askbot_exceptions.AnswerAlreadyGiven,
-            self.post_answer,
-            question=question,
+            askbot_exceptions.ProblemAlreadyGiven,
+            self.post_problem,
+            exercise=exercise,
             user=self.user
         )
 
-    def test_user_can_post_answer_after_deleting_one(self):
-        question = self.post_question(user=self.user)
-        answer = self.post_answer(question=question, user=self.user)
-        self.user.delete_answer(answer=answer)
-        answer2 = self.post_answer(question=question, user=self.user)
-        answers = question.thread.get_answers(user=self.user)
-        self.assertEqual(answers.count(), 1)
-        self.assertEqual(answers[0], answer2)
+    def test_user_can_post_problem_after_deleting_one(self):
+        exercise = self.post_exercise(user=self.user)
+        problem = self.post_problem(exercise=exercise, user=self.user)
+        self.user.delete_problem(problem=problem)
+        problem2 = self.post_problem(exercise=exercise, user=self.user)
+        problems = exercise.thread.get_problems(user=self.user)
+        self.assertEqual(problems.count(), 1)
+        self.assertEqual(problems[0], problem2)
 
-    def test_post_anonymous_question(self):
-        q = self.ask_anonymous_question()
+    def test_post_anonymous_exercise(self):
+        q = self.ask_anonymous_exercise()
         self.assertTrue(q.is_anonymous)
         rev = q.revisions.all()[0]
         self.assertTrue(rev.is_anonymous)
 
-    def test_post_unicode_question(self):
+    def test_post_unicode_exercise(self):
         """there was a bug that caused this to raise a db error"""
-        self.user.post_question(
+        self.user.post_exercise(
             tags=u'\u043c\u043e\u0440\u0435',
             body_text=u'\u041f\u043e\u0447\u0435\u043c\u0443 \u043c\u043e\u0440\u0435 \u0441\u0438\u043d\u0435\u0435? \u043e\u043f\u044f\u0442\u044c \u0436\u0435, \u0431\u044b\u043b\u043e \u0431\u044b \u043f\u0440\u0430\u043a\u0442\u0438\u0447\u043d\u0435\u0435 \u0435\u0441\u043b\u0438 \u0431\u044b \u043e\u043d\u043e \u0431\u044b\u043b\u043e \u043f\u0440\u043e\u0437\u0440\u0430\u0447\u043d\u043e\u0435, \u043c\u043e\u0436\u043d\u043e \u0431\u044b\u043b\u043e \u0441\u0440\u0430\u0437\u0443 \u0440\u0430\u0437\u0433\u043b\u044f\u0434\u0435\u0442\u044c \u0434\u043d\u043e.',
             title=u'\u041f\u043e\u0447\u0435\u043c\u0443 \u043c\u043e\u0440\u0435 \u0441\u0438\u043d\u0435\u0435?'
         )
 
-    def test_post_bodyless_question(self):
-        q = self.user.post_question(
+    def test_post_bodyless_exercise(self):
+        q = self.user.post_exercise(
             body_text = '',
             title = 'aeuaouaousaotuhao',
             tags = 'test'
@@ -126,11 +126,11 @@ class DBApiTests(AskbotTestCase):
         self.assertEquals(q.text.strip(), '')
 
     def test_reveal_asker_identity(self):
-        q = self.ask_anonymous_question()
+        q = self.ask_anonymous_exercise()
         self.other_user.set_status('m')
         self.other_user.save()
-        self.other_user.edit_question(
-                            question = q,
+        self.other_user.edit_exercise(
+                            exercise = q,
                             title = 'hahah',
                             body_text = 'hoeuaoea',
                             tags = 'aoeuaoeu',
@@ -142,55 +142,55 @@ class DBApiTests(AskbotTestCase):
         for rev in q.revisions.all():
             self.assertFalse(rev.is_anonymous)
 
-    def test_accept_best_answer(self):
-        self.post_answer(user = self.other_user)
-        self.user.accept_best_answer(self.answer)
+    def test_accept_best_problem(self):
+        self.post_problem(user = self.other_user)
+        self.user.accept_best_problem(self.problem)
 
-    def test_delete_question(self):
-        self.user.delete_question(self.question)
-        self.assert_post_is_deleted(self.question)
+    def test_delete_exercise(self):
+        self.user.delete_exercise(self.exercise)
+        self.assert_post_is_deleted(self.exercise)
 
-    def test_restore_question(self):
-        self.question.deleted = True
-        self.question.deleted_by = self.user
-        self.question.deleted_at = self.now
-        self.question.save()
-        self.user.restore_post(self.question)
-        self.assert_post_is_not_deleted(self.question)
+    def test_restore_exercise(self):
+        self.exercise.deleted = True
+        self.exercise.deleted_by = self.user
+        self.exercise.deleted_at = self.now
+        self.exercise.save()
+        self.user.restore_post(self.exercise)
+        self.assert_post_is_not_deleted(self.exercise)
 
-    def test_delete_answer(self):
-        self.post_answer(question = self.question)
-        self.user.delete_answer(self.answer)
-        self.assert_post_is_deleted(self.answer)
-        saved_question = models.Post.objects.get_questions().get(id = self.question.id)
-        self.assertEquals(0, saved_question.thread.answer_count)
+    def test_delete_problem(self):
+        self.post_problem(exercise = self.exercise)
+        self.user.delete_problem(self.problem)
+        self.assert_post_is_deleted(self.problem)
+        saved_exercise = models.Post.objects.get_exercises().get(id = self.exercise.id)
+        self.assertEquals(0, saved_exercise.thread.problem_count)
 
-    def test_restore_answer(self):
-        self.post_answer()
-        self.answer.deleted = True
-        self.answer.deleted_by = self.user
-        self.answer.deleted_at = self.now
-        self.answer.save()
-        self.user.restore_post(self.answer)
-        self.assert_post_is_not_deleted(self.answer)
+    def test_restore_problem(self):
+        self.post_problem()
+        self.problem.deleted = True
+        self.problem.deleted_by = self.user
+        self.problem.deleted_at = self.now
+        self.problem.save()
+        self.user.restore_post(self.problem)
+        self.assert_post_is_not_deleted(self.problem)
 
-    def test_delete_question_with_answer_by_other(self):
-        self.post_answer(user = self.other_user)
-        self.user.delete_question(self.question)
-        self.assert_post_is_deleted(self.question)
-        answer_count = self.question.thread.get_answers(user = self.user).count()
-        answer = self.question.thread.posts.get_answers()[0]
-        self.assert_post_is_not_deleted(answer)
-        self.assertTrue(answer_count == 1)
-        saved_question = models.Post.objects.get_questions().get(id = self.question.id)
-        self.assertTrue(saved_question.thread.answer_count == 1)
+    def test_delete_exercise_with_problem_by_other(self):
+        self.post_problem(user = self.other_user)
+        self.user.delete_exercise(self.exercise)
+        self.assert_post_is_deleted(self.exercise)
+        problem_count = self.exercise.thread.get_problems(user = self.user).count()
+        problem = self.exercise.thread.posts.get_problems()[0]
+        self.assert_post_is_not_deleted(problem)
+        self.assertTrue(problem_count == 1)
+        saved_exercise = models.Post.objects.get_exercises().get(id = self.exercise.id)
+        self.assertTrue(saved_exercise.thread.problem_count == 1)
 
     def test_unused_tag_is_auto_deleted(self):
-        self.user.retag_question(self.question, tags = 'one-tag')
+        self.user.retag_exercise(self.exercise, tags = 'one-tag')
         tag = models.Tag.objects.get(name='one-tag')
         self.assertEquals(tag.used_count, 1)
         self.assertEquals(tag.deleted, False)
-        self.user.retag_question(self.question, tags = 'two-tag')
+        self.user.retag_exercise(self.exercise, tags = 'two-tag')
 
         count = models.Tag.objects.filter(name='one-tag').count()
         self.assertEquals(count, 0)
@@ -198,28 +198,28 @@ class DBApiTests(AskbotTestCase):
     @with_settings(MAX_TAG_LENGTH=200, MAX_TAGS_PER_POST=50)
     def test_retag_tags_too_long_raises(self):
         tags = "aoaoesuouooeueooeuoaeuoeou aostoeuoaethoeastn oasoeoa nuhoasut oaeeots aoshootuheotuoehao asaoetoeatuoasu o  aoeuethut aoaoe uou uoetu uouuou ao aouosutoeh"
-        question = self.post_question(user=self.user)
+        exercise = self.post_exercise(user=self.user)
         self.assertRaises(
             exceptions.ValidationError,
-            self.user.retag_question,
-            question=question, tags=tags
+            self.user.retag_exercise,
+            exercise=exercise, tags=tags
         )
 
     def test_search_with_apostrophe_works(self):
-        self.post_question(
+        self.post_exercise(
             user = self.user,
             body_text = "ahahahahahahah database'"
         )
-        matches = models.Post.objects.get_questions().get_by_text_query("database'")
+        matches = models.Post.objects.get_exercises().get_by_text_query("database'")
         self.assertTrue(len(matches) == 1)
 
 class UserLikeTagTests(AskbotTestCase):
     """tests for user liking and disliking tags"""
     def setUp(self):
         self.create_user()
-        self.question = self.post_question(tags = 'one two three')
+        self.exercise = self.post_exercise(tags = 'one two three')
 
-    def test_user_likes_question_via_tags(self):
+    def test_user_likes_exercise_via_tags(self):
         truth_table = (
             ('good', 'like', True),
             ('good', 'dislike', False),
@@ -232,23 +232,23 @@ class UserLikeTagTests(AskbotTestCase):
             mt = models.MarkedTag(user = self.user, tag = tag, reason = reason)
             mt.save()
             self.assertEquals(
-                self.user.has_affinity_to_question(
-                    question = self.question,
+                self.user.has_affinity_to_exercise(
+                    exercise = self.exercise,
                     affinity_type = item[1]
                 ),
                 item[2]
             )
             mt.delete()
 
-    def test_user_does_not_care_about_question_no_wildcards(self):
+    def test_user_does_not_care_about_exercise_no_wildcards(self):
         askbot_settings.update('USE_WILDCARD_TAGS', False)
         tag = models.Tag(name = 'five', created_by = self.user)
         tag.save()
         mt = models.MarkedTag(user = self.user, tag = tag, reason = 'good')
         mt.save()
         self.assertFalse(
-            self.user.has_affinity_to_question(
-                question = self.question,
+            self.user.has_affinity_to_exercise(
+                exercise = self.exercise,
                 affinity_type = 'like'
             )
         )
@@ -266,14 +266,14 @@ class UserLikeTagTests(AskbotTestCase):
 
     def assert_affinity_is(self, affinity_type, expectation):
         self.assertEquals(
-            self.user.has_affinity_to_question(
-                question = self.question,
+            self.user.has_affinity_to_exercise(
+                exercise = self.exercise,
                 affinity_type = affinity_type
             ),
             expectation
         )
 
-    def test_user_likes_question_via_wildcards(self):
+    def test_user_likes_exercise_via_wildcards(self):
         self.setup_wildcard('on*', 'good')
         self.assert_affinity_is('like', True)
         self.assert_affinity_is('dislike', False)
@@ -299,7 +299,7 @@ class UserLikeTagTests(AskbotTestCase):
         self.assert_affinity_is('dislike', False)
 
 class GlobalTagSubscriberGetterTests(AskbotTestCase):
-    """tests for the :meth:`~askbot.models.Question.get_global_tag_based_subscribers`
+    """tests for the :meth:`~askbot.models.Exercise.get_global_tag_based_subscribers`
     """
     def setUp(self):
         """create two users"""
@@ -312,7 +312,7 @@ class GlobalTagSubscriberGetterTests(AskbotTestCase):
                         username = 'user2',
                         notification_schedule = schedule
                     )
-        self.question = self.post_question(
+        self.exercise = self.post_exercise(
                                     user = self.u1,
                                     tags = "good day"
                                 )
@@ -325,12 +325,12 @@ class GlobalTagSubscriberGetterTests(AskbotTestCase):
 
     def assert_subscribers_are(self, expected_subscribers = None, reason = None):
         """a special assertion that compares the subscribers
-        on the question with the given set"""
+        on the exercise with the given set"""
         subscriptions = models.EmailFeedSetting.objects.filter(
                                                     feed_type = 'q_all',
                                                     frequency = 'i'
                                                 )
-        actual_subscribers = self.question.get_global_tag_based_subscribers(
+        actual_subscribers = self.exercise.get_global_tag_based_subscribers(
             tag_mark_reason = reason,
             subscription_records = subscriptions
         )
@@ -418,17 +418,17 @@ class CommentTests(AskbotTestCase):
     def setUp(self):
         self.create_user()
         self.create_user(username = 'other_user')
-        self.question = self.post_question()
+        self.exercise = self.post_exercise()
         self.now = datetime.datetime.now()
         self.comment = self.user.post_comment(
-            parent_post = self.question,
+            parent_post = self.exercise,
             body_text = 'lalalalalalalalal hahahah'
         )
 
     def test_other_user_can_upvote_comment(self):
         self.other_user.upvote(self.comment)
-        models.Post.objects.precache_comments(for_posts=[self.question], visitor = self.other_user)
-        comments = self.question._cached_comments
+        models.Post.objects.precache_comments(for_posts=[self.exercise], visitor = self.other_user)
+        comments = self.exercise._cached_comments
         self.assertEquals(len(comments), 1)
         self.assertEquals(comments[0].upvoted_by_user, True)
         self.assertEquals(comments[0].is_upvoted_by(self.other_user), True)
@@ -452,23 +452,23 @@ class GroupTests(AskbotTestCase):
     def assertObjectGroupsEqual(self, obj, expected_groups):
         self.assertEqual(set(obj.groups.all()), set(expected_groups))
 
-    def post_question_answer_and_comments(self, is_private=False):
-        question = self.post_question(user=self.u1, is_private=is_private)
-        answer = self.post_answer(
-            user=self.u1, question=question, is_private=is_private
+    def post_exercise_problem_and_comments(self, is_private=False):
+        exercise = self.post_exercise(user=self.u1, is_private=is_private)
+        problem = self.post_problem(
+            user=self.u1, exercise=exercise, is_private=is_private
         )
-        question_comment = self.post_comment(
-            user=self.u1, parent_post=question
+        exercise_comment = self.post_comment(
+            user=self.u1, parent_post=exercise
         )
-        answer_comment = self.post_comment(
-            user=self.u1, parent_post=answer
+        problem_comment = self.post_comment(
+            user=self.u1, parent_post=problem
         )
         return {
-            'thread': question.thread,
-            'question': question,
-            'answer': answer,
-            'question_comment': question_comment,
-            'answer_comment': answer_comment
+            'thread': exercise.thread,
+            'exercise': exercise,
+            'problem': problem,
+            'exercise_comment': exercise_comment,
+            'problem_comment': problem_comment
         }
 
     def test_is_group_member(self):
@@ -483,11 +483,11 @@ class GroupTests(AskbotTestCase):
         self.assertEqual(self.u1.is_group_member('othergroup'), False)
 
     def test_posts_added_to_global_group(self):
-        q = self.post_question(user=self.u1)
+        q = self.post_exercise(user=self.u1)
         group_name = askbot_settings.GLOBAL_GROUP_NAME
         self.assertEqual(q.groups.filter(name=group_name).exists(), True)
 
-        a = self.post_answer(question=q, user=self.u1)
+        a = self.post_problem(exercise=q, user=self.u1)
         self.assertEqual(a.groups.filter(name=group_name).exists(), True)
 
         c = self.post_comment(parent_post=a, user=self.u1)
@@ -497,11 +497,11 @@ class GroupTests(AskbotTestCase):
         group = self.create_group(group_name='private')
         self.u1.join_group(group)
 
-        q = self.post_question(user=self.u1, is_private=True)
+        q = self.post_exercise(user=self.u1, is_private=True)
         self.assertEqual(q.groups.count(), 2)
         self.assertEqual(q.groups.filter(name='private').exists(), True)
 
-        a = self.post_answer(question=q, user=self.u1, is_private=True)
+        a = self.post_problem(exercise=q, user=self.u1, is_private=True)
         self.assertEqual(a.groups.count(), 2)
         self.assertEqual(a.groups.filter(name='private').exists(), True)
 
@@ -520,97 +520,97 @@ class GroupTests(AskbotTestCase):
 
     def test_ask_global_group_by_id_works(self):
         group = get_global_group()
-        q = self.post_question(user=self.u1, group_id=group.id)
+        q = self.post_exercise(user=self.u1, group_id=group.id)
         self.assertEqual(q.groups.count(), 2)
         self.assertEqual(q.groups.filter(name=group.name).exists(), True)
 
-    def test_making_public_question_private_works(self):
-        question = self.post_question(user=self.u1)
-        comment = self.post_comment(parent_post=question, user=self.u1)
+    def test_making_public_exercise_private_works(self):
+        exercise = self.post_exercise(user=self.u1)
+        comment = self.post_comment(parent_post=exercise, user=self.u1)
         group = self.create_group(group_name='private')
         self.u1.join_group(group)
-        self.edit_question(question=question, user=self.u1, is_private=True)
-        self.assertEqual(question.groups.count(), 2)
-        self.assertEqual(question.groups.filter(id=group.id).count(), 1)
+        self.edit_exercise(exercise=exercise, user=self.u1, is_private=True)
+        self.assertEqual(exercise.groups.count(), 2)
+        self.assertEqual(exercise.groups.filter(id=group.id).count(), 1)
         #comment inherits sharing scope
         self.assertEqual(comment.groups.count(), 2)
         self.assertEqual(comment.groups.filter(id=group.id).count(), 1)
 
-    def test_making_public_answer_private_works(self):
-        question = self.post_question(user=self.u1)
-        answer = self.post_answer(question=question, user=self.u1)
-        comment = self.post_comment(parent_post=answer, user=self.u1)
+    def test_making_public_problem_private_works(self):
+        exercise = self.post_exercise(user=self.u1)
+        problem = self.post_problem(exercise=exercise, user=self.u1)
+        comment = self.post_comment(parent_post=problem, user=self.u1)
         group = self.create_group(group_name='private')
         self.u1.join_group(group)
 
         #membership in `group` should not affect things,
-        #because answer groups always inherit thread groups
-        self.edit_answer(user=self.u1, answer=answer, is_private=True)
-        self.assertEqual(answer.groups.count(), 1)
+        #because problem groups always inherit thread groups
+        self.edit_problem(user=self.u1, problem=problem, is_private=True)
+        self.assertEqual(problem.groups.count(), 1)
 
-        #here we have a simple case - the comment to answer was posted
-        #by the answer author!!!
+        #here we have a simple case - the comment to problem was posted
+        #by the problem author!!!
         #won't work when comment was by someone else
         u1_group = self.u1.get_personal_group()
-        self.assertEqual(answer.groups.filter(id=u1_group.id).count(), 1)
+        self.assertEqual(problem.groups.filter(id=u1_group.id).count(), 1)
         #comment inherits the sharing scope
         self.assertEqual(comment.groups.count(), 1)
         self.assertEqual(comment.groups.filter(id=u1_group.id).count(), 1)
 
-    def test_public_question_private_answer_works(self):
-        question = self.post_question(self.u1)
+    def test_public_exercise_private_problem_works(self):
+        exercise = self.post_exercise(self.u1)
 
         u2 = self.create_user('u2')
         group = self.create_group(group_name='private')
         u2.join_group(group)
 
-        answer = self.post_answer(question=question, user=u2, is_private=True)
+        problem = self.post_problem(exercise=exercise, user=u2, is_private=True)
 
         threads = models.Thread.objects
-        #u2 will see question and answer
-        self.assertEqual(answer.thread.get_answer_count(user=u2), 1)
+        #u2 will see exercise and problem
+        self.assertEqual(problem.thread.get_problem_count(user=u2), 1)
         self.assertEqual(threads.get_visible(u2).count(), 1)
-        #u1 will see only question
-        self.assertEqual(answer.thread.get_answer_count(user=self.u1), 0)
+        #u1 will see only exercise
+        self.assertEqual(problem.thread.get_problem_count(user=self.u1), 0)
         self.assertEqual(threads.get_visible(self.u1).count(), 1)
-        #anonymous will see question
-        self.assertEqual(answer.thread.get_answer_count(), 0)
+        #anonymous will see exercise
+        self.assertEqual(problem.thread.get_problem_count(), 0)
         anon = AnonymousUser()
         self.assertEqual(threads.get_visible(anon).count(), 1)
 
-    def test_thread_answer_count_for_multiple_groups(self):
-        question = self.post_question(self.u1)
+    def test_thread_problem_count_for_multiple_groups(self):
+        exercise = self.post_exercise(self.u1)
         group = self.create_group(group_name='private')
         self.u1.join_group(group)
-        answer = self.post_answer(question=question, user=self.u1)
-        answer.add_to_groups((group,))
-        self.assertEqual(answer.groups.count(), 3)
-        self.assertEqual(answer.thread.posts.get_answers(self.u1).count(), 1)
+        problem = self.post_problem(exercise=exercise, user=self.u1)
+        problem.add_to_groups((group,))
+        self.assertEqual(problem.groups.count(), 3)
+        self.assertEqual(problem.thread.posts.get_problems(self.u1).count(), 1)
 
     def test_thread_make_public_recursive(self):
         private_group = self.create_group(group_name='private')
         self.u1.join_group(private_group)
-        data = self.post_question_answer_and_comments(is_private=True)
+        data = self.post_exercise_problem_and_comments(is_private=True)
 
         groups = [private_group, self.u1.get_personal_group()]
         self.assertObjectGroupsEqual(data['thread'], groups)
-        self.assertObjectGroupsEqual(data['question'], groups)
-        self.assertObjectGroupsEqual(data['question_comment'], groups)
-        self.assertObjectGroupsEqual(data['answer'], groups)
-        self.assertObjectGroupsEqual(data['answer_comment'], groups)
+        self.assertObjectGroupsEqual(data['exercise'], groups)
+        self.assertObjectGroupsEqual(data['exercise_comment'], groups)
+        self.assertObjectGroupsEqual(data['problem'], groups)
+        self.assertObjectGroupsEqual(data['problem_comment'], groups)
 
         data['thread'].make_public(recursive=True)
 
         global_group = get_global_group()
         groups = [global_group, private_group, self.u1.get_personal_group()]
         self.assertObjectGroupsEqual(data['thread'], groups)
-        self.assertObjectGroupsEqual(data['question'], groups)
-        self.assertObjectGroupsEqual(data['question_comment'], groups)
-        self.assertObjectGroupsEqual(data['answer'], groups)
-        self.assertObjectGroupsEqual(data['answer_comment'], groups)
+        self.assertObjectGroupsEqual(data['exercise'], groups)
+        self.assertObjectGroupsEqual(data['exercise_comment'], groups)
+        self.assertObjectGroupsEqual(data['problem'], groups)
+        self.assertObjectGroupsEqual(data['problem_comment'], groups)
 
     def test_thread_add_to_groups_recursive(self):
-        data = self.post_question_answer_and_comments()
+        data = self.post_exercise_problem_and_comments()
 
         private_group = self.create_group(group_name='private')
         thread = data['thread']
@@ -619,15 +619,15 @@ class GroupTests(AskbotTestCase):
         global_group = get_global_group()
         groups = [global_group, private_group, self.u1.get_personal_group()]
         self.assertObjectGroupsEqual(thread, groups)
-        self.assertObjectGroupsEqual(data['question'], groups)
-        self.assertObjectGroupsEqual(data['question_comment'], groups)
-        self.assertObjectGroupsEqual(data['answer'], groups)
-        self.assertObjectGroupsEqual(data['answer_comment'], groups)
+        self.assertObjectGroupsEqual(data['exercise'], groups)
+        self.assertObjectGroupsEqual(data['exercise_comment'], groups)
+        self.assertObjectGroupsEqual(data['problem'], groups)
+        self.assertObjectGroupsEqual(data['problem_comment'], groups)
 
     def test_private_thread_is_invisible_to_anonymous_user(self):
         group = self.create_group(group_name='private')
         self.u1.join_group(group)
-        self.post_question(user=self.u1, is_private=True)
+        self.post_exercise(user=self.u1, is_private=True)
 
         visible_threads = models.Thread.objects.get_visible(AnonymousUser())
         self.assertEqual(visible_threads.count(), 0)

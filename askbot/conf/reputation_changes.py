@@ -36,18 +36,18 @@ settings.register(
 settings.register(
     IntegerValue(
         REP_CHANGES,
-        'REP_GAIN_FOR_RECEIVING_ANSWER_ACCEPTANCE',
+        'REP_GAIN_FOR_RECEIVING_PROBLEM_ACCEPTANCE',
         default=15,
-        description=_('Gain for the author of accepted answer')
+        description=_('Gain for the author of accepted problem')
     )
 )
 
 settings.register(
     IntegerValue(
         REP_CHANGES,
-        'REP_GAIN_FOR_ACCEPTING_ANSWER',
+        'REP_GAIN_FOR_ACCEPTING_PROBLEM',
         default=2,
-        description=_('Gain for accepting best answer')
+        description=_('Gain for accepting best problem')
     )
 )
 
@@ -73,22 +73,22 @@ settings.register(
 settings.register(
     IntegerValue(
         REP_CHANGES,
-        'REP_LOSS_FOR_CANCELING_ANSWER_ACCEPTANCE',
+        'REP_LOSS_FOR_CANCELING_PROBLEM_ACCEPTANCE',
         default=-2,
-        description=_('Loss for voter for canceling of answer acceptance')
+        description=_('Loss for voter for canceling of problem acceptance')
     )
 )
-#'lose_by_canceling_accepted_answer', 
+#'lose_by_canceling_accepted_problem', 
 
 settings.register(
     IntegerValue(
         REP_CHANGES,
-        'REP_LOSS_FOR_RECEIVING_CANCELATION_OF_ANSWER_ACCEPTANCE',
+        'REP_LOSS_FOR_RECEIVING_CANCELATION_OF_PROBLEM_ACCEPTANCE',
         default=-5,
-        description=_('Loss for author whose answer was "un-accepted"')
+        description=_('Loss for author whose problem was "un-accepted"')
     )
 )
-#'lose_by_accepted_answer_cancled', 
+#'lose_by_accepted_problem_cancled', 
 
 settings.register(
     IntegerValue(

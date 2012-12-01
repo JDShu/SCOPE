@@ -135,7 +135,7 @@ class PageLoadTestCase(AskbotTestCase):
         response = self.client.get(reverse('index'), follow=True)
         self.assertEqual(response.status_code, 200)
         self.failUnless(len(response.redirect_chain) == 1)
-        self.failUnless(response.redirect_chain[0][0].endswith('/questions/'))
+        self.failUnless(response.redirect_chain[0][0].endswith('/exercises/'))
         self.assertTrue(isinstance(response.template, list))
         self.assertIn('main_page.html', [t.name for t in response.template])
 
@@ -153,30 +153,30 @@ class PageLoadTestCase(AskbotTestCase):
         self.proto_test_ask_page(True, 200)
 
     @with_settings(GROUPS_ENABLED=False)
-    def test_api_get_questions_groups_disabled(self):
-        data = {'query': 'Question'}
-        response = self.client.get(reverse('api_get_questions'), data)
+    def test_api_get_exercises_groups_disabled(self):
+        data = {'query': 'Exercise'}
+        response = self.client.get(reverse('api_get_exercises'), data)
         data = simplejson.loads(response.content)
         self.assertTrue(len(data) > 1)
 
     @with_settings(GROUPS_ENABLED=True)
-    def test_api_get_questions_groups_enabled(self):
+    def test_api_get_exercises_groups_enabled(self):
 
         group = models.Group(name='secret group', openness=models.Group.OPEN)
         group.save()
         user = self.create_user('user')
         user.join_group(group)
-        question = self.post_question(user=user, title='alibaba', group_id=group.id)
+        exercise = self.post_exercise(user=user, title='alibaba', group_id=group.id)
 
         #ask for data anonymously - should get nothing
         query_data = {'query': 'alibaba'}
-        response = self.client.get(reverse('api_get_questions'), query_data)
+        response = self.client.get(reverse('api_get_exercises'), query_data)
         response_data = simplejson.loads(response.content)
         self.assertEqual(len(response_data), 0)
 
-        #log in - should get the question
+        #log in - should get the exercise
         self.client.login(method='force', user_id=user.id)
-        response = self.client.get(reverse('api_get_questions'), query_data)
+        response = self.client.get(reverse('api_get_exercises'), query_data)
         response_data = simplejson.loads(response.content)
         self.assertEqual(len(response_data), 1)
 
@@ -205,7 +205,7 @@ class PageLoadTestCase(AskbotTestCase):
                 status_code=status_code)
         #self.try_url(
         #        'feeds',
-        #        kwargs={'url':'question'},
+        #        kwargs={'url':'exercise'},
         #        status_code=status_code)
         self.try_url(
                 'about',
@@ -234,82 +234,82 @@ class PageLoadTestCase(AskbotTestCase):
                 status_code=status_code,
                 template='badges.html')
         self.try_url(
-                'answer_revisions',
+                'problem_revisions',
                 status_code=status_code,
                 template='revisions.html',
-                kwargs={'id': models.Post.objects.get_answers().order_by('id')[0].id}
+                kwargs={'id': models.Post.objects.get_problems().order_by('id')[0].id}
             )
         #todo: test different sort methods and scopes
         self.try_url(
-            'questions',
+            'exercises',
             status_code=status_code,
             template='main_page.html'
         )
         self.try_url(
-            url_name=reverse('questions') + SearchState.get_empty().change_scope('unanswered').query_string(),
+            url_name=reverse('exercises') + SearchState.get_empty().change_scope('without_problem').query_string(),
             plain_url_passed=True,
 
             status_code=status_code,
             template='main_page.html',
         )
         self.try_url(
-            url_name=reverse('questions') + SearchState.get_empty().change_scope('favorite').query_string(),
+            url_name=reverse('exercises') + SearchState.get_empty().change_scope('favorite').query_string(),
             plain_url_passed=True,
 
             status_code=status_code,
             template='main_page.html'
         )
         self.try_url(
-            url_name=reverse('questions') + SearchState.get_empty().change_scope('unanswered').change_sort('age-desc').query_string(),
+            url_name=reverse('exercises') + SearchState.get_empty().change_scope('without_problem').change_sort('age-desc').query_string(),
             plain_url_passed=True,
 
             status_code=status_code,
             template='main_page.html'
         )
         self.try_url(
-            url_name=reverse('questions') + SearchState.get_empty().change_scope('unanswered').change_sort('age-asc').query_string(),
+            url_name=reverse('exercises') + SearchState.get_empty().change_scope('without_problem').change_sort('age-asc').query_string(),
             plain_url_passed=True,
 
             status_code=status_code,
             template='main_page.html'
         )
         self.try_url(
-            url_name=reverse('questions') + SearchState.get_empty().change_scope('unanswered').change_sort('activity-desc').query_string(),
+            url_name=reverse('exercises') + SearchState.get_empty().change_scope('without_problem').change_sort('activity-desc').query_string(),
             plain_url_passed=True,
 
             status_code=status_code,
             template='main_page.html'
         )
         self.try_url(
-            url_name=reverse('questions') + SearchState.get_empty().change_scope('unanswered').change_sort('activity-asc').query_string(),
+            url_name=reverse('exercises') + SearchState.get_empty().change_scope('without_problem').change_sort('activity-asc').query_string(),
             plain_url_passed=True,
 
             status_code=status_code,
             template='main_page.html'
         )
         self.try_url(
-            url_name=reverse('questions') + SearchState.get_empty().change_sort('answers-desc').query_string(),
+            url_name=reverse('exercises') + SearchState.get_empty().change_sort('problems-desc').query_string(),
             plain_url_passed=True,
 
             status_code=status_code,
             template='main_page.html'
         )
         self.try_url(
-            url_name=reverse('questions') + SearchState.get_empty().change_sort('answers-asc').query_string(),
+            url_name=reverse('exercises') + SearchState.get_empty().change_sort('problems-asc').query_string(),
             plain_url_passed=True,
 
             status_code=status_code,
             template='main_page.html'
         )
         self.try_url(
-            url_name=reverse('questions') + SearchState.get_empty().change_sort('votes-desc').query_string(),
+            url_name=reverse('exercises') + SearchState.get_empty().change_sort('votes-desc').query_string(),
             plain_url_passed=True,
 
             status_code=status_code,
             template='main_page.html'
         )
         self.try_url(
-            url_name=reverse('questions') + SearchState.get_empty().change_sort('votes-asc').query_string(),
+            url_name=reverse('exercises') + SearchState.get_empty().change_sort('votes-asc').query_string(),
             plain_url_passed=True,
 
             status_code=status_code,
@@ -317,28 +317,28 @@ class PageLoadTestCase(AskbotTestCase):
         )
 
         self.try_url(
-                'question',
+                'exercise',
                 status_code=status_code,
                 kwargs={'id':1},   # INFO: Hardcoded ID, might fail if DB allocates IDs in some non-continuous way
                 follow=True,
-                template='question.html'
+                template='exercise.html'
             )
         self.try_url(
-                'question',
+                'exercise',
                 status_code=status_code,
                 kwargs={'id':2},   # INFO: Hardcoded ID, might fail if DB allocates IDs in some non-continuous way
                 follow=True,
-                template='question.html'
+                template='exercise.html'
             )
         self.try_url(
-                'question',
+                'exercise',
                 status_code=status_code,
                 kwargs={'id':3},   # INFO: Hardcoded ID, might fail if DB allocates IDs in some non-continuous way
                 follow=True,
-                template='question.html'
+                template='exercise.html'
             )
         self.try_url(
-                'question_revisions',
+                'exercise_revisions',
                 status_code=status_code,
                 kwargs={'id':40},   # INFO: Hardcoded ID, might fail if DB allocates IDs in some non-continuous way
                 template='revisions.html'
@@ -348,10 +348,10 @@ class PageLoadTestCase(AskbotTestCase):
                 template='users.html'
             )
         #self.try_url(
-        #        'widget_questions',
+        #        'widget_exercises',
         #        status_code = status_code,
         #        data={'tags': 'tag-1-0'},
-        #        template='question_widget.html',
+        #        template='exercise_widget.html',
         #    )
         #todo: really odd naming conventions for sort methods
         self.try_url(
@@ -534,15 +534,15 @@ class PageLoadTestCase(AskbotTestCase):
 
     def test_inbox_page(self):
         asker = models.User.objects.get(id = 2)   # INFO: Hardcoded ID, might fail if DB allocates IDs in some non-continuous way
-        question = asker.post_question(
+        exercise = asker.post_exercise(
             title = 'How can this happen?',
-            body_text = 'This is the body of my question',
-            tags = 'question answer test',
+            body_text = 'This is the body of my exercise',
+            tags = 'exercise problem test',
         )
         responder = models.User.objects.get(id = 3)   # INFO: Hardcoded ID, might fail if DB allocates IDs in some non-continuous way
-        responder.post_answer(
-            question = question,
-            body_text = 'this is the answer text'
+        responder.post_problem(
+            exercise = exercise,
+            body_text = 'this is the problem text'
         )
         self.client.login(method = 'force', user_id = asker.id)
         self.try_url(
@@ -571,81 +571,81 @@ class AvatarTests(AskbotTestCase):
                             )
 
 
-class QuestionViewTests(AskbotTestCase):
-    def test_meta_description_has_question_summary(self):
+class ExerciseViewTests(AskbotTestCase):
+    def test_meta_description_has_exercise_summary(self):
         user = self.create_user('user')
-        text = 'this is a question'
-        question = self.post_question(user=user, body_text=text)
-        response = self.client.get(question.get_absolute_url())
+        text = 'this is a exercise'
+        exercise = self.post_exercise(user=user, body_text=text)
+        response = self.client.get(exercise.get_absolute_url())
         soup = BeautifulSoup(response.content)
         meta_descr = soup.find_all('meta', attrs={'name': 'description'})[0]
         self.assertTrue(text in meta_descr.attrs['content'])
 
 
-class QuestionPageRedirectTests(AskbotTestCase):
+class ExercisePageRedirectTests(AskbotTestCase):
 
     def setUp(self):
         self.create_user()
 
-        self.q = self.post_question()
-        self.q.old_question_id = 101
+        self.q = self.post_exercise()
+        self.q.old_exercise_id = 101
         self.q.save()
 
-        self.a = self.post_answer(question=self.q)
-        self.a.old_answer_id = 201
+        self.a = self.post_problem(exercise=self.q)
+        self.a.old_problem_id = 201
         self.a.save()
 
         self.c = self.post_comment(parent_post=self.a)
         self.c.old_comment_id = 301
         self.c.save()
 
-    def test_show_bare_question(self):
+    def test_show_bare_exercise(self):
         resp = self.client.get(self.q.get_absolute_url())
         self.assertEqual(200, resp.status_code)
-        self.assertEqual(self.q, resp.context['question'])
+        self.assertEqual(self.q, resp.context['exercise'])
 
-        url = reverse('question', kwargs={'id': self.q.id})
+        url = reverse('exercise', kwargs={'id': self.q.id})
         resp = self.client.get(url)
         self.assertRedirects(
             resp,
             expected_url=self.q.get_absolute_url()
         )
 
-        url = reverse('question', kwargs={'id': 101})
+        url = reverse('exercise', kwargs={'id': 101})
         resp = self.client.get(url)
-        url = reverse('question', kwargs={'id': self.q.id}) + self.q.slug + '/'# redirect uses the new question.id !
+        url = reverse('exercise', kwargs={'id': self.q.id}) + self.q.slug + '/'# redirect uses the new exercise.id !
         self.assertRedirects(resp, expected_url=url)
 
-        url = reverse('question', kwargs={'id': 101}) + self.q.slug + '/'
+        url = reverse('exercise', kwargs={'id': 101}) + self.q.slug + '/'
         resp = self.client.get(url)
         self.assertEqual(200, resp.status_code)
-        self.assertEqual(self.q, resp.context['question'])
+        self.assertEqual(self.q, resp.context['exercise'])
 
-    def test_show_answer(self):
+    def test_show_problem(self):
         resp = self.client.get(self.a.get_absolute_url())
         self.assertEqual(200, resp.status_code)
-        self.assertEqual(self.q, resp.context['question'])
+        self.assertEqual(self.q, resp.context['exercise'])
         self.assertEqual(self.a, resp.context['show_post'])
 
-        url = reverse('question', kwargs={'id': self.q.id})
-        resp = self.client.get(url, data={'answer': self.a.id})
+        url = reverse('exercise', kwargs={'id': self.q.id})
+        resp = self.client.get(url, data={'problem': self.a.id})
         url = self.q.get_absolute_url()
-        self.assertRedirects(resp, expected_url=url + '?answer=%d' % self.a.id)
+        self.assertRedirects(resp, expected_url=url + '?problem=%d' % self.a.id)
 
-        resp = self.client.get(url, data={'answer': self.a.id})
+        resp = self.client.get(url, data={'problem': self.a.id})
         self.assertEqual(200, resp.status_code)
-        self.assertEqual(self.q, resp.context['question'])
+        self.assertEqual(self.q, resp.context['exercise'])
         self.assertEqual(self.a, resp.context['show_post'])
 
-        #test redirect from old question
-        url = reverse('question', kwargs={'id': 101}) + self.q.slug + '/'
-        resp = self.client.get(url, data={'answer': 201})
+        #test redirect from old exercise
+        url = reverse('exercise', kwargs={'id': 101}) + self.q.slug + '/'
+        resp = self.client.get(url, data={'problem': 201})
         self.assertRedirects(resp, expected_url=self.a.get_absolute_url())
 
     def test_show_comment(self):
         resp = self.client.get(self.c.get_absolute_url())
         self.assertEqual(200, resp.status_code)
-        self.assertEqual(self.q, resp.context['question'])
+        self.assertEqual(self.q, resp.context['exercise'])
         self.assertEqual(self.a, resp.context['show_post'])
         self.assertEqual(self.c, resp.context['show_comment'])
 
@@ -655,7 +655,7 @@ class QuestionPageRedirectTests(AskbotTestCase):
 
         resp = self.client.get(url, data={'comment': self.c.id})
         self.assertEqual(200, resp.status_code)
-        self.assertEqual(self.q, resp.context['question'])
+        self.assertEqual(self.q, resp.context['exercise'])
         self.assertEqual(self.a, resp.context['show_post'])
         self.assertEqual(self.c, resp.context['show_comment'])
 

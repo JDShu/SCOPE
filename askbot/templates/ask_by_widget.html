@@ -3,14 +3,14 @@
 {%endblock%}
 
 {%block body%}
-Enter your question
+Enter your exercise
 <form action="." method="POST" accept-charset="utf-8">
   {% csrf_token %}
   {{form.title}} 
   {% if form.ask_anonymously %}
   {{form.ask_anonymously}}
   {%endif%}
-  <input type="submit" value="Ask your question" />
+  <input type="submit" value="Add your exercise" />
 </form>
 {{form.errors}}
 {%endblock%}

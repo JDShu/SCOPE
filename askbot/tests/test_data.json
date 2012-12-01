@@ -84,8 +84,8 @@
         "pk": 73, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "add_anonymousanswer", 
-            "name": "Can add anonymous answer", 
+            "codename": "add_anonymousproblem", 
+            "name": "Can add anonymous problem", 
             "content_type": 25
         }
     }, 
@@ -93,8 +93,8 @@
         "pk": 74, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "change_anonymousanswer", 
-            "name": "Can change anonymous answer", 
+            "codename": "change_anonymousproblem", 
+            "name": "Can change anonymous problem", 
             "content_type": 25
         }
     }, 
@@ -102,8 +102,8 @@
         "pk": 75, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "delete_anonymousanswer", 
-            "name": "Can delete anonymous answer", 
+            "codename": "delete_anonymousproblem", 
+            "name": "Can delete anonymous problem", 
             "content_type": 25
         }
     }, 
@@ -111,8 +111,8 @@
         "pk": 67, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "add_anonymousquestion", 
-            "name": "Can add anonymous question", 
+            "codename": "add_anonymousexercise", 
+            "name": "Can add anonymous exercise", 
             "content_type": 23
         }
     }, 
@@ -120,8 +120,8 @@
         "pk": 68, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "change_anonymousquestion", 
-            "name": "Can change anonymous question", 
+            "codename": "change_anonymousexercise", 
+            "name": "Can change anonymous exercise", 
             "content_type": 23
         }
     }, 
@@ -129,8 +129,8 @@
         "pk": 69, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "delete_anonymousquestion", 
-            "name": "Can delete anonymous question", 
+            "codename": "delete_anonymousexercise", 
+            "name": "Can delete anonymous exercise", 
             "content_type": 23
         }
     }, 
@@ -138,8 +138,8 @@
         "pk": 70, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "add_answer", 
-            "name": "Can add answer", 
+            "codename": "add_problem", 
+            "name": "Can add problem", 
             "content_type": 24
         }
     }, 
@@ -147,8 +147,8 @@
         "pk": 71, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "change_answer", 
-            "name": "Can change answer", 
+            "codename": "change_problem", 
+            "name": "Can change problem", 
             "content_type": 24
         }
     }, 
@@ -156,8 +156,8 @@
         "pk": 72, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "delete_answer", 
-            "name": "Can delete answer", 
+            "codename": "delete_problem", 
+            "name": "Can delete problem", 
             "content_type": 24
         }
     }, 
@@ -273,8 +273,8 @@
         "pk": 64, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "add_favoritequestion", 
-            "name": "Can add favorite question", 
+            "codename": "add_favoriteexercise", 
+            "name": "Can add favorite exercise", 
             "content_type": 22
         }
     }, 
@@ -282,8 +282,8 @@
         "pk": 65, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "change_favoritequestion", 
-            "name": "Can change favorite question", 
+            "codename": "change_favoriteexercise", 
+            "name": "Can change favorite exercise", 
             "content_type": 22
         }
     }, 
@@ -291,8 +291,8 @@
         "pk": 66, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "delete_favoritequestion", 
-            "name": "Can delete favorite question", 
+            "codename": "delete_favoriteexercise", 
+            "name": "Can delete favorite exercise", 
             "content_type": 22
         }
     }, 
@@ -354,8 +354,8 @@
         "pk": 58, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "add_question", 
-            "name": "Can add question", 
+            "codename": "add_exercise", 
+            "name": "Can add exercise", 
             "content_type": 20
         }
     }, 
@@ -363,8 +363,8 @@
         "pk": 59, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "change_question", 
-            "name": "Can change question", 
+            "codename": "change_exercise", 
+            "name": "Can change exercise", 
             "content_type": 20
         }
     }, 
@@ -372,8 +372,8 @@
         "pk": 60, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "delete_question", 
-            "name": "Can delete question", 
+            "codename": "delete_exercise", 
+            "name": "Can delete exercise", 
             "content_type": 20
         }
     }, 
@@ -381,8 +381,8 @@
         "pk": 61, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "add_questionview", 
-            "name": "Can add question view", 
+            "codename": "add_exerciseview", 
+            "name": "Can add exercise view", 
             "content_type": 21
         }
     }, 
@@ -390,8 +390,8 @@
         "pk": 62, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "change_questionview", 
-            "name": "Can change question view", 
+            "codename": "change_exerciseview", 
+            "name": "Can change exercise view", 
             "content_type": 21
         }
     }, 
@@ -399,8 +399,8 @@
         "pk": 63, 
         "model": "auth.permission", 
         "fields": {
-            "codename": "delete_questionview", 
-            "name": "Can delete question view", 
+            "codename": "delete_exerciseview", 
+            "name": "Can delete exercise view", 
             "content_type": 21
         }
     }, 
@@ -1244,7 +1244,7 @@
             "password": "sha1$917a5$8d31e7e3f8b7b8bbc27d27efdd49fc681cbad56b", 
             "silver": 0, 
             "bronze": 3, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1287,7 +1287,7 @@
             "password": "sha1$2fd95$07bdf8b37814d2a84b6f1673fffada9f84f63c0e", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1330,7 +1330,7 @@
             "password": "sha1$f1879$be089b0acfe1cfc8e4f4c1bba92a0bc8f0cb0fc9", 
             "silver": 0, 
             "bronze": 4, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1373,7 +1373,7 @@
             "password": "sha1$2c013$304d5239a9b0f7f066b756c54fab18d2383fc3c7", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1416,7 +1416,7 @@
             "password": "sha1$df5ca$648a261a796f846a5e8e64b83ef74a13cdf82ee8", 
             "silver": 0, 
             "bronze": 4, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1459,7 +1459,7 @@
             "password": "sha1$a994b$fc8d7f44c567e7d2fbf95b335b1749fd8cccd483", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1502,7 +1502,7 @@
             "password": "sha1$496b9$f8d26a187baffa8beadd90aed0dd0ae7868315cc", 
             "silver": 0, 
             "bronze": 4, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1545,7 +1545,7 @@
             "password": "sha1$5d4b5$0196b971f4a784e0af71ec0655a52a1590c1e478", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1588,7 +1588,7 @@
             "password": "sha1$84ffb$1fba7b1ef5993e0d0cc045593221921efb4a0104", 
             "silver": 0, 
             "bronze": 4, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1631,7 +1631,7 @@
             "password": "sha1$bf988$c56f74855686fa8fb9c5bd039d2774ee9c22b506", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1674,7 +1674,7 @@
             "password": "sha1$25de1$b946e2022e115fd1276922296fd6d9e8465f4d39", 
             "silver": 0, 
             "bronze": 4, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1717,7 +1717,7 @@
             "password": "sha1$a5edf$d53052d9c1fc1e671b43c83a840c14c922b50215", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1760,7 +1760,7 @@
             "password": "sha1$d67f9$03c49b636e84766be0af76f7d7a1fd2c5482f201", 
             "silver": 0, 
             "bronze": 4, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1803,7 +1803,7 @@
             "password": "sha1$8f8ab$b0a4ca8e7e2c2539e2101c325584b9d9679a85f7", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1846,7 +1846,7 @@
             "password": "sha1$69539$e48d801c8c567413cf7ab6d11a78996d89e65b4f", 
             "silver": 0, 
             "bronze": 4, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1889,7 +1889,7 @@
             "password": "sha1$58954$055ea2ca379369686a8767f0f0efec14d6067537", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1932,7 +1932,7 @@
             "password": "sha1$ae00f$8df4d6129e34242ef50158fd2edaf7bea7ca1928", 
             "silver": 0, 
             "bronze": 4, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -1975,7 +1975,7 @@
             "password": "sha1$85dfc$68f8f1587a87befee8ac262eaee9b9269a089d64", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2018,7 +2018,7 @@
             "password": "sha1$3a85d$8070b80232d0e6ec351d9d9d66b09c6212a77a2d", 
             "silver": 0, 
             "bronze": 4, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2061,7 +2061,7 @@
             "password": "sha1$f7931$fd6d24ecd06ca9acbb15506c3f3ff4d105dc693a", 
             "silver": 2, 
             "bronze": 4, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2104,7 +2104,7 @@
             "password": "sha1$ce673$cbe2240ab8a6b25003ab85d4bb705e07d7d76f74", 
             "silver": 0, 
             "bronze": 2, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2147,7 +2147,7 @@
             "password": "sha1$27f03$44e4b1227e5cd18fdd2d9af34bf6b090e360390d", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2190,7 +2190,7 @@
             "password": "sha1$f2a81$9799180e6ff6e310fa091ca69ac0010c51342f4b", 
             "silver": 0, 
             "bronze": 2, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2233,7 +2233,7 @@
             "password": "sha1$fc47b$9d1f96ef03f26ee6949815fc53c08704e30cd2b1", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2276,7 +2276,7 @@
             "password": "sha1$45370$2514c920f4058028a57a0adb6ec5c4e472775e0f", 
             "silver": 0, 
             "bronze": 2, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2319,7 +2319,7 @@
             "password": "sha1$87174$1e7f2ee79f0322329581577f392c345ab1407204", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2362,7 +2362,7 @@
             "password": "sha1$b024a$4c21a57f1b5b48fa974b90f1d3802caa3ca58e8b", 
             "silver": 0, 
             "bronze": 2, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2405,7 +2405,7 @@
             "password": "sha1$58826$41c5e9f5dce2835b5175b023eb527fcade98d2d4", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2448,7 +2448,7 @@
             "password": "sha1$66e41$907b68d8b88a2ee9c8b3e30649f9117cbd07519c", 
             "silver": 0, 
             "bronze": 2, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2491,7 +2491,7 @@
             "password": "sha1$7abb4$302c303a96f5aadfc1a744f4288fa0b7f60ce58d", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2534,7 +2534,7 @@
             "password": "sha1$8f341$7effe1a8dd068de04bf1da8c44d87f9d8b7ef541", 
             "silver": 0, 
             "bronze": 2, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2577,7 +2577,7 @@
             "password": "sha1$a609f$b43e70ce92cd80413937108704a2faf96c659589", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2620,7 +2620,7 @@
             "password": "sha1$c0ee2$ac5ff63a7e0a57041b640151f3aaa844db9b509a", 
             "silver": 0, 
             "bronze": 2, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2663,7 +2663,7 @@
             "password": "sha1$fdc5b$5e1792dcf3371268956f3d4463b2240642db0979", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2706,7 +2706,7 @@
             "password": "sha1$6effa$92f04edd455daf51f7fa680630b86ff7b6a9d5c7", 
             "silver": 0, 
             "bronze": 2, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2749,7 +2749,7 @@
             "password": "sha1$64ff0$24d4e4c0998862417646a9195fb846bc1a7c35aa", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2792,7 +2792,7 @@
             "password": "sha1$264cc$e72669914cc404990b135dc48816b8c4c4afa6ff", 
             "silver": 0, 
             "bronze": 2, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2835,7 +2835,7 @@
             "password": "sha1$a924b$25d6b03ca36b78d3420464097dba8142ba90b20d", 
             "silver": 0, 
             "bronze": 1, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2878,7 +2878,7 @@
             "password": "sha1$6a84f$002738f797df0f265e17f970ccc67fabfee526a7", 
             "silver": 0, 
             "bronze": 2, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -2921,7 +2921,7 @@
             "password": "sha1$b2cca$fffcd0641241dff108a6015328497977a8452fb6", 
             "silver": 1, 
             "bronze": 5, 
-            "questions_per_page": 10, 
+            "exercises_per_page": 10, 
             "about": "", 
             "show_country": false, 
             "country": "", 
@@ -4044,7 +4044,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 1, 
+            "exercise": 1, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 1, 
@@ -4058,7 +4058,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 2, 
+            "exercise": 2, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 2, 
@@ -4072,7 +4072,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 2, 
+            "exercise": 2, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 3, 
@@ -4086,7 +4086,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 3, 
+            "exercise": 3, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 3, 
@@ -4100,7 +4100,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 4, 
+            "exercise": 4, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 4, 
@@ -4114,7 +4114,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 4, 
+            "exercise": 4, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 5, 
@@ -4128,7 +4128,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 5, 
+            "exercise": 5, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 5, 
@@ -4142,7 +4142,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 6, 
+            "exercise": 6, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 6, 
@@ -4156,7 +4156,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 6, 
+            "exercise": 6, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 7, 
@@ -4170,7 +4170,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 7, 
+            "exercise": 7, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 7, 
@@ -4184,7 +4184,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 8, 
+            "exercise": 8, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 8, 
@@ -4198,7 +4198,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 8, 
+            "exercise": 8, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 9, 
@@ -4212,7 +4212,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 9, 
+            "exercise": 9, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 9, 
@@ -4226,7 +4226,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 10, 
+            "exercise": 10, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 10, 
@@ -4240,7 +4240,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 10, 
+            "exercise": 10, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 11, 
@@ -4254,7 +4254,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 11, 
+            "exercise": 11, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 11, 
@@ -4268,7 +4268,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 12, 
+            "exercise": 12, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 12, 
@@ -4282,7 +4282,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 12, 
+            "exercise": 12, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 13, 
@@ -4296,7 +4296,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 13, 
+            "exercise": 13, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 13, 
@@ -4310,7 +4310,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 14, 
+            "exercise": 14, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 14, 
@@ -4324,7 +4324,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 14, 
+            "exercise": 14, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 15, 
@@ -4338,7 +4338,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 15, 
+            "exercise": 15, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 15, 
@@ -4352,7 +4352,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 16, 
+            "exercise": 16, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 16, 
@@ -4366,7 +4366,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 16, 
+            "exercise": 16, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 17, 
@@ -4380,7 +4380,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 17, 
+            "exercise": 17, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 17, 
@@ -4394,7 +4394,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 18, 
+            "exercise": 18, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 18, 
@@ -4408,7 +4408,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 18, 
+            "exercise": 18, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 19, 
@@ -4422,7 +4422,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 19, 
+            "exercise": 19, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 19, 
@@ -4436,7 +4436,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 20, 
+            "exercise": 20, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 20, 
@@ -4450,7 +4450,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 20, 
+            "exercise": 20, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 21, 
@@ -4464,7 +4464,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 21, 
+            "exercise": 21, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 21, 
@@ -4478,7 +4478,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 22, 
+            "exercise": 22, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 22, 
@@ -4492,7 +4492,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 22, 
+            "exercise": 22, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 23, 
@@ -4506,7 +4506,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 23, 
+            "exercise": 23, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 23, 
@@ -4520,7 +4520,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 24, 
+            "exercise": 24, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 24, 
@@ -4534,7 +4534,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 24, 
+            "exercise": 24, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 25, 
@@ -4548,7 +4548,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 25, 
+            "exercise": 25, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 25, 
@@ -4562,7 +4562,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 26, 
+            "exercise": 26, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 26, 
@@ -4576,7 +4576,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 26, 
+            "exercise": 26, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 27, 
@@ -4590,7 +4590,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 27, 
+            "exercise": 27, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 27, 
@@ -4604,7 +4604,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 28, 
+            "exercise": 28, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 28, 
@@ -4618,7 +4618,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 28, 
+            "exercise": 28, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 29, 
@@ -4632,7 +4632,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 29, 
+            "exercise": 29, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 29, 
@@ -4646,7 +4646,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 30, 
+            "exercise": 30, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 30, 
@@ -4660,7 +4660,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 30, 
+            "exercise": 30, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 31, 
@@ -4674,7 +4674,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 31, 
+            "exercise": 31, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 31, 
@@ -4688,7 +4688,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 32, 
+            "exercise": 32, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 32, 
@@ -4702,7 +4702,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 32, 
+            "exercise": 32, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 33, 
@@ -4716,7 +4716,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 33, 
+            "exercise": 33, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 33, 
@@ -4730,7 +4730,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 34, 
+            "exercise": 34, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 34, 
@@ -4744,7 +4744,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 34, 
+            "exercise": 34, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 35, 
@@ -4758,7 +4758,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 35, 
+            "exercise": 35, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 35, 
@@ -4772,7 +4772,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 36, 
+            "exercise": 36, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 36, 
@@ -4786,7 +4786,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 36, 
+            "exercise": 36, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 37, 
@@ -4800,7 +4800,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 37, 
+            "exercise": 37, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 37, 
@@ -4814,7 +4814,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 38, 
+            "exercise": 38, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 38, 
@@ -4828,7 +4828,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 38, 
+            "exercise": 38, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 39, 
@@ -4842,7 +4842,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 39, 
+            "exercise": 39, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 39, 
@@ -4856,7 +4856,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -4870,7 +4870,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 1, 
@@ -4884,7 +4884,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -4898,7 +4898,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 2, 
@@ -4912,7 +4912,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 3, 
@@ -4926,7 +4926,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -4940,7 +4940,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 3, 
@@ -4954,7 +4954,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -4968,7 +4968,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 4, 
@@ -4982,7 +4982,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 5, 
@@ -4996,7 +4996,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5010,7 +5010,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 5, 
@@ -5024,7 +5024,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5038,7 +5038,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 6, 
@@ -5052,7 +5052,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 7, 
@@ -5066,7 +5066,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5080,7 +5080,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 7, 
@@ -5094,7 +5094,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5108,7 +5108,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 8, 
@@ -5122,7 +5122,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 9, 
@@ -5136,7 +5136,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5150,7 +5150,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 9, 
@@ -5164,7 +5164,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5178,7 +5178,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 10, 
@@ -5192,7 +5192,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 11, 
@@ -5206,7 +5206,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5220,7 +5220,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 11, 
@@ -5234,7 +5234,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5248,7 +5248,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 12, 
@@ -5262,7 +5262,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 13, 
@@ -5276,7 +5276,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5290,7 +5290,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 13, 
@@ -5304,7 +5304,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5318,7 +5318,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 14, 
@@ -5332,7 +5332,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 15, 
@@ -5346,7 +5346,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5360,7 +5360,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 15, 
@@ -5374,7 +5374,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5388,7 +5388,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 16, 
@@ -5402,7 +5402,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 17, 
@@ -5416,7 +5416,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5430,7 +5430,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 17, 
@@ -5444,7 +5444,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5458,7 +5458,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -2, 
             "reputation_type": -3, 
             "user": 18, 
@@ -5472,7 +5472,7 @@
         "fields": {
             "comment": null, 
             "positive": 0, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": -1, 
             "reputation_type": -5, 
             "user": 19, 
@@ -5486,7 +5486,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5500,7 +5500,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 19, 
@@ -5514,7 +5514,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 40, 
@@ -5528,7 +5528,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5542,7 +5542,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5556,7 +5556,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5570,7 +5570,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5584,7 +5584,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5598,7 +5598,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5612,7 +5612,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5626,7 +5626,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5640,7 +5640,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5654,7 +5654,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5668,7 +5668,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5682,7 +5682,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5696,7 +5696,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5710,7 +5710,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5724,7 +5724,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5738,7 +5738,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5752,7 +5752,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5766,7 +5766,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5780,7 +5780,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5794,7 +5794,7 @@
         "fields": {
             "comment": null, 
             "positive": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 1, 
             "user": 20, 
@@ -5808,7 +5808,7 @@
         "fields": {
             "comment": null, 
             "positive": 15, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 2, 
             "user": 20, 
@@ -5822,7 +5822,7 @@
         "fields": {
             "comment": null, 
             "positive": 2, 
-            "question": 40, 
+            "exercise": 40, 
             "negative": 0, 
             "reputation_type": 3, 
             "user": 40, 
@@ -8854,12 +8854,12 @@
             "author": 40, 
             "tagnames": "tag-40-0 tag-40-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.EDITED", 
-            "question": 40, 
+            "title": "Test exercise title No.EDITED", 
+            "exercise": 40, 
             "revised_at": "2011-12-20 12:51:50", 
             "summary": "EDITED", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 2
         }
     }, 
@@ -8872,11 +8872,11 @@
             "tagnames": "", 
             "text": "Main differentiators business model micro economics\n                    marketplace equity augmented reality human computer", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:50", 
             "summary": "No.2 Revision", 
             "revision_type": 2, 
-            "answer": 20, 
+            "problem": 20, 
             "revision": 2
         }
     }, 
@@ -8888,12 +8888,12 @@
             "author": 1, 
             "tagnames": "tag-1-0 tag-1-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.1", 
-            "question": 1, 
+            "title": "Test exercise title No.1", 
+            "exercise": 1, 
             "revised_at": "2011-12-20 12:51:22", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -8905,12 +8905,12 @@
             "author": 2, 
             "tagnames": "tag-2-0 tag-2-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.2", 
-            "question": 2, 
+            "title": "Test exercise title No.2", 
+            "exercise": 2, 
             "revised_at": "2011-12-20 12:51:24", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -8922,12 +8922,12 @@
             "author": 3, 
             "tagnames": "tag-3-0 tag-3-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.3", 
-            "question": 3, 
+            "title": "Test exercise title No.3", 
+            "exercise": 3, 
             "revised_at": "2011-12-20 12:51:24", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -8939,12 +8939,12 @@
             "author": 4, 
             "tagnames": "tag-4-0 tag-4-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.4", 
-            "question": 4, 
+            "title": "Test exercise title No.4", 
+            "exercise": 4, 
             "revised_at": "2011-12-20 12:51:24", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -8956,12 +8956,12 @@
             "author": 5, 
             "tagnames": "tag-5-0 tag-5-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.5", 
-            "question": 5, 
+            "title": "Test exercise title No.5", 
+            "exercise": 5, 
             "revised_at": "2011-12-20 12:51:24", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -8973,12 +8973,12 @@
             "author": 6, 
             "tagnames": "tag-6-0 tag-6-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.6", 
-            "question": 6, 
+            "title": "Test exercise title No.6", 
+            "exercise": 6, 
             "revised_at": "2011-12-20 12:51:24", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -8990,12 +8990,12 @@
             "author": 7, 
             "tagnames": "tag-7-0 tag-7-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.7", 
-            "question": 7, 
+            "title": "Test exercise title No.7", 
+            "exercise": 7, 
             "revised_at": "2011-12-20 12:51:24", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9007,12 +9007,12 @@
             "author": 8, 
             "tagnames": "tag-8-0 tag-8-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.8", 
-            "question": 8, 
+            "title": "Test exercise title No.8", 
+            "exercise": 8, 
             "revised_at": "2011-12-20 12:51:24", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9024,12 +9024,12 @@
             "author": 9, 
             "tagnames": "tag-9-0 tag-9-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.9", 
-            "question": 9, 
+            "title": "Test exercise title No.9", 
+            "exercise": 9, 
             "revised_at": "2011-12-20 12:51:25", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9041,12 +9041,12 @@
             "author": 10, 
             "tagnames": "tag-10-0 tag-10-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.10", 
-            "question": 10, 
+            "title": "Test exercise title No.10", 
+            "exercise": 10, 
             "revised_at": "2011-12-20 12:51:25", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9058,12 +9058,12 @@
             "author": 11, 
             "tagnames": "tag-11-0 tag-11-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.11", 
-            "question": 11, 
+            "title": "Test exercise title No.11", 
+            "exercise": 11, 
             "revised_at": "2011-12-20 12:51:25", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9075,12 +9075,12 @@
             "author": 12, 
             "tagnames": "tag-12-0 tag-12-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.12", 
-            "question": 12, 
+            "title": "Test exercise title No.12", 
+            "exercise": 12, 
             "revised_at": "2011-12-20 12:51:25", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9092,12 +9092,12 @@
             "author": 13, 
             "tagnames": "tag-13-0 tag-13-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.13", 
-            "question": 13, 
+            "title": "Test exercise title No.13", 
+            "exercise": 13, 
             "revised_at": "2011-12-20 12:51:25", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9109,12 +9109,12 @@
             "author": 14, 
             "tagnames": "tag-14-0 tag-14-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.14", 
-            "question": 14, 
+            "title": "Test exercise title No.14", 
+            "exercise": 14, 
             "revised_at": "2011-12-20 12:51:25", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9126,12 +9126,12 @@
             "author": 15, 
             "tagnames": "tag-15-0 tag-15-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.15", 
-            "question": 15, 
+            "title": "Test exercise title No.15", 
+            "exercise": 15, 
             "revised_at": "2011-12-20 12:51:25", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9143,12 +9143,12 @@
             "author": 16, 
             "tagnames": "tag-16-0 tag-16-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.16", 
-            "question": 16, 
+            "title": "Test exercise title No.16", 
+            "exercise": 16, 
             "revised_at": "2011-12-20 12:51:26", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9160,12 +9160,12 @@
             "author": 17, 
             "tagnames": "tag-17-0 tag-17-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.17", 
-            "question": 17, 
+            "title": "Test exercise title No.17", 
+            "exercise": 17, 
             "revised_at": "2011-12-20 12:51:26", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9177,12 +9177,12 @@
             "author": 18, 
             "tagnames": "tag-18-0 tag-18-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.18", 
-            "question": 18, 
+            "title": "Test exercise title No.18", 
+            "exercise": 18, 
             "revised_at": "2011-12-20 12:51:26", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9194,12 +9194,12 @@
             "author": 19, 
             "tagnames": "tag-19-0 tag-19-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.19", 
-            "question": 19, 
+            "title": "Test exercise title No.19", 
+            "exercise": 19, 
             "revised_at": "2011-12-20 12:51:26", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9211,12 +9211,12 @@
             "author": 20, 
             "tagnames": "tag-20-0 tag-20-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.20", 
-            "question": 20, 
+            "title": "Test exercise title No.20", 
+            "exercise": 20, 
             "revised_at": "2011-12-20 12:51:26", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9228,12 +9228,12 @@
             "author": 21, 
             "tagnames": "tag-21-0 tag-21-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.21", 
-            "question": 21, 
+            "title": "Test exercise title No.21", 
+            "exercise": 21, 
             "revised_at": "2011-12-20 12:51:26", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9245,12 +9245,12 @@
             "author": 22, 
             "tagnames": "tag-22-0 tag-22-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.22", 
-            "question": 22, 
+            "title": "Test exercise title No.22", 
+            "exercise": 22, 
             "revised_at": "2011-12-20 12:51:26", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9262,12 +9262,12 @@
             "author": 23, 
             "tagnames": "tag-23-0 tag-23-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.23", 
-            "question": 23, 
+            "title": "Test exercise title No.23", 
+            "exercise": 23, 
             "revised_at": "2011-12-20 12:51:27", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9279,12 +9279,12 @@
             "author": 24, 
             "tagnames": "tag-24-0 tag-24-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.24", 
-            "question": 24, 
+            "title": "Test exercise title No.24", 
+            "exercise": 24, 
             "revised_at": "2011-12-20 12:51:27", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9296,12 +9296,12 @@
             "author": 25, 
             "tagnames": "tag-25-0 tag-25-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.25", 
-            "question": 25, 
+            "title": "Test exercise title No.25", 
+            "exercise": 25, 
             "revised_at": "2011-12-20 12:51:27", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9313,12 +9313,12 @@
             "author": 26, 
             "tagnames": "tag-26-0 tag-26-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.26", 
-            "question": 26, 
+            "title": "Test exercise title No.26", 
+            "exercise": 26, 
             "revised_at": "2011-12-20 12:51:27", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9330,12 +9330,12 @@
             "author": 27, 
             "tagnames": "tag-27-0 tag-27-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.27", 
-            "question": 27, 
+            "title": "Test exercise title No.27", 
+            "exercise": 27, 
             "revised_at": "2011-12-20 12:51:27", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9347,12 +9347,12 @@
             "author": 28, 
             "tagnames": "tag-28-0 tag-28-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.28", 
-            "question": 28, 
+            "title": "Test exercise title No.28", 
+            "exercise": 28, 
             "revised_at": "2011-12-20 12:51:27", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9364,12 +9364,12 @@
             "author": 29, 
             "tagnames": "tag-29-0 tag-29-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.29", 
-            "question": 29, 
+            "title": "Test exercise title No.29", 
+            "exercise": 29, 
             "revised_at": "2011-12-20 12:51:27", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9381,12 +9381,12 @@
             "author": 30, 
             "tagnames": "tag-30-0 tag-30-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.30", 
-            "question": 30, 
+            "title": "Test exercise title No.30", 
+            "exercise": 30, 
             "revised_at": "2011-12-20 12:51:28", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9398,12 +9398,12 @@
             "author": 31, 
             "tagnames": "tag-31-0 tag-31-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.31", 
-            "question": 31, 
+            "title": "Test exercise title No.31", 
+            "exercise": 31, 
             "revised_at": "2011-12-20 12:51:28", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9415,12 +9415,12 @@
             "author": 32, 
             "tagnames": "tag-32-0 tag-32-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.32", 
-            "question": 32, 
+            "title": "Test exercise title No.32", 
+            "exercise": 32, 
             "revised_at": "2011-12-20 12:51:28", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9432,12 +9432,12 @@
             "author": 33, 
             "tagnames": "tag-33-0 tag-33-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.33", 
-            "question": 33, 
+            "title": "Test exercise title No.33", 
+            "exercise": 33, 
             "revised_at": "2011-12-20 12:51:28", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9449,12 +9449,12 @@
             "author": 34, 
             "tagnames": "tag-34-0 tag-34-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.34", 
-            "question": 34, 
+            "title": "Test exercise title No.34", 
+            "exercise": 34, 
             "revised_at": "2011-12-20 12:51:28", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9466,12 +9466,12 @@
             "author": 35, 
             "tagnames": "tag-35-0 tag-35-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.35", 
-            "question": 35, 
+            "title": "Test exercise title No.35", 
+            "exercise": 35, 
             "revised_at": "2011-12-20 12:51:28", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9483,12 +9483,12 @@
             "author": 36, 
             "tagnames": "tag-36-0 tag-36-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.36", 
-            "question": 36, 
+            "title": "Test exercise title No.36", 
+            "exercise": 36, 
             "revised_at": "2011-12-20 12:51:29", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9500,12 +9500,12 @@
             "author": 37, 
             "tagnames": "tag-37-0 tag-37-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.37", 
-            "question": 37, 
+            "title": "Test exercise title No.37", 
+            "exercise": 37, 
             "revised_at": "2011-12-20 12:51:29", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9517,12 +9517,12 @@
             "author": 38, 
             "tagnames": "tag-38-0 tag-38-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.38", 
-            "question": 38, 
+            "title": "Test exercise title No.38", 
+            "exercise": 38, 
             "revised_at": "2011-12-20 12:51:29", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9534,12 +9534,12 @@
             "author": 39, 
             "tagnames": "tag-39-0 tag-39-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.39", 
-            "question": 39, 
+            "title": "Test exercise title No.39", 
+            "exercise": 39, 
             "revised_at": "2011-12-20 12:51:29", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9551,12 +9551,12 @@
             "author": 40, 
             "tagnames": "tag-40-0 tag-40-1", 
             "text": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    **A/B** testing *shrink* a market venture capital pitch.", 
-            "title": "Test question title No.40", 
-            "question": 40, 
+            "title": "Test exercise title No.40", 
+            "exercise": 40, 
             "revised_at": "2011-12-20 12:51:29", 
             "summary": "initial version", 
             "revision_type": 1, 
-            "answer": null, 
+            "problem": null, 
             "revision": 1
         }
     }, 
@@ -9569,11 +9569,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:29", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 1, 
+            "problem": 1, 
             "revision": 1
         }
     }, 
@@ -9586,11 +9586,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:30", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 2, 
+            "problem": 2, 
             "revision": 1
         }
     }, 
@@ -9603,11 +9603,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:30", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 3, 
+            "problem": 3, 
             "revision": 1
         }
     }, 
@@ -9620,11 +9620,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:30", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 4, 
+            "problem": 4, 
             "revision": 1
         }
     }, 
@@ -9637,11 +9637,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:30", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 5, 
+            "problem": 5, 
             "revision": 1
         }
     }, 
@@ -9654,11 +9654,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:31", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 6, 
+            "problem": 6, 
             "revision": 1
         }
     }, 
@@ -9671,11 +9671,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:31", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 7, 
+            "problem": 7, 
             "revision": 1
         }
     }, 
@@ -9688,11 +9688,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:31", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 8, 
+            "problem": 8, 
             "revision": 1
         }
     }, 
@@ -9705,11 +9705,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:32", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 9, 
+            "problem": 9, 
             "revision": 1
         }
     }, 
@@ -9722,11 +9722,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:32", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 10, 
+            "problem": 10, 
             "revision": 1
         }
     }, 
@@ -9739,11 +9739,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:33", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 11, 
+            "problem": 11, 
             "revision": 1
         }
     }, 
@@ -9756,11 +9756,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:33", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 12, 
+            "problem": 12, 
             "revision": 1
         }
     }, 
@@ -9773,11 +9773,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:33", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 13, 
+            "problem": 13, 
             "revision": 1
         }
     }, 
@@ -9790,11 +9790,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:34", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 14, 
+            "problem": 14, 
             "revision": 1
         }
     }, 
@@ -9807,11 +9807,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:35", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 15, 
+            "problem": 15, 
             "revision": 1
         }
     }, 
@@ -9824,11 +9824,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:35", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 16, 
+            "problem": 16, 
             "revision": 1
         }
     }, 
@@ -9841,11 +9841,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:36", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 17, 
+            "problem": 17, 
             "revision": 1
         }
     }, 
@@ -9858,11 +9858,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:36", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 18, 
+            "problem": 18, 
             "revision": 1
         }
     }, 
@@ -9875,11 +9875,11 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:37", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 19, 
+            "problem": 19, 
             "revision": 1
         }
     }, 
@@ -9892,17 +9892,17 @@
             "tagnames": "", 
             "text": "Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.", 
             "title": "", 
-            "question": null, 
+            "exercise": null, 
             "revised_at": "2011-12-20 12:51:38", 
             "summary": "initial version", 
             "revision_type": 2, 
-            "answer": 20, 
+            "problem": 20, 
             "revision": 1
         }
     }, 
     {
         "pk": 1, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -9919,7 +9919,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -9929,7 +9929,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:22", 
             "closed_by": null, 
             "close_reason": null, 
@@ -9940,13 +9940,13 @@
             "added_at": "2011-12-20 12:51:22", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.1", 
+            "title": "Test exercise title No.1", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 2, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -9963,7 +9963,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -9973,7 +9973,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:24", 
             "closed_by": null, 
             "close_reason": null, 
@@ -9984,13 +9984,13 @@
             "added_at": "2011-12-20 12:51:24", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.2", 
+            "title": "Test exercise title No.2", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 3, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -10007,7 +10007,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10017,7 +10017,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:24", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10028,13 +10028,13 @@
             "added_at": "2011-12-20 12:51:24", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.3", 
+            "title": "Test exercise title No.3", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 4, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -10051,7 +10051,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10061,7 +10061,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:24", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10072,13 +10072,13 @@
             "added_at": "2011-12-20 12:51:24", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.4", 
+            "title": "Test exercise title No.4", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 5, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -10095,7 +10095,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10105,7 +10105,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:24", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10116,13 +10116,13 @@
             "added_at": "2011-12-20 12:51:24", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.5", 
+            "title": "Test exercise title No.5", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 6, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -10139,7 +10139,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10149,7 +10149,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:24", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10160,13 +10160,13 @@
             "added_at": "2011-12-20 12:51:24", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.6", 
+            "title": "Test exercise title No.6", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 7, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -10183,7 +10183,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10193,7 +10193,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:24", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10204,13 +10204,13 @@
             "added_at": "2011-12-20 12:51:24", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.7", 
+            "title": "Test exercise title No.7", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 8, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -10227,7 +10227,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10237,7 +10237,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:24", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10248,13 +10248,13 @@
             "added_at": "2011-12-20 12:51:24", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.8", 
+            "title": "Test exercise title No.8", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 9, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -10271,7 +10271,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10281,7 +10281,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:25", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10292,13 +10292,13 @@
             "added_at": "2011-12-20 12:51:25", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.9", 
+            "title": "Test exercise title No.9", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 10, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -10315,7 +10315,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10325,7 +10325,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:25", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10336,13 +10336,13 @@
             "added_at": "2011-12-20 12:51:25", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.10", 
+            "title": "Test exercise title No.10", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 11, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -10359,7 +10359,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10369,7 +10369,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:25", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10380,13 +10380,13 @@
             "added_at": "2011-12-20 12:51:25", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.11", 
+            "title": "Test exercise title No.11", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 12, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -10403,7 +10403,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10413,7 +10413,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:25", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10424,13 +10424,13 @@
             "added_at": "2011-12-20 12:51:25", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.12", 
+            "title": "Test exercise title No.12", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 13, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -10447,7 +10447,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10457,7 +10457,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:25", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10468,13 +10468,13 @@
             "added_at": "2011-12-20 12:51:25", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.13", 
+            "title": "Test exercise title No.13", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 14, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -10491,7 +10491,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10501,7 +10501,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:25", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10512,13 +10512,13 @@
             "added_at": "2011-12-20 12:51:25", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.14", 
+            "title": "Test exercise title No.14", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 15, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -10535,7 +10535,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10545,7 +10545,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:25", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10556,13 +10556,13 @@
             "added_at": "2011-12-20 12:51:25", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.15", 
+            "title": "Test exercise title No.15", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 16, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -10579,7 +10579,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10589,7 +10589,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:26", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10600,13 +10600,13 @@
             "added_at": "2011-12-20 12:51:26", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.16", 
+            "title": "Test exercise title No.16", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 17, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -10623,7 +10623,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10633,7 +10633,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:26", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10644,13 +10644,13 @@
             "added_at": "2011-12-20 12:51:26", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.17", 
+            "title": "Test exercise title No.17", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 18, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -10667,7 +10667,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10677,7 +10677,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:26", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10688,13 +10688,13 @@
             "added_at": "2011-12-20 12:51:26", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.18", 
+            "title": "Test exercise title No.18", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 19, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -10711,7 +10711,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10721,7 +10721,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:26", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10732,13 +10732,13 @@
             "added_at": "2011-12-20 12:51:26", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.19", 
+            "title": "Test exercise title No.19", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 20, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -10755,7 +10755,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10765,7 +10765,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:26", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10776,13 +10776,13 @@
             "added_at": "2011-12-20 12:51:26", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.20", 
+            "title": "Test exercise title No.20", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 21, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -10799,7 +10799,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10809,7 +10809,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:26", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10820,13 +10820,13 @@
             "added_at": "2011-12-20 12:51:26", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.21", 
+            "title": "Test exercise title No.21", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 22, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -10843,7 +10843,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10853,7 +10853,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:26", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10864,13 +10864,13 @@
             "added_at": "2011-12-20 12:51:26", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.22", 
+            "title": "Test exercise title No.22", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 23, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -10887,7 +10887,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10897,7 +10897,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:27", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10908,13 +10908,13 @@
             "added_at": "2011-12-20 12:51:27", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.23", 
+            "title": "Test exercise title No.23", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 24, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -10931,7 +10931,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10941,7 +10941,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:27", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10952,13 +10952,13 @@
             "added_at": "2011-12-20 12:51:27", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.24", 
+            "title": "Test exercise title No.24", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 25, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -10975,7 +10975,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -10985,7 +10985,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:27", 
             "closed_by": null, 
             "close_reason": null, 
@@ -10996,13 +10996,13 @@
             "added_at": "2011-12-20 12:51:27", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.25", 
+            "title": "Test exercise title No.25", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 26, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -11019,7 +11019,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -11029,7 +11029,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:27", 
             "closed_by": null, 
             "close_reason": null, 
@@ -11040,13 +11040,13 @@
             "added_at": "2011-12-20 12:51:27", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.26", 
+            "title": "Test exercise title No.26", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 27, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -11063,7 +11063,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -11073,7 +11073,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:27", 
             "closed_by": null, 
             "close_reason": null, 
@@ -11084,13 +11084,13 @@
             "added_at": "2011-12-20 12:51:27", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.27", 
+            "title": "Test exercise title No.27", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 28, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -11107,7 +11107,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -11117,7 +11117,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:27", 
             "closed_by": null, 
             "close_reason": null, 
@@ -11128,13 +11128,13 @@
             "added_at": "2011-12-20 12:51:27", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.28", 
+            "title": "Test exercise title No.28", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 29, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -11151,7 +11151,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -11161,7 +11161,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:27", 
             "closed_by": null, 
             "close_reason": null, 
@@ -11172,13 +11172,13 @@
             "added_at": "2011-12-20 12:51:27", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.29", 
+            "title": "Test exercise title No.29", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 30, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -11195,7 +11195,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -11205,7 +11205,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:28", 
             "closed_by": null, 
             "close_reason": null, 
@@ -11216,13 +11216,13 @@
             "added_at": "2011-12-20 12:51:28", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.30", 
+            "title": "Test exercise title No.30", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 31, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -11239,7 +11239,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -11249,7 +11249,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:28", 
             "closed_by": null, 
             "close_reason": null, 
@@ -11260,13 +11260,13 @@
             "added_at": "2011-12-20 12:51:28", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.31", 
+            "title": "Test exercise title No.31", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 32, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -11283,7 +11283,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -11293,7 +11293,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:28", 
             "closed_by": null, 
             "close_reason": null, 
@@ -11304,13 +11304,13 @@
             "added_at": "2011-12-20 12:51:28", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.32", 
+            "title": "Test exercise title No.32", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 33, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -11327,7 +11327,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -11337,7 +11337,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:28", 
             "closed_by": null, 
             "close_reason": null, 
@@ -11348,13 +11348,13 @@
             "added_at": "2011-12-20 12:51:28", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.33", 
+            "title": "Test exercise title No.33", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 34, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -11371,7 +11371,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -11381,7 +11381,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:28", 
             "closed_by": null, 
             "close_reason": null, 
@@ -11392,13 +11392,13 @@
             "added_at": "2011-12-20 12:51:28", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.34", 
+            "title": "Test exercise title No.34", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 35, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -11415,7 +11415,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -11425,7 +11425,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:28", 
             "closed_by": null, 
             "close_reason": null, 
@@ -11436,13 +11436,13 @@
             "added_at": "2011-12-20 12:51:28", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.35", 
+            "title": "Test exercise title No.35", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 36, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -11459,7 +11459,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -11469,7 +11469,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:29", 
             "closed_by": null, 
             "close_reason": null, 
@@ -11480,13 +11480,13 @@
             "added_at": "2011-12-20 12:51:29", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.36", 
+            "title": "Test exercise title No.36", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 37, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -11503,7 +11503,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -11513,7 +11513,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:29", 
             "closed_by": null, 
             "close_reason": null, 
@@ -11524,13 +11524,13 @@
             "added_at": "2011-12-20 12:51:29", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.37", 
+            "title": "Test exercise title No.37", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 38, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -11547,7 +11547,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 1, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -11557,7 +11557,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:29", 
             "closed_by": null, 
             "close_reason": null, 
@@ -11568,13 +11568,13 @@
             "added_at": "2011-12-20 12:51:29", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.38", 
+            "title": "Test exercise title No.38", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 39, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -11591,7 +11591,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": false, 
+            "problem_accepted": false, 
             "last_edited_by": null, 
             "followed_by": [], 
             "favourite_count": 0, 
@@ -11601,7 +11601,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 0, 
+            "problem_count": 0, 
             "last_activity_at": "2011-12-20 12:51:29", 
             "closed_by": null, 
             "close_reason": null, 
@@ -11612,13 +11612,13 @@
             "added_at": "2011-12-20 12:51:29", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.39", 
+            "title": "Test exercise title No.39", 
             "last_edited_at": null
         }
     }, 
     {
         "pk": 40, 
-        "model": "askbot.question", 
+        "model": "askbot.exercise", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 20, 
@@ -11635,7 +11635,7 @@
             "html": "<p>Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User engagement\n                    <strong>A/B</strong> testing <em>shrink</em> a market venture capital pitch.</p>\n", 
             "vote_down_count": 0, 
             "closed": false, 
-            "answer_accepted": true, 
+            "problem_accepted": true, 
             "last_edited_by": 40, 
             "followed_by": [
                 1, 
@@ -11666,7 +11666,7 @@
             ], 
             "deleted": false, 
             "summary": "Lorem lean startup ipsum product market fit customer\n                    development acquihire technical cofounder. User", 
-            "answer_count": 20, 
+            "problem_count": 20, 
             "last_activity_at": "2011-12-20 12:51:50", 
             "closed_by": null, 
             "close_reason": null, 
@@ -11677,13 +11677,13 @@
             "added_at": "2011-12-20 12:51:29", 
             "deleted_by": null, 
             "wikified_at": null, 
-            "title": "Test question title No.EDITED", 
+            "title": "Test exercise title No.EDITED", 
             "last_edited_at": "2011-12-20 12:51:50"
         }
     }, 
     {
         "pk": 1, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -11693,7 +11693,7 @@
             "locked_at": null, 
             "score": 1, 
             "author": 1, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 0, 
@@ -11711,7 +11711,7 @@
     }, 
     {
         "pk": 2, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -11721,7 +11721,7 @@
             "locked_at": null, 
             "score": -1, 
             "author": 2, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 1, 
@@ -11739,7 +11739,7 @@
     }, 
     {
         "pk": 3, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -11749,7 +11749,7 @@
             "locked_at": null, 
             "score": 1, 
             "author": 3, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 0, 
@@ -11767,7 +11767,7 @@
     }, 
     {
         "pk": 4, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -11777,7 +11777,7 @@
             "locked_at": null, 
             "score": -1, 
             "author": 4, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 1, 
@@ -11795,7 +11795,7 @@
     }, 
     {
         "pk": 5, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -11805,7 +11805,7 @@
             "locked_at": null, 
             "score": 1, 
             "author": 5, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 0, 
@@ -11823,7 +11823,7 @@
     }, 
     {
         "pk": 6, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -11833,7 +11833,7 @@
             "locked_at": null, 
             "score": -1, 
             "author": 6, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 1, 
@@ -11851,7 +11851,7 @@
     }, 
     {
         "pk": 7, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -11861,7 +11861,7 @@
             "locked_at": null, 
             "score": 1, 
             "author": 7, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 0, 
@@ -11879,7 +11879,7 @@
     }, 
     {
         "pk": 8, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -11889,7 +11889,7 @@
             "locked_at": null, 
             "score": -1, 
             "author": 8, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 1, 
@@ -11907,7 +11907,7 @@
     }, 
     {
         "pk": 9, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -11917,7 +11917,7 @@
             "locked_at": null, 
             "score": 1, 
             "author": 9, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 0, 
@@ -11935,7 +11935,7 @@
     }, 
     {
         "pk": 10, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -11945,7 +11945,7 @@
             "locked_at": null, 
             "score": -1, 
             "author": 10, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 1, 
@@ -11963,7 +11963,7 @@
     }, 
     {
         "pk": 11, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -11973,7 +11973,7 @@
             "locked_at": null, 
             "score": 1, 
             "author": 11, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 0, 
@@ -11991,7 +11991,7 @@
     }, 
     {
         "pk": 12, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -12001,7 +12001,7 @@
             "locked_at": null, 
             "score": -1, 
             "author": 12, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 1, 
@@ -12019,7 +12019,7 @@
     }, 
     {
         "pk": 13, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -12029,7 +12029,7 @@
             "locked_at": null, 
             "score": 1, 
             "author": 13, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 0, 
@@ -12047,7 +12047,7 @@
     }, 
     {
         "pk": 14, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -12057,7 +12057,7 @@
             "locked_at": null, 
             "score": -1, 
             "author": 14, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 1, 
@@ -12075,7 +12075,7 @@
     }, 
     {
         "pk": 15, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -12085,7 +12085,7 @@
             "locked_at": null, 
             "score": 1, 
             "author": 15, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 0, 
@@ -12103,7 +12103,7 @@
     }, 
     {
         "pk": 16, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -12113,7 +12113,7 @@
             "locked_at": null, 
             "score": -1, 
             "author": 16, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 1, 
@@ -12131,7 +12131,7 @@
     }, 
     {
         "pk": 17, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -12141,7 +12141,7 @@
             "locked_at": null, 
             "score": 1, 
             "author": 17, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 0, 
@@ -12159,7 +12159,7 @@
     }, 
     {
         "pk": 18, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 0, 
@@ -12169,7 +12169,7 @@
             "locked_at": null, 
             "score": -1, 
             "author": 18, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 1, 
@@ -12187,7 +12187,7 @@
     }, 
     {
         "pk": 19, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 1, 
@@ -12197,7 +12197,7 @@
             "locked_at": null, 
             "score": 1, 
             "author": 19, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 0, 
             "html": "<p>Accelerator photo sharing business school drop out ramen\n                    hustle crush it revenue traction platforms.</p>\n", 
             "vote_down_count": 0, 
@@ -12215,7 +12215,7 @@
     }, 
     {
         "pk": 20, 
-        "model": "askbot.answer", 
+        "model": "askbot.problem", 
         "fields": {
             "wiki": false, 
             "vote_up_count": 20, 
@@ -12225,7 +12225,7 @@
             "locked_at": null, 
             "score": 20, 
             "author": 20, 
-            "question": 40, 
+            "exercise": 40, 
             "comment_count": 20, 
             "html": "<p>Main differentiators business model micro economics\n                    marketplace equity augmented reality human computer</p>\n", 
             "vote_down_count": 0, 

@@ -19,14 +19,14 @@
                            class="medal">
                             <span class="{{ act.badge.css_class }}">&#9679;</span>&nbsp;{% trans name=act.badge.name %}{{name}}{% endtrans %}
                         </a>
-                        {% if act.content_object.post_type == 'question' %}
-                            {% set question=act.content_object %}
-                            (<a title="{{question.summary|collapse|escape}}"
-                                href="{% url question question.id %}{{question.thread.title|slugify}}">{% trans %}source{% endtrans %}</a>)
-                        {% elif act.content_object.post_type == 'answer' %}
-                            {% set answer=act.content_object %}
-                            (<a title="{{answer.text|collapse|escape}}"
-                                href="{% url question answer.thread._question_post().id %}{{answer.thread.title|slugify}}#{{answer.id}}">{% trans %}source{% endtrans %}</a>)
+                        {% if act.content_object.post_type == 'exercise' %}
+                            {% set exercise=act.content_object %}
+                            (<a title="{{exercise.summary|collapse|escape}}"
+                                href="{% url exercise exercise.id %}{{exercise.thread.title|slugify}}">{% trans %}source{% endtrans %}</a>)
+                        {% elif act.content_object.post_type == 'problem' %}
+                            {% set problem=act.content_object %}
+                            (<a title="{{problem.text|collapse|escape}}"
+                                href="{% url exercise problem.thread._exercise_post().id %}{{problem.thread.title|slugify}}#{{problem.id}}">{% trans %}source{% endtrans %}</a>)
                         {% endif %}
                     {% else %}
                         <span class="post-type-{{ act.type_id }}"><a href="{{ act.title_link }}">{{ act.title|escape }}</a></span>

@@ -1,10 +1,10 @@
 
 var liveSearchNewThreadInit = function(auto_focus_out) {
-    var query = $('input#id_title.questionTitleInput');
+    var query = $('input#id_title.exerciseTitleInput');
     var prev_text = $.trim(query.val());
-    var search_url = askbot['urls']['api_get_questions'];
+    var search_url = askbot['urls']['api_get_exercises'];
     var running = false;
-    var q_list_sel = 'question-list'; //id of question listing div
+    var q_list_sel = 'exercise-list'; //id of exercise listing div
 
     running = false;
     var ask_page_eval_handle;
@@ -44,13 +44,13 @@ var liveSearchNewThreadInit = function(auto_focus_out) {
         var container = $('#' + q_list_sel);
         container.fadeOut(200, function() {
             container.children().remove();
-            $.each(data, function(idx, question){
-                var url = question['url'];
-                var title = question['title'];
-                var answer_count = question['answer_count'];
+            $.each(data, function(idx, exercise){
+                var url = exercise['url'];
+                var title = exercise['title'];
+                var problem_count = exercise['problem_count'];
                 var list_item = $('<h2></h2>');
                 var count_element = $('<span class="item-count"></span>');
-                count_element.html(answer_count);
+                count_element.html(problem_count);
                 list_item.append(count_element);
                 var link = $('<a></a>');
                 link.attr('href', url);

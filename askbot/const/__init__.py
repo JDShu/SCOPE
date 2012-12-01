@@ -8,13 +8,13 @@ from django.utils.translation import ugettext as _
 import re
 
 CLOSE_REASONS = (
-    (1, _('duplicate question')),
-    (2, _('question is off-topic or not relevant')),
+    (1, _('duplicate exercise')),
+    (2, _('exercise is off-topic or not relevant')),
     (3, _('too subjective and argumentative')),
-    (4, _('not a real question')),
-    (5, _('the question is answered, right answer was accepted')),
-    (6, _('question is not relevant or outdated')),
-    (7, _('question contains offensive or malicious remarks')),
+    (4, _('not a real exercise')),
+    (5, _('the exercise is problemed, right problem was accepted')),
+    (6, _('exercise is not relevant or outdated')),
+    (7, _('exercise contains offensive or malicious remarks')),
     (8, _('spam or advertising')),
     (9, _('too localized')),
 )
@@ -24,12 +24,12 @@ DATETIME_FORMAT = '%I:%M %p, %d %b %Y'
 
 TYPE_REPUTATION = (
     (1, 'gain_by_upvoted'),
-    (2, 'gain_by_answer_accepted'),
-    (3, 'gain_by_accepting_answer'),
+    (2, 'gain_by_problem_accepted'),
+    (3, 'gain_by_accepting_problem'),
     (4, 'gain_by_downvote_canceled'),
     (5, 'gain_by_canceling_downvote'),
-    (-1, 'lose_by_canceling_accepted_answer'),
-    (-2, 'lose_by_accepted_answer_cancled'),
+    (-1, 'lose_by_canceling_accepted_problem'),
+    (-2, 'lose_by_accepted_problem_cancled'),
     (-3, 'lose_by_downvoted'),
     (-4, 'lose_by_flagged'),
     (-5, 'lose_by_downvoting'),
@@ -46,14 +46,19 @@ POST_SORT_METHODS = (
     ('age-asc', _('oldest')),
     ('activity-desc', _('active')),
     ('activity-asc', _('inactive')),
-    ('answers-desc', _('hottest')),
-    ('answers-asc', _('coldest')),
+    ('problems-desc', _('hottest')),
+    ('problems-asc', _('coldest')),
+    #MAX:
+    ('solutions-desc', _('hottest')),
+    ('solutions-asc', _('coldest')),
     ('votes-desc', _('most voted')),
     ('votes-asc', _('least voted')),
     ('relevance-desc', _('relevance')),
 )
 
-POST_TYPES = ('answer', 'comment', 'question', 'tag_wiki', 'reject_reason')
+#new post types added for SCOPE/QURRENT project (exercise, problem)
+#problem, and exercise to be deleted when not necessary anymore
+POST_TYPES = ('comment', 'exercise', 'problem', 'solution', 'tag_wiki', 'reject_reason')
 
 SIMPLE_REPLY_SEPARATOR_TEMPLATE = '==== %s -=-=='
 
@@ -101,7 +106,7 @@ REPLY_WITH_COMMENT_TEMPLATE = _(
 )
 REPLY_SEPARATOR_REGEX = re.compile(r'==== .* -=-==', re.MULTILINE|re.DOTALL)
 
-ANSWER_SORT_METHODS = (#no translations needed here
+PROBLEM_SORT_METHODS = (#no translations needed here
     'latest', 'oldest', 'votes'
 )
 #todo: add assertion here that all sort methods are unique
@@ -111,7 +116,8 @@ ANSWER_SORT_METHODS = (#no translations needed here
 DEFAULT_POST_SORT_METHOD = 'activity-desc'
 POST_SCOPE_LIST = (
     ('all', _('all')),
-    ('unanswered', _('unanswered')),
+    ('without_problem', _('without_problem')),
+    ('without_solutions', _('without_solutions')),
     ('favorite', _('favorite')),
 )
 DEFAULT_POST_SCOPE = 'all'
@@ -122,15 +128,15 @@ TAG_LIST_FORMAT_CHOICES = (
 )
 
 PAGE_SIZE_CHOICES = (('10', '10',), ('30', '30',), ('50', '50',),)
-ANSWERS_PAGE_SIZE = 10
-QUESTIONS_PER_PAGE_USER_CHOICES = ((10, u'10'), (30, u'30'), (50, u'50'),)
+PROBLEMS_PAGE_SIZE = 10
+EXERCISES_PER_PAGE_USER_CHOICES = ((10, u'10'), (30, u'30'), (50, u'50'),)
 
-UNANSWERED_QUESTION_MEANING_CHOICES = (
-    ('NO_ANSWERS', _('Question has no answers')),
-    ('NO_ACCEPTED_ANSWERS', _('Question has no accepted answers')),
+EXERCISE_WITHOUT_PROBLEM_MEANING_CHOICES = (
+    ('NO_PROBLEMS', _('Exercise has no problems')),
+    ('NO_ACCEPTED_PROBLEMS', _('Exercise has no accepted problems')),
 )
 #todo: implement this
-#    ('NO_UPVOTED_ANSWERS',),
+#    ('NO_UPVOTED_PROBLEMS',),
 #)
 
 #todo:
@@ -148,27 +154,27 @@ TAG_SEP = ',' # has to be valid TAG_SPLIT_REGEX char and MUST NOT be in const.TA
 #!!! see const.message_keys.TAG_WRONG_CHARS_MESSAGE
 EMAIL_REGEX = re.compile(r'\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b', re.I)
 
-TYPE_ACTIVITY_ASK_QUESTION = 1
-TYPE_ACTIVITY_ANSWER = 2
-TYPE_ACTIVITY_COMMENT_QUESTION = 3
-TYPE_ACTIVITY_COMMENT_ANSWER = 4
-TYPE_ACTIVITY_UPDATE_QUESTION = 5
-TYPE_ACTIVITY_UPDATE_ANSWER = 6
+TYPE_ACTIVITY_ASK_EXERCISE = 1
+TYPE_ACTIVITY_PROBLEM = 2
+TYPE_ACTIVITY_COMMENT_EXERCISE = 3
+TYPE_ACTIVITY_COMMENT_PROBLEM = 4
+TYPE_ACTIVITY_UPDATE_EXERCISE = 5
+TYPE_ACTIVITY_UPDATE_PROBLEM = 6
 TYPE_ACTIVITY_PRIZE = 7
-TYPE_ACTIVITY_MARK_ANSWER = 8
+TYPE_ACTIVITY_MARK_PROBLEM = 8
 TYPE_ACTIVITY_VOTE_UP = 9
 TYPE_ACTIVITY_VOTE_DOWN = 10
 TYPE_ACTIVITY_CANCEL_VOTE = 11
-TYPE_ACTIVITY_DELETE_QUESTION = 12
-TYPE_ACTIVITY_DELETE_ANSWER = 13
+TYPE_ACTIVITY_DELETE_EXERCISE = 12
+TYPE_ACTIVITY_DELETE_PROBLEM = 13
 TYPE_ACTIVITY_MARK_OFFENSIVE = 14
 TYPE_ACTIVITY_UPDATE_TAGS = 15
 TYPE_ACTIVITY_FAVORITE = 16
 TYPE_ACTIVITY_USER_FULL_UPDATED = 17
 TYPE_ACTIVITY_EMAIL_UPDATE_SENT = 18
 TYPE_ACTIVITY_MENTION = 19
-TYPE_ACTIVITY_UNANSWERED_REMINDER_SENT = 20
-TYPE_ACTIVITY_ACCEPT_ANSWER_REMINDER_SENT = 21
+TYPE_ACTIVITY_EXERCISE_WITHOUT_PROBLEM_REMINDER_SENT = 20
+TYPE_ACTIVITY_ACCEPT_PROBLEM_REMINDER_SENT = 21
 TYPE_ACTIVITY_CREATE_TAG_WIKI = 22
 TYPE_ACTIVITY_UPDATE_TAG_WIKI = 23
 TYPE_ACTIVITY_MODERATED_NEW_POST = 24
@@ -178,24 +184,24 @@ TYPE_ACTIVITY_UPDATE_REJECT_REASON = 27
 TYPE_ACTIVITY_VALIDATION_EMAIL_SENT = 28
 TYPE_ACTIVITY_POST_SHARED = 29
 TYPE_ACTIVITY_ASK_TO_JOIN_GROUP = 30
-#TYPE_ACTIVITY_EDIT_QUESTION = 17
-#TYPE_ACTIVITY_EDIT_ANSWER = 18
+#TYPE_ACTIVITY_EDIT_EXERCISE = 17
+#TYPE_ACTIVITY_EDIT_PROBLEM = 18
 
 #todo: rename this to TYPE_ACTIVITY_CHOICES
 TYPE_ACTIVITY = (
-    (TYPE_ACTIVITY_ASK_QUESTION, _('asked a question')),
-    (TYPE_ACTIVITY_ANSWER, _('answered a question')),
-    (TYPE_ACTIVITY_COMMENT_QUESTION, _('commented question')),
-    (TYPE_ACTIVITY_COMMENT_ANSWER, _('commented answer')),
-    (TYPE_ACTIVITY_UPDATE_QUESTION, _('edited question')),
-    (TYPE_ACTIVITY_UPDATE_ANSWER, _('edited answer')),
+    (TYPE_ACTIVITY_ASK_EXERCISE, _('asked a exercise')),
+    (TYPE_ACTIVITY_PROBLEM, _('problemed a exercise')),
+    (TYPE_ACTIVITY_COMMENT_EXERCISE, _('commented exercise')),
+    (TYPE_ACTIVITY_COMMENT_PROBLEM, _('commented problem')),
+    (TYPE_ACTIVITY_UPDATE_EXERCISE, _('edited exercise')),
+    (TYPE_ACTIVITY_UPDATE_PROBLEM, _('edited problem')),
     (TYPE_ACTIVITY_PRIZE, _('received badge')),
-    (TYPE_ACTIVITY_MARK_ANSWER, _('marked best answer')),
+    (TYPE_ACTIVITY_MARK_PROBLEM, _('marked best problem')),
     (TYPE_ACTIVITY_VOTE_UP, _('upvoted')),
     (TYPE_ACTIVITY_VOTE_DOWN, _('downvoted')),
     (TYPE_ACTIVITY_CANCEL_VOTE, _('canceled vote')),
-    (TYPE_ACTIVITY_DELETE_QUESTION, _('deleted question')),
-    (TYPE_ACTIVITY_DELETE_ANSWER, _('deleted answer')),
+    (TYPE_ACTIVITY_DELETE_EXERCISE, _('deleted exercise')),
+    (TYPE_ACTIVITY_DELETE_PROBLEM, _('deleted problem')),
     (TYPE_ACTIVITY_MARK_OFFENSIVE, _('marked offensive')),
     (TYPE_ACTIVITY_UPDATE_TAGS, _('updated tags')),
     (TYPE_ACTIVITY_FAVORITE, _('selected favorite')),
@@ -203,12 +209,12 @@ TYPE_ACTIVITY = (
     (TYPE_ACTIVITY_EMAIL_UPDATE_SENT, _('email update sent to user')),
     (TYPE_ACTIVITY_POST_SHARED, _('a post was shared')),
     (
-        TYPE_ACTIVITY_UNANSWERED_REMINDER_SENT,
-        _('reminder about unanswered questions sent'),
+        TYPE_ACTIVITY_EXERCISE_WITHOUT_PROBLEM_REMINDER_SENT,
+        _('reminder about exercises without problems sent'),
     ),
     (
-        TYPE_ACTIVITY_ACCEPT_ANSWER_REMINDER_SENT,
-        _('reminder about accepting the best answer sent'),
+        TYPE_ACTIVITY_ACCEPT_PROBLEM_REMINDER_SENT,
+        _('reminder about accepting the best problem sent'),
     ),
     (TYPE_ACTIVITY_MENTION, _('mentioned in the post')),
     (
@@ -241,12 +247,12 @@ TYPE_ACTIVITY = (
 
 #MENTION activity is added implicitly, unfortunately
 RESPONSE_ACTIVITY_TYPES_FOR_INSTANT_NOTIFICATIONS = (
-    TYPE_ACTIVITY_COMMENT_QUESTION,
-    TYPE_ACTIVITY_COMMENT_ANSWER,
-    TYPE_ACTIVITY_UPDATE_ANSWER,
-    TYPE_ACTIVITY_UPDATE_QUESTION,
-    TYPE_ACTIVITY_ANSWER,
-    TYPE_ACTIVITY_ASK_QUESTION,
+    TYPE_ACTIVITY_COMMENT_EXERCISE,
+    TYPE_ACTIVITY_COMMENT_PROBLEM,
+    TYPE_ACTIVITY_UPDATE_PROBLEM,
+    TYPE_ACTIVITY_UPDATE_EXERCISE,
+    TYPE_ACTIVITY_PROBLEM,
+    TYPE_ACTIVITY_ASK_EXERCISE,
     TYPE_ACTIVITY_POST_SHARED
 )
 
@@ -254,31 +260,31 @@ RESPONSE_ACTIVITY_TYPES_FOR_INSTANT_NOTIFICATIONS = (
 #the same as for instant notifications for now
 #MENTION activity is added implicitly, unfortunately
 RESPONSE_ACTIVITY_TYPES_FOR_DISPLAY = (
-    TYPE_ACTIVITY_ANSWER,
-    TYPE_ACTIVITY_ASK_QUESTION,
-    TYPE_ACTIVITY_COMMENT_QUESTION,
-    TYPE_ACTIVITY_COMMENT_ANSWER,
-    TYPE_ACTIVITY_UPDATE_ANSWER,
-    TYPE_ACTIVITY_UPDATE_QUESTION,
+    TYPE_ACTIVITY_PROBLEM,
+    TYPE_ACTIVITY_ASK_EXERCISE,
+    TYPE_ACTIVITY_COMMENT_EXERCISE,
+    TYPE_ACTIVITY_COMMENT_PROBLEM,
+    TYPE_ACTIVITY_UPDATE_PROBLEM,
+    TYPE_ACTIVITY_UPDATE_EXERCISE,
     TYPE_ACTIVITY_POST_SHARED,
 #    TYPE_ACTIVITY_PRIZE,
-#    TYPE_ACTIVITY_MARK_ANSWER,
+#    TYPE_ACTIVITY_MARK_PROBLEM,
 #    TYPE_ACTIVITY_VOTE_UP,
 #    TYPE_ACTIVITY_VOTE_DOWN,
 #    TYPE_ACTIVITY_CANCEL_VOTE,
-#    TYPE_ACTIVITY_DELETE_QUESTION,
-#    TYPE_ACTIVITY_DELETE_ANSWER,
+#    TYPE_ACTIVITY_DELETE_EXERCISE,
+#    TYPE_ACTIVITY_DELETE_PROBLEM,
 #    TYPE_ACTIVITY_MARK_OFFENSIVE,
 #    TYPE_ACTIVITY_FAVORITE,
 )
 
 RESPONSE_ACTIVITY_TYPE_MAP_FOR_TEMPLATES = {
-    TYPE_ACTIVITY_COMMENT_QUESTION: 'question_comment',
-    TYPE_ACTIVITY_COMMENT_ANSWER: 'answer_comment',
-    TYPE_ACTIVITY_UPDATE_ANSWER: 'answer_update',
-    TYPE_ACTIVITY_UPDATE_QUESTION: 'question_update',
-    TYPE_ACTIVITY_ANSWER: 'new_answer',
-    TYPE_ACTIVITY_ASK_QUESTION: 'new_question',
+    TYPE_ACTIVITY_COMMENT_EXERCISE: 'exercise_comment',
+    TYPE_ACTIVITY_COMMENT_PROBLEM: 'problem_comment',
+    TYPE_ACTIVITY_UPDATE_PROBLEM: 'problem_update',
+    TYPE_ACTIVITY_UPDATE_EXERCISE: 'exercise_update',
+    TYPE_ACTIVITY_PROBLEM: 'new_problem',
+    TYPE_ACTIVITY_ASK_EXERCISE: 'new_exercise',
     TYPE_ACTIVITY_POST_SHARED: 'post_shared'
 }
 
@@ -288,10 +294,10 @@ assert(
 )
 
 TYPE_RESPONSE = {
-    'QUESTION_ANSWERED' : _('answered question'),
-    'QUESTION_COMMENTED': _('commented question'),
-    'ANSWER_COMMENTED'  : _('commented answer'),
-    'ANSWER_ACCEPTED'   : _('accepted answer'),
+    'EXERCISE_PROBLEMED' : _('problemed exercise'),
+    'EXERCISE_COMMENTED': _('commented exercise'),
+    'PROBLEM_COMMENTED'  : _('commented problem'),
+    'PROBLEM_ACCEPTED'   : _('accepted problem'),
 }
 
 POST_STATUS = {
@@ -372,7 +378,7 @@ DEPENDENCY_URLS = {
     'facebook-apps': 'http://www.facebook.com/developers/createapp.php',
     'google-webmaster-tools': 'https://www.google.com/webmasters/tools/home',
     'identica-apps': 'http://identi.ca/settings/oauthapps',
-    'noscript': 'https://www.google.com/support/bin/answer.py?answer=23852',
+    'noscript': 'https://www.google.com/support/bin/problem.py?problem=23852',
     'linkedin-apps': 'https://www.linkedin.com/secure/developer',
     'mathjax': 'http://www.mathjax.org/resources/docs/?installation.html',
     'recaptcha': 'http://google.com/recaptcha',
@@ -409,13 +415,13 @@ SEARCH_ORDER_BY = (
                     ('added_at', _('date ascendant')),
                     ('-last_activity_at', _('activity descendant')),
                     ('last_activity_at', _('activity ascendant')),
-                    ('-answer_count', _('answers descendant')),
-                    ('answer_count', _('answers ascendant')),
+                    ('-problem_count', _('problems descendant')),
+                    ('problem_count', _('problems ascendant')),
                     ('-points', _('votes descendant')),
                     ('points', _('votes ascendant')),
                   )
 
-DEFAULT_QUESTION_WIDGET_STYLE = """
+DEFAULT_EXERCISE_WIDGET_STYLE = """
 @import url('http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,400,700');
 body {
     overflow: hidden;

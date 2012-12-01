@@ -19,9 +19,9 @@ class InsufficientReputation(exceptions.PermissionDenied):
     """
     pass
 
-class AnswerAlreadyGiven(exceptions.PermissionDenied):
-    """Raised when user attempts to post a second answer
-    to the same question"""
+class ProblemAlreadyGiven(exceptions.PermissionDenied):
+    """Raised when user attempts to post a second problem
+    to the same exercise"""
     pass
 
 class DuplicateCommand(exceptions.PermissionDenied):
@@ -36,12 +36,12 @@ class EmailNotSent(exceptions.ImproperlyConfigured):
     """
     pass
 
-class QuestionHidden(exceptions.PermissionDenied):
-    """raised when user cannot see deleted question
+class ExerciseHidden(exceptions.PermissionDenied):
+    """raised when user cannot see deleted exercise
     """
     pass
 
-class AnswerHidden(exceptions.PermissionDenied):
-    """raised when user cannot see deleted answer
+class ProblemHidden(exceptions.PermissionDenied):
+    """raised when user cannot see deleted problem
     """
     pass

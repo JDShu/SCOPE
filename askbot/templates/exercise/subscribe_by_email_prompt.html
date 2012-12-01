@@ -1,0 +1,13 @@
+{% if request.user.is_authenticated() %}
+    <p>
+        {{ problem.email_notify }}
+        <label for="exercise-subscribe-updates">
+            {% trans %}Email me when there are any new problems{% endtrans %}
+        </label>
+    </p>
+{% else %}
+    <p>
+        {{ problem.email_notify }}
+        <label>{% trans %}<span class='strong'>Here</span> (once you log in) you will be able to sign up for the periodic email updates about this exercise.{% endtrans %}</label>
+    </p>
+{% endif %}

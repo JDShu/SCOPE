@@ -1,0 +1,59 @@
+<form
+        id="fmproblem"
+        action="{% url problem exercise.id %}"
+        method="post"
+        >{% csrf_token %}
+    {# ==== START: exercise/subscribe_by_email_prompt.html ==== #}
+    {% include "exercise/subscribe_by_email_prompt.html" %}
+    {# ==== END: exercise/subscribe_by_email_prompt.html ==== #}
+    <div style="clear:both"></div>
+    {% if request.user.is_anonymous() and settings.ALLOW_POSTING_BEFORE_LOGGING_IN == False %}
+        {% if not thread.closed %}
+            <a
+                    class="submit"
+                    href="{{settings.LOGIN_URL}}?next={% url exercise exercise.id %}"
+                    >{% trans %}Login/Signup to Problem{% endtrans %}</a>
+        {% endif %}
+    {% else %}
+        {% if not thread.closed %}
+            <div>
+                {% spaceless %}
+                    <h2>
+                        {% if problems %}
+                            {% trans %}Your problem{% endtrans %}
+                        {% else %}
+                            {% trans %}Be the first one to add a problem to this exercise!{% endtrans %}
+                        {% endif %}
+                    </h2>
+                {% endspaceless %}
+            </div>
+            {% if request.user.is_anonymous() %}
+                <div class="message">{% trans %}<span class='strong big'>Please start posting your problem anonymously</span> - your problem will be saved within the current session and published after you log in or create a new account. Please try to give a <strong>substantial problem</strong>, for discussions, <strong>please use comments</strong> and <strong>please do remember to vote</strong> (after you log in)!{% endtrans %}</div>
+            {% else %}
+                <p class="message">
+                    {% if request.user==exercise.author  %}
+                        {% trans %}<span class='big strong'>You are welcome to add a problem to your own exercise</span>, but please make sure to give an <strong>problem</strong>. Remember that you can always <strong>revise your original exercise</strong>. Please <strong>use comments for discussions</strong>  and <strong>please don't forget to vote :)</strong> for the problems that you liked (or perhaps did not like)!{% endtrans %}
+                    {% else %}
+                        {% trans %}<span class='big strong'>Please try to give a substantial problem</span>. If you wanted to comment on the exercise or problem, just <strong>use the commenting tool</strong>. Please remember that you can always <strong>revise your problems</strong> - no need to problem the same exercise twice. Also, please <strong>don't forget to vote</strong> - it really helps to select the best exercises and problems!{% endtrans %}
+                    {% endif %}
+                </p>
+            {% endif %}
+            {{ macros.edit_post(
+                    problem,
+                    user = request.user,
+                    editor_type = settings.EDITOR_TYPE
+                )
+            }}
+            <input id="add-problem-btn" type="submit" class="submit after-editor" style="float:left"/>
+            <script type="text/javascript">
+                askbot['functions']['renderAddProblemButton']();
+            </script>
+            {% if settings.WIKI_ON %}
+                {{ macros.checkbox_in_div(problem.wiki) }}
+            {% endif %}
+            {% if request.user.is_authenticated() and request.user.can_make_group_private_posts() %}
+                {{ macros.checkbox_in_div(problem.post_privately) }}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+</form>

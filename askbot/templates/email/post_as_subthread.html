@@ -1,6 +1,6 @@
 {% from "email/macros.html" import quoted_post %}
 
-{% if post.post_type in ('question', 'answer') %}
+{% if post.post_type in ('exercise', 'problem') %}
     {{ quoted_post(post) }}
     {% set comments = post.get_cached_comments() %}
     {% if comments %}

@@ -18,12 +18,12 @@ from askbot import forms
 
 WIDGETS_MODELS = {
                   'ask': models.AskWidget,
-                  'question': models.QuestionWidget
+                  'exercise': models.ExerciseWidget
                  }
 
 WIDGETS_FORMS = {
                 'ask': forms.CreateAskWidgetForm,
-                'question': forms.CreateQuestionWidgetForm,
+                'exercise': forms.CreateExerciseWidgetForm,
                }
 
 def _get_model(key):
@@ -44,7 +44,7 @@ def _get_form(key):
 def widgets(request):
     data = {
         'ask_widgets': models.AskWidget.objects.all().count(),
-        'question_widgets': models.QuestionWidget.objects.all().count(),
+        'exercise_widgets': models.ExerciseWidget.objects.all().count(),
         'page_class': 'widgets'
     }
     return render_into_skin('embed/widgets.html', data, request)
@@ -52,11 +52,11 @@ def widgets(request):
 @csrf.csrf_protect
 def ask_widget(request, widget_id):
 
-    def post_question(data, request):
+    def post_exercise(data, request):
         thread = models.Thread.objects.create_new(**data)
-        question = thread._question_post()
-        request.session['widget_question_url'] = question.get_absolute_url()
-        return question
+        exercise = thread._exercise_post()
+        request.session['widget_exercise_url'] = exercise.get_absolute_url()
+        return exercise
 
     widget = get_object_or_404(models.AskWidget, id=widget_id)
 
@@ -93,23 +93,23 @@ def ask_widget(request, widget_id):
             }
             if request.user.is_authenticated():
                 data_dict['author'] = request.user
-                question = post_question(data_dict, request)
+                exercise = post_exercise(data_dict, request)
                 return redirect('ask_by_widget_complete')
             else:
-                request.session['widget_question'] = data_dict
+                request.session['widget_exercise'] = data_dict
                 next_url = '%s?next=%s' % (
                         reverse('widget_signin'),
                         reverse('ask_by_widget', args=(widget.id,))
                 )
                 return redirect(next_url)
     else:
-        if 'widget_question' in request.session and \
+        if 'widget_exercise' in request.session and \
                 request.GET.get('action', 'post-after-login'):
             if request.user.is_authenticated():
-                data_dict = request.session['widget_question']
+                data_dict = request.session['widget_exercise']
                 data_dict['author'] = request.user
-                question = post_question(request.session['widget_question'], request)
-                del request.session['widget_question']
+                exercise = post_exercise(request.session['widget_exercise'], request)
+                del request.session['widget_exercise']
                 return redirect('ask_by_widget_complete')
             else:
                 #FIXME: this redirect is temporal need to create the correct view
@@ -127,17 +127,17 @@ def ask_widget(request, widget_id):
 
 @login_required
 def ask_widget_complete(request):
-    question_url = request.session.get('widget_question_url')
+    exercise_url = request.session.get('widget_exercise_url')
     custom_css = request.session.get('widget_css')
-    if question_url:
-        del request.session['widget_question_url']
+    if exercise_url:
+        del request.session['widget_exercise_url']
     else:
-        question_url = '#'
+        exercise_url = '#'
 
     if custom_css:
         del request.session['widget_css']
 
-    data = {'question_url': question_url, 'custom_css': custom_css}
+    data = {'exercise_url': exercise_url, 'custom_css': custom_css}
     return render_into_skin('embed/ask_widget_complete.html', data, request)
 
 
@@ -240,11 +240,11 @@ def render_ask_widget_css(request, widget_id):
     content =  content_tpl.render(Context(context_dict))
     return HttpResponse(content, mimetype='text/css')
 
-def question_widget(request, widget_id):
-    """Returns the first x questions based on certain tags.
-    @returns template with those questions listed."""
+def exercise_widget(request, widget_id):
+    """Returns the first x exercises based on certain tags.
+    @returns template with those exercises listed."""
     # make sure this is a GET request with the correct parameters.
-    widget = get_object_or_404(models.QuestionWidget, pk=widget_id)
+    widget = get_object_or_404(models.ExerciseWidget, pk=widget_id)
 
     if request.method != 'GET':
         raise Http404
@@ -262,13 +262,13 @@ def question_widget(request, widget_id):
         filter_params['title__icontains'] = widget.search_query
 
     if filter_params:
-        threads = models.Thread.objects.filter(**filter_params).order_by(widget.order_by)[:widget.question_number]
+        threads = models.Thread.objects.filter(**filter_params).order_by(widget.order_by)[:widget.exercise_number]
     else:
-        threads = models.Thread.objects.all().order_by(widget.order_by)[:widget.question_number]
+        threads = models.Thread.objects.all().order_by(widget.order_by)[:widget.exercise_number]
 
     data = {
              'threads': threads,
              'widget': widget
            }
 
-    return render_into_skin('embed/question_widget.html', data, request)
+    return render_into_skin('embed/exercise_widget.html', data, request)

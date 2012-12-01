@@ -15,7 +15,7 @@ class WidgetViewsTests(AskbotTestCase):
         self.user = self.create_user('user1')
         self.user.set_password('sample')
         self.user.save()
-        self.good_data = {'title': 'This is a title question',
+        self.good_data = {'title': 'This is a title exercise',
                           'ask_anonymously': False}
 
     def test_post_with_auth(self):
@@ -28,12 +28,12 @@ class WidgetViewsTests(AskbotTestCase):
         #weird issue
         response = self.client.post(reverse('ask_by_widget', args=(self.widget.id, )), self.good_data)
         self.assertEquals(response.status_code, 302)
-        self.assertTrue('widget_question' in self.client.session)
-        self.assertEquals(self.client.session['widget_question']['title'],
+        self.assertTrue('widget_exercise' in self.client.session)
+        self.assertEquals(self.client.session['widget_exercise']['title'],
                           self.good_data['title'])
 
     def test_post_after_login(self):
-        widget_question_data = { 'title': 'testing post after login, does it?',
+        widget_exercise_data = { 'title': 'testing post after login, does it?',
                                  'author': self.user,
                                  'added_at': datetime.now(),
                                  'wiki': False,
@@ -45,15 +45,15 @@ class WidgetViewsTests(AskbotTestCase):
         self.client.login(username='user1', password='sample')
 
         session = self.client.session
-        session['widget_question'] = widget_question_data
+        session['widget_exercise'] = widget_exercise_data
         session.save()
         response = self.client.get(
             reverse('ask_by_widget', args=(self.widget.id, )),
             {'action': 'post-after-login'}
         )
-        self.assertFalse('widget_question' in self.client.session)
+        self.assertFalse('widget_exercise' in self.client.session)
         self.assertEquals(response.status_code, 302)
-        #verify posting question
+        #verify posting exercise
 
     def test_render_widget_view(self):
         response = self.client.get(reverse('render_ask_widget', args=(self.widget.id, )))
@@ -133,18 +133,18 @@ class WidgetCreatorViewsTests(AskbotTestCase):
     #    self.assertEquals(404, response.status_code)
 
 
-class QuestionWidgetViewsTests(AskbotTestCase):
+class ExerciseWidgetViewsTests(AskbotTestCase):
 
     def setUp(self):
         self.user = self.create_user('testuser')
         self.client = Client()
-        self.widget =  models.QuestionWidget.objects.create(title="foo",
-                                   question_number=5, search_query='test',
+        self.widget =  models.ExerciseWidget.objects.create(title="foo",
+                                   exercise_number=5, search_query='test',
                                    tagnames='test')
 
-        #we post 6 questions!
+        #we post 6 exercises!
         titles = (
-            'test question 1', 'this is a test',
+            'test exercise 1', 'this is a test',
             'without the magic word', 'test test test',
             'test just another test', 'no magic word',
             'test another', 'I can no believe is a test'
@@ -152,7 +152,7 @@ class QuestionWidgetViewsTests(AskbotTestCase):
 
         tagnames = 'test foo bar'
         for title in titles:
-            self.post_question(title=title, tags=tagnames)
+            self.post_exercise(title=title, tags=tagnames)
 
     def test_valid_response(self):
         filter_params = {
@@ -162,7 +162,7 @@ class QuestionWidgetViewsTests(AskbotTestCase):
 
         threads = models.Thread.objects.filter(**filter_params)[:5]
 
-        response = self.client.get(reverse('question_widget', args=(self.widget.id, )))
+        response = self.client.get(reverse('exercise_widget', args=(self.widget.id, )))
         self.assertEquals(200, response.status_code)
 
         self.assertQuerysetEqual(threads, response.context['threads'])

@@ -11,7 +11,7 @@
                     <th class="tags-col">{% trans %}Tag{% endtrans %}</th>
                     <th class="users-col">{% trans %}Suggested by{% endtrans %}</th>
                     <th class="decision-col">{% trans %}Your decision{% endtrans %}</th>
-                    <th>{% trans %}Suggested tag was used for questions{% endtrans %}</th>
+                    <th>{% trans %}Suggested tag was used for exercises{% endtrans %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,7 +27,7 @@
                         {% endfor %}
                     </td>
                     <td colspan="2">
-                        <table>{# inner table for the list of questions #}
+                        <table>{# inner table for the list of exercises #}
                         {% for thread in tag.threads.all() %}
                             <tr class="thread-info" data-thread-id="{{ thread.id }}">
                                 <td class="per-thread-controls">
@@ -35,7 +35,7 @@
                                     <button class="btn reject">{% trans %}Reject{% endtrans %}</button>
                                 </td>
                                 <td class="thread-links-col">
-                                    <a title="{{ thread._question_post().summary|escape }}"
+                                    <a title="{{ thread._exercise_post().summary|escape }}"
                                         href="{{ thread.get_absolute_url() }}"
                                     >{{ thread.title|escape }}</a>
                                 </td>
@@ -47,7 +47,7 @@
                 <tr class="per-tag-controls" data-tag-id="{{ tag.id }}">
                     <td colspan="4">
                         {% if tag.threads.count() > 1 %}
-                            <button class="btn accept">{% trans name=tag.name %}Apply tag "{{ name }}" to all above questions{% endtrans %}</button>
+                            <button class="btn accept">{% trans name=tag.name %}Apply tag "{{ name }}" to all above exercises{% endtrans %}</button>
                             <button class="btn reject">{% trans %}Reject tag{% endtrans %}</button>
                         {% endif %}
                     </td>

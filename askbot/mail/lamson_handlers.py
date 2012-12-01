@@ -200,7 +200,7 @@ def ASK(message, host = None, addr = None):
     subject = message['Subject'].strip('\n\t ')
     body_text, stored_files, unused = mail.process_parts(parts)
     if addr == 'ask':
-        mail.process_emailed_question(
+        mail.process_emailed_exercise(
             from_address, subject, body_text, stored_files
         )
     else:
@@ -209,7 +209,7 @@ def ASK(message, host = None, addr = None):
             return
         try:
             group = Group.objects.get(name__iexact=addr)
-            mail.process_emailed_question(
+            mail.process_emailed_exercise(
                 from_address, subject, body_text, stored_files,
                 group_id = group.id
             )
@@ -298,7 +298,7 @@ def PROCESS(
 
     #4) actually make an edit in the forum
     robj = reply_address_object
-    add_post_actions = ('post_comment', 'post_answer', 'auto_answer_or_comment')
+    add_post_actions = ('post_comment', 'post_problem', 'auto_problem_or_comment')
     if robj.reply_action == 'replace_content':
         robj.edit_post(body_text, title = subject_line)
     elif robj.reply_action == 'append_content':

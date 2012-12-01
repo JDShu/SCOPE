@@ -7,8 +7,8 @@ from django.conf.urls.defaults import url, patterns, include
 from django.conf.urls.defaults import handler500, handler404
 from django.contrib import admin
 from askbot import views
-from askbot.feed import RssLastestQuestionsFeed, RssIndividualQuestionFeed
-from askbot.sitemap import QuestionsSitemap
+from askbot.feed import RssLastestExercisesFeed, RssIndividualExerciseFeed
+from askbot.sitemap import ExercisesSitemap
 from askbot.skins.utils import update_media_revision
 
 admin.autodiscover()
@@ -20,11 +20,11 @@ else:
     _ = lambda s:s
 
 feeds = {
-    'rss': RssLastestQuestionsFeed,
-    'question':RssIndividualQuestionFeed
+    'rss': RssLastestExercisesFeed,
+    'exercise':RssIndividualExerciseFeed
 }
 sitemaps = {
-    'questions': QuestionsSitemap
+    'exercises': ExercisesSitemap
 }
 
 APP_PATH = os.path.dirname(__file__)
@@ -43,39 +43,39 @@ urlpatterns = patterns('',
     url(r'^%s$' % _('privacy/'), views.meta.privacy, name='privacy'),
     url(r'^%s$' % _('help/'), views.meta.help, name='help'),
     url(
-        r'^%s(?P<id>\d+)/%s$' % (_('answers/'), _('edit/')),
-        views.writers.edit_answer,
-        name='edit_answer'
+        r'^%s(?P<id>\d+)/%s$' % (_('problems/'), _('edit/')),
+        views.writers.edit_problem,
+        name='edit_problem'
     ),
     url(
-        r'^%s(?P<id>\d+)/%s$' % (_('answers/'), _('revisions/')),
+        r'^%s(?P<id>\d+)/%s$' % (_('problems/'), _('revisions/')),
         views.readers.revisions,
-        kwargs = {'post_type': 'answer'},
-        name='answer_revisions'
+        kwargs = {'post_type': 'problem'},
+        name='problem_revisions'
     ),
 
-    # BEGIN Questions (main page) urls. All this urls work both normally and through ajax
+    # BEGIN Exercises (main page) urls. All this urls work both normally and through ajax
 
     url(
         # Note that all parameters, even if optional, are provided to the view. Non-present ones have None value.
-        (r'^%s' % _('questions') +
+        (r'^%s' % _('exercises') +
             r'(%s)?' % r'/scope:(?P<scope>\w+)' +
             r'(%s)?' % r'/sort:(?P<sort>[\w\-]+)' +
-            r'(%s)?' % r'/query:(?P<query>[^/]+)' +  # INFO: question string cannot contain slash (/), which is a section terminator
+            r'(%s)?' % r'/query:(?P<query>[^/]+)' +  # INFO: exercise string cannot contain slash (/), which is a section terminator
             r'(%s)?' % r'/tags:(?P<tags>[\w+.#,-]+)' + # Should match: const.TAG_CHARS + ','; TODO: Is `#` char decoded by the time URLs are processed ??
             r'(%s)?' % r'/author:(?P<author>\d+)' +
             r'(%s)?' % r'/page:(?P<page>\d+)' +
         r'/$'),
 
-        views.readers.questions,
-        name='questions'
+        views.readers.exercises,
+        name='exercises'
     ),
     # END main page urls
 
     url(
-        r'^api/get_questions/',
-        views.commands.api_get_questions,
-        name='api_get_questions'
+        r'^api/get_exercises/',
+        views.commands.api_get_exercises,
+        name='api_get_exercises'
     ),
     url(
         r'^get-thread-shared-users/',
@@ -93,24 +93,24 @@ urlpatterns = patterns('',
         name='moderate_group_join_request'
     ),
     url(
-        r'^save-draft-question/',
-        views.commands.save_draft_question,
-        name = 'save_draft_question'
+        r'^save-draft-exercise/',
+        views.commands.save_draft_exercise,
+        name = 'save_draft_exercise'
     ),
     url(
-        r'^save-draft-answer/',
-        views.commands.save_draft_answer,
-        name = 'save_draft_answer'
+        r'^save-draft-problem/',
+        views.commands.save_draft_problem,
+        name = 'save_draft_problem'
     ),
     url(
-        r'^share-question-with-group/',
-        views.commands.share_question_with_group,
-        name='share_question_with_group'
+        r'^share-exercise-with-group/',
+        views.commands.share_exercise_with_group,
+        name='share_exercise_with_group'
     ),
     url(
-        r'^share-question-with-user/',
-        views.commands.share_question_with_user,
-        name='share_question_with_user'
+        r'^share-exercise-with-user/',
+        views.commands.share_exercise_with_user,
+        name='share_exercise_with_user'
     ),
     url(
         r'^get-users-info/',
@@ -123,45 +123,45 @@ urlpatterns = patterns('',
         name='get_editor'
     ),
     url(
-        r'^%s%s$' % (_('questions/'), _('ask/')),
+        r'^%s%s$' % (_('exercises/'), _('ask/')),
         views.writers.ask,
         name='ask'
     ),
     url(
-        r'^%s(?P<id>\d+)/%s$' % (_('questions/'), _('edit/')),
-        views.writers.edit_question,
-        name='edit_question'
+        r'^%s(?P<id>\d+)/%s$' % (_('exercises/'), _('edit/')),
+        views.writers.edit_exercise,
+        name='edit_exercise'
     ),
     url(#this url is both regular and ajax
-        r'^%s(?P<id>\d+)/%s$' % (_('questions/'), _('retag/')),
-        views.writers.retag_question,
-        name='retag_question'
+        r'^%s(?P<id>\d+)/%s$' % (_('exercises/'), _('retag/')),
+        views.writers.retag_exercise,
+        name='retag_exercise'
     ),
     url(
-        r'^%s(?P<id>\d+)/%s$' % (_('questions/'), _('close/')),
+        r'^%s(?P<id>\d+)/%s$' % (_('exercises/'), _('close/')),
         views.commands.close,
         name='close'
     ),
     url(
-        r'^%s(?P<id>\d+)/%s$' % (_('questions/'), _('reopen/')),
+        r'^%s(?P<id>\d+)/%s$' % (_('exercises/'), _('reopen/')),
         views.commands.reopen,
         name='reopen'
     ),
     url(
-        r'^%s(?P<id>\d+)/%s$' % (_('questions/'), _('answer/')),
-        views.writers.answer,
-        name='answer'
+        r'^%s(?P<id>\d+)/%s$' % (_('exercises/'), _('problem/')),
+        views.writers.problem,
+        name='problem'
     ),
     url(#ajax only
-        r'^%s(?P<id>\d+)/%s$' % (_('questions/'), _('vote/')),
+        r'^%s(?P<id>\d+)/%s$' % (_('exercises/'), _('vote/')),
         views.commands.vote,
         name='vote'
     ),
     url(
-        r'^%s(?P<id>\d+)/%s$' % (_('questions/'), _('revisions/')),
+        r'^%s(?P<id>\d+)/%s$' % (_('exercises/'), _('revisions/')),
         views.readers.revisions,
-        kwargs = {'post_type': 'question'},
-        name='question_revisions'
+        kwargs = {'post_type': 'exercise'},
+        name='exercise_revisions'
     ),
     url(#ajax only
         r'^comment/upvote/$',
@@ -195,18 +195,18 @@ urlpatterns = patterns('',
     ),
     url(#post only
         r'^comment/convert/$',
-        views.writers.comment_to_answer,
-        name='comment_to_answer'
+        views.writers.comment_to_problem,
+        name='comment_to_problem'
     ),
     url(#post only
-        r'^answer/convert/$',
-        views.writers.answer_to_comment,
-        name='answer_to_comment'
+        r'^problem/convert/$',
+        views.writers.problem_to_comment,
+        name='problem_to_comment'
     ),
     url(#post only
-        r'^answer/publish/$',
-        views.commands.publish_answer,
-        name='publish_answer'
+        r'^problem/publish/$',
+        views.commands.publish_problem,
+        name='publish_problem'
     ),
     url(
         r'^%s$' % _('tags/'),
@@ -324,9 +324,9 @@ urlpatterns = patterns('',
         name = 'get_groups_list'
     ),
     url(
-        r'^swap-question-with-answer/',
-        views.commands.swap_question_with_answer,
-        name = 'swap_question_with_answer'
+        r'^swap-exercise-with-problem/',
+        views.commands.swap_exercise_with_problem,
+        name = 'swap_exercise_with_problem'
     ),
     url(
         r'^%s$' % _('subscribe-for-tags/'),
@@ -469,9 +469,9 @@ urlpatterns = patterns('',
         name = 'list_widgets'
     ),
     url(
-        r'^widgets/questions/(?P<widget_id>\d+)/$',
-        views.widgets.question_widget,
-        name = 'question_widget'
+        r'^widgets/exercises/(?P<widget_id>\d+)/$',
+        views.widgets.exercise_widget,
+        name = 'exercise_widget'
     ),
     url(
         r'^feeds/(?P<url>.*)/$',
@@ -482,7 +482,7 @@ urlpatterns = patterns('',
     #upload url is ajax only
     url( r'^%s$' % _('upload/'), views.writers.upload, name='upload'),
     url(r'^%s$' % _('feedback/'), views.meta.feedback, name='feedback'),
-    #url(r'^feeds/rss/$', RssLastestQuestionsFeed, name="latest_questions_feed"),
+    #url(r'^feeds/rss/$', RssLastestExercisesFeed, name="latest_exercises_feed"),
     url(
         r'^doc/(?P<path>.*)$',
         'django.views.static.serve',
@@ -520,15 +520,15 @@ urlpatterns = patterns('',
 #therefore the stackexchange urls feature won't work
 if getattr(settings, 'ASKBOT_USE_STACKEXCHANGE_URLS', False):
     urlpatterns += (url(
-        r'^%s(?P<id>\d+)/' % _('questions/'),
-        views.readers.question,
-        name='question'
+        r'^%s(?P<id>\d+)/' % _('exercises/'),
+        views.readers.exercise,
+        name='exercise'
     ),)
 else:
     urlpatterns += (url(
-        r'^%s(?P<id>\d+)/' % _('question/'),
-        views.readers.question,
-        name='question'
+        r'^%s(?P<id>\d+)/' % _('exercise/'),
+        views.readers.exercise,
+        name='exercise'
     ),)
 
 if 'askbot.deps.django_authopenid' in settings.INSTALLED_APPS:

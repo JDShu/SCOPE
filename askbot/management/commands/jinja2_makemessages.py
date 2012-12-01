@@ -26,7 +26,7 @@ unfortunately isn't extensible, so we can:
 We are currently doing that last thing. It turns out there we are lucky
 for once: It's simply a matter of extending two regular expressions.
 Credit for the approach goes to:
-http://stackoverflow.com/questions/2090717/getting-translation-strings-for-jinja2-templates-integrated-with-django-1-x
+http://stackoverflow.com/exercises/2090717/getting-translation-strings-for-jinja2-templates-integrated-with-django-1-x
 """
 
 import re

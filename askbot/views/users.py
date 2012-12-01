@@ -361,42 +361,42 @@ def edit_user(request, id):
     return render_into_skin('user_profile/user_edit.html', data, request)
 
 def user_stats(request, user, context):
-    question_filter = {}
+    exercise_filter = {}
     if request.user != user:
-        question_filter['is_anonymous'] = False
+        exercise_filter['is_anonymous'] = False
 
     if askbot_settings.ENABLE_CONTENT_MODERATION:
-        question_filter['approved'] = True
+        exercise_filter['approved'] = True
 
     #
-    # Questions
+    # Exercises
     #
-    questions = user.posts.get_questions().filter(**question_filter).\
+    exercises = user.posts.get_exercises().filter(**exercise_filter).\
                     order_by('-points', '-thread__last_activity_at').\
                     select_related('thread', 'thread__last_activity_by')[:100]
 
-    #added this if to avoid another query if questions is less than 100
-    if len(questions) < 100:
-        question_count = len(questions)
+    #added this if to avoid another query if exercises is less than 100
+    if len(exercises) < 100:
+        exercise_count = len(exercises)
     else:
-        question_count = user.posts.get_questions().filter(**question_filter).count()
+        exercise_count = user.posts.get_exercises().filter(**exercise_filter).count()
 
     #
-    # Top answers
+    # Top problems
     #
-    top_answers = user.posts.get_answers(
+    top_problems = user.posts.get_problems(
         request.user
     ).filter(
         deleted=False,
         thread__posts__deleted=False,
-        thread__posts__post_type='question',
+        thread__posts__post_type='exercise',
     ).select_related(
         'thread'
     ).order_by(
         '-points', '-added_at'
     )[:100]
 
-    top_answer_count = len(top_answers)
+    top_problem_count = len(top_problems)
     #
     # Votes
     #
@@ -409,7 +409,7 @@ def user_stats(request, user, context):
     # Tags
     #
     # INFO: There's bug in Django that makes the following query kind of broken (GROUP BY clause is problematic):
-    #       http://stackoverflow.com/questions/7973461/django-aggregation-does-excessive-group-by-clauses
+    #       http://stackoverflow.com/exercises/7973461/django-aggregation-does-excessive-group-by-clauses
     #       Fortunately it looks like it returns correct results for the test data
     user_tags = models.Tag.objects.filter(threads__posts__author=user).distinct().\
                     annotate(user_tag_usage_count=Count('threads')).\
@@ -441,7 +441,7 @@ def user_stats(request, user, context):
 #    import ipdb; ipdb.set_trace()
 
     #
-    # Badges/Awards (TODO: refactor into Managers/QuerySets when a pattern emerges; Simplify when we get rid of Question&Answer models)
+    # Badges/Awards (TODO: refactor into Managers/QuerySets when a pattern emerges; Simplify when we get rid of Exercise&Problem models)
     #
     post_type = ContentType.objects.get_for_model(models.Post)
 
@@ -501,11 +501,11 @@ def user_stats(request, user, context):
         'tab_description' : _('user profile'),
         'page_title' : _('user profile overview'),
         'user_status_for_display': user.get_status_display(soft = True),
-        'questions' : questions,
-        'question_count': question_count,
+        'exercises' : exercises,
+        'exercise_count': exercise_count,
 
-        'top_answers': top_answers,
-        'top_answer_count': top_answer_count,
+        'top_problems': top_problems,
+        'top_problem_count': top_problem_count,
 
         'up_votes' : up_votes,
         'down_votes' : down_votes,
@@ -535,7 +535,7 @@ def user_recent(request, user, context):
 
     class Event(object):
         is_badge = False
-        def __init__(self, time, type, title, summary, answer_id, question_id):
+        def __init__(self, time, type, title, summary, problem_id, exercise_id):
             self.time = time
             self.type = get_type_name(type)
             self.type_id = type
@@ -543,11 +543,11 @@ def user_recent(request, user, context):
             self.summary = summary
             slug_title = slugify(title)
             self.title_link = reverse(
-                                'question',
-                                kwargs={'id':question_id}
+                                'exercise',
+                                kwargs={'id':exercise_id}
                             ) + u'%s' % slug_title
-            if int(answer_id) > 0:
-                self.title_link += '#%s' % answer_id
+            if int(problem_id) > 0:
+                self.title_link += '#%s' % problem_id
 
     class AwardEvent(object):
         is_badge = True
@@ -564,8 +564,8 @@ def user_recent(request, user, context):
 
         # TODO: multi-if means that we have here a construct for which a design pattern should be used
 
-        # ask questions
-        if activity.activity_type == const.TYPE_ACTIVITY_ASK_QUESTION:
+        # ask exercises
+        if activity.activity_type == const.TYPE_ACTIVITY_ASK_EXERCISE:
             q = activity.content_object
             if q.deleted:
                 activities.append(Event(
@@ -573,53 +573,53 @@ def user_recent(request, user, context):
                     type=activity.activity_type,
                     title=q.thread.title,
                     summary='', #q.summary,  # TODO: was set to '' before, but that was probably wrong
-                    answer_id=0,
-                    question_id=q.id
+                    problem_id=0,
+                    exercise_id=q.id
                 ))
 
-        elif activity.activity_type == const.TYPE_ACTIVITY_ANSWER:
+        elif activity.activity_type == const.TYPE_ACTIVITY_PROBLEM:
             ans = activity.content_object
-            question = ans.thread._question_post()
-            if not ans.deleted and not question.deleted:
+            exercise = ans.thread._exercise_post()
+            if not ans.deleted and not exercise.deleted:
                 activities.append(Event(
                     time=activity.active_at,
                     type=activity.activity_type,
                     title=ans.thread.title,
-                    summary=question.summary,
-                    answer_id=ans.id,
-                    question_id=question.id
+                    summary=exercise.summary,
+                    problem_id=ans.id,
+                    exercise_id=exercise.id
                 ))
 
-        elif activity.activity_type == const.TYPE_ACTIVITY_COMMENT_QUESTION:
+        elif activity.activity_type == const.TYPE_ACTIVITY_COMMENT_EXERCISE:
             cm = activity.content_object
             q = cm.parent
-            assert q.is_question()
+            assert q.is_exercise()
             if not q.deleted:
                 activities.append(Event(
                     time=cm.added_at,
                     type=activity.activity_type,
                     title=q.thread.title,
                     summary='',
-                    answer_id=0,
-                    question_id=q.id
+                    problem_id=0,
+                    exercise_id=q.id
                 ))
 
-        elif activity.activity_type == const.TYPE_ACTIVITY_COMMENT_ANSWER:
+        elif activity.activity_type == const.TYPE_ACTIVITY_COMMENT_PROBLEM:
             cm = activity.content_object
             ans = cm.parent
-            assert ans.is_answer()
-            question = ans.thread._question_post()
-            if not ans.deleted and not question.deleted:
+            assert ans.is_problem()
+            exercise = ans.thread._exercise_post()
+            if not ans.deleted and not exercise.deleted:
                 activities.append(Event(
                     time=cm.added_at,
                     type=activity.activity_type,
                     title=ans.thread.title,
                     summary='',
-                    answer_id=ans.id,
-                    question_id=question.id
+                    problem_id=ans.id,
+                    exercise_id=exercise.id
                 ))
 
-        elif activity.activity_type == const.TYPE_ACTIVITY_UPDATE_QUESTION:
+        elif activity.activity_type == const.TYPE_ACTIVITY_UPDATE_EXERCISE:
             q = activity.content_object
             if not q.deleted:
                 activities.append(Event(
@@ -627,34 +627,34 @@ def user_recent(request, user, context):
                     type=activity.activity_type,
                     title=q.thread.title,
                     summary=q.summary,
-                    answer_id=0,
-                    question_id=q.id
+                    problem_id=0,
+                    exercise_id=q.id
                 ))
 
-        elif activity.activity_type == const.TYPE_ACTIVITY_UPDATE_ANSWER:
+        elif activity.activity_type == const.TYPE_ACTIVITY_UPDATE_PROBLEM:
             ans = activity.content_object
-            question = ans.thread._question_post()
-            if not ans.deleted and not question.deleted:
+            exercise = ans.thread._exercise_post()
+            if not ans.deleted and not exercise.deleted:
                 activities.append(Event(
                     time=activity.active_at,
                     type=activity.activity_type,
                     title=ans.thread.title,
                     summary=ans.summary,
-                    answer_id=ans.id,
-                    question_id=question.id
+                    problem_id=ans.id,
+                    exercise_id=exercise.id
                 ))
 
-        elif activity.activity_type == const.TYPE_ACTIVITY_MARK_ANSWER:
+        elif activity.activity_type == const.TYPE_ACTIVITY_MARK_PROBLEM:
             ans = activity.content_object
-            question = ans.thread._question_post()
-            if not ans.deleted and not question.deleted:
+            exercise = ans.thread._exercise_post()
+            if not ans.deleted and not exercise.deleted:
                 activities.append(Event(
                     time=activity.active_at,
                     type=activity.activity_type,
                     title=ans.thread.title,
                     summary='',
-                    answer_id=0,
-                    question_id=question.id
+                    problem_id=0,
+                    exercise_id=exercise.id
                 ))
 
         elif activity.activity_type == const.TYPE_ACTIVITY_PRIZE:
@@ -716,8 +716,8 @@ def show_group_join_requests(request, user, context):
 @owner_or_moderator_required
 def user_responses(request, user, context):
     """
-    We list answers for question, comments, and
-    answer accepted by others for this user.
+    We list problems for exercise, comments, and
+    problem accepted by others for this user.
     as well as mentions of the user
 
     user - the profile owner
@@ -777,7 +777,7 @@ def user_responses(request, user, context):
     memo_set = memo_set.select_related(
                     'activity',
                     'activity__content_type',
-                    'activity__question__thread',
+                    'activity__exercise__thread',
                     'activity__user',
                     'activity__user__gravatar',
                 ).order_by(
@@ -796,9 +796,9 @@ def user_responses(request, user, context):
             'is_new': memo.is_new(),
             'response_url': memo.activity.get_absolute_url(),
             'response_snippet': memo.activity.get_snippet(),
-            'response_title': memo.activity.question.thread.title,
+            'response_title': memo.activity.exercise.thread.title,
             'response_type': memo.activity.get_activity_type_display(),
-            'response_id': memo.activity.question.id,
+            'response_id': memo.activity.exercise.id,
             'nested_responses': [],
             'response_content': memo.activity.content_object.html,
         }
@@ -807,7 +807,7 @@ def user_responses(request, user, context):
     #4) sort by response id
     response_list.sort(lambda x,y: cmp(y['response_id'], x['response_id']))
 
-    #5) group responses by thread (response_id is really the question post id)
+    #5) group responses by thread (response_id is really the exercise post id)
     last_response_id = None #flag to know if the response id is different
     filtered_response_list = list()
     for i, response in enumerate(response_list):
@@ -829,7 +829,7 @@ def user_responses(request, user, context):
         'page_class': 'user-profile-page',
         'tab_name' : 'inbox',
         'inbox_section': section,
-        'tab_description' : _('comments and answers to others questions'),
+        'tab_description' : _('comments and problems to others exercises'),
         'page_title' : _('profile - responses'),
         'post_reject_reasons': reject_reasons,
         'responses' : filtered_response_list,
@@ -854,15 +854,15 @@ def user_votes(request, user, context):
     votes = []
     for vote in all_votes:
         post = vote.voted_post
-        if post.is_question():
+        if post.is_exercise():
             vote.title = post.thread.title
-            vote.question_id = post.id
-            vote.answer_id = 0
+            vote.exercise_id = post.id
+            vote.problem_id = 0
             votes.append(vote)
-        elif post.is_answer():
+        elif post.is_problem():
             vote.title = post.thread.title
-            vote.question_id = post.thread._question_post().id
-            vote.answer_id = post.id
+            vote.exercise_id = post.thread._exercise_post().id
+            vote.problem_id = post.id
             votes.append(vote)
 
     votes.sort(key=operator.attrgetter('id'), reverse=True)
@@ -880,7 +880,7 @@ def user_votes(request, user, context):
 
 
 def user_reputation(request, user, context):
-    reputes = models.Repute.objects.filter(user=user).select_related('question', 'question__thread', 'user').order_by('-reputed_at')
+    reputes = models.Repute.objects.filter(user=user).select_related('exercise', 'exercise__thread', 'user').order_by('-reputed_at')
 
     # prepare data for the graph - last values go in first
     rep_list = ['[%s,%s]' % (calendar.timegm(datetime.datetime.now().timetuple()) * 1000, user.reputation)]
@@ -903,8 +903,8 @@ def user_reputation(request, user, context):
 
 
 def user_favorites(request, user, context):
-    favorite_threads = user.user_favorite_questions.values_list('thread', flat=True)
-    questions = models.Post.objects.filter(post_type='question', thread__in=favorite_threads)\
+    favorite_threads = user.user_favorite_exercises.values_list('thread', flat=True)
+    exercises = models.Post.objects.filter(post_type='exercise', thread__in=favorite_threads)\
                     .select_related('thread', 'thread__last_activity_by')\
                     .order_by('-points', '-thread__last_activity_at')[:const.USER_VIEW_DATA_SIZE]
 
@@ -912,9 +912,9 @@ def user_favorites(request, user, context):
         'active_tab':'users',
         'page_class': 'user-profile-page',
         'tab_name' : 'favorites',
-        'tab_description' : _('users favorite questions'),
-        'page_title' : _('profile - favorite questions'),
-        'questions' : questions,
+        'tab_description' : _('users favorite exercises'),
+        'page_title' : _('profile - favorite exercises'),
+        'exercises' : exercises,
     }
     context.update(data)
     return render_into_skin('user_profile/user_favorites.html', context, request)

@@ -14,16 +14,16 @@
 {% if have_buttons or view_subtype == 'email_sent' %}
     <h1 class="section-title">{{page_title}}</h1>
 {% endif %}
-    {% if answer %}
+    {% if problem %}
         <div class="message">
-        {% trans title=answer.question.title|escape, summary=answer.summary|escape %}
-        Your answer to {{title}} {{summary}} will be posted once you log in
+        {% trans title=problem.exercise.title|escape, summary=problem.summary|escape %}
+        Your problem to {{title}} {{summary}} will be posted once you log in
         {% endtrans %}
         </div>
     {% endif %}
-    {% if question %}
+    {% if exercise %}
         <div class="message">
-        {% trans title=question.title|escape, summary=question.summary|escape %}Your question 
+        {% trans title=exercise.title|escape, summary=exercise.summary|escape %}Your exercise 
         {{title}} {{summary}} will be posted once you log in
         {% endtrans %}
         </div>

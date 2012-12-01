@@ -35,7 +35,7 @@ def supports_full_text_search(hint_table = None):
             SUPPORTS_FTS = False
     return SUPPORTS_FTS
 
-                question_index_sql = get_create_full_text_index_sql(
+                exercise_index_sql = get_create_full_text_index_sql(
                                                 index_name,
                                                 table_namee,
                                                 ('title','text','tagnames',)
@@ -44,7 +44,7 @@ def get_create_full_text_index_sql(index_name, table_name, column_list):
     cursor = connection.cursor()
     column_sql = '(%s)' % ','.join(column_list)
     sql = 'CREATE FULLTEXT INDEX %s on %s %s' % (index_name, table_name, column_sql)
-    cursor.execute(question_index_sql)
+    cursor.execute(exercise_index_sql)
     return sql
             else:
                 print NO_FTS_WARNING

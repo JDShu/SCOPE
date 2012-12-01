@@ -8,7 +8,7 @@
         {% elif active_tab == "users" %}
             action="{% url users %}" 
         {% else %}
-            action="{% url questions %}" id="searchForm"
+            action="{% url exercises %}" id="searchForm"
         {% endif %}
         method="get">
             <input type="submit" value="" name="search" class="searchBtn" />
@@ -36,7 +36,7 @@
                 value="X"
                 name="reset_query"
                 class="cancelSearchBtn"
-                {% if not query %}{# query is only defined by questions view (active_tab) #}
+                {% if not query %}{# query is only defined by exercises view (active_tab) #}
                     style="display: none;"
                 {% endif %}
             />

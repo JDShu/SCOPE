@@ -13,7 +13,7 @@
     </thead>
     <tbody>
         <tr>
-            <td>{% trans %}Ask a question{% endtrans %}</td>
+            <td>{% trans %}Add an exercise{% endtrans %}</td>
             <td><a href="{% url create_widget 'ask' %}">{% trans %}create{% endtrans %}</a></td>
             <td>
                 {% if ask_widgets > 0 %}
@@ -22,11 +22,11 @@
             </td>
         </tr>
         <tr>
-            <td>{% trans %}List of questions{% endtrans %}</td>
-            <td><a href="{% url create_widget 'question' %}">{% trans %}create{% endtrans %}</a></td>
+            <td>{% trans %}List of exercises{% endtrans %}</td>
+            <td><a href="{% url create_widget 'exercise' %}">{% trans %}create{% endtrans %}</a></td>
             <td>
-                {% if question_widgets > 0 %}
-                    <a href="{% url list_widgets 'question' %}">{% trans %}view list{% endtrans %}</a>
+                {% if exercise_widgets > 0 %}
+                    <a href="{% url list_widgets 'exercise' %}">{% trans %}view list{% endtrans %}</a>
                 {% endif %}
             </td>
         </tr>

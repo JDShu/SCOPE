@@ -1,4 +1,4 @@
-#todo: http://stackoverflow.com/questions/837828/how-to-use-a-slug-in-django 
+#todo: http://stackoverflow.com/exercises/837828/how-to-use-a-slug-in-django 
 DEBUGME = False 
 import os
 import re
@@ -48,8 +48,8 @@ xml_read_order = (
 #table associations are implied
 #todo: there is an issue that these may be inconsistent with the database
 USER = {}#SE User.id --> django(ASKBOT) User.id
-QUESTION = {}
-ANSWER = {}
+EXERCISE = {}
+PROBLEM = {}
 COMMENT = {}
 NUMBERED_NAME_RE = re.compile(r'^(.*)\*(\d+)\*$')
 
@@ -74,9 +74,9 @@ class X(object):#
     vote_actions = {
         'UpMod':'upvote',
         'DownMod':'downvote',
-        'AcceptedByOriginator':'accept_best_answer',
+        'AcceptedByOriginator':'accept_best_problem',
         'Offensive':'flag_post',
-        'Favorite':'toggle_favorite_question',
+        'Favorite':'toggle_favorite_exercise',
     }
 
     #these modes cannot be mixed
@@ -112,16 +112,16 @@ class X(object):#
         'Post Unlocked':'lock',
         'Community Owned':'wiki',
         'Post Migrated':'migrate',
-        'Question Merged':'merge',
+        'Exercise Merged':'merge',
     }
 
     close_reason_map = {
         1:1,#duplicate
         2:2,#off-topic
         3:3,#subjective and argumentative
-        4:4,#not a real question
+        4:4,#not a real exercise
         5:7,#offensive
-        6:6,#irrelevant or outdated question
+        6:6,#irrelevant or outdated exercise
         7:9,#too localized
         10:8,#spam
     }
@@ -156,10 +156,10 @@ class X(object):#
             if isinstance(se_post, se.PostComment):
                 return askbot.Comment.objects.get(id=COMMENT[se_post.id].id)
             post_type = se_post.post_type.name
-            if post_type == 'Question':
-                return askbot.Question.objects.get(id=QUESTION[se_post.id].id)
-            elif post_type == 'Answer':
-                return askbot.Answer.objects.get(id=ANSWER[se_post.id].id)
+            if post_type == 'Exercise':
+                return askbot.Exercise.objects.get(id=EXERCISE[se_post.id].id)
+            elif post_type == 'Problem':
+                return askbot.Problem.objects.get(id=PROBLEM[se_post.id].id)
             else:
                 raise Exception('unknown post type %s' % post_type)
         except KeyError:
@@ -326,12 +326,12 @@ class Command(BaseCommand):
         print 'done.'
         print 'Transferring content edits...',
         sys.stdout.flush()
-        self.transfer_question_and_answer_activity()
+        self.transfer_exercise_and_problem_activity()
         transaction.commit()
         print 'done.'
         print 'Transferring view counts...',
         sys.stdout.flush()
-        self.transfer_question_view_counts()
+        self.transfer_exercise_view_counts()
         transaction.commit()
         print 'done.'
         print 'Transferring comments...',
@@ -433,32 +433,32 @@ class Command(BaseCommand):
                 raise Exception('unexpected revision type %s' % rev_type)
 
         post_type = rev_group[0].post.post_type.name
-        if post_type == 'Question':
-            q = author.post_question(
+        if post_type == 'Exercise':
+            q = author.post_exercise(
                         title = title,
                         body_text = text,
                         tags = tags,
                         wiki = wiki,
                         timestamp = added_at
                     )
-            QUESTION[rev_group[0].post.id] = q
-        elif post_type == 'Answer':
+            EXERCISE[rev_group[0].post.id] = q
+        elif post_type == 'Problem':
             q = X.get_post(rev_group[0].post.parent)
             if q is None:
                 return
-            a = author.post_answer(
-                        question = q,
+            a = author.post_problem(
+                        exercise = q,
                         body_text = text,
                         wiki = wiki,
                         timestamp = added_at
                     )
-            ANSWER[rev_group[0].post.id] = a
+            PROBLEM[rev_group[0].post.id] = a
         else:
             post_id = rev_group[0].post.id
             raise Exception('unknown post type %s for id=%d' % (post_type, post_id))
 
     def _process_post_edit_revision_group(self, rev_group):
-        #question apply edit
+        #exercise apply edit
         (title, text, tags) = (None, None, None)
         for rev in rev_group:
             rev_type = rev.post_history_type.name
@@ -484,9 +484,9 @@ class Command(BaseCommand):
         post = X.get_post(rev0.post)
         if post is None:
             return
-        if post_type == 'Question':
-            edited_by.edit_question(
-                            question = post,
+        if post_type == 'Exercise':
+            edited_by.edit_exercise(
+                            exercise = post,
                             title = title,
                             body_text = text,
                             tags = tags,
@@ -494,8 +494,8 @@ class Command(BaseCommand):
                             timestamp = edited_at,
                             force = True #avoid insufficient rep issue on imports
                         )
-        elif post_type == 'Answer':
-            #todo: why here use "apply_edit" and not "edit answer"?
+        elif post_type == 'Problem':
+            #todo: why here use "apply_edit" and not "edit problem"?
             post.apply_edit(
                 edited_at = edited_at,
                 edited_by = edited_by,
@@ -522,10 +522,10 @@ class Command(BaseCommand):
     def mark_activity(self,p,u,t):
         """p,u,t - post, user, timestamp
         """
-        if isinstance(p, askbot.Question):
+        if isinstance(p, askbot.Exercise):
             p.thread.set_last_activity(last_activity_by=u, last_activity_at=t)
-        elif isinstance(p, askbot.Answer):
-            p.question.thread.set_last_activity(last_activity_by=u, last_activity_at=t)
+        elif isinstance(p, askbot.Problem):
+            p.exercise.thread.set_last_activity(last_activity_by=u, last_activity_at=t)
 
     def _process_post_rollback_revision_group(self, rev_group):
         #todo: don't know what to do here as there were no
@@ -559,7 +559,7 @@ class Command(BaseCommand):
     def _process_post_close_revision_group(self, rev_group):
         #todo: untested
         for rev in rev_group:
-            if rev.post.post_type.name != 'Question':
+            if rev.post.post_type.name != 'Exercise':
                 return
             rev_type = rev.post_history_type.name
             if rev_type in ('Post Closed', 'Post Reopened'):
@@ -633,8 +633,8 @@ class Command(BaseCommand):
         #maybe in se.User.preferences_raw?
         pass
 
-    def transfer_question_and_answer_activity(self):
-        """transfers all question and answer
+    def transfer_exercise_and_problem_activity(self):
+        """transfers all exercise and problem
         edits and related status changes
         """
         #assuming that there are only two post types
@@ -742,8 +742,8 @@ class Command(BaseCommand):
         self._report_missing_badges()
         pass
 
-    def transfer_question_view_counts(self):
-        for se_q in se.Post.objects.filter(post_type__name='Question').iterator():
+    def transfer_exercise_view_counts(self):
+        for se_q in se.Post.objects.filter(post_type__name='Exercise').iterator():
             q = X.get_post(se_q)
             if q is None:
                 continue
@@ -945,7 +945,7 @@ class Command(BaseCommand):
             if se_u.opt_in_email == True:#set up daily subscription on "own" items
                 form.initial['individually_selected'] = 'd'
                 form.initial['asked_by_me'] = 'd'
-                form.initial['answered_by_me'] = 'd'
+                form.initial['problemed_by_me'] = 'd'
             #
             form.save(user=u, save_unbound=True)
             USER[se_u.id] = u

@@ -44,7 +44,7 @@ settings.register(
     livesettings.StringValue(
         QA_SITE_SETTINGS,
         'APP_DESCRIPTION',
-        default='Open source question and answer forum written in ' +\
+        default='Open source exercise and problem forum written in ' +\
                 'Python and Django',
         description=_('Site description for the search engines')
     )

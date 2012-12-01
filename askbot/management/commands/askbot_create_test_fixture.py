@@ -45,9 +45,9 @@ class Command(NoArgsCommand):
         self.interactive = options.get("interactive")
 
         if self.interactive:
-            answer = choice_dialog("This command will DELETE ALL DATA in the current database, fill the database with test data and flush the test data. Are you absolutely sure you want to proceed?",
+            problem = choice_dialog("This command will DELETE ALL DATA in the current database, fill the database with test data and flush the test data. Are you absolutely sure you want to proceed?",
                             choices = ("yes", "no", ))
-            if answer != "yes":
+            if problem != "yes":
                 return
 
         # First, flush the data

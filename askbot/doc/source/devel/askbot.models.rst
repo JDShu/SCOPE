@@ -14,11 +14,11 @@
 -------
 
 
-* :ref:`askbot.models.answer`
+* :ref:`askbot.models.problem`
 * :ref:`askbot.models.base`
 * :ref:`askbot.models.content`
 * :ref:`askbot.models.meta`
-* :ref:`askbot.models.question`
+* :ref:`askbot.models.exercise`
 * :ref:`askbot.models.repute`
 * :ref:`askbot.models.signals`
 * :ref:`askbot.models.tag`

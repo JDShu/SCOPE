@@ -29,11 +29,11 @@ msgid " - "
 msgstr "-"
 
 #: feed.py:28
-msgid "Individual question feed"
+msgid "Individual exercise feed"
 msgstr "单条问题订阅"
 
 #: feed.py:90
-msgid "latest questions"
+msgid "latest exercises"
 msgstr "最新问题"
 
 #: forms.py:74
@@ -48,15 +48,15 @@ msgstr "国家"
 msgid "Country field is required"
 msgstr "国家字段必填"
 
-#: forms.py:104 skins/default/templates/widgets/answer_edit_tips.html:45
-#: skins/default/templates/widgets/answer_edit_tips.html:49
-#: skins/default/templates/widgets/question_edit_tips.html:40
-#: skins/default/templates/widgets/question_edit_tips.html:45
+#: forms.py:104 skins/default/templates/widgets/problem_edit_tips.html:45
+#: skins/default/templates/widgets/problem_edit_tips.html:49
+#: skins/default/templates/widgets/exercise_edit_tips.html:40
+#: skins/default/templates/widgets/exercise_edit_tips.html:45
 msgid "title"
 msgstr "标题"
 
 #: forms.py:105
-msgid "please enter a descriptive title for your question"
+msgid "please enter a descriptive title for your exercise"
 msgstr "请输入对问题具有描述性质的标题 - “帮忙！紧急求助！”是不建议的标题。"
 
 #: forms.py:113
@@ -94,7 +94,7 @@ msgid_plural ""
 "be used."
 msgstr[0] "标签为不带空格的关键字。最多可以使用 %(max_tags)d 个标签。"
 
-#: forms.py:222 skins/default/templates/question_retag.html:58
+#: forms.py:222 skins/default/templates/exercise_retag.html:58
 msgid "tags are required"
 msgstr " 标签不能为空。"
 
@@ -126,7 +126,7 @@ msgstr "社区 wiki（无积分奖励，很多其他用户也能编辑 wiki 文�
 
 #: forms.py:295
 msgid ""
-"if you choose community wiki option, the question and answer do not generate "
+"if you choose community wiki option, the exercise and problem do not generate "
 "points and name of author will not be shown"
 msgstr "选择社区wiki模式，问答不计算积分，签名也不显示作者信息"
 
@@ -237,17 +237,17 @@ msgstr "匿名提问"
 
 # 100%
 #: forms.py:601
-msgid "Check if you do not want to reveal your name when asking this question"
+msgid "Check if you do not want to reveal your name when asking this exercise"
 msgstr "若您不想在提问此问题时公布自己的名字，请选中本项"
 
 #: forms.py:624
 msgid ""
-"Subject line is expected in the format: [tag1, tag2, tag3,...] question title"
+"Subject line is expected in the format: [tag1, tag2, tag3,...] exercise title"
 msgstr ""
 
 #: forms.py:769
 msgid ""
-"You have asked this question anonymously, if you decide to reveal your "
+"You have asked this exercise anonymously, if you decide to reveal your "
 "identity, please check this box."
 msgstr "您已匿名提问，若决定公开身份，请选中此复选框。"
 
@@ -258,7 +258,7 @@ msgstr "公布身份"
 
 #: forms.py:831
 msgid ""
-"Sorry, only owner of the anonymous question can reveal his or her identity, "
+"Sorry, only owner of the anonymous exercise can reveal his or her identity, "
 "please uncheck the box"
 msgstr "抱歉，只有匿名问题的所有者可以公开其身份，请取消选中复选框"
 
@@ -266,7 +266,7 @@ msgstr "抱歉，只有匿名问题的所有者可以公开其身份，请取消
 msgid ""
 "Sorry, apparently rules have just changed - it is no longer possible to ask "
 "anonymously. Please either check the \"reveal identity\" box or reload this "
-"page and try editing the question again."
+"page and try editing the exercise again."
 msgstr ""
 "抱歉，似乎规则已有变化——不再允许匿名提问。请选中“公开身份”复选框或重新加载本"
 "页面并再次尝试编辑问题。"
@@ -317,7 +317,7 @@ msgid "Asked by me"
 msgstr "我的提问"
 
 #: forms.py:1021
-msgid "Answered by me"
+msgid "Problemed by me"
 msgstr "我的回答"
 
 #: forms.py:1024
@@ -380,7 +380,7 @@ msgid "help/"
 msgstr ""
 
 #: urls.py:46 urls.py:51
-msgid "answers/"
+msgid "problems/"
 msgstr "回答/"
 
 #: urls.py:46 urls.py:87 urls.py:212
@@ -392,12 +392,12 @@ msgid "revisions/"
 msgstr "版本/"
 
 #: urls.py:61
-msgid "questions"
+msgid "exercises"
 msgstr "问题"
 
 #: urls.py:82 urls.py:87 urls.py:92 urls.py:97 urls.py:102 urls.py:107
 #: urls.py:112 urls.py:117 urls.py:123 urls.py:299
-msgid "questions/"
+msgid "exercises/"
 msgstr "问题/"
 
 #: urls.py:82
@@ -417,7 +417,7 @@ msgid "reopen/"
 msgstr "打开/"
 
 #: urls.py:107
-msgid "answer/"
+msgid "problem/"
 msgstr "回答/"
 
 #: urls.py:112
@@ -474,7 +474,7 @@ msgid "feedback/"
 msgstr "问题反馈/"
 
 #: urls.py:305
-msgid "question/"
+msgid "exercise/"
 msgstr "提问/"
 
 #: urls.py:312 setup_templates/settings.py:210
@@ -503,49 +503,49 @@ msgid "Peer Pressure: minimum downvotes for deleted post"
 msgstr "用户压力：达到删除帖子的最低否决票数"
 
 #: conf/badges.py:41
-msgid "Teacher: minimum upvotes for the answer"
+msgid "Teacher: minimum upvotes for the problem"
 msgstr "老师:答案的最小推荐票数"
 
 #: conf/badges.py:50
-msgid "Nice Answer: minimum upvotes for the answer"
+msgid "Nice Problem: minimum upvotes for the problem"
 msgstr "好答案:答案的最小推荐票数"
 
 #: conf/badges.py:59
-msgid "Good Answer: minimum upvotes for the answer"
+msgid "Good Problem: minimum upvotes for the problem"
 msgstr "良好的答案:答案的最小推荐票数"
 
 #: conf/badges.py:68
-msgid "Great Answer: minimum upvotes for the answer"
+msgid "Great Problem: minimum upvotes for the problem"
 msgstr "极好的答案:答案的最小推荐票数"
 
 #: conf/badges.py:77
-msgid "Nice Question: minimum upvotes for the question"
+msgid "Nice Exercise: minimum upvotes for the exercise"
 msgstr "好问题:问题的最小推荐票数"
 
 #: conf/badges.py:86
-msgid "Good Question: minimum upvotes for the question"
+msgid "Good Exercise: minimum upvotes for the exercise"
 msgstr "良好的问题:问题的最小推荐票数"
 
 #: conf/badges.py:95
-msgid "Great Question: minimum upvotes for the question"
+msgid "Great Exercise: minimum upvotes for the exercise"
 msgstr "优秀的问题:问题的最小推荐票数"
 
 #: conf/badges.py:104
-msgid "Popular Question: minimum views"
+msgid "Popular Exercise: minimum views"
 msgstr "受欢迎问题:最小浏览次数"
 
 #: conf/badges.py:113
-msgid "Notable Question: minimum views"
+msgid "Notable Exercise: minimum views"
 msgstr "关注的问题:最小浏览次数"
 
 # #-#-#-#-#  django.po (0.7)  #-#-#-#-#
 # close.html
 #: conf/badges.py:122
-msgid "Famous Question: minimum views"
+msgid "Famous Exercise: minimum views"
 msgstr "极好的问题:最小浏览次数"
 
 #: conf/badges.py:131
-msgid "Self-Learner: minimum answer upvotes"
+msgid "Self-Learner: minimum problem upvotes"
 msgstr "自学者：答案最少推荐票数"
 
 #: conf/badges.py:140
@@ -573,11 +573,11 @@ msgid "Associate Editor: minimum number of edits"
 msgstr "联合编辑:最小编辑数"
 
 #: conf/badges.py:194
-msgid "Favorite Question: minimum stars"
+msgid "Favorite Exercise: minimum stars"
 msgstr "收藏问题:最少星数"
 
 #: conf/badges.py:203
-msgid "Stellar Question: minimum stars"
+msgid "Stellar Exercise: minimum stars"
 msgstr "重要问题:最少星数"
 
 #: conf/badges.py:212
@@ -618,42 +618,42 @@ msgid "Maximum number of news entries in an email alert"
 msgstr "邮件提醒的最大新问题数"
 
 #: conf/email.py:57
-msgid "Default notification frequency all questions"
+msgid "Default notification frequency all exercises"
 msgstr "默认所有问题通知频率"
 
 #: conf/email.py:59
-msgid "Option to define frequency of emailed updates for: all questions."
+msgid "Option to define frequency of emailed updates for: all exercises."
 msgstr "本选项可定义发送更新邮件的频率：所有提问。"
 
 #: conf/email.py:71
-msgid "Default notification frequency questions asked by the user"
+msgid "Default notification frequency exercises asked by the user"
 msgstr "默认用户提问通知频率"
 
 #: conf/email.py:73
 msgid ""
-"Option to define frequency of emailed updates for: Question asked by the "
+"Option to define frequency of emailed updates for: Exercise asked by the "
 "user."
 msgstr "本选项可定义发送更新邮件的频率：用户提问。"
 
 #: conf/email.py:85
-msgid "Default notification frequency questions answered by the user"
+msgid "Default notification frequency exercises problemed by the user"
 msgstr "默认用户回答问题通知频率"
 
 #: conf/email.py:87
 msgid ""
-"Option to define frequency of emailed updates for: Question answered by the "
+"Option to define frequency of emailed updates for: Exercise problemed by the "
 "user."
 msgstr "本选项可定义发送更新邮件的频率：用户回答问题。"
 
 #: conf/email.py:99
 msgid ""
-"Default notification frequency questions individually                        "
+"Default notification frequency exercises individually                        "
 "selected by the user"
 msgstr "默认用户选择问题通知频率"
 
 #: conf/email.py:102
 msgid ""
-"Option to define frequency of emailed updates for: Question individually "
+"Option to define frequency of emailed updates for: Exercise individually "
 "selected by the user."
 msgstr "本选项可定义发送更新邮件的频率：用户选择问题。"
 
@@ -669,58 +669,58 @@ msgid ""
 msgstr "本选项可定义发送更新邮件的频率：提及与评论。"
 
 #: conf/email.py:128
-msgid "Send periodic reminders about unanswered questions"
+msgid "Send periodic reminders about exercises without problems"
 msgstr "发送未回答问题定期提醒邮件"
 
 #: conf/email.py:130
 msgid ""
 "NOTE: in order to use this feature, it is necessary to run the management "
-"command \"send_unanswered_question_reminders\" (for example, via a cron job "
+"command \"send_exercise_without_problem_reminders\" (for example, via a cron job "
 "- with an appropriate frequency) "
 msgstr ""
-"注意: 使用本功能需运行管理命令“send_unanswered_question_reminders”(如通过 "
+"注意: 使用本功能需运行管理命令“send_exercise_without_problem_reminders”(如通过 "
 "cron 任务——以适当频率)"
 
 #: conf/email.py:143
-msgid "Days before starting to send reminders about unanswered questions"
+msgid "Days before starting to send reminders about exercises without problems"
 msgstr "开始发送未回答问题提醒邮件之前的天数"
 
 #: conf/email.py:154
 msgid ""
-"How often to send unanswered question reminders (in days between the "
+"How often to send exercise without problem reminders (in days between the "
 "reminders sent)."
 msgstr "发送未回答问题提醒邮件的间隔时间。"
 
 #: conf/email.py:166
-msgid "Max. number of reminders to send about unanswered questions"
+msgid "Max. number of reminders to send about exercises without problems"
 msgstr "发送无回答提问提醒邮件的最大数量"
 
 #: conf/email.py:177
-msgid "Send periodic reminders to accept the best answer"
+msgid "Send periodic reminders to accept the best problem"
 msgstr "定期发送接受最佳回答的提醒邮件"
 
 #: conf/email.py:179
 msgid ""
 "NOTE: in order to use this feature, it is necessary to run the management "
-"command \"send_accept_answer_reminders\" (for example, via a cron job - with "
+"command \"send_accept_problem_reminders\" (for example, via a cron job - with "
 "an appropriate frequency) "
 msgstr ""
 "NOTE: in order to use this feature, it is necessary to run the management "
-"command \"send_accept_answer_reminders\" (for example, via a cron job - with "
+"command \"send_accept_problem_reminders\" (for example, via a cron job - with "
 "an appropriate frequency) "
 
 #: conf/email.py:192
-msgid "Days before starting to send reminders to accept an answer"
+msgid "Days before starting to send reminders to accept an problem"
 msgstr "发送接受最佳回答提醒邮件前的天数"
 
 #: conf/email.py:203
 msgid ""
-"How often to send accept answer reminders (in days between the reminders "
+"How often to send accept problem reminders (in days between the reminders "
 "sent)."
 msgstr "发送接受回答提醒的间隔天数。"
 
 #: conf/email.py:215
-msgid "Max. number of reminders to send to accept the best answer"
+msgid "Max. number of reminders to send to accept the best problem"
 msgstr "发送接收最佳答案的提醒邮件的最大数量"
 
 #: conf/email.py:227
@@ -745,7 +745,7 @@ msgid "Use this setting to control gravatar for email-less user"
 msgstr "使用这个设置没有邮件的用户图像"
 
 #: conf/email.py:256
-msgid "Allow posting questions by email"
+msgid "Allow posting exercises by email"
 msgstr "允许邮件提问"
 
 #: conf/email.py:258
@@ -760,15 +760,15 @@ msgstr "以破折号替代所发送邮件中标签中的空格"
 
 #: conf/email.py:271
 msgid ""
-"This setting applies to tags written in the subject line of questions asked "
+"This setting applies to tags written in the subject line of exercises asked "
 "by email"
 msgstr ""
-"This setting applies to tags written in the subject line of questions asked "
+"This setting applies to tags written in the subject line of exercises asked "
 "by email"
 
 #: conf/email.py:284
 #, fuzzy
-msgid "Enable posting answers and comments by email"
+msgid "Enable posting problems and comments by email"
 msgstr "允许邮件提问"
 
 #: conf/email.py:287
@@ -782,7 +782,7 @@ msgstr ""
 #: conf/email.py:311
 msgid ""
 "Email replies having fewer words than this number will be posted as comments "
-"instead of answers"
+"instead of problems"
 msgstr ""
 
 #: conf/external_keys.py:11
@@ -964,15 +964,15 @@ msgid "Check to enable community wiki feature"
 msgstr "开启社区wiki功能"
 
 #: conf/forum_data_rules.py:42
-msgid "Allow asking questions anonymously"
+msgid "Allow asking exercises anonymously"
 msgstr "允许匿名提问"
 
 #: conf/forum_data_rules.py:44
 msgid ""
-"Users do not accrue reputation for anonymous questions and their identity is "
+"Users do not accrue reputation for anonymous exercises and their identity is "
 "not revealed until they change their mind"
 msgstr ""
-"Users do not accrue reputation for anonymous questions and their identity is "
+"Users do not accrue reputation for anonymous exercises and their identity is "
 "not revealed until they change their mind"
 
 #: conf/forum_data_rules.py:56
@@ -981,27 +981,27 @@ msgstr "允许不登录发帖"
 
 #: conf/forum_data_rules.py:58
 msgid ""
-"Check if you want to allow users start posting questions or answers before "
+"Check if you want to allow users start posting exercises or problems before "
 "logging in. Enabling this may require adjustments in the user login system "
 "to check for pending posts every time the user logs in. The builtin Askbot "
 "login system supports this feature."
 msgstr ""
-"Check if you want to allow users start posting questions or answers before "
+"Check if you want to allow users start posting exercises or problems before "
 "logging in. Enabling this may require adjustments in the user login system "
 "to check for pending posts every time the user logs in. The builtin Askbot "
 "login system supports this feature."
 
 #: conf/forum_data_rules.py:73
-msgid "Allow swapping answer with question"
+msgid "Allow swapping problem with exercise"
 msgstr "允许对调问题与回答"
 
 #: conf/forum_data_rules.py:75
 msgid ""
 "This setting will help import data from other forums such as zendesk, when "
-"automatic data import fails to detect the original question correctly."
+"automatic data import fails to detect the original exercise correctly."
 msgstr ""
 "This setting will help import data from other forums such as zendesk, when "
-"automatic data import fails to detect the original question correctly."
+"automatic data import fails to detect the original exercise correctly."
 
 #: conf/forum_data_rules.py:87
 msgid "Maximum length of tag (number of characters)"
@@ -1012,11 +1012,11 @@ msgid "Minimum length of title (number of characters)"
 msgstr "标题最小长度 (字符数)"
 
 #: conf/forum_data_rules.py:106
-msgid "Minimum length of question body (number of characters)"
+msgid "Minimum length of exercise body (number of characters)"
 msgstr "问题正文最小长度 (字符数)"
 
 #: conf/forum_data_rules.py:117
-msgid "Minimum length of answer body (number of characters)"
+msgid "Minimum length of problem body (number of characters)"
 msgstr "回答正文最小长度 (字符数)"
 
 #: conf/forum_data_rules.py:126
@@ -1031,10 +1031,10 @@ msgstr "必需标签"
 #: conf/forum_data_rules.py:138
 msgid ""
 "At least one of these tags will be required for any new or newly edited "
-"question. A mandatory tag may be wildcard, if the wildcard tags are active."
+"exercise. A mandatory tag may be wildcard, if the wildcard tags are active."
 msgstr ""
 "At least one of these tags will be required for any new or newly edited "
-"question. A mandatory tag may be wildcard, if the wildcard tags are active."
+"exercise. A mandatory tag may be wildcard, if the wildcard tags are active."
 
 #: conf/forum_data_rules.py:150
 msgid "Force lowercase the tags"
@@ -1043,11 +1043,11 @@ msgstr "强制小写字母标签"
 #: conf/forum_data_rules.py:152
 msgid ""
 "Attention: after checking this, please back up the database, and run a "
-"management command: <code>python manage.py fix_question_tags</code> to "
+"management command: <code>python manage.py fix_exercise_tags</code> to "
 "globally rename the tags"
 msgstr ""
 "Attention: after checking this, please back up the database, and run a "
-"management command: <code>python manage.py fix_question_tags</code> to "
+"management command: <code>python manage.py fix_exercise_tags</code> to "
 "globally rename the tags"
 
 #: conf/forum_data_rules.py:166
@@ -1124,15 +1124,15 @@ msgstr ""
 "do not like the default sticky behavior of the text search query."
 
 #: conf/forum_data_rules.py:273
-msgid "Maximum number of tags per question"
+msgid "Maximum number of tags per exercise"
 msgstr "每个问题的最多标签数"
 
 #: conf/forum_data_rules.py:285
-msgid "Number of questions to list by default"
+msgid "Number of exercises to list by default"
 msgstr "默认显示的问题数"
 
 #: conf/forum_data_rules.py:295
-msgid "What should \"unanswered question\" mean?"
+msgid "What should \"exercise without problem\" mean?"
 msgstr "\"未回答\"问题是什么?"
 
 #: conf/ldap.py:9
@@ -1414,11 +1414,11 @@ msgid "Downvote"
 msgstr "投反对票"
 
 #: conf/minimum_reputation.py:40
-msgid "Answer own question immediately"
+msgid "Problem own exercise immediately"
 msgstr "立即回答你自己的问题"
 
 #: conf/minimum_reputation.py:49
-msgid "Accept own answer"
+msgid "Accept own problem"
 msgstr "接受自己的回答"
 
 #: conf/minimum_reputation.py:58
@@ -1435,7 +1435,7 @@ msgid "Delete comments posted by others"
 msgstr "删除其他人的留言"
 
 #: conf/minimum_reputation.py:85
-msgid "Delete questions and answers posted by others"
+msgid "Delete exercises and problems posted by others"
 msgstr "删除任何一个问题或答案，及其他管理功能"
 
 #: conf/minimum_reputation.py:94
@@ -1444,15 +1444,15 @@ msgstr "上传文件"
 
 # close.html
 #: conf/minimum_reputation.py:103
-msgid "Close own questions"
+msgid "Close own exercises"
 msgstr "关闭自己的问题"
 
 #: conf/minimum_reputation.py:112
-msgid "Retag questions posted by other people"
+msgid "Retag exercises posted by other people"
 msgstr "为其他人发布的问题重新设置标签"
 
 #: conf/minimum_reputation.py:121
-msgid "Reopen own questions"
+msgid "Reopen own exercises"
 msgstr "重设问题"
 
 #: conf/minimum_reputation.py:130
@@ -1469,7 +1469,7 @@ msgstr "查看标记垃圾帖"
 
 # must have extra space after in english
 #: conf/minimum_reputation.py:157
-msgid "Close questions asked by others"
+msgid "Close exercises asked by others"
 msgstr "关闭其他人的问题"
 
 #: conf/minimum_reputation.py:166
@@ -1490,7 +1490,7 @@ msgstr ""
 "the link will not count towards the rank of the users personal site."
 
 #: conf/minimum_reputation.py:190
-msgid "Post answers and comments by email"
+msgid "Post problems and comments by email"
 msgstr ""
 
 #: conf/reputation_changes.py:13
@@ -1506,11 +1506,11 @@ msgid "Gain for receiving an upvote"
 msgstr "标记接收的推荐票"
 
 #: conf/reputation_changes.py:41
-msgid "Gain for the author of accepted answer"
+msgid "Gain for the author of accepted problem"
 msgstr "标记接受回答的作者"
 
 #: conf/reputation_changes.py:50
-msgid "Gain for accepting best answer"
+msgid "Gain for accepting best problem"
 msgstr "标记最佳答案"
 
 #: conf/reputation_changes.py:59
@@ -1522,11 +1522,11 @@ msgid "Gain for voter on canceling downvote"
 msgstr "标记投票者取消反对票"
 
 #: conf/reputation_changes.py:78
-msgid "Loss for voter for canceling of answer acceptance"
+msgid "Loss for voter for canceling of problem acceptance"
 msgstr "减少投票者积分当取消回答的接受时"
 
 #: conf/reputation_changes.py:88
-msgid "Loss for author whose answer was \"un-accepted\""
+msgid "Loss for author whose problem was \"un-accepted\""
 msgstr "减少发布者积分当回答为不可接受时"
 
 #: conf/reputation_changes.py:98
@@ -1560,12 +1560,12 @@ msgstr "主页侧边栏"
 
 # 100%
 #: conf/sidebar_main.py:20 conf/sidebar_profile.py:20
-#: conf/sidebar_question.py:19
+#: conf/sidebar_exercise.py:19
 msgid "Custom sidebar header"
 msgstr "自定义侧边栏头部"
 
 #: conf/sidebar_main.py:23 conf/sidebar_profile.py:23
-#: conf/sidebar_question.py:22
+#: conf/sidebar_exercise.py:22
 msgid ""
 "Use this area to enter content at the TOP of the sidebarin HTML format.   "
 "When using this option (as well as the sidebar footer), please use the HTML "
@@ -1618,12 +1618,12 @@ msgstr ""
 
 # 100%
 #: conf/sidebar_main.py:85 conf/sidebar_profile.py:36
-#: conf/sidebar_question.py:75
+#: conf/sidebar_exercise.py:75
 msgid "Custom sidebar footer"
 msgstr "自定义侧边栏底部"
 
 #: conf/sidebar_main.py:88 conf/sidebar_profile.py:39
-#: conf/sidebar_question.py:78
+#: conf/sidebar_exercise.py:78
 msgid ""
 "Use this area to enter content at the BOTTOM of the sidebarin HTML format.   "
 "When using this option (as well as the sidebar header), please use the HTML "
@@ -1639,39 +1639,39 @@ msgstr ""
 msgid "User profile sidebar"
 msgstr "用户个人档案侧边栏"
 
-#: conf/sidebar_question.py:11
-msgid "Question page sidebar"
+#: conf/sidebar_exercise.py:11
+msgid "Exercise page sidebar"
 msgstr "问题页面侧边栏"
 
 # 100%
-#: conf/sidebar_question.py:35
+#: conf/sidebar_exercise.py:35
 msgid "Show tag list in sidebar"
 msgstr "侧边栏显示标签列表"
 
 # 100%
-#: conf/sidebar_question.py:37
+#: conf/sidebar_exercise.py:37
 msgid "Uncheck this if you want to hide the tag list from the sidebar "
 msgstr "若您希望在侧边栏隐藏标签列表请取消选中本项"
 
 # 100%
-#: conf/sidebar_question.py:48
+#: conf/sidebar_exercise.py:48
 msgid "Show meta information in sidebar"
 msgstr "侧边栏显示元信息"
 
-#: conf/sidebar_question.py:50
+#: conf/sidebar_exercise.py:50
 msgid ""
-"Uncheck this if you want to hide the meta information about the question "
+"Uncheck this if you want to hide the meta information about the exercise "
 "(post date, views, last updated). "
 msgstr ""
-"Uncheck this if you want to hide the meta information about the question "
+"Uncheck this if you want to hide the meta information about the exercise "
 "(post date, views, last updated). "
 
-#: conf/sidebar_question.py:62
-msgid "Show related questions in sidebar"
+#: conf/sidebar_exercise.py:62
+msgid "Show related exercises in sidebar"
 msgstr "在侧边栏显示相关问题"
 
-#: conf/sidebar_question.py:64
-msgid "Uncheck this if you want to hide the list of related questions. "
+#: conf/sidebar_exercise.py:64
+msgid "Uncheck this if you want to hide the list of related exercises. "
 msgstr "取消选中可隐藏相关问题列表。"
 
 # 100%
@@ -1747,7 +1747,7 @@ msgid "If left empty, a simple internal feedback form will be used instead"
 msgstr "如果留空，一个简单的内部反馈将被发送"
 
 #: conf/skin_counter_settings.py:11
-msgid "Skin: view, vote and answer counters"
+msgid "Skin: view, vote and problem counters"
 msgstr "查看，投票和回答计数器"
 
 #: conf/skin_counter_settings.py:19
@@ -1820,39 +1820,39 @@ msgid "Foreground color for views = MAX"
 msgstr "views = MAX前景色"
 
 #: conf/skin_counter_settings.py:173
-msgid "Answer counter value to give \"full color\""
+msgid "Problem counter value to give \"full color\""
 msgstr "回答计数器全颜色值"
 
 #: conf/skin_counter_settings.py:185
-msgid "Background color for answers = 0"
-msgstr "answers = 0背景色"
+msgid "Background color for problems = 0"
+msgstr "problems = 0背景色"
 
 #: conf/skin_counter_settings.py:195
-msgid "Foreground color for answers = 0"
-msgstr "answers = 0前景色"
+msgid "Foreground color for problems = 0"
+msgstr "problems = 0前景色"
 
 #: conf/skin_counter_settings.py:205
-msgid "Background color for answers"
+msgid "Background color for problems"
 msgstr "回答背景色"
 
 #: conf/skin_counter_settings.py:215
-msgid "Foreground color for answers"
+msgid "Foreground color for problems"
 msgstr "回答前景色"
 
 #: conf/skin_counter_settings.py:227
-msgid "Background color for answers = MAX"
-msgstr "answers = MAX背景色"
+msgid "Background color for problems = MAX"
+msgstr "problems = MAX背景色"
 
 #: conf/skin_counter_settings.py:238
-msgid "Foreground color for answers = MAX"
-msgstr "answers = MAX前景色"
+msgid "Foreground color for problems = MAX"
+msgstr "problems = MAX前景色"
 
 #: conf/skin_counter_settings.py:251
 msgid "Background color for accepted"
 msgstr "接受背景色"
 
 #: conf/skin_counter_settings.py:261
-msgid "Foreground color for accepted answer"
+msgid "Foreground color for accepted problem"
 msgstr "接受回答前景色"
 
 # 100%
@@ -2092,23 +2092,23 @@ msgid "Sharing content on social networks"
 msgstr "在社会化网络上共享信息"
 
 #: conf/social_sharing.py:20
-msgid "Check to enable sharing of questions on Twitter"
+msgid "Check to enable sharing of exercises on Twitter"
 msgstr "启用问题分享: Twitter"
 
 #: conf/social_sharing.py:29
-msgid "Check to enable sharing of questions on Facebook"
+msgid "Check to enable sharing of exercises on Facebook"
 msgstr "启用问题分享: Facebook"
 
 #: conf/social_sharing.py:38
-msgid "Check to enable sharing of questions on LinkedIn"
+msgid "Check to enable sharing of exercises on LinkedIn"
 msgstr "启用问题分享: LinkedIn"
 
 #: conf/social_sharing.py:47
-msgid "Check to enable sharing of questions on Identi.ca"
+msgid "Check to enable sharing of exercises on Identi.ca"
 msgstr "启用问题分享: Identi.ca"
 
 #: conf/social_sharing.py:56
-msgid "Check to enable sharing of questions on Google+"
+msgid "Check to enable sharing of exercises on Google+"
 msgstr "启用问题分享: Google+"
 
 # 100%
@@ -2245,7 +2245,7 @@ msgid "Number of days to allow canceling votes"
 msgstr "每天允许取消的投票数"
 
 #: conf/vote_rules.py:60
-msgid "Number of days required before answering own question"
+msgid "Number of days required before probleming own exercise"
 msgstr "回答自己的提问之前允许的天数"
 
 #: conf/vote_rules.py:69
@@ -2258,53 +2258,53 @@ msgstr "要求自动删除的标志数"
 
 #: conf/vote_rules.py:87
 msgid ""
-"Minimum days to accept an answer, if it has not been accepted by the "
-"question poster"
+"Minimum days to accept an problem, if it has not been accepted by the "
+"exercise poster"
 msgstr ""
-"Minimum days to accept an answer, if it has not been accepted by the "
-"question poster"
+"Minimum days to accept an problem, if it has not been accepted by the "
+"exercise poster"
 
 #: conf/widgets.py:13
 msgid "Embeddable widgets"
 msgstr "可嵌入的小工具"
 
 #: conf/widgets.py:25
-msgid "Number of questions to show"
+msgid "Number of exercises to show"
 msgstr "显示问题数"
 
 #: conf/widgets.py:28
 msgid ""
 "To embed the widget, add the following code to your site (and fill in "
 "correct base url, preferred tags, width and height):<iframe src="
-"\"{{base_url}}/widgets/questions?tags={{comma-separated-tags}}\" width=\"100%"
+"\"{{base_url}}/widgets/exercises?tags={{comma-separated-tags}}\" width=\"100%"
 "\" height=\"300\"scrolling=\"no\"><p>Your browser does not support iframes.</"
 "p></iframe>"
 msgstr ""
 "To embed the widget, add the following code to your site (and fill in "
 "correct base url, preferred tags, width and height):<iframe src="
-"\"{{base_url}}/widgets/questions?tags={{comma-separated-tags}}\" width=\"100%"
+"\"{{base_url}}/widgets/exercises?tags={{comma-separated-tags}}\" width=\"100%"
 "\" height=\"300\"scrolling=\"no\"><p>Your browser does not support iframes.</"
 "p></iframe>"
 
 #: conf/widgets.py:73
-msgid "CSS for the questions widget"
+msgid "CSS for the exercises widget"
 msgstr "问题小工具 CSS"
 
 #: conf/widgets.py:81
-msgid "Header for the questions widget"
+msgid "Header for the exercises widget"
 msgstr "问题小工具头"
 
 #: conf/widgets.py:90
-msgid "Footer for the questions widget"
+msgid "Footer for the exercises widget"
 msgstr "问题小工具尾"
 
 #: const/__init__.py:10
-msgid "duplicate question"
+msgid "duplicate exercise"
 msgstr "完全重复的问题"
 
 # chinese translation is domain specific
 #: const/__init__.py:11
-msgid "question is off-topic or not relevant"
+msgid "exercise is off-topic or not relevant"
 msgstr "偏离主题的问题"
 
 #: const/__init__.py:12
@@ -2312,19 +2312,19 @@ msgid "too subjective and argumentative"
 msgstr "太主观性、引起争吵的问题"
 
 #: const/__init__.py:13
-msgid "not a real question"
+msgid "not a real exercise"
 msgstr "不是一个真正的问题"
 
 #: const/__init__.py:14
-msgid "the question is answered, right answer was accepted"
+msgid "the exercise is problemed, right problem was accepted"
 msgstr "问题已经解决，已得到正确答案"
 
 #: const/__init__.py:15
-msgid "question is not relevant or outdated"
+msgid "exercise is not relevant or outdated"
 msgstr "已经过时、不可重现的问题"
 
 #: const/__init__.py:16
-msgid "question contains offensive or malicious remarks"
+msgid "exercise contains offensive or malicious remarks"
 msgstr "恶意言论"
 
 #: const/__init__.py:17
@@ -2336,12 +2336,12 @@ msgid "too localized"
 msgstr "太地域化"
 
 #: const/__init__.py:43
-#: skins/default/templates/question/answer_tab_bar.html:18
+#: skins/default/templates/exercise/problem_tab_bar.html:18
 msgid "newest"
 msgstr "最新问题"
 
 #: const/__init__.py:44 skins/default/templates/users.html:27
-#: skins/default/templates/question/answer_tab_bar.html:15
+#: skins/default/templates/exercise/problem_tab_bar.html:15
 msgid "oldest"
 msgstr "按最早加入"
 
@@ -2364,7 +2364,7 @@ msgstr "最酷"
 # "最有价值问题"
 # "最新问题"
 #: const/__init__.py:49
-#: skins/default/templates/question/answer_tab_bar.html:21
+#: skins/default/templates/exercise/problem_tab_bar.html:21
 msgid "most voted"
 msgstr "最有价值的问题"
 
@@ -2385,7 +2385,7 @@ msgid "all"
 msgstr "所有"
 
 #: const/__init__.py:64
-msgid "unanswered"
+msgid "without_problem"
 msgstr "未回答"
 
 #: const/__init__.py:65
@@ -2402,35 +2402,35 @@ msgid "cloud"
 msgstr "云"
 
 #: const/__init__.py:79
-msgid "Question has no answers"
+msgid "Exercise has no problems"
 msgstr "未回答的问题"
 
 #: const/__init__.py:80
-msgid "Question has no accepted answers"
+msgid "Exercise has no accepted problems"
 msgstr "仍没有正确答案的问题"
 
 #: const/__init__.py:125
-msgid "asked a question"
+msgid "asked a exercise"
 msgstr "我要提问"
 
 #: const/__init__.py:126
-msgid "answered a question"
+msgid "problemed a exercise"
 msgstr "回答问题"
 
 #: const/__init__.py:127 const/__init__.py:203
-msgid "commented question"
+msgid "commented exercise"
 msgstr "评论问题"
 
 #: const/__init__.py:128 const/__init__.py:204
-msgid "commented answer"
+msgid "commented problem"
 msgstr "评论回答"
 
 #: const/__init__.py:129
-msgid "edited question"
+msgid "edited exercise"
 msgstr "修改问题"
 
 #: const/__init__.py:130
-msgid "edited answer"
+msgid "edited problem"
 msgstr "修改回答"
 
 #: const/__init__.py:131
@@ -2439,7 +2439,7 @@ msgid "received badge"
 msgstr "获奖"
 
 #: const/__init__.py:132
-msgid "marked best answer"
+msgid "marked best problem"
 msgstr "标记最佳答案"
 
 #: const/__init__.py:133
@@ -2455,11 +2455,11 @@ msgid "canceled vote"
 msgstr "撤销投票"
 
 #: const/__init__.py:136
-msgid "deleted question"
+msgid "deleted exercise"
 msgstr "删除问题"
 
 #: const/__init__.py:137
-msgid "deleted answer"
+msgid "deleted problem"
 msgstr "删除回答"
 
 #: const/__init__.py:138
@@ -2483,11 +2483,11 @@ msgid "email update sent to user"
 msgstr "发送邮件更新"
 
 #: const/__init__.py:145
-msgid "reminder about unanswered questions sent"
+msgid "reminder about exercises without problems sent"
 msgstr "已发送未回答问题提醒邮件"
 
 #: const/__init__.py:149
-msgid "reminder about accepting the best answer sent"
+msgid "reminder about accepting the best problem sent"
 msgstr "已发送接受最佳答案提醒邮件"
 
 #: const/__init__.py:151
@@ -2496,12 +2496,12 @@ msgstr "发布提醒"
 
 #: const/__init__.py:202
 #, fuzzy
-msgid "answered question"
+msgid "problemed exercise"
 msgstr "回答问题"
 
 #: const/__init__.py:205
 #, fuzzy
-msgid "accepted answer"
+msgid "accepted problem"
 msgstr "修改回答"
 
 #: const/__init__.py:209
@@ -2599,11 +2599,11 @@ msgid "Uploaded Avatar"
 msgstr "已上传头像"
 
 #: const/message_keys.py:21
-msgid "most relevant questions"
+msgid "most relevant exercises"
 msgstr "最相关问题"
 
 #: const/message_keys.py:22
-msgid "click to see most relevant questions"
+msgid "click to see most relevant exercises"
 msgstr "点击查看最相关问题"
 
 #: const/message_keys.py:23
@@ -2611,7 +2611,7 @@ msgid "by relevance"
 msgstr "按相关性"
 
 #: const/message_keys.py:24
-msgid "click to see the oldest questions"
+msgid "click to see the oldest exercises"
 msgstr "最新问题"
 
 #: const/message_keys.py:25
@@ -2619,11 +2619,11 @@ msgid "by date"
 msgstr "按日期"
 
 #: const/message_keys.py:26
-msgid "click to see the newest questions"
+msgid "click to see the newest exercises"
 msgstr "最新问题"
 
 #: const/message_keys.py:27
-msgid "click to see the least recently updated questions"
+msgid "click to see the least recently updated exercises"
 msgstr "最近被更新的问题"
 
 #: const/message_keys.py:28
@@ -2631,23 +2631,23 @@ msgid "by activity"
 msgstr "按活跃程度"
 
 #: const/message_keys.py:29
-msgid "click to see the most recently updated questions"
+msgid "click to see the most recently updated exercises"
 msgstr "最近被更新的问题"
 
 #: const/message_keys.py:30
-msgid "click to see the least answered questions"
+msgid "click to see the least problemed exercises"
 msgstr "点击查看回答数最少的问题"
 
 #: const/message_keys.py:31
-msgid "by answers"
+msgid "by problems"
 msgstr "按回答数"
 
 #: const/message_keys.py:32
-msgid "click to see the most answered questions"
+msgid "click to see the most problemed exercises"
 msgstr "点击查看回答数最多的问题"
 
 #: const/message_keys.py:33
-msgid "click to see least voted questions"
+msgid "click to see least voted exercises"
 msgstr "投票次数最多的问题"
 
 #: const/message_keys.py:34
@@ -2655,7 +2655,7 @@ msgid "by votes"
 msgstr "按票数"
 
 #: const/message_keys.py:35
-msgid "click to see most voted questions"
+msgid "click to see most voted exercises"
 msgstr "投票次数最多的问题"
 
 #: const/message_keys.py:40
@@ -3037,37 +3037,37 @@ msgid "Congratulations, you are now an Administrator"
 msgstr "恭喜您，社区给您颁发了奖牌"
 
 # 100%
-#: management/commands/send_accept_answer_reminders.py:58
+#: management/commands/send_accept_problem_reminders.py:58
 #, python-format
-msgid "Accept the best answer for %(question_count)d of your questions"
-msgstr "接受您 %(question_count)d 个问题的最佳答案"
+msgid "Accept the best problem for %(exercise_count)d of your exercises"
+msgstr "接受您 %(exercise_count)d 个问题的最佳答案"
 
-#: management/commands/send_accept_answer_reminders.py:63
-msgid "Please accept the best answer for this question:"
+#: management/commands/send_accept_problem_reminders.py:63
+msgid "Please accept the best problem for this exercise:"
 msgstr "请接受此问题的最佳答案:"
 
-#: management/commands/send_accept_answer_reminders.py:65
-msgid "Please accept the best answer for these questions:"
+#: management/commands/send_accept_problem_reminders.py:65
+msgid "Please accept the best problem for these exercises:"
 msgstr "请接受这些问题的最佳答案:"
 
 #: management/commands/send_email_alerts.py:414
 #, python-format
-msgid "%(question_count)d updated question about %(topics)s"
-msgid_plural "%(question_count)d updated questions about %(topics)s"
-msgstr[0] "关于 %(topics)s问题有%(question_count)d 个更新"
+msgid "%(exercise_count)d updated exercise about %(topics)s"
+msgid_plural "%(exercise_count)d updated exercises about %(topics)s"
+msgstr[0] "关于 %(topics)s问题有%(exercise_count)d 个更新"
 
 #: management/commands/send_email_alerts.py:425
 #, python-format
 msgid ""
-"<p>Dear %(name)s,</p><p>The following question has been updated "
+"<p>Dear %(name)s,</p><p>The following exercise has been updated "
 "%(sitename)s</p>"
 msgid_plural ""
-"<p>Dear %(name)s,</p><p>The following %(num)d questions have been updated on "
+"<p>Dear %(name)s,</p><p>The following %(num)d exercises have been updated on "
 "%(sitename)s:</p>"
 msgstr[0] ""
 
 #: management/commands/send_email_alerts.py:449
-msgid "new question"
+msgid "new exercise"
 msgstr "提问"
 
 #: management/commands/send_email_alerts.py:474
@@ -3080,11 +3080,11 @@ msgid ""
 "friendly %(sitename)s server.</p>"
 msgstr ""
 
-#: management/commands/send_unanswered_question_reminders.py:60
+#: management/commands/send_exercise_without_problem_reminders.py:60
 #, python-format
-msgid "%(question_count)d unanswered question about %(topics)s"
-msgid_plural "%(question_count)d unanswered questions about %(topics)s"
-msgstr[0] "关于 %(topics)s问题有%(question_count)d 个更新"
+msgid "%(exercise_count)d exercise without problem about %(topics)s"
+msgid_plural "%(exercise_count)d exercises without problems about %(topics)s"
+msgstr[0] "关于 %(topics)s问题有%(exercise_count)d 个更新"
 
 #: middleware/forum_mode.py:53
 #, fuzzy, python-format
@@ -3093,35 +3093,35 @@ msgstr "请登录%s"
 
 #: models/__init__.py:320
 msgid ""
-"Sorry, you cannot accept or unaccept best answers because your account is "
+"Sorry, you cannot accept or unaccept best problems because your account is "
 "blocked"
 msgstr "对不起,你不能认定或否决最佳答案因为你的账户已冻结"
 
 #: models/__init__.py:324
 msgid ""
-"Sorry, you cannot accept or unaccept best answers because your account is "
+"Sorry, you cannot accept or unaccept best problems because your account is "
 "suspended"
 msgstr "对不起,你不能认定或否决最佳答案因为你的账户已暂停使用"
 
 #: models/__init__.py:337
 #, fuzzy, python-format
 msgid ""
-">%(points)s points required to accept or unaccept  your own answer to your "
-"own question"
+">%(points)s points required to accept or unaccept  your own problem to your "
+"own exercise"
 msgstr "对不起,你不能认定或否决你自己的回答的自己的问题"
 
 #: models/__init__.py:359
 #, python-format
 msgid ""
-"Sorry, you will be able to accept this answer only after %(will_be_able_at)s"
+"Sorry, you will be able to accept this problem only after %(will_be_able_at)s"
 msgstr ""
-"Sorry, you will be able to accept this answer only after %(will_be_able_at)s"
+"Sorry, you will be able to accept this problem only after %(will_be_able_at)s"
 
 #: models/__init__.py:367
 #, python-format
 msgid ""
-"Sorry, only moderators or original author of the question  - %(username)s - "
-"can accept or unaccept the best answer"
+"Sorry, only moderators or original author of the exercise  - %(username)s - "
+"can accept or unaccept the best problem"
 msgstr "对不起,只有问题的提问者 - %(username)s - 可以认定最佳答案"
 
 #: models/__init__.py:390
@@ -3183,7 +3183,7 @@ msgstr "对不起，因为你的账户已暂停使用，你只能留言你自己
 #, python-format
 msgid ""
 "Sorry, to comment any post a minimum reputation of %(min_rep)s points is "
-"required. You can still comment your own posts and answers to your questions"
+"required. You can still comment your own posts and problems to your exercises"
 msgstr ""
 "对不起，留言任何信息都需要最少%(min_rep)s积分值,你可以留言你自己发布或回答的"
 "问题"
@@ -3223,10 +3223,10 @@ msgstr "对不起，编辑其他人的信息需要最低积分%(min_rep)s"
 
 #: models/__init__.py:664
 msgid ""
-"Sorry, cannot delete your question since it has an upvoted answer posted by "
+"Sorry, cannot delete your exercise since it has an upvoted problem posted by "
 "someone else"
 msgid_plural ""
-"Sorry, cannot delete your question since it has some upvoted answers posted "
+"Sorry, cannot delete your exercise since it has some upvoted problems posted "
 "by other users"
 msgstr[0] "对不起，你不能删除问题因为它已经有了投赞成票的答案"
 
@@ -3247,11 +3247,11 @@ msgid ""
 msgstr "对不起，你必须有%(min_rep)s积分才能删除别人发布的信息"
 
 #: models/__init__.py:707
-msgid "Sorry, since your account is blocked you cannot close questions"
+msgid "Sorry, since your account is blocked you cannot close exercises"
 msgstr "对不起，因为你的账户已冻结你不能关闭问题"
 
 #: models/__init__.py:711
-msgid "Sorry, since your account is suspended you cannot close questions"
+msgid "Sorry, since your account is suspended you cannot close exercises"
 msgstr "对不起，因为你的账户已暂停使用你不能关闭问题"
 
 #: models/__init__.py:715
@@ -3264,24 +3264,24 @@ msgstr "对不起，你必须有%(min_rep)s积分才能关闭别人发布的信�
 #: models/__init__.py:724
 #, python-format
 msgid ""
-"Sorry, to close own question a minimum reputation of %(min_rep)s is required"
+"Sorry, to close own exercise a minimum reputation of %(min_rep)s is required"
 msgstr "对不起，你必须有%(min_rep)s积分才能关闭自己发布的问题"
 
 #: models/__init__.py:748
 #, python-format
 msgid ""
 "Sorry, only administrators, moderators or post owners with reputation > "
-"%(min_rep)s can reopen questions."
+"%(min_rep)s can reopen exercises."
 msgstr "对不起，只有管理员，版主和有%(min_rep)s积分的发布者才能重开问题"
 
 #: models/__init__.py:754
 #, python-format
 msgid ""
-"Sorry, to reopen own question a minimum reputation of %(min_rep)s is required"
+"Sorry, to reopen own exercise a minimum reputation of %(min_rep)s is required"
 msgstr "对不起，你必须有%(min_rep)s积分才能重开自己发布的问题"
 
 #: models/__init__.py:775
-msgid "You have flagged this question before and cannot do it more than once"
+msgid "You have flagged this exercise before and cannot do it more than once"
 msgstr ""
 
 #: models/__init__.py:783
@@ -3335,23 +3335,23 @@ msgstr "本条目无标记"
 
 #: models/__init__.py:887
 msgid ""
-"Sorry, only question owners, site administrators and moderators can retag "
-"deleted questions"
+"Sorry, only exercise owners, site administrators and moderators can retag "
+"deleted exercises"
 msgstr "对不起，只有发问者，网站管理员和版主才能为已删除问题修改标签"
 
 #: models/__init__.py:894
-msgid "Sorry, since your account is blocked you cannot retag questions"
+msgid "Sorry, since your account is blocked you cannot retag exercises"
 msgstr "对不起，你的账户已冻结，你不能为问题修改标签"
 
 #: models/__init__.py:898
 msgid ""
-"Sorry, since your account is suspended you can retag only your own questions"
+"Sorry, since your account is suspended you can retag only your own exercises"
 msgstr "对不起，你的账户已暂停使用，你只能为你自己的问题修改标签"
 
 #: models/__init__.py:902
 #, python-format
 msgid ""
-"Sorry, to retag questions a minimum reputation of %(min_rep)s is required"
+"Sorry, to retag exercises a minimum reputation of %(min_rep)s is required"
 msgstr "对不起，为问题修改标签必须有%(min_rep)s积分值"
 
 #: models/__init__.py:921
@@ -3408,8 +3408,8 @@ msgstr[0] "%(days)d 天"
 #: models/__init__.py:1480
 #, python-format
 msgid ""
-"New users must wait %(days)s before answering their own question.  You can "
-"post an answer %(left)s"
+"New users must wait %(days)s before probleming their own exercise.  You can "
+"post an problem %(left)s"
 msgstr "新用户需等待 %(days)s 天方可回答自己的提问。还剩 %(left)s"
 
 #: models/__init__.py:1653 skins/default/templates/feedback_email.txt:9
@@ -3516,7 +3516,7 @@ msgstr "同等压力"
 
 #: models/badges.py:174
 #, python-format
-msgid "Received at least %(votes)s upvote for an answer for the first time"
+msgid "Received at least %(votes)s upvote for an problem for the first time"
 msgstr "获取至少有%(votes)s推荐票的问题"
 
 #: models/badges.py:178
@@ -3550,7 +3550,7 @@ msgstr "已投票%(num)s次"
 
 #: models/badges.py:252
 #, python-format
-msgid "Answered own question with at least %(num)s up votes"
+msgid "Problemed own exercise with at least %(num)s up votes"
 msgstr "自己回答的至少有%(num)s次推荐票的问题"
 
 #: models/badges.py:256
@@ -3558,37 +3558,37 @@ msgid "Self-Learner"
 msgstr "自学者"
 
 #: models/badges.py:304
-msgid "Nice Answer"
+msgid "Nice Problem"
 msgstr "好回答"
 
 #: models/badges.py:309 models/badges.py:321 models/badges.py:333
 #, python-format
-msgid "Answer voted up %(num)s times"
+msgid "Problem voted up %(num)s times"
 msgstr "该用户投的赞成票回答总数%(num)s"
 
 #: models/badges.py:316
-msgid "Good Answer"
+msgid "Good Problem"
 msgstr "好回答"
 
 #: models/badges.py:328
-msgid "Great Answer"
+msgid "Great Problem"
 msgstr "完美答案"
 
 #: models/badges.py:340
-msgid "Nice Question"
+msgid "Nice Exercise"
 msgstr "好问题"
 
 #: models/badges.py:345 models/badges.py:357 models/badges.py:369
 #, python-format
-msgid "Question voted up %(num)s times"
+msgid "Exercise voted up %(num)s times"
 msgstr "该用户投的赞成票问题总数%(num)s"
 
 #: models/badges.py:352
-msgid "Good Question"
+msgid "Good Exercise"
 msgstr "好问题"
 
 #: models/badges.py:364
-msgid "Great Question"
+msgid "Great Exercise"
 msgstr "完美的问题"
 
 #: models/badges.py:376
@@ -3596,29 +3596,29 @@ msgid "Student"
 msgstr "学生"
 
 #: models/badges.py:381
-msgid "Asked first question with at least one up vote"
+msgid "Asked first exercise with at least one up vote"
 msgstr "得到至少一个赞成票的问题"
 
 #: models/badges.py:414
-msgid "Popular Question"
+msgid "Popular Exercise"
 msgstr "受欢迎的问题"
 
 #: models/badges.py:418 models/badges.py:429 models/badges.py:441
 #, python-format
-msgid "Asked a question with %(views)s views"
+msgid "Asked a exercise with %(views)s views"
 msgstr "被查看 %(views)s次的问题"
 
 #: models/badges.py:425
-msgid "Notable Question"
+msgid "Notable Exercise"
 msgstr "关注的问题"
 
 # close.html
 #: models/badges.py:436
-msgid "Famous Question"
+msgid "Famous Exercise"
 msgstr "著名问题"
 
 #: models/badges.py:450
-msgid "Asked a question and accepted an answer"
+msgid "Asked a exercise and accepted an problem"
 msgstr "提问的有正确答案的问题"
 
 #: models/badges.py:453
@@ -3631,7 +3631,7 @@ msgstr "文明的"
 
 #: models/badges.py:499
 #, python-format
-msgid "First answer was accepted with %(num)s or more votes"
+msgid "First problem was accepted with %(num)s or more votes"
 msgstr "第一个正确且被投了%(num)s或更多票的答案"
 
 #: models/badges.py:507
@@ -3640,13 +3640,13 @@ msgstr "专家"
 
 #: models/badges.py:510
 #, python-format
-msgid "Answer accepted with %(num)s or more votes"
+msgid "Problem accepted with %(num)s or more votes"
 msgstr "被接受的且被投了%(num)s或更多此的回答"
 
 #: models/badges.py:518
 #, python-format
 msgid ""
-"Answered a question more than %(days)s days later with at least %(votes)s "
+"Problemed a exercise more than %(days)s days later with at least %(votes)s "
 "votes"
 msgstr "问了一个超过%(days)s天且至少有%(votes)s投票的问题"
 
@@ -3714,15 +3714,15 @@ msgstr "完善个人所有资料"
 
 #: models/badges.py:663
 #, python-format
-msgid "Question favorited by %(num)s users"
+msgid "Exercise favorited by %(num)s users"
 msgstr "被%(num)s用户收藏的问题"
 
 #: models/badges.py:689
-msgid "Stellar Question"
+msgid "Stellar Exercise"
 msgstr "重要问题"
 
 #: models/badges.py:698
-msgid "Favorite Question"
+msgid "Favorite Exercise"
 msgstr "收藏问题"
 
 #: models/badges.py:710
@@ -3749,7 +3749,7 @@ msgstr "分类学者"
 
 #: models/badges.py:756
 #, fuzzy, python-format
-msgid "Created a tag used by %(num)s questions"
+msgid "Created a tag used by %(num)s exercises"
 msgstr "创建一个%(num)s个问题都用到的标签"
 
 #: models/badges.py:774
@@ -3761,37 +3761,37 @@ msgid "Very active in one tag"
 msgstr "非常活跃的标签"
 
 #: models/post.py:1071
-msgid "Sorry, this question has been deleted and is no longer accessible"
+msgid "Sorry, this exercise has been deleted and is no longer accessible"
 msgstr "对不起,此问题已删除"
 
 #: models/post.py:1087
 msgid ""
-"Sorry, the answer you are looking for is no longer available, because the "
-"parent question has been removed"
+"Sorry, the problem you are looking for is no longer available, because the "
+"parent exercise has been removed"
 msgstr "对不起,你查找的问题已失效,因为问题已删除"
 
 #: models/post.py:1094
-msgid "Sorry, this answer has been removed and is no longer accessible"
+msgid "Sorry, this problem has been removed and is no longer accessible"
 msgstr "对不起,这个问题已删除"
 
 #: models/post.py:1110
 msgid ""
 "Sorry, the comment you are looking for is no longer accessible, because the "
-"parent question has been removed"
+"parent exercise has been removed"
 msgstr "对不起,你查找的评论不能访问,因为问题已删除"
 
 #: models/post.py:1117
 msgid ""
 "Sorry, the comment you are looking for is no longer accessible, because the "
-"parent answer has been removed"
+"parent problem has been removed"
 msgstr "对不起,你查找的评论不能访问,因为回答已删除"
 
-#: models/question.py:54
+#: models/exercise.py:54
 #, python-format
 msgid "\" and \"%s\""
 msgstr "\" 和 \"%s\""
 
-#: models/question.py:57
+#: models/exercise.py:57
 msgid "\" and more"
 msgstr "查看更多"
 
@@ -3808,16 +3808,16 @@ msgstr "<em>被版主修改. 原因:</em> %(reason)s"
 #: models/repute.py:154
 #, python-format
 msgid ""
-"%(points)s points were added for %(username)s's contribution to question "
-"%(question_title)s"
-msgstr "%(points)s分被加给 %(username)s，因为他贡献了 %(question_title)s问题"
+"%(points)s points were added for %(username)s's contribution to exercise "
+"%(exercise_title)s"
+msgstr "%(points)s分被加给 %(username)s，因为他贡献了 %(exercise_title)s问题"
 
 #: models/repute.py:159
 #, python-format
 msgid ""
 "%(points)s points were subtracted for %(username)s's contribution to "
-"question %(question_title)s"
-msgstr "%(username)s被减去%(points)s分，因为他贡献了 %(question_title)s问题"
+"exercise %(exercise_title)s"
+msgstr "%(username)s被减去%(points)s分，因为他贡献了 %(exercise_title)s问题"
 
 #: models/tag.py:106
 msgid "interesting"
@@ -3832,15 +3832,15 @@ msgid "Entire forum"
 msgstr "忽略的"
 
 #: models/user.py:267
-msgid "Questions that I asked"
+msgid "Exercises that I asked"
 msgstr "我问的问题"
 
 #: models/user.py:268
-msgid "Questions that I answered"
+msgid "Exercises that I problemed"
 msgstr "我答的问题"
 
 #: models/user.py:269
-msgid "Individually selected questions"
+msgid "Individually selected exercises"
 msgstr "我选择的问题"
 
 #: models/user.py:270
@@ -3903,7 +3903,7 @@ msgid ""
 "<span class='strong big'>Please enter your email address in the box below.</"
 "span>\n"
 "Valid email address is required on this Q&amp;A forum. If you like, \n"
-"you can <strong>receive updates</strong> on interesting questions or entire\n"
+"you can <strong>receive updates</strong> on interesting exercises or entire\n"
 "forum via email. Also, your email is used to create a unique \n"
 "<a href='%%(gravatar_faq_url)s'><strong>gravatar</strong></a> image for "
 "your\n"
@@ -3922,11 +3922,11 @@ msgid "Save Email"
 msgstr "保存邮件地址"
 
 #: skins/common/templates/authopenid/changeemail.html:51
-#: skins/default/templates/answer_edit.html:25
+#: skins/default/templates/problem_edit.html:25
 #: skins/default/templates/close.html:16
 #: skins/default/templates/feedback.html:64
-#: skins/default/templates/question_edit.html:36
-#: skins/default/templates/question_retag.html:22
+#: skins/default/templates/exercise_edit.html:36
+#: skins/default/templates/exercise_retag.html:22
 #: skins/default/templates/reopen.html:27
 #: skins/default/templates/subscribe_for_tags.html:16
 #: skins/default/templates/user_profile/user_edit.html:102
@@ -3976,7 +3976,7 @@ msgid ""
 "\n"
 "<span class='big strong'>Your email address is now set to %%(email)s.</"
 "span> \n"
-"Updates on the questions that you like most will be sent to this address. \n"
+"Updates on the exercises that you like most will be sent to this address. \n"
 "Email notifications are sent once a day or less frequently - only when "
 "there \n"
 "are any news."
@@ -3990,9 +3990,9 @@ msgstr "邮件地址确认"
 msgid ""
 "<span class=\\\"big strong\\\">Thank you for verifying your email!</span> "
 "Now \n"
-"you can <strong>ask</strong> and <strong>answer</strong> questions. Also "
+"you can <strong>ask</strong> and <strong>problem</strong> exercises. Also "
 "if \n"
-"you find a very interesting question you can <strong>subscribe for the \n"
+"you find a very interesting exercise you can <strong>subscribe for the \n"
 "updates</strong> - then will be notified about changes <strong>once a day</"
 "strong>\n"
 "or less frequently."
@@ -4110,7 +4110,7 @@ msgstr "用户登录"
 #, python-format
 msgid ""
 "\n"
-"        Your answer to %(title)s %(summary)s will be posted once you log in\n"
+"        Your problem to %(title)s %(summary)s will be posted once you log in\n"
 "        "
 msgstr ""
 "\n"
@@ -4119,7 +4119,7 @@ msgstr ""
 #: skins/common/templates/authopenid/signin.html:21
 #, python-format
 msgid ""
-"Your question \n"
+"Your exercise \n"
 "        %(title)s %(summary)s will be posted once you log in\n"
 "        "
 msgstr "登录后,你的关于 %(title)s %(summary)s 的问题将被发布"
@@ -4219,8 +4219,8 @@ msgid "delete, if you like"
 msgstr "可以删除"
 
 #: skins/common/templates/authopenid/signin.html:177
-#: skins/common/templates/question/answer_controls.html:13
-#: skins/common/templates/question/question_controls.html:4
+#: skins/common/templates/exercise/problem_controls.html:13
+#: skins/common/templates/exercise/exercise_controls.html:4
 msgid "delete"
 msgstr "删除"
 
@@ -4346,91 +4346,91 @@ msgstr ""
 msgid "Delete These"
 msgstr "删除这些"
 
-#: skins/common/templates/question/answer_controls.html:2
-msgid "swap with question"
+#: skins/common/templates/exercise/problem_controls.html:2
+msgid "swap with exercise"
 msgstr "与提问对调"
 
-#: skins/common/templates/question/answer_controls.html:7
+#: skins/common/templates/exercise/problem_controls.html:7
 msgid "permanent link"
 msgstr "永久链接"
 
-#: skins/common/templates/question/answer_controls.html:8
-#: skins/default/templates/widgets/answer_edit_tips.html:45
-#: skins/default/templates/widgets/question_edit_tips.html:40
+#: skins/common/templates/exercise/problem_controls.html:8
+#: skins/default/templates/widgets/problem_edit_tips.html:45
+#: skins/default/templates/widgets/exercise_edit_tips.html:40
 msgid "link"
 msgstr "链接"
 
 # todo please check this in chinese
-#: skins/common/templates/question/answer_controls.html:13
-#: skins/common/templates/question/question_controls.html:4
+#: skins/common/templates/exercise/problem_controls.html:13
+#: skins/common/templates/exercise/exercise_controls.html:4
 msgid "undelete"
 msgstr "取消"
 
-#: skins/common/templates/question/answer_controls.html:19
+#: skins/common/templates/exercise/problem_controls.html:19
 #, fuzzy
 msgid "remove offensive flag"
 msgstr "查看标记垃圾帖"
 
-#: skins/common/templates/question/answer_controls.html:21
-#: skins/common/templates/question/question_controls.html:16
+#: skins/common/templates/exercise/problem_controls.html:21
+#: skins/common/templates/exercise/exercise_controls.html:16
 msgid "remove flag"
 msgstr "移除标签"
 
-#: skins/common/templates/question/answer_controls.html:26
-#: skins/common/templates/question/answer_controls.html:35
-#: skins/common/templates/question/question_controls.html:14
-#: skins/common/templates/question/question_controls.html:20
-#: skins/common/templates/question/question_controls.html:27
+#: skins/common/templates/exercise/problem_controls.html:26
+#: skins/common/templates/exercise/problem_controls.html:35
+#: skins/common/templates/exercise/exercise_controls.html:14
+#: skins/common/templates/exercise/exercise_controls.html:20
+#: skins/common/templates/exercise/exercise_controls.html:27
 msgid ""
 "report as offensive (i.e containing spam, advertising, malicious text, etc.)"
 msgstr "检举该帖为垃“水帖”（含广告、人身攻击、恶意言论等）"
 
-#: skins/common/templates/question/answer_controls.html:28
-#: skins/common/templates/question/answer_controls.html:37
-#: skins/common/templates/question/question_controls.html:22
-#: skins/common/templates/question/question_controls.html:29
+#: skins/common/templates/exercise/problem_controls.html:28
+#: skins/common/templates/exercise/problem_controls.html:37
+#: skins/common/templates/exercise/exercise_controls.html:22
+#: skins/common/templates/exercise/exercise_controls.html:29
 msgid "flag offensive"
 msgstr "垃圾帖？"
 
-#: skins/common/templates/question/answer_controls.html:41
-#: skins/common/templates/question/question_controls.html:36
+#: skins/common/templates/exercise/problem_controls.html:41
+#: skins/common/templates/exercise/exercise_controls.html:36
 #: skins/default/templates/macros.html:311
 #: skins/default/templates/revisions.html:38
 #: skins/default/templates/revisions.html:41
 msgid "edit"
 msgstr "编辑"
 
-#: skins/common/templates/question/answer_vote_buttons.html:6
+#: skins/common/templates/exercise/problem_vote_buttons.html:6
 #: skins/default/templates/user_profile/user_stats.html:24
-msgid "this answer has been selected as correct"
+msgid "this problem has been selected as correct"
 msgstr "该回答已被设为最佳答案"
 
-#: skins/common/templates/question/answer_vote_buttons.html:8
-msgid "mark this answer as correct (click again to undo)"
+#: skins/common/templates/exercise/problem_vote_buttons.html:8
+msgid "mark this problem as correct (click again to undo)"
 msgstr "标记最佳答案 (再次点击可取消)"
 
-#: skins/common/templates/question/closed_question_info.html:2
+#: skins/common/templates/exercise/closed_exercise_info.html:2
 #, python-format
 msgid ""
-"The question has been closed for the following reason <b>\"%(close_reason)s"
+"The exercise has been closed for the following reason <b>\"%(close_reason)s"
 "\"</b> <i>by"
 msgstr "问题因\"%(close_reason)s\"原因已被关闭"
 
-#: skins/common/templates/question/closed_question_info.html:4
+#: skins/common/templates/exercise/closed_exercise_info.html:4
 #, python-format
 msgid "close date %(closed_at)s"
 msgstr "%(closed_at)s日关闭"
 
-#: skins/common/templates/question/question_controls.html:6
+#: skins/common/templates/exercise/exercise_controls.html:6
 msgid "reopen"
 msgstr "打开"
 
-#: skins/common/templates/question/question_controls.html:8
+#: skins/common/templates/exercise/exercise_controls.html:8
 #: skins/default/templates/user_profile/user_inbox.html:67
 msgid "close"
 msgstr "关闭"
 
-#: skins/common/templates/question/question_controls.html:35
+#: skins/common/templates/exercise/exercise_controls.html:35
 msgid "retag"
 msgstr "更新标签"
 
@@ -4454,13 +4454,13 @@ msgid "Toggle the real time Markdown editor preview"
 msgstr "打开或者关闭Markdown编辑器的实时预览"
 
 #: skins/common/templates/widgets/edit_post.html:60
-#: skins/default/templates/answer_edit.html:61
-#: skins/default/templates/answer_edit.html:64
+#: skins/default/templates/problem_edit.html:61
+#: skins/default/templates/problem_edit.html:64
 #: skins/default/templates/ask.html:49 skins/default/templates/ask.html:52
-#: skins/default/templates/question_edit.html:73
-#: skins/default/templates/question_edit.html:76
-#: skins/default/templates/question/javascript.html:85
-#: skins/default/templates/question/javascript.html:88
+#: skins/default/templates/exercise_edit.html:73
+#: skins/default/templates/exercise_edit.html:76
+#: skins/default/templates/exercise/javascript.html:85
+#: skins/default/templates/exercise/javascript.html:88
 msgid "hide preview"
 msgstr "禁用预览"
 
@@ -4502,7 +4502,7 @@ msgstr "有可能是以下原因导致："
 
 #: skins/default/templates/404.jinja.html:17
 #, fuzzy
-msgid "this question or answer has been deleted;"
+msgid "this exercise or problem has been deleted;"
 msgstr ""
 "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
 "你正在查看的问题或答案已经被删除；\n"
@@ -4539,7 +4539,7 @@ msgstr "返回前页"
 
 #: skins/default/templates/404.jinja.html:31
 #: skins/default/templates/widgets/scope_nav.html:6
-msgid "see all questions"
+msgid "see all exercises"
 msgstr "查看最新问题"
 
 #: skins/default/templates/404.jinja.html:32
@@ -4560,44 +4560,44 @@ msgid "please report the error to the site administrators if you wish"
 msgstr "请报告这些错误给网站管理员"
 
 #: skins/default/templates/500.jinja.html:12
-msgid "see latest questions"
+msgid "see latest exercises"
 msgstr "最新问题"
 
 #: skins/default/templates/500.jinja.html:13
 msgid "see tags"
 msgstr "查看标签"
 
-#: skins/default/templates/answer_edit.html:4
-#: skins/default/templates/answer_edit.html:10
-msgid "Edit answer"
+#: skins/default/templates/problem_edit.html:4
+#: skins/default/templates/problem_edit.html:10
+msgid "Edit problem"
 msgstr "修改回答"
 
-#: skins/default/templates/answer_edit.html:10
-#: skins/default/templates/question_edit.html:9
-#: skins/default/templates/question_retag.html:5
+#: skins/default/templates/problem_edit.html:10
+#: skins/default/templates/exercise_edit.html:9
+#: skins/default/templates/exercise_retag.html:5
 #: skins/default/templates/revisions.html:7
 msgid "back"
 msgstr "返回"
 
-#: skins/default/templates/answer_edit.html:14
+#: skins/default/templates/problem_edit.html:14
 msgid "revision"
 msgstr "版本"
 
-#: skins/default/templates/answer_edit.html:17
-#: skins/default/templates/question_edit.html:16
+#: skins/default/templates/problem_edit.html:17
+#: skins/default/templates/exercise_edit.html:16
 msgid "select revision"
 msgstr "选择版本"
 
-# synonym of above in Edit question
-#: skins/default/templates/answer_edit.html:24
-#: skins/default/templates/question_edit.html:35
+# synonym of above in Edit exercise
+#: skins/default/templates/problem_edit.html:24
+#: skins/default/templates/exercise_edit.html:35
 msgid "Save edit"
 msgstr "现在修改"
 
-#: skins/default/templates/answer_edit.html:64
+#: skins/default/templates/problem_edit.html:64
 #: skins/default/templates/ask.html:52
-#: skins/default/templates/question_edit.html:76
-#: skins/default/templates/question/javascript.html:88
+#: skins/default/templates/exercise_edit.html:76
+#: skins/default/templates/exercise/javascript.html:88
 msgid "show preview"
 msgstr "启用预览"
 
@@ -4605,7 +4605,7 @@ msgstr "启用预览"
 #: skins/default/templates/widgets/ask_button.html:5
 #: skins/default/templates/widgets/ask_form.html:43
 #, fuzzy
-msgid "Ask Your Question"
+msgid "Add Your Exercise"
 msgstr "现在提问"
 
 #: skins/default/templates/badge.html:5 skins/default/templates/badge.html:9
@@ -4646,7 +4646,7 @@ msgstr ""
 "枚奖牌"
 
 #: skins/default/templates/badges.html:7
-msgid "Community gives you awards for your questions, answers and votes."
+msgid "Community gives you awards for your exercises, problems and votes."
 msgstr "提出问题，给予回答，投出你的票 - 社区会对你的表现，授予你各类奖牌。"
 
 #: skins/default/templates/badges.html:8
@@ -4706,11 +4706,11 @@ msgstr "铜牌:时常授予之特殊荣誉"
 
 # close.html
 #: skins/default/templates/close.html:3 skins/default/templates/close.html:5
-msgid "Close question"
+msgid "Close exercise"
 msgstr "关闭问题"
 
 #: skins/default/templates/close.html:6
-msgid "Close the question"
+msgid "Close the exercise"
 msgstr "由于以下原因，你要关闭这个问题"
 
 #: skins/default/templates/close.html:11
@@ -4723,23 +4723,23 @@ msgstr "确定关闭"
 
 #: skins/default/templates/faq_static.html:3
 #: skins/default/templates/faq_static.html:5
-#: skins/default/templates/widgets/answer_edit_tips.html:20
-#: skins/default/templates/widgets/question_edit_tips.html:16 views/meta.py:61
+#: skins/default/templates/widgets/problem_edit_tips.html:20
+#: skins/default/templates/widgets/exercise_edit_tips.html:16 views/meta.py:61
 msgid "FAQ"
 msgstr "问答"
 
 #: skins/default/templates/faq_static.html:5
-msgid "Frequently Asked Questions "
+msgid "Frequently Asked Exercises "
 msgstr "常见问题"
 
 #: skins/default/templates/faq_static.html:6
-msgid "What kinds of questions can I ask here?"
+msgid "What kinds of exercises can I ask here?"
 msgstr "我可以在这里提问什么样的问题？"
 
 #: skins/default/templates/faq_static.html:7
 #, fuzzy
 msgid ""
-"Most importanly - questions should be <strong>relevant</strong> to this "
+"Most importanly - exercises should be <strong>relevant</strong> to this "
 "community."
 msgstr ""
 "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
@@ -4750,21 +4750,21 @@ msgstr ""
 #: skins/default/templates/faq_static.html:8
 #, fuzzy
 msgid ""
-"Before you ask - please make sure to search for a similar question. You can "
-"search questions by their title or tags."
+"Before you ask - please make sure to search for a similar exercise. You can "
+"search exercises by their title or tags."
 msgstr ""
 "提问之前，充分利用系统的自动查找、标签和搜索，看看是否已经有一样的问题并有了"
 "答案。"
 
 #: skins/default/templates/faq_static.html:10
 #, fuzzy
-msgid "What kinds of questions should be avoided?"
+msgid "What kinds of exercises should be avoided?"
 msgstr "什么样的问题我不该在这里提问？"
 
 #: skins/default/templates/faq_static.html:11
 #, fuzzy
 msgid ""
-"Please avoid asking questions that are not relevant to this community, too "
+"Please avoid asking exercises that are not relevant to this community, too "
 "subjective and argumentative."
 msgstr ""
 "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
@@ -4774,14 +4774,14 @@ msgstr ""
 "请避免提出无关、过于主观性或易造成争吵的问题。"
 
 #: skins/default/templates/faq_static.html:13
-msgid "What should I avoid in my answers?"
+msgid "What should I avoid in my problems?"
 msgstr "什么样的回答是不受欢迎的？"
 
 #: skins/default/templates/faq_static.html:14
 msgid ""
-"is a <strong>question and answer</strong> site - <strong>it is not a "
-"discussion group</strong>. Please avoid holding debates in your answers as "
-"they tend to dilute the essense of questions and answers. For the brief "
+"is a <strong>exercise and problem</strong> site - <strong>it is not a "
+"discussion group</strong>. Please avoid holding debates in your problems as "
+"they tend to dilute the essense of exercises and problems. For the brief "
 "discussions please use commenting facility."
 msgstr ""
 
@@ -4790,7 +4790,7 @@ msgid "Who moderates this community?"
 msgstr "谁是社区的管理员？"
 
 #: skins/default/templates/faq_static.html:16
-msgid "The short answer is: <strong>you</strong>."
+msgid "The short problem is: <strong>you</strong>."
 msgstr "答案是：<span class=\"yellowbg\">每个用户。</span>"
 
 #: skins/default/templates/faq_static.html:17
@@ -4821,7 +4821,7 @@ msgstr "什么是社区积分？"
 
 #: skins/default/templates/faq_static.html:21
 msgid ""
-"When a question or answer is upvoted, the user who posted them will gain "
+"When a exercise or problem is upvoted, the user who posted them will gain "
 "some points, which are called \\\"karma points\\\". These points serve as a "
 "rough measure of the community trust to him/her. Various moderation tasks "
 "are gradually assigned to the users based on those points."
@@ -4830,13 +4830,13 @@ msgstr ""
 #: skins/default/templates/faq_static.html:22
 #, python-format
 msgid ""
-"For example, if you ask an interesting question or give a helpful answer, "
-"your input will be upvoted. On the other hand if the answer is misleading - "
+"For example, if you ask an interesting exercise or give a helpful problem, "
+"your input will be upvoted. On the other hand if the problem is misleading - "
 "it will be downvoted. Each vote in favor will generate <strong>"
 "%(REP_GAIN_FOR_RECEIVING_UPVOTE)s</strong> points, each vote against will "
 "subtract <strong>%(REP_LOSS_FOR_RECEIVING_DOWNVOTE)s</strong> points. There "
 "is a limit of <strong>%(MAX_REP_GAIN_PER_USER_PER_DAY)s</strong> points that "
-"can be accumulated for a question or answer per day. The table below "
+"can be accumulated for a exercise or problem per day. The table below "
 "explains reputation point requirements for each type of moderation task."
 msgstr ""
 "例如，如果你问一个有趣的问题或给别人一个有帮助的答案，你的输入将被投赞成票。"
@@ -4862,24 +4862,24 @@ msgid "downvote"
 msgstr "投反对票"
 
 #: skins/default/templates/faq_static.html:43
-msgid " accept own answer to own questions"
+msgid " accept own problem to own exercises"
 msgstr " 自己的提问接受自己的回答"
 
 #: skins/default/templates/faq_static.html:47
-msgid "open and close own questions"
+msgid "open and close own exercises"
 msgstr "打开关闭任何人的问题"
 
 #: skins/default/templates/faq_static.html:51
-msgid "retag other's questions"
+msgid "retag other's exercises"
 msgstr "整理标签"
 
 #: skins/default/templates/faq_static.html:56
-msgid "edit community wiki questions"
+msgid "edit community wiki exercises"
 msgstr "编辑wiki类问题"
 
 #: skins/default/templates/faq_static.html:61
 #, fuzzy
-msgid "edit any answer"
+msgid "edit any problem"
 msgstr "\"编辑任意回答"
 
 #: skins/default/templates/faq_static.html:65
@@ -4925,7 +4925,7 @@ msgid "\"Login now!\""
 msgstr "马上登录"
 
 #: skins/default/templates/faq_static.html:75
-msgid "Why other people can edit my questions/answers?"
+msgid "Why other people can edit my exercises/problems?"
 msgstr "为什么其他人可以修改我的问题/回答？"
 
 #: skins/default/templates/faq_static.html:76
@@ -4940,7 +4940,7 @@ msgstr ""
 #: skins/default/templates/faq_static.html:76
 #, fuzzy
 msgid ""
-"So questions and answers can be edited like wiki pages by experienced users "
+"So exercises and problems can be edited like wiki pages by experienced users "
 "of this site and this improves the overall quality of the knowledge base "
 "content."
 msgstr ""
@@ -4956,16 +4956,16 @@ msgid "If this approach is not for you, we respect your choice."
 msgstr "如果您不喜欢这种方式，我们尊重你的选择。"
 
 #: skins/default/templates/faq_static.html:79
-msgid "Still have questions?"
+msgid "Still have exercises?"
 msgstr "还有其他问题？"
 
 #: skins/default/templates/faq_static.html:80
 #, fuzzy, python-format
 msgid ""
-"Please <a href='%%(ask_question_url)s'>ask</a> your question, help make our "
+"Please <a href='%%(ask_exercise_url)s'>ask</a> your exercise, help make our "
 "community better!"
 msgstr ""
-"请提交你的<a href=\\\"%(ask_question_url)s\\\">疑问<\\a>,帮助我们一起完善网站"
+"请提交你的<a href=\\\"%(ask_exercise_url)s\\\">疑问<\\a>,帮助我们一起完善网站"
 
 #: skins/default/templates/feedback.html:3
 msgid "Feedback"
@@ -5048,26 +5048,26 @@ msgstr ""
 
 #: skins/default/templates/help.html:16
 msgid ""
-"This site is for asking and answering questions, not for open-ended "
+"This site is for asking and probleming exercises, not for open-ended "
 "discussions."
 msgstr ""
 
 #: skins/default/templates/help.html:17
 msgid ""
-"We encourage everyone to use “question” space for asking and “answer” for "
-"answering."
+"We encourage everyone to use “exercise” space for asking and “problem” for "
+"probleming."
 msgstr ""
 
 #: skins/default/templates/help.html:20
 msgid ""
-"Despite that, each question and answer can be commented – \n"
+"Despite that, each exercise and problem can be commented – \n"
 "    the comments are good for the limited discussions."
 msgstr ""
 
 #: skins/default/templates/help.html:24
 #, python-format
 msgid ""
-"Voting in %(app_name)s helps to select best answers and thank most helpful "
+"Voting in %(app_name)s helps to select best problems and thank most helpful "
 "users."
 msgstr ""
 
@@ -5160,7 +5160,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s answered a question \n"
+"<p>%(update_author_name)s problemed a exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -5171,7 +5171,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s posted a new question \n"
+"<p>%(update_author_name)s posted a new exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -5182,7 +5182,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s updated an answer to the question\n"
+"<p>%(update_author_name)s updated an problem to the exercise\n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -5193,7 +5193,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s updated a question \n"
+"<p>%(update_author_name)s updated a exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -5230,7 +5230,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"You can post an answer or a comment by replying to email notifications. To "
+"You can post an problem or a comment by replying to email notifications. To "
 "do that\n"
 "you need %(reply_by_email_karma_threshold)s karma, you have "
 "%(receiving_user_karma)s karma. \n"
@@ -5238,7 +5238,7 @@ msgstr ""
 
 #: skins/default/templates/macros.html:5
 #, fuzzy, python-format
-msgid "Share this question on %(site)s"
+msgid "Share this exercise on %(site)s"
 msgstr "发布我的提问到Twitter"
 
 #: skins/default/templates/macros.html:16
@@ -5285,7 +5285,7 @@ msgid "asked"
 msgstr "提问于"
 
 #: skins/default/templates/macros.html:90
-msgid "answered"
+msgid "problemed"
 msgstr "回答"
 
 #: skins/default/templates/macros.html:92
@@ -5299,7 +5299,7 @@ msgstr "更新于"
 # this is how above two are supposed to be
 #: skins/default/templates/macros.html:202
 #, python-format
-msgid "see questions tagged '%(tag)s'"
+msgid "see exercises tagged '%(tag)s'"
 msgstr "查看有关%(tag)s的问题"
 
 #: skins/default/templates/macros.html:304
@@ -5375,77 +5375,77 @@ msgid "%(seen)s flagged posts"
 msgstr "\"%(seen)s 已标记的发布信息"
 
 #: skins/default/templates/main_page.html:11
-msgid "Questions"
+msgid "Exercises"
 msgstr "问题列表"
 
-#: skins/default/templates/question.html:110
+#: skins/default/templates/exercise.html:110
 #, fuzzy
 msgid "post a comment / <strong>some</strong> more"
 msgstr "查看<strong>%(counter)s</strong>更多"
 
-#: skins/default/templates/question.html:113
+#: skins/default/templates/exercise.html:113
 #, fuzzy
 msgid "see <strong>some</strong> more"
 msgstr "查看<strong>%(counter)s</strong>更多"
 
 # todo - check if it's indeed plural
-#: skins/default/templates/question.html:117
-#: skins/default/templates/question/javascript.html:20
+#: skins/default/templates/exercise.html:117
+#: skins/default/templates/exercise/javascript.html:20
 #, fuzzy
 msgid "post a comment"
 msgstr "已发布10条评论"
 
-#: skins/default/templates/question.html:135
-#: skins/default/templates/question/content.html:40
-msgid "Answer Your Own Question"
+#: skins/default/templates/exercise.html:135
+#: skins/default/templates/exercise/content.html:40
+msgid "Add a Problem to Your Own Exercise"
 msgstr "回答你自己的问题"
 
-#: skins/default/templates/question.html:140
+#: skins/default/templates/exercise.html:140
 #, fuzzy
-msgid "Post Your Answer"
+msgid "Post Your Problem"
 msgstr "您的回答"
 
-#: skins/default/templates/question.html:146
+#: skins/default/templates/exercise.html:146
 #: skins/default/templates/widgets/ask_form.html:41
 #, fuzzy
 msgid "Login/Signup to Post"
 msgstr "登录/注册后回答"
 
 # page title
-#: skins/default/templates/question_edit.html:4
-#: skins/default/templates/question_edit.html:9
-msgid "Edit question"
+#: skins/default/templates/exercise_edit.html:4
+#: skins/default/templates/exercise_edit.html:9
+msgid "Edit exercise"
 msgstr "修改问题"
 
-#: skins/default/templates/question_retag.html:3
-#: skins/default/templates/question_retag.html:5
+#: skins/default/templates/exercise_retag.html:3
+#: skins/default/templates/exercise_retag.html:5
 #, fuzzy
-msgid "Retag question"
+msgid "Retag exercise"
 msgstr "相似的问题"
 
-#: skins/default/templates/question_retag.html:21
+#: skins/default/templates/exercise_retag.html:21
 msgid "Retag"
 msgstr "修改标签"
 
-#: skins/default/templates/question_retag.html:28
+#: skins/default/templates/exercise_retag.html:28
 msgid "Why use and modify tags?"
 msgstr "为什么我只能修改问题标签？"
 
-#: skins/default/templates/question_retag.html:30
+#: skins/default/templates/exercise_retag.html:30
 msgid "Tags help to keep the content better organized and searchable"
 msgstr "标签使内容可以更好的组织及搜索"
 
-#: skins/default/templates/question_retag.html:32
+#: skins/default/templates/exercise_retag.html:32
 msgid "tag editors receive special awards from the community"
 msgstr "修改标签的用户将授予特殊的社区奖牌"
 
 # todo: remove magic numbers from this file
-#: skins/default/templates/question_retag.html:59
+#: skins/default/templates/exercise_retag.html:59
 msgid "up to 5 tags, less than 20 characters each"
 msgstr "最多5个标签，每个标签长度小于20个字符。"
 
 #: skins/default/templates/reopen.html:3 skins/default/templates/reopen.html:5
-msgid "Reopen question"
+msgid "Reopen exercise"
 msgstr "重设问题"
 
 #: skins/default/templates/reopen.html:6
@@ -5455,7 +5455,7 @@ msgstr "标题"
 #: skins/default/templates/reopen.html:11
 #, python-format
 msgid ""
-"This question has been closed by \n"
+"This exercise has been closed by \n"
 "    <a href=\"%(closed_by_profile_url)s\">%(closed_by_username)s</a>\n"
 msgstr ""
 "此问题已被\n"
@@ -5471,11 +5471,11 @@ msgid "When:"
 msgstr "当:"
 
 #: skins/default/templates/reopen.html:22
-msgid "Reopen this question?"
+msgid "Reopen this exercise?"
 msgstr "确定打开这个问题"
 
 #: skins/default/templates/reopen.html:26
-msgid "Reopen this question"
+msgid "Reopen this exercise"
 msgstr "确定打开这个问题"
 
 #: skins/default/templates/reply_by_email_error.html:1
@@ -5485,7 +5485,7 @@ msgid ""
 "being:<p>\n"
 msgstr ""
 
-# revisions_answer.html
+# revisions_problem.html
 #: skins/default/templates/revisions.html:4
 #: skins/default/templates/revisions.html:7
 msgid "Revision history"
@@ -5603,8 +5603,8 @@ msgstr "没有找到相关数据。"
 
 #: skins/default/templates/main_page/headline.html:4 views/readers.py:135
 #, python-format
-msgid "%(q_num)s question"
-msgid_plural "%(q_num)s questions"
+msgid "%(q_num)s exercise"
+msgid_plural "%(q_num)s exercises"
 msgstr[0] "%(q_num)s个问题"
 
 #: skins/default/templates/main_page/headline.html:6
@@ -5653,15 +5653,15 @@ msgid "add tags and a query to focus your search"
 msgstr "添加标签和查询条件进行更精确查询"
 
 #: skins/default/templates/main_page/nothing_found.html:4
-msgid "There are no unanswered questions here"
+msgid "There are no exercises without problems here"
 msgstr "没有未回答的问题"
 
 #: skins/default/templates/main_page/nothing_found.html:7
-msgid "No questions here. "
+msgid "No exercises here. "
 msgstr "此处还没有问题。"
 
 #: skins/default/templates/main_page/nothing_found.html:8
-msgid "Please follow some questions or follow some users."
+msgid "Please follow some exercises or follow some users."
 msgstr "请关注一些问题或用户。"
 
 #: skins/default/templates/main_page/nothing_found.html:13
@@ -5683,20 +5683,20 @@ msgid "starting over"
 msgstr "重新开始"
 
 #: skins/default/templates/main_page/nothing_found.html:30
-msgid "Please always feel free to ask your question!"
+msgid "Please always feel free to add your exercise!"
 msgstr "发布你自己的问题"
 
-#: skins/default/templates/main_page/questions_loop.html:11
+#: skins/default/templates/main_page/exercises_loop.html:11
 msgid "Did not find what you were looking for?"
 msgstr "你找的问题没有?"
 
-#: skins/default/templates/main_page/questions_loop.html:12
-msgid "Please, post your question!"
+#: skins/default/templates/main_page/exercises_loop.html:12
+msgid "Please, post your exercise!"
 msgstr "现在提问"
 
 #: skins/default/templates/main_page/tab_bar.html:10
 #, fuzzy
-msgid "subscribe to the questions feed"
+msgid "subscribe to the exercises feed"
 msgstr ""
 "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
 "订阅最新问题\n"
@@ -5737,188 +5737,188 @@ msgid ""
 "please use up to %(tag_count)s tags, less than %(max_chars)s characters each"
 msgstr "最多%(tag_count)s个标签，每个标签长度小于%(max_chars)s个字符。"
 
-#: skins/default/templates/question/answer_tab_bar.html:3
+#: skins/default/templates/exercise/problem_tab_bar.html:3
 #, fuzzy, python-format
 msgid ""
 "\n"
-"            %(counter)s Answer\n"
+"            %(counter)s Problem\n"
 "            "
 msgid_plural ""
 "\n"
-"            %(counter)s Answers\n"
+"            %(counter)s Problems\n"
 "        "
 msgstr[0] ""
 "\n"
 "%(counter)s个回答:"
 
-#: skins/default/templates/question/answer_tab_bar.html:11
+#: skins/default/templates/exercise/problem_tab_bar.html:11
 #, fuzzy
 msgid "Sort by »"
 msgstr "排序"
 
-#: skins/default/templates/question/answer_tab_bar.html:14
-msgid "oldest answers will be shown first"
+#: skins/default/templates/exercise/problem_tab_bar.html:14
+msgid "oldest problems will be shown first"
 msgstr "最先回答显示在最前面"
 
-#: skins/default/templates/question/answer_tab_bar.html:17
-msgid "newest answers will be shown first"
+#: skins/default/templates/exercise/problem_tab_bar.html:17
+msgid "newest problems will be shown first"
 msgstr "最晚回答显示在最前面"
 
-#: skins/default/templates/question/answer_tab_bar.html:20
-msgid "most voted answers will be shown first"
+#: skins/default/templates/exercise/problem_tab_bar.html:20
+msgid "most voted problems will be shown first"
 msgstr "投票次数最多的显示在最前面"
 
-#: skins/default/templates/question/new_answer_form.html:16
-msgid "Login/Signup to Answer"
+#: skins/default/templates/exercise/new_problem_form.html:16
+msgid "Login/Signup to Problem"
 msgstr "登录/注册后回答"
 
-#: skins/default/templates/question/new_answer_form.html:24
-msgid "Your answer"
+#: skins/default/templates/exercise/new_problem_form.html:24
+msgid "Your problem"
 msgstr "您的回答"
 
-#: skins/default/templates/question/new_answer_form.html:26
-msgid "Be the first one to answer this question!"
+#: skins/default/templates/exercise/new_problem_form.html:26
+msgid "Be the first one to add a problem to this exercise!"
 msgstr "成为第一个回答此问题的人!"
 
-#: skins/default/templates/question/new_answer_form.html:32
+#: skins/default/templates/exercise/new_problem_form.html:32
 msgid ""
-"<span class='strong big'>Please start posting your answer anonymously</span> "
-"- your answer will be saved within the current session and published after "
+"<span class='strong big'>Please start posting your problem anonymously</span> "
+"- your problem will be saved within the current session and published after "
 "you log in or create a new account. Please try to give a <strong>substantial "
-"answer</strong>, for discussions, <strong>please use comments</strong> and "
+"problem</strong>, for discussions, <strong>please use comments</strong> and "
 "<strong>please do remember to vote</strong> (after you log in)!"
 msgstr ""
 
-#: skins/default/templates/question/new_answer_form.html:36
+#: skins/default/templates/exercise/new_problem_form.html:36
 msgid ""
-"<span class='big strong'>You are welcome to answer your own question</span>, "
-"but please make sure to give an <strong>answer</strong>. Remember that you "
-"can always <strong>revise your original question</strong>. Please "
+"<span class='big strong'>You are welcome to add a problem to your own exercise</span>, "
+"but please make sure to give an <strong>problem</strong>. Remember that you "
+"can always <strong>revise your original exercise</strong>. Please "
 "<strong>use comments for discussions</strong>  and <strong>please don't "
-"forget to vote :)</strong> for the answers that you liked (or perhaps did "
+"forget to vote :)</strong> for the problems that you liked (or perhaps did "
 "not like)!"
 msgstr ""
 
-#: skins/default/templates/question/new_answer_form.html:38
+#: skins/default/templates/exercise/new_problem_form.html:38
 msgid ""
-"<span class='big strong'>Please try to give a substantial answer</span>. If "
-"you wanted to comment on the question or answer, just <strong>use the "
+"<span class='big strong'>Please try to give a substantial problem</span>. If "
+"you wanted to comment on the exercise or problem, just <strong>use the "
 "commenting tool</strong>. Please remember that you can always <strong>revise "
-"your answers</strong> - no need to answer the same question twice. Also, "
+"your problems</strong> - no need to problem the same exercise twice. Also, "
 "please <strong>don't forget to vote</strong> - it really helps to select the "
-"best questions and answers!"
+"best exercises and problems!"
 msgstr ""
 
-#: skins/default/templates/question/sharing_prompt_phrase.html:2
+#: skins/default/templates/exercise/sharing_prompt_phrase.html:2
 #, python-format
 msgid ""
-"Know someone who can answer?  Share a <a href=\"%(question_url)s\">link</a> "
-"to this question via"
+"Know someone who can problem?  Share a <a href=\"%(exercise_url)s\">link</a> "
+"to this exercise via"
 msgstr ""
-"Know someone who can answer?  Share a <a href=\"%(question_url)s\">link</a> "
-"to this question via"
+"Know someone who can problem?  Share a <a href=\"%(exercise_url)s\">link</a> "
+"to this exercise via"
 
-#: skins/default/templates/question/sharing_prompt_phrase.html:8
+#: skins/default/templates/exercise/sharing_prompt_phrase.html:8
 msgid " or"
 msgstr " 或"
 
-#: skins/default/templates/question/sharing_prompt_phrase.html:10
+#: skins/default/templates/exercise/sharing_prompt_phrase.html:10
 msgid "email"
 msgstr "邮件"
 
-#: skins/default/templates/question/sidebar.html:6
-msgid "Question tools"
+#: skins/default/templates/exercise/sidebar.html:6
+msgid "Exercise tools"
 msgstr "提问工具"
 
-#: skins/default/templates/question/sidebar.html:9
-msgid "click to unfollow this question"
+#: skins/default/templates/exercise/sidebar.html:9
+msgid "click to unfollow this exercise"
 msgstr "点击取消关注问题"
 
-#: skins/default/templates/question/sidebar.html:10
+#: skins/default/templates/exercise/sidebar.html:10
 msgid "Following"
 msgstr "已关注"
 
-#: skins/default/templates/question/sidebar.html:11
+#: skins/default/templates/exercise/sidebar.html:11
 msgid "Unfollow"
 msgstr "取消关注"
 
-#: skins/default/templates/question/sidebar.html:15
-msgid "click to follow this question"
+#: skins/default/templates/exercise/sidebar.html:15
+msgid "click to follow this exercise"
 msgstr "点击可关注此问题"
 
-#: skins/default/templates/question/sidebar.html:16
+#: skins/default/templates/exercise/sidebar.html:16
 msgid "Follow"
 msgstr "关注"
 
-#: skins/default/templates/question/sidebar.html:23
+#: skins/default/templates/exercise/sidebar.html:23
 #, python-format
 msgid "%(count)s follower"
 msgid_plural "%(count)s followers"
 msgstr[0] "%(count)s 位粉丝"
 
-#: skins/default/templates/question/sidebar.html:29
+#: skins/default/templates/exercise/sidebar.html:29
 msgid "email the updates"
 msgstr "邮件订阅更新"
 
-#: skins/default/templates/question/sidebar.html:32
+#: skins/default/templates/exercise/sidebar.html:32
 msgid ""
 "<strong>Here</strong> (once you log in) you will be able to sign up for the "
-"periodic email updates about this question."
+"periodic email updates about this exercise."
 msgstr ""
 "<strong>Here</strong> (once you log in) you will be able to sign up for the "
-"periodic email updates about this question."
+"periodic email updates about this exercise."
 
-#: skins/default/templates/question/sidebar.html:37
-msgid "subscribe to this question rss feed"
+#: skins/default/templates/exercise/sidebar.html:37
+msgid "subscribe to this exercise rss feed"
 msgstr "订阅问题 rss feed"
 
-#: skins/default/templates/question/sidebar.html:38
+#: skins/default/templates/exercise/sidebar.html:38
 msgid "subscribe to rss feed"
 msgstr "订阅 rss feed"
 
-#: skins/default/templates/question/sidebar.html:46
+#: skins/default/templates/exercise/sidebar.html:46
 msgid "Stats"
 msgstr "统计"
 
-#: skins/default/templates/question/sidebar.html:48
+#: skins/default/templates/exercise/sidebar.html:48
 #, fuzzy
 msgid "Asked"
 msgstr "提问于"
 
-#: skins/default/templates/question/sidebar.html:51
+#: skins/default/templates/exercise/sidebar.html:51
 msgid "Seen"
 msgstr ""
 
-#: skins/default/templates/question/sidebar.html:51
+#: skins/default/templates/exercise/sidebar.html:51
 msgid "times"
 msgstr "次"
 
-#: skins/default/templates/question/sidebar.html:54
+#: skins/default/templates/exercise/sidebar.html:54
 #, fuzzy
 msgid "Last updated"
 msgstr "最后更新时间"
 
-#: skins/default/templates/question/sidebar.html:62
-msgid "Related questions"
+#: skins/default/templates/exercise/sidebar.html:62
+msgid "Related exercises"
 msgstr "相似的问题"
 
-#: skins/default/templates/question/subscribe_by_email_prompt.html:5
+#: skins/default/templates/exercise/subscribe_by_email_prompt.html:5
 #, fuzzy
-msgid "Email me when there are any new answers"
+msgid "Email me when there are any new problems"
 msgstr "当有新回答的时候每周提醒我一次"
 
-#: skins/default/templates/question/subscribe_by_email_prompt.html:11
+#: skins/default/templates/exercise/subscribe_by_email_prompt.html:11
 msgid "once you sign in you will be able to subscribe for any updates here"
 msgstr "一旦你注册你就可以订阅这里的任何更新"
 
-#: skins/default/templates/question/subscribe_by_email_prompt.html:12
+#: skins/default/templates/exercise/subscribe_by_email_prompt.html:12
 #, fuzzy
 msgid ""
 "<span class='strong'>Here</span> (once you log in) you will be able to sign "
-"up for the periodic email updates about this question."
+"up for the periodic email updates about this exercise."
 msgstr ""
 "<strong>Here</strong> (once you log in) you will be able to sign up for the "
-"periodic email updates about this question."
+"periodic email updates about this exercise."
 
 #: skins/default/templates/user_profile/user.html:12
 #, python-format
@@ -5973,8 +5973,8 @@ msgstr "邮件订阅设置"
 #: skins/default/templates/user_profile/user_email_subscriptions.html:9
 msgid ""
 "<span class='big strong'>Adjust frequency of email updates.</span> Receive "
-"updates on interesting questions by email, <strong><br/>help the community</"
-"strong> by answering questions of your colleagues. If you do not wish to "
+"updates on interesting exercises by email, <strong><br/>help the community</"
+"strong> by probleming exercises of your colleagues. If you do not wish to "
 "receive emails - select 'no email' on all items below.<br/>Updates are only "
 "sent when there is any new activity on selected items."
 msgstr ""
@@ -5986,7 +5986,7 @@ msgstr "你的邮件"
 
 #: skins/default/templates/user_profile/user_favorites.html:4
 #: skins/default/templates/user_profile/user_tabs.html:27
-msgid "followed questions"
+msgid "followed exercises"
 msgstr "已关注问题"
 
 #: skins/default/templates/user_profile/user_inbox.html:18
@@ -6242,25 +6242,25 @@ msgstr "概览"
 
 #: skins/default/templates/user_profile/user_stats.html:11
 #, python-format
-msgid "<span class=\"count\">%(counter)s</span> Question"
-msgid_plural "<span class=\"count\">%(counter)s</span> Questions"
+msgid "<span class=\"count\">%(counter)s</span> Exercise"
+msgid_plural "<span class=\"count\">%(counter)s</span> Exercises"
 msgstr[0] "<span class=\"count\">%(counter)s</span>个问题"
 
 #: skins/default/templates/user_profile/user_stats.html:16
 #, fuzzy
-msgid "Answer"
-msgid_plural "Answers"
+msgid "Problem"
+msgid_plural "Problems"
 msgstr[0] "回答"
 
 #: skins/default/templates/user_profile/user_stats.html:24
 #, python-format
-msgid "the answer has been voted for %(answer_score)s times"
-msgstr "该回答总共有%(answer_score)s个投票"
+msgid "the problem has been voted for %(problem_score)s times"
+msgstr "该回答总共有%(problem_score)s个投票"
 
 #: skins/default/templates/user_profile/user_stats.html:34
 #, python-format
 msgid "(%(comment_count)s comment)"
-msgid_plural "the answer has been commented %(comment_count)s times"
+msgid_plural "the problem has been commented %(comment_count)s times"
 msgstr[0] "%(comment_count)s次评论"
 
 #: skins/default/templates/user_profile/user_stats.html:44
@@ -6298,7 +6298,7 @@ msgid_plural "<span class=\"count\">%(counter)s</span> Badges"
 msgstr[0] "<span class=\"count\">%(counter)s</span>奖牌"
 
 #: skins/default/templates/user_profile/user_stats.html:120
-msgid "Answer to:"
+msgid "Problem to:"
 msgstr "回答:"
 
 #: skins/default/templates/user_profile/user_tabs.html:5
@@ -6306,7 +6306,7 @@ msgid "User profile"
 msgstr "用户概览"
 
 #: skins/default/templates/user_profile/user_tabs.html:10 views/users.py:638
-msgid "comments and answers to others questions"
+msgid "comments and problems to others exercises"
 msgstr "其他问题的回复和评论"
 
 #: skins/default/templates/user_profile/user_tabs.html:16
@@ -6319,7 +6319,7 @@ msgid "Graph of user karma"
 msgstr "用户的社区积分历史"
 
 #: skins/default/templates/user_profile/user_tabs.html:25
-msgid "questions that user is following"
+msgid "exercises that user is following"
 msgstr "用户关注的问题"
 
 #: skins/default/templates/user_profile/user_tabs.html:34 views/users.py:679
@@ -6339,85 +6339,85 @@ msgstr "邮件订阅设置"
 msgid "moderate this user"
 msgstr "设为版主"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:3
-#: skins/default/templates/widgets/question_edit_tips.html:3
+#: skins/default/templates/widgets/problem_edit_tips.html:3
+#: skins/default/templates/widgets/exercise_edit_tips.html:3
 msgid "Tips"
 msgstr ""
 
-#: skins/default/templates/widgets/answer_edit_tips.html:6
+#: skins/default/templates/widgets/problem_edit_tips.html:6
 #, fuzzy
-msgid "give an answer interesting to this community"
+msgid "provide a problem interesting to this community"
 msgstr ""
 "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
 "请确认你的答案和这个主题相关\n"
 "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
 "请确保回答与社区有关"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:9
-msgid "try to give an answer, rather than engage into a discussion"
+#: skins/default/templates/widgets/problem_edit_tips.html:9
+msgid "try to provide a problem, rather than engage into a discussion"
 msgstr "建议您提的问题是可以被答复的，而不仅仅是可以讨论。"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:12
-#: skins/default/templates/widgets/question_edit_tips.html:8
+#: skins/default/templates/widgets/problem_edit_tips.html:12
+#: skins/default/templates/widgets/exercise_edit_tips.html:8
 #, fuzzy
 msgid "provide enough details"
 msgstr "请详细描述您的问题"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:15
-#: skins/default/templates/widgets/question_edit_tips.html:11
+#: skins/default/templates/widgets/problem_edit_tips.html:15
+#: skins/default/templates/widgets/exercise_edit_tips.html:11
 msgid "be clear and concise"
 msgstr "我们推荐您使用中文描述问题，这样可以得到更多的答复机会。"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:20
-#: skins/default/templates/widgets/question_edit_tips.html:16
-msgid "see frequently asked questions"
+#: skins/default/templates/widgets/problem_edit_tips.html:20
+#: skins/default/templates/widgets/exercise_edit_tips.html:16
+msgid "see frequently asked exercises"
 msgstr "查看常见问题"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:27
-#: skins/default/templates/widgets/question_edit_tips.html:22
+#: skins/default/templates/widgets/problem_edit_tips.html:27
+#: skins/default/templates/widgets/exercise_edit_tips.html:22
 #, fuzzy
 msgid "Markdown basics"
 msgstr "标记栏参考"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:31
-#: skins/default/templates/widgets/question_edit_tips.html:26
+#: skins/default/templates/widgets/problem_edit_tips.html:31
+#: skins/default/templates/widgets/exercise_edit_tips.html:26
 msgid "*italic*"
 msgstr "*斜体*表示*号内字体为斜体"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:34
-#: skins/default/templates/widgets/question_edit_tips.html:29
+#: skins/default/templates/widgets/problem_edit_tips.html:34
+#: skins/default/templates/widgets/exercise_edit_tips.html:29
 msgid "**bold**"
 msgstr "**粗体**表示2个*号内字体为粗体"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:38
-#: skins/default/templates/widgets/question_edit_tips.html:33
+#: skins/default/templates/widgets/problem_edit_tips.html:38
+#: skins/default/templates/widgets/exercise_edit_tips.html:33
 msgid "*italic* or _italic_"
 msgstr "*斜体* , _斜体_表示*号或_号内字体为斜体"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:41
-#: skins/default/templates/widgets/question_edit_tips.html:36
+#: skins/default/templates/widgets/problem_edit_tips.html:41
+#: skins/default/templates/widgets/exercise_edit_tips.html:36
 msgid "**bold** or __bold__"
 msgstr "**加粗** 或者 __加粗__ "
 
-#: skins/default/templates/widgets/answer_edit_tips.html:45
-#: skins/default/templates/widgets/answer_edit_tips.html:49
-#: skins/default/templates/widgets/question_edit_tips.html:40
-#: skins/default/templates/widgets/question_edit_tips.html:45
+#: skins/default/templates/widgets/problem_edit_tips.html:45
+#: skins/default/templates/widgets/problem_edit_tips.html:49
+#: skins/default/templates/widgets/exercise_edit_tips.html:40
+#: skins/default/templates/widgets/exercise_edit_tips.html:45
 msgid "text"
 msgstr "文本"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:49
-#: skins/default/templates/widgets/question_edit_tips.html:45
+#: skins/default/templates/widgets/problem_edit_tips.html:49
+#: skins/default/templates/widgets/exercise_edit_tips.html:45
 msgid "image"
 msgstr "图片"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:53
-#: skins/default/templates/widgets/question_edit_tips.html:49
+#: skins/default/templates/widgets/problem_edit_tips.html:53
+#: skins/default/templates/widgets/exercise_edit_tips.html:49
 msgid "numbered list:"
 msgstr "列表："
 
-#: skins/default/templates/widgets/answer_edit_tips.html:58
-#: skins/default/templates/widgets/question_edit_tips.html:54
+#: skins/default/templates/widgets/problem_edit_tips.html:58
+#: skins/default/templates/widgets/exercise_edit_tips.html:54
 #, fuzzy
 msgid "basic HTML tags are also supported"
 msgstr ""
@@ -6426,20 +6426,20 @@ msgstr ""
 "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
 "同时支持基本 HTML 标签"
 
-#: skins/default/templates/widgets/answer_edit_tips.html:63
-#: skins/default/templates/widgets/question_edit_tips.html:59
+#: skins/default/templates/widgets/problem_edit_tips.html:63
+#: skins/default/templates/widgets/exercise_edit_tips.html:59
 msgid "learn more about Markdown"
 msgstr "有关Markdown详细说明"
 
 #: skins/default/templates/widgets/ask_form.html:6
-msgid "login to post question info"
+msgid "login to post exercise info"
 msgstr "登录并提交问题"
 
 #: skins/default/templates/widgets/ask_form.html:7
 msgid ""
 "<span class=\\\"strong big\\\">You are welcome to start submitting your "
-"question anonymously</span>. When you submit the post, you will be "
-"redirected to the login/signup page. Your question will be saved in the "
+"exercise anonymously</span>. When you submit the post, you will be "
+"redirected to the login/signup page. Your exercise will be saved in the "
 "current session and will be published after you log in. Login/signup process "
 "is very simple. Login takes about 30 seconds, initial signup takes a minute "
 "or less."
@@ -6451,8 +6451,8 @@ msgid ""
 "<span class='strong big'>Looks like your email address, %%(email)s has not "
 "yet been validated.</span> To post messages you must verify your email, "
 "please see <a href='%%(email_validation_faq_url)s'>more details here</a>."
-"<br>You can submit your question now and validate email after that. Your "
-"question will saved as pending meanwhile."
+"<br>You can submit your exercise now and validate email after that. Your "
+"exercise will saved as pending meanwhile."
 msgstr ""
 
 #: skins/default/templates/widgets/contributors.html:3
@@ -6499,26 +6499,26 @@ msgstr "用户"
 msgid "badges"
 msgstr "奖牌榜"
 
-#: skins/default/templates/widgets/question_edit_tips.html:5
+#: skins/default/templates/widgets/exercise_edit_tips.html:5
 #, fuzzy
-msgid "ask a question interesting to this community"
+msgid "add an exercise interesting to this community"
 msgstr ""
 "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
 "请确认你的答案和这个主题相关\n"
 "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
 "请确保回答与社区有关"
 
-#: skins/default/templates/widgets/question_summary.html:12
+#: skins/default/templates/widgets/exercise_summary.html:12
 msgid "view"
 msgid_plural "views"
 msgstr[0] "浏览"
 
-#: skins/default/templates/widgets/question_summary.html:29
-msgid "answer"
-msgid_plural "answers"
+#: skins/default/templates/widgets/exercise_summary.html:29
+msgid "problem"
+msgid_plural "problems"
 msgstr[0] "回答"
 
-#: skins/default/templates/widgets/question_summary.html:40
+#: skins/default/templates/widgets/exercise_summary.html:40
 msgid "vote"
 msgid_plural "votes"
 msgstr[0] "票"
@@ -6528,15 +6528,15 @@ msgid "ALL"
 msgstr "全部"
 
 #: skins/default/templates/widgets/scope_nav.html:8
-msgid "see unanswered questions"
+msgid "see exercises without problems"
 msgstr "查看没有回答的问题"
 
 #: skins/default/templates/widgets/scope_nav.html:8
-msgid "UNANSWERED"
+msgid "WITHOUT_PROBLEM"
 msgstr "未回答"
 
 #: skins/default/templates/widgets/scope_nav.html:11
-msgid "see your followed questions"
+msgid "see your followed exercises"
 msgstr "查看已关注问题"
 
 #: skins/default/templates/widgets/scope_nav.html:11
@@ -6544,7 +6544,7 @@ msgid "FOLLOWED"
 msgstr "已关注"
 
 #: skins/default/templates/widgets/scope_nav.html:14
-msgid "Please ask your question here"
+msgid "Please add your exercise here"
 msgstr "请在此提问"
 
 #: skins/default/templates/widgets/user_long_score_and_badge_summary.html:3
@@ -6681,16 +6681,16 @@ msgstr[0] "%(min)d分钟前"
 msgid ""
 "<p>To ask by email, please:</p>\n"
 "<ul>\n"
-"    <li>Format the subject line as: [Tag1; Tag2] Question title</li>\n"
-"    <li>Type details of your question into the email body</li>\n"
+"    <li>Format the subject line as: [Tag1; Tag2] Exercise title</li>\n"
+"    <li>Type details of your exercise into the email body</li>\n"
 "</ul>\n"
 "<p>Note that tags may consist of more than one word, and tags\n"
 "may be separated by a semicolon or a comma</p>\n"
 msgstr ""
 "<p>To ask by email, please:</p>\n"
 "<ul>\n"
-"    <li>Format the subject line as: [Tag1; Tag2] Question title</li>\n"
-"    <li>Type details of your question into the email body</li>\n"
+"    <li>Format the subject line as: [Tag1; Tag2] Exercise title</li>\n"
+"    <li>Type details of your exercise into the email body</li>\n"
 "</ul>\n"
 "<p>Note that tags may consist of more than one word, and tags\n"
 "may be separated by a semicolon or a comma</p>\n"
@@ -6698,27 +6698,27 @@ msgstr ""
 #: utils/mail.py:167
 #, python-format
 msgid ""
-"<p>Sorry, there was an error posting your question please contact the "
+"<p>Sorry, there was an error posting your exercise please contact the "
 "%(site)s administrator</p>"
 msgstr ""
-"<p>Sorry, there was an error posting your question please contact the "
+"<p>Sorry, there was an error posting your exercise please contact the "
 "%(site)s administrator</p>"
 
 #: utils/mail.py:173
 #, python-format
 msgid ""
-"<p>Sorry, in order to post questions on %(site)s by email, please <a href="
+"<p>Sorry, in order to post exercises on %(site)s by email, please <a href="
 "\"%(url)s\">register first</a></p>"
 msgstr ""
-"<p>Sorry, in order to post questions on %(site)s by email, please <a href="
+"<p>Sorry, in order to post exercises on %(site)s by email, please <a href="
 "\"%(url)s\">register first</a></p>"
 
 #: utils/mail.py:181
 msgid ""
-"<p>Sorry, your question could not be posted due to insufficient privileges "
+"<p>Sorry, your exercise could not be posted due to insufficient privileges "
 "of your user account</p>"
 msgstr ""
-"<p>Sorry, your question could not be posted due to insufficient privileges "
+"<p>Sorry, your exercise could not be posted due to insufficient privileges "
 "of your user account</p>"
 
 # 100%
@@ -6759,7 +6759,7 @@ msgid "Sorry, something is not right here..."
 msgstr "对不起，这里出了些问题"
 
 #: views/commands.py:229
-msgid "Sorry, but anonymous users cannot accept answers"
+msgid "Sorry, but anonymous users cannot accept problems"
 msgstr "匿名用户不能接受回答"
 
 #: views/commands.py:339
@@ -6816,8 +6816,8 @@ msgstr "隐私政策"
 
 #: views/readers.py:133
 #, python-format
-msgid "%(q_num)s question, tagged"
-msgid_plural "%(q_num)s questions, tagged"
+msgid "%(q_num)s exercise, tagged"
+msgid_plural "%(q_num)s exercises, tagged"
 msgstr[0] "%(q_num)s个问题"
 
 #: views/readers.py:388
@@ -6865,11 +6865,11 @@ msgid "Profile - User's Karma"
 msgstr "积分 - 用户资料"
 
 #: views/users.py:720
-msgid "users favorite questions"
+msgid "users favorite exercises"
 msgstr "用户收藏的问题"
 
 #: views/users.py:721
-msgid "profile - favorite questions"
+msgid "profile - favorite exercises"
 msgstr "收藏 - 用户资料"
 
 #: views/users.py:741 views/users.py:745
@@ -6905,15 +6905,15 @@ msgstr "在文件上传过程中产生了错误，请联系管理员，谢谢^_^
 
 #: views/writers.py:189
 msgid ""
-"<span class=\"strong big\">You are welcome to start submitting your question "
+"<span class=\"strong big\">You are welcome to start submitting your exercise "
 "anonymously</span>. When you submit the post, you will be redirected to the "
-"login/signup page. Your question will be saved in the current session and "
+"login/signup page. Your exercise will be saved in the current session and "
 "will be published after you log in. Login/signup process is very simple. "
 "Login takes about 30 seconds, initial signup takes a minute or less."
 msgstr ""
 
 #: views/writers.py:466
-msgid "Please log in to answer questions"
+msgid "Please log in to problem exercises"
 msgstr "请登录后回答"
 
 #: views/writers.py:572
@@ -6954,16 +6954,16 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "Explain how to change LDAP password"
 #~ msgstr "如何修改LDAP密码"
 
-#~ msgid "question_answered"
+#~ msgid "exercise_problemed"
 #~ msgstr "回答的问题"
 
-#~ msgid "question_commented"
+#~ msgid "exercise_commented"
 #~ msgstr "留言的问题"
 
-#~ msgid "answer_commented"
+#~ msgid "problem_commented"
 #~ msgstr "留言的回答"
 
-#~ msgid "answer_accepted"
+#~ msgid "problem_accepted"
 #~ msgstr "已接受的回答"
 
 #~ msgid "Incorrect username."
@@ -6982,22 +6982,22 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ "at the site. Before running this command it is necessary to set up LDAP "
 #~ "parameters in the \"External keys\" section of the site settings."
 
-#~ msgid "%(name)s, this is an update message header for %(num)d question"
+#~ msgid "%(name)s, this is an update message header for %(num)d exercise"
 #~ msgid_plural ""
-#~ "%(name)s, this is an update message header for %(num)d questions"
+#~ "%(name)s, this is an update message header for %(num)d exercises"
 #~ msgstr[0] "%(name)s, %(num)d 个问题的更新标题"
 
 #~ msgid ""
 #~ "Please visit the askbot and see what's new! Could you spread the word "
-#~ "about it - can somebody you know help answering those questions or "
+#~ "about it - can somebody you know help probleming those exercises or "
 #~ "benefit from posting one?"
 #~ msgstr ""
 #~ "Please visit the askbot and see what's new! Could you spread the word "
-#~ "about it - can somebody you know help answering those questions or "
+#~ "about it - can somebody you know help probleming those exercises or "
 #~ "benefit from posting one?"
 
 #~ msgid ""
-#~ "Your most frequent subscription setting is 'daily' on selected questions. "
+#~ "Your most frequent subscription setting is 'daily' on selected exercises. "
 #~ "If you are receiving more than one email per dayplease tell about this "
 #~ "issue to the askbot administrator."
 #~ msgstr ""
@@ -7062,19 +7062,19 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "cannot revoke old vote"
 #~ msgstr "这个投票已经过时，不能撤销。"
 
-#~ msgid "%(author)s modified the question"
+#~ msgid "%(author)s modified the exercise"
 #~ msgstr "%(author)s修改了问题"
 
-#~ msgid "%(people)s posted %(new_answer_count)s new answers"
-#~ msgstr "%(people)s 发布了 %(new_answer_count)s 新答案"
+#~ msgid "%(people)s posted %(new_problem_count)s new problems"
+#~ msgstr "%(people)s 发布了 %(new_problem_count)s 新答案"
 
-#~ msgid "%(people)s commented the question"
+#~ msgid "%(people)s commented the exercise"
 #~ msgstr "%(people)s评论了问题"
 
-#~ msgid "%(people)s commented answers"
+#~ msgid "%(people)s commented problems"
 #~ msgstr "%(people)s 评论了答案"
 
-#~ msgid "%(people)s commented an answer"
+#~ msgid "%(people)s commented an problem"
 #~ msgstr "%(people)s 评论了答案"
 
 #~ msgid "change %(email)s info"
@@ -7187,19 +7187,19 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "Create Account"
 #~ msgstr "创建帐号"
 
-#~ msgid "answer permanent link"
+#~ msgid "problem permanent link"
 #~ msgstr "该回答的链接地址"
 
 #~ msgid "remove all flags"
 #~ msgstr "移除所有标签"
 
-#~ msgid "%(question_author)s has selected this answer as correct"
-#~ msgstr "这个答案已经被%(question_author)s标记为正确答案"
+#~ msgid "%(exercise_author)s has selected this problem as correct"
+#~ msgstr "这个答案已经被%(exercise_author)s标记为正确答案"
 
 #~ msgid "Related tags"
 #~ msgstr "相关标签"
 
-#~ msgid "Ask a question"
+#~ msgid "Add an exercise"
 #~ msgstr "我要提问"
 
 #~ msgid "Badges summary"
@@ -7217,7 +7217,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #, fuzzy
 #~ msgid ""
 #~ "is a Q&A site, not a discussion group. Therefore - please avoid having "
-#~ "discussions in your answers, comment facility allows some space for brief "
+#~ "discussions in your problems, comment facility allows some space for brief "
 #~ "discussions."
 #~ msgstr ""
 #~ "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
@@ -7240,16 +7240,16 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "gravatar faq info"
 #~ msgstr "图像常见问题"
 
-#~ msgid "i like this question (click again to cancel)"
+#~ msgid "i like this exercise (click again to cancel)"
 #~ msgstr "这篇提问我喜欢 (再次点击可取消)"
 
-#~ msgid "i like this answer (click again to cancel)"
+#~ msgid "i like this problem (click again to cancel)"
 #~ msgstr "这篇帖子有价值（再次点击取消操作）"
 
-#~ msgid "i dont like this question (click again to cancel)"
+#~ msgid "i dont like this exercise (click again to cancel)"
 #~ msgstr "这篇提问我不喜欢 (再次点击可取消)"
 
-#~ msgid "i dont like this answer (click again to cancel)"
+#~ msgid "i dont like this problem (click again to cancel)"
 #~ msgstr "这篇帖子没有价值（再次点击取消操作）"
 
 #~ msgid "add comment"
@@ -7270,50 +7270,50 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "reputation"
 #~ msgstr "积分"
 
-#~ msgid "oldest answers"
+#~ msgid "oldest problems"
 #~ msgstr "最先回答"
 
-#~ msgid "newest answers"
+#~ msgid "newest problems"
 #~ msgstr "最近回答"
 
 #, fuzzy
-#~ msgid "popular answers"
+#~ msgid "popular problems"
 #~ msgstr ""
 #~ "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
 #~ "受欢迎的答案\n"
 #~ "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
 #~ "投票最多"
 
-#~ msgid "you can answer anonymously and then login"
+#~ msgid "you can problem anonymously and then login"
 #~ msgstr "你可以匿名回答,然后登录"
 
-#~ msgid "answer your own question only to give an answer"
+#~ msgid "problem your own exercise only to provide a problem"
 #~ msgstr "仅仅为了回答你自己的问题而给一个答案"
 
-#~ msgid "please only give an answer, no discussions"
+#~ msgid "please only provide a problem, no discussions"
 #~ msgstr "建议您提的问题是可以被答复的，而不仅仅是可以讨论。"
 
-#~ msgid "Login/Signup to Post Your Answer"
+#~ msgid "Login/Signup to Post Your Problem"
 #~ msgstr "登录发布你的答案"
 
-#~ msgid "Answer the question"
+#~ msgid "Problem the exercise"
 #~ msgstr "回答该问题"
 
-#~ msgid "question asked"
+#~ msgid "exercise asked"
 #~ msgstr "已问问题"
 
 #, fuzzy
-#~ msgid "question was seen"
+#~ msgid "exercise was seen"
 #~ msgstr ""
 #~ "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
 #~ "浏览量\n"
 #~ "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
 #~ "目前浏览数量"
 
-#~ msgid "Notify me once a day when there are any new answers"
+#~ msgid "Notify me once a day when there are any new problems"
 #~ msgstr "当有新回答的时候每天提醒我一次"
 
-#~ msgid "Notify me immediately when there are any new answers"
+#~ msgid "Notify me immediately when there are any new problems"
 #~ msgstr "当有新回答的时候立即提醒我一次"
 
 #~ msgid ""
@@ -7329,8 +7329,8 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "user website"
 #~ msgstr "个人网站"
 
-#~ msgid "<span class=\"count\">%(counter)s</span> Answer"
-#~ msgid_plural "<span class=\"count\">%(counter)s</span> Answers"
+#~ msgid "<span class=\"count\">%(counter)s</span> Problem"
+#~ msgid_plural "<span class=\"count\">%(counter)s</span> Problems"
 #~ msgstr[0] "<span class=\"count\">%(counter)s</span>个答案"
 
 #~ msgid "reputation history"
@@ -7347,13 +7347,13 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "casted votes"
 #~ msgstr "投票"
 
-#~ msgid "answer tips"
+#~ msgid "problem tips"
 #~ msgstr "受欢迎的提问"
 
 #~ msgid "please try to provide details"
 #~ msgstr "请详细描述您的问题"
 
-#~ msgid "ask a question"
+#~ msgid "add an exercise"
 #~ msgstr "我要提问"
 
 #~ msgid ""
@@ -7362,13 +7362,13 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ "                            "
 #~ msgstr "必须有正确的%(email)s才能发布，查看%(email_validation_faq_url)s"
 
-#~ msgid "Login/signup to post your question"
+#~ msgid "Login/signup to post your exercise"
 #~ msgstr "登录并发布问题"
 
-#~ msgid "question tips"
+#~ msgid "exercise tips"
 #~ msgstr "受欢迎的提问"
 
-#~ msgid "please ask a relevant question"
+#~ msgid "please ask a relevant exercise"
 #~ msgstr "请问与此社区相关的问题"
 
 #~ msgid "logout"
@@ -7396,13 +7396,13 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "user reputation in the community"
 #~ msgstr "用户社区积分"
 
-#~ msgid "Please log in to ask questions"
+#~ msgid "Please log in to ask exercises"
 #~ msgstr "请登录后提问"
 
-#~ msgid "question content must be > 10 characters"
+#~ msgid "exercise content must be > 10 characters"
 #~ msgstr "内容至少要10个字符"
 
-#~ msgid "Question: \"%(title)s\""
+#~ msgid "Exercise: \"%(title)s\""
 #~ msgstr "问题:\"%(title)s\""
 
 #~ msgid "(please enter a valid email)"
@@ -7415,27 +7415,27 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgstr "这篇帖子没有价值（再次点击取消操作）"
 
 #~ msgid ""
-#~ "The question has been closed for the following reason \"%(close_reason)s"
+#~ "The exercise has been closed for the following reason \"%(close_reason)s"
 #~ "\" by"
 #~ msgstr "问题因\"%(close_reason)s\"原因已被关闭"
 
 #, fuzzy
 #~ msgid ""
 #~ "\n"
-#~ "        %(counter)s Answer:\n"
+#~ "        %(counter)s Problem:\n"
 #~ "        "
 #~ msgid_plural ""
 #~ "\n"
-#~ "        %(counter)s Answers:\n"
+#~ "        %(counter)s Problems:\n"
 #~ "        "
 #~ msgstr[0] ""
 #~ "\n"
 #~ "%(counter)s个回答:"
 
-#~ msgid "mark this answer as favorite (click again to undo)"
+#~ msgid "mark this problem as favorite (click again to undo)"
 #~ msgstr "最佳答案（再次点击取消操作）"
 
-#~ msgid "Question tags"
+#~ msgid "Exercise tags"
 #~ msgstr "您正在浏览的问题含有以下标签"
 
 #~ msgid "search"
@@ -7445,7 +7445,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgstr "rss "
 
 #, fuzzy
-#~ msgid "Please star (bookmark) some questions or follow some users."
+#~ msgid "Please star (bookmark) some exercises or follow some users."
 #~ msgstr "当你查看问题时可以收藏"
 
 #~ msgid "In:"
@@ -7479,7 +7479,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 
 #~ msgid ""
 #~ "This option currently defines default frequency of emailed updates in the "
-#~ "following five categories: questions asked by user, answered by user, "
+#~ "following five categories: exercises asked by user, problemed by user, "
 #~ "individually selected, entire forum (per person tag filter applies) and "
 #~ "posts mentioning the user and comment responses"
 #~ msgstr ""
@@ -7533,10 +7533,10 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "First time here? Check out the <a href=\"%s\">FAQ</a>!"
 #~ msgstr "第一次来？查看<a href=\"%s\">FAQ</a>!"
 
-#~ msgid "newquestion/"
+#~ msgid "newexercise/"
 #~ msgstr "提问/"
 
-#~ msgid "newanswer/"
+#~ msgid "newproblem/"
 #~ msgstr "回答/"
 
 # translation and user name validation are language-specific
@@ -7585,28 +7585,28 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "Deleted own post with score of -3 or lower"
 #~ msgstr "删除自己-3分或更低的问题"
 
-#~ msgid "Nice answer"
+#~ msgid "Nice problem"
 #~ msgstr "好回答"
 
-#~ msgid "nice-answer"
+#~ msgid "nice-problem"
 #~ msgstr "好回答"
 
-#~ msgid "Answer voted up 10 times"
+#~ msgid "Problem voted up 10 times"
 #~ msgstr "投票10次以上的回答"
 
-#~ msgid "nice-question"
+#~ msgid "nice-exercise"
 #~ msgstr "好提问"
 
-#~ msgid "Question voted up 10 times"
+#~ msgid "Exercise voted up 10 times"
 #~ msgstr "投票10次以上的问题"
 
 #~ msgid "pundit"
 #~ msgstr "学者"
 
-#~ msgid "popular-question"
+#~ msgid "popular-exercise"
 #~ msgstr "受欢迎的问题"
 
-#~ msgid "Asked a question with 1,000 views"
+#~ msgid "Asked a exercise with 1,000 views"
 #~ msgstr "1000次查看的问题"
 
 #~ msgid "Citizen patrol"
@@ -7645,7 +7645,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "teacher"
 #~ msgstr "老师"
 
-#~ msgid "Answered first question with at least one up vote"
+#~ msgid "Problemed first exercise with at least one up vote"
 #~ msgstr "回答的至少有一个赞成票的问题"
 
 #~ msgid "autobiographer"
@@ -7654,35 +7654,35 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "self-learner"
 #~ msgstr "自学者"
 
-#~ msgid "Answered your own question with at least 3 up votes"
+#~ msgid "Problemed your own exercise with at least 3 up votes"
 #~ msgstr "回答的至少有三个赞成票的问题"
 
-#~ msgid "great-answer"
+#~ msgid "great-problem"
 #~ msgstr "完美-答案"
 
-#~ msgid "Answer voted up 100 times"
+#~ msgid "Problem voted up 100 times"
 #~ msgstr "赞成票达到100的答案"
 
-#~ msgid "great-question"
+#~ msgid "great-exercise"
 #~ msgstr "完美-问题"
 
-#~ msgid "Question voted up 100 times"
+#~ msgid "Exercise voted up 100 times"
 #~ msgstr "有100赞成票的问题"
 
-#~ msgid "stellar-question"
+#~ msgid "stellar-exercise"
 #~ msgstr "重要问题"
 
-#~ msgid "Question favorited by 100 users"
+#~ msgid "Exercise favorited by 100 users"
 #~ msgstr "被100个用户收藏的问题"
 
 # close.html
-#~ msgid "Famous question"
+#~ msgid "Famous exercise"
 #~ msgstr "极好的问题"
 
-#~ msgid "famous-question"
+#~ msgid "famous-exercise"
 #~ msgstr "极好的问题"
 
-#~ msgid "Asked a question with 10,000 views"
+#~ msgid "Asked a exercise with 10,000 views"
 #~ msgstr "被点击10000此的问题"
 
 #~ msgid "Alpha"
@@ -7694,22 +7694,22 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "Actively participated in the private alpha"
 #~ msgstr "在alpha阶段积极贡献"
 
-#~ msgid "good-answer"
+#~ msgid "good-problem"
 #~ msgstr "好回答"
 
-#~ msgid "Answer voted up 25 times"
+#~ msgid "Problem voted up 25 times"
 #~ msgstr "有25次投票的回答"
 
-#~ msgid "good-question"
+#~ msgid "good-exercise"
 #~ msgstr "好问题"
 
-#~ msgid "Question voted up 25 times"
+#~ msgid "Exercise voted up 25 times"
 #~ msgstr "有25次投票的问题"
 
-#~ msgid "favorite-question"
+#~ msgid "favorite-exercise"
 #~ msgstr "收藏问题"
 
-#~ msgid "Question favorited by 25 users"
+#~ msgid "Exercise favorited by 25 users"
 #~ msgstr "被25人收藏的问题"
 
 #~ msgid "Civic duty"
@@ -7745,16 +7745,16 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "Active member for a year"
 #~ msgstr "一年中活跃用户"
 
-#~ msgid "notable-question"
+#~ msgid "notable-exercise"
 #~ msgstr "关注的问题"
 
-#~ msgid "Asked a question with 2,500 views"
+#~ msgid "Asked a exercise with 2,500 views"
 #~ msgstr "有2500次点击的问题"
 
 #~ msgid "enlightened"
 #~ msgstr "文明的"
 
-#~ msgid "First answer was accepted with at least 10 up votes"
+#~ msgid "First problem was accepted with at least 10 up votes"
 #~ msgstr "第一个被接受的有10个推荐票的答案"
 
 #~ msgid "Beta"
@@ -7769,10 +7769,10 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "guru"
 #~ msgstr "专家"
 
-#~ msgid "Accepted answer and voted up 40 times"
+#~ msgid "Accepted problem and voted up 40 times"
 #~ msgstr "投票超过40次的回答"
 
-#~ msgid "Answered a question more than 60 days later with at least 5 votes"
+#~ msgid "Problemed a exercise more than 60 days later with at least 5 votes"
 #~ msgstr "回答问题超过60天且至少有5个投票"
 
 #~ msgid "taxonomist"
@@ -7818,27 +7818,27 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "Logout now"
 #~ msgstr "点击退出登录"
 
-#~ msgid "mark this question as favorite (click again to cancel)"
+#~ msgid "mark this exercise as favorite (click again to cancel)"
 #~ msgstr "我要收藏这个问题（再次点击取消操作）"
 
 #~ msgid ""
-#~ "remove favorite mark from this question (click again to restore mark)"
+#~ "remove favorite mark from this exercise (click again to restore mark)"
 #~ msgstr "我要收藏这个问题（再次点击取消操作）"
 
-#~ msgid "Share this question on facebook"
+#~ msgid "Share this exercise on facebook"
 #~ msgstr "分享提问到我的facebook"
 
 # this is how above two are supposed to be
-#~ msgid "see questions tagged '%(tag_name)s'"
+#~ msgid "see exercises tagged '%(tag_name)s'"
 #~ msgstr "查看有关%(tag_name)s的问题"
 
 #~ msgid ""
 #~ "\n"
-#~ "                %(q_num)s question\n"
+#~ "                %(q_num)s exercise\n"
 #~ "            "
 #~ msgid_plural ""
 #~ "\n"
-#~ "                %(q_num)s questions\n"
+#~ "                %(q_num)s exercises\n"
 #~ "            "
 #~ msgstr[0] ""
 #~ "\n"
@@ -7857,15 +7857,15 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ "匹配 '<span class=\"darkred\"><strong>%(stag)s</strong></span>的标签"
 
 #~ msgid ""
-#~ "see other questions with %(view_user)s's contributions tagged '%(tag_name)"
+#~ "see other exercises with %(view_user)s's contributions tagged '%(tag_name)"
 #~ "s' "
 #~ msgstr "查看有关%(view_user)s的%(tag_name)s标签的分享"
 
 #~ msgid "favorites"
 #~ msgstr "收藏"
 
-#~ msgid "this questions was selected as favorite %(cnt)s time"
-#~ msgid_plural "this questions was selected as favorite %(cnt)s times"
+#~ msgid "this exercises was selected as favorite %(cnt)s time"
+#~ msgid_plural "this exercises was selected as favorite %(cnt)s times"
 #~ msgstr[0] "这个问题被收藏%(cnt)s次"
 
 #~ msgid "thumb-up on"
@@ -7886,7 +7886,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "I am a Human Being"
 #~ msgstr "我是人"
 
-#~ msgid "Please decide if you like this question or not by voting"
+#~ msgid "Please decide if you like this exercise or not by voting"
 #~ msgstr "请通过投票决定你是否喜欢此问题"
 
 #~ msgid ""
@@ -7901,16 +7901,16 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ "\n"
 #~ "投票"
 
-#~ msgid "this answer has been accepted to be correct"
+#~ msgid "this problem has been accepted to be correct"
 #~ msgstr "答案已被接受为正确答案"
 
 #~ msgid ""
 #~ "\n"
-#~ "        answer \n"
+#~ "        problem \n"
 #~ "        "
 #~ msgid_plural ""
 #~ "\n"
-#~ "        answers \n"
+#~ "        problems \n"
 #~ "        "
 #~ msgstr[0] ""
 #~ "\n"
@@ -7942,11 +7942,11 @@ msgstr "对不起，好像有一些技术上的错误。"
 
 #~ msgid ""
 #~ "\n"
-#~ "            answer \n"
+#~ "            problem \n"
 #~ "            "
 #~ msgid_plural ""
 #~ "\n"
-#~ "            answers \n"
+#~ "            problems \n"
 #~ "            "
 #~ msgstr[0] ""
 #~ "\n"
@@ -8004,22 +8004,22 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ "A new password and the activation link were sent to your email address."
 #~ msgstr "和您的邮件地址是绑定的"
 
-#~ msgid "Your question and all of it's answers have been deleted"
+#~ msgid "Your exercise and all of it's problems have been deleted"
 #~ msgstr "你正在查看的问题或者回答已经被删除；"
 
-#~ msgid "Your question has been deleted"
+#~ msgid "Your exercise has been deleted"
 #~ msgstr "你正在查看的问题或者回答已经被删除；"
 
-#~ msgid "The question and all of it's answers have been deleted"
+#~ msgid "The exercise and all of it's problems have been deleted"
 #~ msgstr "你正在查看的问题或者回答已经被删除；"
 
-#~ msgid "The question has been deleted"
+#~ msgid "The exercise has been deleted"
 #~ msgstr "你正在查看的问题或者回答已经被删除；"
 
-#~ msgid "question"
+#~ msgid "exercise"
 #~ msgstr "提问"
 
-#~ msgid "unanswered/"
+#~ msgid "without_problem/"
 #~ msgstr "回答"
 
 #~ msgid "Change email "
@@ -8061,7 +8061,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "buy online"
 #~ msgstr "网上购买"
 
-#~ msgid "reader questions"
+#~ msgid "reader exercises"
 #~ msgstr "答读者问"
 
 #~ msgid "ask the author"
@@ -8070,13 +8070,13 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "number of times"
 #~ msgstr "位用户收藏"
 
-#~ msgid "the answer has been accepted to be correct"
+#~ msgid "the problem has been accepted to be correct"
 #~ msgstr "有答案已被接受为正确答案"
 
 #~ msgid "subscribe to book RSS feed"
 #~ msgstr "RSS订阅该图书最新问题"
 
-#~ msgid "open any closed question"
+#~ msgid "open any closed exercise"
 #~ msgstr "打开关闭任何人的问题"
 
 #~ msgid "books"
@@ -8133,7 +8133,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ "看CNProg隐私政策的改动，在任何改动生效后您的继续访问和使用本站，我们假设您"
 #~ "已同意了CNProg以上的所有条款。"
 
-#~ msgid "tags help us keep Questions organized"
+#~ msgid "tags help us keep Exercises organized"
 #~ msgstr "CNProg用标签来分类系统的信息"
 
 #~ msgid "Found by tags"
@@ -8142,13 +8142,13 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "Found by title"
 #~ msgstr "查询结果"
 
-#~ msgid "Unanswered questions"
+#~ msgid "Exercises without problems"
 #~ msgstr "没有回答的问题"
 
-#~ msgid "less answers"
+#~ msgid "less problems"
 #~ msgstr "最先回答"
 
-#~ msgid "click to see coldest questions"
+#~ msgid "click to see coldest exercises"
 #~ msgstr "最新问题"
 
 #~ msgid "unpopular"
@@ -8157,11 +8157,11 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "popular"
 #~ msgstr "受欢迎的标签"
 
-#~ msgid " %(q_num)s question found"
-#~ msgid_plural "%(q_num)s questions found"
+#~ msgid " %(q_num)s exercise found"
+#~ msgid_plural "%(q_num)s exercises found"
 #~ msgstr[0] "个"
 
-#~ msgid "Open the previously closed question"
+#~ msgid "Open the previously closed exercise"
 #~ msgstr "你将打开这个已经被关闭的问题"
 
 #~ msgid "reason - leave blank in english"
@@ -8215,7 +8215,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "Create account"
 #~ msgstr "创建帐号"
 
-#~ msgid "favorite questions"
+#~ msgid "favorite exercises"
 #~ msgstr "收藏"
 
 #~ msgid "books/"
@@ -8228,8 +8228,8 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid_plural "%(rev_count)s revisions"
 #~ msgstr[0] "版本"
 
-#~ msgid " One question found"
-#~ msgid_plural "%(q_num)s questions found"
+#~ msgid " One exercise found"
+#~ msgid_plural "%(q_num)s exercises found"
 #~ msgstr[0] ""
 #~ "问题按<strong>提问时间</strong>显示排序。新加入的问题将显示在最前面。"
 
@@ -8285,7 +8285,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "Twitter password:"
 #~ msgstr "密码:"
 
-#~ msgid "Send my Answers to Twitter"
+#~ msgid "Send my Problems to Twitter"
 #~ msgstr "发布我的回答到我的Twitter"
 
 #~ msgid ""
@@ -8302,7 +8302,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "my profile"
 #~ msgstr "我的资料"
 
-#~ msgid "last updated questions"
+#~ msgid "last updated exercises"
 #~ msgstr "最新更新的问题"
 
 #~ msgid "welcome to website"
@@ -8320,7 +8320,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "all awards"
 #~ msgstr "所有奖牌"
 
-#~ msgid "subscribe to last 30 questions by RSS"
+#~ msgid "subscribe to last 30 exercises by RSS"
 #~ msgstr "RSS订阅最新30个问题"
 
 #~ msgid "Still looking for more? See"
@@ -8338,7 +8338,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "Community wiki"
 #~ msgstr "社区Wiki"
 
-#~ msgid "Browse questions with tag of "
+#~ msgid "Browse exercises with tag of "
 #~ msgstr "查看有关"
 
 #~ msgid "All tags matching query"
@@ -8354,7 +8354,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgstr "和您的邮件地址是绑定的"
 
 #~ msgid ""
-#~ "the answer has been commented %(answered_question.comment_count)s times"
+#~ "the problem has been commented %(problemed_exercise.comment_count)s times"
 #~ msgstr "该回答有%d条评论"
 
 #~ msgid "votes total"
@@ -8450,7 +8450,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "Change now"
 #~ msgstr "现在修改"
 
-#~ msgid "uses tags for the classification of questions"
+#~ msgid "uses tags for the classification of exercises"
 #~ msgstr "用标签来分类系统的信息"
 
 #~ msgid "Found by tag"
@@ -8458,28 +8458,28 @@ msgstr "对不起，好像有一些技术上的错误。"
 
 #~ msgid ""
 #~ "\n"
-#~ "\t\t\thave total %(q_num)s questions tagged %(tagname)s\n"
+#~ "\t\t\thave total %(q_num)s exercises tagged %(tagname)s\n"
 #~ "\t\t\t"
 #~ msgid_plural ""
 #~ "\n"
-#~ "\t\t\thave total %(q_num)s questions tagged %(tagname)s\n"
+#~ "\t\t\thave total %(q_num)s exercises tagged %(tagname)s\n"
 #~ "\t\t\t"
 #~ msgstr[0] ""
 #~ "\n"
-#~ "您正在浏览所有<div class=\"questions-count\">%(q_num)s</div>个标记为<span "
+#~ "您正在浏览所有<div class=\"exercises-count\">%(q_num)s</div>个标记为<span "
 #~ "class=\"tag\">%(tagname)s</span></p>"
 
 #~ msgid ""
 #~ "\n"
-#~ "\t\t\thave total %(q_num)s questions containing %(searchtitle)s\n"
+#~ "\t\t\thave total %(q_num)s exercises containing %(searchtitle)s\n"
 #~ "\t\t\t"
 #~ msgid_plural ""
 #~ "\n"
-#~ "\t\t\thave total %(q_num)s questions containing %(searchtitle)s\n"
+#~ "\t\t\thave total %(q_num)s exercises containing %(searchtitle)s\n"
 #~ "\t\t\t"
 #~ msgstr[0] ""
 #~ "\n"
-#~ "您正在浏览所有<div class=\"questions-count\">%(q_num)s</div>个标题含有"
+#~ "您正在浏览所有<div class=\"exercises-count\">%(q_num)s</div>个标题含有"
 #~ "<span class=\"tag\">%(searchtitle)s</span></p>"
 
 #~ msgid "tagged with"
@@ -8488,26 +8488,26 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "whose title contains"
 #~ msgstr "标题含有"
 
-#~ msgid "Questions are sorted by the <strong>time of last update</strong>."
+#~ msgid "Exercises are sorted by the <strong>time of last update</strong>."
 #~ msgstr "问题按<strong>最后更新时间</strong>显示排序。"
 
-#~ msgid "Most recently answered ones are shown first."
+#~ msgid "Most recently problemed ones are shown first."
 #~ msgstr "最后被回答或者>更新的问题将显示在最前面。"
 
-#~ msgid "Questions sorted by <strong>number of responses</strong>."
+#~ msgid "Exercises sorted by <strong>number of responses</strong>."
 #~ msgstr "问题按<strong>回复数量</strong>显示排序。"
 
-#~ msgid "Most answered questions are shown first"
+#~ msgid "Most problemed exercises are shown first"
 #~ msgstr "回复最多的问题将显示在最前面。"
 
-#~ msgid "Questions are sorted by the <strong>number of votes</strong>."
+#~ msgid "Exercises are sorted by the <strong>number of votes</strong>."
 #~ msgstr "问题按<strong>投票数量</strong>显示排序。"
 
-#~ msgid "Most voted questions are shown first"
+#~ msgid "Most voted exercises are shown first"
 #~ msgstr "投票最多的问题将显示在最前面。"
 
 #~ msgid ""
-#~ "Anyone can ask questions and give answers, points are not necessary for "
+#~ "Anyone can ask exercises and give problems, points are not necessary for "
 #~ "that."
 #~ msgstr "对于正常使用社区进行提问、回答而言，积分不是必须的。"
 
@@ -8527,14 +8527,14 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ "任“赚得”的。"
 
 #~ msgid ""
-#~ "For example, if you ask an interesting question or give a helpful answer, "
+#~ "For example, if you ask an interesting exercise or give a helpful problem, "
 #~ "your input will be upvoted and you will gain more trust in the community."
 #~ msgstr ""
 #~ "举例来说，如果你提了一个非常有帮助的问题或者做了很有用的回答，你将会被其他"
 #~ "用户投赞成票。"
 
 #~ msgid ""
-#~ "If on the other hand someone gives a misleading answer, the answer will "
+#~ "If on the other hand someone gives a misleading problem, the problem will "
 #~ "be voted down and he/she loses some points."
 #~ msgstr ""
 #~ "相反，你提了不受欢迎的问题，或者误导用户的回答，你将可能被其他用户投反对"

@@ -27,7 +27,7 @@ def supports_full_text_search_migr0004():
     global SUPPORTS_FTS
     if SUPPORTS_FTS is None:
         cursor = connection.cursor()
-        cursor.execute("SHOW CREATE TABLE question") # In migration 0004 model forum.Question used db table `question`
+        cursor.execute("SHOW CREATE TABLE exercise") # In migration 0004 model forum.Exercise used db table `exercise`
         data = cursor.fetchone()
         if 'ENGINE=MyISAM' in data[1]:
             SUPPORTS_FTS = True

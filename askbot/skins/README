@@ -8,8 +8,8 @@ incurring much maintenance overhead.
 
 Current status of templates
 ===========================
-The two busiest templates are - the "main" page and the "question" page,
-the main page is more or less complete. "Question" page will be significantly
+The two busiest templates are - the "main" page and the "exercise" page,
+the main page is more or less complete. "Exercise" page will be significantly
 refactored in the near future.
 
 How skins work in Askbot

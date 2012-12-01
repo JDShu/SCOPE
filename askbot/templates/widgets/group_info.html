@@ -43,19 +43,19 @@
                 data-toggle-url="{% url toggle_group_profile_property %}"
             />
             <label for="moderate-email">
-                {% trans %}moderate emailed questions{% endtrans %}
+                {% trans %}moderate emailed exercises{% endtrans %}
             </label>
             <br/>
         {% endif %}
 
         <input
             type="checkbox"
-            id="moderate-answers-to-enquirers"
-            {% if group.moderate_answers_to_enquirers %}checked="checked"{% endif %}
+            id="moderate-problems-to-enquirers"
+            {% if group.moderate_problems_to_enquirers %}checked="checked"{% endif %}
             data-toggle-url="{% url toggle_group_profile_property %}"
         />
-        <label for="moderate-answers-to-enquirers">
-            {% trans %}show only selected answers to enquirers{% endtrans %}
+        <label for="moderate-problems-to-enquirers">
+            {% trans %}show only selected problems to enquirers{% endtrans %}
         </label>
         <br/>
 

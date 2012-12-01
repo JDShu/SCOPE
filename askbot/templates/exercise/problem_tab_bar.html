@@ -1,0 +1,23 @@
+<div class="tabBar tabBar-problem">
+    <h2 id="exerciseCount">
+        {% trans counter=problem_count %}
+            {{counter}} Problem
+            {% pluralize %}
+            {{counter}} Problems
+        {% endtrans %}
+    </h2>
+    <div class="tabsA">
+                    <span class="label">
+                    {% trans %}Sort by »{% endtrans %}
+                    </span>
+        <a id="oldest" href="{{ exercise.get_absolute_url() }}?sort=oldest#sort-top"
+           title="{% trans %}oldest problems will be shown first{% endtrans %}"
+                ><span>{% trans %}oldest{% endtrans %}</span></a>
+        <a id="latest" href="{{ exercise.get_absolute_url() }}?sort=latest#sort-top"
+           title="{% trans %}newest problems will be shown first{% endtrans %}"
+                ><span>{% trans %}newest{% endtrans %}</span></a>
+        <a id="votes" href="{{ exercise.get_absolute_url() }}?sort=votes#sort-top"
+           title="{% trans %}most voted problems will be shown first{% endtrans %}"
+                ><span>{% trans %}most voted{% endtrans %}</span></a>
+    </div>
+</div>
