@@ -19,36 +19,13 @@
                 {% if problem.id in published_problem_ids %}
                     <p><strong>{% trans %}This response is published{% endtrans %}</strong></p>
                 {% endif %}
-                {{ problem.html }}
+                {{ answer.html }}
             </div>
             <div class="problem-controls post-controls">
                 {% include "exercise/problem_controls.html" %}
             </div>
             {% include "exercise/problem_comments.html" %}
         </div>
-        {{ problem.solution_count }} solutions to this problem.
-        {# HANS : This is a hackish place to put this for now, refactor later #}
-        {% set answers = problem.get_cached_solutions() %}
-        {% if answers %}
-            {% for answer in answers %}
-                {# ==== START: exercise/answer_card.html ==== #}
-                {% include "exercise/answer_card.html" %}
-                {# ==== END: exercise/answer_card.html ==== #}
-            {% endfor %}
-        {% endif %}
-        < Link > Post an answer to this problem </ Link >
-        {# ==== START: exercise/new_problem_form.html ==== #}
-        {# buttons below cannot be cached yet #}
-        {% include "exercise/new_answer_form.html" %}
-        {% if exercise.closed == False and request.user == exercise.author %}{# this is outside the form on purpose #}
-        <input
-           type="button"
-           class="submit after-editor problem-own-exercise"
-           id="fmproblem_button"
-           value="{% trans %}Add a Problem to Your Own Answer{% endtrans %}"
-           />
-        {% endif %}
-
     </div>
     <div class="clean"></div>
 </div>

@@ -30,17 +30,9 @@
 
 {# ==== START: exercise/new_problem_form.html ==== #}
 {# buttons below cannot be cached yet #}
-{% if user_already_gave_problem %}
-    <a
-        class="submit"
-        href="{% url "edit_problem" previous_problem.id %}"
-    >{% trans %}Edit Your Previous Problem{% endtrans %}</a>
-    <span>{% trans %}(only one problem per exercise is allowed){% endtrans %}</span>
-{% else %}
     {% include "exercise/new_problem_form.html" %}
-{% endif %}
 {% if exercise.closed == False and request.user == exercise.author %}{# this is outside the form on purpose #}
-<input 
+<input
   type="button"
   class="submit after-editor problem-own-exercise"
   id="fmproblem_button"
