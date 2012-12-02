@@ -29,7 +29,7 @@ from django.conf import settings
 import askbot
 from askbot import exceptions
 from askbot.utils.diff import textDiff as htmldiff
-from askbot.forms import ProblemForm, ShowExerciseForm
+from askbot.forms import ProblemForm, ShowExerciseForm, AnswerForm
 from askbot import conf
 from askbot import models
 from askbot import schedules
@@ -550,6 +550,7 @@ def exercise(request, id):#refactor - long subroutine. display exercise body, pr
             initial['text'] = drafts[0].text
 
     problem_form = ProblemForm(initial)
+    answer_form = AnswerForm(initial)
 
     user_can_post_comment = (
         request.user.is_authenticated() and request.user.can_post_comment()
@@ -592,6 +593,8 @@ def exercise(request, id):#refactor - long subroutine. display exercise body, pr
         'show_post': show_post,
         'show_comment': show_comment,
         'show_comment_position': show_comment_position,
+        'answer': answer_form,
+        #'answers': answer_form,
     }
     #shared with ...
     if askbot_settings.GROUPS_ENABLED:

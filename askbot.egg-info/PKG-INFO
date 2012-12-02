@@ -1,14 +1,14 @@
 Metadata-Version: 1.1
 Name: askbot
 Version: 0.7.43
-Summary: Question and Answer forum, like StackOverflow, written in python and Django
+Summary: Exercise and Problem forum, like StackOverflow, written in python and Django
 Home-page: http://askbot.org
 Author: Evgeny.Fadeev
 Author-email: evgeny.fadeev@gmail.com
 License: GPLv3
 Description: Askbot will work alone or with other django apps (with some limitations, please see below), Django 1.1.1 - 1.2.3(*), MySQL(**) and PostgresQL(recommended) (>=8.3).
         
-        Questions? Suggestions? Found a bug? -> please post at http://askbot.org/
+        Exercises? Suggestions? Found a bug? -> please post at http://askbot.org/
         
         Features
         ========
@@ -69,7 +69,7 @@ Description: Askbot will work alone or with other django apps (with some limitat
         
         Background Information
         ======================
-        Askbot is based on CNPROG project by Mike Chen and Sailing Cai, project which was originally inspired by StackOverflow and Yahoo Answers.
+        Askbot is based on CNPROG project by Mike Chen and Sailing Cai, project which was originally inspired by StackOverflow and Yahoo Problems.
         
         Footnotes
         =========

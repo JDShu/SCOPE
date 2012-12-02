@@ -92,7 +92,7 @@
                     return;//same here
                 }
                 if (//maybe remove "delete" button
-                    data['userReputation'] < 
+                    data['userReputation'] <
                     {{settings.MIN_REP_TO_DELETE_OTHERS_COMMENTS}}
                 ) {
                     var delete_btn = document.getElementById(
@@ -140,10 +140,10 @@
                 var text = '';
                 if (extra_comment_count > 0){
                     if (can_add){
-                        text = 
+                        text =
         "{% trans %}post a comment / <strong>some</strong> more{% endtrans %}";
                     } else {
-                        text = 
+                        text =
         "{% trans %}see <strong>some</strong> more{% endtrans%}";
                     }
                 } else {
@@ -160,6 +160,29 @@
                     }
                 }
             }
+            function render_add_answer_button(){
+                var add_problem_btn = document.getElementById('add-problem-btn');
+                if (askbot['data']['userIsAuthenticated']){
+                    if (askbot['data']['userId'] == {{exercise.author_id}}){
+                        add_problem_btn.className += ' problem-own-exercise';
+                        add_problem_btn.setAttribute(
+                            'value',
+                            '{% trans %}Add a Solution to Your Own Problem{% endtrans %}'
+                        )
+                    } else {
+                        add_problem_btn.setAttribute(
+                           'value',
+                            '{% trans %}Post Your Solution{% endtrans %}'
+                        )
+                    }
+                } else {
+                    add_problem_btn.setAttribute(
+                        'value',
+                        '{% trans %}Login/Signup to Post{% endtrans %}'
+                    );
+                }
+            }
+
             function render_add_problem_button(){
                 var add_problem_btn = document.getElementById('add-problem-btn');
                 if (askbot['data']['userIsAuthenticated']){
@@ -191,11 +214,12 @@
                 }
               }
             }
-            
+
             askbot['functions'] = askbot['functions'] || {};
             askbot['functions']['renderPostVoteButtons'] = render_vote_buttons;
             askbot['functions']['renderPostControls'] = render_post_controls;
             askbot['functions']['renderAddCommentButton'] = render_add_comment_button;
+            askbot['functions']['renderAddAnswerButton'] = render_add_answer_button;
             askbot['functions']['renderAddProblemButton'] = render_add_problem_button;
             askbot['functions']['hideConvertLinks'] = hide_convert_links;
             askbot['functions']['hideConvertProblemLinks'] = hide_convert_problem_links;
@@ -242,4 +266,3 @@
     </script>
     #}
 {% endblock %}
-
