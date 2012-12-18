@@ -877,7 +877,7 @@ class Post(models.Model):
             return u'%(base)s%(id)d/post-answer/' % {
                 'base': urlresolvers.reverse('exercise', args=[exercise_post.id]),
                 'slug': django_urlquote(slugify(self.thread.title)),
-                'id': self.id
+                'id': self.id,
                 }
 
     def delete(self, **kwargs):

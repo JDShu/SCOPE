@@ -1,30 +1,29 @@
-<a name="{{ problem.id }}"></a>
-{% if problem.old_problem_id %}
+<a name="{{ answer.id }}"></a>
+{% if answer.old_answer_id %}
     {# Make old URL anchors/hashes work #}
-    <a class="old_problem_id_anchor" name="{{ problem.old_problem_id }}"></a>
+    <a class="old_answer_id_anchor" name="{{ answer.old_answer_id }}"></a>
 {% endif %}
 <div
-        id="post-id-{{ problem.id }}"
+        id="post-id-{{ answer.id }}"
         class="{{ macros.problem_classes(problem, exercise) }}">
     <div class="vote-buttons">
         {% include "exercise/problem_vote_buttons.html" %}
     </div>
-    <div class="problem-table">
-
+    <div class="answer-table">
         <div class="item-right">
-            <div class="problem-body">
+            <div class="answer-body">
                 <div class="post-update-info-container">
                     {% include "exercise/problem_author_info.html" %}
                 </div>
-                {% if problem.id in published_problem_ids %}
+                {% if answer.id in published_answer_ids %}
                     <p><strong>{% trans %}This response is published{% endtrans %}</strong></p>
                 {% endif %}
                 {{ answer.html }}
             </div>
             <div class="problem-controls post-controls">
-                {% include "exercise/problem_controls.html" %}
+                {% include "exercise/answer_controls.html" %}
             </div>
-            {% include "exercise/problem_comments.html" %}
+            {% include "exercise/answer_comments.html" %}
         </div>
     </div>
     <div class="clean"></div>

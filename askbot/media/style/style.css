@@ -1940,11 +1940,13 @@ ul#related-tags li {
   border-bottom: 1px solid #D4D4D4;
   float: right;
 }
+
 .exercise-page .problem-table td,
 .exercise-page #exercise-table td {
   width: 20px;
   vertical-align: top;
 }
+
 .exercise-page .exercise-body,
 .exercise-page .problem-body {
   overflow: auto;

@@ -4,9 +4,30 @@
     <link rel="stylesheet" type="text/css" href="{{"/js/wmd/wmd.css"|media}}" />
 {% endblock %}
 {% block content %}
-Test.
-<br>Material id: {{mid}}</br>
-<br>Problem id: {{pid}}</br>
+
+    <div class="item-right">
+      <div class="problem-body">
+        <div class="post-update-info-container">
+          {% include "exercise/problem_author_info.html" %}
+        </div>
+        {% if problem.id in published_problem_ids %}
+        <p><strong>{% trans %}This response is published{% endtrans %}</strong></p>
+        {% endif %}
+        {{ problem.html }}
+      </div>
+    </div>
+    {% if exercise.closed == False and request.user == exercise.author %}{# this is outside the form on purpose #}
+    <input
+       type="button"
+       class="submit after-editor problem-own-exercise"
+       id="fmproblem_button"
+       value="{% trans %}Add a Problem to Your Own Answer{% endtrans %}"
+       />
+    {% endif %}
+
+</div>
+
+{{ macros.problem_classes(problem, exercise) }}
 
 {% include "exercise/new_answer_form.html" %}
 {% endblock %}

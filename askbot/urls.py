@@ -48,6 +48,11 @@ urlpatterns = patterns('',
         name='edit_problem'
     ),
     url(
+        r'^%s(?P<id>\d+)/%s$' % (_('answers/'), _('edit/')),
+        views.writers.edit_problem,
+        name='edit_answer'
+    ),
+    url(
         r'^%s(?P<id>\d+)/%s$' % (_('problems/'), _('revisions/')),
         views.readers.revisions,
         kwargs = {'post_type': 'problem'},
@@ -214,6 +219,11 @@ urlpatterns = patterns('',
         r'^problem/convert/$',
         views.writers.problem_to_comment,
         name='problem_to_comment'
+    ),
+    url(#post only
+        r'^answer/convert/$',
+        views.writers.problem_to_comment,
+        name='answer_to_comment'
     ),
     url(#post only
         r'^problem/publish/$',

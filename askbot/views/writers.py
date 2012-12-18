@@ -696,7 +696,7 @@ def post_comments(request):#generic ajax handler to load comments to an object
     # only support get post comments by ajax now
 
     post_type = request.REQUEST.get('post_type', '')
-    if not request.is_ajax() or post_type not in ('exercise', 'problem'):
+    if not request.is_ajax() or post_type not in ('exercise', 'problem', 'solution'):
         raise Http404  # TODO: Shouldn't be 404! More like 400, 403 or sth more specific
 
     user = request.user
