@@ -6,7 +6,7 @@ class DeploymentError(exceptions.ImproperlyConfigured):
     pass
 
 class LoginRequired(exceptions.PermissionDenied):
-    """raised when an operation required a logged 
+    """raised when an operation required a logged
     in user"""
     def __init__(self, msg = None):
         if msg is None:
@@ -21,6 +21,11 @@ class InsufficientReputation(exceptions.PermissionDenied):
 
 class ProblemAlreadyGiven(exceptions.PermissionDenied):
     """Raised when user attempts to post a second problem
+    to the same exercise"""
+    pass
+
+class SolutionAlreadyGiven(exceptions.PermissionDenied):
+    """Raised when user attempts to post a second solution
     to the same exercise"""
     pass
 

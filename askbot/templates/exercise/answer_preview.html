@@ -4,8 +4,8 @@
 {% if answers %}
 <ul>
   {% for answer in answers %}
-  <li><a href="{{answer.get_absolute_url}}"> An answer </a></li>
+  <li><a href="{{ answer.get_absolute_url() }}"> An answer </a></li>
   {% endfor %}
 </ul>
 {% endif %}
-<br><a href="{{problem.get_answer_form_url()}}"> Post an answer to this problem</br>
+<br><a href="{{ problem.get_answer_form_url() }}"> Post an answer to this problem</br>

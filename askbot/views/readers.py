@@ -640,3 +640,33 @@ def get_comment(request):
     comment = models.Post.objects.get(post_type='comment', id=id)
     request.user.assert_can_edit_comment(comment)
     return {'text': comment.text}
+
+#@decorators.check_authorization_to_post(_('Please log in to post answers'))
+#@decorators.check_spam('text')
+@csrf.csrf_protect
+def new_answer_form(request, mid, pid):
+    exercise_post = models.Post.objects.filter(
+                                post_type = 'exercise',
+                                id = mid
+                            ).select_related('thread')[0]
+
+    problem_post = models.Post.objects.filter(
+                                post_type = 'problem',
+                                id = pid
+                            ).select_related('thread')[0]
+    thread = exercise_post.thread
+    initial = {
+        'wiki': exercise_post.wiki and askbot_settings.WIKI_ON,
+        'email_notify': thread.is_followed_by(request.user)
+    }
+    answer_form = AnswerForm(initial)
+    # if exercise doesn't exist, redirect to main page
+    data = {
+        'pid': pid,
+        'mid': mid,
+        'exercise': exercise_post,
+        'problem': problem_post,
+        'thread': thread,
+        'answer_form': answer_form
+        }
+    return render_into_skin('exercise/answer_form.html', data, request)

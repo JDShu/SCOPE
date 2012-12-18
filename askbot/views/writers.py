@@ -38,6 +38,7 @@ from askbot.utils.file_utils import store_file
 from askbot.views import context
 from askbot.templatetags import extra_filters_jinja as template_filters
 from askbot.importers.stackexchange import management as stackexchange#todo: may change
+from askbot.forms import AnswerForm #Hans
 
 # used in index page
 INDEX_PAGE_SIZE = 20
@@ -572,6 +573,68 @@ def problem(request, id):#process a new problem
             else:
                 request.session.flush()
                 models.AnonymousProblem.objects.create(
+                    exercise=exercise,
+                    wiki=wiki,
+                    text=text,
+                    summary=strip_tags(text)[:120],
+                    session_key=request.session.session_key,
+                    ip_addr=request.META['REMOTE_ADDR'],
+                )
+                return HttpResponseRedirect(url_utils.get_login_url())
+
+    return HttpResponseRedirect(exercise.get_absolute_url())
+
+# Hans: use the new solution methods Max made
+@decorators.check_authorization_to_post(_('Please log in to problem exercises'))
+@decorators.check_spam('text')
+def post_new_answer(request, mid, pid):#process a new problem
+    """view that posts new problem
+
+    anonymous users post into anonymous storage
+    and redirected to login page
+
+    authenticated users post directly
+    """
+    exercise = get_object_or_404(models.Post, post_type='exercise', id=mid)
+    problem = get_object_or_404(models.Post, post_type='problem', id=pid)
+    if request.method == "POST":
+        form = forms.AnswerForm(request.POST)
+        if form.is_valid():
+            wiki = form.cleaned_data['wiki']
+            text = form.cleaned_data['text']
+            update_time = datetime.datetime.now()
+
+            if request.user.is_authenticated():
+                drafts = models.DraftSolution.objects.filter(
+                                                author=request.user,
+                                                #thread=exercise.thread
+                                            )
+                drafts.delete()
+                try:
+                    follow = form.cleaned_data['email_notify']
+                    is_private = form.cleaned_data['post_privately']
+
+                    user = form.get_post_user(request.user)
+                    print dir(user.post_solution)
+                    solution = user.post_solution(
+                                        exercise = exercise,
+                                        parent = problem,
+                                        body_text = text,
+                                        follow = follow,
+                                        wiki = wiki,
+                                        is_private = is_private,
+                                        timestamp = update_time,
+                                    )
+                    return HttpResponseRedirect(exercise.get_absolute_url())
+                except askbot_exceptions.SolutionAlreadyGiven, e:
+                    request.user.message_set.create(message = unicode(e))
+                    answer = exercise.thread.get_solutions_by_user(request.user)[0]
+                    return HttpResponseRedirect(exercise.get_absolute_url())
+                except exceptions.PermissionDenied, e:
+                    request.user.message_set.create(message = unicode(e))
+            else:
+                request.session.flush()
+                models.AnonymousSolution.objects.create(
                     exercise=exercise,
                     wiki=wiki,
                     text=text,

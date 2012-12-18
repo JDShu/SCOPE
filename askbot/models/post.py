@@ -874,7 +874,7 @@ class Post(models.Model):
         if self.is_problem():
             if not exercise_post:
                 exercise_post = self.thread._exercise_post()
-            return u'%(base)s%(slug)s/%(id)d/post-answer/' % {
+            return u'%(base)s%(id)d/post-answer/' % {
                 'base': urlresolvers.reverse('exercise', args=[exercise_post.id]),
                 'slug': django_urlquote(slugify(self.thread.title)),
                 'id': self.id

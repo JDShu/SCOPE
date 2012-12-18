@@ -152,6 +152,18 @@ urlpatterns = patterns('',
         views.writers.problem,
         name='problem'
     ),
+    #Hans: process the answer form
+    url(
+        r'^%s(?P<mid>\d+)/(?P<pid>\d+)/%s$' % (_('exercises/'), _('answer/')),
+        views.writers.post_new_answer,
+        name='post_new_answer'
+    ),
+    #Hans: hack the dispatcher to redirect to the answer form
+    url(
+        r'^%s(?P<mid>\d+)/(?P<pid>\d+)/%s$' % (_('exercise/'), _('post-answer/')),
+        views.readers.new_answer_form,
+        name='new_answer_form'
+    ),
     url(#ajax only
         r'^%s(?P<id>\d+)/%s$' % (_('exercises/'), _('vote/')),
         views.commands.vote,

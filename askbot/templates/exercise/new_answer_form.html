@@ -1,6 +1,7 @@
+{% import "macros.html" as macros %}
 <form
         id="fmanswer"
-        action="{% url problem exercise.id %}"
+        action="{% url post_new_answer mid, pid %}"
         method="post"
         >{% csrf_token %}
     {# ==== START: exercise/subscribe_by_email_prompt.html ==== #}
@@ -16,17 +17,6 @@
         {% endif %}
     {% else %}
         {% if not thread.closed %}
-            <div>
-                {% spaceless %}
-                    <h2>
-                        {% if answers %}
-                            {% trans %}Your Solution{% endtrans %}
-                        {% else %}
-                            {% trans %}Be the first one to add a solution to this exercise!{% endtrans %}
-                        {% endif %}
-                    </h2>
-                {% endspaceless %}
-            </div>
             {% if request.user.is_anonymous() %}
                 <div class="message">{% trans %}<span class='strong big'>Please start posting your problem anonymously</span> - your problem will be saved within the current session and published after you log in or create a new account. Please try to give a <strong>substantial solution</strong>, for discussions, <strong>please use comments</strong> and <strong>please do remember to vote</strong> (after you log in)!{% endtrans %}</div>
             {% else %}
@@ -39,7 +29,7 @@
                 </p>
             {% endif %}
             {{ macros.edit_post(
-                    answer,
+                    answer_form,
                     user = request.user,
                     editor_type = settings.EDITOR_TYPE
                 )
