@@ -1,0 +1,11 @@
+{{ problem.solution_count }} solutions to this problem.
+{# HANS : This is a hackish place to put this for now, refactor later #}
+{% set answers = problem.get_cached_solutions() %}
+{% if answers %}
+<ul>
+  {% for answer in answers %}
+  <li><a href="{{answer.get_absolute_url}}"> An answer </a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+<br><a href="{{problem.get_answer_form_url()}}"> Post an answer to this problem</br>

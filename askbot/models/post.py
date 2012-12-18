@@ -45,7 +45,7 @@ from askbot.utils import mysql
 class PostToGroup(models.Model):
     post = models.ForeignKey('Post')
     group = models.ForeignKey(Group)
-    
+
     class Meta:
         unique_together = ('post', 'group')
         app_label = 'askbot'
@@ -59,7 +59,7 @@ class PostQuerySet(models.query.QuerySet):
     #todo: we may not need this query set class,
     #as all methods on this class seem to want to
     #belong to Thread manager or Query set.
-    
+
     #MAX:
     def get_by_text_query(self, search_query):
         """returns a query set of exercises,
@@ -98,7 +98,7 @@ class PostQuerySet(models.query.QuerySet):
     #        else:
     #            #fallback to dumb title match search
     #            return self.filter(thread__title__icontains=search_query)
-    
+
     def added_between(self, start, end):
         """exercises added between ``start`` and ``end`` timestamps"""
         #todo: goes to thread
@@ -107,7 +107,7 @@ class PostQuerySet(models.query.QuerySet):
                            ).exclude(
                                      added_at__gt = end
                                      )
-    
+
     def get_exercises_needing_reminder(self,
                                        user = None,
                                        activity_type = None,
@@ -142,7 +142,7 @@ class PostQuerySet(models.query.QuerySet):
             activity.save()
             exercise_list.append(exercise)
         return exercise_list
-    
+
     def get_author_list(self, **kwargs):
         #todo: - this is duplication - problem manager also has this method
         #will be gone when models are consolidated
@@ -157,32 +157,32 @@ class PostQuerySet(models.query.QuerySet):
 class PostManager(BaseQuerySetManager):
     def get_query_set(self):
         return PostQuerySet(self.model)
-    
+
     def get_exercises(self):
         return self.filter(post_type='exercise')
-    
+
     def get_problems(self, user = None):
         """returns query set of problem posts,
             optionally filtered to exclude posts of groups
             to which user does not belong"""
         problems = self.filter(post_type='problem')
-        
+
         if askbot_settings.GROUPS_ENABLED:
             if user is None or user.is_anonymous():
                 groups = [get_global_group()]
             else:
                 groups = user.get_groups()
             problems = problems.filter(groups__in = groups).distinct()
-        
+
         return problems
-    
+
     #MAX:
     def get_solutions(self, user = None):
         """returns query set of solution posts,
             optionally filtered to exclude posts of groups
             to which user does not belong"""
         solutions = self.filter(post_type='solution')
-        
+
         if askbot_settings.GROUPS_ENABLED:
             if user is None or user.is_anonymous():
                 groups = [get_global_group()]
@@ -191,11 +191,11 @@ class PostManager(BaseQuerySetManager):
             solutions = solutions.filter(groups__in = groups).distinct()
 
         return solutions
-    
-    
+
+
     def get_comments(self):
         return self.filter(post_type='comment')
-    
+
     def create_new_tag_wiki(self, text = None, author = None):
         return self.create_new(
                                None,#this post type is threadless
@@ -205,7 +205,7 @@ class PostManager(BaseQuerySetManager):
                                wiki = True,
                                post_type = 'tag_wiki'
                                )
-    
+
     def create_new(
                    self,
                    thread,
@@ -220,9 +220,9 @@ class PostManager(BaseQuerySetManager):
                    by_email = False
                    ):
         # TODO: Some of this code will go to Post.objects.create_new
-        
+
         assert(post_type in const.POST_TYPES)
-        
+
         post = Post(
                     post_type = post_type,
                     thread = thread,
@@ -233,19 +233,19 @@ class PostManager(BaseQuerySetManager):
                     text = text,
                     #.html field is denormalized by the save() call
                     )
-        
+
         if post.wiki:
             post.last_edited_by = post.author
             post.last_edited_at = added_at
             post.wikified_at = added_at
-        
+
         #possibly modify the is_private, if one of the groups
         #mandates explicit publishing of the posts
         is_private = is_private or \
             (thread and thread.requires_response_moderation(author))
-        
+
         parse_results = post.parse_and_save(author=author, is_private=is_private)
-        
+
         from askbot.models import signals
         signals.post_updated.send(
                                   post=post,
@@ -256,7 +256,7 @@ class PostManager(BaseQuerySetManager):
                                   diff=parse_results['diff'],
                                   sender=post.__class__
                                   )
-        
+
         post.add_revision(
                           author = author,
                           revised_at = added_at,
@@ -264,9 +264,9 @@ class PostManager(BaseQuerySetManager):
                           comment = const.POST_STATUS['default_version'],
                           by_email = by_email
                           )
-        
+
         return post
-    
+
     #todo: instead of this, have Thread.add_problem()
     def create_new_problem(
                            self,
@@ -294,7 +294,7 @@ class PostManager(BaseQuerySetManager):
             thread.followed_by.add(author)
         else:
             thread.followed_by.remove(author)
-        
+
         #update thread data
         #todo: this totally belongs to some `Thread` class method
         thread.problem_count += 1
@@ -330,7 +330,7 @@ class PostManager(BaseQuerySetManager):
             thread.followed_by.add(author)
         else:
             thread.followed_by.remove(author)
-        
+
         #update thread data
         #todo: this totally belongs to some `Thread` class method
         thread.solution_count += 1
@@ -343,48 +343,48 @@ class PostManager(BaseQuerySetManager):
         """
             Fetches solutions for given posts, and stores them in post._cached_solutions
             Additionally, annotates posts with ``upvoted_by_user`` parameter, if visitor is logged in
-            
+
             """
         qs = Post.objects.get_solutions().filter(parent__in=for_posts).select_related('author')
-        
+
         if visitor.is_anonymous():
             solutions = list(qs.order_by('added_at'))
         else:
             upvoted_by_user = list(qs.filter(votes__user=visitor).distinct())
             not_upvoted_by_user = list(qs.exclude(votes__user=visitor).distinct())
-            
+
             for s in upvoted_by_user:
                 s.upvoted_by_user = 1  # numeric value to maintain compatibility with previous version of this code
-            
+
             solutions = upvoted_by_user + not_upvoted_by_user
             solutions.sort(key=operator.attrgetter('added_at'))
-        
+
         post_map = defaultdict(list)
         for s in solutions:
             post_map[s.parent_id].append(s)
         for post in for_posts:
             post.set_cached_solutions(post_map[post.id])
-    
+
     def precache_comments(self, for_posts, visitor):
         """
             Fetches comments for given posts, and stores them in post._cached_comments
             Additionally, annotates posts with ``upvoted_by_user`` parameter, if visitor is logged in
-            
+
             """
         qs = Post.objects.get_comments().filter(parent__in=for_posts).select_related('author')
-        
+
         if visitor.is_anonymous():
             comments = list(qs.order_by('added_at'))
         else:
             upvoted_by_user = list(qs.filter(votes__user=visitor).distinct())
             not_upvoted_by_user = list(qs.exclude(votes__user=visitor).distinct())
-            
+
             for c in upvoted_by_user:
                 c.upvoted_by_user = 1  # numeric value to maintain compatibility with previous version of this code
-            
+
             comments = upvoted_by_user + not_upvoted_by_user
             comments.sort(key=operator.attrgetter('added_at'))
-        
+
         post_map = defaultdict(list)
         for cm in comments:
             post_map[cm.parent_id].append(cm)
@@ -410,37 +410,37 @@ class PostManager(BaseQuerySetManager):
 
 class Post(models.Model):
     post_type = models.CharField(max_length=255, db_index=True)
-    
+
     old_exercise_id = models.PositiveIntegerField(null=True, blank=True, default=None, unique=True)
     old_problem_id = models.PositiveIntegerField(null=True, blank=True, default=None, unique=True)
     #MAX:
     old_solution_id = models.PositiveIntegerField(null=True, blank=True, default=None, unique=True)
     old_comment_id = models.PositiveIntegerField(null=True, blank=True, default=None, unique=True)
-    
+
     #MAX:  #Problem is parent for Solution
     parent = models.ForeignKey('Post', blank=True, null=True, related_name='child_post') # Problem, Exercise, or Solution for Comment
     thread = models.ForeignKey('Thread', blank=True, null=True, default = None, related_name='posts')
     groups = models.ManyToManyField(Group, through='PostToGroup', related_name = 'group_posts')#used for group-private posts
-    
+
     author = models.ForeignKey(User, related_name='posts')
     added_at = models.DateTimeField(default=datetime.datetime.now)
-    
+
     #denormalized data: the core approval of the posts is made
     #in the revisions. In the revisions there is more data about
     #approvals - by whom and when
     approved = models.BooleanField(default=True, db_index=True)
-    
+
     deleted     = models.BooleanField(default=False, db_index=True)
     deleted_at  = models.DateTimeField(null=True, blank=True)
     deleted_by  = models.ForeignKey(User, null=True, blank=True, related_name='deleted_posts')
-    
+
     wiki = models.BooleanField(default=False)
     wikified_at = models.DateTimeField(null=True, blank=True)
-    
+
     locked = models.BooleanField(default=False)
     locked_by = models.ForeignKey(User, null=True, blank=True, related_name='locked_posts')
     locked_at = models.DateTimeField(null=True, blank=True)
-    
+
     points = models.IntegerField(default=0, db_column='score')
     vote_up_count = models.IntegerField(default=0)
     vote_down_count = models.IntegerField(default=0)
@@ -448,16 +448,16 @@ class Post(models.Model):
     solution_count = models.PositiveIntegerField(default=0)
     comment_count = models.PositiveIntegerField(default=0)
     offensive_flag_count = models.SmallIntegerField(default=0)
-    
+
     last_edited_at = models.DateTimeField(null=True, blank=True)
     last_edited_by = models.ForeignKey(User, null=True, blank=True, related_name='last_edited_posts')
-    
+
     html = models.TextField(null=True)#html rendition of the latest revision
     text = models.TextField(null=True)#denormalized copy of latest revision
-    
+
     # Denormalised data
     summary = models.TextField(null=True)
-    
+
     #note: anonymity here applies to exercise only, but
     #the field will still go to thread
     #maybe we should rename it to is_exercise_anonymous
@@ -466,13 +466,13 @@ class Post(models.Model):
     #the reason is that the title and tags belong to thread,
     #but the exercise body to Post
     is_anonymous = models.BooleanField(default=False)
-    
+
     objects = PostManager()
-    
+
     class Meta:
         app_label = 'askbot'
         db_table = 'askbot_post'
-    
+
     #property to support legacy themes in case there are.
     @property
     def score(self):
@@ -491,13 +491,13 @@ class Post(models.Model):
             and extract any metadata given stored in source (currently
             this metadata is limited by twitter style @mentions
             but there may be more in the future
-            
+
             function returns a dictionary with the following keys
             html
             newly_mentioned_users - list of <User> objects
             removed_mentions - list of mention <Activity> objects - for removed ones
             """
-        
+
         if self.post_type in ('exercise', 'problem', 'solution', 'tag_wiki', 'reject_reason'):
             _urlize = False
             _use_markdown = True
@@ -510,7 +510,7 @@ class Post(models.Model):
             raise NotImplementedError
 
         text = self.text
-        
+
         if _escape_html:
             text = cgi.escape(text)
 
@@ -531,24 +531,24 @@ class Post(models.Model):
                                                      include_comments = True,
                                                      recursive = True
                                                      )
-            
+
             extra_name_seeds = markup.extract_mentioned_name_seeds(text)
-            
+
             extra_authors = set()
             for name_seed in extra_name_seeds:
                 extra_authors.update(
                                      User.objects.filter(username__istartswith = name_seed)
                                      )
-            
+
             #it is important to preserve order here so that authors of post
             #get mentioned first
             anticipated_authors += list(extra_authors)
-            
+
             mentioned_authors, post_html = markup.mentionize_text(
                                                                   text,
                                                                   anticipated_authors
                                                                   )
-            
+
             #find mentions that were removed and identify any previously
             #entered mentions so that we can send alerts on only new ones
             from askbot.models.user import Activity
@@ -559,7 +559,7 @@ class Post(models.Model):
                                                                 )
                 new_set = set(mentioned_authors)
                 for prev_mention in prev_mention_qs:
-                    
+
                     user = prev_mention.get_mentioned_user()
                     if user is None:
                         continue
@@ -582,34 +582,34 @@ class Post(models.Model):
         """generic method to use with posts to be used prior to saving
             post edit or addition
             """
-        
+
         assert(author is not None)
-        
+
         last_revision = self.html
         data = self.parse_post_text()
-        
+
         self.html = data['html']
         newly_mentioned_users = set(data['newly_mentioned_users']) - set([author])
         removed_mentions = data['removed_mentions']
-        
+
         #a hack allowing to save denormalized .summary field for exercises
         if hasattr(self, 'summary'):
             self.summary = self.get_snippet()
-        
+
         #delete removed mentions
         for rm in removed_mentions:
             rm.delete()
-        
+
         created = self.pk is None
-        
+
         is_private = kwargs.pop('is_private', False)
         group_id = kwargs.pop('group_id', None)
-        
+
         #this save must precede saving the mention activity
         #as well as assigning groups to the post
         #because generic relation needs primary key of the related object
         super(self.__class__, self).save(**kwargs)
-        
+
         if self.is_comment():
             #copy groups from the parent post into the comment
             groups = self.parent.groups.all()
@@ -641,26 +641,26 @@ class Post(models.Model):
             logging.debug('cannot ping google - did you register with them?')
 
         return {'diff': diff, 'newly_mentioned_users': newly_mentioned_users}
-    
+
     def is_exercise(self):
         return self.post_type == 'exercise'
-    
+
     def is_problem(self):
         return self.post_type == 'problem'
-    
+
     #MAX:
     def is_solution(self):
         return self.post_type == 'solution'
-    
+
     def is_comment(self):
         return self.post_type == 'comment'
-    
+
     def is_tag_wiki(self):
         return self.post_type == 'tag_wiki'
-    
+
     def is_reject_reason(self):
         return self.post_type == 'reject_reason'
-    
+
     def get_moderators(self):
         """returns query set of users who are site administrators
             and moderators"""
@@ -668,11 +668,11 @@ class Post(models.Model):
         if askbot_settings.GROUPS_ENABLED:
             user_filter = user_filter & models.Q(groups__in=self.groups.all())
         return User.objects.filter(user_filter)
-    
+
     def has_group(self, group):
         """true if post belongs to the group"""
         return self.groups.filter(id=group.id).exists()
-    
+
     def add_to_groups(self, groups):
         """associates post with groups"""
         #this is likely to be temporary - we add
@@ -690,7 +690,7 @@ class Post(models.Model):
             #for group in groups:
                 #for comment in comments:
                     #PostToGroup.objects.get_or_create(post=comment, group=group)
-    
+
     def remove_from_groups(self, groups):
         PostToGroup.objects.filter(post=self, group__in=groups).delete()
         #MAX:
@@ -700,8 +700,8 @@ class Post(models.Model):
                                        post__id__in=comment_ids,
                                        group__in=groups
                                        ).delete()
-    
-    
+
+
     def issue_update_notifications(
                                    self,
                                    updated_by=None,
@@ -711,11 +711,11 @@ class Post(models.Model):
                                    diff=None
                                    ):
         """Called when a post is updated. Arguments:
-            
+
             * ``notify_sets`` - result of ``Post.get_notify_sets()`` method
-            
+
             The method does two things:
-            
+
             * records "red envelope" recipients of the post
             * sends email alerts to all subscribers to the post
             """
@@ -724,7 +724,7 @@ class Post(models.Model):
             summary = diff
         else:
             summary = self.get_snippet()
-        
+
         update_activity = Activity(
                                    user = updated_by,
                                    active_at = timestamp,
@@ -734,9 +734,9 @@ class Post(models.Model):
                                    summary = summary
                                    )
         update_activity.save()
-        
+
         update_activity.add_recipients(notify_sets['for_inbox'])
-        
+
         #create new mentions (barring the double-adds)
         for u in notify_sets['for_mentions'] - notify_sets['for_inbox']:
             Activity.objects.create_new_mention(
@@ -781,7 +781,7 @@ class Post(models.Model):
             group = Group.objects.get(id=group_id)
             groups = [group]
             self.add_to_groups(groups)
-            
+
             global_group = get_global_group()
             if group != global_group:
                 self.remove_from_groups((global_group,))
@@ -794,7 +794,7 @@ class Post(models.Model):
                 groups = set([personal_group]) | set(thread_groups)
             else:
                 groups = user.get_groups(private=True)
-            
+
             self.add_to_groups(groups)
             self.remove_from_groups((get_global_group(),))
 
@@ -813,7 +813,7 @@ class Post(models.Model):
             group = get_global_group()
             return not self.groups.filter(id=group.id).exists()
         return False
-    
+
     def is_approved(self):
         """``False`` only when moderation is ``True`` and post
             ``self.approved is False``
@@ -822,11 +822,11 @@ class Post(models.Model):
             if self.approved == False:
                 return False
         return True
-    
+
     def needs_moderation(self):
         #todo: do we need this, can't we just use is_approved()?
         return self.approved is False
-    
+
     def get_absolute_url(self, no_slug = False, exercise_post=None, thread=None):
         from askbot.utils.slug import slugify
         #todo: the url generation function is pretty bad -
@@ -836,11 +836,16 @@ class Post(models.Model):
         if self.is_problem():
             if not exercise_post:
                 exercise_post = self.thread._exercise_post()
-            return u'%(base)s%(slug)s/?problem=%(id)d#post-id-%(id)d' % {
+            return u'%(base)s%(slug)s/%(id)d/' % {
                 'base': urlresolvers.reverse('exercise', args=[exercise_post.id]),
                 'slug': django_urlquote(slugify(self.thread.title)),
                 'id': self.id
-        }
+                }
+#            return u'%(base)s%(slug)s/?problem=%(id)d#post-id-%(id)d' % {
+#                'base': urlresolvers.reverse('exercise', args=[exercise_post.id]),
+#                'slug': django_urlquote(slugify(self.thread.title)),
+#                'id': self.id
+#        }
         #MAX:
         if self.is_solution():
             if not exercise_post:
@@ -863,7 +868,18 @@ class Post(models.Model):
                 {'url': origin_post.get_absolute_url(thread=thread), 'id':self.id}
 
         raise NotImplementedError
-    
+
+    # Hans: hack in an answer form URL for use in the templates
+    def get_answer_form_url(self, exercise_post=None):
+        if self.is_problem():
+            if not exercise_post:
+                exercise_post = self.thread._exercise_post()
+            return u'%(base)s%(slug)s/%(id)d/post-answer/' % {
+                'base': urlresolvers.reverse('exercise', args=[exercise_post.id]),
+                'slug': django_urlquote(slugify(self.thread.title)),
+                'id': self.id
+                }
+
     def delete(self, **kwargs):
         """deletes comment and concomitant response activity
             records, as well as mention records, while preserving
@@ -883,21 +899,21 @@ class Post(models.Model):
                                                  object_id = self.id,
                                                  #activity_type__in = activity_types
                                                  )
-            
+
             recipients = set()
             for activity in activities:
                 for user in activity.recipients.all():
                     recipients.add(user)
-        
+
             #activities need to be deleted before the response
             #counts are updated
             activities.delete()
-        
+
             for user in recipients:
                 user.update_response_counts()
-        
+
         super(Post, self).delete(**kwargs)
-    
+
     def __unicode__(self):
         if self.is_exercise():
             return self.thread.title
@@ -927,12 +943,12 @@ class Post(models.Model):
             raise NotImplementedError
         return slugify(self.thread.title)
     slug = property(_get_slug)
-    
+
     def get_snippet(self, max_length = 120):
         """returns an abbreviated snippet of the content
             """
         return html_utils.strip_tags(self.html)[:max_length] + ' ...'
-    
+
     def filter_authorized_users(self, candidates):
         """returns list of users who are allowed to see this post"""
         if askbot_settings.GROUPS_ENABLED == False:
@@ -942,18 +958,18 @@ class Post(models.Model):
                 return candidates
             #get post groups
             groups = list(self.groups.all())
-            
+
             if len(groups) == 0:
                 logging.critical('post %d is groupless' % self.id)
                 return list()
-            
+
             #load group memberships for the candidates
             memberships = GroupMembership.objects.filter(
                                                          user__in=candidates,
                                                          group__in=groups
                                                          )
             user_ids = set(memberships.values_list('user__id', flat=True))
-            
+
             #scan through the user ids and see which are group members
             filtered_candidates = set()
             for candidate in candidates:
@@ -979,7 +995,7 @@ class Post(models.Model):
             'format': format
         }
         return template.render(Context(data))
-    
+
     def format_for_email_as_parent_thread_summary(self):
         """format for email as summary of parent posts
             all the way to the original exercise"""
@@ -1008,7 +1024,7 @@ class Post(models.Model):
                                                    )
             current_post = parent_post
         return output
-    
+
     def format_for_email_as_subthread(self):
         """outputs exercise or problem and all it's comments
             returns empty string for all other post types
@@ -1017,20 +1033,20 @@ class Post(models.Model):
         from django.template import Context
         template = get_template('email/post_as_subthread.html')
         return template.render(Context({'post': self}))
-    
+
     #MAX:
     def set_cached_solutions(self, solutions):
         """caches solutions in the lifetime of the object
             does not talk to the actual cache system
             """
         self._cached_solutions = solutions
-    
+
     def set_cached_comments(self, comments):
         """caches comments in the lifetime of the object
             does not talk to the actual cache system
             """
         self._cached_comments = comments
-    
+
     #MAX:
     def get_cached_solutions(self):
         try:
@@ -1038,14 +1054,14 @@ class Post(models.Model):
         except AttributeError:
             self._cached_solutions = list()
             return self._cached_solutions
-    
+
     def get_cached_comments(self):
         try:
             return self._cached_comments
         except AttributeError:
             self._cached_comments = list()
             return self._cached_comments
-    
+
     #MAX:  This needs to be fixed
     def add_solution(
                     self,
@@ -1081,14 +1097,14 @@ class Post(models.Model):
         self.solution_count = self.solution_count + 1
         self.save()
         return solution_post
-    
+
     def add_comment(
                     self,
                     comment=None,
                     user=None,
                     added_at=None,
                     by_email = False):
-        
+
         if added_at is None:
             added_at = datetime.datetime.now()
         if None in (comment, user):
@@ -1123,7 +1139,7 @@ class Post(models.Model):
         #    origin_post.save()
 
         return comment_post
-    
+
     def get_global_tag_based_subscribers(
                                          self,
                                          tag_mark_reason = None,
@@ -1131,7 +1147,7 @@ class Post(models.Model):
                                          ):
         """returns a list of users who either follow or "do not ignore"
             the given set of tags, depending on the tag_mark_reason
-            
+
             ``subscription_records`` - query set of ``~askbot.models.EmailFeedSetting``
             this argument is used to reduce number of database queries
             """
@@ -1158,7 +1174,7 @@ class Post(models.Model):
                                                    notification_subscriptions__in = subscription_records
                                                    )
                           )
-        
+
         #part 2 - find users who follow or not ignore tags via wildcard selections
         #inside there is a potentially time consuming loop
         if askbot_settings.USE_WILDCARD_TAGS:
@@ -1187,35 +1203,35 @@ class Post(models.Model):
                                         potential_subscriber,
                                         wildcard_tags_attribute
                                         ).split(' ')
-                
+
                 if tags_match_some_wildcard(tag_names, wildcard_tags):
                     update_subscribers(subscribers, potential_subscriber)
 
         return subscribers
-    
+
     def get_global_instant_notification_subscribers(self):
         """returns a set of subscribers to post according to tag filters
             both - subscribers who ignore tags or who follow only
             specific tags
-            
+
             this method in turn calls several more specialized
             subscriber retrieval functions
             todo: retrieval of wildcard tag followers ignorers
             won't scale at all
             """
         subscriber_set = set()
-        
+
         global_subscriptions = EmailFeedSetting.objects.filter(
                                                                feed_type = 'q_all',
                                                                frequency = 'i'
                                                                )
-        
+
         #segment of users who have tag filter turned off
         global_subscribers = User.objects.filter(
                                                  email_tag_filter_strategy = const.INCLUDE_ALL
                                                  )
         subscriber_set.update(global_subscribers)
-        
+
         #segment of users who want emails on selected exercises only
         subscriber_set.update(
                               self.get_global_tag_based_subscribers(
@@ -1223,7 +1239,7 @@ class Post(models.Model):
                                                                     tag_mark_reason = 'good'
                                                                     )
                               )
-        
+
         #segment of users who want to exclude ignored tags
         subscriber_set.update(
                               self.get_global_tag_based_subscribers(
@@ -1232,8 +1248,8 @@ class Post(models.Model):
                                                                     )
                               )
         return subscriber_set
-    
-    
+
+
     def _qa__get_instant_notification_subscribers(
                                                   self,
                                                   potential_subscribers = None,
@@ -1242,11 +1258,11 @@ class Post(models.Model):
                                                   ):
         """get list of users who have subscribed to
             receive instant notifications for a given post
-            
+
             this method works for exercises and problems
-            
+
             Arguments:
-            
+
             * ``potential_subscribers`` is not used here! todo: why? - clean this out
             parameter is left for the uniformity of the interface
             (Comment method does use it)
@@ -1256,9 +1272,9 @@ class Post(models.Model):
             - depending on the type of the post
             * ``mentioned_users`` - users, mentioned in the post for the first time
             * ``exclude_list`` - users who must be excluded from the subscription
-            
+
             Users who receive notifications are:
-            
+
             * of ``mentioned_users`` - those who subscribe for the instant
             updates on the @name mentions
             * those who follow the parent exercise
@@ -1272,7 +1288,7 @@ class Post(models.Model):
         #print 'in content function'
         subscriber_set = set()
         #print 'potential subscribers: ', potential_subscribers
-        
+
         #1) mention subscribers - common to exercises and problems
         if mentioned_users:
             mention_subscribers = EmailFeedSetting.objects.filter_subscribers(
@@ -1281,11 +1297,11 @@ class Post(models.Model):
                                                                               frequency = 'i'
                                                                               )
             subscriber_set.update(mention_subscribers)
-        
+
         origin_post = self.get_origin_post()
-        
+
         #print origin_post
-        
+
         #2) individually selected - make sure that users
         #are individual subscribers to this exercise
         # TODO: The line below works only if origin_post is Exercise !
@@ -1299,11 +1315,11 @@ class Post(models.Model):
                                                                                 )
             subscriber_set.update(selective_subscribers)
         #print 'selective subscribers: ', selective_subscribers
-        
+
         #3) whole forum subscribers
         global_subscribers = origin_post.get_global_instant_notification_subscribers()
         subscriber_set.update(global_subscribers)
-        
+
         #4) exercise asked by me (todo: not "edited_by_me" ???)
         exercise_author = origin_post.author
         if EmailFeedSetting.objects.filter(
@@ -1312,7 +1328,7 @@ class Post(models.Model):
                                            feed_type = 'q_ask'
                                            ).exists():
             subscriber_set.add(exercise_author)
-        
+
         #4) exercises problemed by me -make sure is that people
         #are authors of the problems to this exercise
         #todo: replace this with a query set method
@@ -1320,7 +1336,7 @@ class Post(models.Model):
         for problem in origin_post.thread.posts.get_problems().all():
             authors = problem.get_author_list()
             problem_authors.update(authors)
-        
+
         if problem_authors:
             problem_subscribers = EmailFeedSetting.objects.filter_subscribers(
                                                                               potential_subscribers = problem_authors,
@@ -1329,7 +1345,7 @@ class Post(models.Model):
                                                                               )
             subscriber_set.update(problem_subscribers)
         #print 'problem subscribers: ', problem_subscribers
-        
+
         #MAX:
         #4b) exercises solutioned by me -make sure is that people
         #are authors of the solutions to this exercise
@@ -1338,7 +1354,7 @@ class Post(models.Model):
         for solution in origin_post.thread.posts.get_solutions().all():
             authors = solution.get_author_list()
             solution_authors.update(authors)
-        
+
         if solution_authors:
             solution_subscribers = EmailFeedSetting.objects.filter_subscribers(
                                                                                potential_subscribers = solution_authors,
@@ -1347,10 +1363,10 @@ class Post(models.Model):
                                                                                )
             subscriber_set.update(solution_subscribers)
         #print 'solution subscribers: ', solution_subscribers
-        
+
         #print 'exclude_list is ', exclude_list
         return subscriber_set - set(exclude_list)
-    
+
     def _comment__get_instant_notification_subscribers(
                                                        self,
                                                        potential_subscribers = None,
@@ -1358,11 +1374,11 @@ class Post(models.Model):
                                                        exclude_list = None
                                                        ):
         """get list of users who want instant notifications about comments
-            
+
             argument potential_subscribers is required as it saves on db hits
-            
+
             Here is the list of people who will receive the notifications:
-            
+
             * mentioned users
             * of response receivers
             (see :meth:`~askbot.models.meta.Comment.get_response_receivers`) -
@@ -1374,14 +1390,14 @@ class Post(models.Model):
             """
         #print 'in meta function'
         #print 'potential subscribers: ', potential_subscribers
-        
+
         subscriber_set = set()
-        
+
         if potential_subscribers:
             potential_subscribers = set(potential_subscribers)
         else:
             potential_subscribers = set()
-        
+
         if mentioned_users:
             potential_subscribers.update(mentioned_users)
 
@@ -1438,7 +1454,7 @@ class Post(models.Model):
             return set()
         else:
             raise NotImplementedError
-        
+
         #if askbot_settings.GROUPS_ENABLED and self.is_effectively_private():
         #    for subscriber in subscribers:
         return self.filter_authorized_users(subscribers)
@@ -1456,7 +1472,7 @@ class Post(models.Model):
         #are included, for comments only authors of comments and parent
         #post are included
         result['for_inbox'] = self.get_response_receivers(exclude_list=exclude_list)
-        
+
         if askbot_settings.ENABLE_EMAIL_ALERTS == False:
             result['for_email'] = set()
         else:
@@ -1470,17 +1486,17 @@ class Post(models.Model):
                                                                             )
         return result
 
-    
+
     def get_latest_revision(self):
         return self.revisions.order_by('-revised_at')[0]
-    
+
     def get_latest_revision_number(self):
         return self.get_latest_revision().revision
-    
+
     def get_time_of_last_edit(self):
         if self.is_comment():
             return self.added_at
-        
+
         if self.last_edited_at:
             return self.last_edited_at
         else:
@@ -1494,7 +1510,7 @@ class Post(models.Model):
                         include_comments = False,
                         recursive = False,
                         exclude_list = None):
-        
+
         #todo: there may be a better way to do these queries
         authors = set()
         authors.update([r.author for r in self.revisions.all()])
@@ -1514,7 +1530,7 @@ class Post(models.Model):
         return list(authors)
 
     def passes_tag_filter_for_user(self, user):
-        
+
         exercise = self.get_origin_post()
         if user.email_tag_filter_strategy == const.INCLUDE_INTERESTING:
             #at least some of the tags must be marked interesting
@@ -1551,7 +1567,7 @@ class Post(models.Model):
 
     def tagname_meta_generator(self):
         return u','.join([unicode(tag) for tag in self.get_tag_names()])
-    
+
     def get_parent_post(self):
         """returns parent post or None
             if there is no parent, as it is in the case of exercise post"""
@@ -1641,10 +1657,10 @@ class Post(models.Model):
         #   and the problem body, as well as the authors of all revisions
         #   and repost all the comments
         new_exercise = self._repost_as_exercise(new_title = new_title)
-        
+
         #2) post exercise (all revisions and comments) as problem
         new_problem = self.exercise._repost_as_problem(exercise = new_exercise)
-        
+
         #3) assign all remaining problems to the new exercise
         self.exercise.problems.update(exercise = new_exercise)
         self.exercise.delete()
@@ -1665,9 +1681,9 @@ class Post(models.Model):
         else:
             raise NotImplementedError
 
-    
-    
-    
+
+
+
     def _exercise__assert_is_visible_to(self, user):
         """raises ExerciseHidden"""
         if self.is_approved() is False:
@@ -1766,12 +1782,12 @@ class Post(models.Model):
         global_group_name = askbot_settings.GLOBAL_GROUP_NAME
         if post_groups.filter(name=global_group_name).count() == 1:
             return
-        
+
         if self.is_exercise():#todo maybe merge the "hidden" exceptions
             exception = exceptions.ExerciseHidden
         elif self.is_problem():
             exception = exceptions.ProblemHidden
-        
+
         #MAX:
         elif self.is_solution():
             exception = exceptions.SolutionHidden
@@ -1844,10 +1860,10 @@ class Post(models.Model):
                 return const.TYPE_ACTIVITY_UPDATE_REJECT_REASON, self
 
         raise NotImplementedError
-    
+
     def get_tag_names(self):
         return self.thread.get_tag_names()
-    
+
     def __apply_edit(
                      self,
                      edited_at=None,
@@ -1871,7 +1887,7 @@ class Post(models.Model):
         #self.html is denormalized in save()
         self.text = text
         self.is_anonymous = edit_anonymously
-        
+
         #wiki is an eternal trap whence there is no exit
         if self.wiki == False and wiki == True:
             self.wiki = True
@@ -1898,7 +1914,7 @@ class Post(models.Model):
                                   sender=self.__class__
                                   )
 
-    
+
     def _problem__apply_edit(
                              self,
                              edited_at = None,
@@ -1909,14 +1925,14 @@ class Post(models.Model):
                              is_private = False,
                              by_email = False
                              ):
-        
+
         ##it is important to do this before __apply_edit b/c of signals!!!
         if self.is_private() != is_private:
             if is_private:
                 self.make_private(self.author)
             else:
                 self.make_public()
-        
+
         self.__apply_edit(
                           edited_at=edited_at,
                           edited_by=edited_by,
@@ -1926,7 +1942,7 @@ class Post(models.Model):
                           by_email=by_email,
                           is_private=is_private
                           )
-        
+
         if edited_at is None:
             edited_at = datetime.datetime.now()
         self.thread.set_last_activity(last_activity_at=edited_at, last_activity_by=edited_by)
@@ -1942,14 +1958,14 @@ class Post(models.Model):
                               is_private = False,
                               by_email = False
                               ):
-        
+
         ##it is important to do this before __apply_edit b/c of signals!!!
         if self.is_private() != is_private:
             if is_private:
                 self.make_private(self.author)
             else:
                 self.make_public()
-        
+
         self.__apply_edit(
                           edited_at=edited_at,
                           edited_by=edited_by,
@@ -1959,7 +1975,7 @@ class Post(models.Model):
                           by_email=by_email,
                           is_private=is_private
                           )
-        
+
         if edited_at is None:
             edited_at = datetime.datetime.now()
         self.thread.set_last_activity(last_activity_at=edited_at, last_activity_by=edited_by)
@@ -1969,7 +1985,7 @@ class Post(models.Model):
                               edit_anonymously = False, is_private = False,
                               by_email = False
                               ):
-        
+
         #todo: the thread editing should happen outside of this
         #method, then we'll be able to unify all the *__apply_edit
         #methods
@@ -2100,7 +2116,7 @@ class Post(models.Model):
         """get list of users interested in this response
             update based on their participation in the exercise
             activity
-            
+
             exclude_list is required and normally should contain
             author of the updated so that he/she is not notified of
             the response
@@ -2120,15 +2136,15 @@ class Post(models.Model):
                           )
         for problem in exercise.thread.posts.get_problems().all():
             recipients.update(problem.get_author_list())
-        
+
         return recipients - set(exclude_list)
-    
+
     #MAX:
     def _solution__get_response_receivers(self, exclude_list = None):
         """get list of users interested in this response
             update based on their participation in the exercise
             activity
-            
+
             exclude_list is required and normally should contain
             author of the updated so that he/she is not notified of
             the response
@@ -2148,14 +2164,14 @@ class Post(models.Model):
                           )
         for solution in exercise.thread.posts.get_solutions().all():
             recipients.update(solution.get_author_list())
-        
+
         return recipients - set(exclude_list)
-    
+
     def _exercise__get_response_receivers(self, exclude_list = None):
         """returns list of users who might be interested
             in the exercise update based on their participation
             in the exercise activity
-            
+
             exclude_list is mandatory - it normally should have the
             author of the update so the he/she is not notified about the update
             """
@@ -2169,14 +2185,14 @@ class Post(models.Model):
         #do not include problem commenters here
         for a in self.thread.posts.get_problems().all():
             recipients.update(a.get_author_list())
-        
+
         #MAX:
         #do not include solution commenters here
         for a in self.thread.posts.get_solutions().all():
             recipients.update(a.get_author_list())
-        
+
         return recipients - set(exclude_list)
-    
+
     def _comment__get_response_receivers(self, exclude_list = None):
         """Response receivers are commenters of the
             same post and the authors of the post itself.
@@ -2190,7 +2206,7 @@ class Post(models.Model):
                                                  )
                      )
         return users - set(exclude_list)
-    
+
     def get_response_receivers(self, exclude_list = None):
         """returns a list of response receiving users
             who see the on-screen notifications
@@ -2224,7 +2240,7 @@ class Post(models.Model):
             else:
                 return self.thread.title
         raise NotImplementedError
-    
+
     #MAX:  Notion of Accepted problems doesn't make sense anymore unless
     #it becomes a field in the Post Model.  Threads might have multiple problems
     #and problems might have an "accepted solution" each.
@@ -2232,7 +2248,7 @@ class Post(models.Model):
         if self.is_problem():
             return self.thread.accepted_problem_id == self.id
         raise NotImplementedError
-    
+
     #MAX:  Not sure what to do with this...  Useful if a single problem has pages of solutions...
     def get_page_number(self, problem_posts):
         """When exercise has many problems, problems are
@@ -2241,28 +2257,28 @@ class Post(models.Model):
             sort order. The result may depend on the visitor."""
         if not self.is_problem() and not self.is_comment():
             raise NotImplementedError
-        
+
         if self.is_comment():
             post = self.parent
         else:
             post = self
-        
+
         order_number = 0
         for problem_post in problem_posts:
             if post == problem_post:
                 break
             order_number += 1
         return int(order_number/const.PROBLEMS_PAGE_SIZE) + 1
-    
+
     def get_order_number(self):
         if not self.is_comment():
             raise NotImplementedError
         return self.parent.comments.filter(added_at__lt = self.added_at).count() + 1
-    
+
     def is_upvoted_by(self, user):
         from askbot.models.repute import Vote
         return Vote.objects.filter(user=user, voted_post=self, vote=Vote.VOTE_UP).exists()
-    
+
     def is_last(self):
         """True if there are no newer comments on
             the related parent object
@@ -2273,7 +2289,7 @@ class Post(models.Model):
                                                   added_at__gt=self.added_at,
                                                   parent=self.parent
                                                   ).exists() is False
-    
+
     def hack_template_marker(self, name):
         list(Post.objects.filter(text=name))
 
@@ -2289,28 +2305,28 @@ class PostRevision(models.Model):
                                           '<h3>%(title)s</h3>\n'
                                           '<div class="text">%(html)s</div>\n'
                                           )
-    
+
     post = models.ForeignKey('askbot.Post', related_name='revisions', null=True, blank=True)
     revision = models.PositiveIntegerField()
     author = models.ForeignKey('auth.User', related_name='%(class)ss')
     revised_at = models.DateTimeField()
     summary = models.CharField(max_length=300, blank=True)
     text = models.TextField()
-    
+
     approved = models.BooleanField(default=False, db_index=True)
     approved_by = models.ForeignKey(User, null = True, blank = True)
     approved_at = models.DateTimeField(null = True, blank = True)
-    
+
     by_email = models.BooleanField(default = False)#true, if edited by email
     email_address = models.EmailField(null = True, blank = True)
-    
+
     # Exercise-specific fields
     title = models.CharField(max_length=300, blank=True, default='')
     tagnames = models.CharField(max_length=125, blank=True, default='')
     is_anonymous = models.BooleanField(default=False)
-    
+
     objects = PostRevisionManager()
-    
+
     class Meta:
         # INFO: This `unique_together` constraint might be problematic for databases in which
         #       2+ NULLs cannot be stored in an UNIQUE column.
@@ -2318,7 +2334,7 @@ class PostRevision(models.Model):
         unique_together = ('post', 'revision')
         ordering = ('-revision',)
         app_label = 'askbot'
-    
+
     def needs_moderation(self):
         """``True`` if post needs moderation"""
         if askbot_settings.ENABLE_CONTENT_MODERATION:
@@ -2327,7 +2343,7 @@ class PostRevision(models.Model):
                 return False
             if self.approved:
                 return False
-            
+
             #if sent by email to group and group does not want moderation
             if self.by_email and self.email_address:
                 group_name = self.email_address.split('@')[0]
@@ -2338,29 +2354,29 @@ class PostRevision(models.Model):
                     pass
             return True
         return False
-    
-    
+
+
     def place_on_moderation_queue(self):
         """If revision is the first one,
             keeps the post invisible until the revision
             is aprroved.
             If the revision is an edit, will autoapprove
             but will still add it to the moderation queue.
-            
+
             Eventually we might find a way to moderate every
             edit as well."""
         #this is run on "post-save" so for a new post
         #we'll have just one revision
         if self.post.revisions.count() == 1:
             activity_type = const.TYPE_ACTIVITY_MODERATED_NEW_POST
-            
+
             self.approved = False
             self.approved_by = None
             self.approved_at = None
-            
+
             self.post.approved = False
             self.post.save()
-            
+
             if self.post.is_exercise():
                 self.post.thread.approved = False
                 self.post.thread.save()
@@ -2380,7 +2396,7 @@ class PostRevision(models.Model):
                           body_text = body_text,
                           recipient_list = [self.author.email,],
                           )
-            
+
             else:
                 message = _(
                             'Your post was placed on the moderation queue '
@@ -2395,7 +2411,7 @@ class PostRevision(models.Model):
             #than one edit in a row and then we'll need to deal with
             #merging multiple edits. We don't have a solution for this yet.
             activity_type = const.TYPE_ACTIVITY_MODERATED_POST_EDIT
-        
+
         from askbot.models import Activity
         activity = Activity(
                             user = self.author,
@@ -2406,7 +2422,7 @@ class PostRevision(models.Model):
         activity.save()
         #todo: make this group-sensitive
         activity.add_recipients(self.post.get_moderators())
-    
+
     def moderate_or_publish(self):
         """either place on moderation queue or announce
             that this revision is published"""
@@ -2415,7 +2431,7 @@ class PostRevision(models.Model):
         else:#auto-approve
             from askbot.models import signals
             signals.post_revision_published.send(None, revision = self)
-    
+
     def should_notify_author_about_publishing(self, was_approved = False):
         """True if author should get email about making own post"""
         if self.by_email:
@@ -2433,18 +2449,18 @@ class PostRevision(models.Model):
             #the ``was_approved`` argument will be used here
             #schedule = askbot_settings.SELF_NOTIFY_WEB_POST_AUTHOR_WHEN
             return False
-    
+
     def __unicode__(self):
         return u'%s - revision %s of %s' % (self.post.post_type, self.revision, self.title)
-    
+
     def parent(self):
         return self.post
-    
+
     def clean(self):
         "Internal cleaning method, called from self.save() by self.full_clean()"
         if not self.post:
             raise ValidationError('Post field has to be set.')
-    
+
     def save(self, **kwargs):
         # Determine the revision number, if not set
         if not self.revision:
@@ -2454,7 +2470,7 @@ class PostRevision(models.Model):
                                                                 )[0] + 1
         self.full_clean()
         super(PostRevision, self).save(**kwargs)
-    
+
     def get_absolute_url(self):
         if self.post.is_exercise():
             return reverse('exercise_revisions', args = (self.post.id,))
@@ -2465,20 +2481,20 @@ class PostRevision(models.Model):
             return reverse('solution_revisions', kwargs = {'id':self.post.id})
         else:
             return self.post.get_absolute_url()
-    
+
     def get_exercise_title(self):
         #INFO: ack-grepping shows that it's only used for Exercises, so there's no code for Problems
         return self.exercise.thread.title
-    
+
     def get_origin_post(self):
         """same as Post.get_origin_post()"""
         return self.post.get_origin_post()
-    
+
     @property
     def html(self, **kwargs):
         markdowner = markup.get_parser()
         sanitized_html = sanitize_html(markdowner.convert(self.text))
-        
+
         if self.post.is_exercise():
             return self.EXERCISE_REVISION_TEMPLATE_NO_TAGS % {
                 'title': self.title,
@@ -2486,7 +2502,7 @@ class PostRevision(models.Model):
         }
         elif self.post.is_problem() or self.post.is_solution():
             return sanitized_html
-    
+
     def get_snippet(self, max_length = 120):
         """same as Post.get_snippet"""
         return html_utils.strip_tags(self.html)[:max_length] + '...'
@@ -2509,7 +2525,7 @@ class DraftProblem(models.Model):
     thread = models.ForeignKey('Thread', related_name='draft_problems')
     author = models.ForeignKey(User, related_name='draft_problems')
     text = models.TextField(null=True)
-    
+
     class Meta:
         app_label = 'askbot'
 
@@ -2521,7 +2537,7 @@ class DraftSolution(models.Model):
     parent = models.ForeignKey('Post', related_name='draft_solutions')
     author = models.ForeignKey(User, related_name='draft_solutions')
     text = models.TextField(null=True)
-    
+
     class Meta:
         app_label = 'askbot'
 
@@ -2529,7 +2545,7 @@ class DraftSolution(models.Model):
 class AnonymousProblem(DraftContent):
     """Todo: re-route the foreign key to ``Thread``"""
     exercise = models.ForeignKey(Post, related_name='anonymous_problems')
-    
+
     def publish(self, user):
         added_at = datetime.datetime.now()
         Post.objects.create_new_problem(
@@ -2545,7 +2561,7 @@ class AnonymousProblem(DraftContent):
 class AnonymousSolution(DraftContent):
     """Todo: re-route the foreign key to ``Thread``"""
     parent = models.ForeignKey(Post, related_name='anonymous_solutions')
-    
+
     def publish(self, user):
         added_at = datetime.datetime.now()
         Post.objects.create_new_solution(
