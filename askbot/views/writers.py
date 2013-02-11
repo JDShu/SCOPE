@@ -524,6 +524,70 @@ def edit_problem(request, id):
         request.user.message_set.create(message = unicode(e))
         return HttpResponseRedirect(problem.get_absolute_url())
 
+# Copy pasted from above and switched to deal with answers. - Hans
+@login_required
+@csrf.csrf_protect
+@decorators.check_spam('text')
+def edit_answer(request, id):
+    problem = get_object_or_404(models.Post, id=id)
+    revision = problem.get_latest_revision()
+    try:
+        request.user.assert_can_edit_solution(problem)
+        if request.method == "POST":
+            if request.POST['select_revision'] == 'true':
+                # user has changed revistion number
+                revision_form = forms.RevisionForm(
+                                                problem,
+                                                revision,
+                                                request.POST
+                                            )
+                if revision_form.is_valid():
+                    # Replace with those from the selected revision
+                    rev = revision_form.cleaned_data['revision']
+                    revision = problem.revisions.get(revision = rev)
+                    form = forms.EditProblemForm(problem, revision)
+                else:
+                    form = forms.EditProblemForm(
+                                            problem,
+                                            revision,
+                                            request.POST
+                                        )
+            else:
+                form = forms.EditProblemForm(problem, revision, request.POST)
+                revision_form = forms.RevisionForm(problem, revision)
+
+                if form.is_valid():
+                    if form.has_changed():
+                        user = form.get_post_user(request.user)
+                        user.edit_problem(
+                                problem = problem,
+                                body_text = form.cleaned_data['text'],
+                                revision_comment = form.cleaned_data['summary'],
+                                wiki = form.cleaned_data.get('wiki', problem.wiki),
+                                is_private = form.cleaned_data.get('is_private', False)
+                                #todo: add wiki field to form
+                            )
+                    return HttpResponseRedirect(problem.get_absolute_url())
+        else:
+            revision_form = forms.RevisionForm(problem, revision)
+            form = forms.EditProblemForm(problem, revision)
+            if request.user.can_make_group_private_posts():
+                form.initial['post_privately'] = problem.is_private()
+        data = {
+            'page_class': 'edit-problem-page',
+            'active_tab': 'exercises',
+            'problem': problem,
+            'revision': revision,
+            'revision_form': revision_form,
+            'form': form,
+        }
+        return render_into_skin('problem_edit.html', data, request)
+
+    except exceptions.PermissionDenied, e:
+        request.user.message_set.create(message = unicode(e))
+        return HttpResponseRedirect(problem.get_absolute_url())
+
+
 #todo: rename this function to post_new_problem
 @decorators.check_authorization_to_post(_('Please log in to problem exercises'))
 @decorators.check_spam('text')

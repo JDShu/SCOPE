@@ -49,7 +49,7 @@ urlpatterns = patterns('',
     ),
     url(
         r'^%s(?P<id>\d+)/%s$' % (_('answers/'), _('edit/')),
-        views.writers.edit_problem,
+        views.writers.edit_answer,
         name='edit_answer'
     ),
     url(
