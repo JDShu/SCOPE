@@ -1,3 +1,5 @@
+from os import environ
+
 ## Django settings for ASKBOT enabled project.
 import os.path
 import logging
@@ -27,22 +29,25 @@ MANAGERS = ADMINS
 #DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
 #outgoing mail server settings
-SERVER_EMAIL = ''
-DEFAULT_FROM_EMAIL = ''
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_SUBJECT_PREFIX = ''
-EMAIL_HOST=''
-EMAIL_PORT=''
-EMAIL_USE_TLS=False
+
+env = lambda e, d: environ[e] if environ.has_key(e) else d
+
+DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER', 'fake@fakemail.com')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', 'fake@fakemail.com')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', '')
+EMAIL_SUBJECT_PREFIX = 'SCOPE feedback: '
+EMAIL_HOST= env('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT=env('EMAIL_PORT', 587)
+EMAIL_USE_TLS=True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+SERVER_EMAIL = EMAIL_HOST_USER
 
 #incoming mail settings
 #after filling out these settings - please
 #go to the site's live settings and enable the feature
 #"Email settings" -> "allow asking by email"
 #
-#   WARNING: command post_emailed_questions DELETES all 
+#   WARNING: command post_emailed_questions DELETES all
 #            emails from the mailbox each time
 #            do not use your personal mail box here!!!
 #
@@ -83,7 +88,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 # Make up some unique string, and don't share it with anybody.
-SECRET_KEY = 'sdljdfjkldsflsdjkhsjkldgjlsdgfs s ' 
+SECRET_KEY = 'sdljdfjkldsflsdjkhsjkldgjlsdgfs s '
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -121,7 +126,7 @@ ROOT_URLCONF = os.path.basename(os.path.dirname(__file__)) + '.urls'
 
 #UPLOAD SETTINGS
 FILE_UPLOAD_TEMP_DIR = os.path.join(
-                                os.path.dirname(__file__), 
+                                os.path.dirname(__file__),
                                 'tmp'
                             ).replace('\\','/')
 
@@ -276,8 +281,7 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 
 #delayed notifications, time in seconds, 15 mins by default
-NOTIFICATION_DELAY_TIME = 60 * 15 
+NOTIFICATION_DELAY_TIME = 60 * 15
 
 import dj_database_url  # add this to requirements.txt
 DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
-
