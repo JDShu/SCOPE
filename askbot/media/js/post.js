@@ -215,7 +215,7 @@ inherits(ThreadUsersDialog, SimpleControl);
 
 ThreadUsersDialog.prototype.setHeadingText = function(text) {
     this._heading_text = text;
-};  
+};
 
 ThreadUsersDialog.prototype.showUsers = function(html) {
     this._dialog.setContent(html);
@@ -529,6 +529,8 @@ var Vote = function(){
     var imgIdPrefixExerciseVotedown = 'exercise-img-downvote-';
     var imgIdPrefixProblemVoteup = 'problem-img-upvote-';
     var imgIdPrefixProblemVotedown = 'problem-img-downvote-';
+    var imgIdPrefixSolutionVoteup = 'solution-img-upvote-';
+    var imgIdPrefixSolutionVotedown = 'solution-img-downvote-';
     var divIdFavorite = 'favorite-number';
     var commentLinkIdPrefix = 'comment-';
     var voteNumberClass = "vote-number";
@@ -580,8 +582,10 @@ var Vote = function(){
         removeExercise: 9,//deprecate
         removeProblem:10,//deprecate
         exerciseSubscribeUpdates:11,
-        exerciseUnsubscribeUpdates:12
-    };
+        exerciseUnsubscribeUpdates:12,
+        solutionUpVote: 13,
+        solutionDownVote: 14
+};
 
     var getFavoriteButton = function(){
         var favoriteButton = 'div.'+ voteContainerId +' a[class="'+ classPrefixFollow +'"]';
@@ -615,6 +619,24 @@ var Vote = function(){
     var getProblemVoteDownButton = function(id){
         var problemVoteDownButton = 'div.'+ voteContainerId +' div[id="'+ imgIdPrefixProblemVotedown + id + '"]';
         return $(problemVoteDownButton);
+    };
+
+    var getSolutionVoteUpButtons = function(){
+        var solutionVoteUpButton = 'div.'+ voteContainerId +' div[id^="'+ imgIdPrefixSolutionVoteup +'"]';
+        return $(solutionVoteUpButton);
+    };
+    var getSolutionVoteDownButtons = function(){
+        var solutionVoteDownButton = 'div.'+ voteContainerId +' div[id^="'+ imgIdPrefixSolutionVotedown +'"]';
+        return $(solutionVoteDownButton);
+    };
+
+    var getSolutionVoteUpButton = function(id){
+        var solutionVoteUpButton = 'div.'+ voteContainerId +' div[id="'+ imgIdPrefixSolutionVoteup + id + '"]';
+        return $(solutionVoteUpButton);
+    };
+    var getSolutionVoteDownButton = function(id){
+        var solutionVoteDownButton = 'div.'+ voteContainerId +' div[id="'+ imgIdPrefixSolutionVotedown + id + '"]';
+        return $(solutionVoteDownButton);
     };
 
     var getOffensiveExerciseFlag = function(){
@@ -717,6 +739,16 @@ var Vote = function(){
         var problemVoteDownButton = getProblemVoteDownButtons();
         problemVoteDownButton.unbind('click').click(function(event){
            Vote.vote($(event.target), VoteType.problemDownVote);
+        });
+
+        var solutionVoteUpButton = getSolutionVoteUpButtons();
+        solutionVoteUpButton.unbind('click').click(function(event){
+           Vote.vote($(event.target), VoteType.solutionUpVote);
+        });
+
+        var solutionVoteDownButton = getSolutionVoteDownButtons();
+        solutionVoteDownButton.unbind('click').click(function(event){
+           Vote.vote($(event.target), VoteType.solutionDownVote);
         });
 
         getOffensiveExerciseFlag().unbind('click').click(function(event){
@@ -923,7 +955,7 @@ var Vote = function(){
         //_('anonymous users cannot flag offensive posts') + pleaseLogin;
         if (data.success == "1"){
             if(data.count > 0){
-                $(object).children('span[class="darkred"]').text("("+ data.count +")");                
+                $(object).children('span[class="darkred"]').text("("+ data.count +")");
             }
             else{
                 $(object).children('span[class="darkred"]').text("");
@@ -964,7 +996,7 @@ var Vote = function(){
             var remove_own = $(object).siblings('span.offensive-flag[id*="-offensive-remove-flag-"]');
             $(remove_own).find("a.exercise-flag").html(gettext("flag offensive"));
             $(remove_own).attr("id", $(remove_own).attr("id").replace("remove-flag-", "flag-"));
-            
+
             $(object).next("span.sep").remove();
             $(object).remove();
 
@@ -1058,10 +1090,15 @@ var Vote = function(){
             if (voteType == VoteType.problemUpVote){
                 postId = object.attr("id").substring(imgIdPrefixProblemVoteup.length);
             }
-            else if (voteType == VoteType.problemDownVote){
+            else if (voteType == VoteType.solutionUpVote) {
+                postId = object.attr("id").substring(imgIdPrefixSolutionVoteup.length);
+            }
+            else if (voteType == VoteType.problemDownVote) {
                 postId = object.attr("id").substring(imgIdPrefixProblemVotedown.length);
             }
-
+            else if (voteType == VoteType.solutionDownVote){
+                postId = object.attr("id").substring(imgIdPrefixSolutionVotedown.length);
+            }
             submit(object, voteType, callback_vote);
         },
         //flag offensive
@@ -1386,7 +1423,7 @@ DeletePostLink.prototype.getDeleteHandler = function(){
     return function(){
         var data = {
             'post_id': me.getPostId(),
-            //todo rename cancel_vote -> undo 
+            //todo rename cancel_vote -> undo
             'cancel_vote': me.isPostDeleted() ? true: false
         };
         $.ajax({
@@ -1705,7 +1742,7 @@ Comment.prototype.decorate = function(element){
 
     var convert_link = this._element.find('form.convert-comment');
     if (this._is_convertible){
-        this._convert_link = new CommentConvertLink(comment_id); 
+        this._convert_link = new CommentConvertLink(comment_id);
         this._convert_link.decorate(convert_link);
     }
 
@@ -1794,7 +1831,7 @@ Comment.prototype.setContent = function(data){
     }
 
     if (this._is_convertible){
-        this._convert_link = new CommentConvertLink(this._data['id']); 
+        this._convert_link = new CommentConvertLink(this._data['id']);
         this._comment_body.append(this._convert_link.getElement());
     }
     this._element.append(this._comment_body);
@@ -2412,7 +2449,7 @@ TagWikiEditor.prototype.saveData = function(){
 };
 
 TagWikiEditor.prototype.cancelEdit = function(){
-    this.restoreContent(); 
+    this.restoreContent();
     this.setState('display');
 };
 
@@ -2957,7 +2994,7 @@ TagEditor.prototype.getTagInputKeyHandler = function() {
         } else {
             try {
                 /* do-nothing validation here
-                 * just to report any errors while 
+                 * just to report any errors while
                  * the user is typing */
                 me.cleanTag(text);
                 me.clearErrorMessage();
@@ -2965,7 +3002,7 @@ TagEditor.prototype.getTagInputKeyHandler = function() {
                 me.setErrorMessage(error);
             }
         }
-        
+
         //8 is backspace
         if (key == 8 && text.length == 0) {
             if (me.hasHotBackspace() === true) {
@@ -3233,7 +3270,7 @@ Category.prototype.addControls = function() {
 
     var edit_button = this.makeButton(
         gettext('edit'),
-        function(){ 
+        function(){
             //todo: I would like to make only one at a time editable
             //var tree = me.getCategoryTree();
             //tree.closeAllEditors();
@@ -3419,7 +3456,7 @@ CategoryAdder.prototype.createDom = function() {
     )
     setupButtonEventHandlers(
         save_button,
-        function() { 
+        function() {
             me.startAdding();
             return false;//prevent form submit
         }
@@ -3672,7 +3709,7 @@ CategorySelector.prototype.getSelectBox = function(level) {
 
 CategorySelector.prototype.getSelectedPath = function(selected_level) {
     var path = [0];//root, todo: better use names for path???
-    /* 
+    /*
      * upper limit capped by current clicked level
      * we ignore all selection above the current level
      */
@@ -4035,7 +4072,7 @@ $(document).ready(function() {
             var tip = new TippedInput();
             tip.decorate(proxyUserEmailInput);
         }
-        
+
     }
     //if groups are enabled - activate share functions
     var groupsInput = $('#share_group_name');

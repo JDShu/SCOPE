@@ -1,5 +1,5 @@
 {#<span class="action-link swap-qa">
-    <a id="swap-exercise-with-answer-{{answer.id}}">{% trans %}swap with exercise{% endtrans %}</a>
+    <a id="swap-exercise-with-solution-{{answer.id}}">{% trans %}swap with exercise{% endtrans %}</a>
 </span>uncomment if needed#}
 <span class="action-link">
     <a  class="permant-link"
@@ -14,13 +14,13 @@
 >
     {% if answer.id in published_answer_ids %}
         <a
-            class="answer-unpublish"
-            data-answer-id="{{ answer.id }}"
+            class="solution-unpublish"
+            data-solution-id="{{ answer.id }}"
         >{% trans %}unpublish{% endtrans %}</a>
     {% else %}
         <a
-            class="answer-publish"
-            data-answer-id="{{ answer.id}}"
+            class="solution-publish"
+            data-solution-id="{{ answer.id}}"
         >{% trans %}publish{% endtrans %}</a>
     {% endif %}
 </span>
@@ -30,7 +30,7 @@
 </span>
 {% if answer.offensive_flag_count > 0 %}
 <span
-    id="answer-offensive-remove-flag-{{ answer.id }}"
+    id="solution-offensive-remove-flag-{{ answer.id }}"
     class="action-link offensive-flag"
     title="{% trans %}remove offensive flag{% endtrans %}"
 >
@@ -45,7 +45,7 @@
 </span>
 {% else %}
 <span
-    id="answer-offensive-flag-{{ answer.id }}"
+    id="solution-offensive-flag-{{ answer.id }}"
     class="action-link offensive-flag"
     title="{% trans %}report as offensive (i.e containing spam, advertising, malicious text, etc.){% endtrans %}"
 >
@@ -56,9 +56,9 @@
     <a class="exercise-edit" href="{% url edit_answer answer.id %}">{% trans %}edit{% endtrans %}</a>
 </span>
 <span id='post-{{answer.id}}-convert' class="action-link">
-  <form class="answer-convert" action="{% url answer_to_comment %}" method="POST">
+  <form class="solution-convert" action="{% url answer_to_comment %}" method="POST">
     {% csrf_token %}
-    <input type="hidden" name="answer_id" id="id_answer_id" value="{{answer.id}}"/>
+    <input type="hidden" name="solution_id" id="id_solution_id" value="{{answer.id}}"/>
     <input type="submit" name="" value="{% trans %}convert to comment{% endtrans %}"/>
   </form>
 </span>

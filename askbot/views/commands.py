@@ -222,6 +222,8 @@ def vote(request, id):
         removeProblem:10
         exerciseSubscribeUpdates:11
         exerciseUnSubscribeUpdates:12
+        solutionUpVote : 13,
+        solutionDownVote : 14,
 
     accept problem code:
         response_data['allowed'] = -1, Accept his own problem   0, no allowed - Anonymous    1, Allowed - by default
@@ -280,13 +282,13 @@ def vote(request, id):
                         _('Sorry, but anonymous users cannot accept problems')
                     )
 
-        elif vote_type in ('1', '2', '5', '6'):#Q&A up/down votes
+        elif vote_type in ('1', '2', '5', '6', '13', '14'):#Q&A up/down votes
 
             ###############################
             # all this can be avoided with
             # better query parameters
             vote_direction = 'up'
-            if vote_type in ('2','6'):
+            if vote_type in ('2','6', '14'):
                 vote_direction = 'down'
 
             if vote_type in ('5', '6'):
@@ -294,6 +296,11 @@ def vote(request, id):
                 #and not with exercise?
                 id = request.POST.get('postId')
                 post = get_object_or_404(models.Post, post_type='problem', id=id)
+            elif vote_type in ('13', '14'):
+                #todo: fix this weirdness - why postId here
+                #and not with exercise?
+                id = request.POST.get('postId')
+                post = get_object_or_404(models.Post, post_type='solution', id=id)
             else:
                 post = get_object_or_404(models.Post, post_type='exercise', id=id)
             #

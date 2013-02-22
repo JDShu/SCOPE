@@ -25,10 +25,10 @@
                 {% include "exercise/problem_controls.html" %}
             </div>
             {% include "exercise/problem_comments.html" %}
-        </div>
         {# ==== START: exercise/answer_preview.html ==== #}
         {% include "exercise/answer_preview.html" %}
         {# ==== END: exercise/answer_card.html ==== #}
+        </div>
         {% if exercise.closed == False and request.user == exercise.author %}{# this is outside the form on purpose #}
         <input
            type="button"

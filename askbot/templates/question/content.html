@@ -40,9 +40,9 @@
     {% include "question/new_answer_form.html" %}
 {% endif %}
 {% if question.closed == False and request.user == question.author %}{# this is outside the form on purpose #}
-<input 
+<input
   type="button"
-  class="submit after-editor answer-own-question"
+  class="submit after-editor solution-own-question"
   id="fmanswer_button"
   value="{% trans %}Answer Your Own Question{% endtrans %}"
 />

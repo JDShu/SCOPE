@@ -20,6 +20,7 @@
             if (data['userIsAuthenticated']){
                 var votes = {};
                 {% for post_id in user_votes %}
+                    /* Hans debugging: post_id */
                     votes['{{post_id}}'] = {{user_votes[post_id]}};
                 {% endfor %}
                 data['user_votes'] = votes;

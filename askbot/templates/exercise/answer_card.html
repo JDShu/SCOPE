@@ -5,13 +5,13 @@
 {% endif %}
 <div
         id="post-id-{{ answer.id }}"
-        class="{{ macros.problem_classes(problem, exercise) }}">
+        class="{{ macros.solution_classes(answer, problem) }}">
     <div class="vote-buttons">
-        {% include "exercise/problem_vote_buttons.html" %}
+        {% include "exercise/answer_vote_buttons.html" %}
     </div>
-    <div class="answer-table">
+    <div class="solution-table">
         <div class="item-right">
-            <div class="answer-body">
+            <div class="solution-body">
                 <div class="post-update-info-container">
                     {% include "exercise/problem_author_info.html" %}
                 </div>
@@ -20,7 +20,7 @@
                 {% endif %}
                 {{ answer.html }}
             </div>
-            <div class="problem-controls post-controls">
+            <div class="solution-controls post-controls">
                 {% include "exercise/answer_controls.html" %}
             </div>
             {% include "exercise/answer_comments.html" %}

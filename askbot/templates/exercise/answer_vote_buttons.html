@@ -3,8 +3,8 @@
     id="solution-img-accept-{{ answer.id }}"
     class="solution-img-accept"
         {% if answer.accepted() %}
-    title="{% trans %}this answer has been selected as correct{% endtrans %}"
+    title="{% trans %}this problem has been selected as correct{% endtrans %}"
         {% else %}
-    title="{% trans %}mark this answer as correct (click again to undo){% endtrans %}"
+    title="{% trans %}mark this problem as correct (click again to undo){% endtrans %}"
         {% endif %}
 ></div>

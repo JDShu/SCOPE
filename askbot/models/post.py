@@ -2245,7 +2245,7 @@ class Post(models.Model):
     #it becomes a field in the Post Model.  Threads might have multiple problems
     #and problems might have an "accepted solution" each.
     def accepted(self):
-        if self.is_problem():
+        if self.is_problem() or self.is_solution():
             return self.thread.accepted_problem_id == self.id
         raise NotImplementedError
 

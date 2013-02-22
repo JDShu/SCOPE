@@ -62,7 +62,7 @@
                 if (data['userIsAdminOrMod']){
                     var answer_id = 'post-id-' + post_id;
                     var answer_container = document.getElementById(answer_id);
-                    var answer_element= answer_container.getElementsByClassName('answer-body')[0].children[1];
+                    var answer_element= answer_container.getElementsByClassName('solution-body')[0].children[1];
                     if (answer_element.textContent.length > 300){
                         convert_answer.parentNode.removeChild(convert_answer);
                     }
@@ -92,7 +92,7 @@
                     return;//same here
                 }
                 if (//maybe remove "delete" button
-                    data['userReputation'] < 
+                    data['userReputation'] <
                     {{settings.MIN_REP_TO_DELETE_OTHERS_COMMENTS}}
                 ) {
                     var delete_btn = document.getElementById(
@@ -140,10 +140,10 @@
                 var text = '';
                 if (extra_comment_count > 0){
                     if (can_add){
-                        text = 
+                        text =
         "{% trans %}post a comment / <strong>some</strong> more{% endtrans %}";
                     } else {
-                        text = 
+                        text =
         "{% trans %}see <strong>some</strong> more{% endtrans%}";
                     }
                 } else {
@@ -161,10 +161,10 @@
                 }
             }
             function render_add_answer_button(){
-                var add_answer_btn = document.getElementById('add-answer-btn');
+                var add_answer_btn = document.getElementById('add-solution-btn');
                 if (askbot['data']['userIsAuthenticated']){
                     if (askbot['data']['userId'] == {{question.author_id}}){
-                        add_answer_btn.className += ' answer-own-question';
+                        add_answer_btn.className += ' solution-own-question';
                         add_answer_btn.setAttribute(
                             'value',
                             '{% trans %}Answer Your Own Question{% endtrans %}'
@@ -191,7 +191,7 @@
                 }
               }
             }
-            
+
             askbot['functions'] = askbot['functions'] || {};
             askbot['functions']['renderPostVoteButtons'] = render_vote_buttons;
             askbot['functions']['renderPostControls'] = render_post_controls;
@@ -242,4 +242,3 @@
     </script>
     #}
 {% endblock %}
-
