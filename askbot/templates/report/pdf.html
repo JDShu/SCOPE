@@ -1,0 +1,118 @@
+<!doctype html>
+<!-- https://github.com/chrisglass/xhtml2pdf/blob/master/doc/usage.rst -->
+<html>
+    <head>
+        <style>
+            body {
+                font-size: 14px;
+            }
+            h1 {
+                font-size: 30px;
+                line-height: 36px;
+            }
+            h2 {
+                /*background-color: #eff5f6;*/
+                padding-top: 10px;
+            }
+            h2, h3 {
+                /*color: #7ea9b3;*/
+            }
+            th {
+                width: 50px;
+                vertical-align: top;
+            }
+            .comment th {
+                width: 40px;
+                margin-left: 40px;
+            }
+            .comment table {
+                padding: 5px 0;
+            }
+            .text {
+                margin-top: 10px;
+                color: #4b4b4b;
+            }
+            h3, .comment {
+                margin-left: 40px;
+            }
+            .comment {
+                font-size: 13px;
+                color: #666;
+                line-height: 1.2em;
+            }
+            .author {
+                text-align: right;
+                color: #4b4b4b;
+                padding-top: -10px;
+            }
+            @page template {
+                size: a4 portrait;
+                left: 5cm;
+                right: 2cm;
+            }
+            .sep {
+                height: 20px;
+                border-bottom: 1px solid #D4D4D4;
+                margin-bottom: 30px;
+            }
+            .attrs p{
+                font-size: 12px;
+                color: #4b4b4b;
+                line-height: 14px;
+                margin: 0;
+                padding: 0;
+            }
+            code {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        {% import "macros.html" as macros %}
+        {% for obj in exercises %}
+            {% set post = obj.post %}
+            <div class="thread">
+                <div class="attrs">
+                    <p><strong>URL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>http://localhost{{ post.thread.get_absolute_url() }}</p><p><strong>Author(s)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>{{ post.author }}{% if post.last_edited_at %}, {{ post.last_edited_by }}{% endif %}</p><p><strong>Download At&nbsp;&nbsp;&nbsp; </strong>{{ now }}</p>
+                </div>
+                <div class="topic">
+                    <h1>{{ post.thread.get_title(post)|escape }}</h1>
+                    <div class="text">
+                        {{ post.html|safe }}
+                        <!--p class="author">by {{ post.author.username|escape }} ({{ post.added_at|timesince }})</p-->
+                    </div>
+                    {% if 0 and post.comment_count > 0 %}
+                        <h3>{{ post.comment_count }} Comments</h3>
+                        {% set comments = post.get_cached_comments() %}
+                        {% for i in comments %}
+                            <div class="comment">
+                                {{ i.html|safe }}
+                                <!--p class="author">by {{ i.author.username|escape }} ({{ i.added_at|timesince }})</p-->
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                {% if obj.problems|length %}
+                    <h2>{% trans counter=obj.problems|length %}{{counter}} Problem{% pluralize %}{{counter}} Problems{% endtrans %}</h2>
+                    {% for i in obj.problems %}
+                        <div class="text">
+                            <table><tr><th>Q{{ loop.index }}</th><td>{{ i.html|safe }}</td></tr></table>
+                            <!--p class="author">by {{ i.author.username|escape }} ({{ i.added_at|timesince }})</p-->
+                        </div>
+                        {% set answers = i.get_cached_solutions() %}
+                        {% if with_answers and answers %}
+                            {% for j in answers %}
+                                <div class="comment">
+                                    <table><tr><th>A{{ loop.index }}</th><td>{{ j.html|safe }}</td></tr></table>
+                                    <!--p class="author">by {{ j.author.username|escape }} ({{ j.added_at|timesince }})</p-->
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        {% if not loop.last %}<div class="sep">&nbsp;</div>{% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <pdf:nextpage />
+        {% endfor %}
+    </body>
+</html>

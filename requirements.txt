@@ -44,3 +44,8 @@ python-openid==2.2.5
 pytz==2012f
 virtualenv==1.8.2
 wsgiref==0.1.2
+reportlab==2.6
+pyPdf==1.13
+PIL==1.1.7
+xhtml2pdf==0.0.4
+PyRTF==0.45

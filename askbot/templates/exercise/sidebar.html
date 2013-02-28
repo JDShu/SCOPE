@@ -6,6 +6,12 @@
 {% endif %}
 <div class="box vote-buttons">
     <h2 >{% trans %}Exercise tools{% endtrans %}</h2>
+    {% if request.user.is_authenticated() %}
+        <a class="button followed2 add2cart" style="margin: 10px auto;" data-eid="{{ exercise.id }}"
+            data-title="{{ thread.get_title(exercise)|escape }}" alt="{% trans %}click to add this exercise to download cart{% endtrans %}">
+            {%trans %}Add to cart{%endtrans%}
+        </a>
+    {% endif %}
     {% if favorited %}
         <a class="button followed" 
             alt="{% trans %}click to unfollow this exercise{% endtrans %}">
@@ -154,6 +160,44 @@
         {% trans %}Last updated{% endtrans %}: <strong title="{{ thread.last_activity_at }}">{{thread.last_activity_at|diff_date}}</strong>
     </p>
 </div>
+{% endif %}
+
+{%if request.user.is_authenticated() %}
+<div class="box vote-buttons">
+    <h2 >{% trans %}Downloads{% endtrans %}</h2>
+    <div class="clearfix"></div>
+    <div class="notify-sidebar">
+        <p class="rss" style="background-image:url({{ "/images/pdf.png"|media }})">
+            <a
+                href="{{settings.APP_URL}}/export/pdf/{{ exercise.id }}"
+                title="{% trans %} Export to PDF {% endtrans %}"
+                >{% trans %}export problems to PDF{% endtrans %}</a>
+            </a>
+        </p>
+        <p class="rss" style="background-image:url({{ "/images/pdf.png"|media }})">
+            <a
+                href="{{settings.APP_URL}}/export/pdf/{{ exercise.id }}?all=1"
+                title="{% trans %} Export to PDF {% endtrans %}"
+                >{% trans %}export problems and answers to PDF{% endtrans %}</a>
+            </a>
+        </p>
+        <p class="rss" style="background-image:url({{ "/images/word.gif"|media }})">
+            <a
+                href="{{settings.APP_URL}}/export/rtf/{{ exercise.id }}"
+                title="{% trans %} Export to RTF {% endtrans %}"
+                >{% trans %}export problems to RTF{% endtrans %}</a>
+            </a>
+        </p>
+        <p class="rss" style="background-image:url({{ "/images/word.gif"|media }})">
+            <a
+                href="{{settings.APP_URL}}/export/rtf/{{ exercise.id }}?all=1"
+                title="{% trans %} Export to RTF {% endtrans %}"
+                >{% trans %}export problems and answers to RTF{% endtrans %}</a>
+            </a>
+        </p>
+    </div> 
+</div>
+<div class="clearfix"></div>
 {% endif %}
 
 {% if similar_threads.data() and settings.SIDEBAR_EXERCISE_SHOW_RELATED %}
