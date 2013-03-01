@@ -48,4 +48,4 @@ reportlab==2.6
 pyPdf==1.13
 PIL==1.1.7
 xhtml2pdf==0.0.4
-PyRTF==0.45
+http://downloads.sourceforge.net/project/pyrtf/pyrtf/0.45/PyRTF-0.45.tar.gz
