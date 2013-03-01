@@ -5804,7 +5804,7 @@ msgid ""
 "<span class='big strong'>Please try to give a substantial problem</span>. If "
 "you wanted to comment on the exercise or problem, just <strong>use the "
 "commenting tool</strong>. Please remember that you can always <strong>revise "
-"your problems</strong> - no need to problem the same exercise twice. Also, "
+"your problems</strong> - no need to contribute a problem to the same exercise twice. Also, "
 "please <strong>don't forget to vote</strong> - it really helps to select the "
 "best exercises and problems!"
 msgstr ""
@@ -5812,10 +5812,10 @@ msgstr ""
 #: skins/default/templates/exercise/sharing_prompt_phrase.html:2
 #, python-format
 msgid ""
-"Know someone who can problem?  Share a <a href=\"%(exercise_url)s\">link</a> "
+"Know someone who can contribute a problem?  Share a <a href=\"%(exercise_url)s\">link</a> "
 "to this exercise via"
 msgstr ""
-"Know someone who can problem?  Share a <a href=\"%(exercise_url)s\">link</a> "
+"Know someone who can contribute a problem?  Share a <a href=\"%(exercise_url)s\">link</a> "
 "to this exercise via"
 
 #: skins/default/templates/exercise/sharing_prompt_phrase.html:8

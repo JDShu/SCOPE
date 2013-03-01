@@ -88,7 +88,7 @@ poor design of the data or methods on data objects #}
            {%- if post.post_type == 'exercise' -%}
                 {%- trans %}asked{% endtrans %}
            {% elif post.post_type == 'problem' %}
-                {%- trans %}problemed{% endtrans %}
+                {%- trans %}problem added{% endtrans %}
            {% else %}
                 {%- trans %}posted{% endtrans %}
            {% endif %}
@@ -107,7 +107,7 @@ poor design of the data or methods on data objects #}
             {% if post.post_type == 'exercise' %}
                 {% trans %}asked{% endtrans %}
             {% elif post.post_type == 'problem' %}
-                {% trans %}problemed{% endtrans %}
+                {% trans %}problem added{% endtrans %}
             {% else %}
                 {% trans %}posted{% endtrans %}
             {% endif %}

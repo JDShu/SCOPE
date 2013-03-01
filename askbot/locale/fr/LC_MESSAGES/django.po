@@ -5192,12 +5192,12 @@ msgid "<span class='big strong'>You are welcome to add a problem to your own exe
 msgstr "<span class='big strong'>Vous pouvez répondre vous-même à vos exercises</span>, mais assurez-vous de donner une <strong>réponse</strong>. Souvenez-vous que vous pouvez <strong>revoir votre exercise d'origine</strong>. Merci <strong>d'utiliser les commentaires pour les discussions</strong> et <strong>n'oubliez-pas de voter :)</strong> pour les réponses que vous avez apprécié (ou peut-être pas) !"
 
 #: skins/default/templates/exercise/new_problem_form.html:38
-msgid "<span class='big strong'>Please try to give a substantial problem</span>. If you wanted to comment on the exercise or problem, just <strong>use the commenting tool</strong>. Please remember that you can always <strong>revise your problems</strong> - no need to problem the same exercise twice. Also, please <strong>don't forget to vote</strong> - it really helps to select the best exercises and problems!"
+msgid "<span class='big strong'>Please try to give a substantial problem</span>. If you wanted to comment on the exercise or problem, just <strong>use the commenting tool</strong>. Please remember that you can always <strong>revise your problems</strong> - no need to contribute a problem to the same exercise twice. Also, please <strong>don't forget to vote</strong> - it really helps to select the best exercises and problems!"
 msgstr "<span class='big strong'>Merci d'essayer de donner une réponse complète</span>. Si vous vouliez commenter la exercise ou la réponse, <strong>utilisez l'outil de commentaire</strong>. Merci de vous souvenir que vous pouvez toujours <strong>revoir vos réponses</strong> - il n'est pas nécessaire de répondre deux fois à la même exercise. De plus, <strong>n'oubliez pas de voter</strong> - c'est très utile pour la sélection des meilleures exercises et réponses !"
 
 #: skins/default/templates/exercise/sharing_prompt_phrase.html:2
 #, python-format
-msgid "Know someone who can problem?  Share a <a href=\"%(exercise_url)s\">link</a> to this exercise via"
+msgid "Know someone who can contribute a problem?  Share a <a href=\"%(exercise_url)s\">link</a> to this exercise via"
 msgstr "Vous connaissez quelqu'un qui a la réponse ? Partagez un <a href=\"%(exercise_url)s\">lien</a> vers cette exercise exercise via"
 
 #: skins/default/templates/exercise/sharing_prompt_phrase.html:8

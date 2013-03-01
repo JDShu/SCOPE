@@ -2508,7 +2508,7 @@ def user_get_primary_group(self):
 
 def user_can_make_group_private_posts(self):
     """simplest implementation: user belongs to at least one group"""
-    return self.get_groups(private=True).count() > 0
+    return False#self.get_groups(private=True).count() > 0
 
 def user_get_group_membership(self, group):
     """returns a group membership object or None

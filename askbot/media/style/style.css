@@ -149,14 +149,17 @@ ul#searchTags{margin-left:10px;float:right;padding-top:2px;}
 .short-summary .counts .item-count{padding:0px 5px 0px 5px;font-size:25px;font-family:'Open Sans Condensed',Arial,sans-serif;}
 .short-summary .counts .votes div,.short-summary .counts .views div,.short-summary .counts .problems div,.short-summary .counts .favorites div{margin-top:3px;font-size:14px;line-height:14px;color:#646464;}
 .short-summary .tags{margin:0 0 0 1px;}
-.short-summary .votes,.short-summary .problems,.short-summary .favorites,.short-summary .views{text-align:center;margin:0 3px;padding:8px 2px 0px 2px;width:51px;float:right;height:44px;border:#dbdbd4 1px solid;}
+.short-summary .votes,.short-summary .problems,.short-summary .solutions,.short-summary .favorites,.short-summary .views{text-align:center;margin:0 3px;padding:8px 2px 0px 2px;width:51px;float:right;height:44px;border:#dbdbd4 1px solid;}
 .short-summary .votes{background:url(../images/vote-background.png) repeat-x;}
 .short-summary .problems{background:url(../images/problems-background.png) repeat-x;}
+.short-summary .solutions{background:url(../images/solutions-background.png) repeat-x;}
 .short-summary .views{background:url(../images/view-background.png) repeat-x;}
 .short-summary .no-votes .item-count{color:#b1b5b6;}
 .short-summary .some-votes .item-count{color:#4a757f;}
 .short-summary .no-problems .item-count{color:#b1b5b6;}
 .short-summary .some-problems .item-count{color:#eab243;}
+.short-summary .no-solutions .item-count{color:#b1b5b6;}
+.short-summary .some-solutions .item-count{color:#4d65de;}
 .short-summary .no-views .item-count{color:#b1b5b6;}
 .short-summary .some-views .item-count{color:#d33f00;}
 .short-summary .accepted .item-count{background:url(../images/accept.png) no-repeat top right;display:block;text-align:center;width:40px;color:#eab243;}
@@ -370,6 +373,8 @@ ul#related-tags li{margin:0 5px 8px 0;float:left;clear:left;}
 .exercise-page .problem-body li{margin-bottom:0.7em;}
 .exercise-page #fmproblem{color:#707070;line-height:1.2;margin-top:10px;}.exercise-page #fmproblem h2{font-family:'Open Sans Condensed',Arial,sans-serif;color:#7ea9b3;font-size:24px;}
 .exercise-page #fmproblem label{font-size:13px;}
+.exercise-page #fmanswer h2{font-family:'Open Sans Condensed',Arial,sans-serif;color:#7ea9b3;font-size:24px;}
+.exercise-page #fmanswer label{font-size:13px;}
 .exercise-page .message{padding:5px;margin:0px 0 10px 0;}
 .facebook-share.icon,.twitter-share.icon,.linkedin-share.icon,.identica-share.icon{background:url(../images/socialsprite.png) no-repeat;display:block;text-indent:-100em;height:25px;width:25px;margin-bottom:3px;}
 .facebook-share.icon:hover,.twitter-share.icon:hover,.linkedin-share.icon:hover,.identica-share.icon:hover{opacity:0.8;filter:alpha(opacity=80);}

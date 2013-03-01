@@ -316,9 +316,12 @@ class ProblemEditorField(EditorField):
 
     def __init__(self, *args, **kwargs):
         super(ProblemEditorField, self).__init__(*args, **kwargs)
-        self.length_error_template_singular = 'problem must be > %d character'
-        self.length_error_template_plural = 'problem must be > %d characters'
+        self.length_error_template_singular = \
+			'problem must be > %d character'
+        self.length_error_template_plural = \
+			'problem must be > %d characters'
         self.min_length = askbot_settings.MIN_PROBLEM_BODY_LENGTH
+
 
 class AnswerEditorField(EditorField):
     """Editor field for problems"""
@@ -1108,7 +1111,7 @@ class AnswerForm(PostAsSomeoneForm, PostPrivatelyForm):
 
     def __init__(self, *args, **kwargs):
         super(AnswerForm, self).__init__(*args, **kwargs)
-        self.fields['text'] = ProblemEditorField()
+        self.fields['text'] = AnswerEditorField()
         self.fields['email_notify'].widget.attrs['id'] = \
                                     'exercise-subscribe-updates'
 

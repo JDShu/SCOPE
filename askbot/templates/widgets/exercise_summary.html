@@ -12,6 +12,24 @@
             {% trans cnt=thread.view_count %}view{% pluralize %}views{% endtrans %}
             </div>
         </div>
+		{% set solution_count = thread.get_solution_count(visitor) %}
+        <div class="solutions
+                {% if solution_count == 0 -%}
+                    no-solutions
+                {% else -%}
+                    {%- if thread.accepted_solution_id -%}  {# INFO: Use _id to not fetch the whole problem post #}
+                        accepted
+                    {%- else -%}
+                        some-solutions
+                    {%- endif -%}
+                {%- endif -%}"> 
+            <span 
+                class="item-count"
+            >{{ solution_count|humanize_counter }}{% if thread.accepted_solution_id %}{% endif %}</span>
+            <div>
+            {% trans cnt = solution_count %}solution{% pluralize %}solutions{% endtrans %}
+            </div>
+        </div>
         {% set problem_count = thread.get_problem_count(visitor) %}
         <div class="problems
                 {% if problem_count == 0 -%}

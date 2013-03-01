@@ -1,5 +1,5 @@
 {% set exercise_url=(settings.APP_URL|strip_path + exercise.get_absolute_url())|urlencode %}
-<h2 class="share-exercise">{% trans %}Know someone who can problem?  Share a <a href="{{ exercise_url }}">link</a> to this exercise via{% endtrans %}
+<h2 class="share-exercise">{% trans %}Know someone who can contribute a problem?  Share a <a href="{{ exercise_url }}">link</a> to this exercise via{% endtrans %}
     {% if settings.ENABLE_SHARING_TWITTER %}{{ macros.share(site = 'twitter', site_label = 'Twitter') }},{% endif %}
     {% if settings.ENABLE_SHARING_FACEBOOK %}{{ macros.share(site = 'facebook', site_label = 'Facebook') }},{% endif %}
     {% if settings.ENABLE_SHARING_LINKEDIN %}{{ macros.share(site = 'linkedin', site_label = 'LinkedIn') }},{% endif %}

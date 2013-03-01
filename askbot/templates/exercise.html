@@ -162,27 +162,27 @@
                 }
             }
             function render_add_answer_button(){
-                var add_problem_btn = document.getElementById('add-problem-btn');
-                if (askbot['data']['userIsAuthenticated']){
-                    if (askbot['data']['userId'] == {{exercise.author_id}}){
-                        add_problem_btn.className += ' problem-own-exercise';
-                        add_problem_btn.setAttribute(
-                            'value',
-                            '{% trans %}Add a Solution to Your Own Problem{% endtrans %}'
-                        )
-                    } else {
-                        add_problem_btn.setAttribute(
-                           'value',
-                            '{% trans %}Post Your Solution{% endtrans %}'
-                        )
-                    }
-                } else {
-                    add_problem_btn.setAttribute(
-                        'value',
-                        '{% trans %}Login/Signup to Post{% endtrans %}'
-                    );
-                }
-            }
+			    var add_problem_btn = document.getElementById('add-problem-btn');
+			    if (askbot['data']['userIsAuthenticated']){
+			        if (askbot['data']['userId'] == {{exercise.author_id}}){
+			            add_problem_btn.className += ' problem-own-exercise';
+			            add_problem_btn.setAttribute(
+			                'value',
+			                '{% trans %}Add a Solution to Your Own Problem{% endtrans %}'
+			            )
+			        } else {
+			            add_problem_btn.setAttribute(
+			               'value',
+			                '{% trans %}Post Your Answer{% endtrans %}'
+			            )
+			        }
+			    } else {
+			        add_problem_btn.setAttribute(
+			            'value',
+			            '{% trans %}Login/Signup to Post{% endtrans %}'
+			        );
+			    }
+			}
 
             function render_add_problem_button(){
                 var add_problem_btn = document.getElementById('add-problem-btn');
