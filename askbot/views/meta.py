@@ -57,6 +57,7 @@ def server_error(request, template='500.html'):
 
 def help(request):
     data = {
+		'active_tab': 'help',
         'app_name': askbot_settings.APP_SHORT_NAME,
         'page_class': 'meta'
     }

@@ -1,12 +1,9 @@
-{% import "macros.html" as macros %}
+<div class="exercise-page">
 <form
         id="fmanswer"
         action="{% url post_new_answer mid, pid %}"
         method="post"
         >{% csrf_token %}
-    {# ==== START: exercise/subscribe_by_email_prompt.html ==== #}
-    {% include "exercise/subscribe_by_email_prompt.html" %}
-    {# ==== END: exercise/subscribe_by_email_prompt.html ==== #}
     <div style="clear:both"></div>
     {% if request.user.is_anonymous() and settings.ALLOW_POSTING_BEFORE_LOGGING_IN == False %}
         {% if not thread.closed %}
@@ -17,6 +14,13 @@
         {% endif %}
     {% else %}
         {% if not thread.closed %}
+			<div>
+                {% spaceless %}
+                    <h2>
+                        {% trans %}Your answer{% endtrans %}
+                    </h2>
+                {% endspaceless %}
+            </div>
             {% if request.user.is_anonymous() %}
                 <div class="message">{% trans %}<span class='strong big'>Please start posting your problem anonymously</span> - your problem will be saved within the current session and published after you log in or create a new account. Please try to give a <strong>substantial solution</strong>, for discussions, <strong>please use comments</strong> and <strong>please do remember to vote</strong> (after you log in)!{% endtrans %}</div>
             {% else %}
@@ -24,17 +28,23 @@
                     {% if request.user==exercise.author  %}
                         {% trans %}<span class='big strong'>You are welcome to add a problem to your own exercise</span>, but please make sure to give an <strong>problem</strong>. Remember that you can always <strong>revise your original exercise</strong>. Please <strong>use comments for discussions</strong>  and <strong>please don't forget to vote :)</strong> for the problems that you liked (or perhaps did not like)!{% endtrans %}
                     {% else %}
-                        {% trans %}<span class='big strong'>Please try to give a substantial problem</span>. If you wanted to comment on the exercise or problem, just <strong>use the commenting tool</strong>. Please remember that you can always <strong>revise your problems</strong> - no need to problem the same exercise twice. Also, please <strong>don't forget to vote</strong> - it really helps to select the best exercises and problems!{% endtrans %}
+                        {% trans %}<span class='big strong'>Please try to give a substantial problem</span>. If you wanted to comment on the exercise or problem, just <strong>use the commenting tool</strong>. Please remember that you can always <strong>revise your problems</strong> - no need to contribute a problem to the same exercise twice. Also, please <strong>don't forget to vote</strong> - it really helps to select the best exercises and problems!{% endtrans %}
                     {% endif %}
                 </p>
             {% endif %}
+			<div class="exercise-page">
             {{ macros.edit_post(
                     answer_form,
                     user = request.user,
                     editor_type = settings.EDITOR_TYPE
                 )
             }}
+<<<<<<< HEAD
             <input id="add-solution-btn" type="submit" class="submit after-editor" style="float:left"/>
+=======
+			</div>
+            <input id="add-answer-btn" type="submit" class="submit after-editor" style="float:left"/>
+>>>>>>> 8ad9d4a... UI fixes
             <script type="text/javascript">
                 askbot['functions']['renderAddAnswerButton']();
             </script>
@@ -47,3 +57,4 @@
         {% endif %}
     {% endif %}
 </form>
+</div>

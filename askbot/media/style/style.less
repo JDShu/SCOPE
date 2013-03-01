@@ -1021,7 +1021,7 @@ ul#searchTags {
         margin: 0 0 0 1px;
     }
 
-    .votes, .problems, .favorites, .views {
+    .votes, .problems, .solutions, .favorites, .views {
         text-align: center;
         margin: 0 3px;
         padding: 8px 2px 0px 2px;
@@ -1037,6 +1037,10 @@ ul#searchTags {
 
     .problems{
         background:url(../images/problems-background.png) repeat-x;
+    }
+    
+    .solutions{
+        background:url(../images/solutions/background.png) repeat-x;
     }
 
     .views {
@@ -1055,6 +1059,13 @@ ul#searchTags {
     }
     .some-problems .item-count {
         color: #eab243;
+    }
+    
+    .no-solutions .item-count {
+        color: #b1b5b6;
+    }
+    .some-solutions .item-count {
+        color: #4d65de;
     }
 
     .no-views .item-count {
@@ -2430,6 +2441,16 @@ ul#related-tags li {
           font-family:@main-font;
           color:@section-title;
           font-size:24px;
+        }
+        label{
+          font-size:13px;
+        }
+    }
+    #fmanswer {
+        h2{
+            font-family:@main-font;
+            color:@section-title;
+            font-size:24px;
         }
         label{
           font-size:13px;

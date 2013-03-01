@@ -60,8 +60,17 @@
         {{macros.reversible_sort_button(
                 button_sort_criterium = 'problems',
                 label = gettext('by problems'),
-                asc_tooltip = gettext('click to see the least problemed exercises'),
-                desc_tooltip = gettext('click to see the most problemed exercises'),
+                asc_tooltip = gettext('click to see the exercises with the fewest problems'),
+                desc_tooltip = gettext('click to see the exercises with the most problems'),
+                current_sort_method = sort,
+                search_state = search_state,
+            )
+        }}
+		{{macros.reversible_sort_button(
+                button_sort_criterium = 'solutions',
+                label = gettext('by solutions'),
+                asc_tooltip = gettext('click to see the least solved exercises'),
+                desc_tooltip = gettext('click to see the most solved exercises'),
                 current_sort_method = sort,
                 search_state = search_state,
             )

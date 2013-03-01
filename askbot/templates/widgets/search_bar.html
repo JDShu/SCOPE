@@ -1,4 +1,6 @@
-{% if active_tab != "ask" %}
+{% if active_tab == "ask" %}
+{% elif active_tab == "help" %}
+{% else %}
 {% spaceless %}
 <div id="searchBar">
     {# url action depends on which tab is active #}
