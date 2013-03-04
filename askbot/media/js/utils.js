@@ -1,3 +1,8 @@
+var targetUserLinksToNew = function() {
+    $('.exercise-body>p>a,.problem-body>p>a,.solution-body>p>a,.comment-body>p>a').attr("target","_blank");
+}
+$(document).ready(targetUserLinksToNew);
+
 //var $, scriptUrl, askbotSkin
 /**
  * attention - this function needs to be retired
