@@ -41,6 +41,7 @@ from askbot.skins.loaders import render_into_skin, get_template
 from askbot.skins.loaders import render_into_skin_as_string
 from askbot.skins.loaders import render_text_into_skin
 from askbot import const
+import reporter
 
 
 @csrf.csrf_exempt
@@ -1408,3 +1409,39 @@ def publish_problem(request):
         #todo: notify enquirer by email about the post
     request.user.message_set.create(message=message)
     return {'redirect_url': problem.get_absolute_url()}
+
+
+@csrf.csrf_exempt
+#@decorators.post_only
+@decorators.ajax_login_required
+def export(request, to, ids):
+    """ Export to pdf or rtf"""
+
+    exercises = []
+    try:
+        ids = map(int, ids.split(','))
+        posts = models.Post.objects.filter(
+            post_type='exercise',
+            id__in=ids).select_related('thread')
+        assert len(posts)
+        [i.assert_is_visible_to(request.user) for i in posts]
+    except exceptions.ExerciseHidden, error:
+        request.user.message_set.create(message = unicode(error))
+        return HttpResponseRedirect(reverse('index'))
+    except:
+        raise Http404
+
+    for i in posts:
+        updated, problems, _, _ = i.thread.get_cached_post_data(user=request.user)
+        i.set_cached_comments(
+            updated.get_cached_comments()
+        )
+        exercises.append({
+            'post': i,
+            'problems': problems
+        })
+    
+    data = getattr(reporter, to)(exercises, bool(request.GET.get('all', 0)))
+    resp = HttpResponse(data, mimetype='application/octet-stream')
+    resp['Content-Disposition'] = 'attachment; filename="exercise.%s"' % to
+    return resp

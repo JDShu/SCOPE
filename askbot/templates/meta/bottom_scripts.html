@@ -39,6 +39,7 @@
 <!-- History.js --> 
 <script type='text/javascript' src="{{"/js/jquery.history.js"|media }}"></script>
 <script type='text/javascript' src="{{"/js/utils.js"|media }}"></script>
+<script type='text/javascript' src="{{"/js/jstorage.js"|media }}"></script>
 {% if settings.ENABLE_MATHJAX %}
     <script type='text/javascript' src="{{settings.MATHJAX_BASE_URL}}/MathJax.js">
         MathJax.Hub.Config({
@@ -70,6 +71,89 @@
         group_dropdown.enableAddGroups();
         {%endif%}
         {% endif %}
+
+        {% if request.user.is_authenticated() %}
+        // shopping cart
+        var cart_title = [
+            '<div class="btn-group" style="display:inline-block">',
+                '<a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#">Download <span class="caret"></span></a>',
+                '<ul class="dropdown-menu">',
+                    '<li><a href="#" class="cart-down" data-type="pdf" >PDF</a></li>',
+                    '<li><a href="#" class="cart-down" data-type="pdf" data-all="1">PDF(with answers)</a></li>',
+                    '<li><a href="#" class="cart-down" data-type="rtf" >RTF</a></li>',
+                    '<li><a href="#" class="cart-down" data-type="rtf" data-all="1">RTF(with answers)</a></li>',
+                '</ul>',
+            '</div>',
+            '<a id="id-clear-cart" class="btn" href="#" style="margin-top:-17px;">Clear Cart</a>',
+        ].join('\n');
+        var cart_content = [
+            '<div id="cart-items">',
+                '<ul></ul>',
+            '</div>',
+        ].join('\n');
+        var ul = $('#cart-items ul');
+        $('#id-cart').popover({
+            placement: 'bottom',
+            trigger: 'manual',
+            animation: false,
+            content: cart_content,
+            title: cart_title
+        }).click(function() {
+            $(this).popover('toggle');
+            $('.dropdown-toggle').dropdown();
+            ul = $('#cart-items ul');
+            refresh_cart();
+            return false;
+        });
+        $(document.body).click(function() { $('#id-cart').popover('hide'); });
+
+        var refresh_cart = function() {
+            ul.html('');
+            for (var i = 0, items = $.jStorage.get('cart', []); i < items.length; i++) {
+                j = items[i];
+                var el = $('<li><a/></li>').data('id', j.id);
+                    el.find('a').attr('href', '/exercise/' + j.id + '/').text(j.title);
+                ul.append(el);
+            }
+        };
+        var in_cart = function(id) {
+            for (var i = 0, items = $.jStorage.get('cart', []); i < items.length; i++) {
+                j = items[i];
+                if (id == j.id)
+                    return true;
+            }
+            return false;
+        };
+        $('body').on('click', '#id-clear-cart', function() {
+            $.jStorage.set('cart', []);
+            refresh_cart();
+        });
+        $('body').on('click', '.cart-down', function() {
+            var me = $(this), uri = '/export/' + me.data('type') + '/';
+            var ids = ul.find('li').map(function(){ return $(this).data('id'); }).get().join(',');
+            if (ids) {
+                uri += ids;
+                if (me.data('all'))
+                    uri += '?all=1';
+                location.href = uri;
+            }
+        });
+
+        var add2cart = $('.add2cart').click(function() {
+            var items = $.jStorage.get('cart', []), me = $(this);
+            items.push({id: me.data('eid'), title: me.data('title')});
+            $.jStorage.set('cart', items);
+            me.remove();
+            return false;
+        });
+
+        add2cart.each(function() {
+            var me = $(this), eid = me.data('eid');
+            if (in_cart(eid))
+                me.remove();
+        });
+        refresh_cart();
+        {% endif %}
     });
 {% if user_messages %}
     $('#validate_email_alert').click(function(){notify.close(true)})
@@ -78,6 +162,68 @@
     $('abbr.timeago').timeago();
     /*]]>*/
 </script>
+<style>
+.popover-title li a { font-size: 12px; }
+#cart-items {
+    min-height: 100px;
+    max-height: 200px;
+    overflow: auto;
+}
+.followed2 {
+  line-height: 34px;
+  border: 0;
+  font-weight: normal;
+  margin-top: 3px;
+  display: block;
+  height: 34px;
+  font-size: 21px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  color: #4a757f;
+  font-family: 'Open Sans Condensed', Arial, sans-serif;
+  text-shadow: 0px 1px 0px #c6d9dd;
+  -moz-text-shadow: 0px 1px 0px #c6d9dd;
+  -webkit-text-shadow: 0px 1px 0px #c6d9dd;
+  border-top: #eaf2f3 1px solid;
+  background-color: #d1e2e5;
+  background-repeat: no-repeat;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#d1e2e5), color-stop(25%, #d1e2e5), to(#a9c2c7));
+  background-image: -webkit-linear-gradient(#d1e2e5, #d1e2e5 25%, #a9c2c7);
+  background-image: -moz-linear-gradient(top, #d1e2e5, #d1e2e5 25%, #a9c2c7);
+  background-image: -ms-linear-gradient(#d1e2e5, #d1e2e5 25%, #a9c2c7);
+  background-image: -o-linear-gradient(#d1e2e5, #d1e2e5 25%, #a9c2c7);
+  background-image: linear-gradient(#d1e2e5, #d1e2e5 25%, #a9c2c7);
+  border-radius: 4px;
+  -ms-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  -webkit-box-shadow: 1px 1px 2px #636363;
+  -moz-box-shadow: 1px 1px 2px #636363;
+  box-shadow: 1px 1px 2px #636363;
+  margin: 0 auto;
+  padding: 0;
+  width: 130px;
+}
+.followed2:hover {
+  background-color: #cde5e9;
+  background-repeat: no-repeat;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#cde5e9), color-stop(25%, #cde5e9), to(#94b3ba));
+  background-image: -webkit-linear-gradient(#cde5e9, #cde5e9 25%, #94b3ba);
+  background-image: -moz-linear-gradient(top, #cde5e9, #cde5e9 25%, #94b3ba);
+  background-image: -ms-linear-gradient(#cde5e9, #cde5e9 25%, #94b3ba);
+  background-image: -o-linear-gradient(#cde5e9, #cde5e9 25%, #94b3ba);
+  background-image: linear-gradient(#cde5e9, #cde5e9 25%, #94b3ba);
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #c6d9dd;
+  -moz-text-shadow: 0px 1px 0px #c6d9dd;
+  -webkit-text-shadow: 0px 1px 0px #c6d9dd;
+  text-shadow: 0px 1px 0px #c6d9dd;
+  -moz-text-shadow: 0px 1px 0px #c6d9dd;
+  -webkit-text-shadow: 0px 1px 0px #c6d9dd;
+}
+</style>
 {% if settings.USE_CUSTOM_JS %}
 <script 
     src="{% url "custom_js"%}?v={{ settings.MEDIA_RESOURCE_REVISION }}"
