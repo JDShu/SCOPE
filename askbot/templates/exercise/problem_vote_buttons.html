@@ -1,5 +1,5 @@
 {{ macros.post_vote_buttons(post = problem) }}
-<div
+{#<div
     id="problem-img-accept-{{ problem.id }}"
     class="problem-img-accept"
         {% if problem.accepted() %}
@@ -7,4 +7,4 @@
         {% else %}
     title="{% trans %}mark this problem as correct (click again to undo){% endtrans %}"
         {% endif %}
-></div>
+></div>#}
