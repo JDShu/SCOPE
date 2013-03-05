@@ -118,7 +118,7 @@
                     retag_btn.parentNode.removeChild(retag_btn);
                 }
             }
-            function render_add_comment_button(post_id, extra_comment_count){
+            function render_add_comment_button(post_id, extra_comment_count, type){
                 var can_add = false;
                 if (data['user_posts'] === undefined) {
                     return;
@@ -142,14 +142,14 @@
                 if (extra_comment_count > 0){
                     if (can_add){
                         text =
-        "{% trans %}post a comment / <strong>some</strong> more{% endtrans %}";
+        "{% trans %}post a comment on this "+type+" / <strong>some</strong> more{% endtrans %}";
                     } else {
                         text =
         "{% trans %}see <strong>some</strong> more{% endtrans%}";
                     }
                 } else {
                     if (can_add){
-                        text = "{% trans %}post a comment{% endtrans %}";
+                        text = "{% trans %}post a comment on this "+type+"{% endtrans %}";
                     }
                 }
                 add_comment_btn.innerHTML = text;
