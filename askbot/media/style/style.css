@@ -3107,6 +3107,30 @@ a:hover.medal {
   -webkit-border-radius: 4px;
   -khtml-border-radius: 4px;
 }
+.solution-summary {
+  display: block;
+  clear: both;
+  padding: 3px;
+}
+.solution-votes {
+  background-color: #EEEEEE;
+  color: #555555;
+  float: left;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  height: 17px;
+  padding: 2px 4px 5px;
+  text-align: center;
+  text-decoration: none;
+  width: 20px;
+  margin-right: 10px;
+  border-radius: 4px;
+  -ms-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -khtml-border-radius: 4px;
+}
 .karma-summary {
   padding: 5px;
   font-size: 13px;
