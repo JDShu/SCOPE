@@ -2210,14 +2210,22 @@ ul#related-tags li {
 .exercise-page div.comments {
   padding: 0;
 }
-.exercise-page #comment-title,
-.exercise-page #solution-title {
+.exercise-page #comment-title {
   font-weight: bold;
-  font-size: 23px;
+  font-size: 16px;
   color: #7ea9b3;
   width: 200px;
   float: left;
   font-family: 'Open Sans Condensed', Arial, sans-serif;
+}
+.exercise-page #solution-title {
+  font-weight: bold;
+  font-size: 16px;
+  color: #7ea9b3;
+  width: 200px;
+  float: left;
+  font-family: 'Open Sans Condensed', Arial, sans-serif;
+  font-size: 20px;
 }
 .exercise-page .comments {
   font-size: 12px;
@@ -2511,12 +2519,14 @@ ul#related-tags li {
   width: 723px;
   margin-top: 10px;
 }
+.exercise-page .problem {
+  background-color: #F1F1FF;
+}
 .exercise-page .problem .vote-buttons {
   float: left;
   margin-top: 10px;
 }
 .exercise-page .accepted-problem {
-  background-color: #f7fecc;
   border-bottom-color: #9BD59B;
 }
 .exercise-page .accepted-problem .vote-buttons {

@@ -2091,13 +2091,17 @@ ul#related-tags li {
     div.comments {
         padding: 0;
     }
-    #comment-title,#solution-title{
+    #comment-title{
        font-weight:bold;
-       font-size:23px;
+       font-size:16px;
        color:@section-title;
        width:200px;
        float:left;
        font-family:@main-font;
+    }
+    #solution-title {
+        #comment-title;
+        font-size:20px;
     }
     .comments {
         font-size: 12px;
@@ -2375,13 +2379,14 @@ ul#related-tags li {
         margin-top:10px;
     }
     .problem{
+        background-color: #F1F1FF;
         .vote-buttons {
             float:left;
             margin-top: 10px;
         }
     }
     .accepted-problem {
-        background-color: #f7fecc;
+        //background-color: #f7fecc;
         border-bottom-color: #9BD59B;
 
         .vote-buttons {
