@@ -1976,9 +1976,6 @@ ul#related-tags li {
   width: 20px;
   vertical-align: top;
 }
-.exercise-page div:nth-child(2) > .solution-table {
-  margin-top: 2.5em;
-}
 .exercise-page .solution-table {
   background-color: #E1DEFE;
   margin-right: -0.75em;
@@ -2213,7 +2210,8 @@ ul#related-tags li {
 .exercise-page div.comments {
   padding: 0;
 }
-.exercise-page #comment-title {
+.exercise-page #comment-title,
+.exercise-page #solution-title {
   font-weight: bold;
   font-size: 23px;
   color: #7ea9b3;

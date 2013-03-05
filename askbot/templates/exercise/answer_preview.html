@@ -1,10 +1,19 @@
 {# HANS : This is a hackish place to put this for now, refactor later #}
 {% set answers = problem.get_cached_solutions() %}
 {% if answers %}
-<ul>
-  {% for answer in answers %}
-  {% include "exercise/answer_card.html" %}
-  {% endfor %}
-</ul>
+
+<div class="solutions-outer">
+		<h2 id="solution-title">
+	        {% trans counter=thread.get_solution_count(visitor) %}
+	            {{counter}} Solution
+	            {% pluralize %}
+	            {{counter}} Solutions
+	        {% endtrans %}
+	    </h2>
+	<div class="clean"></div>
+	{% for answer in answers %}
+	{% include "exercise/answer_card.html" %}
+	{% endfor %}
+</div>
 {% endif %}
 <br><a href="{{ problem.get_answer_form_url() }}"><input id="add-answer-btn" class="submit after-editor" type="button" style="float:left" value="Answer This Problem"/></a></br>
