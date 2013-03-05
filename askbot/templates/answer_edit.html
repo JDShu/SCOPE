@@ -7,11 +7,11 @@
 {% endblock %}
 {% block content %}
 <h1 class="section-title">
-    {% trans %}Edit answer{% endtrans %} [<a href="{{ answer.thread._question_post().get_absolute_url() }}#{{ answer.id }}">{% trans %}back{% endtrans %}</a>]
+    {% trans %}Edit answer{% endtrans %} [<a href="{{ answer.thread._exercise_post().get_absolute_url() }}#{{ answer.id }}">{% trans %}back{% endtrans %}</a>]
 </h1>
 <div id="main-body" class="ask-body">
     <form id="fmedit" action="{% url edit_answer answer.id %}" method="post" >{% csrf_token %}
-        <label for="id_revision" >{% trans %}revision{% endtrans %}:</label> <br/> 
+        <label for="id_revision" >{% trans %}revision{% endtrans %}:</label> <br/>
         {% if revision_form.revision.errors %}{{ revision_form.revision.errors.as_ul() }}{% endif %}
         <div style="vertical-align:middle">
         {{ revision_form.revision }} <input type="hidden"
@@ -64,11 +64,11 @@
         $().ready(function(){
             $("#nav_questions").attr('className',"on");
             $('#editor').TextAreaResizer();
-            
+
             //highlight code synctax when editor has new text
             $("#editor").typeWatch({highlight: false, wait: 3000,
                              captureLength: 5, callback: lanai.highlightSyntax});
-                             
+
             //toggle preview of editor
             var display = true;
             var txt = "{% trans %}hide preview{% endtrans %}";
@@ -85,14 +85,14 @@
                 CPValidator.getAnswerFormRules(),
                 CPValidator.getAnswerFormMessages()
             );
-            
+
             $('#id_revision').unbind().change(function(){
                 $("#select_revision").val('true');
                 $('#edit_post_form_submit_button').click();
             });
-            
+
             lanai.highlightSyntax();
-            
+
         });
     </script>
 {% endblock %}
