@@ -1874,6 +1874,15 @@ ul#related-tags li {
         width:20px;
         vertical-align:top;
     }
+    .solutions-outer {
+    }
+    .solution-table {
+        background-color: #E1DEFE;
+        margin-right: -0.75em;
+        padding-top: 1em;
+        padding-bottom: 2.5em;
+        padding-right: 0.5em;
+    }
     .exercise-body, .problem-body {
         overflow: auto;
         margin-top:10px;
@@ -2084,11 +2093,15 @@ ul#related-tags li {
     }
     #comment-title{
        font-weight:bold;
-       font-size:23px;
+       font-size:16px;
        color:@section-title;
        width:200px;
        float:left;
        font-family:@main-font;
+    }
+    #solution-title {
+        #comment-title;
+        font-size:20px;
     }
     .comments {
         font-size: 12px;
@@ -2366,13 +2379,14 @@ ul#related-tags li {
         margin-top:10px;
     }
     .problem{
+        background-color: #F1F1FF;
         .vote-buttons {
             float:left;
             margin-top: 10px;
         }
     }
     .accepted-problem {
-        background-color: #f7fecc;
+        //background-color: #f7fecc;
         border-bottom-color: #9BD59B;
 
         .vote-buttons {
@@ -2402,7 +2416,7 @@ ul#related-tags li {
 
     .problemed-by-owner {
         background: #F1F1FF;
-
+        
         .comments .button {
             background-color: #E6ECFF;
        }
@@ -2830,6 +2844,14 @@ a:hover.medal {
     width: 20px;
     margin-right: 10px;
     .rounded-corners(4px);
+}
+
+.solution-summary {
+    .problem-summary;
+}
+
+.solution-votes {
+    .problem-votes;
 }
 
 .karma-summary {

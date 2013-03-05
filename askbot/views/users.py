@@ -397,6 +397,24 @@ def user_stats(request, user, context):
     )[:100]
 
     top_problem_count = len(top_problems)
+    
+    #
+    # Top solutions
+    #
+    top_solutions = user.posts.get_solutions(
+        request.user
+    ).filter(
+        deleted=False,
+        thread__posts__deleted=False,
+        thread__posts__post_type='exercise',
+    ).select_related(
+        'thread'
+    ).order_by(
+        '-points', '-added_at'
+    )[:100]
+
+    top_solution_count = len(top_solutions)
+    
     #
     # Votes
     #
@@ -506,6 +524,9 @@ def user_stats(request, user, context):
 
         'top_problems': top_problems,
         'top_problem_count': top_problem_count,
+        
+        'top_solutions': top_solutions,
+        'top_solution_count': top_solution_count,
 
         'up_votes' : up_votes,
         'down_votes' : down_votes,

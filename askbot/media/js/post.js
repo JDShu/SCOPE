@@ -2029,6 +2029,7 @@ PostCommentsWidget.prototype.getActivateHandler = function(){
                 });
             }
             else {
+                askbot['messages']['addComment'] = "post a comment on this "+me._post_type;
                 me.startNewComment();
             }
         }

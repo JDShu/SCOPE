@@ -368,7 +368,8 @@ for the purposes of the AJAX comment editor #}
         };
         askbot['functions']['renderAddCommentButton'](
                                                 '{{post.id}}',
-                                                {{remaining_comment_count}}
+                                                {{remaining_comment_count}},
+												'{{post.post_type}}'
                                             );
     </script>
 {%- endmacro -%}
