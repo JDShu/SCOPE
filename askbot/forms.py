@@ -1483,10 +1483,10 @@ class EditUserEmailFeedsForm(forms.Form):
     }
 
     asked_by_me = EmailFeedSettingField(
-                            label=_('Asked by me')
+                            label=_('Exercises submitted by me')
                         )
     problemed_by_me = EmailFeedSettingField(
-                            label=_('Problemed by me')
+                            label=_('Problems submitted by me')
                         )
     individually_selected = EmailFeedSettingField(
                             label=_('Individually selected')
