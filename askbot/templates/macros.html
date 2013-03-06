@@ -90,7 +90,7 @@ poor design of the data or methods on data objects #}
            {% elif post.post_type == 'problem' %}
                 {%- trans %}problem added{% endtrans %}
            {% else %}
-                {%- trans %}posted{% endtrans %}
+                {%- trans %}solution added{% endtrans %}
            {% endif %}
            <strong>{{ timeago(post.added_at) }}</strong>
         </p>
@@ -109,7 +109,7 @@ poor design of the data or methods on data objects #}
             {% elif post.post_type == 'problem' %}
                 {% trans %}problem added{% endtrans %}
             {% else %}
-                {% trans %}posted{% endtrans %}
+                {% trans %}solution added{% endtrans %}
             {% endif %}
             {% if post.__class__.__name__ == 'PostRevision' %}
                 <strong>{{ timeago(post.revised_at) }}</strong>
