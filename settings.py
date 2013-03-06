@@ -284,4 +284,4 @@ TINYMCE_DEFAULT_CONFIG = {
 NOTIFICATION_DELAY_TIME = 60 * 15
 
 import dj_database_url  # add this to requirements.txt
-DATABASES = {'default': dj_database_url.config(default='postgres://scopeuser:scopepassword@localhost/scopedatabase')}
+DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
