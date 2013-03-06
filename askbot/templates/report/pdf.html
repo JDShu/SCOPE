@@ -62,7 +62,7 @@
                 margin: 0;
                 padding: 0;
             }
-            code {
+            latex {
                 display: none;
             }
         </style>
@@ -73,7 +73,7 @@
             {% set post = obj.post %}
             <div class="thread">
                 <div class="attrs">
-                    <p><strong>URL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>http://localhost{{ post.thread.get_absolute_url() }}</p><p><strong>Author(s)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>{{ post.author }}{% if post.last_edited_at %}, {{ post.last_edited_by }}{% endif %}</p><p><strong>Download At&nbsp;&nbsp;&nbsp; </strong>{{ now }}</p>
+                    <p><strong>URL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>{{ base_url }}{{ post.thread.get_absolute_url() }}</p><p><strong>Author&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>{{ post.author }}</p><p><strong>Download At&nbsp;&nbsp;&nbsp; </strong>{{ now }}</p>
                 </div>
                 <div class="topic">
                     <h1>{{ post.thread.get_title(post)|escape }}</h1>

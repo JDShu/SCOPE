@@ -36,7 +36,7 @@
                     no-problems
                 {% else -%}
                     {%- if thread.accepted_problem_id -%}  {# INFO: Use _id to not fetch the whole problem post #}
-						some-problems {# accepted #}
+                        accepted
                     {%- else -%}
                         some-problems
                     {%- endif -%}
@@ -59,7 +59,7 @@
             {% trans cnt=exercise.score %}vote{% pluralize %}votes{% endtrans %}
             </div>
         </div>
-        <a href="#" class="add2cart" style="float:right;padding:16px 2px 0px 2px;margin:0 3px;width:70px;height:44px;box-sizing:border-box" title="Add to Cart" data-eid="{{ exercise.id }}" data-title="{{ thread.get_title(exercise)|escape }}">Add to Cart</a>
+        <a href="#" class="add2cart" style="display:none;float:right;padding:16px 2px 0px 2px;margin:0 3px;width:70px;height:44px;box-sizing:border-box" title="Add to Cart" data-eid="{{ exercise.id }}" data-title="{{ thread.get_title(exercise)|escape }}">Add to Cart</a>
         <div style="clear:both"></div>
         <div class="userinfo">
             {{ timeago(thread.last_activity_at) }}

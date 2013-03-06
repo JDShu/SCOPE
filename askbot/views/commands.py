@@ -1441,7 +1441,14 @@ def export(request, to, ids):
             'problems': problems
         })
     
-    data = getattr(reporter, to)(exercises, bool(request.GET.get('all', 0)))
+    # start: dynamic url
+    base_url = request.META.get('HTTP_REFERER', 'http://localhost')
+    if base_url.count('/') >= 3:
+        path_pos = base_url.index('/', base_url.index('/', base_url.index('/') + 1) + 1)
+        base_url = base_url[:path_pos]
+    
+    data = reporter.report(to, exercises, bool(request.GET.get('all', 0)), base_url)
+    # end: dynamic url
     resp = HttpResponse(data, mimetype='application/octet-stream')
     resp['Content-Disposition'] = 'attachment; filename="exercise.%s"' % to
     return resp

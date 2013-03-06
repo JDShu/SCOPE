@@ -195,6 +195,22 @@
                 >{% trans %}export problems and answers to RTF{% endtrans %}</a>
             </a>
         </p>
+{# ==== BEGIN: txt type added  ==== #}
+        <p class="rss" style="background-image:url({{ "/images/txt.png"|media }})">
+            <a
+                href="{{settings.APP_URL}}/export/txt/{{ exercise.id }}"
+                title="{% trans %} Export to TXT {% endtrans %}"
+                >{% trans %}export problems to TXT{% endtrans %}</a>
+            </a>
+        </p>
+        <p class="rss" style="background-image:url({{ "/images/txt.png"|media }})">
+            <a
+                href="{{settings.APP_URL}}/export/txt/{{ exercise.id }}?all=1"
+                title="{% trans %} Export to TXT {% endtrans %}"
+                >{% trans %}export problems and answers to TXT{% endtrans %}</a>
+            </a>
+        </p>
+{# ==== END: txt type added  ==== #}
     </div> 
 </div>
 <div class="clearfix"></div>

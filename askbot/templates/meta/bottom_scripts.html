@@ -82,6 +82,10 @@
                     '<li><a href="#" class="cart-down" data-type="pdf" data-all="1">PDF(with answers)</a></li>',
                     '<li><a href="#" class="cart-down" data-type="rtf" >RTF</a></li>',
                     '<li><a href="#" class="cart-down" data-type="rtf" data-all="1">RTF(with answers)</a></li>',
+		    {# ==== START: txt type added ==== #}
+                    '<li><a href="#" class="cart-down" data-type="txt" >TXT</a></li>',
+                    '<li><a href="#" class="cart-down" data-type="txt" data-all="1">TXT(with answers)</a></li>',
+                    {# ==== END: txt type added ==== #}
                 '</ul>',
             '</div>',
             '<a id="id-clear-cart" class="btn" href="#" style="margin-top:-17px;">Clear Cart</a>',
@@ -145,7 +149,7 @@
             $.jStorage.set('cart', items);
             me.remove();
             return false;
-        });
+        }).show();
 
         add2cart.each(function() {
             var me = $(this), eid = me.data('eid');
@@ -165,8 +169,8 @@
 <style>
 .popover-title li a { font-size: 12px; }
 #cart-items {
-    min-height: 100px;
-    max-height: 200px;
+    min-height: 120px;
+    max-height: 220px;
     overflow: auto;
 }
 .followed2 {
