@@ -3,6 +3,19 @@ var targetUserLinksToNew = function() {
 }
 $(document).ready(targetUserLinksToNew);
 
+var reorderFeedbackNoEmailCheckbox = function() {
+    var cb = $('#id_no_email');
+    if(cb) {
+        var l = cb.parent();
+        var d = l.parent();
+        cb.detach(); //remove the checkbox
+        d.prepend(cb); //add it back in before its label
+        l.attr("for","id_no_email"); //connect its label to it
+        l.text(l.text().replace(/:\s+$/,"")); //trim the colon off the end of the label text
+    }
+}
+$(document).ready(reorderFeedbackNoEmailCheckbox);
+
 //var $, scriptUrl, askbotSkin
 /**
  * attention - this function needs to be retired
