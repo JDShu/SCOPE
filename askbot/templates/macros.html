@@ -86,7 +86,7 @@ poor design of the data or methods on data objects #}
     {% if is_wiki %}
         <p>
            {%- if post.post_type == 'exercise' -%}
-                {%- trans %}asked{% endtrans %}
+                {%- trans %}exercise added{% endtrans %}
            {% elif post.post_type == 'problem' %}
                 {%- trans %}problem added{% endtrans %}
            {% else %}
@@ -105,7 +105,7 @@ poor design of the data or methods on data objects #}
         <p style="line-height:12px;">
             {# todo: access to class names needs to be removed here #}
             {% if post.post_type == 'exercise' %}
-                {% trans %}asked{% endtrans %}
+                {% trans %}exercise added{% endtrans %}
             {% elif post.post_type == 'problem' %}
                 {% trans %}problem added{% endtrans %}
             {% else %}
