@@ -43,6 +43,7 @@ def config_variable(request, variable_name = None, mimetype = None):
 def about(request, template='about.html'):
     title = _('About %(site)s') % {'site': askbot_settings.APP_SHORT_NAME}
     data = {
+        'active_tab': 'nosearch',
         'title': title,
         'page_class': 'meta',
         'content': askbot_settings.FORUM_ABOUT
@@ -57,7 +58,7 @@ def server_error(request, template='500.html'):
 
 def help(request):
     data = {
-		'active_tab': 'help',
+		'active_tab': 'nosearch',
         'app_name': askbot_settings.APP_SHORT_NAME,
         'page_class': 'meta'
     }
@@ -66,6 +67,7 @@ def help(request):
 def faq(request):
     if askbot_settings.FORUM_FAQ.strip() != '':
         data = {
+            'active_tab': 'nosearch',
             'title': _('FAQ'),
             'content': askbot_settings.FORUM_FAQ,
             'page_class': 'meta',
@@ -85,7 +87,10 @@ def faq(request):
 
 @csrf.csrf_protect
 def feedback(request):
-    data = {'page_class': 'meta'}
+    data = {
+        'active_tab': 'nosearch',
+        'page_class': 'meta'
+    }
     form = None
 
     if askbot_settings.ALLOW_ANONYMOUS_FEEDBACK is False:
@@ -121,6 +126,7 @@ feedback.CANCEL_MESSAGE=_('We look forward to hearing your feedback! Please, giv
 
 def privacy(request):
     data = {
+        'active_tab': 'nosearch',
         'title': _('Privacy policy'),
         'page_class': 'meta',
         'content': askbot_settings.FORUM_PRIVACY
