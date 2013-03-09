@@ -190,6 +190,7 @@ UPDATE askbot_post as q SET text_search_vector = text_search_vector ||
 --thread tsvector
 UPDATE askbot_thread SET text_search_vector = get_thread_tsv(title, tagnames);
 UPDATE askbot_thread as t SET text_search_vector = text_search_vector ||
+    get_dependent_comments_tsv((select p.id from askbot_post p where p.thread_id = t.id and post_type = 'exercise')) ||
     get_dependent_problems_tsv(t.id) ||
     get_dependent_solutions_tsv(t.id) ||
     get_thread_exercise_tsv(t.id);
@@ -202,7 +203,7 @@ $$
 BEGIN
     new.text_search_vector = get_thread_tsv(new.title, new.tagnames) ||
                              get_thread_exercise_tsv(new.id) ||
-                             get_dependent_comments_tsv(new.id) ||
+                             get_dependent_comments_tsv((select p.id from askbot_post p where p.thread_id = new.id and post_type = 'exercise')) ||
                              get_dependent_problems_tsv(new.id) ||
                              get_dependent_solutions_tsv(new.id);
     RETURN new;
