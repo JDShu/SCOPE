@@ -30,27 +30,6 @@
         {% if follower_count > 0 %}
             {% trans count=follower_count %}{{count}} follower{% pluralize %}{{count}} followers{% endtrans %}
         {% endif %}
-    </div>
-    <div class="notify-sidebar">
-        {%if request.user.is_authenticated() %}
-        <input 
-            type="checkbox"
-            id="exercise-subscribe-sidebar"
-            {% if thread.is_followed_by(request.user) %}
-                checked="checked"
-            {% endif %}
-        />
-        <label for="exercise-subscribe-sidebar">{% trans %}email the updates{% endtrans %}</label>
-        {%else%}
-        <input type="checkbox" id="exercise-subscribe-sidebar"/>
-        <label for="exercise-subscribe-sidebar">{% trans %}<strong>Here</strong> (once you log in) you will be able to sign up for the periodic email updates about this exercise.{% endtrans %}</label>
-        {%endif%}
-        <p class="rss">
-            <a
-                href="{{settings.APP_URL}}/feeds/exercise/{{ exercise.id }}"
-                title="{% trans %}subscribe to this exercise rss feed{% endtrans %}"
-                >{% trans %}subscribe to rss feed{% endtrans %}</a>
-        </p>
     </div> 
 </div>
 
