@@ -1,16 +1,16 @@
 {% extends "two_column_body.html" %}
 {% import "macros.html" as macros %}
-<!-- template answer_edit.html -->
-{% block title %}{% spaceless %}{% trans %}Edit answer{% endtrans %}{% endspaceless %}{% endblock %}
+<!-- template solution_edit.html -->
+{% block title %}{% spaceless %}{% trans %}Edit solution{% endtrans %}{% endspaceless %}{% endblock %}
 {% block forestyle %}
     <link rel="stylesheet" type="text/css" href="{{"/js/wmd/wmd.css"|media}}" />
 {% endblock %}
 {% block content %}
 <h1 class="section-title">
-    {% trans %}Edit answer{% endtrans %} [<a href="{{ answer.thread._exercise_post().get_absolute_url() }}#{{ answer.id }}">{% trans %}back{% endtrans %}</a>]
+    {% trans %}Edit solution{% endtrans %} [<a href="{{ solution.thread._exercise_post().get_absolute_url() }}#{{ solution.id }}">{% trans %}back{% endtrans %}</a>]
 </h1>
 <div id="main-body" class="ask-body">
-    <form id="fmedit" action="{% url edit_answer answer.id %}" method="post" >{% csrf_token %}
+    <form id="fmedit" action="{% url edit_solution solution.id %}" method="post" >{% csrf_token %}
         <label for="id_revision" >{% trans %}revision{% endtrans %}:</label> <br/>
         {% if revision_form.revision.errors %}{{ revision_form.revision.errors.as_ul() }}{% endif %}
         <div style="vertical-align:middle">
@@ -25,7 +25,7 @@
                         editor_type = settings.EDITOR_TYPE
                     )
         }}
-        {% if settings.WIKI_ON and answer.wiki == False %}
+        {% if settings.WIKI_ON and solution.wiki == False %}
             {{ macros.checkbox_in_div(form.wiki) }}
         {% endif %}
         {% if request.user.is_authenticated() and request.user.can_make_group_private_posts() %}
@@ -41,7 +41,7 @@
 {% endblock %}
 
 {% block sidebar %}
-    {% include "widgets/answer_edit_tips.html" %}
+    {% include "widgets/solution_edit_tips.html" %}
 {% endblock %}
 
 {% block endjs %}
@@ -82,8 +82,8 @@
 
             setupFormValidation(
                 $("#fmedit"),
-                CPValidator.getAnswerFormRules(),
-                CPValidator.getAnswerFormMessages()
+                CPValidator.getSolutionFormRules(),
+                CPValidator.getSolutionFormMessages()
             );
 
             $('#id_revision').unbind().change(function(){
@@ -96,4 +96,4 @@
         });
     </script>
 {% endblock %}
-<!-- end template answer_edit.html -->
+<!-- end template solution_edit.html -->

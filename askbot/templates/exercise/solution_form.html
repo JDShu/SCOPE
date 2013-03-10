@@ -153,8 +153,8 @@
                     }
                 }
             }
-            function render_add_answer_button(){
-			    var add_problem_btn = document.getElementById('add-answer-btn');
+            function render_add_solution_button(){
+			    var add_problem_btn = document.getElementById('add-solution-btn');
 			    if (askbot['data']['userIsAuthenticated']){
 			        if (askbot['data']['userId'] == {{exercise.author_id}}){
 			            add_problem_btn.className += ' problem-own-exercise';
@@ -165,7 +165,7 @@
 			        } else {
 			            add_problem_btn.setAttribute(
 			               'value',
-			                '{% trans %}Post Your Answer{% endtrans %}'
+			                '{% trans %}Post Your Solution{% endtrans %}'
 			            )
 			        }
 			    } else {
@@ -212,7 +212,7 @@
             askbot['functions']['renderPostVoteButtons'] = render_vote_buttons;
             askbot['functions']['renderPostControls'] = render_post_controls;
             askbot['functions']['renderAddCommentButton'] = render_add_comment_button;
-            askbot['functions']['renderAddAnswerButton'] = render_add_answer_button;
+            askbot['functions']['renderAddSolutionButton'] = render_add_solution_button;
             askbot['functions']['renderAddProblemButton'] = render_add_problem_button;
             askbot['functions']['hideConvertLinks'] = hide_convert_links;
             askbot['functions']['hideConvertProblemLinks'] = hide_convert_problem_links;
@@ -241,7 +241,7 @@
        type="button"
        class="submit after-editor problem-own-exercise"
        id="fmproblem_button"
-       value="{% trans %}Add a Problem to Your Own Answer{% endtrans %}"
+       value="{% trans %}Add a Problem to Your Own Solution{% endtrans %}"
        />
     {% endif %}
 
@@ -249,7 +249,7 @@
 
 <div class="{{ macros.problem_classes(problem, exercise) }}"> </div>
 </div>
-{% include "exercise/new_answer_form.html" %}
+{% include "exercise/new_solution_form.html" %}
 {% endblock %}
 
 

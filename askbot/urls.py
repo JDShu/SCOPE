@@ -48,9 +48,9 @@ urlpatterns = patterns('',
         name='edit_problem'
     ),
     url(
-        r'^%s(?P<id>\d+)/%s$' % (_('answers/'), _('edit/')),
-        views.writers.edit_answer,
-        name='edit_answer'
+        r'^%s(?P<id>\d+)/%s$' % (_('solutions/'), _('edit/')),
+        views.writers.edit_solution,
+        name='edit_solution'
     ),
     url(
         r'^%s(?P<id>\d+)/%s$' % (_('problems/'), _('revisions/')),
@@ -157,17 +157,17 @@ urlpatterns = patterns('',
         views.writers.problem,
         name='problem'
     ),
-    #Hans: process the answer form
+    #Hans: process the solution form
     url(
-        r'^%s(?P<mid>\d+)/(?P<pid>\d+)/%s$' % (_('exercises/'), _('answer/')),
-        views.writers.post_new_answer,
-        name='post_new_answer'
+        r'^%s(?P<mid>\d+)/(?P<pid>\d+)/%s$' % (_('exercises/'), _('solution/')),
+        views.writers.post_new_solution,
+        name='post_new_solution'
     ),
-    #Hans: hack the dispatcher to redirect to the answer form
+    #Hans: hack the dispatcher to redirect to the solution form
     url(
-        r'^%s(?P<mid>\d+)/(?P<pid>\d+)/%s$' % (_('exercise/'), _('post-answer/')),
-        views.readers.new_answer_form,
-        name='new_answer_form'
+        r'^%s(?P<mid>\d+)/(?P<pid>\d+)/%s$' % (_('exercise/'), _('post-solution/')),
+        views.readers.new_solution_form,
+        name='new_solution_form'
     ),
     url(#ajax only
         r'^%s(?P<id>\d+)/%s$' % (_('exercises/'), _('vote/')),
@@ -221,9 +221,9 @@ urlpatterns = patterns('',
         name='problem_to_comment'
     ),
     url(#post only
-        r'^answer/convert/$',
+        r'^solution/convert/$',
         views.writers.problem_to_comment,
-        name='answer_to_comment'
+        name='solution_to_comment'
     ),
     url(#post only
         r'^problem/publish/$',

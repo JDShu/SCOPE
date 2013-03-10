@@ -25,16 +25,16 @@
                 {% include "exercise/problem_controls.html" %}
             </div>
             {% include "exercise/problem_comments.html" %}
-        {# ==== START: exercise/answer_preview.html ==== #}
-        {% include "exercise/answer_preview.html" %}
-        {# ==== END: exercise/answer_card.html ==== #}
+        {# ==== START: exercise/solution_preview.html ==== #}
+        {% include "exercise/solution_preview.html" %}
+        {# ==== END: exercise/solution_card.html ==== #}
         </div>
         {% if exercise.closed == False and request.user == exercise.author %}{# this is outside the form on purpose #}
         <input
            type="button"
            class="submit after-editor problem-own-exercise"
            id="fmproblem_button"
-           value="{% trans %}Add a Problem to Your Own Answer{% endtrans %}"
+           value="{% trans %}Add a Problem to Your Own Solution{% endtrans %}"
            />
         {% endif %}
 
@@ -42,4 +42,3 @@
     <div class="clean"></div>
 </div>
 <div class="clean"></div>
-

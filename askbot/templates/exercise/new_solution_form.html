@@ -1,7 +1,7 @@
 <div class="exercise-page">
 <form
-        id="fmanswer"
-        action="{% url post_new_answer mid, pid %}"
+        id="fmsolution"
+        action="{% url post_new_solution mid, pid %}"
         method="post"
         >{% csrf_token %}
     <div style="clear:both"></div>
@@ -17,7 +17,7 @@
 			<div>
                 {% spaceless %}
                     <h2>
-                        {% trans %}Your answer{% endtrans %}
+                        {% trans %}Your solution{% endtrans %}
                     </h2>
                 {% endspaceless %}
             </div>
@@ -34,15 +34,15 @@
             {% endif %}
 			<div class="exercise-page">
             {{ macros.edit_post(
-                    answer_form,
+                    solution_form,
                     user = request.user,
                     editor_type = settings.EDITOR_TYPE
                 )
             }}
 			</div>
-            <input id="add-answer-btn" type="submit" class="submit after-editor" style="float:left"/>
+            <input id="add-solution-btn" type="submit" class="submit after-editor" style="float:left"/>
             <script type="text/javascript">
-                askbot['functions']['renderAddAnswerButton']();
+                askbot['functions']['renderAddSolutionButton']();
             </script>
             {% if settings.WIKI_ON %}
                 {# HANS: {{ macros.checkbox_in_div(problem.wiki) }} #}

@@ -869,12 +869,12 @@ class Post(models.Model):
 
         raise NotImplementedError
 
-    # Hans: hack in an answer form URL for use in the templates
-    def get_answer_form_url(self, exercise_post=None):
+    # Hans: hack in a solution form URL for use in the templates
+    def get_solution_form_url(self, exercise_post=None):
         if self.is_problem():
             if not exercise_post:
                 exercise_post = self.thread._exercise_post()
-            return u'%(base)s%(id)d/post-answer/' % {
+            return u'%(base)s%(id)d/post-solution/' % {
                 'base': urlresolvers.reverse('exercise', args=[exercise_post.id]),
                 'slug': django_urlquote(slugify(self.thread.title)),
                 'id': self.id,

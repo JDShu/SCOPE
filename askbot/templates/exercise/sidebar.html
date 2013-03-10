@@ -13,7 +13,7 @@
         </a>
     {% endif %}
     {% if favorited %}
-        <a class="button followed" 
+        <a class="button followed"
             alt="{% trans %}click to unfollow this exercise{% endtrans %}">
             <div>{% trans %}Following{% endtrans %}</div>
             <div class='unfollow'>{% trans %}Unfollow{% endtrans %}</div>
@@ -30,7 +30,7 @@
         {% if follower_count > 0 %}
             {% trans count=follower_count %}{{count}} follower{% pluralize %}{{count}} followers{% endtrans %}
         {% endif %}
-    </div> 
+    </div>
 </div>
 
 <div class="clearfix"></div>
@@ -60,7 +60,7 @@
             />
             <input type="hidden" name="thread_id" value="{{ thread.id }}"/>
             <p class="share-input-col">
-            <input 
+            <input
                 type="submit"
                 class="add-groups add-everyone-group"
                 value="{% trans %}share with everyone{% endtrans %}"
@@ -72,7 +72,7 @@
         {% set shared_groups_count = sharing_info['groups'].count() %}
 
         {% if shared_users_count or shared_groups_count %}
-            <p 
+            <p
                 style="margin:16px 0 4px 0"
             >{% trans %}This exercise is currently shared only with:{% endtrans %}</p>
         {% endif %}
@@ -89,12 +89,12 @@
             {% endif -%}
             {%- if sharing_info['more_users_count'] > 0 %}
                 {% trans %}and{% endtrans %}
-                <a 
+                <a
                     class="see-related-users"
                     data-url="{% url get_thread_shared_users %}"
                     data-thread-id="{{ thread.id }}"
-                >{% trans 
-                        more_count=sharing_info['more_users_count'] 
+                >{% trans
+                        more_count=sharing_info['more_users_count']
                     %}{{ more_count }} more{% endtrans %}
                 </a>
             {% endif %}
@@ -109,7 +109,7 @@
                 {%- endfor -%}
                 {% if sharing_info['more_groups_count'] > 0 %}
                     {% trans %}and{% endtrans %}
-                    <a 
+                    <a
                         class="see-related-groups"
                         data-url="{% url get_thread_shared_groups %}"
                         data-thread-id="{{ thread.id }}"
@@ -132,7 +132,7 @@
     <p>
         {% trans %}Asked{% endtrans %}: <strong>{{ macros.timeago(exercise.added_at) }}</strong>
     </p>
-    <p> 
+    <p>
         {% trans %}Seen{% endtrans %}: <strong>{{ thread.view_count|intcomma }} {% trans %}times{% endtrans %}</strong>
     </p>
     <p>
@@ -157,7 +157,7 @@
             <a
                 href="{{settings.APP_URL}}/export/pdf/{{ exercise.id }}?all=1"
                 title="{% trans %} Export to PDF {% endtrans %}"
-                >{% trans %}export problems and answers to PDF{% endtrans %}</a>
+                >{% trans %}export problems and solutions to PDF{% endtrans %}</a>
             </a>
         </p>
         <p class="rss" style="background-image:url({{ "/images/word.gif"|media }})">
@@ -171,7 +171,7 @@
             <a
                 href="{{settings.APP_URL}}/export/rtf/{{ exercise.id }}?all=1"
                 title="{% trans %} Export to RTF {% endtrans %}"
-                >{% trans %}export problems and answers to RTF{% endtrans %}</a>
+                >{% trans %}export problems and solutions to RTF{% endtrans %}</a>
             </a>
         </p>
 {# ==== BEGIN: txt type added  ==== #}
@@ -186,11 +186,11 @@
             <a
                 href="{{settings.APP_URL}}/export/txt/{{ exercise.id }}?all=1"
                 title="{% trans %} Export to TXT {% endtrans %}"
-                >{% trans %}export problems and answers to TXT{% endtrans %}</a>
+                >{% trans %}export problems and solutions to TXT{% endtrans %}</a>
             </a>
         </p>
 {# ==== END: txt type added  ==== #}
-    </div> 
+    </div>
 </div>
 <div class="clearfix"></div>
 {% endif %}

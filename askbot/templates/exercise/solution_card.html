@@ -1,31 +1,31 @@
 
-<a name="{{ answer.id }}"></a>
-{% if answer.old_answer_id %}
+<a name="{{ solution.id }}"></a>
+{% if solution.old_solution_id %}
     {# Make old URL anchors/hashes work #}
-    <a class="old_answer_id_anchor" name="{{ answer.old_answer_id }}"></a>
+    <a class="old_solution_id_anchor" name="{{ solution.old_solution_id }}"></a>
 {% endif %}
 <div
-        id="post-id-{{ answer.id }}"
-        class="{{ macros.solution_classes(answer, problem) }}">
+        id="post-id-{{ solution.id }}"
+        class="{{ macros.solution_classes(solution, problem) }}">
     <div class="vote-buttons">
-        {% include "exercise/answer_vote_buttons.html" %}
+        {% include "exercise/solution_vote_buttons.html" %}
     </div>
     <div class="solution-table">
         <div class="item-right">
             <div class="solution-body">
                 <div class="post-update-info-container">
-                    {% include "exercise/answer_author_info.html" %}
+                    {% include "exercise/solution_author_info.html" %}
                 </div>
-                {% if answer.id in published_answer_ids %}
+                {% if solution.id in published_solution_ids %}
                     <p><strong>{% trans %}This response is published{% endtrans %}</strong></p>
                 {% endif %}
-                {{ answer.html }}
+                {{ solution.html }}
             </div>
             <div class="solution-controls post-controls">
-                {% include "exercise/answer_controls.html" %}
+                {% include "exercise/solution_controls.html" %}
             </div>
 			<div style="margin-left: 2em">
-            	{% include "exercise/answer_comments.html" %}
+            	{% include "exercise/solution_comments.html" %}
 			</div>
         </div>
     </div>

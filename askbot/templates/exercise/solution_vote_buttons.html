@@ -1,8 +1,8 @@
-{{ macros.post_vote_buttons(post = answer) }}
+{{ macros.post_vote_buttons(post = solution) }}
 <div
-    id="solution-img-accept-{{ answer.id }}"
+    id="solution-img-accept-{{ solution.id }}"
     class="solution-img-accept"
-        {% if answer.accepted() %}
+        {% if solution.accepted() %}
     title="{% trans %}this problem has been selected as correct{% endtrans %}"
         {% else %}
     title="{% trans %}mark this problem as correct (click again to undo){% endtrans %}"

@@ -38,7 +38,7 @@ from askbot.utils.file_utils import store_file
 from askbot.views import context
 from askbot.templatetags import extra_filters_jinja as template_filters
 from askbot.importers.stackexchange import management as stackexchange#todo: may change
-from askbot.forms import AnswerForm #Hans
+from askbot.forms import SolutionForm #Hans
 
 # used in index page
 INDEX_PAGE_SIZE = 20
@@ -524,11 +524,11 @@ def edit_problem(request, id):
         request.user.message_set.create(message = unicode(e))
         return HttpResponseRedirect(problem.get_absolute_url())
 
-# Copy pasted from above and switched to deal with answers. - Hans
+# Copy pasted from above and switched to deal with solutions. - Hans
 @login_required
 @csrf.csrf_protect
 @decorators.check_spam('text')
-def edit_answer(request, id):
+def edit_solution(request, id):
     solution = get_object_or_404(models.Post, id=id)
     revision = solution.get_latest_revision()
     try:
@@ -576,12 +576,12 @@ def edit_answer(request, id):
         data = {
             'page_class': 'edit-problem-page',
             'active_tab': 'exercises',
-            'answer': solution,
+            'solution': solution,
             'revision': revision,
             'revision_form': revision_form,
             'form': form,
         }
-        return render_into_skin('answer_edit.html', data, request)
+        return render_into_skin('solution_edit.html', data, request)
 
     except exceptions.PermissionDenied, e:
         request.user.message_set.create(message = unicode(e))
@@ -651,7 +651,7 @@ def problem(request, id):#process a new problem
 # Hans: use the new solution methods Max made
 @decorators.check_authorization_to_post(_('Please log in to problem exercises'))
 @decorators.check_spam('text')
-def post_new_answer(request, mid, pid):#process a new problem
+def post_new_solution(request, mid, pid):#process a new problem
     """view that posts new problem
 
     anonymous users post into anonymous storage
@@ -662,7 +662,7 @@ def post_new_answer(request, mid, pid):#process a new problem
     exercise = get_object_or_404(models.Post, post_type='exercise', id=mid)
     problem = get_object_or_404(models.Post, post_type='problem', id=pid)
     if request.method == "POST":
-        form = forms.AnswerForm(request.POST)
+        form = forms.SolutionForm(request.POST)
         if form.is_valid():
             wiki = form.cleaned_data['wiki']
             text = form.cleaned_data['text']
@@ -692,7 +692,7 @@ def post_new_answer(request, mid, pid):#process a new problem
                     return HttpResponseRedirect(exercise.get_absolute_url())
                 except askbot_exceptions.SolutionAlreadyGiven, e:
                     request.user.message_set.create(message = unicode(e))
-                    answer = exercise.thread.get_solutions_by_user(request.user)[0]
+                    solution = exercise.thread.get_solutions_by_user(request.user)[0]
                     return HttpResponseRedirect(exercise.get_absolute_url())
                 except exceptions.PermissionDenied, e:
                     request.user.message_set.create(message = unicode(e))

@@ -323,13 +323,13 @@ class ProblemEditorField(EditorField):
         self.min_length = askbot_settings.MIN_PROBLEM_BODY_LENGTH
 
 
-class AnswerEditorField(EditorField):
+class SolutionEditorField(EditorField):
     """Editor field for problems"""
 
     def __init__(self, *args, **kwargs):
-        super(AnswerEditorField, self).__init__(*args, **kwargs)
-        self.length_error_template_singular = 'answer must be > %d character'
-        self.length_error_template_plural = 'answer must be > %d characters'
+        super(SolutionEditorField, self).__init__(*args, **kwargs)
+        self.length_error_template_singular = 'solution must be > %d character'
+        self.length_error_template_plural = 'solution must be > %d characters'
         self.min_length = askbot_settings.MIN_PROBLEM_BODY_LENGTH
 
 
@@ -1100,8 +1100,8 @@ class ProblemForm(PostAsSomeoneForm, PostPrivatelyForm):
         self.fields['email_notify'].widget.attrs['id'] = \
                                     'exercise-subscribe-updates'
 
-class AnswerForm(PostAsSomeoneForm, PostPrivatelyForm):
-    text = AnswerEditorField()
+class SolutionForm(PostAsSomeoneForm, PostPrivatelyForm):
+    text = SolutionEditorField()
     wiki = WikiField()
     openid = forms.CharField(
         required=False, max_length=255,
@@ -1110,8 +1110,8 @@ class AnswerForm(PostAsSomeoneForm, PostPrivatelyForm):
     email_notify = EmailNotifyField(initial=False)
 
     def __init__(self, *args, **kwargs):
-        super(AnswerForm, self).__init__(*args, **kwargs)
-        self.fields['text'] = AnswerEditorField()
+        super(SolutionForm, self).__init__(*args, **kwargs)
+        self.fields['text'] = SolutionEditorField()
         self.fields['email_notify'].widget.attrs['id'] = \
                                     'exercise-subscribe-updates'
 

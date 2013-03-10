@@ -29,7 +29,7 @@ from django.conf import settings
 import askbot
 from askbot import exceptions
 from askbot.utils.diff import textDiff as htmldiff
-from askbot.forms import ProblemForm, ShowExerciseForm, AnswerForm
+from askbot.forms import ProblemForm, ShowExerciseForm, SolutionForm
 from askbot import conf
 from askbot import models
 from askbot import schedules
@@ -550,7 +550,7 @@ def exercise(request, id):#refactor - long subroutine. display exercise body, pr
             initial['text'] = drafts[0].text
 
     problem_form = ProblemForm(initial)
-    answer_form = AnswerForm(initial)
+    solution_form = SolutionForm(initial)
 
     user_can_post_comment = (
         request.user.is_authenticated() and request.user.can_post_comment()
@@ -593,8 +593,8 @@ def exercise(request, id):#refactor - long subroutine. display exercise body, pr
         'show_post': show_post,
         'show_comment': show_comment,
         'show_comment_position': show_comment_position,
-        'answer': answer_form,
-        #'answers': answer_form,
+        'solution': solution_form,
+        #'solutions': solution_form,
     }
     #shared with ...
     if askbot_settings.GROUPS_ENABLED:
@@ -641,10 +641,10 @@ def get_comment(request):
     request.user.assert_can_edit_comment(comment)
     return {'text': comment.text}
 
-#@decorators.check_authorization_to_post(_('Please log in to post answers'))
+#@decorators.check_authorization_to_post(_('Please log in to post solutions'))
 #@decorators.check_spam('text')
 @csrf.csrf_protect
-def new_answer_form(request, mid, pid):
+def new_solution_form(request, mid, pid):
     exercise_post = models.Post.objects.filter(
                                 post_type = 'exercise',
                                 id = mid
@@ -659,7 +659,7 @@ def new_answer_form(request, mid, pid):
         'wiki': exercise_post.wiki and askbot_settings.WIKI_ON,
         'email_notify': thread.is_followed_by(request.user)
     }
-    answer_form = AnswerForm(initial)
+    solution_form = SolutionForm(initial)
     # if exercise doesn't exist, redirect to main page
     data = {
         'pid': pid,
@@ -667,6 +667,6 @@ def new_answer_form(request, mid, pid):
         'exercise': exercise_post,
         'problem': problem_post,
         'thread': thread,
-        'answer_form': answer_form
+        'solution_form': solution_form
         }
-    return render_into_skin('exercise/answer_form.html', data, request)
+    return render_into_skin('exercise/solution_form.html', data, request)

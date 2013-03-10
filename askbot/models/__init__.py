@@ -665,15 +665,15 @@ def user_assert_can_post_problem(self, thread = None):
         raise askbot_exceptions.ProblemAlreadyGiven(message)
 
     self.assert_can_post_exercise()
-    
+
 #MAX:  This only tests to see that a user can post an exercise at this time.
 def user_assert_can_post_solution(self, thread = None):
     """same as user_can_post_exercise
-    
+
     limit_solutions = askbot_settings.LIMIT_ONE_SOLUTION_PER_USER
     if limit_solutions and thread.has_solution_by_user(self):
         message = _(
-            'Sorry, you already gave an solution, please edit it instead.'
+            'Sorry, you already gave a solution, please edit it instead.'
         )
         raise askbot_exceptions.SolutionAlreadyGiven(message)"""
     self.assert_can_post_exercise()
@@ -2060,7 +2060,7 @@ def user_post_solution(
             day = ungettext('%(days)d day','%(days)d days',askbot_settings.MIN_DAYS_TO_SOLUTION_OWN_EXERCISE) % {'days':askbot_settings.MIN_DAYS_TO_SOLUTION_OWN_EXERCISE}
             error_message = _(
                 'New users must wait %(days)s before solutioning their own exercise. '
-                ' You can post an solution %(left)s'
+                ' You can post a solution %(left)s'
                 ) % {'days': day,'left': left}
             assert(error_message is not None)
             raise django_exceptions.PermissionDenied(error_message)"""
@@ -3897,7 +3897,7 @@ __all__ = [
 
         'AnonymousProblem',
         'DraftProblem',
-        
+
         'AnonymousSolution',
         'DraftSolution',
 

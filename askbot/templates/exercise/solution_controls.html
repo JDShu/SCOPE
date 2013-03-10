@@ -1,0 +1,62 @@
+{#<span class="action-link swap-qa">
+    <a id="swap-exercise-with-solution-{{solution.id}}">{% trans %}swap with exercise{% endtrans %}</a>
+</span>uncomment if needed#}
+<span
+    id="post-{{solution.id}}-publish"
+    class="action-link"
+>
+    {% if solution.id in published_solution_ids %}
+        <a
+            class="solution-unpublish"
+            data-solution-id="{{ solution.id }}"
+        >{% trans %}unpublish{% endtrans %}</a>
+    {% else %}
+        <a
+            class="solution-publish"
+            data-solution-id="{{ solution.id}}"
+        >{% trans %}publish{% endtrans %}</a>
+    {% endif %}
+</span>
+<span id='post-{{solution.id}}-delete' class="action-link delete-post">
+    <a class="exercise-delete"
+    >{% if solution.deleted %}{% trans %}undelete{% endtrans %}{% else %}{% trans %}delete{% endtrans %}{% endif %}</a>
+</span>
+{% if solution.offensive_flag_count > 0 %}
+<span
+    id="solution-offensive-remove-flag-{{ solution.id }}"
+    class="action-link offensive-flag"
+    title="{% trans %}remove offensive flag{% endtrans %}"
+>
+    <a class="exercise-flag">{% trans %}remove flag{% endtrans %}</a>
+</span>
+<span
+    id="amswer-offensive-flag-{{ solution.id }}"
+    class="action-link offensive-flag"
+    title="{% trans %}report as offensive (i.e containing spam, advertising, malicious text, etc.){% endtrans %}"
+>
+    <a class="exercise-flag">{% trans %}flag offensive{% endtrans %} ({{ solution.offensive_flag_count }})</a>
+</span>
+{% else %}
+<span
+    id="solution-offensive-flag-{{ solution.id }}"
+    class="action-link offensive-flag"
+    title="{% trans %}report as offensive (i.e containing spam, advertising, malicious text, etc.){% endtrans %}"
+>
+    <a class="exercise-flag">{% trans %}flag offensive{% endtrans %}</a>
+</span>
+{% endif %}
+<span id='post-{{solution.id}}-edit' class="action-link">
+    <a class="exercise-edit" href="{% url edit_solution solution.id %}">{% trans %}edit{% endtrans %}</a>
+</span>
+<span id='post-{{solution.id}}-convert' class="action-link">
+  <form class="solution-convert" action="{% url solution_to_comment %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="solution_id" id="id_solution_id" value="{{solution.id}}"/>
+    <input type="submit" name="" value="{% trans %}convert to comment{% endtrans %}"/>
+  </form>
+</span>
+<script type="text/javascript">
+    askbot['functions']['hideConvertProblemLinks']('{{ solution.id }}');
+    askbot['functions']['hidePublishProblemLink']('{{ solution.id }}');
+    askbot['functions']['renderPostControls']('{{ solution.id }}');
+</script>

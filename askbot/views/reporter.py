@@ -20,14 +20,14 @@ RE_BLOCKQUOTE = re.compile(r'<blockquote>(.+?)</blockquote>', re.S)
 RE_STRIPTAGS = re.compile(r'[ \t]*<.+?>[ \t]*', re.S)
 
 
-def report(type, exercises, with_answers=True, base_url='http://localhost'):
+def report(type, exercises, with_solutions=True, base_url='http://localhost'):
     '''
     render pdf/rtf/txt report
     '''
     now = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
     text = get_template('report/%s.html' % type).render({
         'exercises': exercises,
-        'with_answers': with_answers,
+        'with_solutions': with_solutions,
         'now': now,
         'base_url': base_url,
     })
@@ -71,13 +71,13 @@ def latex2img(html):
 
 def _repl_code(obj):
     return '\n' + '\n'.join('  ' + i for i in obj.group(1).split('\n'))
-    
+
 
 def _repl_latex(obj):
     latex = obj.group(0)
     latex = latex[2:-2] if latex[:2] == '$$' else latex[1:-1]
     return '\n  {%s}\n' % latex
-    
+
 
 def _repl_ul(obj):
     lis = obj.group(1)
@@ -90,13 +90,13 @@ def _repl_ol(obj):
     _li_index = 0
     lis = obj.group(1)
     return '\n' + RE_LI.sub(_repl_li, lis)
-    
+
 
 def _repl_li(obj):
     global _li_index
     _li_index += 1
     return '%d. %s' % (_li_index, obj.group(1))
-    
+
 
 def _repl_strip(obj):
     ret = RE_CODE.sub(_repl_code, obj.group(1))
@@ -106,7 +106,7 @@ def _repl_strip(obj):
     ret = RE_UL.sub(_repl_ul, ret)
     ret = RE_STRIPTAGS.sub('', ret)
     return ret.replace('\n', '\r\n')
-    
+
 
 def html2text(html):
     '''
@@ -175,7 +175,7 @@ class HTML2RTF(HTMLParser):
         elif t == 'blockquote':
             self._queue.append(PyRTF.TAB)
         elif t == 'th':
-            # answer
+            # solution
             if data[0] == 'A':
                 self._queue.append(PyRTF.TAB)
             self._queue.append(PyRTF.TEXT(data, bold=True))
