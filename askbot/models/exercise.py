@@ -926,6 +926,7 @@ class Thread(models.Model):
                 if post.parent_id not in solution_map:
                     solution_map[post.parent_id] = list()
                 solution_map[post.parent_id].append(post)
+                post_map[post.id] = post
             elif post.post_type == 'comment':
                 if post.parent_id not in comment_map:
                     comment_map[post.parent_id] = list()
