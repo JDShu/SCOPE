@@ -115,7 +115,7 @@ def feedback(request):
                             initial={'next':get_next_url(request)})
 
     data['form'] = form
-    return render_into_skin("autoclose.html", data, request)
+    return render_into_skin('feedback.html', data, request)
 feedback.CANCEL_MESSAGE=_('We look forward to hearing your feedback! Please, give it next time :)')
 
 def privacy(request):
