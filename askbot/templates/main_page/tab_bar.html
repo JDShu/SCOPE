@@ -1,15 +1,6 @@
 {% import "macros.html" as macros %}
 {% load extra_filters_jinja %}
 {% cache 0 "scope_sort_tabs" search_tags request.user author_name scope sort query context.page language_code %}
-<a class="rss"
-    {% if feed_url %}
-    href="{{feed_url}}"
-    {% else %}
-    href="/feeds/rss/"
-    {% endif %}
-    title="{% trans %}subscribe to the exercises feed{% endtrans %}"
-    >{% trans %}RSS{% endtrans %}
-</a>
 <div class="tabBar">
     <div id="sort_tabs" class="tabsA">
         <span class="label">{% trans %}Sort by &raquo;{% endtrans %}</span>

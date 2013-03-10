@@ -57,7 +57,6 @@ def server_error(request, template='500.html'):
 
 def help(request):
     data = {
-		'active_tab': 'help',
         'app_name': askbot_settings.APP_SHORT_NAME,
         'page_class': 'meta'
     }
@@ -110,7 +109,7 @@ def feedback(request):
             mail_moderators(_('Q&A forum feedback'), message)
             msg = _('Thanks for the feedback!')
             request.user.message_set.create(message=msg)
-            return HttpResponseRedirect(get_next_url(request))
+            return render_into_skin("autoclose.html", data, request)
     else:
         form = FeedbackForm(is_auth = request.user.is_authenticated(),
                             initial={'next':get_next_url(request)})

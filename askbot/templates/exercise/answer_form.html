@@ -52,7 +52,7 @@
             function hide_convert_problem_links(post_id){
                 var problem_convert_id = 'post-' + post_id + '-convert';
                 var convert_problem = document.getElementById(problem_convert_id);
-                if (data['userIsAdminOrMod']){
+                if (data['userIsAdminOrMod'] && false){
                     var problem_id = 'post-id-' + post_id;
                     var problem_container = document.getElementById(problem_id);
                     var problem_element= problem_container.getElementsByClassName('problem-body')[0].children[1];
@@ -65,7 +65,7 @@
             }
 
             function hidePublishProblemLink(postId) {
-                if (data['userIsThreadModerator'] === false) {
+                if (data['userIsThreadModerator'] === false || true) {
                     //hide publish/unpublish problem links
                     var problemId = 'post-' + postId + '-publish';
                     var pubBtn = document.getElementById(problemId);
