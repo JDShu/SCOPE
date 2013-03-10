@@ -109,13 +109,13 @@ def feedback(request):
             mail_moderators(_('Q&A forum feedback'), message)
             msg = _('Thanks for the feedback!')
             request.user.message_set.create(message=msg)
-            return HttpResponseRedirect(get_next_url(request))
+            return render_into_skin("autoclose.html", data, request)
     else:
         form = FeedbackForm(is_auth = request.user.is_authenticated(),
                             initial={'next':get_next_url(request)})
 
     data['form'] = form
-    return render_into_skin('feedback.html', data, request)
+    return render_into_skin("autoclose.html", data, request)
 feedback.CANCEL_MESSAGE=_('We look forward to hearing your feedback! Please, give it next time :)')
 
 def privacy(request):
