@@ -7,19 +7,16 @@
 		id="allHomeButton"
 	 	title="{% trans %}see all exercises{% endtrans %}"
 		href="{% url exercises %}">{% trans %}ALL{% endtrans %}</a>
+	{% if request.user.is_authenticated() %} 
+    <a class="scope-selector {% if scope == 'favorite' %}on{% endif %}" 
+		title="{% trans %}see your followed exercises{% endtrans %}"
+		href="{{ search_state.change_scope('favorite').full_url() }}">{% trans %}FOLLOWED{% endtrans %}</a>
+    {% endif %}
     <a class="scope-selector on"
 		id="searchButton"
 		title="{% trans %}search results{% endtrans %}"
 		style="{% if not query %}display:none{% endif %}"
         href="{{ search_state.change_scope('all').full_url() }}">{% trans %}SEARCH{% endtrans %}</a>
-    {% if request.user.is_authenticated() %} 
-    <a class="scope-selector {% if scope == 'favorite' %}on{% endif %}" 
-		title="{% trans %}see your followed exercises{% endtrans %}"
-		href="{{ search_state.change_scope('favorite').full_url() }}">{% trans %}FOLLOWED{% endtrans %}</a>
-    <a class="scope-selector" 
-		id="id-cart" 
-		href="#" >{% trans %}CART{% endtrans %}</a>
-    {% endif %}
 {% else %}
     <div class="scope-selector ask-message">{% trans %}Please add your exercise here{% endtrans %}</div>
 {% endif %}
