@@ -1,13 +1,6 @@
 {#<span class="action-link swap-qa">
     <a id="swap-exercise-with-solution-{{answer.id}}">{% trans %}swap with exercise{% endtrans %}</a>
 </span>uncomment if needed#}
-<span class="action-link">
-    <a  class="permant-link"
-        href="{{ answer.get_absolute_url(exercise_post=exercise) }}"
-        title="{% trans %}permanent link{% endtrans %}">
-        {% trans %}link{% endtrans %}
-    </a>
-</span>
 <span
     id="post-{{answer.id}}-publish"
     class="action-link"
