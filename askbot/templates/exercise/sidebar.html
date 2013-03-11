@@ -4,6 +4,9 @@
     {{ settings.SIDEBAR_EXERCISE_HEADER }}
 </div>
 {% endif %}
+
+{% include "widgets/cart_button.html" %}
+
 <div class="box vote-buttons">
     <h2 >{% trans %}Exercise tools{% endtrans %}</h2>
     {% if request.user.is_authenticated() %}
