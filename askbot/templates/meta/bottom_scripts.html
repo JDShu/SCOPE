@@ -40,12 +40,13 @@
 <script type='text/javascript' src="{{"/js/jquery.history.js"|media }}"></script>
 <script type='text/javascript' src="{{"/js/utils.js"|media }}"></script>
 <script type='text/javascript' src="{{"/js/jstorage.js"|media }}"></script>
+<script type='text/javascript' src="{{"/js/jquery-ui-1.10.1.custom.min.js"|media }}"></script>
 {% if settings.ENABLE_MATHJAX %}
     <script type='text/javascript' src="{{settings.MATHJAX_BASE_URL}}/MathJax.js">
         MathJax.Hub.Config({
             extensions: ["tex2jax.js"],
             jax: ["input/TeX","output/HTML-CSS"],
-            tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+            tex2jax: {inlineMath: [["!!","!!"],["\\(","\\)"]]}
         });
     </script>
 {% endif %}
@@ -82,7 +83,7 @@
                     '<li><a href="#" class="cart-down" data-type="pdf" data-all="1">PDF(with answers)</a></li>',
                     '<li><a href="#" class="cart-down" data-type="rtf" >RTF</a></li>',
                     '<li><a href="#" class="cart-down" data-type="rtf" data-all="1">RTF(with answers)</a></li>',
-		    {# ==== START: txt type added ==== #}
+                    {# ==== START: txt type added ==== #}
                     '<li><a href="#" class="cart-down" data-type="txt" >TXT</a></li>',
                     '<li><a href="#" class="cart-down" data-type="txt" data-all="1">TXT(with answers)</a></li>',
                     {# ==== END: txt type added ==== #}
@@ -114,11 +115,28 @@
         var refresh_cart = function() {
             ul.html('');
             $.map($.jStorage.get('cart', []), function(j) {
-                var el = $('<li><a/></li>').data('id', j.id);
-                    el.find('a').attr('href', '/exercise/' + j.id + '/').text(j.title);
+                var el = $('<li><a title="Remove From Cart" class="del-cart-item" href="#">&times;</a><a/></li>').data('id', j.id).data('title', j.title);
+                    el.find('a:eq(1)').attr('href', '/exercise/' + j.id + '/').text(j.title);
                 ul.append(el);
             });
+            ul.sortable({
+                stop: function() {
+                    var items = ul.find('li').map(function(){
+                        var me = $(this);
+                        return {id: me.data('id'), title: me.data('title')};
+                    }).toArray();
+                    $.jStorage.set('cart', items);
+                }
+            });
         };
+        $('body').on('click', '.del-cart-item', function() {
+            var li = $(this).parent(), eid = li.data('id'), items = $.jStorage.get('cart', []);
+            items = $.grep(items, function(i) { return i.id != eid; });
+            $.jStorage.set('cart', items);
+            li.remove();
+            set_op_state($('.item-cart-op[data-eid="' + eid + '"]'), false);
+            return false;
+        });
         var in_cart = function(id) {
             var ret = false;
             $.map($.jStorage.get('cart', []), function(i) {
@@ -134,7 +152,7 @@
         });
         $('body').on('click', '.cart-down', function() {
             var me = $(this), uri = '/export/' + me.data('type') + '/';
-            var ids = ul.find('li').map(function(){ return $(this).data('id'); }).get().join(',');
+            var ids = ul.find('li').map(function(){ return $(this).data('id'); }).toArray().join(',');
             if (ids) {
                 uri += ids;
                 if (me.data('all'))
@@ -180,6 +198,13 @@
 </script>
 <style>
 .popover-title li a { font-size: 12px; }
+#cart-items ul {
+    list-style: none;
+    margin: 0;
+}
+.del-cart-item {
+    margin-right: 10px;
+}
 </style>
 {% if settings.USE_CUSTOM_JS %}
 <script 

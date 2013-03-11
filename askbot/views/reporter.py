@@ -2,7 +2,7 @@
 export to pdf or word
 '''
 
-import PyRTF, Image
+import PyRTF, Image, htmlentitydefs
 from StringIO import StringIO
 import os, re, urllib, datetime
 from HTMLParser import HTMLParser
@@ -10,7 +10,8 @@ from xhtml2pdf.document import pisaDocument
 from askbot.skins.loaders import get_template
 from django.conf import settings
 
-RE_LATEX = re.compile(r'(\${1,2})[^\$]+\1')
+#RE_LATEX = re.compile(r'(\${1,2})[^\$]+\1')
+RE_LATEX = re.compile(r'(!!)[^!]+\1')
 RE_STRIP = re.compile(r'<strip>(.+?)</strip>', re.S)
 RE_CODE = re.compile(r'<code>(.+?)</code>', re.S)
 RE_OL = re.compile(r'<ol>(.+?)</ol>', re.S)
@@ -18,6 +19,7 @@ RE_UL = re.compile(r'<ul>(.+?)</ul>', re.S)
 RE_LI = re.compile(r'<li>(.+?)</li>', re.S)
 RE_BLOCKQUOTE = re.compile(r'<blockquote>(.+?)</blockquote>', re.S)
 RE_STRIPTAGS = re.compile(r'[ \t]*<.+?>[ \t]*', re.S)
+RE_ENTITY = re.compile("&(\w+?);")
 
 
 def report(type, exercises, with_solutions=True, base_url='http://localhost'):
@@ -46,6 +48,7 @@ def report(type, exercises, with_solutions=True, base_url='http://localhost'):
         convetor.feed(latex2img(text))
         return convetor.get_rtf()
     else:
+        text = html_entity_decode(text)
         return html2text(text)
 
 
@@ -58,7 +61,7 @@ def _upfile_path(path, _):
 
 def _repl(obj):
     latex = obj.group(0)
-    latex = latex[2:-2] if latex[:2] == '$$' else latex[1:-1]
+    latex = latex[2:-2] if latex[:2] == '!!' else latex[1:-1]
     return '<img src="http://www.forkosh.com/mathtex.cgi?%s" /><latex>(%s)</latex>' % (urllib.quote(latex), latex)
 
 
@@ -75,8 +78,8 @@ def _repl_code(obj):
 
 def _repl_latex(obj):
     latex = obj.group(0)
-    latex = latex[2:-2] if latex[:2] == '$$' else latex[1:-1]
-    return '\n  {%s}\n' % latex
+    latex = latex[2:-2] if latex[:2] == '!!' else latex[1:-1]
+    return '\n{%s}\n' % latex
 
 
 def _repl_ul(obj):
@@ -106,6 +109,17 @@ def _repl_strip(obj):
     ret = RE_UL.sub(_repl_ul, ret)
     ret = RE_STRIPTAGS.sub('', ret)
     return ret.replace('\n', '\r\n')
+
+
+def html_entity_decode_char(m, defs=htmlentitydefs.entitydefs):
+    try:
+        return defs[m.group(1)]
+    except KeyError:
+        return m.group(0)
+
+
+def html_entity_decode(string):
+    return RE_ENTITY.sub(html_entity_decode_char, string)
 
 
 def html2text(html):
