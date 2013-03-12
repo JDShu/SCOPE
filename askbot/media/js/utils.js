@@ -16,6 +16,19 @@ var reorderFeedbackNoEmailCheckbox = function() {
 }
 $(document).ready(reorderFeedbackNoEmailCheckbox);
 
+function toggleDisplay(el, domid) {
+    var toggler = $(el);
+    $('#post-id-' + domid).toggle('fast', function() { 
+        if($(this).css('display') == 'none') {
+            toggler.addClass('toggler-hide')
+            toggler.removeClass('toggler-show');
+        } else {
+            toggler.addClass('toggler-show');
+            toggler.removeClass('toggler-hide'); 
+        }
+    });
+}
+
 //var $, scriptUrl, askbotSkin
 /**
  * attention - this function needs to be retired

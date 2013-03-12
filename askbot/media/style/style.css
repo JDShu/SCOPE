@@ -1976,9 +1976,12 @@ ul#related-tags li {
   width: 20px;
   vertical-align: top;
 }
-.exercise-page .solution-table {
+.exercise-page .solution {
   background-color: #E1DEFE;
   margin-right: -0.75em;
+}
+.exercise-page .solution-table {
+  background-color: #E1DEFE;
   padding-top: 1em;
   padding-bottom: 2.5em;
   padding-right: 0.5em;
@@ -2559,6 +2562,21 @@ ul#related-tags li {
 }
 .exercise-page .problemed-by-owner .vote-buttons {
   margin-right: 10px;
+}
+.exercise-page .toggler {
+  font-weight: bold;
+  font-size: 14px;
+  color: #7ea9b3;
+  cursor: pointer;
+  background-position: left center;
+  background-repeat: no-repeat;
+  padding-left: 1.5em;
+}
+.exercise-page .toggler-hide {
+  background-image: url(../images/expander-arrow-show.gif);
+}
+.exercise-page .toggler-show {
+  background-image: url(../images/expander-arrow-hide.gif);
 }
 .exercise-page .problem-img-accept {
   background: url(../images/vote-accepted.png);
