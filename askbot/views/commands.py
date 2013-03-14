@@ -1425,6 +1425,12 @@ def export(request, to, ids):
             id__in=ids).select_related('thread')
         assert len(posts)
         [i.assert_is_visible_to(request.user) for i in posts]
+        p = []
+        for i in ids:
+            for j in posts:
+                if j.id == i:
+                    p.append(j)
+        posts = p
     except exceptions.ExerciseHidden, error:
         request.user.message_set.create(message = unicode(error))
         return HttpResponseRedirect(reverse('index'))

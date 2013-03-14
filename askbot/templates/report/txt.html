@@ -12,10 +12,10 @@ Download At: {{ now }}{{ '\r\n' }}{{ '\r\n' }}
 {% trans counter=obj.problems|length %}{{counter}} Problem{% pluralize %}{{counter}} Problems{% endtrans %}{{ '\r\n' }}{{ '\r\n' }}
 {% for i in obj.problems %}
 {% set answers = i.get_cached_solutions() %}
-Q{{ loop.index }}: {{ i.html|striptags|safe }}{{ '\r\n' }}
+Q{{ loop.index }}: <strip>{{ i.html|safe }}</strip>{{ '\r\n' }}
 {% if with_answers and answers %}
 {% for j in answers %}
-  A{{ loop.index }}: {{ j.html|striptags|safe }}{{ '\r\n' }}
+  A{{ loop.index }}: <strip>{{ j.html|safe }}</strip>{{ '\r\n' }}
 {% endfor %}
 {% endif %}
 {{ '\r\n' }}
