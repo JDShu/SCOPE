@@ -3,7 +3,9 @@
     {# Make old URL anchors/hashes work #}
     <a class="old_problem_id_anchor" name="{{ problem.old_problem_id }}"></a>
 {% endif %}
+<div class="problem toggler toggler-hide" onclick="toggleDisplay(this, {{ problem.id }});">[Problem]</div>
 <div
+        style="display:none"
         id="post-id-{{ problem.id }}"
         class="{{ macros.problem_classes(problem, exercise) }}">
     <div class="vote-buttons">
