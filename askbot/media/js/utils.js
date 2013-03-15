@@ -16,7 +16,7 @@ var reorderFeedbackNoEmailCheckbox = function() {
 }
 $(document).ready(reorderFeedbackNoEmailCheckbox);
 
-function toggleDisplay(el, domid) {
+var toggleDisplay = function(el, domid) {
     var toggler = $(el);
     $('#post-id-' + domid).toggle('fast', function() { 
         if($(this).css('display') == 'none') {
@@ -28,6 +28,34 @@ function toggleDisplay(el, domid) {
         }
     });
 }
+
+var setDownloadLinkTarget = function() {
+    var url = $('#select-download-type-dd').attr('value');
+    if(url == false || url == "false") {
+        $('#exercise-download-btn').attr('href', "javascript:void(0)");
+        return;
+    }
+        
+    if($('#include-solutions-cb').is(':checked'))
+        url += "?all=1";
+    $('#exercise-download-btn').attr('href', url);
+}
+var setDownloadLinkTarget = function() {
+    if($('#include-solutions-cb').is(':checked')) {
+        $('.download a').each(function() {
+            $(this).querystring({all: 1});
+        });
+    } else {
+        $('.download a').each(function() {
+            var qs = $(this).querystring();
+            delete qs["all"];
+            $(this).querystring(qs,true);
+        });
+    }
+}
+$('document').ready(setDownloadLinkTarget);
+$('document').ready(function() {$('#select-download-type-dd,#include-solutions-cb').change(setDownloadLinkTarget); });
+
 
 //var $, scriptUrl, askbotSkin
 /**

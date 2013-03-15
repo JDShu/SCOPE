@@ -4299,3 +4299,15 @@ textarea.tipped-input {
 .showCart {
   margin-bottom: 0.5em;
 }
+ul.download {
+  width: 125px;
+}
+ul.download li {
+  list-style-type: none;
+  background-position: left center;
+  background-repeat: no-repeat;
+  padding-left: 2em;
+  color: #707070;
+  font-size: 14px;
+  font-family: 'Open Sans Condensed', Arial, sans-serif;
+}

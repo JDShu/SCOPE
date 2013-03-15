@@ -1149,10 +1149,10 @@ util.prompt = function(text, defaultInputText, makeLinkMarkdown, dialogType){
             }
             
             if (isButtonUsed('latexdisplay')) {
-                var spacer4 = document.createElement("li");
-                spacer4.className = "wmd-spacer";
-                spacer4.id = "wmd-spacer3";
-                buttonRow.appendChild(spacer4);
+                var spacer3 = document.createElement("li");
+                spacer3.className = "wmd-spacer";
+                spacer3.id = "wmd-spacer3";
+                buttonRow.appendChild(spacer3);
                 
                 var latexDisplayButton = document.createElement("li");
                 latexDisplayButton.className = "wmd-button";
@@ -1176,10 +1176,10 @@ util.prompt = function(text, defaultInputText, makeLinkMarkdown, dialogType){
             }
 			
             if (isButtonUsed('undo')){
-                var spacer3 = document.createElement("li");
-                spacer3.className = "wmd-spacer";
-                spacer3.id = "wmd-spacer3";
-                buttonRow.appendChild(spacer3); 
+                var spacer4 = document.createElement("li");
+                spacer4.className = "wmd-spacer";
+                spacer4.id = "wmd-spacer3";
+                buttonRow.appendChild(spacer4); 
                 
                 var undoButton = document.createElement("li");
                 undoButton.className = "wmd-button";
