@@ -39,6 +39,8 @@ Attacklab.wmdBase = function(){
     var toolbar_bulleted_label = gettext('bulleted list') + " <ul> Ctrl-U";
     var toolbar_heading_label = gettext('heading') + " <h1>/<h2> Ctrl-H";
     var toolbar_horizontal_label = gettext('horizontal bar') + " <hr> Ctrl-R";
+    var toolbar_latexdisplay_label = gettext('Mathematical Equation') + " [[math]]";
+    var toolbar_latexinline_label = gettext('Inline Mathematical Expression') + " [[$ $]]";
     var toolbar_undo_label = gettext('undo') + " Ctrl-Z";
     var toolbar_redo_label = gettext('redo') + " Ctrl-Y";
     
@@ -1145,6 +1147,33 @@ util.prompt = function(text, defaultInputText, makeLinkMarkdown, dialogType){
                 setupButton(hrButton, true);
                 buttonRow.appendChild(hrButton); 
             }
+            
+            if (isButtonUsed('latexdisplay')) {
+                var spacer4 = document.createElement("li");
+                spacer4.className = "wmd-spacer";
+                spacer4.id = "wmd-spacer3";
+                buttonRow.appendChild(spacer4);
+                
+                var latexDisplayButton = document.createElement("li");
+                latexDisplayButton.className = "wmd-button";
+                latexDisplayButton.id = "wmd-latexdisplay-button";
+                latexDisplayButton.title = toolbar_latexdisplay_label;
+                latexDisplayButton.XShift = "-220px";
+                latexDisplayButton.textOp = command.doLatexDisplay;
+                setupButton(latexDisplayButton, true);
+                buttonRow.appendChild(latexDisplayButton); 
+            }
+            
+            if (isButtonUsed('latexinline')) {
+                var latexInlineButton = document.createElement("li");
+                latexInlineButton.className = "wmd-button";
+                latexInlineButton.id = "wmd-latexinline-button";
+                latexInlineButton.title = toolbar_latexinline_label;
+                latexInlineButton.XShift = "-240px";
+                latexInlineButton.textOp = command.doLatexInline;
+                setupButton(latexInlineButton, true);
+                buttonRow.appendChild(latexInlineButton); 
+            }
 			
             if (isButtonUsed('undo')){
                 var spacer3 = document.createElement("li");
@@ -1156,7 +1185,7 @@ util.prompt = function(text, defaultInputText, makeLinkMarkdown, dialogType){
                 undoButton.className = "wmd-button";
                 undoButton.id = "wmd-undo-button";
                 undoButton.title = toolbar_undo_label;
-                undoButton.XShift = "-220px";
+                undoButton.XShift = "-260px";
                 undoButton.execute = function(manager){
                     manager.undo();
                 };
@@ -1174,7 +1203,7 @@ util.prompt = function(text, defaultInputText, makeLinkMarkdown, dialogType){
                     // mac and other non-Windows platforms
                     redoButton.title = gettext('redo') + " - Ctrl+Shift+Z";
                 }
-                redoButton.XShift = "-240px";
+                redoButton.XShift = "-280px";
                 redoButton.execute = function(manager){
                     manager.redo();
                 };
@@ -1186,7 +1215,7 @@ util.prompt = function(text, defaultInputText, makeLinkMarkdown, dialogType){
 			var helpButton = document.createElement("li");
 			helpButton.className = "wmd-button";
 			helpButton.id = "wmd-help-button";
-			helpButton.XShift = "-240px";
+			helpButton.XShift = "-280px";
 			helpButton.isHelp = true;
 			
 			var helpAnchor = document.createElement("a");
@@ -2465,6 +2494,20 @@ util.prompt = function(text, defaultInputText, makeLinkMarkdown, dialogType){
 		chunk.selection = "";
 		chunk.skipLines(2, 1, true);
 	}
+	
+	command.doLatexDisplay = function(chunk, postProcessing) {
+	    chunk.startTag = "[[math]]\n";
+	    if(!chunk.selection)
+	        chunk.selection = "insert LaTeX equation here";
+	    chunk.endTag = "\n[[/math]]";
+	}
+	
+	command.doLatexInline = function(chunk, postProcessing) {
+	    chunk.startTag = "[[$ ";
+	    if(!chunk.selection)
+	        chunk.selection = "insert LaTeX equation here";
+	    chunk.endTag = " $]]";
+	}
 };
 
 
@@ -2496,7 +2539,7 @@ if(!Attacklab.wmd)
 			mergeEnv(top["wmd_options"]);
 			Attacklab.full = true;
 			
-			var defaultButtons = "bold italic link blockquote code image attachment ol ul heading hr";
+			var defaultButtons = "bold italic link blockquote code image attachment ol ul heading hr latexdisplay latexinline";
 			Attacklab.wmd_env.buttons = Attacklab.wmd_env.buttons || defaultButtons;
 		};
 		Attacklab.loadEnv();
