@@ -6,7 +6,9 @@
 </div>
 {% endif %}
 
-{% include "widgets/cart_button.html" %}
+{% if request.user.is_authenticated() %}
+    {% include "widgets/cart_button.html" %}
+{% endif %}
 
 {% if contributors and settings.SIDEBAR_MAIN_SHOW_AVATARS %}
     {% include "widgets/contributors.html" %}
