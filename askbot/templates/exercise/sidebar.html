@@ -5,7 +5,9 @@
 </div>
 {% endif %}
 
-{% include "widgets/cart_button.html" %}
+{% if request.user.is_authenticated() %}
+    {% include "widgets/cart_button.html" %}
+{% endif %}
 
 <div class="box vote-buttons">
     <h2 >{% trans %}Exercise tools{% endtrans %}</h2>

@@ -21,6 +21,11 @@ RE_BLOCKQUOTE = re.compile(r'<blockquote>(.+?)</blockquote>', re.S)
 RE_STRIPTAGS = re.compile(r'[ \t]*<.+?>[ \t]*', re.S)
 RE_ENTITY = re.compile("&(\w+?);")
 
+RE_LATEX_INLINE1 = re.compile(r'\[\[\$.+?\$\]\]', re.S)
+RE_LATEX_INLINE2 = re.compile(r'\\\(.+?\\\)', re.S)
+RE_LATEX_BLOCK1 = re.compile(r'\[\[math\]\].+?\[\[\/math\]\]', re.S)
+RE_LATEX_BLOCK2 = re.compile(r'\\\[.+?\\\]', re.S)
+
 
 def report(type, exercises, with_solutions=True, base_url='http://localhost'):
     '''
@@ -65,11 +70,58 @@ def _repl(obj):
     return '<img src="http://www.forkosh.com/mathtex.cgi?%s" /><latex>(%s)</latex>' % (urllib.quote(latex), latex)
 
 
+def _repl_inline_block(obj):
+    latex = obj.group(0)
+    inline = True
+
+    if latex[:3] == '[[$':
+        latex = latex[3:-3]
+    elif latex[:2] == '\\(':
+        latex = latex[2:-2]
+    elif latex[:8] == '[[math]]':
+        latex = latex[8:-9]
+        inline = False
+    elif latex[:2] == '\\[':
+        latex = latex[2:-2]
+        inline = False
+
+    ret = '<img src="http://www.forkosh.com/mathtex.cgi?%s" /><latex>(%s)</latex>' % (urllib.quote(latex), latex)
+    if not inline:
+        ret = '<div><p class="center">%s</p></div>' % ret
+    return ret
+
+
+def _repl_inline_block2(obj):
+    latex = obj.group(0)
+    inline = True
+
+    if latex[:3] == '[[$':
+        latex = '$%s$' % latex[3:-3]
+    elif latex[:2] == '\\(':
+        latex = latex[2:-2]
+    elif latex[:8] == '[[math]]':
+        latex = '\\begin{equation}%s\\end{equation}' % latex[8:-9]
+        inline = False
+    elif latex[:2] == '\\[':
+        latex = latex[2:-2]
+        inline = False
+
+    latex = ' %s ' % latex
+    if not inline:
+        latex = '\n%s%s\n' % (' ' * 10,  latex)
+    return latex
+
+
 def latex2img(html):
     '''
     find and replace latex expr to html img
     '''
-    return RE_LATEX.sub(_repl, html)
+    #return RE_LATEX.sub(_repl, html)
+    ret = RE_LATEX_INLINE1.sub(_repl_inline_block, html)
+    ret = RE_LATEX_INLINE2.sub(_repl_inline_block, ret)
+    ret = RE_LATEX_BLOCK1.sub(_repl_inline_block, ret)
+    ret = RE_LATEX_BLOCK2.sub(_repl_inline_block, ret)
+    return ret
 
 
 def _repl_code(obj):
@@ -104,7 +156,12 @@ def _repl_li(obj):
 def _repl_strip(obj):
     ret = RE_CODE.sub(_repl_code, obj.group(1))
     ret = RE_BLOCKQUOTE.sub(_repl_code, ret)
-    ret = RE_LATEX.sub(_repl_latex, ret)
+
+    ret = RE_LATEX_INLINE1.sub(_repl_inline_block2, ret)
+    ret = RE_LATEX_INLINE2.sub(_repl_inline_block2, ret)
+    ret = RE_LATEX_BLOCK1.sub(_repl_inline_block2, ret)
+    ret = RE_LATEX_BLOCK2.sub(_repl_inline_block2, ret)
+
     ret = RE_OL.sub(_repl_ol, ret)
     ret = RE_UL.sub(_repl_ul, ret)
     ret = RE_STRIPTAGS.sub('', ret)
