@@ -1,4 +1,4 @@
-{% if active_tab != "ask" %}
+
 	{% if not search_state %} {# get empty SearchState() if there's none #}
         {% set search_state=search_state|get_empty_search_state %}
     {% endif %}
@@ -17,6 +17,4 @@
 		title="{% trans %}search results{% endtrans %}"
 		style="{% if not query %}display:none{% endif %}"
         href="{{ search_state.change_scope('all').full_url() }}">{% trans %}SEARCH{% endtrans %}</a>
-{% else %}
-    <div class="scope-selector ask-message">{% trans %}Please add your exercise here{% endtrans %}</div>
-{% endif %}
+

@@ -7,28 +7,6 @@
 {% else %}
     <a class="exercise-close" href="{% url close exercise.id %}">{% trans %}close{% endtrans %}</a>
 {% endif %}
-{% if exercise.offensive_flag_count > 0 %}
-    <span 
-        id="exercise-offensive-remove-flag-{{ exercise.id }}"
-        class="offensive-flag"
-        title="{% trans %}report as offensive (i.e containing spam, advertising, malicious text, etc.){% endtrans %}"
-    >
-        <a class="exercise-flag">{% trans %}remove flag{% endtrans %}</a>
-    </span>
-    <span 
-        id="exercise-offensive-flag-{{ exercise.id }}" class="offensive-flag"
-        title="{% trans %}report as offensive (i.e containing spam, advertising, malicious text, etc.){% endtrans %}"
-    >
-        <a class="exercise-flag">{% trans %}flag offensive{% endtrans %} ({{ exercise.offensive_flag_count }})</a>
-    </span>
-{% else %}
-    <span 
-        id="exercise-offensive-flag-{{ exercise.id }}" class="offensive-flag"
-        title="{% trans %}report as offensive (i.e containing spam, advertising, malicious text, etc.){% endtrans %}"
-    >
-        <a class="exercise-flag">{% trans %}flag offensive{% endtrans %}</a>
-    </span>
-{% endif %}
 <script type="text/javascript">
     var retagUrl = "{% url retag_exercise exercise.id %}";
 </script>
