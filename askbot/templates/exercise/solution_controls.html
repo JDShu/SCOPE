@@ -21,30 +21,6 @@
     <a class="exercise-delete"
     >{% if solution.deleted %}{% trans %}undelete{% endtrans %}{% else %}{% trans %}delete{% endtrans %}{% endif %}</a>
 </span>
-{% if solution.offensive_flag_count > 0 %}
-<span
-    id="solution-offensive-remove-flag-{{ solution.id }}"
-    class="action-link offensive-flag"
-    title="{% trans %}remove offensive flag{% endtrans %}"
->
-    <a class="exercise-flag">{% trans %}remove flag{% endtrans %}</a>
-</span>
-<span
-    id="amswer-offensive-flag-{{ solution.id }}"
-    class="action-link offensive-flag"
-    title="{% trans %}report as offensive (i.e containing spam, advertising, malicious text, etc.){% endtrans %}"
->
-    <a class="exercise-flag">{% trans %}flag offensive{% endtrans %} ({{ solution.offensive_flag_count }})</a>
-</span>
-{% else %}
-<span
-    id="solution-offensive-flag-{{ solution.id }}"
-    class="action-link offensive-flag"
-    title="{% trans %}report as offensive (i.e containing spam, advertising, malicious text, etc.){% endtrans %}"
->
-    <a class="exercise-flag">{% trans %}flag offensive{% endtrans %}</a>
-</span>
-{% endif %}
 <span id='post-{{solution.id}}-edit' class="action-link">
     <a class="exercise-edit" href="{% url edit_solution solution.id %}">{% trans %}edit{% endtrans %}</a>
 </span>
