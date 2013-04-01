@@ -2,6 +2,7 @@
 <form id="fmask" action="" method="post" >{% csrf_token %}
     <div class="form-item">
         <div id="askFormBar">
+			<h2>Please add your exercise here</h2>
             {% if not request.user.is_authenticated() %}
 <p>{% trans %}<span class=\"strong big\">You are welcome to start submitting your exercise anonymously</span>. When you submit the post, you will be redirected to the login/signup page. Your exercise will be saved in the current session and will be published after you log in. Login/signup process is very simple. Login takes about 30 seconds, initial signup takes a minute or less.{% endtrans %}</p>
             {% else %}
