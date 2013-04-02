@@ -56,6 +56,12 @@ var setDownloadLinkTarget = function() {
 $('document').ready(setDownloadLinkTarget);
 $('document').ready(function() {$('#select-download-type-dd,#include-solutions-cb').change(setDownloadLinkTarget); });
 
+var insertMathJaxHelp = function() {
+    $('#mathjax-tips').append('<li>[[$ inline equation $]]</li>');
+    $('#mathjax-tips').append('<li>[[math]] display equation [[/math]]</li>');
+    $('#mathjax-tips').append('<li>Inline space: "\\\\"</li>');
+}
+$('document').ready(insertMathJaxHelp);
 
 //var $, scriptUrl, askbotSkin
 /**
