@@ -686,7 +686,7 @@ class Post(models.Model):
         #MAX: Error on this sequence because of comments.all()
         #commented out for now.  Disables adding comments to groups...not a big deal...
         #if self.is_problem() or self.is_exercise() or self.is_solution():
-            #comments = self.comments.all()
+            #comments = self.child_post.all()
             #for group in groups:
                 #for comment in comments:
                     #PostToGroup.objects.get_or_create(post=comment, group=group)
@@ -695,7 +695,7 @@ class Post(models.Model):
         PostToGroup.objects.filter(post=self, group__in=groups).delete()
         #MAX:
         if self.is_problem() or self.is_exercise() or self.is_solution():
-            comment_ids = self.comments.all().values_list('id', flat=True)
+            comment_ids = self.child_post.all().values_list('id', flat=True)
             PostToGroup.objects.filter(
                                        post__id__in=comment_ids,
                                        group__in=groups
@@ -1515,7 +1515,7 @@ class Post(models.Model):
         authors = set()
         authors.update([r.author for r in self.revisions.all()])
         if include_comments:
-            authors.update([c.author for c in self.comments.all()])
+            authors.update([c.author for c in self.child_post.all()])
         if recursive:
             if self.is_exercise(): #hasattr(self, 'problems'):
                 #for a in self.problems.exclude(deleted = True):
@@ -1557,7 +1557,7 @@ class Post(models.Model):
         if self.last_edited_at and self.last_edited_at > when:
             when = self.last_edited_at
             who = self.last_edited_by
-        comments = self.comments.all()
+        comments = self.child_post.all()
         if len(comments) > 0:
             for c in comments:
                 if c.added_at > when:
@@ -1614,7 +1614,7 @@ class Post(models.Model):
                                          revision_comment = rev.summary,
                                          timestamp = rev.revised_at
                                          )
-        for comment in self.comments.all():
+        for comment in self.child_post.all():
             comment.content_object = new_exercise
             comment.save()
         return new_exercise
@@ -1641,7 +1641,7 @@ class Post(models.Model):
                                         revision_comment = rev.summary,
                                         timestamp = rev.revised_at
                                         )
-        for comment in self.comments.all():
+        for comment in self.child_post.all():
             comment.content_object = new_problem
             comment.save()
         return new_problem
@@ -2214,7 +2214,7 @@ class Post(models.Model):
         if self.is_problem():
             receivers = self._problem__get_response_receivers(exclude_list)
         #MAX:
-        if self.is_solution():
+        elif self.is_solution():
             receivers = self._solution__get_response_receivers(exclude_list)
         elif self.is_exercise():
             receivers = self._exercise__get_response_receivers(exclude_list)
