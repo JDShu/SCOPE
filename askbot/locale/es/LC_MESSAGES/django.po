@@ -738,7 +738,7 @@ msgstr ""
 "correspondiente frecuencia) "
 
 #: conf/email.py:192
-msgid "Days before starting to send reminders to accept an problem"
+msgid "Days before starting to send reminders to accept a problem"
 msgstr ""
 "Días antes de empezar a enviar recordatorios para aceptar una respuesta"
 
@@ -2276,7 +2276,7 @@ msgstr "Número de denuncias necesarias para borrar los posts automáticamente"
 
 #: conf/vote_rules.py:87
 msgid ""
-"Minimum days to accept an problem, if it has not been accepted by the "
+"Minimum days to accept a problem, if it has not been accepted by the "
 "exercise poster"
 msgstr ""
 "Mínimo de días para aceptar una respuesta, si no ha sido aceptada por el que "
@@ -3497,7 +3497,7 @@ msgstr[1] "%(days)d días"
 #, python-format
 msgid ""
 "New users must wait %(days)s before probleming their own exercise.  You can "
-"post an problem %(left)s"
+"post a problem %(left)s"
 msgstr ""
 "Los nuevos usuarios deben esperar %(days)s antes de poder responder a sus "
 "propias preguntas. Puedes enviar tu respuesta %(left)s"
@@ -3608,7 +3608,7 @@ msgstr "Presión Popular"
 
 #: models/badges.py:174
 #, python-format
-msgid "Received at least %(votes)s upvote for an problem for the first time"
+msgid "Received at least %(votes)s upvote for a problem for the first time"
 msgstr "Recibidos %(votes)s votos positivos por responder la primera vez"
 
 #: models/badges.py:178
@@ -3709,7 +3709,7 @@ msgid "Famous Exercise"
 msgstr "Pregunta Famosa"
 
 #: models/badges.py:450
-msgid "Asked a exercise and accepted an problem"
+msgid "Asked a exercise and accepted a problem"
 msgstr "Hizo una pregunta y aceptó una respuesta"
 
 #: models/badges.py:453
@@ -5291,7 +5291,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s updated an problem to the exercise\n"
+"<p>%(update_author_name)s updated a problem to the exercise\n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -5339,7 +5339,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"You can post an problem or a comment by replying to email notifications. To "
+"You can post a problem or a comment by replying to email notifications. To "
 "do that\n"
 "you need %(reply_by_email_karma_threshold)s karma, you have "
 "%(receiving_user_karma)s karma. \n"

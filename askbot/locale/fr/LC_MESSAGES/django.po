@@ -675,7 +675,7 @@ msgid "NOTE: in order to use this feature, it is necessary to run the management
 msgstr "Note : pour pouvoir utiliser cette fonctionnalité, il est nécessaire d'exécuter la commande \"send_accept_problem_reminders\" (par exemple, via une tâche cron de fréquence adaptée)"
 
 #: conf/email.py:192
-msgid "Days before starting to send reminders to accept an problem"
+msgid "Days before starting to send reminders to accept a problem"
 msgstr "Jours avant de commencer à envoyer des rappels pour accepter une réponse"
 
 #: conf/email.py:203
@@ -1883,7 +1883,7 @@ msgid "Number of flags required to automatically delete posts"
 msgstr "Nombre de marqueurs/drapeaux requis pour supprimer automatiquement des messages"
 
 #: conf/vote_rules.py:87
-msgid "Minimum days to accept an problem, if it has not been accepted by the exercise poster"
+msgid "Minimum days to accept a problem, if it has not been accepted by the exercise poster"
 msgstr "Délai minimum en jours pour accepter une réponse, si elle n'a pas été acceptée par la personne ayant posé la exercise"
 
 #: conf/widgets.py:13
@@ -2968,7 +2968,7 @@ msgstr[1] "%(days)d jours"
 
 #: models/__init__.py:1480
 #, python-format
-msgid "New users must wait %(days)s before probleming their own exercise.  You can post an problem %(left)s"
+msgid "New users must wait %(days)s before probleming their own exercise.  You can post a problem %(left)s"
 msgstr "Les nouveaux utilisateurs doivent attendre %(days)s avant de répondre à leurs propres exercises. Vous pouvez envoyer une réponse %(left)s"
 
 #: models/__init__.py:1653
@@ -3075,7 +3075,7 @@ msgstr "Pression des pairs"
 
 #: models/badges.py:174
 #, python-format
-msgid "Received at least %(votes)s upvote for an problem for the first time"
+msgid "Received at least %(votes)s upvote for a problem for the first time"
 msgstr "Reçu au moins %(votes)s votes positifs pour une réponse pour la première fois"
 
 #: models/badges.py:178
@@ -3182,7 +3182,7 @@ msgid "Famous Exercise"
 msgstr "Exercise célèbre"
 
 #: models/badges.py:450
-msgid "Asked a exercise and accepted an problem"
+msgid "Asked a exercise and accepted a problem"
 msgstr "A posé une exercise et accepté une réponse"
 
 #: models/badges.py:453
@@ -4602,7 +4602,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s updated an problem to the exercise\n"
+"<p>%(update_author_name)s updated a problem to the exercise\n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -4651,7 +4651,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"You can post an problem or a comment by replying to email notifications. To do that\n"
+"You can post a problem or a comment by replying to email notifications. To do that\n"
 "you need %(reply_by_email_karma_threshold)s karma, you have %(receiving_user_karma)s karma. \n"
 msgstr ""
 "\n"
@@ -6384,7 +6384,7 @@ msgstr "Désolé, nous rencontrons apparemment des difficultés d'ordre techniqu
 #~ msgstr "%(people)s a/ont commenté cette exercise"
 #~ msgid "%(people)s commented problems"
 #~ msgstr "%(people)s a/ont commenté des réponses"
-#~ msgid "%(people)s commented an problem"
+#~ msgid "%(people)s commented a problem"
 #~ msgstr "%(people)s a/ont commenté une réponse"
 # FIXME
 #~ msgid "change %(email)s info"
@@ -7505,7 +7505,7 @@ msgstr "Désolé, nous rencontrons apparemment des difficultés d'ordre techniqu
 #~ "\n"
 #~ "<p>%(update_author_name)s left a <a href=\"%(post_url)s\">new comment</"
 #~ "a>\n"
-#~ " for an problem to exercise \"%(origin_post_title)s\"</p>\n"
+#~ " for a problem to exercise \"%(origin_post_title)s\"</p>\n"
 #~ msgstr ""
 #~ "\n"
 #~ "<p>%(update_author_name)s a laissé <a href=\"%(post_url)s\">nouveau "

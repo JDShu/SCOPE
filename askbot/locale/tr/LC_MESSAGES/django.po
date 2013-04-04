@@ -741,7 +741,7 @@ msgstr ""
 
 #: conf/email.py:192
 #, fuzzy
-msgid "Days before starting to send reminders to accept an problem"
+msgid "Days before starting to send reminders to accept a problem"
 msgstr "Harika! Cevapsız bir soru bile kalmamış..."
 
 #: conf/email.py:203
@@ -2188,7 +2188,7 @@ msgstr "Gönderiyi otomatik olarak silmek için gerekli olumsuz bildirim sayıs�
 
 #: conf/vote_rules.py:87
 msgid ""
-"Minimum days to accept an problem, if it has not been accepted by the "
+"Minimum days to accept a problem, if it has not been accepted by the "
 "exercise poster"
 msgstr ""
 
@@ -3365,7 +3365,7 @@ msgstr[1] ""
 #, python-format
 msgid ""
 "New users must wait %(days)s before probleming their own exercise.  You can "
-"post an problem %(left)s"
+"post a problem %(left)s"
 msgstr ""
 
 #: models/__init__.py:1653 skins/default/templates/feedback_email.txt:9
@@ -3476,7 +3476,7 @@ msgstr "Çevre baskısı"
 
 #: models/badges.py:174
 #, python-format
-msgid "Received at least %(votes)s upvote for an problem for the first time"
+msgid "Received at least %(votes)s upvote for a problem for the first time"
 msgstr ""
 
 #: models/badges.py:178
@@ -3583,7 +3583,7 @@ msgstr "Ünlü soru"
 
 #: models/badges.py:450
 #, fuzzy
-msgid "Asked a exercise and accepted an problem"
+msgid "Asked a exercise and accepted a problem"
 msgstr "Kabul edilmiş cevabı olmayan soru"
 
 #: models/badges.py:453
@@ -5141,7 +5141,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s updated an problem to the exercise\n"
+"<p>%(update_author_name)s updated a problem to the exercise\n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -5189,7 +5189,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"You can post an problem or a comment by replying to email notifications. To "
+"You can post a problem or a comment by replying to email notifications. To "
 "do that\n"
 "you need %(reply_by_email_karma_threshold)s karma, you have "
 "%(receiving_user_karma)s karma. \n"
@@ -7048,7 +7048,7 @@ msgstr "Özür dileriz, bazı teknik sorunlar yaşıyoruz"
 #~ "  \n"
 #~ "%(people)s cevaba yorum yazdı"
 
-#~ msgid "%(people)s commented an problem"
+#~ msgid "%(people)s commented a problem"
 #~ msgstr "%(people)s bir cevabı yorumladı"
 
 #~ msgid "change %(email)s info"
@@ -8287,7 +8287,7 @@ msgstr "Özür dileriz, bazı teknik sorunlar yaşıyoruz"
 #~ "\n"
 #~ "<p>%(update_author_name)s left a <a href=\"%(post_url)s\">new comment</"
 #~ "a>\n"
-#~ " for an problem to exercise \"%(origin_post_title)s\"</p>\n"
+#~ " for a problem to exercise \"%(origin_post_title)s\"</p>\n"
 #~ msgstr ""
 #~ "\n"
 #~ "<p>%(update_author_name)s, \"%(origin_post_title)s\" sorusunun bir cevabı "
