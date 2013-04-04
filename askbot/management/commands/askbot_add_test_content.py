@@ -161,12 +161,12 @@ class Command(NoArgsCommand):
                 if not active_problem is None:
                     if last_vote:
                         user.downvote(active_problem)
-                        self.print_if_verbose("%s downvoted an problem"%(
+                        self.print_if_verbose("%s downvoted a problem"%(
                                             user.username
                                         ))
                     else:
                         user.upvote(active_problem)
-                        self.print_if_verbose("%s upvoted an problem"%(
+                        self.print_if_verbose("%s upvoted a problem"%(
                                             user.username
                                         ))
                     last_vote = ~last_vote
@@ -176,7 +176,7 @@ class Command(NoArgsCommand):
                         body_text = PROBLEM_TEMPLATE,
                         follow = True
                     )
-                self.print_if_verbose("%s posted an problem to the active exercise"%(
+                self.print_if_verbose("%s posted a problem to the active exercise"%(
                                             user.username
                                         ))
                 # Upvote the active exercise
@@ -211,7 +211,7 @@ class Command(NoArgsCommand):
                                     parent_post = active_problem,
                                     body_text = COMMENT_TEMPLATE
                                 )
-            self.print_if_verbose("%s posted an problem comment"%user.username)
+            self.print_if_verbose("%s posted a problem comment"%user.username)
 
             # Upvote the active problem
             user.upvote(active_problem)

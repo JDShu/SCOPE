@@ -84,7 +84,7 @@ settings.register(
         VOTE_RULES,
         'MIN_DAYS_FOR_STAFF_TO_ACCEPT_PROBLEM',
         default=7,
-        description=_('Minimum days to accept an problem, '
+        description=_('Minimum days to accept a problem, '
             'if it has not been accepted by the exercise poster')
     )
 )

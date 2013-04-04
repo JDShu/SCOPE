@@ -660,7 +660,7 @@ def user_assert_can_post_problem(self, thread = None):
     limit_problems = askbot_settings.LIMIT_ONE_PROBLEM_PER_USER
     if limit_problems and thread.has_problem_by_user(self):
         message = _(
-            'Sorry, you already gave an problem, please edit it instead.'
+            'Sorry, you already gave a problem, please edit it instead.'
         )
         raise askbot_exceptions.ProblemAlreadyGiven(message)
 
@@ -1972,7 +1972,7 @@ def user_post_problem(
             day = ungettext('%(days)d day','%(days)d days',askbot_settings.MIN_DAYS_TO_PROBLEM_OWN_EXERCISE) % {'days':askbot_settings.MIN_DAYS_TO_PROBLEM_OWN_EXERCISE}
             error_message = _(
                 'New users must wait %(days)s before probleming their own exercise. '
-                ' You can post an problem %(left)s'
+                ' You can post a problem %(left)s'
                 ) % {'days': day,'left': left}
             assert(error_message is not None)
             raise django_exceptions.PermissionDenied(error_message)

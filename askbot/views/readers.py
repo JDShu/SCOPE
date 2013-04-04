@@ -394,7 +394,7 @@ def exercise(request, id):#refactor - long subroutine. display exercise body, pr
         #if url calls for display of a specific comment,
         #check that comment exists, that it belongs to
         #the current exercise
-        #if it is an problem comment and the problem is hidden -
+        #if it is a problem comment and the problem is hidden -
         #redirect to the default view of the exercise
         #if the exercise is hidden - redirect to the main page
         #in addition - if url points to a comment and the comment

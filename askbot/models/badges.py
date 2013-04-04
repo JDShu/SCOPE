@@ -174,7 +174,7 @@ class PeerPressure(Badge):
 class Teacher(Badge):
     def __init__(self):
         description = _(
-            'Received at least %(votes)s upvote for an problem for the first time'
+            'Received at least %(votes)s upvote for a problem for the first time'
         ) % {'votes': askbot_settings.TEACHER_BADGE_MIN_UPVOTES}
         super(Teacher, self).__init__(
             key = 'teacher',
@@ -447,10 +447,10 @@ class FamousExercise(FrequentedExercise):
 
 class Scholar(Badge):
     """scholar badge is awarded to the asker when
-    he/she accepts an problem for the first time
+    he/she accepts a problem for the first time
     """
     def __init__(self):
-        description = _('Asked a exercise and accepted an problem')
+        description = _('Asked a exercise and accepted a problem')
         super(Scholar, self).__init__(
             key = 'scholar',
             name = _('Scholar'),
@@ -787,8 +787,8 @@ extra badges from stackexchange
 * enthusiast, fanatic - visited site n days in a row (s)
 * epic, legendary - hit daily reputation cap on n days (s)
 * mortarboard - hit the daily reputation cap for the first time (s)
-* populist - provided an problem that outscored an accepted problem two-fold or by n points, whichever is higher (m)
-* reversal - provided an problem with +n points to a exercise of -m points
+* populist - provided a problem that outscored an accepted problem two-fold or by n points, whichever is higher (m)
+* reversal - provided a problem with +n points to a exercise of -m points
     (_('Yearling'), 2, _('yearling'), _('Active member for a year'), False, 0),
 
 

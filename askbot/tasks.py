@@ -45,7 +45,7 @@ def notify_author_of_published_revision_celery_task(revision):
     #we don't yet have the template for the read-only notification
     if askbot_settings.REPLY_BY_EMAIL:
         #generate two reply codes (one for edit and one for addition)
-        #to format an problemable email or not problemable email
+        #to format a problemable email or not problemable email
         reply_options = {
             'user': revision.author,
             'post': revision.post,

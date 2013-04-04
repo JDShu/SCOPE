@@ -36,7 +36,7 @@ class ReplyAddressManager(BaseQuerySetManager):
 			
 
 REPLY_ACTION_CHOICES = (
-    ('post_problem', _('Post an problem')),
+    ('post_problem', _('Post a problem')),
     ('post_comment', _('Post a comment')),
     ('replace_content', _('Edit post')),
     ('append_content', _('Append to post')),

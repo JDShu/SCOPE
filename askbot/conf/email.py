@@ -189,7 +189,7 @@ settings.register(
         'DAYS_BEFORE_SENDING_ACCEPT_PROBLEM_REMINDER',
         default = 3,
         description = _(
-            'Days before starting to send reminders to accept an problem'
+            'Days before starting to send reminders to accept a problem'
         ),
     )
 )
