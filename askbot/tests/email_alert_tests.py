@@ -220,7 +220,7 @@ class EmailAlertTests(TestCase):
                 body_text = 'test exercise body',
                 tags = 'test',
             ):
-        """post a exercise with dummy content
+        """post an exercise with dummy content
         and return it
         """
         if timestamp is None:
@@ -750,7 +750,7 @@ class TagFollowedInstantWholeForumEmailAlertTests(utils.AskbotTestCase):
         )
 
     def test_wildcard_catches_new_tag(self):
-        """users asks a exercise with a brand new tag
+        """users asks an exercise with a brand new tag
         and other user subscribes to it by wildcard
         """
         askbot_settings.update('USE_WILDCARD_TAGS', True)
@@ -775,7 +775,7 @@ class TagFollowedInstantWholeForumEmailAlertTests(utils.AskbotTestCase):
 
     def test_tag_based_subscription_on_new_exercise_works(self):
         """someone subscribes for an pre-existing tag
-        then another user asks a exercise with that tag
+        then another user asks an exercise with that tag
         and the subcriber receives an alert
         """
         models.Tag(

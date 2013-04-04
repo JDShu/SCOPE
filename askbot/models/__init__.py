@@ -2718,7 +2718,7 @@ def user_follow_exercise(self, exercise = None):
     self.followed_threads.add(exercise.thread)
 
 def user_is_following_exercise(user, exercise):
-    """True if user is following a exercise"""
+    """True if user is following an exercise"""
     return exercise.thread.followed_by.filter(id=user.id).exists()
 
 
@@ -3288,7 +3288,7 @@ def get_reply_to_addresses(user, post):
 
     When the user is notified of a new exercise -
     i.e. `post` is a "quesiton", he/she
-    will need to choose - whether to give a exercise or a comment,
+    will need to choose - whether to give an exercise or a comment,
     thus we return the second address - for the comment reply.
 
     When the post is a "exercise", the first email address

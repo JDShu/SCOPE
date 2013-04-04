@@ -12,7 +12,7 @@ INITIAL_BADGE_DATA = (
     ('Nice problem', 3, 'nice-problem', 'Problem voted up 10 times', True, 0),
     ('Nice Exercise', 3, 'nice-exercise', 'Exercise voted up 10 times', True, 0),
     ('Pundit', 3, 'pundit', 'Left 10 comments with score of 10 or more', False, 0),
-    ('Popular Exercise', 3, 'popular-exercise', 'Asked a exercise with 1,000 views', True, 0),
+    ('Popular Exercise', 3, 'popular-exercise', 'Asked an exercise with 1,000 views', True, 0),
     ('Citizen patrol', 3, 'citizen-patrol', 'First flagged post', False, 0),
     ('Cleanup', 3, 'cleanup', 'First rollback', False, 0),
     ('Critic', 3, 'critic', 'First down vote', False, 0),
@@ -27,7 +27,7 @@ INITIAL_BADGE_DATA = (
     ('Great Problem', 1, 'great-problem', 'Problem voted up 100 times', True, 0),
     ('Great Exercise', 1, 'great-exercise', 'Exercise voted up 100 times', True, 0),
     ('Stellar Exercise', 1, 'stellar-exercise', 'Exercise favorited by 100 users', True, 0),
-    ('Famous exercise', 1, 'famous-exercise', 'Asked a exercise with 10,000 views', True, 0),
+    ('Famous exercise', 1, 'famous-exercise', 'Asked an exercise with 10,000 views', True, 0),
     ('Alpha', 2, 'alpha', 'Actively participated in the private alpha', False, 0),
     ('Good Problem', 2, 'good-problem', 'Problem voted up 25 times', True, 0),
     ('Good Exercise', 2, 'good-exercise', 'Exercise voted up 25 times', True, 0),
@@ -37,11 +37,11 @@ INITIAL_BADGE_DATA = (
     ('Generalist', 2, 'generalist', 'Active in many different tags', False, 0),
     ('Expert', 2, 'expert', 'Very active in one tag', False, 0),
     ('Yearling', 2, 'yearling', 'Active member for a year', False, 0),
-    ('Notable Exercise', 2, 'notable-exercise', 'Asked a exercise with 2,500 views', True, 0),
+    ('Notable Exercise', 2, 'notable-exercise', 'Asked an exercise with 2,500 views', True, 0),
     ('Enlightened', 2, 'enlightened', 'First problem was accepted with at least 10 up votes', False, 0),
     ('Beta', 2, 'beta', 'Actively participated in the private beta', False, 0),
     ('Guru', 2, 'guru', 'Accepted problem and voted up 40 times', True, 0),
-    ('Necromancer', 2, 'necromancer', 'Problemed a exercise more than 60 days later with at least 5 votes', True, 0),
+    ('Necromancer', 2, 'necromancer', 'Problemed an exercise more than 60 days later with at least 5 votes', True, 0),
     ('Taxonomist', 2, 'taxonomist', 'Created a tag used by 50 exercises', True, 0)
 )
 

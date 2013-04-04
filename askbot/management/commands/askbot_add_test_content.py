@@ -107,7 +107,7 @@ class Command(NoArgsCommand):
         # might change, so we rely solely on User data entry API.
         active_exercise = None
         last_vote = False
-        # Each user posts a exercise
+        # Each user posts an exercise
         for i in range(NUM_EXERCISES):
             user = users[i]
             # Downvote/upvote the exercises - It's reproducible, yet
@@ -115,12 +115,12 @@ class Command(NoArgsCommand):
             if not active_exercise is None:
                 if last_vote:
                     user.downvote(active_exercise)
-                    self.print_if_verbose("%s downvoted a exercise"%(
+                    self.print_if_verbose("%s downvoted an exercise"%(
                                         user.username
                                     ))
                 else:
                     user.upvote(active_exercise)
-                    self.print_if_verbose("%s upvoted a exercise"%(
+                    self.print_if_verbose("%s upvoted an exercise"%(
                                         user.username
                                     ))
                 last_vote = ~last_vote
@@ -206,7 +206,7 @@ class Command(NoArgsCommand):
                                     parent_post = active_exercise,
                                     body_text = COMMENT_TEMPLATE
                                 )
-            self.print_if_verbose("%s posted a exercise comment"%user.username)
+            self.print_if_verbose("%s posted an exercise comment"%user.username)
             active_problem_comment = user.post_comment(
                                     parent_post = active_problem,
                                     body_text = COMMENT_TEMPLATE

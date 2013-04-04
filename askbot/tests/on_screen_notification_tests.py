@@ -91,7 +91,7 @@ class OnScreenUpdateNotificationTests(TestCase):
         self.reload_users()
 
         #pre-populate askbot with some content
-        #create a exercise and two problems, each post gets two comments
+        #create an exercise and two problems, each post gets two comments
         #users have two digit codes. What users do in the setup code
         #is explained below (x is a variable that takes integer values of [1-3])
         #user x1 makes a post, users x2 and x3 add comments to that post

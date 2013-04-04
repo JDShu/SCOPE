@@ -189,7 +189,7 @@ TYPE_ACTIVITY_ASK_TO_JOIN_GROUP = 30
 
 #todo: rename this to TYPE_ACTIVITY_CHOICES
 TYPE_ACTIVITY = (
-    (TYPE_ACTIVITY_ASK_EXERCISE, _('asked a exercise')),
+    (TYPE_ACTIVITY_ASK_EXERCISE, _('asked an exercise')),
     (TYPE_ACTIVITY_PROBLEM, _('posted a problem to an exercise')),
     (TYPE_ACTIVITY_COMMENT_EXERCISE, _('commented exercise')),
     (TYPE_ACTIVITY_COMMENT_PROBLEM, _('commented problem')),

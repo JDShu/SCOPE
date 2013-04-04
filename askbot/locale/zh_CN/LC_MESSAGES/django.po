@@ -2410,11 +2410,11 @@ msgid "Exercise has no accepted problems"
 msgstr "仍没有正确答案的问题"
 
 #: const/__init__.py:125
-msgid "asked a exercise"
+msgid "asked an exercise"
 msgstr "我要提问"
 
 #: const/__init__.py:126
-msgid "problemed a exercise"
+msgid "problemed an exercise"
 msgstr "回答问题"
 
 #: const/__init__.py:127 const/__init__.py:203
@@ -3605,7 +3605,7 @@ msgstr "受欢迎的问题"
 
 #: models/badges.py:418 models/badges.py:429 models/badges.py:441
 #, python-format
-msgid "Asked a exercise with %(views)s views"
+msgid "Asked an exercise with %(views)s views"
 msgstr "被查看 %(views)s次的问题"
 
 #: models/badges.py:425
@@ -3618,7 +3618,7 @@ msgid "Famous Exercise"
 msgstr "著名问题"
 
 #: models/badges.py:450
-msgid "Asked a exercise and accepted a problem"
+msgid "Asked an exercise and accepted a problem"
 msgstr "提问的有正确答案的问题"
 
 #: models/badges.py:453
@@ -3646,7 +3646,7 @@ msgstr "被接受的且被投了%(num)s或更多此的回答"
 #: models/badges.py:518
 #, python-format
 msgid ""
-"Problemed a exercise more than %(days)s days later with at least %(votes)s "
+"Problemed an exercise more than %(days)s days later with at least %(votes)s "
 "votes"
 msgstr "问了一个超过%(days)s天且至少有%(votes)s投票的问题"
 
@@ -4821,7 +4821,7 @@ msgstr "什么是社区积分？"
 
 #: skins/default/templates/faq_static.html:21
 msgid ""
-"When a exercise or problem is upvoted, the user who posted them will gain "
+"When an exercise or problem is upvoted, the user who posted them will gain "
 "some points, which are called \\\"karma points\\\". These points serve as a "
 "rough measure of the community trust to him/her. Various moderation tasks "
 "are gradually assigned to the users based on those points."
@@ -4836,7 +4836,7 @@ msgid ""
 "%(REP_GAIN_FOR_RECEIVING_UPVOTE)s</strong> points, each vote against will "
 "subtract <strong>%(REP_LOSS_FOR_RECEIVING_DOWNVOTE)s</strong> points. There "
 "is a limit of <strong>%(MAX_REP_GAIN_PER_USER_PER_DAY)s</strong> points that "
-"can be accumulated for a exercise or problem per day. The table below "
+"can be accumulated for an exercise or problem per day. The table below "
 "explains reputation point requirements for each type of moderation task."
 msgstr ""
 "例如，如果你问一个有趣的问题或给别人一个有帮助的答案，你的输入将被投赞成票。"
@@ -5160,7 +5160,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s problemed a exercise \n"
+"<p>%(update_author_name)s problemed an exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -5193,7 +5193,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s updated a exercise \n"
+"<p>%(update_author_name)s updated an exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -7606,7 +7606,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "popular-exercise"
 #~ msgstr "受欢迎的问题"
 
-#~ msgid "Asked a exercise with 1,000 views"
+#~ msgid "Asked an exercise with 1,000 views"
 #~ msgstr "1000次查看的问题"
 
 #~ msgid "Citizen patrol"
@@ -7682,7 +7682,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "famous-exercise"
 #~ msgstr "极好的问题"
 
-#~ msgid "Asked a exercise with 10,000 views"
+#~ msgid "Asked an exercise with 10,000 views"
 #~ msgstr "被点击10000此的问题"
 
 #~ msgid "Alpha"
@@ -7748,7 +7748,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "notable-exercise"
 #~ msgstr "关注的问题"
 
-#~ msgid "Asked a exercise with 2,500 views"
+#~ msgid "Asked an exercise with 2,500 views"
 #~ msgstr "有2500次点击的问题"
 
 #~ msgid "enlightened"
@@ -7772,7 +7772,7 @@ msgstr "对不起，好像有一些技术上的错误。"
 #~ msgid "Accepted problem and voted up 40 times"
 #~ msgstr "投票超过40次的回答"
 
-#~ msgid "Problemed a exercise more than 60 days later with at least 5 votes"
+#~ msgid "Problemed an exercise more than 60 days later with at least 5 votes"
 #~ msgstr "回答问题超过60天且至少有5个投票"
 
 #~ msgid "taxonomist"

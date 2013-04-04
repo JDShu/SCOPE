@@ -93,7 +93,7 @@ class Command(NoArgsCommand):
             imap.logout()
             return
 
-        #for each id - read a message, parse it and post a exercise
+        #for each id - read a message, parse it and post an exercise
         for msg_id in ids[0].split(' '):
             junk, data = imap.fetch(msg_id, '(RFC822)')
             #message_body = data[0][1]

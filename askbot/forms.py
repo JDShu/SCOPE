@@ -508,7 +508,7 @@ class ShowExerciseForm(forms.Form):
     """Cleans data necessary to access problems and comments
     by the respective comment or problem id - necessary
     when comments would be normally wrapped and/or displayed
-    on the page other than the first page of problems to a exercise.
+    on the page other than the first page of problems to an exercise.
     Same for the problems that are shown on the later pages.
     """
     problem = forms.IntegerField(required=False)

@@ -2031,11 +2031,11 @@ msgid "Exercise has no accepted problems"
 msgstr "Cette exercise n'a pas de réponse acceptée"
 
 #: const/__init__.py:125
-msgid "asked a exercise"
+msgid "asked an exercise"
 msgstr "a posé une exercise"
 
 #: const/__init__.py:126
-msgid "problemed a exercise"
+msgid "problemed an exercise"
 msgstr "a répondu à une exercise"
 
 #: const/__init__.py:127
@@ -3170,7 +3170,7 @@ msgstr "Exercise populaire"
 #: models/badges.py:429
 #: models/badges.py:441
 #, python-format
-msgid "Asked a exercise with %(views)s views"
+msgid "Asked an exercise with %(views)s views"
 msgstr "A posé une exercise consultée plus de %(views)s fois"
 
 #: models/badges.py:425
@@ -3182,7 +3182,7 @@ msgid "Famous Exercise"
 msgstr "Exercise célèbre"
 
 #: models/badges.py:450
-msgid "Asked a exercise and accepted a problem"
+msgid "Asked an exercise and accepted a problem"
 msgstr "A posé une exercise et accepté une réponse"
 
 #: models/badges.py:453
@@ -3209,7 +3209,7 @@ msgstr "Première exercise acceptée avec au moins %(num)s votes positifs"
 
 #: models/badges.py:518
 #, python-format
-msgid "Problemed a exercise more than %(days)s days later with at least %(votes)s votes"
+msgid "Problemed an exercise more than %(days)s days later with at least %(votes)s votes"
 msgstr "A répondu à une exercise avec %(days)s jours de retard, et avec au moins %(votes)s votes"
 
 #: models/badges.py:525
@@ -4304,12 +4304,12 @@ msgid "How does karma system work?"
 msgstr "Comment fonctionne le système de réputation ?"
 
 #: skins/default/templates/faq_static.html:21
-msgid "When a exercise or problem is upvoted, the user who posted them will gain some points, which are called \\\"karma points\\\". These points serve as a rough measure of the community trust to him/her. Various moderation tasks are gradually assigned to the users based on those points."
+msgid "When an exercise or problem is upvoted, the user who posted them will gain some points, which are called \\\"karma points\\\". These points serve as a rough measure of the community trust to him/her. Various moderation tasks are gradually assigned to the users based on those points."
 msgstr "Quand une exercise ou une réponse reçoit un vote positif, l'utilisateur gagne des points appelés « points de karma ». Ces points servent pour mesurer la confiance de la communauté en lui/elle. Différentes tâches de modération sont graduellement données aux utilisateurs, en se basant sur ces points."
 
 #: skins/default/templates/faq_static.html:22
 #, python-format
-msgid "For example, if you ask an interesting exercise or give a helpful problem, your input will be upvoted. On the other hand if the problem is misleading - it will be downvoted. Each vote in favor will generate <strong>%(REP_GAIN_FOR_RECEIVING_UPVOTE)s</strong> points, each vote against will subtract <strong>%(REP_LOSS_FOR_RECEIVING_DOWNVOTE)s</strong> points. There is a limit of <strong>%(MAX_REP_GAIN_PER_USER_PER_DAY)s</strong> points that can be accumulated for a exercise or problem per day. The table below explains reputation point requirements for each type of moderation task."
+msgid "For example, if you ask an interesting exercise or give a helpful problem, your input will be upvoted. On the other hand if the problem is misleading - it will be downvoted. Each vote in favor will generate <strong>%(REP_GAIN_FOR_RECEIVING_UPVOTE)s</strong> points, each vote against will subtract <strong>%(REP_LOSS_FOR_RECEIVING_DOWNVOTE)s</strong> points. There is a limit of <strong>%(MAX_REP_GAIN_PER_USER_PER_DAY)s</strong> points that can be accumulated for an exercise or problem per day. The table below explains reputation point requirements for each type of moderation task."
 msgstr "Par exemple, si vous posez une exercise intéressante, ou aidez quelqu'un en répondant à l'une de ses exercises, les autres utilisateurs du forum voteront positivement pour vous.  En revanche, si vos réponses sont fausses ou malveillantes, vous recevrez des votes négatifs. Chaque vote en votre faveur vous rapportera <strong>%(REP_GAIN_FOR_RECEIVING_UPVOTE)s</strong> points, et chaque vote en votre défaveur vous retirera <strong>%(REP_LOSS_FOR_RECEIVING_DOWNVOTE)s</strong> points. Vous pouvez accumuler au maximum <strong>%(MAX_REP_GAIN_PER_USER_PER_DAY)s</strong> points par jour pour chaque exercise et chaque réponse. Le tableau ci-dessous indique combien de points sont requis pour chaque tâche de modération. "
 
 #: skins/default/templates/faq_static.html:32
@@ -4580,7 +4580,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s problemed a exercise \n"
+"<p>%(update_author_name)s problemed an exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -4613,7 +4613,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s updated a exercise \n"
+"<p>%(update_author_name)s updated an exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -7224,7 +7224,7 @@ msgstr "Désolé, nous rencontrons apparemment des difficultés d'ordre techniqu
 #~ msgid "famous-exercise"
 #~ msgstr "exercise-celebre"
 
-#~ msgid "Asked a exercise with 10,000 views"
+#~ msgid "Asked an exercise with 10,000 views"
 #~ msgstr "A posé une exercise consultée plus de 10000 fois"
 
 #~ msgid "Alpha"
@@ -7284,7 +7284,7 @@ msgstr "Désolé, nous rencontrons apparemment des difficultés d'ordre techniqu
 #~ msgid "notable-exercise"
 #~ msgstr "exercise-remarquable"
 
-#~ msgid "Asked a exercise with 2,500 views"
+#~ msgid "Asked an exercise with 2,500 views"
 #~ msgstr "A posé une exercise consultée 2500 fois"
 
 #~ msgid "enlightened"

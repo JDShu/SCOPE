@@ -52,7 +52,7 @@ EXERCISES_PAGE_SIZE = 10
 PROBLEMS_PAGE_SIZE = 10
 
 @csrf.csrf_exempt
-def upload(request):#ajax upload file to a exercise or problem
+def upload(request):#ajax upload file to an exercise or problem
     """view that handles file upload via Ajax
     """
 
@@ -209,7 +209,7 @@ def ask(request):#view used to ask a new exercise
     """a view to ask a new exercise
     gives space for q title, body, tags and checkbox for to post as wiki
 
-    user can start posting a exercise anonymously but then
+    user can start posting an exercise anonymously but then
     must login/register in order for the exercise go be shown
     """
     form = forms.AskForm(request.REQUEST)

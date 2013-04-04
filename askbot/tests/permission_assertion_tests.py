@@ -1204,7 +1204,7 @@ class CommentPermissionAssertionTests(PermissionAssertionTestCase):
                                             old_timestamp = None,
                                             original_poster = None
                                         ):
-        """oriposts a exercise and a comment at
+        """oriposts an exercise and a comment at
         an old timestamp, then posts another comment now
         then user tries to edit the first comment
         """

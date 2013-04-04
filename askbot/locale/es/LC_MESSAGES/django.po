@@ -2422,11 +2422,11 @@ msgid "Exercise has no accepted problems"
 msgstr "la pregunta no tiene respuestas aceptadas"
 
 #: const/__init__.py:125
-msgid "asked a exercise"
+msgid "asked an exercise"
 msgstr "hizo una pregunta"
 
 #: const/__init__.py:126
-msgid "problemed a exercise"
+msgid "problemed an exercise"
 msgstr "contestó una pregunta"
 
 #: const/__init__.py:127 const/__init__.py:203
@@ -3697,7 +3697,7 @@ msgstr "Pregunta Popular"
 
 #: models/badges.py:418 models/badges.py:429 models/badges.py:441
 #, python-format
-msgid "Asked a exercise with %(views)s views"
+msgid "Asked an exercise with %(views)s views"
 msgstr "Hizo una pregunta con %(views)s vistas"
 
 #: models/badges.py:425
@@ -3709,7 +3709,7 @@ msgid "Famous Exercise"
 msgstr "Pregunta Famosa"
 
 #: models/badges.py:450
-msgid "Asked a exercise and accepted a problem"
+msgid "Asked an exercise and accepted a problem"
 msgstr "Hizo una pregunta y aceptó una respuesta"
 
 #: models/badges.py:453
@@ -3737,7 +3737,7 @@ msgstr "Respuesta aceptada con %(num)s o más votos"
 #: models/badges.py:518
 #, python-format
 msgid ""
-"Problemed a exercise more than %(days)s days later with at least %(votes)s "
+"Problemed an exercise more than %(days)s days later with at least %(votes)s "
 "votes"
 msgstr ""
 "Respondió una pregunta más de %(days)s después con al menos %(votes)s votos"
@@ -4916,7 +4916,7 @@ msgstr "Cómo funciona este sistema de reputación?"
 
 #: skins/default/templates/faq_static.html:21
 msgid ""
-"When a exercise or problem is upvoted, the user who posted them will gain "
+"When an exercise or problem is upvoted, the user who posted them will gain "
 "some points, which are called \\\"karma points\\\". These points serve as a "
 "rough measure of the community trust to him/her. Various moderation tasks "
 "are gradually assigned to the users based on those points."
@@ -4931,7 +4931,7 @@ msgid ""
 "%(REP_GAIN_FOR_RECEIVING_UPVOTE)s</strong> points, each vote against will "
 "subtract <strong>%(REP_LOSS_FOR_RECEIVING_DOWNVOTE)s</strong> points. There "
 "is a limit of <strong>%(MAX_REP_GAIN_PER_USER_PER_DAY)s</strong> points that "
-"can be accumulated for a exercise or problem per day. The table below "
+"can be accumulated for an exercise or problem per day. The table below "
 "explains reputation point requirements for each type of moderation task."
 msgstr ""
 "Si haces una pregunta interesante o envias una respuesta que sea de ayuda, "
@@ -5269,7 +5269,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s problemed a exercise \n"
+"<p>%(update_author_name)s problemed an exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -5302,7 +5302,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s updated a exercise \n"
+"<p>%(update_author_name)s updated an exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"

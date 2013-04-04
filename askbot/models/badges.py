@@ -418,7 +418,7 @@ class PopularExercise(FrequentedExercise):
         self.key = 'popular-exercise'
         self.level = const.BRONZE_BADGE
         self.min_views = askbot_settings.POPULAR_EXERCISE_BADGE_MIN_VIEWS
-        self.description = _('Asked a exercise with %(views)s views') \
+        self.description = _('Asked an exercise with %(views)s views') \
                             % {'views' : self.min_views}
         return self
 
@@ -429,7 +429,7 @@ class NotableExercise(FrequentedExercise):
         self.key = 'notable-exercise'
         self.level = const.SILVER_BADGE
         self.min_views = askbot_settings.NOTABLE_EXERCISE_BADGE_MIN_VIEWS
-        self.description = _('Asked a exercise with %(views)s views') \
+        self.description = _('Asked an exercise with %(views)s views') \
                             % {'views' : self.min_views}
         return self
 
@@ -441,7 +441,7 @@ class FamousExercise(FrequentedExercise):
         self.level = const.GOLD_BADGE
         self.multiple = True
         self.min_views = askbot_settings.FAMOUS_EXERCISE_BADGE_MIN_VIEWS
-        self.description = _('Asked a exercise with %(views)s views') \
+        self.description = _('Asked an exercise with %(views)s views') \
                             % {'views' : self.min_views}
         return self
 
@@ -450,7 +450,7 @@ class Scholar(Badge):
     he/she accepts a problem for the first time
     """
     def __init__(self):
-        description = _('Asked a exercise and accepted a problem')
+        description = _('Asked an exercise and accepted a problem')
         super(Scholar, self).__init__(
             key = 'scholar',
             name = _('Scholar'),
@@ -518,7 +518,7 @@ class Guru(VotedAcceptedProblem):
 class Necromancer(Badge):
     def __init__(self):
         description = _(
-            'Problemed a exercise more than %(days)s days '
+            'Problemed an exercise more than %(days)s days '
             'later with at least %(votes)s votes'
         )
         days = askbot_settings.NECROMANCER_BADGE_MIN_DELAY
@@ -788,7 +788,7 @@ extra badges from stackexchange
 * epic, legendary - hit daily reputation cap on n days (s)
 * mortarboard - hit the daily reputation cap for the first time (s)
 * populist - provided a problem that outscored an accepted problem two-fold or by n points, whichever is higher (m)
-* reversal - provided a problem with +n points to a exercise of -m points
+* reversal - provided a problem with +n points to an exercise of -m points
     (_('Yearling'), 2, _('yearling'), _('Active member for a year'), False, 0),
 
 

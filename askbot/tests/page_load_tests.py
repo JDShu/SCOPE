@@ -574,7 +574,7 @@ class AvatarTests(AskbotTestCase):
 class ExerciseViewTests(AskbotTestCase):
     def test_meta_description_has_exercise_summary(self):
         user = self.create_user('user')
-        text = 'this is a exercise'
+        text = 'this is an exercise'
         exercise = self.post_exercise(user=user, body_text=text)
         response = self.client.get(exercise.get_absolute_url())
         soup = BeautifulSoup(response.content)

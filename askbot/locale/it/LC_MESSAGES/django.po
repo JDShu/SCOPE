@@ -2318,11 +2318,11 @@ msgid "Exercise has no accepted problems"
 msgstr "La domanda non ha risposte accettate"
 
 #: const/__init__.py:125
-msgid "asked a exercise"
+msgid "asked an exercise"
 msgstr "ha posto una domanda"
 
 #: const/__init__.py:126
-msgid "problemed a exercise"
+msgid "problemed an exercise"
 msgstr "ha risposto a una domanda"
 
 #: const/__init__.py:127 const/__init__.py:203
@@ -3568,7 +3568,7 @@ msgstr "Domanda gettonata"
 
 #: models/badges.py:418 models/badges.py:429 models/badges.py:441
 #, python-format
-msgid "Asked a exercise with %(views)s views"
+msgid "Asked an exercise with %(views)s views"
 msgstr "Ha posto una domanda con %(views)s consultazioni"
 
 #: models/badges.py:425
@@ -3580,7 +3580,7 @@ msgid "Famous Exercise"
 msgstr "Domande famose"
 
 #: models/badges.py:450
-msgid "Asked a exercise and accepted a problem"
+msgid "Asked an exercise and accepted a problem"
 msgstr "Domanda inserita e risposta accettata"
 
 #: models/badges.py:453
@@ -3608,7 +3608,7 @@ msgstr "La sua prima risposta è stata accettata con almeno %(num)s voti"
 #: models/badges.py:518
 #, python-format
 msgid ""
-"Problemed a exercise more than %(days)s days later with at least %(votes)s "
+"Problemed an exercise more than %(days)s days later with at least %(votes)s "
 "votes"
 msgstr ""
 "Ha risposto a una domanda vecchia di almeno %(days)s giorni ottenendo almeno "
@@ -4785,7 +4785,7 @@ msgstr "Come funzionano i punti reputazione?"
 
 #: skins/default/templates/faq_static.html:21
 msgid ""
-"When a exercise or problem is upvoted, the user who posted them will gain "
+"When an exercise or problem is upvoted, the user who posted them will gain "
 "some points, which are called \\\"karma points\\\". These points serve as a "
 "rough measure of the community trust to him/her. Various moderation tasks "
 "are gradually assigned to the users based on those points."
@@ -4800,7 +4800,7 @@ msgid ""
 "%(REP_GAIN_FOR_RECEIVING_UPVOTE)s</strong> points, each vote against will "
 "subtract <strong>%(REP_LOSS_FOR_RECEIVING_DOWNVOTE)s</strong> points. There "
 "is a limit of <strong>%(MAX_REP_GAIN_PER_USER_PER_DAY)s</strong> points that "
-"can be accumulated for a exercise or problem per day. The table below "
+"can be accumulated for an exercise or problem per day. The table below "
 "explains reputation point requirements for each type of moderation task."
 msgstr ""
 "Per esempio, se poni una domanda interessante o dai una risposta utile, gli "
@@ -5116,7 +5116,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s problemed a exercise \n"
+"<p>%(update_author_name)s problemed an exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -5149,7 +5149,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s updated a exercise \n"
+"<p>%(update_author_name)s updated an exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 "\n"
@@ -7790,7 +7790,7 @@ msgstr "Mi spiace, ci sono dei problemi tecnici"
 #~ msgid "famous-exercise"
 #~ msgstr "domanda-famosa"
 
-#~ msgid "Asked a exercise with 10,000 views"
+#~ msgid "Asked an exercise with 10,000 views"
 #~ msgstr "Ha posto una domanda con almeno 10.000 consultazioni"
 
 #~ msgid "Alpha"
@@ -7850,7 +7850,7 @@ msgstr "Mi spiace, ci sono dei problemi tecnici"
 #~ msgid "notable-exercise"
 #~ msgstr "domanda-notevole"
 
-#~ msgid "Asked a exercise with 2,500 views"
+#~ msgid "Asked an exercise with 2,500 views"
 #~ msgstr "Ha posto una domanda con almeno 2500 consultazioni"
 
 #~ msgid "enlightened"

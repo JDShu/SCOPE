@@ -2223,12 +2223,12 @@ msgstr ""
 
 #: const/__init__.py:125
 #, fuzzy
-msgid "asked a exercise"
+msgid "asked an exercise"
 msgstr "Add Your Exercise"
 
 #: const/__init__.py:126
 #, fuzzy
-msgid "problemed a exercise"
+msgid "problemed an exercise"
 msgstr "without_problem"
 
 #: const/__init__.py:127 const/__init__.py:203
@@ -3442,7 +3442,7 @@ msgstr ""
 
 #: models/badges.py:418 models/badges.py:429 models/badges.py:441
 #, python-format
-msgid "Asked a exercise with %(views)s views"
+msgid "Asked an exercise with %(views)s views"
 msgstr ""
 
 #: models/badges.py:425
@@ -3456,7 +3456,7 @@ msgstr "Add Your Exercise"
 
 #: models/badges.py:450
 #, fuzzy
-msgid "Asked a exercise and accepted a problem"
+msgid "Asked an exercise and accepted a problem"
 msgstr ""
 "<span class='big strong'>You are welcome to add a problem to your own exercise</span>, "
 "but please make sure to give an <strong>problem</strong>. Remember that you "
@@ -3490,7 +3490,7 @@ msgstr ""
 #: models/badges.py:518
 #, python-format
 msgid ""
-"Problemed a exercise more than %(days)s days later with at least %(votes)s "
+"Problemed an exercise more than %(days)s days later with at least %(votes)s "
 "votes"
 msgstr ""
 
@@ -4484,7 +4484,7 @@ msgstr ""
 #, fuzzy
 msgid "Badge"
 msgstr ""
-"When a exercise or problem is upvoted, the user who posted them will gain "
+"When an exercise or problem is upvoted, the user who posted them will gain "
 "some points, which are called \"karma points\". These points serve as a "
 "rough measure of the community trust to him/her. Various moderation tasks "
 "are gradually assigned to the users based on those points."
@@ -4515,7 +4515,7 @@ msgstr[0] ""
 #, fuzzy
 msgid "Badges"
 msgstr ""
-"When a exercise or problem is upvoted, the user who posted them will gain "
+"When an exercise or problem is upvoted, the user who posted them will gain "
 "some points, which are called \"karma points\". These points serve as a "
 "rough measure of the community trust to him/her. Various moderation tasks "
 "are gradually assigned to the users based on those points."
@@ -4670,7 +4670,7 @@ msgstr "How does karma system work?"
 
 #: skins/default/templates/faq_static.html:21
 msgid ""
-"When a exercise or problem is upvoted, the user who posted them will gain "
+"When an exercise or problem is upvoted, the user who posted them will gain "
 "some points, which are called \\\"karma points\\\". These points serve as a "
 "rough measure of the community trust to him/her. Various moderation tasks "
 "are gradually assigned to the users based on those points."
@@ -4685,7 +4685,7 @@ msgid ""
 "%(REP_GAIN_FOR_RECEIVING_UPVOTE)s</strong> points, each vote against will "
 "subtract <strong>%(REP_LOSS_FOR_RECEIVING_DOWNVOTE)s</strong> points. There "
 "is a limit of <strong>%(MAX_REP_GAIN_PER_USER_PER_DAY)s</strong> points that "
-"can be accumulated for a exercise or problem per day. The table below "
+"can be accumulated for an exercise or problem per day. The table below "
 "explains reputation point requirements for each type of moderation task."
 msgstr ""
 
@@ -4973,7 +4973,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s problemed a exercise \n"
+"<p>%(update_author_name)s problemed an exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 
@@ -4997,7 +4997,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<p>%(update_author_name)s updated a exercise \n"
+"<p>%(update_author_name)s updated an exercise \n"
 "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 msgstr ""
 
@@ -5941,7 +5941,7 @@ msgstr "karma"
 #, fuzzy
 msgid "age"
 msgstr ""
-"When a exercise or problem is upvoted, the user who posted them will gain "
+"When an exercise or problem is upvoted, the user who posted them will gain "
 "some points, which are called \"karma points\". These points serve as a "
 "rough measure of the community trust to him/her. Various moderation tasks "
 "are gradually assigned to the users based on those points."
@@ -6374,7 +6374,7 @@ msgstr "people"
 #, fuzzy
 msgid "badges"
 msgstr ""
-"When a exercise or problem is upvoted, the user who posted them will gain "
+"When an exercise or problem is upvoted, the user who posted them will gain "
 "some points, which are called \"karma points\". These points serve as a "
 "rough measure of the community trust to him/her. Various moderation tasks "
 "are gradually assigned to the users based on those points."
@@ -6436,7 +6436,7 @@ msgstr ""
 #, fuzzy
 msgid "badges:"
 msgstr ""
-"When a exercise or problem is upvoted, the user who posted them will gain "
+"When an exercise or problem is upvoted, the user who posted them will gain "
 "some points, which are called \"karma points\". These points serve as a "
 "rough measure of the community trust to him/her. Various moderation tasks "
 "are gradually assigned to the users based on those points."
@@ -7084,7 +7084,7 @@ msgstr ""
 #, fuzzy
 #~ msgid "Badges summary"
 #~ msgstr ""
-#~ "When a exercise or problem is upvoted, the user who posted them will gain "
+#~ "When an exercise or problem is upvoted, the user who posted them will gain "
 #~ "some points, which are called \"karma points\". These points serve as a "
 #~ "rough measure of the community trust to him/her. Various moderation tasks "
 #~ "are gradually assigned to the users based on those points."
@@ -7117,7 +7117,7 @@ msgstr ""
 
 #~ msgid "Rep system summary"
 #~ msgstr ""
-#~ "When a exercise or problem is upvoted, the user who posted them will gain "
+#~ "When an exercise or problem is upvoted, the user who posted them will gain "
 #~ "some points, which are called \"karma points\". These points serve as a "
 #~ "rough measure of the community trust to him/her. Various moderation tasks "
 #~ "are gradually assigned to the users based on those points."

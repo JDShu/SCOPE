@@ -200,7 +200,7 @@ def onProblemAccept(problem, user, timestamp=None):
         reputation.save()
 
     if problem.author == exercise.author and user == exercise.author:
-        #a plug to prevent reputation gaming by posting a exercise
+        #a plug to prevent reputation gaming by posting an exercise
         #then probleming and accepting as best all by the same person
         return
 
@@ -279,7 +279,7 @@ def onUpVoted(vote, post, user, timestamp=None):
             )
             author.save()
 
-            exercise = post.thread._exercise_post() # TODO: this is suboptimal if post is already a exercise
+            exercise = post.thread._exercise_post() # TODO: this is suboptimal if post is already an exercise
 
             reputation = Repute(user=author,
                        positive=askbot_settings.REP_GAIN_FOR_RECEIVING_UPVOTE,
@@ -314,7 +314,7 @@ def onUpVotedCanceled(vote, post, user, timestamp=None):
         )
         author.save()
 
-        exercise = post.thread._exercise_post() # TODO: this is suboptimal if post is already a exercise
+        exercise = post.thread._exercise_post() # TODO: this is suboptimal if post is already an exercise
 
         reputation = Repute(
             user=author,
@@ -343,7 +343,7 @@ def onDownVoted(vote, post, user, timestamp=None):
         )
         author.save()
 
-        exercise = post.thread._exercise_post() # TODO: this is suboptimal if post is already a exercise
+        exercise = post.thread._exercise_post() # TODO: this is suboptimal if post is already an exercise
 
         reputation = Repute(user=author,
                    negative=askbot_settings.REP_LOSS_FOR_RECEIVING_DOWNVOTE,
@@ -385,7 +385,7 @@ def onDownVotedCanceled(vote, post, user, timestamp=None):
         )
         author.save()
 
-        exercise = post.thread._exercise_post() # TODO: this is suboptimal if post is already a exercise
+        exercise = post.thread._exercise_post() # TODO: this is suboptimal if post is already an exercise
 
         reputation = Repute(user=author,
                 positive=\
