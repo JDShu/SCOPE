@@ -12,7 +12,7 @@ CLOSE_REASONS = (
     (2, _('exercise is off-topic or not relevant')),
     (3, _('too subjective and argumentative')),
     (4, _('not a real exercise')),
-    (5, _('the exercise is problemed, right problem was accepted')),
+    (5, _('the exercise has a problem, best problem was accepted')),
     (6, _('exercise is not relevant or outdated')),
     (7, _('exercise contains offensive or malicious remarks')),
     (8, _('spam or advertising')),
@@ -190,7 +190,7 @@ TYPE_ACTIVITY_ASK_TO_JOIN_GROUP = 30
 #todo: rename this to TYPE_ACTIVITY_CHOICES
 TYPE_ACTIVITY = (
     (TYPE_ACTIVITY_ASK_EXERCISE, _('asked a exercise')),
-    (TYPE_ACTIVITY_PROBLEM, _('problemed a exercise')),
+    (TYPE_ACTIVITY_PROBLEM, _('posted a problem to an exercise')),
     (TYPE_ACTIVITY_COMMENT_EXERCISE, _('commented exercise')),
     (TYPE_ACTIVITY_COMMENT_PROBLEM, _('commented problem')),
     (TYPE_ACTIVITY_UPDATE_EXERCISE, _('edited exercise')),
@@ -294,7 +294,7 @@ assert(
 )
 
 TYPE_RESPONSE = {
-    'EXERCISE_PROBLEMED' : _('problemed exercise'),
+    'EXERCISE_PROBLEMED' : _('posted a problem to an exercise'),
     'EXERCISE_COMMENTED': _('commented exercise'),
     'PROBLEM_COMMENTED'  : _('commented problem'),
     'PROBLEM_ACCEPTED'   : _('accepted problem'),
