@@ -2091,7 +2091,7 @@ util.prompt = function(text, defaultInputText, makeLinkMarkdown, dialogType){
 		var isFirstTimeFilled = true;
 		
 		var pushPreviewHtml = function(text){
-		
+		    
 			var emptyTop = position.getTop(wmd.panels.input) - getDocScrollTop();
 			
 			// Send the encoded HTML to the output textarea/div.
@@ -2113,6 +2113,7 @@ util.prompt = function(text, defaultInputText, makeLinkMarkdown, dialogType){
 			
 			if (wmd.panels.preview) {
 				wmd.panels.preview.innerHTML = text;
+				MathJax.Hub.Queue(["Typeset",MathJax.Hub,wmd.panels.preview]);
 			}
 			
 			setPanelScrollTops();
