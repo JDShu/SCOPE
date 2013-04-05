@@ -147,7 +147,7 @@
 {% endif %}
 
 {%if request.user.is_authenticated() %}
-{% if false %}
+{% if true %}
 <div class="box vote-buttons">
     <h2 >{% trans %}Download Exercise{% endtrans %}</h2>
 	<div class="clearfix"></div>
@@ -155,13 +155,13 @@
 		<div class="box"><input type="checkbox" id="include-solutions-cb" value=false /><label for="include-solutions-cb">Include Solutions</label></div>
 		<ul class="download" id="select-download-type-dd">
 			<li style="background-image:url({{ "/images/pdf.png"|media }})"><a href="{{settings.APP_URL}}/export/pdf/{{ exercise.id }}">PDF</a></li>
-			<li style="background-image:url({{ "/images/word.gif"|media }})"><a href="{{settings.APP_URL}}/export/rtf/{{ exercise.id }}">Rich Text (RTF)</a></li>
+			<!--<li style="background-image:url({{ "/images/word.gif"|media }})"><a href="{{settings.APP_URL}}/export/rtf/{{ exercise.id }}">Rich Text (RTF)</a></li>-->
 			<li style="background-image:url({{ "/images/txt.png"|media }})"><a href="{{settings.APP_URL}}/export/txt/{{ exercise.id }}">Plain Text (TXT)</a></li>
 		</ul>
 	</div>
 </div>
 {% endif %}
-
+{% if false %}
 <div class="box vote-buttons">
     <h2 >{% trans %}Downloads{% endtrans %}</h2>
     <div class="clearfix"></div>
@@ -212,6 +212,7 @@
 {# ==== END: txt type added  ==== #}
     </div>
 </div>
+{% endif %}
 <div class="clearfix"></div>
 {% endif %}
 

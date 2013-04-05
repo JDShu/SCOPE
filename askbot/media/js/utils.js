@@ -1,3 +1,12 @@
+var makeMathJaxIgnoreBody = function() {
+    $('body').addClass('mathjaxignore');
+    $('.exercise-body>p').addClass('mathjaxprocess');
+    $('.problem-body>p').addClass('mathjaxprocess');
+    $('.solution-body>p').addClass('mathjaxprocess');
+    $('#previewer>p').addClass('mathjaxprocess');
+}
+$(document).ready(makeMathJaxIgnoreBody);
+
 var targetUserLinksToNew = function() {
     $('.exercise-body>p>a,.problem-body>p>a,.solution-body>p>a,.comment-body>p>a').attr("target","_blank");
 }
