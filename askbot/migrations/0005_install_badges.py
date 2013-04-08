@@ -21,9 +21,9 @@ INITIAL_BADGE_DATA = (
     ('Scholar', 3, 'scholar', 'First accepted problem on your own exercise', False, 0),
     ('Student', 3, 'student', 'Asked first exercise with at least one up vote', False, 0),
     ('Supporter', 3, 'supporter', 'First up vote', False, 0),
-    ('Teacher', 3, 'teacher', 'Problemed first exercise with at least one up vote', False, 0),
+    ('Teacher', 3, 'teacher', 'Posted a problem to first exercise with at least one up vote', False, 0),
     ('Autobiographer', 3, 'autobiographer', 'Completed all user profile fields', False, 0),
-    ('Self-Learner', 3, 'self-learner', 'Problemed your own exercise with at least 3 up votes', True, 0),
+    ('Self-Learner', 3, 'self-learner', 'Posted a problem to your own exercise with at least 3 up votes', True, 0),
     ('Great Problem', 1, 'great-problem', 'Problem voted up 100 times', True, 0),
     ('Great Exercise', 1, 'great-exercise', 'Exercise voted up 100 times', True, 0),
     ('Stellar Exercise', 1, 'stellar-exercise', 'Exercise favorited by 100 users', True, 0),
@@ -41,7 +41,7 @@ INITIAL_BADGE_DATA = (
     ('Enlightened', 2, 'enlightened', 'First problem was accepted with at least 10 up votes', False, 0),
     ('Beta', 2, 'beta', 'Actively participated in the private beta', False, 0),
     ('Guru', 2, 'guru', 'Accepted problem and voted up 40 times', True, 0),
-    ('Necromancer', 2, 'necromancer', 'Problemed an exercise more than 60 days later with at least 5 votes', True, 0),
+    ('Necromancer', 2, 'necromancer', 'Posted a problem to an exercise more than 60 days later with at least 5 votes', True, 0),
     ('Taxonomist', 2, 'taxonomist', 'Created a tag used by 50 exercises', True, 0)
 )
 

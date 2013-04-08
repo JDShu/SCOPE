@@ -8,7 +8,7 @@ and can still be used as a variable in python files.
 In addition, some messages are repeated too many times
 in the code, so we need to be able to retreive them
 by a key. Therefore we have a function here, called
-get_i18n_message(). Possibly all messages included in 
+get_i18n_message(). Possibly all messages included in
 this file could be implemented this way.
 '''
 _ = lambda v:v
@@ -27,9 +27,9 @@ _('click to see the newest exercises')
 _('click to see the least recently updated exercises')
 _('by activity')
 _('click to see the most recently updated exercises')
-_('click to see the least problemed exercises')
+_('click to see exercises with the least problems')
 _('by problems')
-_('click to see the most problemed exercises')
+_('click to see exercises with the most problems')
 _('click to see least voted exercises')
 _('by votes')
 _('click to see most voted exercises')

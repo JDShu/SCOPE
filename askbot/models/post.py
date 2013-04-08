@@ -1329,7 +1329,7 @@ class Post(models.Model):
                                            ).exists():
             subscriber_set.add(exercise_author)
 
-        #4) exercises problemed by me -make sure is that people
+        #4) exercises posted a problem to by me -make sure is that people
         #are authors of the problems to this exercise
         #todo: replace this with a query set method
         problem_authors = set()

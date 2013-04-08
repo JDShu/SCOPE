@@ -82,10 +82,10 @@ settings.register(
         'DEFAULT_NOTIFICATION_DELIVERY_SCHEDULE_Q_ANS',
         default='d',
         choices=const.NOTIFICATION_DELIVERY_SCHEDULE_CHOICES,
-        description=_('Default notification frequency exercises problemed by the user'),
+        description=_('Default notification frequency exercises posted a problem to by the user'),
         help_text=_(
                     'Option to define frequency of emailed updates for: '
-                    'Exercise problemed by the user.'
+                    'Exercise posted a problem to by the user.'
                     )
     )
 )

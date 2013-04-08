@@ -252,7 +252,7 @@ class CivicDuty(Badge):
 
 class SelfLearner(Badge):
     def __init__(self):
-        description = _('Problemed own exercise with at least %(num)s up votes')
+        description = _('Posted a problem to own exercise with at least %(num)s up votes')
         min_votes = askbot_settings.SELF_LEARNER_BADGE_MIN_UPVOTES
         super(SelfLearner, self).__init__(
             key = 'self-learner',
@@ -518,7 +518,7 @@ class Guru(VotedAcceptedProblem):
 class Necromancer(Badge):
     def __init__(self):
         description = _(
-            'Problemed an exercise more than %(days)s days '
+            'Posted a problem to an exercise more than %(days)s days '
             'later with at least %(votes)s votes'
         )
         days = askbot_settings.NECROMANCER_BADGE_MIN_DELAY
