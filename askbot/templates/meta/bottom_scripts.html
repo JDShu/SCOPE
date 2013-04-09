@@ -191,6 +191,16 @@
             var me = $(this), eid = me.data('eid'), msg;
             set_op_state(me, in_cart(eid));
         });
+
+        var add2cart = $('.add2cart').click(function() {
+            var items = $.jStorage.get('cart', []), me = $(this);
+            items.push({id: me.data('eid'), title: me.data('title')});
+            $.jStorage.set('cart', items);
+            me.remove();
+            return false;
+        });
+        if (in_cart(add2cart.data('eid')))
+            add2cart.remove();
         
         refresh_cart();
         {% endif %}
