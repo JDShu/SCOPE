@@ -6,6 +6,7 @@
 {% endif %}
 <div class="solution toggler toggler-hide" onclick="toggleDisplay(this, {{ solution.id }});">[Solution]</div>
 <div
+		style="display:none"
         id="post-id-{{ solution.id }}"
         class="{{ macros.solution_classes(solution, problem) }}">
     <div class="vote-buttons">
