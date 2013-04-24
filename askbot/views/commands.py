@@ -864,7 +864,7 @@ def delete_post(request):
         post_id = form.cleaned_data['post_id']
         post = get_object_or_404(
             models.Post,
-            post_type__in = ('exercise', 'problem'),
+            post_type__in = ('exercise', 'problem','solution'),
             id = post_id
         )
         if form.cleaned_data['cancel_vote']:
