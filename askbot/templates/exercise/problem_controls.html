@@ -17,8 +17,8 @@
         >{% trans %}publish{% endtrans %}</a>
     {% endif %}
 </span>
-<span id='post-{{problem.id}}-delete' class="action-link delete-post">
-    <a class="exercise-delete"
+<span class="action-link delete-post">
+    <a class="exercise-delete" id="post-{{problem.id}}-delete"
     >{% if problem.deleted %}{% trans %}undelete{% endtrans %}{% else %}{% trans %}delete{% endtrans %}{% endif %}</a>
 </span>
 <span id='post-{{problem.id}}-edit' class="action-link">
