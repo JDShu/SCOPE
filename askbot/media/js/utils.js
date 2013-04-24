@@ -1,5 +1,5 @@
 var makeMathJaxIgnoreBody = function() {
-    $('body').addClass('mathjaxignore');
+    //$('body').addClass('mathjaxignore');
     $('.exercise-body>p').addClass('mathjaxprocess');
     $('.problem-body>p').addClass('mathjaxprocess');
     $('.solution-body>p').addClass('mathjaxprocess');
