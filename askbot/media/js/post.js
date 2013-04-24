@@ -4017,7 +4017,7 @@ $(document).ready(function() {
         //confusingly .exercise-delete matches the problems too need rename
         var post_id = element.id.split('-').pop();
         deleter.setPostId(post_id);
-        deleter.decorate($(element).find('.exercise-delete'));
+        deleter.decorate($('#post-'+post_id+'-delete'));
     });
     //todo: convert to "control" class
     var publishBtns = $('.problem-publish, .problem-unpublish');
