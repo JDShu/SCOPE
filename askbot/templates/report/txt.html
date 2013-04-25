@@ -13,7 +13,7 @@ Download At: {{ now }}{{ '\r\n' }}{{ '\r\n' }}
 {% for i in obj.problems %}
 {% set answers = i.get_cached_solutions() %}
 Q{{ loop.index }}: <strip>{{ i.html|safe }}</strip>{{ '\r\n' }}
-{% if with_answers and answers %}
+{% if with_solutions and answers %}
 {% for j in answers %}
   A{{ loop.index }}: <strip>{{ j.html|safe }}</strip>{{ '\r\n' }}
 {% endfor %}
