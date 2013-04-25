@@ -103,7 +103,7 @@
                             <!--p class="author">by {{ i.author.username|escape }} ({{ i.added_at|timesince }})</p-->
                         </div>
                         {% set answers = i.get_cached_solutions() %}
-                        {% if with_answers and answers %}
+                        {% if with_solutions and answers %}
                             {% for j in answers %}
                                 <div class="comment">
                                     <table><tr><th>A{{ loop.index }}</th><td>{{ j.html|safe }}</td></tr></table>
