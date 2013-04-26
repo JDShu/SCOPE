@@ -2297,7 +2297,7 @@ msgstr "Fragen, die ich beantwortet habe"
 
 #: const/__init__.py:125
 #, fuzzy
-msgid "asked an exercise"
+msgid "added an exercise"
 msgstr "Frage stellen"
 
 #: const/__init__.py:126

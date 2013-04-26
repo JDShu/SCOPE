@@ -2506,7 +2506,7 @@ msgstr "Питања на која сте одговорили"
 
 #: const/__init__.py:125
 #, fuzzy
-msgid "asked an exercise"
+msgid "added an exercise"
 msgstr "поставите питање"
 
 #: const/__init__.py:126

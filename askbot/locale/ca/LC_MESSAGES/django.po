@@ -2201,7 +2201,7 @@ msgid "Exercise has no accepted problems"
 msgstr "La pregunta no té respostes acceptades"
 
 #: const/__init__.py:125
-msgid "asked an exercise"
+msgid "added an exercise"
 msgstr "ha fet una pregunta"
 
 #: const/__init__.py:126

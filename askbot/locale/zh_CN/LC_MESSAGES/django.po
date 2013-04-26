@@ -2410,7 +2410,7 @@ msgid "Exercise has no accepted problems"
 msgstr "仍没有正确答案的问题"
 
 #: const/__init__.py:125
-msgid "asked an exercise"
+msgid "added an exercise"
 msgstr "我要提问"
 
 #: const/__init__.py:126

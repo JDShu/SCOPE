@@ -2195,7 +2195,7 @@ msgid "Exercise has no accepted problems"
 msgstr ""
 
 #: const/__init__.py:125
-msgid "asked an exercise"
+msgid "added an exercise"
 msgstr ""
 
 #: const/__init__.py:126

@@ -2863,7 +2863,7 @@ msgstr "Pergunta não tem respostas aceita"
 
 # 100%
 #: const/__init__.py:125
-msgid "asked an exercise"
+msgid "added an exercise"
 msgstr "perguntou"
 
 # 100%

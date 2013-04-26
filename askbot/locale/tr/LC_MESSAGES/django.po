@@ -2332,7 +2332,7 @@ msgid "Exercise has no accepted problems"
 msgstr "Kabul edilmiş cevabı olmayan soru"
 
 #: const/__init__.py:125
-msgid "asked an exercise"
+msgid "added an exercise"
 msgstr "bir soru sordu"
 
 #: const/__init__.py:126
@@ -8295,7 +8295,7 @@ msgstr "Özür dileriz, bazı teknik sorunlar yaşıyoruz"
 
 #~ msgid ""
 #~ "\n"
-#~ "<p>%(update_author_name)s asked an exercise \n"
+#~ "<p>%(update_author_name)s added an exercise \n"
 #~ "<a href=\"%(post_url)s\">%(origin_post_title)s</a></p>\n"
 #~ msgstr ""
 #~ "\n"

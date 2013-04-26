@@ -2246,7 +2246,7 @@ msgid "Exercise has no accepted problems"
 msgstr "Întrebarea nu are un răspuns acceptat"
 
 #: const/__init__.py:125
-msgid "asked an exercise"
+msgid "added an exercise"
 msgstr "a pus o întrebare"
 
 #: const/__init__.py:126
