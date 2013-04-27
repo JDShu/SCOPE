@@ -381,7 +381,7 @@ class Student(QualityPost):
         self.level = const.BRONZE_BADGE
         self.multiple = False
         self.min_votes = 1
-        self.description = _('Asked first exercise with at least one up vote')
+        self.description = _('Added first exercise with at least one up vote')
         self.post_type = 'exercise'
         return self
 
