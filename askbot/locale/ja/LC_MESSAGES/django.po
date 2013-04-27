@@ -310,7 +310,7 @@ msgid "Asked by me"
 msgstr "自分からの質問"
 
 #: forms.py:1021
-msgid "Problemed by me"
+msgid "Added by me"
 msgstr "自分からの回答"
 
 #: forms.py:1024
@@ -3288,7 +3288,7 @@ msgstr "%(num)s 回投票しました"
 
 #: models/badges.py:252
 #, python-format
-msgid "Problemed own exercise with at least %(num)s up votes"
+msgid "Added own exercise with at least %(num)s up votes"
 msgstr ""
 
 #: models/badges.py:256
@@ -3334,7 +3334,7 @@ msgid "Student"
 msgstr "生徒"
 
 #: models/badges.py:381
-msgid "Asked first exercise with at least one up vote"
+msgid "Added first exercise with at least one up vote"
 msgstr "質問を最初に尋ねつつ少なくとも一つの上げ投票した"
 
 #: models/badges.py:414
@@ -3343,7 +3343,7 @@ msgstr "人気の質問"
 
 #: models/badges.py:418 models/badges.py:429 models/badges.py:441
 #, python-format
-msgid "Asked an exercise with %(views)s views"
+msgid "Added an exercise with %(views)s views"
 msgstr ""
 
 #: models/badges.py:425
@@ -3355,7 +3355,7 @@ msgid "Famous Exercise"
 msgstr ""
 
 #: models/badges.py:450
-msgid "Asked an exercise and accepted a problem"
+msgid "Added an exercise and accepted a problem"
 msgstr ""
 
 #: models/badges.py:453
@@ -3383,7 +3383,7 @@ msgstr ""
 #: models/badges.py:518
 #, python-format
 msgid ""
-"Problemed an exercise more than %(days)s days later with at least %(votes)s "
+"Added an exercise more than %(days)s days later with at least %(votes)s "
 "votes"
 msgstr ""
 
@@ -4428,7 +4428,7 @@ msgid "FAQ"
 msgstr "よくある質問（FAQ）"
 
 #: skins/default/templates/faq_static.html:5
-msgid "Frequently Asked Exercises "
+msgid "Frequently Asked Questions "
 msgstr "よくある質問"
 
 #: skins/default/templates/faq_static.html:6

@@ -418,7 +418,7 @@ class PopularExercise(FrequentedExercise):
         self.key = 'popular-exercise'
         self.level = const.BRONZE_BADGE
         self.min_views = askbot_settings.POPULAR_EXERCISE_BADGE_MIN_VIEWS
-        self.description = _('Asked an exercise with %(views)s views') \
+        self.description = _('Added an exercise with %(views)s views') \
                             % {'views' : self.min_views}
         return self
 
@@ -429,7 +429,7 @@ class NotableExercise(FrequentedExercise):
         self.key = 'notable-exercise'
         self.level = const.SILVER_BADGE
         self.min_views = askbot_settings.NOTABLE_EXERCISE_BADGE_MIN_VIEWS
-        self.description = _('Asked an exercise with %(views)s views') \
+        self.description = _('Added an exercise with %(views)s views') \
                             % {'views' : self.min_views}
         return self
 
@@ -441,7 +441,7 @@ class FamousExercise(FrequentedExercise):
         self.level = const.GOLD_BADGE
         self.multiple = True
         self.min_views = askbot_settings.FAMOUS_EXERCISE_BADGE_MIN_VIEWS
-        self.description = _('Asked an exercise with %(views)s views') \
+        self.description = _('Added an exercise with %(views)s views') \
                             % {'views' : self.min_views}
         return self
 
@@ -450,7 +450,7 @@ class Scholar(Badge):
     he/she accepts a problem for the first time
     """
     def __init__(self):
-        description = _('Asked an exercise and accepted a problem')
+        description = _('Added an exercise and accepted a problem')
         super(Scholar, self).__init__(
             key = 'scholar',
             name = _('Scholar'),

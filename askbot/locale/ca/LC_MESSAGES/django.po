@@ -327,7 +327,7 @@ msgid "Asked by me"
 msgstr "Preguntat per mi"
 
 #: forms.py:1021
-msgid "Problemed by me"
+msgid "Added by me"
 msgstr "Respost per mi"
 
 #: forms.py:1024
@@ -3400,7 +3400,7 @@ msgstr "Vota %(num)s vegades"
 
 #: models/badges.py:252
 #, python-format
-msgid "Problemed own exercise with at least %(num)s up votes"
+msgid "Added own exercise with at least %(num)s up votes"
 msgstr "Respon a una pregunta pròpia amb un mínim de %(num)s vots positius"
 
 #: models/badges.py:256
@@ -3446,7 +3446,7 @@ msgid "Student"
 msgstr "Estudiant"
 
 #: models/badges.py:381
-msgid "Asked first exercise with at least one up vote"
+msgid "Added first exercise with at least one up vote"
 msgstr "Pregunta per primera vegada amb al menys un vot positiu"
 
 #: models/badges.py:414
@@ -3455,7 +3455,7 @@ msgstr "Pregunta Popular"
 
 #: models/badges.py:418 models/badges.py:429 models/badges.py:441
 #, python-format
-msgid "Asked an exercise with %(views)s views"
+msgid "Added an exercise with %(views)s views"
 msgstr "Fa una pregunta amb  %(views)s visites"
 
 #: models/badges.py:425
@@ -3467,7 +3467,7 @@ msgid "Famous Exercise"
 msgstr "Pregunta famosa"
 
 #: models/badges.py:450
-msgid "Asked an exercise and accepted a problem"
+msgid "Added an exercise and accepted a problem"
 msgstr "Ha fet una pregunta i ha acceptat una resposta"
 
 #: models/badges.py:453
@@ -3495,7 +3495,7 @@ msgstr "Resposta acceptada amb  %(num)s o més vots"
 #: models/badges.py:518
 #, python-format
 msgid ""
-"Problemed an exercise more than %(days)s days later with at least %(votes)s "
+"Added an exercise more than %(days)s days later with at least %(votes)s "
 "votes"
 msgstr ""
 "Respon una pregunta feta fa més %(days)s dies amb un mínim de %(votes)s"
@@ -4591,7 +4591,7 @@ msgid "FAQ"
 msgstr ""
 
 #: skins/default/templates/faq_static.html:5
-msgid "Frequently Asked Exercises "
+msgid "Frequently Asked Questions "
 msgstr "Preguntes més freqüents"
 
 #: skins/default/templates/faq_static.html:6

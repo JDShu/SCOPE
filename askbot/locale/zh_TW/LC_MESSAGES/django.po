@@ -326,7 +326,7 @@ msgid "Asked by me"
 msgstr "詢問"
 
 #: forms.py:1021
-msgid "Problemed by me"
+msgid "Added by me"
 msgstr "回應"
 
 #: forms.py:1024
@@ -3463,7 +3463,7 @@ msgstr " 超過 300 選票 "
 
 #: models/badges.py:252
 #, fuzzy, python-format
-msgid "Problemed own exercise with at least %(num)s up votes"
+msgid "Added own exercise with at least %(num)s up votes"
 msgstr "回答至少有三票的問題"
 
 #: models/badges.py:256
@@ -3510,7 +3510,7 @@ msgid "Student"
 msgstr "學生"
 
 #: models/badges.py:381
-msgid "Asked first exercise with at least one up vote"
+msgid "Added first exercise with at least one up vote"
 msgstr "詢問至少有一票的問題"
 
 #: models/badges.py:414
@@ -3519,7 +3519,7 @@ msgstr "常見問題"
 
 #: models/badges.py:418 models/badges.py:429 models/badges.py:441
 #, fuzzy, python-format
-msgid "Asked an exercise with %(views)s views"
+msgid "Added an exercise with %(views)s views"
 msgstr "提問瀏覽 1,000 次的問題"
 
 #: models/badges.py:425
@@ -3534,7 +3534,7 @@ msgstr "著名問題"
 
 #: models/badges.py:450
 #, fuzzy
-msgid "Asked an exercise and accepted a problem"
+msgid "Added an exercise and accepted a problem"
 msgstr "已回答的問題"
 
 #: models/badges.py:453
@@ -3562,7 +3562,7 @@ msgstr "第一個認同超過 10 次的答案"
 #: models/badges.py:518
 #, fuzzy, python-format
 msgid ""
-"Problemed an exercise more than %(days)s days later with at least %(votes)s "
+"Added an exercise more than %(days)s days later with at least %(votes)s "
 "votes"
 msgstr "回應超過 40 天且至少 5 票的問題"
 
@@ -4682,7 +4682,7 @@ msgid "FAQ"
 msgstr ""
 
 #: skins/default/templates/faq_static.html:5
-msgid "Frequently Asked Exercises "
+msgid "Frequently Asked Questions "
 msgstr "常見問題"
 
 #: skins/default/templates/faq_static.html:6
@@ -7377,7 +7377,7 @@ msgstr ""
 #~ msgid "teacher"
 #~ msgstr "老師"
 
-#~ msgid "Problemed first exercise with at least one up vote"
+#~ msgid "Added first exercise with at least one up vote"
 #~ msgstr "回答至少有一票的問題"
 
 #~ msgid "autobiographer"
@@ -7407,7 +7407,7 @@ msgstr ""
 #~ msgid "famous-exercise"
 #~ msgstr "著名問題"
 
-#~ msgid "Asked an exercise with 10,000 views"
+#~ msgid "Added an exercise with 10,000 views"
 #~ msgstr "提問瀏覽數 10,000 的問題"
 
 #~ msgid "Alpha"
@@ -7467,7 +7467,7 @@ msgstr ""
 #~ msgid "notable-exercise"
 #~ msgstr "顯目問題"
 
-#~ msgid "Asked an exercise with 2,500 views"
+#~ msgid "Added an exercise with 2,500 views"
 #~ msgstr "提問瀏覽數 2,500 的問題"
 
 #~ msgid "enlightened"
