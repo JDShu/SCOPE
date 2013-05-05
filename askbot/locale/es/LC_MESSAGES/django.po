@@ -332,7 +332,7 @@ msgid "Asked by me"
 msgstr "Preguntadas por mi"
 
 #: forms.py:1021
-msgid "Problemed by me"
+msgid "Added by me"
 msgstr "Respondidas por mi"
 
 #: forms.py:1024
@@ -2422,7 +2422,7 @@ msgid "Exercise has no accepted problems"
 msgstr "la pregunta no tiene respuestas aceptadas"
 
 #: const/__init__.py:125
-msgid "asked an exercise"
+msgid "added an exercise"
 msgstr "hizo una pregunta"
 
 #: const/__init__.py:126
@@ -3642,7 +3642,7 @@ msgstr "Votada %(num)s veces"
 
 #: models/badges.py:252
 #, python-format
-msgid "Problemed own exercise with at least %(num)s up votes"
+msgid "Added own exercise with at least %(num)s up votes"
 msgstr "Contestó una pregunta propia con al menos %(num)s votos positivos"
 
 #: models/badges.py:256
@@ -3688,7 +3688,7 @@ msgid "Student"
 msgstr "Estudiante"
 
 #: models/badges.py:381
-msgid "Asked first exercise with at least one up vote"
+msgid "Added first exercise with at least one up vote"
 msgstr "Primera pregunta con al menos un voto"
 
 #: models/badges.py:414
@@ -3697,7 +3697,7 @@ msgstr "Pregunta Popular"
 
 #: models/badges.py:418 models/badges.py:429 models/badges.py:441
 #, python-format
-msgid "Asked an exercise with %(views)s views"
+msgid "Added an exercise with %(views)s views"
 msgstr "Hizo una pregunta con %(views)s vistas"
 
 #: models/badges.py:425
@@ -3709,7 +3709,7 @@ msgid "Famous Exercise"
 msgstr "Pregunta Famosa"
 
 #: models/badges.py:450
-msgid "Asked an exercise and accepted a problem"
+msgid "Added an exercise and accepted a problem"
 msgstr "Hizo una pregunta y aceptó una respuesta"
 
 #: models/badges.py:453
@@ -3737,7 +3737,7 @@ msgstr "Respuesta aceptada con %(num)s o más votos"
 #: models/badges.py:518
 #, python-format
 msgid ""
-"Problemed an exercise more than %(days)s days later with at least %(votes)s "
+"Added an exercise more than %(days)s days later with at least %(votes)s "
 "votes"
 msgstr ""
 "Respondió una pregunta más de %(days)s después con al menos %(votes)s votos"
@@ -4839,7 +4839,7 @@ msgid "FAQ"
 msgstr "Ayuda"
 
 #: skins/default/templates/faq_static.html:5
-msgid "Frequently Asked Exercises "
+msgid "Frequently Asked Questions "
 msgstr "Preguntas más frecuentes"
 
 #: skins/default/templates/faq_static.html:6

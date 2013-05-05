@@ -347,7 +347,7 @@ msgid "Asked by me"
 msgstr "Von mir gefragt"
 
 #: forms.py:1021
-msgid "Problemed by me"
+msgid "Added by me"
 msgstr "Von mir beantwortet"
 
 #: forms.py:1024
@@ -2297,7 +2297,7 @@ msgstr "Fragen, die ich beantwortet habe"
 
 #: const/__init__.py:125
 #, fuzzy
-msgid "asked an exercise"
+msgid "added an exercise"
 msgstr "Frage stellen"
 
 #: const/__init__.py:126
@@ -3545,7 +3545,7 @@ msgstr "300 Mal abgestimmt"
 
 #: models/badges.py:252
 #, fuzzy, python-format
-msgid "Problemed own exercise with at least %(num)s up votes"
+msgid "Added own exercise with at least %(num)s up votes"
 msgstr ""
 "Eigene Frage beantwortet und mindestens 3 positive Bewertungen dafür erhalten"
 
@@ -3593,7 +3593,7 @@ msgid "Student"
 msgstr "Schüler"
 
 #: models/badges.py:381
-msgid "Asked first exercise with at least one up vote"
+msgid "Added first exercise with at least one up vote"
 msgstr "Hat erste Frage mit mindestens einer positiven Bewertung gestellt"
 
 #: models/badges.py:414
@@ -3602,7 +3602,7 @@ msgstr "populäre Frage"
 
 #: models/badges.py:418 models/badges.py:429 models/badges.py:441
 #, fuzzy, python-format
-msgid "Asked an exercise with %(views)s views"
+msgid "Added an exercise with %(views)s views"
 msgstr "Hat Frage mit mindestens 1.000 Einblendungen gestellt"
 
 #: models/badges.py:425
@@ -3616,7 +3616,7 @@ msgstr "Berühmte Frage"
 
 #: models/badges.py:450
 #, fuzzy
-msgid "Asked an exercise and accepted a problem"
+msgid "Added an exercise and accepted a problem"
 msgstr "Fragen, die ich beantwortet habe"
 
 #: models/badges.py:453
@@ -3648,7 +3648,7 @@ msgstr ""
 #: models/badges.py:518
 #, fuzzy, python-format
 msgid ""
-"Problemed an exercise more than %(days)s days later with at least %(votes)s "
+"Added an exercise more than %(days)s days later with at least %(votes)s "
 "votes"
 msgstr ""
 "Hat eine Frage mehr als 2 Monate später beantwortet und mindestens 5 "
@@ -4789,7 +4789,7 @@ msgid "FAQ"
 msgstr ""
 
 #: skins/default/templates/faq_static.html:5
-msgid "Frequently Asked Exercises "
+msgid "Frequently Asked Questions "
 msgstr "Häufig gestellte Fragen"
 
 #: skins/default/templates/faq_static.html:6
@@ -7881,7 +7881,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "teacher"
 #~ msgstr "Suche"
 
-#~ msgid "Problemed first exercise with at least one up vote"
+#~ msgid "Added first exercise with at least one up vote"
 #~ msgstr ""
 #~ "Hat erste Frage mit mindestens einer positiven Bewertung beantwortet"
 
@@ -7912,7 +7912,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "famous-exercise"
 #~ msgstr "beruehmte-frage"
 
-#~ msgid "Asked an exercise with 10,000 views"
+#~ msgid "Added an exercise with 10,000 views"
 #~ msgstr "Hat Frage mit 10.000 Einblendungen gestellt"
 
 #~ msgid "Alpha"
@@ -7972,7 +7972,7 @@ msgstr "sembla que tenim algunes dificultats tècniques"
 #~ msgid "notable-exercise"
 #~ msgstr "bemerkenswerte-frage"
 
-#~ msgid "Asked an exercise with 2,500 views"
+#~ msgid "Added an exercise with 2,500 views"
 #~ msgstr "Hat eine Frage mit 2.500 Einblendungen gestellt"
 
 #~ msgid "enlightened"

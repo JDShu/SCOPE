@@ -1,5 +1,5 @@
 =======
-Qurrent
+SCOPE
 =======
 
 This is a school project that is based off of Askbot.

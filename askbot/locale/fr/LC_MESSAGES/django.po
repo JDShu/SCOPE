@@ -305,7 +305,7 @@ msgid "Asked by me"
 msgstr "Mes exercises"
 
 #: forms.py:1021
-msgid "Problemed by me"
+msgid "Added by me"
 msgstr "Exercises auxquelles j'ai répondu"
 
 #: forms.py:1024
@@ -2031,7 +2031,7 @@ msgid "Exercise has no accepted problems"
 msgstr "Cette exercise n'a pas de réponse acceptée"
 
 #: const/__init__.py:125
-msgid "asked an exercise"
+msgid "added an exercise"
 msgstr "a posé une exercise"
 
 #: const/__init__.py:126
@@ -3109,7 +3109,7 @@ msgstr "a voté %(num)s fois"
 
 #: models/badges.py:252
 #, python-format
-msgid "Problemed own exercise with at least %(num)s up votes"
+msgid "Added own exercise with at least %(num)s up votes"
 msgstr "A répondu à sa propre exercise avec au moins %(num)s votes positifs"
 
 #: models/badges.py:256
@@ -3159,7 +3159,7 @@ msgid "Student"
 msgstr "Étudiant"
 
 #: models/badges.py:381
-msgid "Asked first exercise with at least one up vote"
+msgid "Added first exercise with at least one up vote"
 msgstr "A posté sa première exercise avec au moins un vote positif"
 
 #: models/badges.py:414
@@ -3170,7 +3170,7 @@ msgstr "Exercise populaire"
 #: models/badges.py:429
 #: models/badges.py:441
 #, python-format
-msgid "Asked an exercise with %(views)s views"
+msgid "Added an exercise with %(views)s views"
 msgstr "A posé une exercise consultée plus de %(views)s fois"
 
 #: models/badges.py:425
@@ -3182,7 +3182,7 @@ msgid "Famous Exercise"
 msgstr "Exercise célèbre"
 
 #: models/badges.py:450
-msgid "Asked an exercise and accepted a problem"
+msgid "Added an exercise and accepted a problem"
 msgstr "A posé une exercise et accepté une réponse"
 
 #: models/badges.py:453
@@ -3209,7 +3209,7 @@ msgstr "Première exercise acceptée avec au moins %(num)s votes positifs"
 
 #: models/badges.py:518
 #, python-format
-msgid "Problemed an exercise more than %(days)s days later with at least %(votes)s votes"
+msgid "Added an exercise more than %(days)s days later with at least %(votes)s votes"
 msgstr "A répondu à une exercise avec %(days)s jours de retard, et avec au moins %(votes)s votes"
 
 #: models/badges.py:525
@@ -4252,7 +4252,7 @@ msgid "FAQ"
 msgstr "FAQ"
 
 #: skins/default/templates/faq_static.html:5
-msgid "Frequently Asked Exercises "
+msgid "Frequently Asked Questions "
 msgstr "Exercises fréquemment posées"
 
 #: skins/default/templates/faq_static.html:6
@@ -7192,7 +7192,7 @@ msgstr "Désolé, nous rencontrons apparemment des difficultés d'ordre techniqu
 #~ msgid "teacher"
 #~ msgstr "professeur"
 
-#~ msgid "Problemed first exercise with at least one up vote"
+#~ msgid "Added first exercise with at least one up vote"
 #~ msgstr ""
 #~ "A obtenu au moins un vote positif lors de sa première réponse à une "
 #~ "exercise"
@@ -7224,7 +7224,7 @@ msgstr "Désolé, nous rencontrons apparemment des difficultés d'ordre techniqu
 #~ msgid "famous-exercise"
 #~ msgstr "exercise-celebre"
 
-#~ msgid "Asked an exercise with 10,000 views"
+#~ msgid "Added an exercise with 10,000 views"
 #~ msgstr "A posé une exercise consultée plus de 10000 fois"
 
 #~ msgid "Alpha"
@@ -7284,7 +7284,7 @@ msgstr "Désolé, nous rencontrons apparemment des difficultés d'ordre techniqu
 #~ msgid "notable-exercise"
 #~ msgstr "exercise-remarquable"
 
-#~ msgid "Asked an exercise with 2,500 views"
+#~ msgid "Added an exercise with 2,500 views"
 #~ msgstr "A posé une exercise consultée 2500 fois"
 
 #~ msgid "enlightened"

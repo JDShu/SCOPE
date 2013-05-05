@@ -345,7 +345,7 @@ msgid "Asked by me"
 msgstr "Întrebate de mine"
 
 #: forms.py:1021
-msgid "Problemed by me"
+msgid "Added by me"
 msgstr "Răspunse de mine"
 
 #: forms.py:1024
@@ -2246,7 +2246,7 @@ msgid "Exercise has no accepted problems"
 msgstr "Întrebarea nu are un răspuns acceptat"
 
 #: const/__init__.py:125
-msgid "asked an exercise"
+msgid "added an exercise"
 msgstr "a pus o întrebare"
 
 #: const/__init__.py:126
@@ -3480,7 +3480,7 @@ msgstr "A votat de %(num)s de ori"
 
 #: models/badges.py:252
 #, python-format
-msgid "Problemed own exercise with at least %(num)s up votes"
+msgid "Added own exercise with at least %(num)s up votes"
 msgstr "A răspuns proprieri întrebări cu cel puțin %(num)s voturi pozitive"
 
 #: models/badges.py:256
@@ -3526,7 +3526,7 @@ msgid "Student"
 msgstr "Student"
 
 #: models/badges.py:381
-msgid "Asked first exercise with at least one up vote"
+msgid "Added first exercise with at least one up vote"
 msgstr "A întrebat prima întrebare cu cel puțin un vot pozitiv"
 
 #: models/badges.py:414
@@ -3535,7 +3535,7 @@ msgstr "Întrebare populară"
 
 #: models/badges.py:418 models/badges.py:429 models/badges.py:441
 #, python-format
-msgid "Asked an exercise with %(views)s views"
+msgid "Added an exercise with %(views)s views"
 msgstr "A pus o întrebare cu %(views)s vizualizări"
 
 #: models/badges.py:425
@@ -3547,7 +3547,7 @@ msgid "Famous Exercise"
 msgstr "Întrebare faimoasă"
 
 #: models/badges.py:450
-msgid "Asked an exercise and accepted a problem"
+msgid "Added an exercise and accepted a problem"
 msgstr "A pus o întrebare și a acceptat răspunsul"
 
 #: models/badges.py:453
@@ -3575,7 +3575,7 @@ msgstr "Răspuns acceptat cu %(num)s sau mai multe voturi"
 #: models/badges.py:518
 #, python-format
 msgid ""
-"Problemed an exercise more than %(days)s days later with at least %(votes)s "
+"Added an exercise more than %(days)s days later with at least %(votes)s "
 "votes"
 msgstr ""
 "A răspuns unei întrebări mai mult de %(days)s zile mai târziu cu cel puțin "
@@ -4678,7 +4678,7 @@ msgid "FAQ"
 msgstr "Întrebări frecvente"
 
 #: skins/default/templates/faq_static.html:5
-msgid "Frequently Asked Exercises "
+msgid "Frequently Asked Questions "
 msgstr "Întrebări frecvente "
 
 #: skins/default/templates/faq_static.html:6

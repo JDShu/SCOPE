@@ -349,7 +349,7 @@ msgid "Asked by me"
 msgstr "Заданные мной"
 
 #: forms.py:1021
-msgid "Problemed by me"
+msgid "Added by me"
 msgstr "Отвеченные мной"
 
 #: forms.py:1024
@@ -2506,7 +2506,7 @@ msgstr "Питања на која сте одговорили"
 
 #: const/__init__.py:125
 #, fuzzy
-msgid "asked an exercise"
+msgid "added an exercise"
 msgstr "поставите питање"
 
 #: const/__init__.py:126
@@ -3846,7 +3846,7 @@ msgstr "Голосовал %(num)s раз"
 
 #: models/badges.py:252
 #, python-format
-msgid "Problemed own exercise with at least %(num)s up votes"
+msgid "Added own exercise with at least %(num)s up votes"
 msgstr "Ответил на вопрос и получил более %(num)s позитивных откликов"
 
 #: models/badges.py:256
@@ -3893,7 +3893,7 @@ msgid "Student"
 msgstr "Студент"
 
 #: models/badges.py:381
-msgid "Asked first exercise with at least one up vote"
+msgid "Added first exercise with at least one up vote"
 msgstr "Задан первый вопрос, получивший хотя бы один положительный отклик"
 
 #: models/badges.py:414
@@ -3902,7 +3902,7 @@ msgstr "Популярный Вопрос"
 
 #: models/badges.py:418 models/badges.py:429 models/badges.py:441
 #, python-format
-msgid "Asked an exercise with %(views)s views"
+msgid "Added an exercise with %(views)s views"
 msgstr "Задал вопрос с %(views)s просмотрами"
 
 #: models/badges.py:425
@@ -3916,7 +3916,7 @@ msgstr "Добро Питање"
 
 #: models/badges.py:450
 #, fuzzy
-msgid "Asked an exercise and accepted a problem"
+msgid "Added an exercise and accepted a problem"
 msgstr "Питања на која сте одговорили"
 
 #: models/badges.py:453
@@ -3944,7 +3944,7 @@ msgstr "Ответ отмечен, по меньшей мере %(num)s голо
 #: models/badges.py:518
 #, python-format
 msgid ""
-"Problemed an exercise more than %(days)s days later with at least %(votes)s "
+"Added an exercise more than %(days)s days later with at least %(votes)s "
 "votes"
 msgstr ""
 "Ответил на вопрос более чем %(days)s дней спустя с минимум %(votes)s голосами"
@@ -5123,7 +5123,7 @@ msgid "FAQ"
 msgstr "FAQ"
 
 #: skins/default/templates/faq_static.html:5
-msgid "Frequently Asked Exercises "
+msgid "Frequently Asked Questions "
 msgstr "Често постављана питања"
 
 #: skins/default/templates/faq_static.html:6
@@ -9549,7 +9549,7 @@ msgstr "Извините, у нас определённые техническ�
 #~ msgid "popular-exercise"
 #~ msgstr "популярный-вопрос"
 
-#~ msgid "Asked an exercise with 1,000 views"
+#~ msgid "Added an exercise with 1,000 views"
 #~ msgstr "Задан вопрос с более 1,000 просмотров"
 
 #~ msgid "Citizen patrol"
@@ -9570,10 +9570,10 @@ msgstr "Извините, у нас определённые техническ�
 #~ msgid "First up vote"
 #~ msgstr "Первый положительный голос "
 
-#~ msgid "Problemed first exercise with at least one up vote"
+#~ msgid "Added first exercise with at least one up vote"
 #~ msgstr "Дал первый ответ и получил один или более положительный голос"
 
-#~ msgid "Problemed your own exercise with at least 3 up votes"
+#~ msgid "Added your own exercise with at least 3 up votes"
 #~ msgstr ""
 #~ "Дал ответ на собственный вопрос и получил 3 или более положительных "
 #~ "голосов"
@@ -9596,7 +9596,7 @@ msgstr "Извините, у нас определённые техническ�
 #~ msgid "famous-exercise"
 #~ msgstr "знаменитый-вопрос"
 
-#~ msgid "Asked an exercise with 10,000 views"
+#~ msgid "Added an exercise with 10,000 views"
 #~ msgstr "Задан вопрос набравший более 10 000 просмотров"
 
 #~ msgid "Alpha"
@@ -9662,7 +9662,7 @@ msgstr "Извините, у нас определённые техническ�
 #~ msgid "notable-exercise"
 #~ msgstr "выдающийся-вопрос"
 
-#~ msgid "Asked an exercise with 2,500 views"
+#~ msgid "Added an exercise with 2,500 views"
 #~ msgstr "Задаваемые вопросы с 2500 просмотров"
 
 #~ msgid "enlightened"
@@ -9690,7 +9690,7 @@ msgstr "Извините, у нас определённые техническ�
 #~ msgid "necromancer"
 #~ msgstr "некромант"
 
-#~ msgid "Problemed an exercise more than 60 days later with at least 5 votes"
+#~ msgid "Added an exercise more than 60 days later with at least 5 votes"
 #~ msgstr "Ответ на вопрос более чем 60 дней спустя с минимум 5 голосами"
 
 #~ msgid "taxonomist"

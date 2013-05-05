@@ -334,7 +334,7 @@ msgid "Asked by me"
 msgstr "Kysyjänä minä"
 
 #: forms.py:1021
-msgid "Problemed by me"
+msgid "Added by me"
 msgstr "Vastaajana minä"
 
 #: forms.py:1024
@@ -2405,7 +2405,7 @@ msgid "Exercise has no accepted problems"
 msgstr "Kysymyksellä ei ole hyväksyttyjä vastauksia"
 
 #: const/__init__.py:125
-msgid "asked an exercise"
+msgid "added an exercise"
 msgstr "esitti kysymyksen"
 
 #: const/__init__.py:126
@@ -3609,7 +3609,7 @@ msgstr "Äänestetty %(num)s kertaa"
 
 #: models/badges.py:252
 #, python-format
-msgid "Problemed own exercise with at least %(num)s up votes"
+msgid "Added own exercise with at least %(num)s up votes"
 msgstr ""
 "Vastannut omaan kysymykseensä, joka on saanut vähintään %(num)s positiivista "
 "ääntä"
@@ -3657,7 +3657,7 @@ msgid "Student"
 msgstr "Opiskelija"
 
 #: models/badges.py:381
-msgid "Asked first exercise with at least one up vote"
+msgid "Added first exercise with at least one up vote"
 msgstr ""
 "Kysyi ensimmäisen kysymyksen joka sai vähintään yhden positiivisen äänen"
 
@@ -3667,7 +3667,7 @@ msgstr "Suosittu kysymys"
 
 #: models/badges.py:418 models/badges.py:429 models/badges.py:441
 #, python-format
-msgid "Asked an exercise with %(views)s views"
+msgid "Added an exercise with %(views)s views"
 msgstr "Kysyit kysymyksen, jota on katsottu %(views)s kertaa"
 
 #: models/badges.py:425
@@ -3679,7 +3679,7 @@ msgid "Famous Exercise"
 msgstr "Kuuluista kysymys"
 
 #: models/badges.py:450
-msgid "Asked an exercise and accepted a problem"
+msgid "Added an exercise and accepted a problem"
 msgstr "Kysyi kysymyksen ja hyväksyi vastauksen"
 
 #: models/badges.py:453
@@ -3707,7 +3707,7 @@ msgstr "Vastaus hyväksyttiin %(num)s:lla tai useammalla äänellä"
 #: models/badges.py:518
 #, python-format
 msgid ""
-"Problemed an exercise more than %(days)s days later with at least %(votes)s "
+"Added an exercise more than %(days)s days later with at least %(votes)s "
 "votes"
 msgstr ""
 "Vastannut kysymykseen yli %(days)s päivää myöhemmin ja saanut vähintään "
@@ -4808,7 +4808,7 @@ msgid "FAQ"
 msgstr "UKK"
 
 #: skins/default/templates/faq_static.html:5
-msgid "Frequently Asked Exercises "
+msgid "Frequently Asked Questions "
 msgstr "Usein Kysytyt Kysymykset"
 
 #: skins/default/templates/faq_static.html:6

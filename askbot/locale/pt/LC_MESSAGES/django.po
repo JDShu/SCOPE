@@ -313,7 +313,7 @@ msgid "Asked by me"
 msgstr "As minhas questões"
 
 #: forms.py:1021
-msgid "Problemed by me"
+msgid "Added by me"
 msgstr "As minhas respostas"
 
 #: forms.py:1024
@@ -2182,7 +2182,7 @@ msgid "Exercise has no accepted problems"
 msgstr "A questão não tem respostas aceites"
 
 #: const/__init__.py:125
-msgid "asked an exercise"
+msgid "added an exercise"
 msgstr "colocou uma questão"
 
 #: const/__init__.py:126
@@ -3306,7 +3306,7 @@ msgstr ""
 
 #: models/badges.py:252
 #, python-format
-msgid "Problemed own exercise with at least %(num)s up votes"
+msgid "Added own exercise with at least %(num)s up votes"
 msgstr ""
 
 #: models/badges.py:256
@@ -3352,7 +3352,7 @@ msgid "Student"
 msgstr "Estudante"
 
 #: models/badges.py:381
-msgid "Asked first exercise with at least one up vote"
+msgid "Added first exercise with at least one up vote"
 msgstr ""
 
 #: models/badges.py:414
@@ -3361,7 +3361,7 @@ msgstr ""
 
 #: models/badges.py:418 models/badges.py:429 models/badges.py:441
 #, python-format
-msgid "Asked an exercise with %(views)s views"
+msgid "Added an exercise with %(views)s views"
 msgstr ""
 
 #: models/badges.py:425
@@ -3373,7 +3373,7 @@ msgid "Famous Exercise"
 msgstr ""
 
 #: models/badges.py:450
-msgid "Asked an exercise and accepted a problem"
+msgid "Added an exercise and accepted a problem"
 msgstr ""
 
 #: models/badges.py:453
@@ -3401,7 +3401,7 @@ msgstr ""
 #: models/badges.py:518
 #, python-format
 msgid ""
-"Problemed an exercise more than %(days)s days later with at least %(votes)s "
+"Added an exercise more than %(days)s days later with at least %(votes)s "
 "votes"
 msgstr ""
 
@@ -4437,7 +4437,7 @@ msgid "FAQ"
 msgstr "FAQ"
 
 #: skins/default/templates/faq_static.html:5
-msgid "Frequently Asked Exercises "
+msgid "Frequently Asked Questions "
 msgstr "Perguntas frequentes"
 
 #: skins/default/templates/faq_static.html:6

@@ -19,7 +19,7 @@ INITIAL_BADGE_DATA = (
     ('Editor', 3, 'editor', 'First edit', False, 0),
     ('Organizer', 3, 'organizer', 'First retag', False, 0),
     ('Scholar', 3, 'scholar', 'First accepted problem on your own exercise', False, 0),
-    ('Student', 3, 'student', 'Asked first exercise with at least one up vote', False, 0),
+    ('Student', 3, 'student', 'Added first exercise with at least one up vote', False, 0),
     ('Supporter', 3, 'supporter', 'First up vote', False, 0),
     ('Teacher', 3, 'teacher', 'Posted a problem to first exercise with at least one up vote', False, 0),
     ('Autobiographer', 3, 'autobiographer', 'Completed all user profile fields', False, 0),
@@ -46,7 +46,7 @@ INITIAL_BADGE_DATA = (
 )
 
 class Migration(DataMigration):
-    
+
     def forwards(self, orm):
         "Write your forwards methods here."
 
@@ -71,7 +71,7 @@ class Migration(DataMigration):
             badge.multiple = multiple
             badge.save()
 
-    
+
     def backwards(self, orm):
         "Write your backwards methods here."
         for entry in INITIAL_BADGE_DATA:
@@ -84,7 +84,7 @@ class Migration(DataMigration):
             except orm.Badge.DoesNotExist:
                 print 'no such badge %s - so skipping' % unidecode(name)
                 pass
-    
+
     forum_app_name = os.path.basename(os.path.dirname(os.path.dirname(__file__)))
     if forum_app_name == 'forum':
         models = {
@@ -414,7 +414,7 @@ class Migration(DataMigration):
                 'voted_at': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'})
             }
         }
-        
+
         complete_apps = ['forum']
     else:
         models = {
@@ -744,5 +744,5 @@ class Migration(DataMigration):
                 'voted_at': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'})
             }
         }
-        
+
         complete_apps = ['askbot']
