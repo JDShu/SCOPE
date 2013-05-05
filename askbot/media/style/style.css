@@ -4311,3 +4311,10 @@ ul.download li {
   font-size: 14px;
   font-family: 'Open Sans Condensed', Arial, sans-serif;
 }
+#logo-bar {
+  background-color: black;
+}
+#logo-bar div {
+  width: 960px;
+  margin: auto;
+}

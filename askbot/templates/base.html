@@ -11,7 +11,7 @@
         <meta name="google-site-verification" content="{{settings.GOOGLE_SITEMAP_CODE}}" />
         {% endif %}
         <link rel="shortcut icon" href="{{ settings.SITE_FAVICON|media }}" />
-		<link rel="icon" href="{{ settings.SITE_FAVICON|media }}" />
+        <link rel="icon" href="{{ settings.SITE_FAVICON|media }}" />
         {% block before_css %}{% endblock %}
         {% include "meta/html_head_stylesheets.html" %}
         {% block forestyle %}{% endblock %}
@@ -25,7 +25,7 @@
         {% include "widgets/system_messages.html" %}
         {% include "debug_header.html" %}
         {% include "custom_header.html" ignore missing %}
-		<div style="background-color: black"><img src="{{ '/images/scope-logo.png'|media }}" alt="Scope Logo" /></div>
+        <div id="logo-bar"><div><a href="{% url exercises %}"><img src="{{ '/images/scope-logo.png'|media }}" alt="Scope Logo" /></a></div></div>
         {% if settings.CUSTOM_HEADER|trim != '' %}
         <div id="custom-header">
             {{settings.CUSTOM_HEADER}}
