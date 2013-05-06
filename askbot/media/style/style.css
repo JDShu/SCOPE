@@ -4318,3 +4318,7 @@ ul.download li {
   width: 960px;
   margin: auto;
 }
+#toggle-all-bar span {
+  cursor: pointer;
+  color: #7398A3;
+}

@@ -37,6 +37,24 @@ var toggleDisplay = function(el, domid) {
         }
     });
 }
+showAllProblemsAndSolutions = function() {
+    $('.problem[id^="post-id-"]').toggle(true);
+    $('div.problem.toggler').addClass('toggler-show');
+    $('div.problem.toggler').removeClass('toggler-hide');
+    
+    $('.solution[id^="post-id-"]').toggle(true);
+    $('div.solution.toggler').addClass('toggler-show');
+    $('div.solution.toggler').removeClass('toggler-hide');
+}
+hideAllProblemsAndSolutions = function() {
+    $('.problem[id^="post-id-"]').toggle(false);
+    $('div.problem.toggler').addClass('toggler-hide');
+    $('div.problem.toggler').removeClass('toggler-show');
+    
+    $('.solution[id^="post-id-"]').toggle(false);
+    $('div.solution.toggler').addClass('toggler-hide');
+    $('div.solution.toggler').removeClass('toggler-show');
+}
 
 var setDownloadLinkTarget = function() {
     var url = $('#select-download-type-dd').attr('value');
