@@ -1,3 +1,9 @@
+var setSCOPEVersion = function() {
+    var version = $('meta#scopeversion').attr("content");
+    $('span.scopeversion').text(version);
+}
+$(document).ready(setSCOPEVersion);
+
 var makeMathJaxIgnoreBody = function() {
     //$('body').addClass('mathjaxignore');
     $('.exercise-body>p').addClass('mathjaxprocess');
