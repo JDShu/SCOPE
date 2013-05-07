@@ -144,7 +144,7 @@ def __import_se_data(dump_file):
     read_stdout = open(fake_stdout.name, 'r')
     file_pos = 0
     fd = read_stdout.fileno()
-    yield '<html><body><style>* {font-family: sans;} p {font-size: 12px; line-height: 16px; margin: 0; padding: 0;}</style><h1>Importing your data. This may take a few minutes...</h1>'
+    yield '<html><body><style type="text/css">* {font-family: sans;} p {font-size: 12px; line-height: 16px; margin: 0; padding: 0;}</style><h1>Importing your data. This may take a few minutes...</h1>'
     while importer.isAlive():
         c_size = os.fstat(fd).st_size
         if c_size > file_pos:

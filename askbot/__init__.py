@@ -7,7 +7,7 @@ basic actions on behalf of the forum application
 import os
 import platform
 
-VERSION = (0, 0, 1)
+VERSION = (1, 0, 0)
 
 #keys are module names used by python imports,
 #values - the package qualifier to use for pip

@@ -17,6 +17,7 @@
         {% block forestyle %}{% endblock %}
         {% include "meta/html_head_javascript.html" %}
         {% block forejs %}{% endblock %}
+        <meta id="scopeversion" name="scopeversion" content="{{settings.ASKBOT_VERSION}}" />
         {% if settings.USE_CUSTOM_HTML_HEAD %}
             {{ settings.CUSTOM_HTML_HEAD }}
         {% endif %}
