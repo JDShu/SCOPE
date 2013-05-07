@@ -4,7 +4,7 @@ function isNumber(n) {
 
 var setSCOPEVersion = function() {
     var version = $('meta#scopeversion').attr("content");
-    $('span.scopeversion').text(version);
+    $('span.scopeversion').text(version+" beta");
 }
 $(document).ready(setSCOPEVersion);
 
