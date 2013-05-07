@@ -4,7 +4,7 @@
     {# Make old URL anchors/hashes work #}
     <a class="old_solution_id_anchor" name="{{ solution.old_solution_id }}"></a>
 {% endif %}
-<div class="solution toggler toggler-hide" onclick="toggleDisplay(this, {{ solution.id }});">[Solution]</div>
+<div class="solution toggler toggler-hide" onclick="toggleDisplay(this, {{ solution.id }});" title="{{solution.summary|escape}}" >[Solution]</div>
 <div
 		style="display:none"
         id="post-id-{{ solution.id }}"
