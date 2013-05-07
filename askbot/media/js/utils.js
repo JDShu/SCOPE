@@ -1,3 +1,7 @@
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 var setSCOPEVersion = function() {
     var version = $('meta#scopeversion').attr("content");
     $('span.scopeversion').text(version);
@@ -61,6 +65,12 @@ hideAllProblemsAndSolutions = function() {
     $('div.solution.toggler').addClass('toggler-hide');
     $('div.solution.toggler').removeClass('toggler-show');
 }
+showAllWhenAnchored = function() {
+    post_id = window.location.hash.replace(/^#/,"");
+    if(isNumber(post_id))
+        showAllProblemsAndSolutions();
+}
+$('document').ready(showAllWhenAnchored);
 
 var setDownloadLinkTarget = function() {
     var url = $('#select-download-type-dd').attr('value');

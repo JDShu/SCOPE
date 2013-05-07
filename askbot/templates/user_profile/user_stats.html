@@ -19,7 +19,7 @@
     <div class="user-stats-table">
         {% for top_problem in top_problems %}
         <div class="problem-summary">
-            <a title="{{ top_problem.summary|collapse|escape }}"
+            <a
                 href="{% url exercise top_problem.thread._exercise_post().id %}{{ top_problem.thread.title|slugify }}#{{ top_problem.id }}">
                 <span class="problem-votes {% if top_problem.accepted() %}problemed-accepted{% endif %}"
                       title="{% trans problem_score=top_problem.score %}the problem has been voted for {{ problem_score }} times{% endtrans %} {% if top_problem.accepted() %}{% trans %}this problem has been selected as correct{% endtrans %}{%endif%}">
@@ -28,7 +28,7 @@
             </a>
             <div class="problem-link">
                 {% spaceless %}
-                <a href="{% url exercise top_problem.thread._exercise_post().id %}{{ top_problem.thread.title|slugify }}#{{top_problem.id}}">{{ top_problem.thread.title|escape }}</a>
+                <a href="{% url exercise top_problem.thread._exercise_post().id %}{{ top_problem.thread.title|slugify }}#{{top_problem.id}}"  title="{{ top_problem.summary|collapse|escape }}">{{ top_problem.thread.title|escape }}</a>
                 {% endspaceless %}
                 {% if top_problem.comment_count > 0 %}
                 <span>
@@ -47,7 +47,7 @@
     <div class="user-stats-table">
         {% for top_solution in top_solutions %}
         <div class="solution-summary">
-            <a title="{{ top_solution.summary|collapse|escape }}"
+            <a
                 href="{% url exercise top_solution.thread._exercise_post().id %}{{ top_solution.thread.title|slugify }}#{{ top_solution.id }}">
                 <span class="solution-votes"
                       title="{% trans solution_score=top_solution.score %}the solution has been voted for {{ solution_score }} times{% endtrans %}">
@@ -56,7 +56,7 @@
             </a>
             <div class="solution-link">
                 {% spaceless %}
-                <a href="{% url exercise top_solution.thread._exercise_post().id %}{{ top_solution.thread.title|slugify }}#{{top_solution.id}}">{{ top_solution.thread.title|escape }}</a>
+                <a href="{% url exercise top_solution.thread._exercise_post().id %}{{ top_solution.thread.title|slugify }}#{{top_solution.id}}" title="{{ top_solution.summary|collapse|escape }}">{{ top_solution.thread.title|escape }}</a>
                 {% endspaceless %}
                 {% if top_solution.comment_count > 0 %}
                 <span>
