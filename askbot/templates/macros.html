@@ -597,7 +597,7 @@ solution {% if solution.accepted() %}accepted-solution{% endif %} {% if solution
 {%- endmacro -%}
 
 {%- macro user_country_flag(user) -%}
-    {% if user.country and user.show_country %}
+    {% if user.country and user.show_country and false %}
         <img class="flag"
             src="{{ ('/images/flags/' ~ user.country.code|lower ~ '.gif')|media }}"
             alt="{% trans
