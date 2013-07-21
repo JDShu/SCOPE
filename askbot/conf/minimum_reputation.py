@@ -14,6 +14,16 @@ MIN_REP = livesettings.ConfigurationGroup(
     super_group = REP_AND_BADGES
 )
 
+#MAX This is a possible solution to students seeing solutions
+settings.register(
+    livesettings.IntegerValue(
+        MIN_REP,
+        'MIN_REP_TO_SEE_SOLUTIONS',
+        default=10000,
+        description=_('Solutions Visible')
+    )
+)
+
 settings.register(
     livesettings.IntegerValue(
         MIN_REP,

@@ -1,15 +1,18 @@
 {# HANS : This is a hackish place to put this for now, refactor later #}
 {% set solutions = problem.get_cached_solutions() %}
-{% if solutions %}
-
-<div class="solutions-outer">
-		<h2 id="solution-title">
-	        {% trans %}Solutions{% endtrans %}
-	    </h2>
-	<div class="clean"></div>
-	{% for solution in solutions %}
-	{% include "exercise/solution_card.html" %}
-	{% endfor %}
-</div>
+{% if (not request.user.is_anonymous()) and request.user.can_see_solutions() or request.user.is_administrator()  %}
+    {% if solutions %}
+    <div class="solutions-outer">
+            <h2 id="solution-title">
+                {% trans %}Solutions{% endtrans %}
+            </h2>
+        <div class="clean"></div>
+        {% for solution in solutions %}
+        {% include "exercise/solution_card.html" %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <br><a href="{{ problem.get_solution_form_url() }}"><input id="add-solution-btn" class="submit after-editor" type="button" style="float:left" value="Post Solution to this Problem"/></a></br>
 {% endif %}
-<br><a href="{{ problem.get_solution_form_url() }}"><input id="add-solution-btn" class="submit after-editor" type="button" style="float:left" value="Post Solution to this Problem"/></a></br>
+
+

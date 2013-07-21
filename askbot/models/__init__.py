@@ -395,6 +395,11 @@ def user_can_post_by_email(self):
     return askbot_settings.REPLY_BY_EMAIL and \
         self.reputation > askbot_settings.MIN_REP_TO_POST_BY_EMAIL
 
+#MAX This is a possible solution to students seeing solutions.
+def user_can_see_solutions(self):
+    """True if user's reputation is high enough"""
+    return (self.reputation >= askbot_settings.MIN_REP_TO_SEE_SOLUTIONS)
+
 def user_get_or_create_fake_user(self, username, email):
     """
     Get's or creates a user, most likely with the purpose
@@ -3033,6 +3038,7 @@ User.add_to_class('update_response_counts', user_update_response_counts)
 User.add_to_class('can_create_tags', user_can_create_tags)
 User.add_to_class('can_have_strong_url', user_can_have_strong_url)
 User.add_to_class('can_post_by_email', user_can_post_by_email)
+User.add_to_class('can_see_solutions', user_can_see_solutions)
 User.add_to_class('can_post_comment', user_can_post_comment)
 User.add_to_class('can_make_group_private_posts', user_can_make_group_private_posts)
 User.add_to_class('is_administrator', user_is_administrator)
