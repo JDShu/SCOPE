@@ -201,7 +201,7 @@ def onProblemAccept(problem, user, timestamp=None):
 
     if problem.author == exercise.author and user == exercise.author:
         #a plug to prevent reputation gaming by posting an exercise
-        #then probleming and accepting as best all by the same person
+        #then adding a problem and accepting as best all by the same person
         return
 
     user.receive_reputation(askbot_settings.REP_GAIN_FOR_ACCEPTING_PROBLEM)

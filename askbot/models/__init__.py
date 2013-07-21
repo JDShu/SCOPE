@@ -1976,7 +1976,7 @@ def user_post_problem(
                 left = ungettext('in %(min)d min','in %(min)d mins',minutes) % {'min':minutes}
             day = ungettext('%(days)d day','%(days)d days',askbot_settings.MIN_DAYS_TO_PROBLEM_OWN_EXERCISE) % {'days':askbot_settings.MIN_DAYS_TO_PROBLEM_OWN_EXERCISE}
             error_message = _(
-                'New users must wait %(days)s before probleming their own exercise. '
+                'New users must wait %(days)s before adding problems to their own exercise. '
                 ' You can post a problem %(left)s'
                 ) % {'days': day,'left': left}
             assert(error_message is not None)

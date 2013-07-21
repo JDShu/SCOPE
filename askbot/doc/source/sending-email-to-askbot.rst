@@ -3,7 +3,7 @@ Sending email to askbot
 =======================
 
 Askbot supports asking exercises by email via the IMAP protocol,
-probleming by email is not yet supported.
+adding problems by email is not yet supported.
 
 .. note::
     This feature is still experimental and some emails will not

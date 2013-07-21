@@ -1204,7 +1204,7 @@ msgid "Downvote"
 msgstr "vote négatif"
 
 #: conf/minimum_reputation.py:40
-msgid "Problem own exercise immediately"
+msgid "Add problem to own exercise immediately"
 msgstr "Répondre à votre propre exercise immédiatement"
 
 #: conf/minimum_reputation.py:49
@@ -1871,7 +1871,7 @@ msgid "Number of days to allow canceling votes"
 msgstr "Nombre de jours pour autoriser l'annulation de votes"
 
 #: conf/vote_rules.py:60
-msgid "Number of days required before probleming own exercise"
+msgid "Number of days required before adding a problem to own exercise"
 msgstr "Nombre de jours nécessaires avant de se répondre"
 
 #: conf/vote_rules.py:69
@@ -2968,7 +2968,7 @@ msgstr[1] "%(days)d jours"
 
 #: models/__init__.py:1480
 #, python-format
-msgid "New users must wait %(days)s before probleming their own exercise.  You can post a problem %(left)s"
+msgid "New users must wait %(days)s before adding problems to their own exercise.  You can post a problem %(left)s"
 msgstr "Les nouveaux utilisateurs doivent attendre %(days)s avant de répondre à leurs propres exercises. Vous pouvez envoyer une réponse %(left)s"
 
 #: models/__init__.py:1653
@@ -4474,11 +4474,11 @@ msgid "Thank you for using %(app_name)s, here is how it works."
 msgstr "Merci d'utiliser %(app_name)s, voici le fonctionnement."
 
 #: skins/default/templates/help.html:16
-msgid "This site is for asking and probleming exercises, not for open-ended discussions."
+msgid "This site is for adding problems and solutions to exercises, not for open-ended discussions."
 msgstr "Ce site permet de poser et de répondre à des exercises, il ne vise pas des discussions."
 
 #: skins/default/templates/help.html:17
-msgid "We encourage everyone to use “exercise” space for asking and “problem” for probleming."
+msgid "We encourage everyone to use the “exercise” space for contributing exercises and “problem” for adding problems."
 msgstr "Nous encourageons tout le monde à utiliser l'espace « exercise » pour demander et « réponse » pour répondre."
 
 #: skins/default/templates/help.html:20
@@ -5172,7 +5172,7 @@ msgid "most voted problems will be shown first"
 msgstr "Les réponses ayant obtenu le plus de votes seront affichées en premier"
 
 #: skins/default/templates/exercise/new_problem_form.html:16
-msgid "Login/Signup to Problem"
+msgid "Login/Signup to add problems"
 msgstr "Connexion pour répondre"
 
 #: skins/default/templates/exercise/new_problem_form.html:24
@@ -5192,7 +5192,7 @@ msgid "<span class='big strong'>You are welcome to add a problem to your own exe
 msgstr "<span class='big strong'>Vous pouvez répondre vous-même à vos exercises</span>, mais assurez-vous de donner une <strong>réponse</strong>. Souvenez-vous que vous pouvez <strong>revoir votre exercise d'origine</strong>. Merci <strong>d'utiliser les commentaires pour les discussions</strong> et <strong>n'oubliez-pas de voter :)</strong> pour les réponses que vous avez apprécié (ou peut-être pas) !"
 
 #: skins/default/templates/exercise/new_problem_form.html:38
-msgid "<span class='big strong'>Please try to give a substantial problem</span>. If you wanted to comment on the exercise or problem, just <strong>use the commenting tool</strong>. Please remember that you can always <strong>revise your problems</strong> - no need to contribute a problem to the same exercise twice. Also, please <strong>don't forget to vote</strong> - it really helps to select the best exercises and problems!"
+msgid "<span class='big strong'>Please try to contribute a substantial problem</span>. If you wanted to comment on the exercise or problem, just <strong>use the commenting tool</strong>. Please remember that you can always <strong>revise your problems</strong> - no need to contribute a problem to the same exercise twice. Also, please <strong>don't forget to vote</strong> - it really helps to select the best exercises and problems!"
 msgstr "<span class='big strong'>Merci d'essayer de donner une réponse complète</span>. Si vous vouliez commenter la exercise ou la réponse, <strong>utilisez l'outil de commentaire</strong>. Merci de vous souvenir que vous pouvez toujours <strong>revoir vos réponses</strong> - il n'est pas nécessaire de répondre deux fois à la même exercise. De plus, <strong>n'oubliez pas de voter</strong> - c'est très utile pour la sélection des meilleures exercises et réponses !"
 
 #: skins/default/templates/exercise/sharing_prompt_phrase.html:2
@@ -5344,7 +5344,7 @@ msgid "Email subscription settings"
 msgstr "Paramètres d'abonnement aux emails"
 
 #: skins/default/templates/user_profile/user_email_subscriptions.html:9
-msgid "<span class='big strong'>Adjust frequency of email updates.</span> Receive updates on interesting exercises by email, <strong><br/>help the community</strong> by probleming exercises of your colleagues. If you do not wish to receive emails - select 'no email' on all items below.<br/>Updates are only sent when there is any new activity on selected items."
+msgid "<span class='big strong'>Adjust frequency of email updates.</span> Receive updates on interesting exercises by email, <strong><br/>help the community</strong> by contributing to exercises of your colleagues If you do not wish to receive emails - select 'no email' on all items below.<br/>Updates are only sent when there is any new activity on selected items."
 msgstr "<span class='big strong'>Ajuster la fréquence des notifications par email.</span> Recevez des notifications sur les exercises intéressante par email, <strong><br/>aidez la communauté</strong> en répondant à vos collègues. Si vous ne souhaitez pas recevoir d'emails - sélectionner « pas d'email » dans tous les éléments ci-dessous.<br/>Les notifications sont uniquement envoyées quand il y a de l'activité sur les éléments sélectionnés."
 
 #: skins/default/templates/user_profile/user_email_subscriptions.html:23
@@ -6221,7 +6221,7 @@ msgid "<span class=\"strong big\">You are welcome to start submitting your exerc
 msgstr "<span class=\"strong big\">Vous pouvez envoyer des exercises de manière anonyme</span>. Quand vous enverrez le message, vous serez redirigé vers la page de connexion et d'inscription. Votre exercise sera sauvegardée dans la session courante et sera publiée après connexion. Le processus de connexion ou d'inscription est très simple. La connexion prend 30 secondes, l'inscription initiale prend moins d'une minute."
 
 #: views/writers.py:466
-msgid "Please log in to problem exercises"
+msgid "Please log in to add problems to exercises"
 msgstr "Merci de vous connecter pour répondre à des exercises"
 
 #: views/writers.py:572
@@ -6281,7 +6281,7 @@ msgstr "Désolé, nous rencontrons apparemment des difficultés d'ordre techniqu
 
 #~ msgid ""
 #~ "Please visit the askbot and see what's new! Could you spread the word "
-#~ "about it - can somebody you know help probleming those exercises or "
+#~ "about it - can somebody you know help by contributing problems to those exercises or "
 #~ "benefit from posting one?"
 #~ msgstr ""
 #~ "Merci de visiter notre forum de Exercises/Réponses pour découvrir les "

@@ -1296,7 +1296,7 @@ msgid "Downvote"
 msgstr ""
 
 #: conf/minimum_reputation.py:40
-msgid "Problem own exercise immediately"
+msgid "Add problem to own exercise immediately"
 msgstr ""
 
 #: conf/minimum_reputation.py:49
@@ -2019,7 +2019,7 @@ msgid "Number of days to allow canceling votes"
 msgstr ""
 
 #: conf/vote_rules.py:60
-msgid "Number of days required before probleming own exercise"
+msgid "Number of days required before adding a problem to own exercise"
 msgstr ""
 
 #: conf/vote_rules.py:69
@@ -3149,7 +3149,7 @@ msgstr[1] ""
 #: models/__init__.py:1480
 #, python-format
 msgid ""
-"New users must wait %(days)s before probleming their own exercise.  You can "
+"New users must wait %(days)s before adding problems to their own exercise.  You can "
 "post a problem %(left)s"
 msgstr ""
 
@@ -4671,14 +4671,14 @@ msgstr ""
 
 #: skins/default/templates/help.html:16
 msgid ""
-"This site is for asking and probleming exercises, not for open-ended "
+"This site is for adding problems and solutions to exercises, not for open-ended "
 "discussions."
 msgstr ""
 
 #: skins/default/templates/help.html:17
 msgid ""
-"We encourage everyone to use “exercise” space for asking and “problem” for "
-"probleming."
+"We encourage everyone to use the “exercise” space for contributing exercises and and “problem” for "
+"adding problems."
 msgstr ""
 
 #: skins/default/templates/help.html:20
@@ -5327,7 +5327,7 @@ msgid "most voted problems will be shown first"
 msgstr ""
 
 #: skins/default/templates/exercise/new_problem_form.html:16
-msgid "Login/Signup to Problem"
+msgid "Login/Signup to add problems"
 msgstr ""
 
 #: skins/default/templates/exercise/new_problem_form.html:24
@@ -5359,7 +5359,7 @@ msgstr ""
 
 #: skins/default/templates/exercise/new_problem_form.html:38
 msgid ""
-"<span class='big strong'>Please try to give a substantial problem</span>. If "
+"<span class='big strong'>Please try to contribute a substantial problem</span>. If "
 "you wanted to comment on the exercise or problem, just <strong>use the "
 "commenting tool</strong>. Please remember that you can always <strong>revise "
 "your problems</strong> - no need to contribute a problem to the same exercise twice. Also, "
@@ -5522,7 +5522,7 @@ msgstr ""
 msgid ""
 "<span class='big strong'>Adjust frequency of email updates.</span> Receive "
 "updates on interesting exercises by email, <strong><br/>help the community</"
-"strong> by probleming exercises of your colleagues. If you do not wish to "
+"strong> by contributing to exercises of your colleagues If you do not wish to "
 "receive emails - select 'no email' on all items below.<br/>Updates are only "
 "sent when there is any new activity on selected items."
 msgstr ""
@@ -6416,7 +6416,7 @@ msgid ""
 msgstr ""
 
 #: views/writers.py:466
-msgid "Please log in to problem exercises"
+msgid "Please log in to add problems to exercises"
 msgstr ""
 
 #: views/writers.py:572

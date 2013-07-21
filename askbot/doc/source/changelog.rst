@@ -182,7 +182,7 @@ For these versions we did not keep consistent record of features.
 -------------------
 * RSS feed for individual exercise (Sayan Chowdhury)
 * Allow pre-population of tags via add an exercises link (Adolfo)
-* Make probleming own exercise one click harder (Adolfo)
+* Make adding a problem to own exercise one click harder (Adolfo)
 * Bootstrap mode (Adolfo, Evgeny)
 * Color-animated urls with the hash fragments (Adolfo)
 

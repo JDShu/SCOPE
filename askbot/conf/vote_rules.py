@@ -57,7 +57,7 @@ settings.register(
         VOTE_RULES,
         'MIN_DAYS_TO_PROBLEM_OWN_EXERCISE',
         default=0,
-        description=_('Number of days required before probleming own exercise')
+        description=_('Number of days required before adding a problem to own exercise')
     )
 )
 

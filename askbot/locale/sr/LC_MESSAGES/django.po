@@ -1514,7 +1514,7 @@ msgstr "downvoted"
 
 #: conf/minimum_reputation.py:40
 #, fuzzy
-msgid "Problem own exercise immediately"
+msgid "Add problem to own exercise immediately"
 msgstr "Одговорите на ваше питање"
 
 #: conf/minimum_reputation.py:49
@@ -2339,7 +2339,7 @@ msgstr "Количество дней, в течение которых можн
 
 #: conf/vote_rules.py:60
 #, fuzzy
-msgid "Number of days required before probleming own exercise"
+msgid "Number of days required before adding a problem to own exercise"
 msgstr ""
 "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
 "#-#-#-#-#  django.po (0.7)  #-#-#-#-#\n"
@@ -3673,7 +3673,7 @@ msgstr[2] ""
 #: models/__init__.py:1480
 #, python-format
 msgid ""
-"New users must wait %(days)s before probleming their own exercise.  You can "
+"New users must wait %(days)s before adding problems to their own exercise.  You can "
 "post a problem %(left)s"
 msgstr ""
 
@@ -5442,14 +5442,14 @@ msgstr ""
 
 #: skins/default/templates/help.html:16
 msgid ""
-"This site is for asking and probleming exercises, not for open-ended "
+"This site is for adding problems and solutions to exercises, not for open-ended "
 "discussions."
 msgstr ""
 
 #: skins/default/templates/help.html:17
 msgid ""
-"We encourage everyone to use “exercise” space for asking and “problem” for "
-"probleming."
+"We encourage everyone to use the “exercise” space for contributing exercises and and “problem” for "
+"adding problems."
 msgstr ""
 
 #: skins/default/templates/help.html:20
@@ -6196,7 +6196,7 @@ msgstr " "
 
 #: skins/default/templates/exercise/new_problem_form.html:16
 #, fuzzy
-msgid "Login/Signup to Problem"
+msgid "Login/Signup to add problems"
 msgstr "Login/Signup to Post"
 
 #: skins/default/templates/exercise/new_problem_form.html:24
@@ -6228,7 +6228,7 @@ msgstr ""
 
 #: skins/default/templates/exercise/new_problem_form.html:38
 msgid ""
-"<span class='big strong'>Please try to give a substantial problem</span>. If "
+"<span class='big strong'>Please try to contribute a substantial problem</span>. If "
 "you wanted to comment on the exercise or problem, just <strong>use the "
 "commenting tool</strong>. Please remember that you can always <strong>revise "
 "your problems</strong> - no need to contribute a problem to the same exercise twice. Also, "
@@ -6418,7 +6418,7 @@ msgid "Email subscription settings"
 msgstr ""
 "<span class='big strong'>Adjust frequency of email updates.</span> Receive "
 "updates on interesting exercises by email, <strong><br/>help the community</"
-"strong> by probleming exercises of your colleagues. If you do not wish to "
+"strong> by contributing to exercises of your colleagues If you do not wish to "
 "receive emails - select 'no email' on all items below.<br/>Updates are only "
 "sent when there is any new activity on selected items."
 
@@ -6426,7 +6426,7 @@ msgstr ""
 msgid ""
 "<span class='big strong'>Adjust frequency of email updates.</span> Receive "
 "updates on interesting exercises by email, <strong><br/>help the community</"
-"strong> by probleming exercises of your colleagues. If you do not wish to "
+"strong> by contributing to exercises of your colleagues If you do not wish to "
 "receive emails - select 'no email' on all items below.<br/>Updates are only "
 "sent when there is any new activity on selected items."
 msgstr ""
@@ -6870,7 +6870,7 @@ msgstr "add an exercise interesting to this community"
 #, fuzzy
 msgid "try to provide a problem, rather than engage into a discussion"
 msgstr ""
-"<span class='big strong'>Please try to give a substantial problem</span>. If "
+"<span class='big strong'>Please try to contribute a substantial problem</span>. If "
 "you wanted to comment on the exercise or problem, just <strong>use the "
 "commenting tool</strong>. Please remember that you can always <strong>revise "
 "your problems</strong> - no need to contribute a problem to the same exercise twice. Also, "
@@ -7454,7 +7454,7 @@ msgstr ""
 
 #: views/writers.py:466
 #, fuzzy
-msgid "Please log in to problem exercises"
+msgid "Please log in to add problems to exercises"
 msgstr "погледајте питања без одговора"
 
 #: views/writers.py:572
@@ -7529,7 +7529,7 @@ msgstr "Извините, у нас определённые техническ�
 
 #~ msgid ""
 #~ "Please visit the askbot and see what's new! Could you spread the word "
-#~ "about it - can somebody you know help probleming those exercises or "
+#~ "about it - can somebody you know help by contributing problems to those exercises or "
 #~ "benefit from posting one?"
 #~ msgstr ""
 #~ "Пожалуйста, зайдите на наш форум и посмотрите что есть нового. Может быть "
@@ -7992,7 +7992,7 @@ msgstr "Извините, у нас определённые техническ�
 
 #~ msgid "please only provide a problem, no discussions"
 #~ msgstr ""
-#~ "<span class='big strong'>Please try to give a substantial problem</span>. "
+#~ "<span class='big strong'>Please try to contribute a substantial problem</span>. "
 #~ "If you wanted to comment on the exercise or problem, just <strong>use the "
 #~ "commenting tool</strong>. Please remember that you can always "
 #~ "<strong>revise your problems</strong> - no need to problem the same "
@@ -8034,7 +8034,7 @@ msgstr "Извините, у нас определённые техническ�
 #~ msgstr ""
 #~ "<span class='big strong'>Adjust frequency of email updates.</span> "
 #~ "Receive updates on interesting exercises by email, <strong><br/>help the "
-#~ "community</strong> by probleming exercises of your colleagues. If you do "
+#~ "community</strong> by contributing to exercises of your colleagues If you do "
 #~ "not wish to receive emails - select 'no email' on all items below.<br/"
 #~ ">Updates are only sent when there is any new activity on selected items."
 

@@ -589,7 +589,7 @@ def edit_solution(request, id):
 
 
 #todo: rename this function to post_new_problem
-@decorators.check_authorization_to_post(_('Please log in to problem exercises'))
+@decorators.check_authorization_to_post(_('Please log in to add problems to exercises'))
 @decorators.check_spam('text')
 def problem(request, id):#process a new problem
     """view that posts new problem
@@ -649,7 +649,7 @@ def problem(request, id):#process a new problem
     return HttpResponseRedirect(exercise.get_absolute_url())
 
 # Hans: use the new solution methods Max made
-@decorators.check_authorization_to_post(_('Please log in to problem exercises'))
+@decorators.check_authorization_to_post(_('Please log in to add problems to exercises'))
 @decorators.check_spam('text')
 def post_new_solution(request, mid, pid):#process a new problem
     """view that posts new problem

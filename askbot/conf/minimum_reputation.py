@@ -47,7 +47,7 @@ settings.register(
         MIN_REP,
         'MIN_REP_TO_PROBLEM_OWN_EXERCISE',
         default=5,
-        description=_('Problem own exercise immediately')
+        description=_('Add problem to own exercise immediately')
     )
 )
 
