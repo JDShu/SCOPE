@@ -1,6 +1,6 @@
 {# HANS : This is a hackish place to put this for now, refactor later #}
 {% set solutions = problem.get_cached_solutions() %}
-{% if (not request.user.is_anonymous()) and request.user.can_see_solutions() or request.user.is_administrator()  %}
+{% if (not request.user.is_anonymous()) and (request.user.can_see_solutions() or request.user.is_administrator())  %}
     {% if solutions %}
     <div class="solutions-outer">
             <h2 id="solution-title">
