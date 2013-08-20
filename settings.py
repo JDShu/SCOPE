@@ -76,14 +76,16 @@ LANGUAGE_CODE = 'en'
 # Absolute path to the directory that holds uploaded media
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'askbot', 'upfiles')
-#MEDIA_URL = '/upfiles/'
+MEDIA_URL = '/upfiles/'
 STATIC_URL = '/m/'#this must be different from MEDIA_URL
 
-AWS_STORAGE_BUCKET_NAME = 'raynor'
-S3_URL = env('S3_URL', '')
-MEDIA_URL = S3_URL
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY', '')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', '')
+# This is for AWS support, disabled by default
+
+# AWS_STORAGE_BUCKET_NAME = 'raynor'
+# S3_URL = env('S3_URL', '')
+# MEDIA_URL = S3_URL
+# AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY', '')
+# AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', '')
 
 PROJECT_ROOT = os.path.dirname(__file__)
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
